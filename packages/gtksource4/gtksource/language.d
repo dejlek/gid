@@ -8,7 +8,7 @@ import gtksource.c.types;
 import gtksource.types;
 
 /** */
-class Language : gobject.object.ObjectG
+class Language : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,34 @@ class Language : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Language self()
   {
     return this;
+  }
+
+  /** */
+  @property bool hidden()
+  {
+    return getHidden();
+  }
+
+  /** */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /** */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /** */
+  @property string section()
+  {
+    return getSection();
   }
 
   /**

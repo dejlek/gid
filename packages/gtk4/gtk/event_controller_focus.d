@@ -41,6 +41,7 @@ class EventControllerFocus : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventControllerFocus self()
   {
     return this;

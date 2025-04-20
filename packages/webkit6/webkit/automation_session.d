@@ -20,7 +20,7 @@ import webkit.web_view;
     #WebKitWebView to interact with it. When this happens the signal #WebKitAutomationSession::create-web-view
     is emitted.
 */
-class AutomationSession : gobject.object.ObjectG
+class AutomationSession : gobject.object.ObjectWrap
 {
 
   /** */

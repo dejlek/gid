@@ -21,7 +21,7 @@ import gstpbutils.types;
 /**
     Structure containing the information of a URI analyzed by #GstDiscoverer.
 */
-class DiscovererInfo : gobject.object.ObjectG
+class DiscovererInfo : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class DiscovererInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DiscovererInfo self()
   {
     return this;
@@ -56,11 +57,11 @@ class DiscovererInfo : gobject.object.ObjectG
         variant = A #GVariant to deserialize into a #GstDiscovererInfo.
       Returns: A newly-allocated #GstDiscovererInfo.
   */
-  static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.VariantG variant)
+  static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.Variant variant)
   {
     GstDiscovererInfo* _cretval;
-    _cretval = gst_discoverer_info_from_variant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_info_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     GstDiscovererInfo* _cretval;
     _cretval = gst_discoverer_info_copy(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,7 +174,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_info_get_stream_info(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -271,11 +272,11 @@ class DiscovererInfo : gobject.object.ObjectG
           what needs to be serialized.
       Returns: A newly-allocated #GVariant representing info.
   */
-  glib.variant.VariantG toVariant(gstpbutils.types.DiscovererSerializeFlags flags)
+  glib.variant.Variant toVariant(gstpbutils.types.DiscovererSerializeFlags flags)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)cPtr, flags);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

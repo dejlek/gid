@@ -52,9 +52,29 @@ class Spinner : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Spinner self()
   {
     return this;
+  }
+
+  /**
+      Get `spinning` property.
+      Returns: Whether the spinner is spinning
+  */
+  @property bool spinning()
+  {
+    return getSpinning();
+  }
+
+  /**
+      Set `spinning` property.
+      Params:
+        propval = Whether the spinner is spinning
+  */
+  @property void spinning(bool propval)
+  {
+    return setSpinning(propval);
   }
 
   /**

@@ -1009,7 +1009,7 @@ enum GtkAccessibleTristate
     Controls how a widget deals with extra space in a single dimension.
     
     Alignment only matters if the widget receives a “too large” allocation,
-    for example if you packed the widget with the [gtk.widget.Widget.gboolean]
+    for example if you packed the widget with the [gtk.widget.Widget.hexpand]
     property inside a `class@Box`, then the widget might get extra space.
     If you have for example a 16x16 icon inside a 32x32 space, the icon
     could be scaled and stretched, it could be centered, or it could be
@@ -2063,7 +2063,7 @@ enum GtkDirectionType
 enum GtkEditableProperties
 {
   /**
-      the property id for [gtk.editable.Editable.utf8]
+      the property id for [gtk.editable.Editable.text]
   */
   PropText = 0,
 
@@ -2078,7 +2078,7 @@ enum GtkEditableProperties
   PropSelectionBound = 2,
 
   /**
-      the property id for [gtk.editable.Editable.gboolean]
+      the property id for [gtk.editable.Editable.editable]
   */
   PropEditable = 3,
 
@@ -2093,7 +2093,7 @@ enum GtkEditableProperties
   PropMaxWidthChars = 5,
 
   /**
-      the property id for [gtk.editable.Editable.gfloat]
+      the property id for [gtk.editable.Editable.xalign]
   */
   PropXalign = 6,
 
@@ -3135,7 +3135,7 @@ enum GtkOrientation
     Defines how content overflowing a given area should be handled.
     
     This is used in [gtk.widget.Widget.setOverflow]. The
-    [gtk.widget.Widget.Overflow] property is modeled after the
+    [gtk.widget.Widget.overflow] property is modeled after the
     CSS overflow property, but implements it only partially.
 */
 enum GtkOverflow
@@ -5049,7 +5049,7 @@ struct GtkAboutDialog;
     The attributes are updated every time a UI element's state changes in
     a way that should be reflected by assistive technologies. For instance,
     if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.Hidden]
-    state will also change to reflect the [gtk.widget.Widget.gboolean] property.
+    state will also change to reflect the [gtk.widget.Widget.visible] property.
     
     Every accessible implementation is part of a tree of accessible objects.
     Normally, this tree corresponds to the widget tree, but can be customized
@@ -5277,12 +5277,12 @@ struct GtkActionableInterface
   /**
       virtual function for [gtk.actionable.Actionable.getActionTargetValue]
   */
-  extern(C) VariantC* function(GtkActionable* actionable) getActionTargetValue;
+  extern(C) GVariant* function(GtkActionable* actionable) getActionTargetValue;
 
   /**
       virtual function for [gtk.actionable.Actionable.setActionTargetValue]
   */
-  extern(C) void function(GtkActionable* actionable, VariantC* targetValue) setActionTargetValue;
+  extern(C) void function(GtkActionable* actionable, GVariant* targetValue) setActionTargetValue;
 }
 
 /**
@@ -5760,8 +5760,8 @@ struct GtkAssistantPage;
     widgets.
     
     [gtk.bin_layout.BinLayout] will stack each child of a widget on top of each other,
-    using the [gtk.widget.Widget.gboolean], [gtk.widget.Widget.gboolean],
-    [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
+    using the [gtk.widget.Widget.hexpand], [gtk.widget.Widget.vexpand],
+    [gtk.widget.Widget.halign], and [gtk.widget.Widget.valign] properties
     of each child to determine where they should be positioned.
 */
 struct GtkBinLayout;
@@ -5872,9 +5872,9 @@ struct GtkBorder
     ![An example GtkBox](box.png)
     
     Whether it is a row or column depends on the value of its
-    [gtk.orientable.Orientable.Orientation] property. Within the other
+    [gtk.orientable.Orientable.orientation] property. Within the other
     dimension, all children are allocated the same size. Of course, the
-    [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align] properties
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign] properties
     can be used on the children to influence their allocation.
     
     Use repeated calls to [gtk.box.Box.append] to pack widgets into a
@@ -5925,16 +5925,16 @@ struct GtkBoxClass
     row or column.
     
     Whether it is a row or column depends on the value of its
-    [gtk.orientable.Orientable.Orientation] property. Within the other dimension
+    [gtk.orientable.Orientable.orientation] property. Within the other dimension
     all children all allocated the same size. The [gtk.box_layout.BoxLayout] will respect
-    the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    the [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties of each child widget.
     
     If you want all children to be assigned the same size, you can use
-    the [gtk.box_layout.BoxLayout.gboolean] property.
+    the [gtk.box_layout.BoxLayout.homogeneous] property.
     
     If you want to specify the amount of space placed between each child,
-    you can use the [gtk.box_layout.BoxLayout.gint] property.
+    you can use the [gtk.box_layout.BoxLayout.spacing] property.
 */
 struct GtkBoxLayout;
 
@@ -5999,9 +5999,9 @@ struct GtkBuildableIface
 
   /**
       Sets a property of a buildable object.
-       It is normally not necessary to implement this, [gobject.object.ObjectG.setProperty]
+       It is normally not necessary to implement this, [gobject.object.ObjectWrap.setProperty]
        is used by default. [gtk.window.Window] implements this to delay showing itself
-       (i.e. setting the [gtk.widget.Widget.gboolean] property) until the whole
+       (i.e. setting the [gtk.widget.Widget.visible] property) until the whole
        interface is created.
   */
   extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, const(char)* name, const(GValue)* value) setBuildableProperty;
@@ -6121,7 +6121,7 @@ struct GtkBuildableParser
     builder (in which case you should not have to worry about their lifecycle),
     or without a parent, in which case they have to be added to some container
     to make use of them. Non-widget objects need to be reffed with
-    [gobject.object.ObjectG.ref_] to keep them beyond the lifespan of the builder.
+    [gobject.object.ObjectWrap.ref_] to keep them beyond the lifespan of the builder.
     
     ## GtkBuilder UI Definitions
     
@@ -6229,8 +6229,8 @@ struct GtkBuildableParser
         value, and optionally combined with “|” for bitwise OR, e.g.
         “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
       * colors (in a format understood by [gdk.rgba.RGBA.parse])
-      * [glib.variant.VariantG] (can be specified in the format understood by
-         [glib.variant.VariantG.parse])
+      * [glib.variant.Variant] (can be specified in the format understood by
+         [glib.variant.Variant.parse])
       * pixbufs (can be specified as a filename of an image file to load)
     )
       
@@ -6245,7 +6245,7 @@ struct GtkBuildableParser
     ### Child objects
     
     Many widgets have properties for child widgets, such as
-    [gtk.expander.Expander.Widget]. In this case, the preferred way to
+    [gtk.expander.Expander.child]. In this case, the preferred way to
     specify the child widget in a ui file is to simply set the property:
     
     ```xml
@@ -6322,7 +6322,7 @@ struct GtkBuildableParser
     ```
     
     For more information, see the documentation of the
-    [gobject.object.ObjectG.bindProperty] method.
+    [gobject.object.ObjectWrap.bindProperty] method.
     
     Please note that another way to set up bindings between objects in .ui files
     is to use the [gtk.expression.Expression] methodology. See the
@@ -7478,7 +7478,7 @@ struct GtkCellLayoutIface
     elements on a [cairo.context.Context]. Typically, one cell renderer is used to
     draw many cells on the screen.  To this extent, it isn’t expected that a
     CellRenderer keep any permanent state around.  Instead, any state is set
-    just prior to use using [gobject.object.ObjectG]s property system.  Then, the
+    just prior to use using [gobject.object.ObjectWrap]s property system.  Then, the
     cell is measured using [gtk.cell_renderer.CellRenderer.getPreferredSize]. Finally, the cell
     is rendered in the correct location using [gtk.cell_renderer.CellRenderer.snapshot].
     
@@ -7871,7 +7871,7 @@ struct GtkCenterLayoutClass
     ```
     
     A [gtk.check_button.CheckButton] has a main node with name checkbutton. If the
-    [gtk.check_button.CheckButton.utf8] or [gtk.check_button.CheckButton.Widget]
+    [gtk.check_button.CheckButton.label] or [gtk.check_button.CheckButton.child]
     properties are set, it contains a child widget. The indicator node
     is named check when no group is set, and radio if the checkbutton
     is grouped together with other checkbuttons.
@@ -8102,8 +8102,8 @@ struct GtkColorDialogClass
     
     The column view also supports interactive resizing and reordering of
     columns, via Drag-and-Drop of the column headers. This can be enabled or
-    disabled with the [gtk.column_view.ColumnView.gboolean] and
-    [gtk.column_view_column.ColumnViewColumn.gboolean] properties.
+    disabled with the [gtk.column_view.ColumnView.reorderable] and
+    [gtk.column_view_column.ColumnViewColumn.resizable] properties.
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
@@ -8156,11 +8156,11 @@ struct GtkColumnView;
     [gtk.column_view_cell.ColumnViewCell]s exist in 2 stages:
     
     1. The unbound stage where the listitem is not currently connected to
-       an item in the list. In that case, the [gtk.column_view_cell.ColumnViewCell.GObject.Object]
+       an item in the list. In that case, the [gtk.column_view_cell.ColumnViewCell.item]
        property is set to null.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.column_view_cell.ColumnViewCell.GObject.Object] property is not null.
+       The [gtk.column_view_cell.ColumnViewCell.item] property is not null.
 */
 struct GtkColumnViewCell;
 
@@ -8490,7 +8490,7 @@ struct GtkConstraintGuideClass
     is undefined.
     
     A constraint-based layout with conflicting constraints may be unsolvable,
-    and lead to an unstable layout. You can use the [gtk.constraint.Constraint.gint]
+    and lead to an unstable layout. You can use the [gtk.constraint.Constraint.strength]
     property of [gtk.constraint.Constraint] to "nudge" the layout towards a solution.
     
     ### GtkConstraintLayout as GtkBuildable
@@ -8932,14 +8932,14 @@ struct GtkDialogClass
     returned from that function.
     
     Enumeration will start automatically when the
-    [gtk.directory_list.DirectoryList.Gio.File] property is set.
+    [gtk.directory_list.DirectoryList.file] property is set.
     
     While the [gtk.directory_list.DirectoryList] is being filled, the
-    [gtk.directory_list.DirectoryList.gboolean] property will be set to true. You can
+    [gtk.directory_list.DirectoryList.loading] property will be set to true. You can
     listen to that property if you want to show information like a [gtk.spinner.Spinner]
     or a "Loading..." text.
     
-    If loading fails at any point, the [gtk.directory_list.DirectoryList.GLib.Error]
+    If loading fails at any point, the [gtk.directory_list.DirectoryList.error]
     property will be set to give more indication about the failure.
     
     The [gio.file_info.FileInfo]s returned from a [gtk.directory_list.DirectoryList] have the "standard::file"
@@ -9185,7 +9185,7 @@ struct GtkDropControllerMotionClass;
     
     ![An example GtkDropDown](drop-down.png)
     
-    The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.guint]
+    The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.selected]
     choice.
     
     The options are given to [gtk.drop_down.DropDown] in the form of [gio.list_model.ListModel]
@@ -9304,8 +9304,8 @@ struct GtkDropDownClass
           [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
           [gtk.drop_target.DropTarget.leave] signals
         * configuring how to receive data by setting the
-          [gtk.drop_target.DropTarget.gboolean] property and listening for its
-          availability via the [gtk.drop_target.DropTarget.GObject.Value] property
+          [gtk.drop_target.DropTarget.preload] property and listening for its
+          availability via the [gtk.drop_target.DropTarget.value] property
      )
        
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
@@ -9977,7 +9977,7 @@ struct GtkEveryFilterClass;
     expanded widget yourself, such as when you want to actually create
     the widget at expansion time. In this case, create a [gtk.expander.Expander]
     but do not add a child to it. The expander widget has an
-    [gtk.expander.Expander.gboolean] property which can be used to
+    [gtk.expander.Expander.expanded] property which can be used to
     monitor its expansion state. You should watch this property with
     a signal connection as follows:
     
@@ -10061,7 +10061,7 @@ struct GtkExpander;
     from a source that is several steps away. For example, an expression
     may describe ‘the value of property A of `object1`, which is itself the
     value of a property of `object2`’. And `object1` may not even exist yet
-    at the time that the expression is created. This is contrast to [gobject.object.ObjectG]
+    at the time that the expression is created. This is contrast to [gobject.object.ObjectWrap]
     property bindings, which can only create direct connections between
     the properties of two objects that must both exist for the duration
     of the binding.
@@ -10073,7 +10073,7 @@ struct GtkExpander;
     [gtk.expression.Expression.evaluate] for evaluating an expression.
     
     Various methods for defining expressions exist, from simple constants via
-    [gtk.constant_expression.ConstantExpression.new_] to looking up properties in a [gobject.object.ObjectG]
+    [gtk.constant_expression.ConstantExpression.new_] to looking up properties in a [gobject.object.ObjectWrap]
     (even recursively) via [gtk.property_expression.PropertyExpression.new_] or providing
     custom functions to transform and combine expressions via
     [gtk.closure_expression.ClosureExpression.new_].
@@ -10115,9 +10115,9 @@ struct GtkExpander;
     
     ## GtkExpression in GObject properties
     
-    In order to use a [gtk.expression.Expression] as a [gobject.object.ObjectG] property, you must use the
+    In order to use a [gtk.expression.Expression] as a [gobject.object.ObjectWrap] property, you must use the
     `func@Gtk.param_spec_expression` when creating a [gobject.param_spec.ParamSpec] to install in the
-    [gobject.object.ObjectG] class being defined; for instance:
+    [gobject.object.ObjectWrap] class being defined; for instance:
     
     ```c
     obj_props[PROP_EXPRESSION] =
@@ -11845,7 +11845,7 @@ struct GtkGridLayoutClass
     ```
     
     [gtk.grid_view.GridView] uses a single CSS node with name `gridview`. Each child uses
-    a single CSS node with name `child`. If the [gtk.list_item.ListItem.gboolean]
+    a single CSS node with name `child`. If the [gtk.list_item.ListItem.activatable]
     property is set, the corresponding row will have the `.activatable` style
     class. For rubberband selection, a subnode with name `rubberband` is used.
     
@@ -12326,7 +12326,7 @@ struct GtkIconView;
     
     Sometimes an application will want to avoid depending on external data
     files, such as image files. See the documentation of [gio.resource.Resource] inside
-    GIO, for details. In this case, [gtk.image.Image.utf8],
+    GIO, for details. In this case, [gtk.image.Image.resource],
     [gtk.image.Image.newFromResource], and [gtk.image.Image.setFromResource]
     should be used.
     
@@ -12606,8 +12606,8 @@ struct GtkKeyvalTriggerClass;
     
     [gtk.label.Label.setJustify] sets how the lines in a label align
     with one another. If you want to set how the label as a whole aligns
-    in its available space, see the [gtk.widget.Widget.Align] and
-    [gtk.widget.Widget.Align] properties.
+    in its available space, see the [gtk.widget.Widget.halign] and
+    [gtk.widget.Widget.valign] properties.
     
     The `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
     properties can be used to control the size allocation of ellipsized or
@@ -12684,7 +12684,7 @@ struct GtkLayoutChildClass
     
     A layout manager can expose properties for controlling the layout of
     each child, by creating an object type derived from [gtk.layout_child.LayoutChild]
-    and installing the properties on it as normal [gobject.object.ObjectG] properties.
+    and installing the properties on it as normal [gobject.object.ObjectWrap] properties.
     
     Each [gtk.layout_child.LayoutChild] instance storing the layout properties for a
     specific child is created through the [gtk.layout_manager.LayoutManager.getLayoutChild]
@@ -13024,11 +13024,11 @@ struct GtkListHeaderClass;
     [gtk.list_item.ListItem] objects exist in 2 stages:
     
     1. The unbound stage where the listitem is not currently connected to
-       an item in the list. In that case, the [gtk.list_item.ListItem.GObject.Object]
+       an item in the list. In that case, the [gtk.list_item.ListItem.item]
        property is set to null.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.list_item.ListItem.GObject.Object] property is not null.
+       The [gtk.list_item.ListItem.item] property is not null.
 */
 struct GtkListItem;
 
@@ -13104,7 +13104,7 @@ struct GtkListItemFactoryClass;
     The [gtk.list_store.ListStore] can accept most [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s as a column type, though
     it can’t accept all custom types.  Internally, it will keep a copy of
     data passed in (such as a string or a boxed pointer).  Columns that
-    accept [gobject.object.ObjectG]s are handled a little differently.  The
+    accept [gobject.object.ObjectWrap]s are handled a little differently.  The
     [gtk.list_store.ListStore] will keep a reference to the object instead of copying the
     value.  As a result, if the object is modified, it is up to the
     application writer to call [gtk.tree_model.TreeModel.rowChanged] to emit the
@@ -13345,7 +13345,7 @@ struct GtkListStorePrivate;
     [gtk.list_view.ListView] uses a single CSS node named `listview`. It may carry the
     `.separators` style class, when `property@Gtk.ListView:show-separators`
     property is set. Each child widget uses a single CSS node named `row`.
-    If the [gtk.list_item.ListItem.gboolean] property is set, the
+    If the [gtk.list_item.ListItem.activatable] property is set, the
     corresponding row will have the `.activatable` style class. For
     rubberband selection, a node with name `rubberband` is used.
     
@@ -13587,15 +13587,15 @@ struct GtkMediaStreamClass
     
     The [gtk.menu_button.MenuButton] widget can show either an icon (set with the
     `property@Gtk.MenuButton:icon-name` property) or a label (set with the
-    [gtk.menu_button.MenuButton.utf8] property). If neither is explicitly set,
+    [gtk.menu_button.MenuButton.label] property). If neither is explicitly set,
     a [gtk.image.Image] is automatically created, using an arrow image oriented
-    according to [gtk.menu_button.MenuButton.ArrowType] or the generic
+    according to [gtk.menu_button.MenuButton.direction] or the generic
     “open-menu-symbolic” icon if the direction is not set.
     
     The positioning of the popup is determined by the
-    [gtk.menu_button.MenuButton.ArrowType] property of the menu button.
+    [gtk.menu_button.MenuButton.direction] property of the menu button.
     
-    For menus, the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    For menus, the [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties of the menu are also taken into account. For example, when the
     direction is [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start],
     the menu will be positioned below the button, with the starting edge
@@ -14056,7 +14056,7 @@ struct GtkNumericSorterClass
 }
 
 /**
-    A [gobject.object.ObjectG] value in a [gtk.expression.Expression].
+    A [gobject.object.ObjectWrap] value in a [gtk.expression.Expression].
 */
 struct GtkObjectExpression;
 
@@ -14071,7 +14071,7 @@ struct GtkObjectExpression;
     
     [gtk.widget.Widget] types implementing the [gtk.orientable.Orientable] interface will
     automatically acquire the `horizontal` or `vertical` CSS class depending on
-    the value of the [gtk.orientable.Orientable.Orientation] property.
+    the value of the [gtk.orientable.Orientable.orientation] property.
 */
 struct GtkOrientable;
 
@@ -14089,7 +14089,7 @@ struct GtkOrientableIface
     ![An example GtkOverlay](overlay.png)
     
     The position of each overlay widget is determined by its
-    [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
     will be placed at the top left corner of the [gtk.overlay.Overlay] container,
     whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
@@ -14501,8 +14501,8 @@ struct GtkPasswordEntryClass;
     that paintables are never made smaller than their ideal size - but
     be careful if you do not know the size of the paintable in use (like
     when displaying user-loaded images). This can easily cause the picture to
-    grow larger than the screen. And [gtk.widget.Widget.Align] and
-    [gtk.widget.Widget.Align] can be used to make sure the paintable doesn't
+    grow larger than the screen. And [gtk.widget.Widget.halign] and
+    [gtk.widget.Widget.valign] can be used to make sure the paintable doesn't
     fill all available space but is instead displayed at its original size.
     
     ## CSS nodes
@@ -14632,7 +14632,7 @@ struct GtkPopoverClass
     [gtk.popover_menu.PopoverMenu] treats its children like menus and allows switching
     between them. It can open submenus as traditional, nested submenus,
     or in a more touch-friendly sliding fashion.
-    The property [gtk.popover_menu.PopoverMenu.PopoverMenuFlags] controls this appearance.
+    The property [gtk.popover_menu.PopoverMenu.flags] controls this appearance.
     
     [gtk.popover_menu.PopoverMenu] is meant to be used primarily with menu models,
     using [gtk.popover_menu.PopoverMenu.newFromModel]. If you need to put
@@ -15247,7 +15247,7 @@ struct GtkPrinter;
 struct GtkProgressBar;
 
 /**
-    A [gobject.object.ObjectG] property value in a [gtk.expression.Expression].
+    A [gobject.object.ObjectWrap] property value in a [gtk.expression.Expression].
 */
 struct GtkPropertyExpression;
 
@@ -15680,8 +15680,8 @@ struct GtkScrollInfo;
     [gtk.scrollable.Scrollable] is an interface for widgets with native scrolling ability.
     
     To implement this interface you should override the
-    [gtk.scrollable.Scrollable.Adjustment] and
-    [gtk.scrollable.Scrollable.Adjustment] properties.
+    [gtk.scrollable.Scrollable.hadjustment] and
+    [gtk.scrollable.Scrollable.vadjustment] properties.
     
     ## Creating a scrollable widget
     
@@ -15727,15 +15727,15 @@ struct GtkScrollableInterface
     
     Its position and movement are controlled by the adjustment that is passed to
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
-    details. The [gtk.adjustment.Adjustment.gdouble] field sets the position of the
-    thumb and must be between [gtk.adjustment.Adjustment.gdouble] and
-    [gtk.adjustment.Adjustment.gdouble] - `property@Gtk.Adjustment:page-size`.
+    details. The [gtk.adjustment.Adjustment.value] field sets the position of the
+    thumb and must be between [gtk.adjustment.Adjustment.lower] and
+    [gtk.adjustment.Adjustment.upper] - `property@Gtk.Adjustment:page-size`.
     The `property@Gtk.Adjustment:page-size` represents the size of the visible
     scrollable area.
     
     The fields `property@Gtk.Adjustment:step-increment` and
     `property@Gtk.Adjustment:page-increment` fields are added to or subtracted
-    from the [gtk.adjustment.Adjustment.gdouble] when the user asks to move by a step
+    from the [gtk.adjustment.Adjustment.value] when the user asks to move by a step
     (using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
     keys).
     
@@ -15786,8 +15786,8 @@ struct GtkScrollbar;
     `property@Gtk.ScrolledWindow:vscrollbar-policy` are [gtk.types.PolicyType.Never] or
     [gtk.types.PolicyType.External], [gtk.scrolled_window.ScrolledWindow] adds internal [gtk.scrollbar.Scrollbar] widgets
     around its child. The scroll position of the child, and if applicable the
-    scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.Adjustment]
-    and [gtk.scrolled_window.ScrolledWindow.Adjustment] that are associated with the
+    scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.hadjustment]
+    and [gtk.scrolled_window.ScrolledWindow.vadjustment] that are associated with the
     [gtk.scrolled_window.ScrolledWindow]. See the docs on [gtk.scrollbar.Scrollbar] for the details,
     but note that the “step_increment” and “page_increment” fields are only
     effective if the policy causes scrollbars to be present.
@@ -16143,7 +16143,7 @@ struct GtkSeparator;
     next to their `gtk.css` file.
     
     Applications can override system-wide settings by setting the property
-    of the [gtk.settings.Settings] object with [gobject.object.ObjectG.set]. This should be restricted
+    of the [gtk.settings.Settings] object with [gobject.object.ObjectWrap.set]. This should be restricted
     to special cases though; [gtk.settings.Settings] are not meant as an application
     configuration facility.
     
@@ -16359,7 +16359,7 @@ struct GtkShortcutsGroupClass;
     
     If your application needs multiple sections, you should give each
     section a unique `property@Gtk.ShortcutsSection:section-name` and
-    a [gtk.shortcuts_section.ShortcutsSection.utf8] that can be shown in the
+    a [gtk.shortcuts_section.ShortcutsSection.title] that can be shown in the
     section selector of the [gtk.shortcuts_window.ShortcutsWindow].
     
     The `property@Gtk.ShortcutsSection:max-height` property can be used
@@ -16470,7 +16470,7 @@ struct GtkSignalActionClass;
      the row and adding them to the listitem.
     
      2. [gtk.signal_list_item_factory.SignalListItemFactory.bind] is emitted to bind the item passed
-     via [gtk.list_item.ListItem.GObject.Object] to the widgets that have been created in
+     via [gtk.list_item.ListItem.item] to the widgets that have been created in
      step 1 or to add item-specific widgets. Signals are connected to listen to
      changes - both to changes in the item to update the widgets or to changes
      in the widgets to update the item. After this signal has been called, the
@@ -16494,7 +16494,7 @@ struct GtkSignalActionClass;
     
     Note that during the signal emissions, changing properties on the
     listitems passed will not trigger notify signals as the listitem's
-    notifications are frozen. See [gobject.object.ObjectG.freezeNotify] for details.
+    notifications are frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
     
     For tracking changes in other properties in the listitem, the
     ::notify signal is recommended. The signal can be connected in the
@@ -16543,7 +16543,7 @@ struct GtkSingleSelectionClass
     
     [gtk.size_group.SizeGroup] objects are referenced by each widget in the size group,
     so once you have added all widgets to a [gtk.size_group.SizeGroup], you can drop
-    the initial reference to the size group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the size group with [gobject.object.ObjectWrap.unref]. If the
     widgets in the size group are subsequently destroyed, then they will
     be removed from the size group and drop their references on the size
     group; when all widgets have been removed, the size group will be
@@ -16658,7 +16658,7 @@ struct GtkSnapshotClass;
     implements [gtk.section_model.SectionModel] and when `property@Gtk.SortListModel:section-sorter`
     is set, it will sort all items with that sorter and items comparing
     equal with it will be put into the same section.
-    The [gtk.sort_list_model.SortListModel.Sorter] will then be used to sort items
+    The [gtk.sort_list_model.SortListModel.sorter] will then be used to sort items
     inside their sections.
 */
 struct GtkSortListModel;
@@ -16686,7 +16686,7 @@ struct GtkSortListModelClass
     
     GTK provides various pre-made sorter implementations for common sorting
     operations. [gtk.column_view.ColumnView] has built-in support for sorting lists
-    via the [gtk.column_view_column.ColumnViewColumn.Sorter] property, where the user can
+    via the [gtk.column_view_column.ColumnViewColumn.sorter] property, where the user can
     change the sorting by clicking on list headers.
     
     Of course, in particular for large lists, it is also possible to subclass
@@ -17097,7 +17097,7 @@ struct GtkStringListClass
     [gtk.string_object.StringObject] is the type of items in a [gtk.string_list.StringList].
     
     A [gtk.string_object.StringObject] is a wrapper around a `const char*`; it has
-    a [gtk.string_object.StringObject.utf8] property that can be used
+    a [gtk.string_object.StringObject.string_] property that can be used
     for property bindings and expressions.
 */
 struct GtkStringObject;
@@ -17222,9 +17222,9 @@ struct GtkStyleProvider;
     
     [gtk.switch_.Switch] can also handle situations where the underlying state
     changes with a delay. In this case, the slider position indicates
-    the user's recent change (as indicated by the [gtk.switch_.Switch.gboolean]
+    the user's recent change (as indicated by the [gtk.switch_.Switch.active]
     property), and the color indicates whether the underlying state (represented
-    by the [gtk.switch_.Switch.gboolean] property) has been updated yet.
+    by the [gtk.switch_.Switch.state] property) has been updated yet.
     
     ![GtkSwitch with delayed state change](switch-state.png)
     
@@ -18025,7 +18025,7 @@ struct GtkTreeDragSourceIface
     UI for managing expanded state.
     
     It is important to mention that you want to set the
-    [gtk.list_item.ListItem.gboolean] property to FALSE when using this
+    [gtk.list_item.ListItem.focusable] property to FALSE when using this
     widget, as you want the keyboard focus to be in the treexpander, and not
     inside the list to make use of the keybindings.
     
@@ -18125,7 +18125,7 @@ struct GtkTreeListModelClass
     It allows navigating the model as a tree and modify the state of rows.
     
     [gtk.tree_list_row.TreeListRow] instances are created by a [gtk.tree_list_model.TreeListModel] only
-    when the [gtk.tree_list_model.TreeListModel.gboolean] property is not set.
+    when the [gtk.tree_list_model.TreeListModel.passthrough] property is not set.
     
     There are various support objects that can make use of [gtk.tree_list_row.TreeListRow]
     objects, such as the [gtk.tree_expander.TreeExpander] widget that allows displaying
@@ -19859,7 +19859,7 @@ struct GtkWindowClass
     ![An example GtkWindowControls](windowcontrols.png)
     
     [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
-    [gtk.window_controls.WindowControls.PackType]), so it's intended to be always used
+    [gtk.window_controls.WindowControls.side]), so it's intended to be always used
     in pair with another [gtk.window_controls.WindowControls] for the opposite side, for example:
     
     ```xml
@@ -19895,7 +19895,7 @@ struct GtkWindowClass
     exist and where they are placed exactly depends on the desktop environment
     and `property@Gtk.WindowControls:decoration-layout` value.
     
-    When [gtk.window_controls.WindowControls.gboolean] is true, it gets the .empty
+    When [gtk.window_controls.WindowControls.empty] is true, it gets the .empty
     style class.
     
     # Accessibility
@@ -19923,7 +19923,7 @@ struct GtkWindowControlsClass
     
     [gtk.window_group.WindowGroup] objects are referenced by each window in the group,
     so once you have added all windows to a [gtk.window_group.WindowGroup], you can drop
-    the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the window group with [gobject.object.ObjectWrap.unref]. If the
     windows in the window group are subsequently destroyed, then they will
     be removed from the window group and drop their references on the window
     group; when all window have been removed, the window group will be
@@ -20043,7 +20043,7 @@ alias extern(C) bool function(GtkPrinter* printer, void* data) GtkPrinterFunc;
 
 alias extern(C) char* function(GtkScale* scale, double value, void* userData) GtkScaleFormatValueFunc;
 
-alias extern(C) bool function(GtkWidget* widget, VariantC* args, void* userData) GtkShortcutFunc;
+alias extern(C) bool function(GtkWidget* widget, GVariant* args, void* userData) GtkShortcutFunc;
 
 alias extern(C) bool function(dchar ch, void* userData) GtkTextCharPredicate;
 
@@ -20075,5 +20075,5 @@ alias extern(C) bool function(GtkTreeModel* model, GtkTreeIter* iter, void* data
 
 alias extern(C) bool function(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData) GtkTreeViewSearchEqualFunc;
 
-alias extern(C) void function(GtkWidget* widget, const(char)* actionName, VariantC* parameter) GtkWidgetActionActivateFunc;
+alias extern(C) void function(GtkWidget* widget, const(char)* actionName, GVariant* parameter) GtkWidgetActionActivateFunc;
 

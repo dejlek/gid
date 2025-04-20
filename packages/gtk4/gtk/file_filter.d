@@ -81,9 +81,35 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileFilter self()
   {
     return this;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The human-readable name of the filter.
+      
+      This is the string that will be displayed in the file chooser
+      user interface if there is a selectable list of filters.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The human-readable name of the filter.
+        
+        This is the string that will be displayed in the file chooser
+        user interface if there is a selectable list of filters.
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
   }
 
   mixin BuildableT!();
@@ -113,20 +139,20 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
-      Deserialize a file filter from a [glib.variant.VariantG].
+      Deserialize a file filter from a [glib.variant.Variant].
       
       The variant must be in the format produced by
       [gtk.file_filter.FileFilter.toGvariant].
   
       Params:
-        variant = an `a{sv}` [glib.variant.VariantG]
+        variant = an `a{sv}` [glib.variant.Variant]
       Returns: a new [gtk.file_filter.FileFilter] object
   */
-  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.VariantG variant)
+  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant)
   {
     GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
+    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -247,13 +273,13 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Serialize a file filter to an `a{sv}` variant.
-      Returns: a new, floating, [glib.variant.VariantG]
+      Returns: a new, floating, [glib.variant.Variant]
   */
-  glib.variant.VariantG toGvariant()
+  glib.variant.Variant toGvariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 }

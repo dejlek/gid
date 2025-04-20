@@ -116,7 +116,7 @@ template PollableOutputStreamT()
         cancellable = a #GCancellable, or null
       Returns: the number of bytes written, or -1 on error (including
           [gio.types.IOErrorEnum.WouldBlock]).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -129,7 +129,7 @@ template PollableOutputStreamT()
     GError *_err;
     _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ template PollableOutputStreamT()
         if the stream is not currently writable (and error is *not* set), or
         [gio.types.PollableReturn.Failed] if there was an error in which case error will
         be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -176,7 +176,7 @@ template PollableOutputStreamT()
     GError *_err;
     _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;
     return _retval;
   }

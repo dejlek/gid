@@ -55,7 +55,7 @@ import gobject.object;
     
     Unlike other configuration systems (like GConf), GSettings does not
     restrict keys to basic types like strings and numbers. GSettings stores
-    values as [glib.variant.VariantG], and allows any [glib.variant_type.VariantType] for
+    values as [glib.variant.Variant], and allows any [glib.variant_type.VariantType] for
     keys. Key names are restricted to lowercase characters, numbers and `-`.
     Furthermore, the names must begin with a lowercase character, must not end
     with a `-`, and must not contain consecutive dashes.
@@ -88,7 +88,7 @@ import gobject.object;
     ```
     
     Translations of default values must remain syntactically valid serialized
-    [glib.variant.VariantG]s (e.g. retaining any surrounding quotation marks) or
+    [glib.variant.Variant]s (e.g. retaining any surrounding quotation marks) or
     runtime errors will occur.
     
     GSettings uses schemas in a compact binary form that is created
@@ -110,7 +110,7 @@ import gobject.object;
     associated with one named application, the ID should not use
     StudlyCaps, e.g. `org.gnome.font-rendering`.
     
-    In addition to [glib.variant.VariantG] types, keys can have types that have
+    In addition to [glib.variant.Variant] types, keys can have types that have
     enumerated types. These can be described by a `<choice>`,
     `<enum>` or `<flags>` element, as seen in the
     second example below. The underlying type of such a key
@@ -201,7 +201,7 @@ import gobject.object;
     override’ files. These are keyfiles in the same directory as the XML
     schema sources which can override default values. The schema ID serves
     as the group name in the key file, and the values are expected in
-    serialized [glib.variant.VariantG] form, as in the following example:
+    serialized [glib.variant.Variant] form, as in the following example:
     ```
     [org.gtk.Example]
     key1='string'
@@ -213,11 +213,11 @@ import gobject.object;
     
     ## Binding
     
-    A very convenient feature of GSettings lets you bind [gobject.object.ObjectG]
+    A very convenient feature of GSettings lets you bind [gobject.object.ObjectWrap]
     properties directly to settings, using [gio.settings.Settings.bind]. Once a
-    [gobject.object.ObjectG] property has been bound to a setting, changes on
+    [gobject.object.ObjectWrap] property has been bound to a setting, changes on
     either side are automatically propagated to the other side. GSettings handles
-    details like mapping between [gobject.object.ObjectG] and [glib.variant.VariantG]
+    details like mapping between [gobject.object.ObjectWrap] and [glib.variant.Variant]
     types, and preventing infinite cycles.
     
     This makes it very easy to hook up a preferences dialog to the
@@ -304,7 +304,7 @@ import gobject.object;
     rules. It should not be committed to version control or included in
     `EXTRA_DIST`.
 */
-class Settings : gobject.object.ObjectG
+class Settings : gobject.object.ObjectWrap
 {
 
   /** */
@@ -326,9 +326,30 @@ class Settings : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Settings self()
   {
     return this;
+  }
+
+  /**
+      Get `delayApply` property.
+      Returns: Whether the #GSettings object is in 'delay-apply' mode. See
+      [gio.settings.Settings.delay] for details.
+  */
+  @property bool delayApply()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("delay-apply");
+  }
+
+  /**
+      Get `hasUnapplied` property.
+      Returns: If this property is true, the #GSettings object has outstanding
+      changes that will be applied when [gio.settings.Settings.apply] is called.
+  */
+  @property bool hasUnapplied()
+  {
+    return getHasUnapplied();
   }
 
   /**
@@ -394,7 +415,7 @@ class Settings : gobject.object.ObjectG
     GSettings* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_full(schema ? cast(GSettingsSchema*)schema.cPtr(No.Dup) : null, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
-    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -418,7 +439,7 @@ class Settings : gobject.object.ObjectG
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     _cretval = g_settings_new_with_backend(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -441,7 +462,7 @@ class Settings : gobject.object.ObjectG
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_with_backend_and_path(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
-    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -471,7 +492,7 @@ class Settings : gobject.object.ObjectG
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_with_path(_schemaId, _path);
-    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -558,7 +579,7 @@ class Settings : gobject.object.ObjectG
         object = the object
         property = the property whose binding is removed
   */
-  static void unbind(gobject.object.ObjectG object, string property)
+  static void unbind(gobject.object.ObjectWrap object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_settings_unbind(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -603,7 +624,7 @@ class Settings : gobject.object.ObjectG
         property = the name of the property to bind
         flags = flags for the binding
   */
-  void bind(string key, gobject.object.ObjectG object, string property, gio.types.SettingsBindFlags flags)
+  void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags)
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -635,7 +656,7 @@ class Settings : gobject.object.ObjectG
         property = the name of a boolean property to bind
         inverted = whether to 'invert' the value
   */
-  void bindWritable(string key, gobject.object.ObjectG object, string property, bool inverted)
+  void bindWritable(string key, gobject.object.ObjectWrap object, string property, bool inverted)
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -667,7 +688,7 @@ class Settings : gobject.object.ObjectG
     GAction* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_create_action(cast(GSettings*)cPtr, _key);
-    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action.Action)(cast(GAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -721,7 +742,7 @@ class Settings : gobject.object.ObjectG
     GSettings* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_settings_get_child(cast(GSettings*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -752,12 +773,12 @@ class Settings : gobject.object.ObjectG
         key = the key to get the default value for
       Returns: the default value
   */
-  glib.variant.VariantG getDefaultValue(string key)
+  glib.variant.Variant getDefaultValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_default_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -922,11 +943,11 @@ class Settings : gobject.object.ObjectG
   */
   void* getMapped(string key, gio.types.SettingsGetMapping mapping)
   {
-    extern(C) bool _mappingCallback(VariantC* value, void** result, void* userData)
+    extern(C) bool _mappingCallback(GVariant* value, void** result, void* userData)
     {
       auto _dlg = cast(gio.types.SettingsGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new glib.variant.VariantG(cast(void*)value, No.Take) : null, *result);
+      bool _retval = (*_dlg)(value ? new glib.variant.Variant(cast(void*)value, No.Take) : null, *result);
       return _retval;
     }
     auto _mappingCB = mapping ? &_mappingCallback : null;
@@ -946,12 +967,12 @@ class Settings : gobject.object.ObjectG
   
       Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.getRange] instead.
   */
-  glib.variant.VariantG getRange(string key)
+  glib.variant.Variant getRange(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_range(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1073,12 +1094,12 @@ class Settings : gobject.object.ObjectG
         key = the key to get the user value for
       Returns: the user's value, if set
   */
-  glib.variant.VariantG getUserValue(string key)
+  glib.variant.Variant getUserValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_user_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1092,12 +1113,12 @@ class Settings : gobject.object.ObjectG
         key = the key to get the value for
       Returns: a new #GVariant
   */
-  glib.variant.VariantG getValue(string key)
+  glib.variant.Variant getValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1192,11 +1213,11 @@ class Settings : gobject.object.ObjectG
   
       Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.rangeCheck] instead.
   */
-  bool rangeCheck(string key, glib.variant.VariantG value)
+  bool rangeCheck(string key, glib.variant.Variant value)
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_settings_range_check(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    _retval = g_settings_range_check(cast(GSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1480,11 +1501,11 @@ class Settings : gobject.object.ObjectG
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setValue(string key, glib.variant.VariantG value)
+  bool setValue(string key, glib.variant.Variant value)
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_settings_set_value(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    _retval = g_settings_set_value(cast(GSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 

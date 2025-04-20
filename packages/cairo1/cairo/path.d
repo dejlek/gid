@@ -24,10 +24,17 @@ import gobject.boxed;
 class Path : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `path.Path` boxed type.
+      Params:
+        status = the current error status
+        numData = the number of elements in the data array
+  */
+  this(cairo.types.Status status = cairo.types.Status.init, int numData = int.init)
   {
     super(gMalloc(cairo_path_t.sizeof), Yes.Take);
+    this.status = status;
+    this.numData = numData;
   }
 
   /** */
@@ -55,26 +62,45 @@ class Path : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Path self()
   {
     return this;
   }
 
+  /**
+      Get `status` field.
+      Returns: the current error status
+  */
   @property cairo.types.Status status()
   {
     return cast(cairo.types.Status)(cast(cairo_path_t*)cPtr).status;
   }
 
+  /**
+      Set `status` field.
+      Params:
+        propval = the current error status
+  */
   @property void status(cairo.types.Status propval)
   {
     (cast(cairo_path_t*)cPtr).status = cast(cairo_status_t)propval;
   }
 
+  /**
+      Get `numData` field.
+      Returns: the number of elements in the data array
+  */
   @property int numData()
   {
     return (cast(cairo_path_t*)cPtr).numData;
   }
 
+  /**
+      Set `numData` field.
+      Params:
+        propval = the number of elements in the data array
+  */
   @property void numData(int propval)
   {
     (cast(cairo_path_t*)cPtr).numData = propval;

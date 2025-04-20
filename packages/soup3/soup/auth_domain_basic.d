@@ -37,9 +37,48 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthDomainBasic self()
   {
     return this;
+  }
+
+  /**
+      Get `authCallback` property.
+      Returns: The `callback@AuthDomainBasicAuthCallback`.
+  */
+  @property soup.types.AuthDomainBasicAuthCallback authCallback()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainBasicAuthCallback)("auth-callback");
+  }
+
+  /**
+      Set `authCallback` property.
+      Params:
+        propval = The `callback@AuthDomainBasicAuthCallback`.
+  */
+  @property void authCallback(soup.types.AuthDomainBasicAuthCallback propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainBasicAuthCallback)("auth-callback", propval);
+  }
+
+  /**
+      Get `authData` property.
+      Returns: The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+  */
+  @property void* authData()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("auth-data");
+  }
+
+  /**
+      Set `authData` property.
+      Params:
+        propval = The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+  */
+  @property void authData(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("auth-data", propval);
   }
 
   /**
@@ -66,7 +105,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
       string _username = username.fromCString(No.Free);
       string _password = password.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

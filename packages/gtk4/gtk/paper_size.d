@@ -51,6 +51,7 @@ class PaperSize : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PaperSize self()
   {
     return this;
@@ -101,19 +102,19 @@ class PaperSize : gobject.boxed.Boxed
   }
 
   /**
-      Deserialize a paper size from a [glib.variant.VariantG].
+      Deserialize a paper size from a [glib.variant.Variant].
       
       The `GVariant must be in the format produced by
       [gtk.paper_size.PaperSize.toGvariant].
   
       Params:
-        variant = an a{sv} [glib.variant.VariantG]
+        variant = an a{sv} [glib.variant.Variant]
       Returns: a new [gtk.paper_size.PaperSize] object
   */
-  static gtk.paper_size.PaperSize newFromGvariant(glib.variant.VariantG variant)
+  static gtk.paper_size.PaperSize newFromGvariant(glib.variant.Variant variant)
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -151,7 +152,7 @@ class PaperSize : gobject.boxed.Boxed
         groupName = the name of the group in the key file to read,
             or null to read the first group
       Returns: a new [gtk.paper_size.PaperSize] object with the restored paper size
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -160,7 +161,7 @@ class PaperSize : gobject.boxed.Boxed
     GError *_err;
     _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -378,13 +379,13 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Serialize a paper size to an `a{sv}` variant.
-      Returns: a new, floating, [glib.variant.VariantG]
+      Returns: a new, floating, [glib.variant.Variant]
   */
-  glib.variant.VariantG toGvariant()
+  glib.variant.Variant toGvariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 

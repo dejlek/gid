@@ -13,7 +13,7 @@ import gtk.widget;
 
     Deprecated: This object will be removed in GTK 5
 */
-class AssistantPage : gobject.object.ObjectG
+class AssistantPage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,9 +35,85 @@ class AssistantPage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AssistantPage self()
   {
     return this;
+  }
+
+  /**
+      Get `complete` property.
+      Returns: Whether all required fields are filled in.
+      
+      GTK uses this information to control the sensitivity
+      of the navigation buttons.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property bool complete()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("complete");
+  }
+
+  /**
+      Set `complete` property.
+      Params:
+        propval = Whether all required fields are filled in.
+        
+        GTK uses this information to control the sensitivity
+        of the navigation buttons.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property void complete(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("complete", propval);
+  }
+
+  /**
+      Get `pageType` property.
+      Returns: The type of the assistant page.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property gtk.types.AssistantPageType pageType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.AssistantPageType)("page-type");
+  }
+
+  /**
+      Set `pageType` property.
+      Params:
+        propval = The type of the assistant page.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property void pageType(gtk.types.AssistantPageType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.AssistantPageType)("page-type", propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the page.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property string title()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the page.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property void title(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
 
   /**
@@ -50,7 +126,7 @@ class AssistantPage : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_page_get_child(cast(GtkAssistantPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

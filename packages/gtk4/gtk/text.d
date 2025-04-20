@@ -110,9 +110,388 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Text self()
   {
     return this;
+  }
+
+  /**
+      Get `activatesDefault` property.
+      Returns: Whether to activate the default widget when Enter is pressed.
+  */
+  @property bool activatesDefault()
+  {
+    return getActivatesDefault();
+  }
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+  */
+  @property void activatesDefault(bool propval)
+  {
+    return setActivatesDefault(propval);
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: A list of Pango attributes to apply to the text of the [gtk.text.Text].
+      
+      This is mainly useful to change the size or weight of the text.
+      
+      The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+      [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property pango.attr_list.AttrList attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the [gtk.text.Text].
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+        [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property void attributes(pango.attr_list.AttrList propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The [gtk.entry_buffer.EntryBuffer] object which stores the text.
+  */
+  @property gtk.entry_buffer.EntryBuffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The [gtk.entry_buffer.EntryBuffer] object which stores the text.
+  */
+  @property void buffer(gtk.entry_buffer.EntryBuffer propval)
+  {
+    return setBuffer(propval);
+  }
+
+  /**
+      Get `enableEmojiCompletion` property.
+      Returns: Whether to suggest Emoji replacements.
+  */
+  @property bool enableEmojiCompletion()
+  {
+    return getEnableEmojiCompletion();
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest Emoji replacements.
+  */
+  @property void enableEmojiCompletion(bool propval)
+  {
+    return setEnableEmojiCompletion(propval);
+  }
+
+  /**
+      Get `extraMenu` property.
+      Returns: A menu model whose contents will be appended to
+      the context menu.
+  */
+  @property gio.menu_model.MenuModel extraMenu()
+  {
+    return getExtraMenu();
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to
+        the context menu.
+  */
+  @property void extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setExtraMenu(propval);
+  }
+
+  /**
+      Get `imModule` property.
+      Returns: Which IM (input method) module should be used for this self.
+      
+      See [gtk.immulticontext.IMMulticontext].
+      
+      Setting this to a non-null value overrides the system-wide
+      IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+      property.
+  */
+  @property string imModule()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("im-module");
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this self.
+        
+        See [gtk.immulticontext.IMMulticontext].
+        
+        Setting this to a non-null value overrides the system-wide
+        IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+        property.
+  */
+  @property void imModule(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional hints that allow input methods to fine-tune
+      their behaviour.
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune
+        their behaviour.
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose of this text field.
+      
+      This property can be used by on-screen keyboards and other input
+      methods to adjust their behaviour.
+      
+      Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+      [gtk.types.InputPurpose.Pin] is independent from setting
+      [gtk.text.Text.visibility].
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+        [gtk.types.InputPurpose.Pin] is independent from setting
+        [gtk.text.Text.visibility].
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
+  }
+
+  /**
+      Get `invisibleChar` property.
+      Returns: The character to used when masking contents (in “password mode”).
+  */
+  @property uint invisibleChar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("invisible-char");
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The character to used when masking contents (in “password mode”).
+  */
+  @property void invisibleChar(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("invisible-char", propval);
+  }
+
+  /**
+      Get `invisibleCharSet` property.
+      Returns: Whether the invisible char has been set for the [gtk.text.Text].
+  */
+  @property bool invisibleCharSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("invisible-char-set");
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the [gtk.text.Text].
+  */
+  @property void invisibleCharSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("invisible-char-set", propval);
+  }
+
+  /**
+      Get `maxLength` property.
+      Returns: Maximum number of characters that are allowed.
+      
+      Zero indicates no limit.
+  */
+  @property int maxLength()
+  {
+    return getMaxLength();
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters that are allowed.
+        
+        Zero indicates no limit.
+  */
+  @property void maxLength(int propval)
+  {
+    return setMaxLength(propval);
+  }
+
+  /**
+      Get `overwriteMode` property.
+      Returns: If text is overwritten when typing in the [gtk.text.Text].
+  */
+  @property bool overwriteMode()
+  {
+    return getOverwriteMode();
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the [gtk.text.Text].
+  */
+  @property void overwriteMode(bool propval)
+  {
+    return setOverwriteMode(propval);
+  }
+
+  /**
+      Get `placeholderText` property.
+      Returns: The text that will be displayed in the [gtk.text.Text] when it is empty
+      and unfocused.
+  */
+  @property string placeholderText()
+  {
+    return getPlaceholderText();
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.text.Text] when it is empty
+        and unfocused.
+  */
+  @property void placeholderText(string propval)
+  {
+    return setPlaceholderText(propval);
+  }
+
+  /**
+      Get `propagateTextWidth` property.
+      Returns: Whether the widget should grow and shrink with the content.
+  */
+  @property bool propagateTextWidth()
+  {
+    return getPropagateTextWidth();
+  }
+
+  /**
+      Set `propagateTextWidth` property.
+      Params:
+        propval = Whether the widget should grow and shrink with the content.
+  */
+  @property void propagateTextWidth(bool propval)
+  {
+    return setPropagateTextWidth(propval);
+  }
+
+  /**
+      Get `scrollOffset` property.
+      Returns: Number of pixels scrolled of the screen to the left.
+  */
+  @property int scrollOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("scroll-offset");
+  }
+
+  /**
+      Get `tabs` property.
+      Returns: A list of tabstops to apply to the text of the [gtk.text.Text].
+  */
+  @property pango.tab_array.TabArray tabs()
+  {
+    return getTabs();
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the [gtk.text.Text].
+  */
+  @property void tabs(pango.tab_array.TabArray propval)
+  {
+    return setTabs(propval);
+  }
+
+  /**
+      Get `truncateMultiline` property.
+      Returns: When true, pasted multi-line text is truncated to the first line.
+  */
+  @property bool truncateMultiline()
+  {
+    return getTruncateMultiline();
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+  */
+  @property void truncateMultiline(bool propval)
+  {
+    return setTruncateMultiline(propval);
+  }
+
+  /**
+      Get `visibility` property.
+      Returns: If false, the text is masked with the “invisible char”.
+  */
+  @property bool visibility()
+  {
+    return getVisibility();
+  }
+
+  /**
+      Set `visibility` property.
+      Params:
+        propval = If false, the text is masked with the “invisible char”.
+  */
+  @property void visibility(bool propval)
+  {
+    return setVisibility(propval);
   }
 
   mixin AccessibleTextT!();
@@ -140,7 +519,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +586,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_text_get_buffer(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +612,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_get_extra_menu(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 

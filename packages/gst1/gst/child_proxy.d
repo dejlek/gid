@@ -43,7 +43,7 @@ interface ChildProxy
         child = the newly added child
         name = the name of the new child
   */
-  void childAdded(gobject.object.ObjectG child, string name);
+  void childAdded(gobject.object.ObjectWrap child, string name);
 
   /**
       Emits the #GstChildProxy::child-removed signal.
@@ -52,7 +52,7 @@ interface ChildProxy
         child = the removed child
         name = the name of the old child
   */
-  void childRemoved(gobject.object.ObjectG child, string name);
+  void childRemoved(gobject.object.ObjectWrap child, string name);
 
   /**
       Fetches a child by its number.
@@ -62,13 +62,13 @@ interface ChildProxy
       Returns: the child object or null if
             not found (index too high).
   */
-  gobject.object.ObjectG getChildByIndex(uint index);
+  gobject.object.ObjectWrap getChildByIndex(uint index);
 
   /**
       Looks up a child element by the given name.
       
       This virtual method has a default implementation that uses #GstObject
-      together with [gst.object.ObjectGst.getName]. If the interface is to be used with
+      together with [gst.object.ObjectWrap.getName]. If the interface is to be used with
       #GObjects, this methods needs to be overridden.
   
       Params:
@@ -76,7 +76,7 @@ interface ChildProxy
       Returns: the child object or null if
             not found.
   */
-  gobject.object.ObjectG getChildByName(string name);
+  gobject.object.ObjectWrap getChildByName(string name);
 
   /**
       Looks up a child element by the given full-path name.
@@ -93,7 +93,7 @@ interface ChildProxy
       Returns: the child object or null if
             not found.
   */
-  gobject.object.ObjectG getChildByNameRecurse(string name);
+  gobject.object.ObjectWrap getChildByNameRecurse(string name);
 
   /**
       Gets the number of child objects this parent contains.
@@ -124,7 +124,7 @@ interface ChildProxy
         case the values for pspec and target are not modified. Unref target after
         usage. For plain #GObject target is the same as object.
   */
-  bool lookup(string name, out gobject.object.ObjectG target, out gobject.param_spec.ParamSpec pspec);
+  bool lookup(string name, out gobject.object.ObjectWrap target, out gobject.param_spec.ParamSpec pspec);
 
   /**
       Sets a single property using the GstChildProxy mechanism.
@@ -143,7 +143,7 @@ interface ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, string name, gst.child_proxy.ChildProxy childProxy))
+          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
   
           `object` the #GObject that was added (optional)
   
@@ -164,7 +164,7 @@ interface ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, string name, gst.child_proxy.ChildProxy childProxy))
+          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
   
           `object` the #GObject that was removed (optional)
   

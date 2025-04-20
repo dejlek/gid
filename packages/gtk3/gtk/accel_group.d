@@ -28,7 +28,7 @@ import gtk.types;
     [gtk.label.Label.newWithMnemonic]. Menu items can have both accelerators
     and mnemonics, of course.
 */
-class AccelGroup : gobject.object.ObjectG
+class AccelGroup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,9 +50,22 @@ class AccelGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AccelGroup self()
   {
     return this;
+  }
+
+  /** */
+  @property bool isLocked()
+  {
+    return getIsLocked();
+  }
+
+  /** */
+  @property gdk.types.ModifierType modifierMask()
+  {
+    return getModifierMask();
   }
 
   /**
@@ -79,7 +92,7 @@ class AccelGroup : gobject.object.ObjectG
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +109,7 @@ class AccelGroup : gobject.object.ObjectG
       Returns: true if an accelerator was activated and handled
             this keypress
   */
-  bool activate(glib.types.Quark accelQuark, gobject.object.ObjectG acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
+  bool activate(glib.types.Quark accelQuark, gobject.object.ObjectWrap acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
     _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)cPtr, accelQuark, acceleratable ? cast(ObjectC*)acceleratable.cPtr(No.Dup) : null, accelKey, accelMods);
@@ -274,7 +287,7 @@ class AccelGroup : gobject.object.ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gobject.object.ObjectG acceleratable, uint keyval, gdk.types.ModifierType modifier, gtk.accel_group.AccelGroup accelGroup))
+          $(D bool callback(gobject.object.ObjectWrap acceleratable, uint keyval, gdk.types.ModifierType modifier, gtk.accel_group.AccelGroup accelGroup))
   
           `acceleratable` the object on which the accelerator was activated (optional)
   
@@ -291,7 +304,7 @@ class AccelGroup : gobject.object.ObjectG
   ulong connectAccelActivate(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gdk.types.ModifierType)))
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.accel_group.AccelGroup)))

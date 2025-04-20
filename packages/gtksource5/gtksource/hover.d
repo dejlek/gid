@@ -23,7 +23,7 @@ import gtksource.types;
     You can change how long to wait to display the interactive tooltip by
     setting the `property@Hover:hover-delay` property in milliseconds.
 */
-class Hover : gobject.object.ObjectG
+class Hover : gobject.object.ObjectWrap
 {
 
   /** */
@@ -45,20 +45,40 @@ class Hover : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Hover self()
   {
     return this;
   }
 
+  /**
+      Get `hoverDelay` property.
+      Returns: Contains the number of milliseconds to delay before showing the hover assistant.
+  */
+  @property uint hoverDelay()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("hover-delay");
+  }
+
+  /**
+      Set `hoverDelay` property.
+      Params:
+        propval = Contains the number of milliseconds to delay before showing the hover assistant.
+  */
+  @property void hoverDelay(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("hover-delay", propval);
+  }
+
   /** */
   void addProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /** */
   void removeProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 }

@@ -22,8 +22,8 @@ template ReadableT()
     GError *_err;
     _cretval = garrow_readable_read(cast(GArrowReadable*)cPtr, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -34,7 +34,7 @@ template ReadableT()
     GError *_err;
     _cretval = garrow_readable_read_bytes(cast(GArrowReadable*)cPtr, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

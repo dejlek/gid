@@ -37,9 +37,16 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseFilter self()
   {
     return this;
+  }
+
+  /** */
+  @property gstgl.glcontext.GLContext context()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstgl.glcontext.GLContext)("context");
   }
 
   /** */
@@ -55,7 +62,7 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_filter_get_gl_context(cast(GstGLBaseFilter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 }

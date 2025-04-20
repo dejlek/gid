@@ -33,6 +33,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BooleanArray self()
   {
     return this;
@@ -53,8 +54,8 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _cretval = garrow_boolean_array_and(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,8 +89,8 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _cretval = garrow_boolean_array_invert(cast(GArrowBooleanArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,8 +101,8 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _cretval = garrow_boolean_array_or(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,8 +113,8 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _cretval = garrow_boolean_array_xor(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -32,6 +32,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DayTimeIntervalScalar self()
   {
     return this;
@@ -50,7 +51,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -38,7 +38,7 @@ import gobject.object;
     passed to the callback.  That callback should then call
     [gio.volume.Volume.mountFinish] with the [gio.volume.Volume] instance and the
     [gio.async_result.AsyncResult] data to see if the operation was completed
-    successfully.  If a [glib.error.ErrorG] is present when
+    successfully.  If a [glib.error.ErrorWrap] is present when
     [gio.volume.Volume.mountFinish] is called, then it will be filled with any
     error information.
     
@@ -103,7 +103,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
   */
@@ -130,7 +130,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true if the volume was successfully ejected. false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -170,7 +170,7 @@ interface Volume
       implementations to find the underlying mount to shadow, see
       [gio.mount.Mount.isShadowed] for more details.
       Returns: the activation root of volume
-            or null. Use [gobject.object.ObjectG.unref] to free.
+            or null. Use [gobject.object.ObjectWrap.unref] to free.
   */
   gio.file.File getActivationRoot();
 
@@ -178,14 +178,14 @@ interface Volume
       Gets the drive for the volume.
       Returns: a #GDrive or null if volume is not
             associated with a drive. The returned object should be unreffed
-            with [gobject.object.ObjectG.unref] when no longer needed.
+            with [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.drive.Drive getDrive();
 
   /**
       Gets the icon for volume.
       Returns: a #GIcon.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   gio.icon.Icon getIcon();
@@ -206,7 +206,7 @@ interface Volume
   /**
       Gets the mount for the volume.
       Returns: a #GMount or null if volume isn't mounted.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   gio.mount.Mount getMount();
@@ -227,7 +227,7 @@ interface Volume
   /**
       Gets the symbolic icon for volume.
       Returns: a #GIcon.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   gio.icon.Icon getSymbolicIcon();
@@ -269,7 +269,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool mountFinish(gio.async_result.AsyncResult result);
 

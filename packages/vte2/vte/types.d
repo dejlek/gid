@@ -70,7 +70,7 @@ alias SelectionFunc = bool delegate(vte.terminal.Terminal terminal, glong column
       pid = a #GPid
       error = a #GError, or null
 */
-alias TerminalSpawnAsyncCallback = void delegate(vte.terminal.Terminal terminal, glib.types.Pid pid, glib.error.ErrorG error);
+alias TerminalSpawnAsyncCallback = void delegate(vte.terminal.Terminal terminal, glib.types.Pid pid, glib.error.ErrorWrap error);
 
 /**
     The major version number of the VTE library

@@ -18,7 +18,7 @@ class SDPBandwidth
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPBandwidth");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpbandwidth.SDPBandwidth");
 
     cInstance = *cast(GstSDPBandwidth*)ptr;
 
@@ -32,22 +32,40 @@ class SDPBandwidth
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `bwtype` field.
+      Returns: the bandwidth modifier type
+  */
   @property string bwtype()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
   }
 
+  /**
+      Set `bwtype` field.
+      Params:
+        propval = the bandwidth modifier type
+  */
   @property void bwtype(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
     dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)cPtr).bwtype);
   }
 
+  /**
+      Get `bandwidth` field.
+      Returns: the bandwidth in kilobits per second
+  */
   @property uint bandwidth()
   {
     return (cast(GstSDPBandwidth*)cPtr).bandwidth;
   }
 
+  /**
+      Set `bandwidth` field.
+      Params:
+        propval = the bandwidth in kilobits per second
+  */
   @property void bandwidth(uint propval)
   {
     (cast(GstSDPBandwidth*)cPtr).bandwidth = propval;

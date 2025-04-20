@@ -49,7 +49,7 @@ import gtk.types;
     is undefined.
     
     A constraint-based layout with conflicting constraints may be unsolvable,
-    and lead to an unstable layout. You can use the [gtk.constraint.Constraint.gint]
+    and lead to an unstable layout. You can use the [gtk.constraint.Constraint.strength]
     property of [gtk.constraint.Constraint] to "nudge" the layout towards a solution.
     
     ### GtkConstraintLayout as GtkBuildable
@@ -206,6 +206,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ConstraintLayout self()
   {
     return this;
@@ -227,7 +228,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   /**
       Adds a constraint to the layout manager.
       
-      The [gtk.constraint.Constraint.ConstraintTarget] and [gtk.constraint.Constraint.ConstraintTarget]
+      The [gtk.constraint.Constraint.source] and [gtk.constraint.Constraint.target]
       properties of `constraint` can be:
       
        $(LIST
@@ -339,7 +340,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
             or guides
       Returns: the list of
           [gtk.constraint.Constraint] instances that were added to the layout
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gtk.constraint.Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, gtk.constraint_target.ConstraintTarget[string] views)
   {
@@ -358,7 +359,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     GError *_err;
     _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(gtk.constraint.Constraint, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -397,7 +398,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -418,7 +419,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 

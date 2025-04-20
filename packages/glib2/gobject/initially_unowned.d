@@ -13,7 +13,7 @@ import gobject.types;
     All the fields in the [gobject.initially_unowned.InitiallyUnowned] structure are private to the
     implementation and should never be accessed directly.
 */
-class InitiallyUnowned : gobject.object.ObjectG
+class InitiallyUnowned : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class InitiallyUnowned : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InitiallyUnowned self()
   {
     return this;

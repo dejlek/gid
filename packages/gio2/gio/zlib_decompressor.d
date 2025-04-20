@@ -14,7 +14,7 @@ import gobject.object;
     [gio.zlib_decompressor.ZlibDecompressor] is an implementation of [gio.converter.Converter] that
     decompresses data compressed with zlib.
 */
-class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
+class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
 {
 
   /** */
@@ -36,9 +36,22 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ZlibDecompressor self()
   {
     return this;
+  }
+
+  /**
+      Get `fileInfo` property.
+      Returns: A #GFileInfo containing the information found in the GZIP header
+      of the data stream processed, or null if the header was not yet
+      fully processed, is not present at all, or the compressor's
+      #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip].
+  */
+  @property gio.file_info.FileInfo fileInfo()
+  {
+    return getFileInfo();
   }
 
   mixin ConverterT!();
@@ -69,7 +82,7 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 }

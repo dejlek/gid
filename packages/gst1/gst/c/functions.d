@@ -848,7 +848,7 @@ __gshared extern(C)
   GstMiniObject* function(GstMiniObject** olddata) c_gst_mini_object_steal; ///
   bool function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_take; ///
 
-  // ObjectGst
+  // ObjectWrap
   GType function() c_gst_object_get_type; ///
   bool function(GList* list, const(char)* name) c_gst_object_check_uniqueness; ///
   void function(ObjectC* object, GstObject* orig, GParamSpec* pspec, char** excludedProps) c_gst_object_default_deep_notify; ///
@@ -4125,7 +4125,7 @@ alias gst_mini_object_steal = c_gst_mini_object_steal;
 /** */
 alias gst_mini_object_take = c_gst_mini_object_take;
 
-// ObjectGst
+// ObjectWrap
 
 /** */
 alias gst_object_get_type = c_gst_object_get_type;
@@ -7639,7 +7639,7 @@ shared static this()
   gidLink(cast(void**)&gst_mini_object_steal, "gst_mini_object_steal", LIBS);
   gidLink(cast(void**)&gst_mini_object_take, "gst_mini_object_take", LIBS);
 
-  // ObjectGst
+  // ObjectWrap
   gidLink(cast(void**)&gst_object_get_type, "gst_object_get_type", LIBS);
   gidLink(cast(void**)&gst_object_check_uniqueness, "gst_object_check_uniqueness", LIBS);
   gidLink(cast(void**)&gst_object_default_deep_notify, "gst_object_default_deep_notify", LIBS);

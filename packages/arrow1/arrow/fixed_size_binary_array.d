@@ -33,6 +33,7 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FixedSizeBinaryArray self()
   {
     return this;

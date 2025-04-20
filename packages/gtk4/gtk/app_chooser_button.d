@@ -73,9 +73,96 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppChooserButton self()
   {
     return this;
+  }
+
+  /**
+      Get `heading` property.
+      Returns: The text to show at the top of the dialog that can be
+      opened from the button.
+      
+      The string may contain Pango markup.
+  */
+  @property string heading()
+  {
+    return getHeading();
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The text to show at the top of the dialog that can be
+        opened from the button.
+        
+        The string may contain Pango markup.
+  */
+  @property void heading(string propval)
+  {
+    return setHeading(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the app chooser dialog should be modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the app chooser dialog should be modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `showDefaultItem` property.
+      Returns: Determines whether the dropdown menu shows the default application
+      on top for the provided content type.
+  */
+  @property bool showDefaultItem()
+  {
+    return getShowDefaultItem();
+  }
+
+  /**
+      Set `showDefaultItem` property.
+      Params:
+        propval = Determines whether the dropdown menu shows the default application
+        on top for the provided content type.
+  */
+  @property void showDefaultItem(bool propval)
+  {
+    return setShowDefaultItem(propval);
+  }
+
+  /**
+      Get `showDialogItem` property.
+      Returns: Determines whether the dropdown menu shows an item to open
+      a [gtk.app_chooser_dialog.AppChooserDialog].
+  */
+  @property bool showDialogItem()
+  {
+    return getShowDialogItem();
+  }
+
+  /**
+      Set `showDialogItem` property.
+      Params:
+        propval = Determines whether the dropdown menu shows an item to open
+        a [gtk.app_chooser_dialog.AppChooserDialog].
+  */
+  @property void showDialogItem(bool propval)
+  {
+    return setShowDialogItem(propval);
   }
 
   mixin AppChooserT!();
@@ -120,7 +207,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

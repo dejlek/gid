@@ -12,6 +12,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.tool_item;
 import gtk.types;
+import gtk.widget;
 
 /**
     A #GtkSeparatorToolItem is a #GtkToolItem that separates groups of other
@@ -50,9 +51,26 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SeparatorToolItem self()
   {
     return this;
+  }
+
+  alias draw = gtk.widget.Widget.draw;
+
+  /** */
+  @property bool draw()
+  {
+    return getDraw();
+  }
+
+  alias draw = gtk.widget.Widget.draw;
+
+  /** */
+  @property void draw(bool propval)
+  {
+    return setDraw(propval);
   }
 
   /**

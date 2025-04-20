@@ -55,6 +55,7 @@ class OffscreenWindow : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OffscreenWindow self()
   {
     return this;
@@ -83,7 +84,7 @@ class OffscreenWindow : gtk.window.Window
   {
     PixbufC* _cretval;
     _cretval = gtk_offscreen_window_get_pixbuf(cast(GtkOffscreenWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

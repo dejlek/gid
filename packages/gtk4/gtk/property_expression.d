@@ -10,7 +10,7 @@ import gtk.expression;
 import gtk.types;
 
 /**
-    A [gobject.object.ObjectG] property value in a [gtk.expression.Expression].
+    A [gobject.object.ObjectWrap] property value in a [gtk.expression.Expression].
 */
 class PropertyExpression : gtk.expression.Expression
 {
@@ -19,7 +19,7 @@ class PropertyExpression : gtk.expression.Expression
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.PropertyExpression");
+      throw new GidConstructException("Null instance pointer for gtk.property_expression.PropertyExpression");
 
     super(cast(GtkExpression*)ptr, take);
   }

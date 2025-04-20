@@ -20,6 +20,7 @@ import gobject.dclosure;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
+import gtk.menu;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.widget;
@@ -55,9 +56,867 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Terminal self()
   {
     return this;
+  }
+
+  /**
+      Get `allowBold` property.
+      Returns: Controls whether or not the terminal will attempt to draw bold text,
+      by using a bold font variant.
+  
+      Deprecated: There's probably no reason for this feature to exist.
+  */
+  @property bool allowBold()
+  {
+    return getAllowBold();
+  }
+
+  /**
+      Set `allowBold` property.
+      Params:
+        propval = Controls whether or not the terminal will attempt to draw bold text,
+        by using a bold font variant.
+  
+      Deprecated: There's probably no reason for this feature to exist.
+  */
+  @property void allowBold(bool propval)
+  {
+    return setAllowBold(propval);
+  }
+
+  /**
+      Get `allowHyperlink` property.
+      Returns: Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
+  */
+  @property bool allowHyperlink()
+  {
+    return getAllowHyperlink();
+  }
+
+  /**
+      Set `allowHyperlink` property.
+      Params:
+        propval = Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
+  */
+  @property void allowHyperlink(bool propval)
+  {
+    return setAllowHyperlink(propval);
+  }
+
+  /**
+      Get `audibleBell` property.
+      Returns: Controls whether or not the terminal will beep when the child outputs the
+      "bl" sequence.
+  */
+  @property bool audibleBell()
+  {
+    return getAudibleBell();
+  }
+
+  /**
+      Set `audibleBell` property.
+      Params:
+        propval = Controls whether or not the terminal will beep when the child outputs the
+        "bl" sequence.
+  */
+  @property void audibleBell(bool propval)
+  {
+    return setAudibleBell(propval);
+  }
+
+  /**
+      Get `backspaceBinding` property.
+      Returns: Controls what string or control sequence the terminal sends to its child
+      when the user presses the backspace key.
+  */
+  @property vte.types.EraseBinding backspaceBinding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(vte.types.EraseBinding)("backspace-binding");
+  }
+
+  /**
+      Set `backspaceBinding` property.
+      Params:
+        propval = Controls what string or control sequence the terminal sends to its child
+        when the user presses the backspace key.
+  */
+  @property void backspaceBinding(vte.types.EraseBinding propval)
+  {
+    return setBackspaceBinding(propval);
+  }
+
+  /**
+      Get `boldIsBright` property.
+      Returns: Whether the SGR 1 attribute also switches to the bright counterpart
+      of the first 8 palette colors, in addition to making them bold (legacy behavior)
+      or if SGR 1 only enables bold and leaves the color intact.
+  */
+  @property bool boldIsBright()
+  {
+    return getBoldIsBright();
+  }
+
+  /**
+      Set `boldIsBright` property.
+      Params:
+        propval = Whether the SGR 1 attribute also switches to the bright counterpart
+        of the first 8 palette colors, in addition to making them bold (legacy behavior)
+        or if SGR 1 only enables bold and leaves the color intact.
+  */
+  @property void boldIsBright(bool propval)
+  {
+    return setBoldIsBright(propval);
+  }
+
+  /**
+      Get `cellHeightScale` property.
+      Returns: Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
+  */
+  @property double cellHeightScale()
+  {
+    return getCellHeightScale();
+  }
+
+  /**
+      Set `cellHeightScale` property.
+      Params:
+        propval = Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
+  */
+  @property void cellHeightScale(double propval)
+  {
+    return setCellHeightScale(propval);
+  }
+
+  /**
+      Get `cellWidthScale` property.
+      Returns: Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
+  */
+  @property double cellWidthScale()
+  {
+    return getCellWidthScale();
+  }
+
+  /**
+      Set `cellWidthScale` property.
+      Params:
+        propval = Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
+  */
+  @property void cellWidthScale(double propval)
+  {
+    return setCellWidthScale(propval);
+  }
+
+  /**
+      Get `cjkAmbiguousWidth` property.
+      Returns: This setting controls whether ambiguous-width characters are narrow or wide.
+      (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
+      the width of ambiguous-width characters is fixed and determined by the encoding
+      itself.)
+      
+      This setting only takes effect the next time the terminal is reset, either
+      via escape sequence or with [vte.terminal.Terminal.reset].
+  */
+  @property int cjkAmbiguousWidth()
+  {
+    return getCjkAmbiguousWidth();
+  }
+
+  /**
+      Set `cjkAmbiguousWidth` property.
+      Params:
+        propval = This setting controls whether ambiguous-width characters are narrow or wide.
+        (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
+        the width of ambiguous-width characters is fixed and determined by the encoding
+        itself.)
+        
+        This setting only takes effect the next time the terminal is reset, either
+        via escape sequence or with [vte.terminal.Terminal.reset].
+  */
+  @property void cjkAmbiguousWidth(int propval)
+  {
+    return setCjkAmbiguousWidth(propval);
+  }
+
+  /**
+      Get `contextMenu` property.
+      Returns: The menu used for context menus. Note that context menu model set with the
+      #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
+      takes precedence over this.
+  */
+  @property gtk.menu.Menu contextMenu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("context-menu");
+  }
+
+  /**
+      Set `contextMenu` property.
+      Params:
+        propval = The menu used for context menus. Note that context menu model set with the
+        #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
+        takes precedence over this.
+  */
+  @property void contextMenu(gtk.menu.Menu propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("context-menu", propval);
+  }
+
+  /**
+      Get `contextMenuModel` property.
+      Returns: The menu model used for context menus. If non-null, the context menu is
+      generated from this model, and overrides a context menu set with the
+      #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
+  */
+  @property gio.menu_model.MenuModel contextMenuModel()
+  {
+    return getContextMenuModel();
+  }
+
+  /**
+      Set `contextMenuModel` property.
+      Params:
+        propval = The menu model used for context menus. If non-null, the context menu is
+        generated from this model, and overrides a context menu set with the
+        #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
+  */
+  @property void contextMenuModel(gio.menu_model.MenuModel propval)
+  {
+    return setContextMenuModel(propval);
+  }
+
+  /**
+      Get `currentContainerName` property.
+      Returns: The name of the current container, or null if unset.
+  */
+  @property string currentContainerName()
+  {
+    return getCurrentContainerName();
+  }
+
+  /**
+      Get `currentContainerRuntime` property.
+      Returns: The name of the runtime toolset used to set up the current
+      container, or null if unset.
+  */
+  @property string currentContainerRuntime()
+  {
+    return getCurrentContainerRuntime();
+  }
+
+  /**
+      Get `currentDirectoryUri` property.
+      Returns: The current directory URI, or null if unset.
+  */
+  @property string currentDirectoryUri()
+  {
+    return getCurrentDirectoryUri();
+  }
+
+  /**
+      Get `currentFileUri` property.
+      Returns: The current file URI, or null if unset.
+  */
+  @property string currentFileUri()
+  {
+    return getCurrentFileUri();
+  }
+
+  /**
+      Get `cursorBlinkMode` property.
+      Returns: Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
+      will use the #GtkSettings:gtk-cursor-blink setting.
+  */
+  @property vte.types.CursorBlinkMode cursorBlinkMode()
+  {
+    return getCursorBlinkMode();
+  }
+
+  /**
+      Set `cursorBlinkMode` property.
+      Params:
+        propval = Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
+        will use the #GtkSettings:gtk-cursor-blink setting.
+  */
+  @property void cursorBlinkMode(vte.types.CursorBlinkMode propval)
+  {
+    return setCursorBlinkMode(propval);
+  }
+
+  /**
+      Get `cursorShape` property.
+      Returns: Controls the shape of the cursor.
+  */
+  @property vte.types.CursorShape cursorShape()
+  {
+    return getCursorShape();
+  }
+
+  /**
+      Set `cursorShape` property.
+      Params:
+        propval = Controls the shape of the cursor.
+  */
+  @property void cursorShape(vte.types.CursorShape propval)
+  {
+    return setCursorShape(propval);
+  }
+
+  /**
+      Get `deleteBinding` property.
+      Returns: Controls what string or control sequence the terminal sends to its child
+      when the user presses the delete key.
+  */
+  @property vte.types.EraseBinding deleteBinding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(vte.types.EraseBinding)("delete-binding");
+  }
+
+  /**
+      Set `deleteBinding` property.
+      Params:
+        propval = Controls what string or control sequence the terminal sends to its child
+        when the user presses the delete key.
+  */
+  @property void deleteBinding(vte.types.EraseBinding propval)
+  {
+    return setDeleteBinding(propval);
+  }
+
+  /**
+      Get `enableA11y` property.
+      Returns: Controls whether or not a11y is enabled for the widget.
+  */
+  @property bool enableA11y()
+  {
+    return getEnableA11y();
+  }
+
+  /**
+      Set `enableA11y` property.
+      Params:
+        propval = Controls whether or not a11y is enabled for the widget.
+  */
+  @property void enableA11y(bool propval)
+  {
+    return setEnableA11y(propval);
+  }
+
+  /**
+      Get `enableBidi` property.
+      Returns: Controls whether or not the terminal will perform bidirectional text rendering.
+  */
+  @property bool enableBidi()
+  {
+    return getEnableBidi();
+  }
+
+  /**
+      Set `enableBidi` property.
+      Params:
+        propval = Controls whether or not the terminal will perform bidirectional text rendering.
+  */
+  @property void enableBidi(bool propval)
+  {
+    return setEnableBidi(propval);
+  }
+
+  /** */
+  @property bool enableFallbackScrolling()
+  {
+    return getEnableFallbackScrolling();
+  }
+
+  /** */
+  @property void enableFallbackScrolling(bool propval)
+  {
+    return setEnableFallbackScrolling(propval);
+  }
+
+  /**
+      Get `enableShaping` property.
+      Returns: Controls whether or not the terminal will shape Arabic text.
+  */
+  @property bool enableShaping()
+  {
+    return getEnableShaping();
+  }
+
+  /**
+      Set `enableShaping` property.
+      Params:
+        propval = Controls whether or not the terminal will shape Arabic text.
+  */
+  @property void enableShaping(bool propval)
+  {
+    return setEnableShaping(propval);
+  }
+
+  /**
+      Get `enableSixel` property.
+      Returns: Controls whether SIXEL image support is enabled.
+  */
+  @property bool enableSixel()
+  {
+    return getEnableSixel();
+  }
+
+  /**
+      Set `enableSixel` property.
+      Params:
+        propval = Controls whether SIXEL image support is enabled.
+  */
+  @property void enableSixel(bool propval)
+  {
+    return setEnableSixel(propval);
+  }
+
+  /**
+      Get `encoding` property.
+      Returns: Controls the encoding the terminal will expect data from the child to
+      be encoded with.  For certain terminal types, applications executing in the
+      terminal can change the encoding.  The default is defined by the
+      application's locale settings.
+  
+      Deprecated: Instead of using this, you should use a tool like
+        luit(1) when support for non-UTF-8 is required
+  */
+  @property string encoding()
+  {
+    return getEncoding();
+  }
+
+  /**
+      Set `encoding` property.
+      Params:
+        propval = Controls the encoding the terminal will expect data from the child to
+        be encoded with.  For certain terminal types, applications executing in the
+        terminal can change the encoding.  The default is defined by the
+        application's locale settings.
+  
+      Deprecated: Instead of using this, you should use a tool like
+        luit(1) when support for non-UTF-8 is required
+  */
+  @property void encoding(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("encoding", propval);
+  }
+
+  /**
+      Get `fontDesc` property.
+      Returns: Specifies the font used for rendering all text displayed by the terminal,
+      overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
+      will immediately attempt to load the desired font, retrieve its
+      metrics, and attempt to resize itself to keep the same number of rows
+      and columns.
+  */
+  @property pango.font_description.FontDescription fontDesc()
+  {
+    return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = Specifies the font used for rendering all text displayed by the terminal,
+        overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
+        will immediately attempt to load the desired font, retrieve its
+        metrics, and attempt to resize itself to keep the same number of rows
+        and columns.
+  */
+  @property void fontDesc(pango.font_description.FontDescription propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
+  }
+
+  /**
+      Get `fontOptions` property.
+      Returns: The terminal's font options, or null to use the default font options.
+      
+      Note that on GTK4, the terminal by default uses font options
+      with [cairo.types.HintMetrics.On] set; to override that, use this
+      function to set a #cairo_font_options_t that has
+      [cairo.types.HintMetrics.Off] set.
+  */
+  @property cairo.font_options.FontOptions fontOptions()
+  {
+    return getFontOptions();
+  }
+
+  /**
+      Set `fontOptions` property.
+      Params:
+        propval = The terminal's font options, or null to use the default font options.
+        
+        Note that on GTK4, the terminal by default uses font options
+        with [cairo.types.HintMetrics.On] set; to override that, use this
+        function to set a #cairo_font_options_t that has
+        [cairo.types.HintMetrics.Off] set.
+  */
+  @property void fontOptions(cairo.font_options.FontOptions propval)
+  {
+    return setFontOptions(propval);
+  }
+
+  /**
+      Get `fontScale` property.
+      Returns: The terminal's font scale.
+  */
+  @property double fontScale()
+  {
+    return getFontScale();
+  }
+
+  /**
+      Set `fontScale` property.
+      Params:
+        propval = The terminal's font scale.
+  */
+  @property void fontScale(double propval)
+  {
+    return setFontScale(propval);
+  }
+
+  /**
+      Get `hyperlinkHoverUri` property.
+      Returns: The currently hovered hyperlink URI, or null if unset.
+  */
+  @property string hyperlinkHoverUri()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("hyperlink-hover-uri");
+  }
+
+  /** */
+  @property string iconTitle()
+  {
+    return getIconTitle();
+  }
+
+  /**
+      Get `inputEnabled` property.
+      Returns: Controls whether the terminal allows user input. When user input is disabled,
+      key press and mouse button press and motion events are not sent to the
+      terminal's child.
+  */
+  @property bool inputEnabled()
+  {
+    return getInputEnabled();
+  }
+
+  /**
+      Set `inputEnabled` property.
+      Params:
+        propval = Controls whether the terminal allows user input. When user input is disabled,
+        key press and mouse button press and motion events are not sent to the
+        terminal's child.
+  */
+  @property void inputEnabled(bool propval)
+  {
+    return setInputEnabled(propval);
+  }
+
+  /**
+      Get `pointerAutohide` property.
+      Returns: Controls the value of the terminal's mouse autohide setting.  When autohiding
+      is enabled, the mouse cursor will be hidden when the user presses a key and
+      shown when the user moves the mouse.
+  */
+  @property bool pointerAutohide()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("pointer-autohide");
+  }
+
+  /**
+      Set `pointerAutohide` property.
+      Params:
+        propval = Controls the value of the terminal's mouse autohide setting.  When autohiding
+        is enabled, the mouse cursor will be hidden when the user presses a key and
+        shown when the user moves the mouse.
+  */
+  @property void pointerAutohide(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("pointer-autohide", propval);
+  }
+
+  /**
+      Get `pty` property.
+      Returns: The PTY object for the terminal.
+  */
+  @property vte.pty.Pty pty()
+  {
+    return getPty();
+  }
+
+  /**
+      Set `pty` property.
+      Params:
+        propval = The PTY object for the terminal.
+  */
+  @property void pty(vte.pty.Pty propval)
+  {
+    return setPty(propval);
+  }
+
+  /**
+      Get `rewrapOnResize` property.
+      Returns: Controls whether or not the terminal will rewrap its contents, including
+      the scrollback buffer, whenever the terminal's width changes.
+  */
+  @property bool rewrapOnResize()
+  {
+    return getRewrapOnResize();
+  }
+
+  /**
+      Set `rewrapOnResize` property.
+      Params:
+        propval = Controls whether or not the terminal will rewrap its contents, including
+        the scrollback buffer, whenever the terminal's width changes.
+  */
+  @property void rewrapOnResize(bool propval)
+  {
+    return setRewrapOnResize(propval);
+  }
+
+  /**
+      Get `scrollOnInsert` property.
+      Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
+      the viewable history when the text is inserted (e.g. by a paste).
+  */
+  @property bool scrollOnInsert()
+  {
+    return getScrollOnInsert();
+  }
+
+  /**
+      Set `scrollOnInsert` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+        the viewable history when the text is inserted (e.g. by a paste).
+  */
+  @property void scrollOnInsert(bool propval)
+  {
+    return setScrollOnInsert(propval);
+  }
+
+  /**
+      Get `scrollOnKeystroke` property.
+      Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
+      the viewable history when the user presses a key.  Modifier keys do not
+      trigger this behavior.
+  */
+  @property bool scrollOnKeystroke()
+  {
+    return getScrollOnKeystroke();
+  }
+
+  /**
+      Set `scrollOnKeystroke` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+        the viewable history when the user presses a key.  Modifier keys do not
+        trigger this behavior.
+  */
+  @property void scrollOnKeystroke(bool propval)
+  {
+    return setScrollOnKeystroke(propval);
+  }
+
+  /**
+      Get `scrollOnOutput` property.
+      Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
+      the viewable history when the new data is received from the child.
+  */
+  @property bool scrollOnOutput()
+  {
+    return getScrollOnOutput();
+  }
+
+  /**
+      Set `scrollOnOutput` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+        the viewable history when the new data is received from the child.
+  */
+  @property void scrollOnOutput(bool propval)
+  {
+    return setScrollOnOutput(propval);
+  }
+
+  /**
+      Get `scrollUnitIsPixels` property.
+      Returns: Controls whether the terminal's GtkAdjustment values unit is lines
+      or pixels. This can be enabled when the terminal is the child of a
+      GtkScrolledWindow to fix some bugs with its kinetic scrolling.
+  */
+  @property bool scrollUnitIsPixels()
+  {
+    return getScrollUnitIsPixels();
+  }
+
+  /**
+      Set `scrollUnitIsPixels` property.
+      Params:
+        propval = Controls whether the terminal's GtkAdjustment values unit is lines
+        or pixels. This can be enabled when the terminal is the child of a
+        GtkScrolledWindow to fix some bugs with its kinetic scrolling.
+  */
+  @property void scrollUnitIsPixels(bool propval)
+  {
+    return setScrollUnitIsPixels(propval);
+  }
+
+  /**
+      Get `scrollbackLines` property.
+      Returns: The length of the scrollback buffer used by the terminal.  The size of
+      the scrollback buffer will be set to the larger of this value and the number
+      of visible rows the widget can display, so 0 can safely be used to disable
+      scrollback.  Note that this setting only affects the normal screen buffer.
+      For terminal types which have an alternate screen buffer, no scrollback is
+      allowed on the alternate screen buffer.
+  */
+  @property uint scrollbackLines()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("scrollback-lines");
+  }
+
+  /**
+      Set `scrollbackLines` property.
+      Params:
+        propval = The length of the scrollback buffer used by the terminal.  The size of
+        the scrollback buffer will be set to the larger of this value and the number
+        of visible rows the widget can display, so 0 can safely be used to disable
+        scrollback.  Note that this setting only affects the normal screen buffer.
+        For terminal types which have an alternate screen buffer, no scrollback is
+        allowed on the alternate screen buffer.
+  */
+  @property void scrollbackLines(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("scrollback-lines", propval);
+  }
+
+  /**
+      Get `textBlinkMode` property.
+      Returns: Controls whether or not the terminal will allow blinking text.
+  */
+  @property vte.types.TextBlinkMode textBlinkMode()
+  {
+    return getTextBlinkMode();
+  }
+
+  /**
+      Set `textBlinkMode` property.
+      Params:
+        propval = Controls whether or not the terminal will allow blinking text.
+  */
+  @property void textBlinkMode(vte.types.TextBlinkMode propval)
+  {
+    return setTextBlinkMode(propval);
+  }
+
+  /**
+      Get `windowTitle` property.
+      Returns: The terminal's title.
+  */
+  @property string windowTitle()
+  {
+    return getWindowTitle();
+  }
+
+  /**
+      Get `wordCharExceptions` property.
+      Returns: The set of characters which will be considered parts of a word
+      when doing word-wise selection, in addition to the default which only
+      considers alphanumeric characters part of a word.
+      
+      If null, a built-in set is used.
+  */
+  @property string wordCharExceptions()
+  {
+    return getWordCharExceptions();
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment of @terminal within its allocation.
+  */
+  @property vte.types.Align xalign()
+  {
+    return getXalign();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of @terminal within its allocation.
+  */
+  @property void xalign(vte.types.Align propval)
+  {
+    return setXalign(propval);
+  }
+
+  /**
+      Get `xfill` property.
+      Returns: The horizontal fillment of @terminal within its allocation.
+  */
+  @property bool xfill()
+  {
+    return getXfill();
+  }
+
+  /**
+      Set `xfill` property.
+      Params:
+        propval = The horizontal fillment of @terminal within its allocation.
+  */
+  @property void xfill(bool propval)
+  {
+    return setXfill(propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The vertical alignment of @terminal within its allocation
+  */
+  @property vte.types.Align yalign()
+  {
+    return getYalign();
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of @terminal within its allocation
+  */
+  @property void yalign(vte.types.Align propval)
+  {
+    return setYalign(propval);
+  }
+
+  /**
+      Get `yfill` property.
+      Returns: The vertical fillment of @terminal within its allocation.
+      Note that #VteTerminal:yfill=true is only supported with
+      #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
+      all other yalign values.
+  */
+  @property bool yfill()
+  {
+    return getYfill();
+  }
+
+  /**
+      Set `yfill` property.
+      Params:
+        propval = The vertical fillment of @terminal within its allocation.
+        Note that #VteTerminal:yfill=true is only supported with
+        #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
+        all other yalign values.
+  */
+  @property void yfill(bool propval)
+  {
+    return setYfill(propval);
   }
 
   mixin ScrollableT!();
@@ -335,7 +1194,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -344,7 +1203,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GMenuModel* _cretval;
     _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -594,7 +1453,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     VtePty* _cretval;
     _cretval = vte_terminal_get_pty(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1020,7 +1879,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         flags = flags from #VtePtyFlags
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   vte.pty.Pty ptyNewSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1028,8 +1887,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1530,7 +2389,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         codeset = target charset, or null to use UTF-8
       Returns: true if the encoding could be changed to the specified one,
          or false with error set to `G_CONVERT_ERROR_NO_CONVERSION`.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Support for non-UTF-8 is deprecated.
   */
@@ -1541,7 +2400,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = vte_terminal_set_encoding(cast(VteTerminal*)cPtr, _codeset, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1857,7 +2716,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1917,7 +2776,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         childPid = a location to store the child PID, or null
         cancellable = a #GCancellable, or null
       Returns: true on success, or false on error with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [vte.terminal.Terminal.spawnAsync] instead.
   */
@@ -1949,7 +2808,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -2029,7 +2888,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2110,7 +2969,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         flags = a set of #VteWriteFlags
         cancellable = a #GCancellable object, or null
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeContentsSync(gio.output_stream.OutputStream stream, vte.types.WriteFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2118,7 +2977,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

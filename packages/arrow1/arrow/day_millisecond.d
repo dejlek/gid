@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class DayMillisecond : gobject.object.ObjectG
+class DayMillisecond : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,48 @@ class DayMillisecond : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DayMillisecond self()
   {
     return this;
+  }
+
+  /**
+      Get `day` property.
+      Returns: The day part value.
+  */
+  @property int day()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("day");
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The day part value.
+  */
+  @property void day(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("day", propval);
+  }
+
+  /**
+      Get `millisecond` property.
+      Returns: The millisecond part value.
+  */
+  @property int millisecond()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("millisecond");
+  }
+
+  /**
+      Set `millisecond` property.
+      Params:
+        propval = The millisecond part value.
+  */
+  @property void millisecond(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("millisecond", propval);
   }
 
   /** */

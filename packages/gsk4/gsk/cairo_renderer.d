@@ -35,6 +35,7 @@ class CairoRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CairoRenderer self()
   {
     return this;

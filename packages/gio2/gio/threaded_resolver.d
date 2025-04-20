@@ -33,6 +33,7 @@ class ThreadedResolver : gio.resolver.Resolver
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ThreadedResolver self()
   {
     return this;

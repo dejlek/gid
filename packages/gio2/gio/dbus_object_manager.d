@@ -38,7 +38,7 @@ interface DBusObjectManager
         objectPath = Object path to look up.
         interfaceName = D-Bus interface name to look up.
       Returns: A #GDBusInterface instance or null. Free
-          with [gobject.object.ObjectG.unref].
+          with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_interface.DBusInterface getInterface(string objectPath, string interfaceName);
 
@@ -48,7 +48,7 @@ interface DBusObjectManager
       Params:
         objectPath = Object path to look up.
       Returns: A #GDBusObject or null. Free with
-          [gobject.object.ObjectG.unref].
+          [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_object.DBusObject getObject(string objectPath);
 
@@ -63,7 +63,7 @@ interface DBusObjectManager
       Returns: A list of
           #GDBusObject objects. The returned list should be freed with
           [glib.list.List.free] after each element has been freed with
-          [gobject.object.ObjectG.unref].
+          [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_object.DBusObject[] getObjects();
 

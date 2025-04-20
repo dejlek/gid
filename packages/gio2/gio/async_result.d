@@ -111,7 +111,7 @@ interface AsyncResult
       Returns: a new reference to the source
            object for the res, or null if there is none.
   */
-  gobject.object.ObjectG getSourceObject();
+  gobject.object.ObjectWrap getSourceObject();
 
   /**
       Gets the user data from a #GAsyncResult.
@@ -143,7 +143,7 @@ interface AsyncResult
       to enable subclasses to chain up correctly.
       Returns: true if error is has been filled in with an error from
           res, false if not.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool legacyPropagateError();
 }

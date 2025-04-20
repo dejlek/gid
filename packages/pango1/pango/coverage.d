@@ -17,7 +17,7 @@ import pango.types;
     structure that is used to represent that information. It is an
     opaque structure with no public fields.
 */
-class Coverage : gobject.object.ObjectG
+class Coverage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -39,6 +39,7 @@ class Coverage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Coverage self()
   {
     return this;
@@ -77,7 +78,7 @@ class Coverage : gobject.object.ObjectG
 
     auto _bytes = cast(ubyte*)bytes.ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
-    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,7 +92,7 @@ class Coverage : gobject.object.ObjectG
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_copy(cast(PangoCoverage*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 

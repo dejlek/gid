@@ -23,7 +23,7 @@ class AudioRingBufferSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioRingBufferSpec");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec");
 
     cInstance = *cast(GstAudioRingBufferSpec*)ptr;
 
@@ -37,77 +37,146 @@ class AudioRingBufferSpec
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `caps` field.
+      Returns: The caps that generated the Spec.
+  */
   @property gst.caps.Caps caps()
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
   }
 
+  /**
+      Set `caps` field.
+      Params:
+        propval = The caps that generated the Spec.
+  */
   @property void caps(gst.caps.Caps propval)
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
     dToC(propval, cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).caps);
   }
 
+  /**
+      Get `type` field.
+      Returns: the sample type
+  */
   @property gstaudio.types.AudioRingBufferFormatType type()
   {
     return cast(gstaudio.types.AudioRingBufferFormatType)(cast(GstAudioRingBufferSpec*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the sample type
+  */
   @property void type(gstaudio.types.AudioRingBufferFormatType propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).type = cast(GstAudioRingBufferFormatType)propval;
   }
 
+  /**
+      Get `info` field.
+      Returns: the #GstAudioInfo
+  */
   @property gstaudio.audio_info.AudioInfo info()
   {
     return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).info);
   }
 
+  /**
+      Get `latencyTime` field.
+      Returns: the latency in microseconds
+  */
   @property ulong latencyTime()
   {
     return (cast(GstAudioRingBufferSpec*)cPtr).latencyTime;
   }
 
+  /**
+      Set `latencyTime` field.
+      Params:
+        propval = the latency in microseconds
+  */
   @property void latencyTime(ulong propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).latencyTime = propval;
   }
 
+  /**
+      Get `bufferTime` field.
+      Returns: the total buffer size in microseconds
+  */
   @property ulong bufferTime()
   {
     return (cast(GstAudioRingBufferSpec*)cPtr).bufferTime;
   }
 
+  /**
+      Set `bufferTime` field.
+      Params:
+        propval = the total buffer size in microseconds
+  */
   @property void bufferTime(ulong propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).bufferTime = propval;
   }
 
+  /**
+      Get `segsize` field.
+      Returns: the size of one segment in bytes
+  */
   @property int segsize()
   {
     return (cast(GstAudioRingBufferSpec*)cPtr).segsize;
   }
 
+  /**
+      Set `segsize` field.
+      Params:
+        propval = the size of one segment in bytes
+  */
   @property void segsize(int propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).segsize = propval;
   }
 
+  /**
+      Get `segtotal` field.
+      Returns: the total number of segments
+  */
   @property int segtotal()
   {
     return (cast(GstAudioRingBufferSpec*)cPtr).segtotal;
   }
 
+  /**
+      Set `segtotal` field.
+      Params:
+        propval = the total number of segments
+  */
   @property void segtotal(int propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).segtotal = propval;
   }
 
+  /**
+      Get `seglatency` field.
+      Returns: number of segments queued in the lower level device,
+       defaults to segtotal
+  */
   @property int seglatency()
   {
     return (cast(GstAudioRingBufferSpec*)cPtr).seglatency;
   }
 
+  /**
+      Set `seglatency` field.
+      Params:
+        propval = number of segments queued in the lower level device,
+         defaults to segtotal
+  */
   @property void seglatency(int propval)
   {
     (cast(GstAudioRingBufferSpec*)cPtr).seglatency = propval;

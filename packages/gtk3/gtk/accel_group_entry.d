@@ -17,7 +17,7 @@ class AccelGroupEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.AccelGroupEntry");
+      throw new GidConstructException("Null instance pointer for gtk.accel_group_entry.AccelGroupEntry");
 
     cInstance = *cast(GtkAccelGroupEntry*)ptr;
 
@@ -31,32 +31,38 @@ class AccelGroupEntry
     return cast(void*)&cInstance;
   }
 
+  /** */
   @property gtk.types.AccelKey key()
   {
     return cToD!(gtk.types.AccelKey)(cast(void*)&(cast(GtkAccelGroupEntry*)cPtr).key);
   }
 
+  /** */
   @property void key(gtk.types.AccelKey propval)
   {
     (cast(GtkAccelGroupEntry*)cPtr).key = propval;
   }
 
+  /** */
   @property gobject.closure.Closure closure()
   {
     return cToD!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)cPtr).closure);
   }
 
+  /** */
   @property void closure(gobject.closure.Closure propval)
   {
     cValueFree!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)cPtr).closure);
     dToC(propval, cast(void*)&(cast(GtkAccelGroupEntry*)cPtr).closure);
   }
 
+  /** */
   @property glib.types.Quark accelPathQuark()
   {
     return (cast(GtkAccelGroupEntry*)cPtr).accelPathQuark;
   }
 
+  /** */
   @property void accelPathQuark(glib.types.Quark propval)
   {
     (cast(GtkAccelGroupEntry*)cPtr).accelPathQuark = propval;

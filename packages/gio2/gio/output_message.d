@@ -24,7 +24,7 @@ class OutputMessage
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.OutputMessage");
+      throw new GidConstructException("Null instance pointer for gio.output_message.OutputMessage");
 
     cInstance = *cast(GOutputMessage*)ptr;
 
@@ -38,52 +38,99 @@ class OutputMessage
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `address` field.
+      Returns: a #GSocketAddress, or null
+  */
   @property gio.socket_address.SocketAddress address()
   {
     return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
   }
 
+  /**
+      Set `address` field.
+      Params:
+        propval = a #GSocketAddress, or null
+  */
   @property void address(gio.socket_address.SocketAddress propval)
   {
     cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
     dToC(propval, cast(void*)&(cast(GOutputMessage*)cPtr).address);
   }
 
+  /**
+      Get `vectors` field.
+      Returns: pointer to an array of output vectors
+  */
   @property gio.types.OutputVector vectors()
   {
     return cToD!(gio.types.OutputVector)(cast(void*)(cast(GOutputMessage*)cPtr).vectors);
   }
 
+  /**
+      Set `vectors` field.
+      Params:
+        propval = pointer to an array of output vectors
+  */
   @property void vectors(gio.types.OutputVector propval)
   {
     (cast(GOutputMessage*)cPtr).vectors = &propval;
   }
 
+  /**
+      Get `numVectors` field.
+      Returns: the number of output vectors pointed to by @vectors.
+  */
   @property uint numVectors()
   {
     return (cast(GOutputMessage*)cPtr).numVectors;
   }
 
+  /**
+      Set `numVectors` field.
+      Params:
+        propval = the number of output vectors pointed to by @vectors.
+  */
   @property void numVectors(uint propval)
   {
     (cast(GOutputMessage*)cPtr).numVectors = propval;
   }
 
+  /**
+      Get `bytesSent` field.
+      Returns: initialize to 0. Will be set to the number of bytes
+          that have been sent
+  */
   @property uint bytesSent()
   {
     return (cast(GOutputMessage*)cPtr).bytesSent;
   }
 
+  /**
+      Set `bytesSent` field.
+      Params:
+        propval = initialize to 0. Will be set to the number of bytes
+            that have been sent
+  */
   @property void bytesSent(uint propval)
   {
     (cast(GOutputMessage*)cPtr).bytesSent = propval;
   }
 
+  /**
+      Get `numControlMessages` field.
+      Returns: number of elements in @control_messages.
+  */
   @property uint numControlMessages()
   {
     return (cast(GOutputMessage*)cPtr).numControlMessages;
   }
 
+  /**
+      Set `numControlMessages` field.
+      Params:
+        propval = number of elements in @control_messages.
+  */
   @property void numControlMessages(uint propval)
   {
     (cast(GOutputMessage*)cPtr).numControlMessages = propval;

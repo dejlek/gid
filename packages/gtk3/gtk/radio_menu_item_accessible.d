@@ -36,6 +36,7 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RadioMenuItemAccessible self()
   {
     return this;

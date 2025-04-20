@@ -16,7 +16,7 @@ class AudioQuantize
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioQuantize");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_quantize.AudioQuantize");
 
     cInstancePtr = cast(GstAudioQuantize*)ptr;
 

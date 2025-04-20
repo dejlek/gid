@@ -31,6 +31,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ResizableBuffer self()
   {
     return this;
@@ -43,7 +44,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _cretval = garrow_resizable_buffer_new(initialSize, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -54,7 +55,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _retval = garrow_resizable_buffer_reserve(cast(GArrowResizableBuffer*)cPtr, newCapacity, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -65,7 +66,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _retval = garrow_resizable_buffer_resize(cast(GArrowResizableBuffer*)cPtr, newSize, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

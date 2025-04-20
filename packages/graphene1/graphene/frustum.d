@@ -21,7 +21,9 @@ import graphene.types;
 class Frustum : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `frustum.Frustum` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_frustum_t.sizeof), Yes.Take);
@@ -52,6 +54,7 @@ class Frustum : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Frustum self()
   {
     return this;

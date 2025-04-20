@@ -36,6 +36,7 @@ class Encoding : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Encoding self()
   {
     return this;

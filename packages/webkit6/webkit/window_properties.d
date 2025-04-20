@@ -64,7 +64,7 @@ import webkit.types;
     }
     ```
 */
-class WindowProperties : gobject.object.ObjectG
+class WindowProperties : gobject.object.ObjectWrap
 {
 
   /** */

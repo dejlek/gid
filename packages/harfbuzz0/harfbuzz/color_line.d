@@ -13,10 +13,17 @@ import harfbuzz.types;
 class ColorLine : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `color_line.ColorLine` boxed type.
+      Params:
+        getColorStops = 
+        getExtend = 
+  */
+  this(hb_color_line_get_color_stops_func_t getColorStops = hb_color_line_get_color_stops_func_t.init, hb_color_line_get_extend_func_t getExtend = hb_color_line_get_extend_func_t.init)
   {
     super(gMalloc(hb_color_line_t.sizeof), Yes.Take);
+    this.getColorStops = getColorStops;
+    this.getExtend = getExtend;
   }
 
   /** */
@@ -44,25 +51,32 @@ class ColorLine : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorLine self()
   {
     return this;
   }
 
+  /** */
   @property hb_color_line_get_color_stops_func_t getColorStops()
   {
     return (cast(hb_color_line_t*)cPtr).getColorStops;
   }
+
+  /** */
 
   @property void getColorStops(hb_color_line_get_color_stops_func_t propval)
   {
     (cast(hb_color_line_t*)cPtr).getColorStops = propval;
   }
 
+  /** */
   @property hb_color_line_get_extend_func_t getExtend()
   {
     return (cast(hb_color_line_t*)cPtr).getExtend;
   }
+
+  /** */
 
   @property void getExtend(hb_color_line_get_extend_func_t propval)
   {

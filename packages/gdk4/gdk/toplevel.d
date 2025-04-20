@@ -32,6 +32,128 @@ interface Toplevel
   }
 
   /**
+      Get `decorated` property.
+      Returns: Whether the window manager should add decorations.
+  */
+  @property bool decorated();
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+  */
+  @property void decorated(bool propval);
+
+  /**
+      Get `deletable` property.
+      Returns: Whether the window manager should allow to close the surface.
+  */
+  @property bool deletable();
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+  */
+  @property void deletable(bool propval);
+
+  /**
+      Get `fullscreenMode` property.
+      Returns: The fullscreen mode of the surface.
+  */
+  @property gdk.types.FullscreenMode fullscreenMode();
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+  */
+  @property void fullscreenMode(gdk.types.FullscreenMode propval);
+
+  /**
+      Get `iconList` property.
+      Returns: A list of textures to use as icon.
+  */
+  @property void* iconList();
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+  */
+  @property void iconList(void* propval);
+
+  /**
+      Get `modal` property.
+      Returns: Whether the surface is modal.
+  */
+  @property bool modal();
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+  */
+  @property void modal(bool propval);
+
+  /**
+      Get `shortcutsInhibited` property.
+      Returns: Whether the surface should inhibit keyboard shortcuts.
+  */
+  @property bool shortcutsInhibited();
+
+  /**
+      Get `startupId` property.
+      Returns: The startup ID of the surface.
+      
+      See [gdk.app_launch_context.AppLaunchContext] for more information about
+      startup feedback.
+  */
+  @property string startupId();
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+        
+        See [gdk.app_launch_context.AppLaunchContext] for more information about
+        startup feedback.
+  */
+  @property void startupId(string propval);
+
+  /**
+      Get `state` property.
+      Returns: The state of the toplevel.
+  */
+  @property gdk.types.ToplevelState state();
+
+  /**
+      Get `title` property.
+      Returns: The title of the surface.
+  */
+  @property string title();
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+  */
+  @property void title(string propval);
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the surface.
+  */
+  @property gdk.surface.Surface transientFor();
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+  */
+  @property void transientFor(gdk.surface.Surface propval);
+
+  /**
       Begins an interactive move operation.
       
       You might use this function to implement draggable titlebars.

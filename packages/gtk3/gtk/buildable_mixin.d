@@ -37,7 +37,7 @@ template BuildableT()
         child = child to add
         type = kind of child or null
   */
-  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type = null)
+  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string type = null)
   {
     const(char)* _type = type.toCString(No.Alloc);
     gtk_buildable_add_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _type);
@@ -54,12 +54,12 @@ template BuildableT()
         name = name of child to construct
       Returns: the constructed child
   */
-  override gobject.object.ObjectG constructChild(gtk.builder.Builder builder, string name)
+  override gobject.object.ObjectWrap constructChild(gtk.builder.Builder builder, string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_buildable_construct_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ template BuildableT()
         tagname = the name of the tag
         data = user data created in custom_tag_start
   */
-  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data = null)
+  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, void* data = null)
   {
     const(char)* _tagname = tagname.toCString(No.Alloc);
     gtk_buildable_custom_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _tagname, data);
@@ -92,7 +92,7 @@ template BuildableT()
       Returns: true if a object has a custom implementation, false
                  if it doesn't.
   */
-  override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, out glib.types.MarkupParser parser, out void* data)
+  override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, out glib.types.MarkupParser parser, out void* data)
   {
     bool _retval;
     const(char)* _tagname = tagname.toCString(No.Alloc);
@@ -108,12 +108,12 @@ template BuildableT()
         childname = name of child
       Returns: the internal child of the buildable object
   */
-  override gobject.object.ObjectG getInternalChild(gtk.builder.Builder builder, string childname)
+  override gobject.object.ObjectWrap getInternalChild(gtk.builder.Builder builder, string childname)
   {
     ObjectC* _cretval;
     const(char)* _childname = childname.toCString(No.Alloc);
     _cretval = gtk_buildable_get_internal_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, _childname);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

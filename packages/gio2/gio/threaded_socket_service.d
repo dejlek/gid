@@ -50,6 +50,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ThreadedSocketService self()
   {
     return this;
@@ -82,7 +83,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService))
+          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService))
   
           `connection` a new #GSocketConnection object. (optional)
   
@@ -98,7 +99,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.socket_connection.SocketConnection)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.threaded_socket_service.ThreadedSocketService)))
   && Parameters!T.length < 4)
   {

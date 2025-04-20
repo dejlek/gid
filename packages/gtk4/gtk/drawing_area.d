@@ -120,9 +120,48 @@ class DrawingArea : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DrawingArea self()
   {
     return this;
+  }
+
+  /**
+      Get `contentHeight` property.
+      Returns: The content height.
+  */
+  @property int contentHeight()
+  {
+    return getContentHeight();
+  }
+
+  /**
+      Set `contentHeight` property.
+      Params:
+        propval = The content height.
+  */
+  @property void contentHeight(int propval)
+  {
+    return setContentHeight(propval);
+  }
+
+  /**
+      Get `contentWidth` property.
+      Returns: The content width.
+  */
+  @property int contentWidth()
+  {
+    return getContentWidth();
+  }
+
+  /**
+      Set `contentWidth` property.
+      Params:
+        propval = The content width.
+  */
+  @property void contentWidth(int propval)
+  {
+    return setContentWidth(propval);
   }
 
   /**
@@ -220,7 +259,7 @@ class DrawingArea : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
 

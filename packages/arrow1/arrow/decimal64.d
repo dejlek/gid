@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Decimal64 : gobject.object.ObjectG
+class Decimal64 : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class Decimal64 : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Decimal64 self()
   {
     return this;
@@ -42,7 +43,7 @@ class Decimal64 : gobject.object.ObjectG
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_new_integer(data);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -54,8 +55,8 @@ class Decimal64 : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_decimal64_new_string(_data, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -72,7 +73,7 @@ class Decimal64 : gobject.object.ObjectG
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_copy(cast(GArrowDecimal64*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,8 +85,8 @@ class Decimal64 : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_decimal64_divide(cast(GArrowDecimal64*)cPtr, right ? cast(GArrowDecimal64*)right.cPtr(No.Dup) : null, &_remainder, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     remainder = new arrow.decimal64.Decimal64(cast(void*)_remainder, Yes.Take);
     return _retval;
   }
@@ -135,7 +136,7 @@ class Decimal64 : gobject.object.ObjectG
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_minus(cast(GArrowDecimal64*)cPtr, right ? cast(GArrowDecimal64*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -144,7 +145,7 @@ class Decimal64 : gobject.object.ObjectG
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_multiply(cast(GArrowDecimal64*)cPtr, right ? cast(GArrowDecimal64*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +170,7 @@ class Decimal64 : gobject.object.ObjectG
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_plus(cast(GArrowDecimal64*)cPtr, right ? cast(GArrowDecimal64*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,8 +181,8 @@ class Decimal64 : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_decimal64_rescale(cast(GArrowDecimal64*)cPtr, originalScale, newScale, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 

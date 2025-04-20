@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import pango.c.functions;
 import pango.c.types;
 import pango.font_face;
@@ -17,7 +18,7 @@ import pango.types;
     The font faces in a family share a common design, but differ in
     slant, weight, width or other aspects.
 */
-class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
+class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -39,9 +40,37 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontFamily self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items contained in this list.
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items contained in this list.
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the family
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   mixin ListModelT!();
@@ -61,7 +90,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     PangoFontFace* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_family_get_face(cast(PangoFontFamily*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +174,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     pango_font_family_list_faces(cast(PangoFontFamily*)cPtr, &_faces, &_nFaces);
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
-      faces[i] = ObjectG.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
+      faces[i] = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
     gFree(cast(void*)_faces);
   }
 }

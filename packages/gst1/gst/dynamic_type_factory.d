@@ -51,6 +51,7 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DynamicTypeFactory self()
   {
     return this;

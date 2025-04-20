@@ -60,7 +60,7 @@ import gtk.buildable_mixin;
     </object>
     ```
 */
-class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
+class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -82,9 +82,29 @@ class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Breakpoint self()
   {
     return this;
+  }
+
+  /**
+      Get `condition` property.
+      Returns: The breakpoint's condition.
+  */
+  @property adw.breakpoint_condition.BreakpointCondition condition()
+  {
+    return getCondition();
+  }
+
+  /**
+      Set `condition` property.
+      Params:
+        propval = The breakpoint's condition.
+  */
+  @property void condition(adw.breakpoint_condition.BreakpointCondition propval)
+  {
+    return setCondition(propval);
   }
 
   mixin BuildableT!();
@@ -113,7 +133,7 @@ class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
       ::: note
           Setting properties to their original values does not work for properties
           that have irreversible side effects. For example, changing
-          [gtk.button.Button.utf8] while `propertyGtk.Button:icon-name` is set
+          [gtk.button.Button.label] while `propertyGtk.Button:icon-name` is set
           will reset the icon. However, resetting the label will not set
           `icon-name` to its original value.
       
@@ -146,7 +166,7 @@ class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
         property = the target property
         value = the value to set
   */
-  void addSetter(gobject.object.ObjectG object, string property, gobject.value.Value value = null)
+  void addSetter(gobject.object.ObjectWrap object, string property, gobject.value.Value value = null)
   {
     const(char)* _property = property.toCString(No.Alloc);
     adw_breakpoint_add_setter(cast(AdwBreakpoint*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
@@ -166,7 +186,7 @@ class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
         names = setter target properties
         values = setter values
   */
-  void addSetters(gobject.object.ObjectG[] objects, string[] names, gobject.value.Value[] values)
+  void addSetters(gobject.object.ObjectWrap[] objects, string[] names, gobject.value.Value[] values)
   {
     int _nSetters;
     if (objects)

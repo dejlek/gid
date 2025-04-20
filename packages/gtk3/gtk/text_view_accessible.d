@@ -38,6 +38,7 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextViewAccessible self()
   {
     return this;

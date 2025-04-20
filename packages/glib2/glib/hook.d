@@ -18,7 +18,7 @@ class Hook
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Hook");
+      throw new GidConstructException("Null instance pointer for glib.hook.Hook");
 
     cInstance = *cast(GHook*)ptr;
 
@@ -32,50 +32,99 @@ class Hook
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `next` field.
+      Returns: pointer to the next hook in the list
+  */
   @property glib.hook.Hook next()
   {
     return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).next);
   }
 
+  /**
+      Get `prev` field.
+      Returns: pointer to the previous hook in the list
+  */
   @property glib.hook.Hook prev()
   {
     return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).prev);
   }
 
+  /**
+      Get `refCount` field.
+      Returns: the reference count of this hook
+  */
   @property uint refCount()
   {
     return (cast(GHook*)cPtr).refCount;
   }
 
+  /**
+      Set `refCount` field.
+      Params:
+        propval = the reference count of this hook
+  */
   @property void refCount(uint propval)
   {
     (cast(GHook*)cPtr).refCount = propval;
   }
 
+  /**
+      Get `hookId` field.
+      Returns: the id of this hook, which is unique within its list
+  */
   @property gulong hookId()
   {
     return (cast(GHook*)cPtr).hookId;
   }
 
+  /**
+      Set `hookId` field.
+      Params:
+        propval = the id of this hook, which is unique within its list
+  */
   @property void hookId(gulong propval)
   {
     (cast(GHook*)cPtr).hookId = propval;
   }
 
+  /**
+      Get `flags` field.
+      Returns: flags which are set for this hook. See #GHookFlagMask for
+          predefined flags
+  */
   @property uint flags()
   {
     return (cast(GHook*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = flags which are set for this hook. See #GHookFlagMask for
+            predefined flags
+  */
   @property void flags(uint propval)
   {
     (cast(GHook*)cPtr).flags = propval;
   }
 
+  /**
+      Get `destroy` field.
+      Returns: the default @finalize_hook function of a #GHookList calls
+          this member of the hook that is being finalized
+  */
   @property GDestroyNotify destroy()
   {
     return (cast(GHook*)cPtr).destroy;
   }
+
+  /**
+      Set `destroy` field.
+      Params:
+        propval = the default @finalize_hook function of a #GHookList calls
+            this member of the hook that is being finalized
+  */
 
   @property void destroy(GDestroyNotify propval)
   {

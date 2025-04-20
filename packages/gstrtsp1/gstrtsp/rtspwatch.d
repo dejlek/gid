@@ -22,7 +22,7 @@ class RTSPWatch
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtsp.RTSPWatch");
+      throw new GidConstructException("Null instance pointer for gstrtsp.rtspwatch.RTSPWatch");
 
     cInstancePtr = cast(GstRTSPWatch*)ptr;
 

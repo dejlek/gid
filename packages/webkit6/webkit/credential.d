@@ -121,7 +121,7 @@ class Credential : gobject.boxed.Boxed
   {
     GTlsCertificate* _cretval;
     _cretval = webkit_credential_get_certificate(cast(WebKitCredential*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 

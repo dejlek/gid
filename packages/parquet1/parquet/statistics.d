@@ -8,7 +8,7 @@ import parquet.c.types;
 import parquet.types;
 
 /** */
-class Statistics : gobject.object.ObjectG
+class Statistics : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Statistics : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Statistics self()
   {
     return this;

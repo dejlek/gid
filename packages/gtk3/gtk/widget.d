@@ -52,6 +52,7 @@ import gtk.buildable_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.clipboard;
+import gtk.container;
 import gtk.rc_style;
 import gtk.requisition;
 import gtk.selection_data;
@@ -478,9 +479,720 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Widget self()
   {
     return this;
+  }
+
+  /** */
+  @property bool appPaintable()
+  {
+    return getAppPaintable();
+  }
+
+  /** */
+  @property void appPaintable(bool propval)
+  {
+    return setAppPaintable(propval);
+  }
+
+  /** */
+  @property bool canDefault()
+  {
+    return getCanDefault();
+  }
+
+  /** */
+  @property void canDefault(bool propval)
+  {
+    return setCanDefault(propval);
+  }
+
+  /** */
+  @property bool canFocus()
+  {
+    return getCanFocus();
+  }
+
+  /** */
+  @property void canFocus(bool propval)
+  {
+    return setCanFocus(propval);
+  }
+
+  /** */
+  @property bool compositeChild()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("composite-child");
+  }
+
+  /**
+      Get `doubleBuffered` property.
+      Returns: Whether the widget is double buffered.
+  
+      Deprecated: Widgets should not use this property.
+  */
+  @property bool doubleBuffered()
+  {
+    return getDoubleBuffered();
+  }
+
+  /**
+      Set `doubleBuffered` property.
+      Params:
+        propval = Whether the widget is double buffered.
+  
+      Deprecated: Widgets should not use this property.
+  */
+  @property void doubleBuffered(bool propval)
+  {
+    return setDoubleBuffered(propval);
+  }
+
+  /** */
+  @property gdk.types.EventMask events()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.EventMask)("events");
+  }
+
+  /** */
+  @property void events(gdk.types.EventMask propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.EventMask)("events", propval);
+  }
+
+  /**
+      Get `expand` property.
+      Returns: Whether to expand in both directions. Setting this sets both #GtkWidget:hexpand and #GtkWidget:vexpand
+  */
+  @property bool expand()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("expand");
+  }
+
+  /**
+      Set `expand` property.
+      Params:
+        propval = Whether to expand in both directions. Setting this sets both #GtkWidget:hexpand and #GtkWidget:vexpand
+  */
+  @property void expand(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("expand", propval);
+  }
+
+  /**
+      Get `focusOnClick` property.
+      Returns: Whether the widget should grab focus when it is clicked with the mouse.
+      
+      This property is only relevant for widgets that can take focus.
+      
+      Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
+      GtkComboBox) implemented this property individually.
+  */
+  @property bool focusOnClick()
+  {
+    return getFocusOnClick();
+  }
+
+  /**
+      Set `focusOnClick` property.
+      Params:
+        propval = Whether the widget should grab focus when it is clicked with the mouse.
+        
+        This property is only relevant for widgets that can take focus.
+        
+        Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
+        GtkComboBox) implemented this property individually.
+  */
+  @property void focusOnClick(bool propval)
+  {
+    return setFocusOnClick(propval);
+  }
+
+  /**
+      Get `halign` property.
+      Returns: How to distribute horizontal space if widget gets extra space, see #GtkAlign
+  */
+  @property gtk.types.Align halign()
+  {
+    return getHalign();
+  }
+
+  /**
+      Set `halign` property.
+      Params:
+        propval = How to distribute horizontal space if widget gets extra space, see #GtkAlign
+  */
+  @property void halign(gtk.types.Align propval)
+  {
+    return setHalign(propval);
+  }
+
+  /**
+      Get `hasTooltip` property.
+      Returns: Enables or disables the emission of #GtkWidget::query-tooltip on @widget.
+      A value of true indicates that @widget can have a tooltip, in this case
+      the widget will be queried using #GtkWidget::query-tooltip to determine
+      whether it will provide a tooltip or not.
+      
+      Note that setting this property to true for the first time will change
+      the event masks of the GdkWindows of this widget to include leave-notify
+      and motion-notify events.  This cannot and will not be undone when the
+      property is set to false again.
+  */
+  @property bool hasTooltip()
+  {
+    return getHasTooltip();
+  }
+
+  /**
+      Set `hasTooltip` property.
+      Params:
+        propval = Enables or disables the emission of #GtkWidget::query-tooltip on @widget.
+        A value of true indicates that @widget can have a tooltip, in this case
+        the widget will be queried using #GtkWidget::query-tooltip to determine
+        whether it will provide a tooltip or not.
+        
+        Note that setting this property to true for the first time will change
+        the event masks of the GdkWindows of this widget to include leave-notify
+        and motion-notify events.  This cannot and will not be undone when the
+        property is set to false again.
+  */
+  @property void hasTooltip(bool propval)
+  {
+    return setHasTooltip(propval);
+  }
+
+  /** */
+  @property int heightRequest()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("height-request");
+  }
+
+  /** */
+  @property void heightRequest(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("height-request", propval);
+  }
+
+  /**
+      Get `hexpand` property.
+      Returns: Whether to expand horizontally. See [gtk.widget.Widget.setHexpand].
+  */
+  @property bool hexpand()
+  {
+    return getHexpand();
+  }
+
+  /**
+      Set `hexpand` property.
+      Params:
+        propval = Whether to expand horizontally. See [gtk.widget.Widget.setHexpand].
+  */
+  @property void hexpand(bool propval)
+  {
+    return setHexpand(propval);
+  }
+
+  /**
+      Get `hexpandSet` property.
+      Returns: Whether to use the #GtkWidget:hexpand property. See [gtk.widget.Widget.getHexpandSet].
+  */
+  @property bool hexpandSet()
+  {
+    return getHexpandSet();
+  }
+
+  /**
+      Set `hexpandSet` property.
+      Params:
+        propval = Whether to use the #GtkWidget:hexpand property. See [gtk.widget.Widget.getHexpandSet].
+  */
+  @property void hexpandSet(bool propval)
+  {
+    return setHexpandSet(propval);
+  }
+
+  /**
+      Get `margin` property.
+      Returns: Sets all four sides' margin at once. If read, returns max
+      margin on any side.
+  */
+  @property int margin()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("margin");
+  }
+
+  /**
+      Set `margin` property.
+      Params:
+        propval = Sets all four sides' margin at once. If read, returns max
+        margin on any side.
+  */
+  @property void margin(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("margin", propval);
+  }
+
+  /**
+      Get `marginBottom` property.
+      Returns: Margin on bottom side of widget.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property int marginBottom()
+  {
+    return getMarginBottom();
+  }
+
+  /**
+      Set `marginBottom` property.
+      Params:
+        propval = Margin on bottom side of widget.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void marginBottom(int propval)
+  {
+    return setMarginBottom(propval);
+  }
+
+  /**
+      Get `marginEnd` property.
+      Returns: Margin on end of widget, horizontally. This property supports
+      left-to-right and right-to-left text directions.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property int marginEnd()
+  {
+    return getMarginEnd();
+  }
+
+  /**
+      Set `marginEnd` property.
+      Params:
+        propval = Margin on end of widget, horizontally. This property supports
+        left-to-right and right-to-left text directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void marginEnd(int propval)
+  {
+    return setMarginEnd(propval);
+  }
+
+  /**
+      Get `marginLeft` property.
+      Returns: Margin on left side of widget.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  
+      Deprecated: Use #GtkWidget:margin-start instead.
+  */
+  @property int marginLeft()
+  {
+    return getMarginLeft();
+  }
+
+  /**
+      Set `marginLeft` property.
+      Params:
+        propval = Margin on left side of widget.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  
+      Deprecated: Use #GtkWidget:margin-start instead.
+  */
+  @property void marginLeft(int propval)
+  {
+    return setMarginLeft(propval);
+  }
+
+  /**
+      Get `marginRight` property.
+      Returns: Margin on right side of widget.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  
+      Deprecated: Use #GtkWidget:margin-end instead.
+  */
+  @property int marginRight()
+  {
+    return getMarginRight();
+  }
+
+  /**
+      Set `marginRight` property.
+      Params:
+        propval = Margin on right side of widget.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  
+      Deprecated: Use #GtkWidget:margin-end instead.
+  */
+  @property void marginRight(int propval)
+  {
+    return setMarginRight(propval);
+  }
+
+  /**
+      Get `marginStart` property.
+      Returns: Margin on start of widget, horizontally. This property supports
+      left-to-right and right-to-left text directions.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property int marginStart()
+  {
+    return getMarginStart();
+  }
+
+  /**
+      Set `marginStart` property.
+      Params:
+        propval = Margin on start of widget, horizontally. This property supports
+        left-to-right and right-to-left text directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void marginStart(int propval)
+  {
+    return setMarginStart(propval);
+  }
+
+  /**
+      Get `marginTop` property.
+      Returns: Margin on top side of widget.
+      
+      This property adds margin outside of the widget's normal size
+      request, the margin will be added in addition to the size from
+      [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property int marginTop()
+  {
+    return getMarginTop();
+  }
+
+  /**
+      Set `marginTop` property.
+      Params:
+        propval = Margin on top side of widget.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void marginTop(int propval)
+  {
+    return setMarginTop(propval);
+  }
+
+  /** */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /** */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /** */
+  @property bool noShowAll()
+  {
+    return getNoShowAll();
+  }
+
+  /** */
+  @property void noShowAll(bool propval)
+  {
+    return setNoShowAll(propval);
+  }
+
+  /**
+      Get `opacity` property.
+      Returns: The requested opacity of the widget. See [gtk.widget.Widget.setOpacity] for
+      more details about window opacity.
+      
+      Before 3.8 this was only available in GtkWindow
+  */
+  @property double opacity()
+  {
+    return getOpacity();
+  }
+
+  /**
+      Set `opacity` property.
+      Params:
+        propval = The requested opacity of the widget. See [gtk.widget.Widget.setOpacity] for
+        more details about window opacity.
+        
+        Before 3.8 this was only available in GtkWindow
+  */
+  @property void opacity(double propval)
+  {
+    return setOpacity(propval);
+  }
+
+  /** */
+  @property gtk.container.Container parent()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.container.Container)("parent");
+  }
+
+  /** */
+  @property void parent(gtk.container.Container propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.container.Container)("parent", propval);
+  }
+
+  /** */
+  @property bool receivesDefault()
+  {
+    return getReceivesDefault();
+  }
+
+  /** */
+  @property void receivesDefault(bool propval)
+  {
+    return setReceivesDefault(propval);
+  }
+
+  /**
+      Get `scaleFactor` property.
+      Returns: The scale factor of the widget. See [gtk.widget.Widget.getScaleFactor] for
+      more details about widget scaling.
+  */
+  @property int scaleFactor()
+  {
+    return getScaleFactor();
+  }
+
+  /** */
+  @property bool sensitive()
+  {
+    return getSensitive();
+  }
+
+  /** */
+  @property void sensitive(bool propval)
+  {
+    return setSensitive(propval);
+  }
+
+  /**
+      Get `style` property.
+      Returns: The style of the widget, which contains information about how it will look (colors, etc).
+  
+      Deprecated: Use #GtkStyleContext instead
+  */
+  @property gtk.style.Style style()
+  {
+    return getStyle();
+  }
+
+  /**
+      Set `style` property.
+      Params:
+        propval = The style of the widget, which contains information about how it will look (colors, etc).
+  
+      Deprecated: Use #GtkStyleContext instead
+  */
+  @property void style(gtk.style.Style propval)
+  {
+    return setStyle(propval);
+  }
+
+  /**
+      Get `tooltipMarkup` property.
+      Returns: Sets the text of tooltip to be the given string, which is marked up
+      with the [Pango text markup language][PangoMarkupFormat].
+      Also see [gtk.tooltip.Tooltip.setMarkup].
+      
+      This is a convenience property which will take care of getting the
+      tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+      will automatically be set to true and there will be taken care of
+      #GtkWidget::query-tooltip in the default signal handler.
+      
+      Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+      are set, the last one wins.
+  */
+  @property string tooltipMarkup()
+  {
+    return getTooltipMarkup();
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+        with the [Pango text markup language][PangoMarkupFormat].
+        Also see [gtk.tooltip.Tooltip.setMarkup].
+        
+        This is a convenience property which will take care of getting the
+        tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+        will automatically be set to true and there will be taken care of
+        #GtkWidget::query-tooltip in the default signal handler.
+        
+        Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+        are set, the last one wins.
+  */
+  @property void tooltipMarkup(string propval)
+  {
+    return setTooltipMarkup(propval);
+  }
+
+  /**
+      Get `tooltipText` property.
+      Returns: Sets the text of tooltip to be the given string.
+      
+      Also see [gtk.tooltip.Tooltip.setText].
+      
+      This is a convenience property which will take care of getting the
+      tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+      will automatically be set to true and there will be taken care of
+      #GtkWidget::query-tooltip in the default signal handler.
+      
+      Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+      are set, the last one wins.
+  */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+        
+        Also see [gtk.tooltip.Tooltip.setText].
+        
+        This is a convenience property which will take care of getting the
+        tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+        will automatically be set to true and there will be taken care of
+        #GtkWidget::query-tooltip in the default signal handler.
+        
+        Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+        are set, the last one wins.
+  */
+  @property void tooltipText(string propval)
+  {
+    return setTooltipText(propval);
+  }
+
+  /**
+      Get `valign` property.
+      Returns: How to distribute vertical space if widget gets extra space, see #GtkAlign
+  */
+  @property gtk.types.Align valign()
+  {
+    return getValign();
+  }
+
+  /**
+      Set `valign` property.
+      Params:
+        propval = How to distribute vertical space if widget gets extra space, see #GtkAlign
+  */
+  @property void valign(gtk.types.Align propval)
+  {
+    return setValign(propval);
+  }
+
+  /**
+      Get `vexpand` property.
+      Returns: Whether to expand vertically. See [gtk.widget.Widget.setVexpand].
+  */
+  @property bool vexpand()
+  {
+    return getVexpand();
+  }
+
+  /**
+      Set `vexpand` property.
+      Params:
+        propval = Whether to expand vertically. See [gtk.widget.Widget.setVexpand].
+  */
+  @property void vexpand(bool propval)
+  {
+    return setVexpand(propval);
+  }
+
+  /**
+      Get `vexpandSet` property.
+      Returns: Whether to use the #GtkWidget:vexpand property. See [gtk.widget.Widget.getVexpandSet].
+  */
+  @property bool vexpandSet()
+  {
+    return getVexpandSet();
+  }
+
+  /**
+      Set `vexpandSet` property.
+      Params:
+        propval = Whether to use the #GtkWidget:vexpand property. See [gtk.widget.Widget.getVexpandSet].
+  */
+  @property void vexpandSet(bool propval)
+  {
+    return setVexpandSet(propval);
+  }
+
+  /** */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /** */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
+  }
+
+  /** */
+  @property int widthRequest()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("width-request");
+  }
+
+  /** */
+  @property void widthRequest(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("width-request", propval);
+  }
+
+  /**
+      Get `window` property.
+      Returns: The widget's window if it is realized, null otherwise.
+  */
+  @property gdk.window.Window window()
+  {
+    return getWindow();
   }
 
   mixin ImplementorIfaceT!();
@@ -512,7 +1224,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_default_style();
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -669,7 +1381,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     {
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -738,7 +1450,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [child property][child-properties] child_property
       on widget.
       
-      This is the analogue of [gobject.object.ObjectG.notify] for child properties.
+      This is the analogue of [gobject.object.ObjectWrap.notify] for child properties.
       
       Also see [gtk.container.Container.childNotify].
   
@@ -809,7 +1521,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -832,7 +1544,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)cPtr, _text);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -864,7 +1576,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       It's important to notice that [gtk.widget.Widget.destroy] will only cause
       the widget to be finalized if no additional references, acquired
-      using [gobject.object.ObjectG.ref_], are held on it. In case additional references
+      using [gobject.object.ObjectWrap.ref_], are held on it. In case additional references
       are in place, the widget will be in an "inert" state after calling
       this function; widget will still point to valid memory, allowing you
       to release the references you hold, but you may not query the widget's
@@ -935,7 +1647,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkDragContext* _cretval;
     _cretval = gtk_drag_begin(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -985,7 +1697,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkDragContext* _cretval;
     _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1324,7 +2036,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconGicon(gio.icon.Icon icon)
   {
-    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1480,7 +2192,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       signals are queued until [gtk.widget.Widget.thawChildNotify] is called
       on widget.
       
-      This is the analogue of [gobject.object.ObjectG.freezeNotify] for child properties.
+      This is the analogue of [gobject.object.ObjectWrap.freezeNotify] for child properties.
   */
   void freezeChildNotify()
   {
@@ -1502,11 +2214,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       library contains more information about accessible objects and their uses.
       Returns: the #AtkObject associated with widget
   */
-  atk.object.ObjectAtk getAccessible()
+  atk.object.ObjectWrap getAccessible()
   {
     AtkObject* _cretval;
     _cretval = gtk_widget_get_accessible(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1526,7 +2238,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     GActionGroup* _cretval;
     const(char)* _prefix = prefix.toCString(No.Alloc);
     _cretval = gtk_widget_get_action_group(cast(GtkWidget*)cPtr, _prefix);
-    auto _retval = ObjectG.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1589,7 +2301,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)cPtr, widgetType);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1700,7 +2412,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkClipboard* _cretval;
     _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)cPtr, selection ? cast(GdkAtom)selection.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1778,7 +2490,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkDisplay* _cretval;
     _cretval = gtk_widget_get_display(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1833,7 +2545,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoFontMap* _cretval;
     _cretval = gtk_widget_get_font_map(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1879,7 +2591,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2083,7 +2795,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the modifier style for the widget.
             This rc style is owned by the widget. If you want to keep a
             pointer to value this around, you must add a refcount using
-            [gobject.object.ObjectG.ref_].
+            [gobject.object.ObjectWrap.ref_].
   
       Deprecated: Use #GtkStyleContext with a custom #GtkStyleProvider instead
   */
@@ -2091,7 +2803,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_widget_get_modifier_style(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2148,7 +2860,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2160,7 +2872,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_parent(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2173,7 +2885,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_parent_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2428,7 +3140,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_root_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2462,7 +3174,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkScreen* _cretval;
     _cretval = gtk_widget_get_screen(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2493,7 +3205,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkSettings* _cretval;
     _cretval = gtk_widget_get_settings(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2558,7 +3270,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_style(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2572,7 +3284,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_widget_get_style_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2604,12 +3316,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         name = The “id” of the child defined in the template XML
       Returns: The object built in the template XML with the id name
   */
-  gobject.object.ObjectG getTemplateChild(gobject.types.GType widgetType, string name)
+  gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)cPtr, widgetType, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2649,7 +3361,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWindow* _cretval;
     _cretval = gtk_widget_get_tooltip_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2692,7 +3404,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_toplevel(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2781,7 +3493,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkVisual* _cretval;
     _cretval = gtk_widget_get_visual(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2793,7 +3505,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2997,9 +3709,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       class composite widgets have been created in their instance
       initializers.
       
-      Another reason is that when calling [gobject.object.ObjectG.new_] on a widget with
+      Another reason is that when calling [gobject.object.ObjectWrap.new_] on a widget with
       composite templates, it’s important to build the composite widgets
-      before the construct properties are set. Properties passed to [gobject.object.ObjectG.new_]
+      before the construct properties are set. Properties passed to [gobject.object.ObjectWrap.new_]
       should take precedence over properties set in the private template XML.
   */
   void initTemplate()
@@ -3036,7 +3748,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
+    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null);
   }
 
   /**
@@ -3855,7 +4567,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       The pixels in the returned #GdkPixbuf are shared with the rest of
       the application and should not be modified. The pixbuf should be
-      freed after use with [gobject.object.ObjectG.unref].
+      freed after use with [gobject.object.ObjectWrap.unref].
   
       Params:
         stockId = a stock ID
@@ -3874,7 +4586,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     const(char)* _stockId = stockId.toCString(No.Alloc);
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon(cast(GtkWidget*)cPtr, _stockId, size, _detail);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3887,7 +4599,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       The pixels in the returned #GdkPixbuf are shared with the rest of
       the application and should not be modified. The pixbuf should be freed
-      after use with [gobject.object.ObjectG.unref].
+      after use with [gobject.object.ObjectWrap.unref].
   
       Params:
         stockId = a stock ID
@@ -3904,7 +4616,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     PixbufC* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)cPtr, _stockId, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

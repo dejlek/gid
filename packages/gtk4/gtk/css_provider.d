@@ -45,7 +45,7 @@ import gtk.types;
     To track errors while loading CSS, connect to the
     `signal@Gtk.CssProvider::parsing-error` signal.
 */
-class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
+class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {
 
   /** */
@@ -67,6 +67,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CssProvider self()
   {
     return this;
@@ -126,7 +127,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromFile(gio.file.File file)
   {
-    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**
@@ -229,7 +230,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.css_section.CssSection section, glib.error.ErrorG error, gtk.css_provider.CssProvider cssProvider))
+          $(D void callback(gtk.css_section.CssSection section, glib.error.ErrorWrap error, gtk.css_provider.CssProvider cssProvider))
   
           `section` section the error happened in (optional)
   
@@ -244,7 +245,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.css_section.CssSection)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.css_provider.CssProvider)))
   && Parameters!T.length < 4)
   {

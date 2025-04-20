@@ -30,6 +30,7 @@ class S3FileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override S3FileSystem self()
   {
     return this;

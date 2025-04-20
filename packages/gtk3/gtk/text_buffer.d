@@ -24,7 +24,7 @@ import gtk.types;
     which gives an overview of all the objects and data
     types related to the text widget and how they work together.
 */
-class TextBuffer : gobject.object.ObjectG
+class TextBuffer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,9 +46,71 @@ class TextBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextBuffer self()
   {
     return this;
+  }
+
+  /**
+      Get `copyTargetList` property.
+      Returns: The list of targets this buffer supports for clipboard copying
+      and as DND source.
+  */
+  @property gtk.target_list.TargetList copyTargetList()
+  {
+    return getCopyTargetList();
+  }
+
+  /**
+      Get `cursorPosition` property.
+      Returns: The position of the insert mark (as offset from the beginning
+      of the buffer). It is useful for getting notified when the
+      cursor moves.
+  */
+  @property int cursorPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
+  }
+
+  /**
+      Get `hasSelection` property.
+      Returns: Whether the buffer has some text currently selected.
+  */
+  @property bool hasSelection()
+  {
+    return getHasSelection();
+  }
+
+  /**
+      Get `pasteTargetList` property.
+      Returns: The list of targets this buffer supports for clipboard pasting
+      and as DND destination.
+  */
+  @property gtk.target_list.TargetList pasteTargetList()
+  {
+    return getPasteTargetList();
+  }
+
+  /**
+      Get `text` property.
+      Returns: The text content of the buffer. Without child widgets and images,
+      see [gtk.text_buffer.TextBuffer.getText] for more information.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The text content of the buffer. Without child widgets and images,
+        see [gtk.text_buffer.TextBuffer.getText] for more information.
+  */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
 
   /**
@@ -200,7 +262,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -234,7 +296,7 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextMark* _cretval;
     const(char)* _markName = markName.toCString(No.Alloc);
     _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null, leftGravity);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -292,7 +354,7 @@ class TextBuffer : gobject.object.ObjectG
   /**
       Deletes mark, so that it’s no longer located anywhere in the
       buffer. Removes the reference the buffer holds to the mark, so if
-      you haven’t called [gobject.object.ObjectG.ref_] on the mark, it will be freed. Even
+      you haven’t called [gobject.object.ObjectWrap.ref_] on the mark, it will be freed. Even
       if the mark isn’t freed, most operations on mark become
       invalid, until it gets added to a buffer again with
       [gtk.text_buffer.TextBuffer.addMark]. Use [gtk.text_mark.TextMark.getDeleted] to
@@ -353,7 +415,7 @@ class TextBuffer : gobject.object.ObjectG
         iter = insertion point for the deserialized text
         data = data to deserialize
       Returns: true on success, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deserialize(gtk.text_buffer.TextBuffer contentBuffer, gdk.atom.Atom format, gtk.text_iter.TextIter iter, ubyte[] data)
   {
@@ -366,7 +428,7 @@ class TextBuffer : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_text_buffer_deserialize(cast(GtkTextBuffer*)cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer.cPtr(No.Dup) : null, format ? cast(GdkAtom)format.cPtr : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _data, _length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -509,7 +571,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -643,7 +705,7 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -695,7 +757,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -772,7 +834,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1062,7 +1124,7 @@ class TextBuffer : gobject.object.ObjectG
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, createTags, _err);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, createTags, _err);
       return _retval;
     }
     auto _function_CB = function_ ? &_function_Callback : null;
@@ -1112,7 +1174,7 @@ class TextBuffer : gobject.object.ObjectG
       ubyte[] _dretval;
       auto _dlg = cast(gtk.types.TextBufferSerializeFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), start ? new gtk.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gtk.text_iter.TextIter(cast(void*)end, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), start ? new gtk.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gtk.text_iter.TextIter(cast(void*)end, No.Take) : null);
       ubyte* _retval;
 
       if (_dretval.length > 0)

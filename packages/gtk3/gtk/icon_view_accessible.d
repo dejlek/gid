@@ -34,6 +34,7 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconViewAccessible self()
   {
     return this;

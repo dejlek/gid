@@ -3,6 +3,7 @@ module gstvideo.video_direction_mixin;
 
 public import gstvideo.video_direction_iface_proxy;
 public import gid.gid;
+public import gobject.object;
 public import gstvideo.c.functions;
 public import gstvideo.c.types;
 public import gstvideo.types;
@@ -13,4 +14,16 @@ public import gstvideo.types;
 */
 template VideoDirectionT()
 {
+
+  /** */
+  @property gstvideo.types.VideoOrientationMethod videoDirection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoOrientationMethod)("video-direction");
+  }
+
+  /** */
+  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoOrientationMethod)("video-direction", propval);
+  }
 }

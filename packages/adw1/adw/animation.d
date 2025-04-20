@@ -26,7 +26,7 @@ import gtk.widget;
     
     The `signal@Animation::done` signal can be used to perform an action after
     the animation ends, for example hiding a widget after animating its
-    [gtk.widget.Widget.gdouble] to 0.
+    [gtk.widget.Widget.opacity] to 0.
     
     [adw.animation.Animation] will be kept alive while the animation is playing. As such,
     it's safe to create an animation, start it and immediately unref it:
@@ -57,7 +57,7 @@ import gtk.widget;
     finished, the previous animation should be stopped first, or the existing
     [adw.animation.Animation] object can be reused.
 */
-class Animation : gobject.object.ObjectG
+class Animation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -79,9 +79,85 @@ class Animation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Animation self()
   {
     return this;
+  }
+
+  /**
+      Get `followEnableAnimationsSetting` property.
+      Returns: Whether to skip the animation when animations are globally disabled.
+      
+      The default behavior is to skip the animation. Set to `FALSE` to disable
+      this behavior.
+      
+      This can be useful for cases where animation is essential, like spinners,
+      or in demo applications. Most other animations should keep it enabled.
+      
+      See `property@Gtk.Settings:gtk-enable-animations`.
+  */
+  @property bool followEnableAnimationsSetting()
+  {
+    return getFollowEnableAnimationsSetting();
+  }
+
+  /**
+      Set `followEnableAnimationsSetting` property.
+      Params:
+        propval = Whether to skip the animation when animations are globally disabled.
+        
+        The default behavior is to skip the animation. Set to `FALSE` to disable
+        this behavior.
+        
+        This can be useful for cases where animation is essential, like spinners,
+        or in demo applications. Most other animations should keep it enabled.
+        
+        See `property@Gtk.Settings:gtk-enable-animations`.
+  */
+  @property void followEnableAnimationsSetting(bool propval)
+  {
+    return setFollowEnableAnimationsSetting(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The animation state.
+      
+      The state indicates whether the animation is currently playing, paused,
+      finished or hasn't been started yet.
+  */
+  @property adw.types.AnimationState state()
+  {
+    return getState();
+  }
+
+  /**
+      Get `target` property.
+      Returns: The target to animate.
+  */
+  @property adw.animation_target.AnimationTarget target()
+  {
+    return getTarget();
+  }
+
+  /**
+      Set `target` property.
+      Params:
+        propval = The target to animate.
+  */
+  @property void target(adw.animation_target.AnimationTarget propval)
+  {
+    return setTarget(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The current value of the animation.
+  */
+  @property double value()
+  {
+    return getValue();
   }
 
   /**
@@ -118,7 +194,7 @@ class Animation : gobject.object.ObjectG
   {
     AdwAnimationTarget* _cretval;
     _cretval = adw_animation_get_target(cast(AdwAnimation*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.animation_target.AnimationTarget)(cast(AdwAnimationTarget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.animation_target.AnimationTarget)(cast(AdwAnimationTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +224,7 @@ class Animation : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = adw_animation_get_widget(cast(AdwAnimation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -19,7 +19,7 @@ import gobject.object;
     
     This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
 */
-class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
+class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 {
 
   /** */
@@ -41,9 +41,29 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusObjectSkeleton self()
   {
     return this;
+  }
+
+  /**
+      Get `gObjectPath` property.
+      Returns: The object path where the object is exported.
+  */
+  @property string gObjectPath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
+  }
+
+  /**
+      Set `gObjectPath` property.
+      Params:
+        propval = The object path where the object is exported.
+  */
+  @property void gObjectPath(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("g-object-path", propval);
   }
 
   mixin DBusObjectT!();
@@ -53,7 +73,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   
       Params:
         objectPath = An object path.
-      Returns: A #GDBusObjectSkeleton. Free with [gobject.object.ObjectG.unref].
+      Returns: A #GDBusObjectSkeleton. Free with [gobject.object.ObjectWrap.unref].
   */
   this(string objectPath)
   {

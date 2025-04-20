@@ -14,7 +14,7 @@ import gtksource.types;
     The [gtksource.style.Style] structure is used to describe text attributes
     which are set when given style is used.
 */
-class Style : gobject.object.ObjectG
+class Style : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class Style : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Style self()
   {
     return this;
@@ -61,14 +62,14 @@ class Style : gobject.object.ObjectG
   /**
       Creates a copy of style, that is a new #GtkSourceStyle instance which
       has the same attributes set.
-      Returns: copy of style, call [gobject.object.ObjectG.unref]
+      Returns: copy of style, call [gobject.object.ObjectWrap.unref]
         when you are done with it.
   */
   gtksource.style.Style copy()
   {
     GtkSourceStyle* _cretval;
     _cretval = gtk_source_style_copy(cast(const(GtkSourceStyle)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.Take);
     return _retval;
   }
 }

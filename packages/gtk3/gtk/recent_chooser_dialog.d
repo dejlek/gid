@@ -78,6 +78,7 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentChooserDialog self()
   {
     return this;

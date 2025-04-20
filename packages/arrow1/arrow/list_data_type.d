@@ -32,6 +32,7 @@ class ListDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListDataType self()
   {
     return this;
@@ -50,7 +51,7 @@ class ListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_field(cast(GArrowListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -59,7 +60,7 @@ class ListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_value_field(cast(GArrowListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 }

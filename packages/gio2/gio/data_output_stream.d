@@ -38,9 +38,31 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DataOutputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `byteOrder` property.
+      Returns: Determines the byte ordering that is used when writing
+      multi-byte entities (such as integers) to the stream.
+  */
+  @property gio.types.DataStreamByteOrder byteOrder()
+  {
+    return getByteOrder();
+  }
+
+  /**
+      Set `byteOrder` property.
+      Params:
+        propval = Determines the byte ordering that is used when writing
+        multi-byte entities (such as integers) to the stream.
+  */
+  @property void byteOrder(gio.types.DataStreamByteOrder propval)
+  {
+    return setByteOrder(propval);
   }
 
   mixin SeekableT!();
@@ -78,7 +100,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guchar.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putByte(ubyte data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -86,7 +108,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_byte(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -97,7 +119,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint16.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putInt16(short data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -105,7 +127,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_int16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -116,7 +138,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint32.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putInt32(int data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -124,7 +146,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_int32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -135,7 +157,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint64.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putInt64(long data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -143,7 +165,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_int64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -154,7 +176,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         str = a string.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if string was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putString(string str, gio.cancellable.Cancellable cancellable = null)
   {
@@ -163,7 +185,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_string(cast(GDataOutputStream*)cPtr, _str, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -174,7 +196,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint16.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putUint16(ushort data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -182,7 +204,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_uint16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -193,7 +215,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint32.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putUint32(uint data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -201,7 +223,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_uint32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -212,7 +234,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint64.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool putUint64(ulong data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -220,7 +242,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     GError *_err;
     _retval = g_data_output_stream_put_uint64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

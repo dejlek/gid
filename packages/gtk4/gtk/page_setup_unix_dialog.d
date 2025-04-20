@@ -60,6 +60,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PageSetupUnixDialog self()
   {
     return this;
@@ -89,7 +90,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_page_setup(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +102,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_print_settings(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 

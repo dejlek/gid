@@ -135,7 +135,7 @@ pango.context.Context createContext(cairo.context.Context cr)
 {
   PangoContext* _cretval;
   _cretval = pango_cairo_create_context(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -161,7 +161,7 @@ pango.layout.Layout createLayout(cairo.context.Context cr)
 {
   PangoLayout* _cretval;
   _cretval = pango_cairo_create_layout(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
   return _retval;
 }
 

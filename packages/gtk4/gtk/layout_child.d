@@ -20,7 +20,7 @@ import gtk.widget;
     A [gtk.layout_child.LayoutChild] instance is only ever valid while a widget is part
     of a layout.
 */
-class LayoutChild : gobject.object.ObjectG
+class LayoutChild : gobject.object.ObjectWrap
 {
 
   /** */
@@ -42,6 +42,7 @@ class LayoutChild : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LayoutChild self()
   {
     return this;
@@ -55,7 +56,7 @@ class LayoutChild : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,7 +69,7 @@ class LayoutChild : gobject.object.ObjectG
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 }

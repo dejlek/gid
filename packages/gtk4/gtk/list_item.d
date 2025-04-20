@@ -19,13 +19,13 @@ import gtk.widget;
     [gtk.list_item.ListItem] objects exist in 2 stages:
     
     1. The unbound stage where the listitem is not currently connected to
-       an item in the list. In that case, the [gtk.list_item.ListItem.GObject.Object]
+       an item in the list. In that case, the [gtk.list_item.ListItem.item]
        property is set to null.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.list_item.ListItem.GObject.Object] property is not null.
+       The [gtk.list_item.ListItem.item] property is not null.
 */
-class ListItem : gobject.object.ObjectG
+class ListItem : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,9 +47,151 @@ class ListItem : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListItem self()
   {
     return this;
+  }
+
+  /**
+      Get `accessibleDescription` property.
+      Returns: The accessible description to set on the list item.
+  */
+  @property string accessibleDescription()
+  {
+    return getAccessibleDescription();
+  }
+
+  /**
+      Set `accessibleDescription` property.
+      Params:
+        propval = The accessible description to set on the list item.
+  */
+  @property void accessibleDescription(string propval)
+  {
+    return setAccessibleDescription(propval);
+  }
+
+  /**
+      Get `accessibleLabel` property.
+      Returns: The accessible label to set on the list item.
+  */
+  @property string accessibleLabel()
+  {
+    return getAccessibleLabel();
+  }
+
+  /**
+      Set `accessibleLabel` property.
+      Params:
+        propval = The accessible label to set on the list item.
+  */
+  @property void accessibleLabel(string propval)
+  {
+    return setAccessibleLabel(propval);
+  }
+
+  /**
+      Get `activatable` property.
+      Returns: If the item can be activated by the user.
+  */
+  @property bool activatable()
+  {
+    return getActivatable();
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = If the item can be activated by the user.
+  */
+  @property void activatable(bool propval)
+  {
+    return setActivatable(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: Widget used for display.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `focusable` property.
+      Returns: If the item can be focused with the keyboard.
+  */
+  @property bool focusable()
+  {
+    return getFocusable();
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the item can be focused with the keyboard.
+  */
+  @property void focusable(bool propval)
+  {
+    return setFocusable(propval);
+  }
+
+  /**
+      Get `item` property.
+      Returns: Displayed item.
+  */
+  @property gobject.object.ObjectWrap item()
+  {
+    return getItem();
+  }
+
+  /**
+      Get `position` property.
+      Returns: Position of the item.
+  */
+  @property uint position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `selectable` property.
+      Returns: If the item can be selected by the user.
+  */
+  @property bool selectable()
+  {
+    return getSelectable();
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = If the item can be selected by the user.
+  */
+  @property void selectable(bool propval)
+  {
+    return setSelectable(propval);
+  }
+
+  /**
+      Get `selected` property.
+      Returns: If the item is currently selected.
+  */
+  @property bool selected()
+  {
+    return getSelected();
   }
 
   /**
@@ -97,7 +239,7 @@ class ListItem : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_item_get_child(cast(GtkListItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,11 +261,11 @@ class ListItem : gobject.object.ObjectG
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  gobject.object.ObjectG getItem()
+  gobject.object.ObjectWrap getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_list_item_get_item(cast(GtkListItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

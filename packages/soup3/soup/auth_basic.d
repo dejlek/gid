@@ -36,6 +36,7 @@ class AuthBasic : soup.auth.Auth
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthBasic self()
   {
     return this;

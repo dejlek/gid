@@ -19,7 +19,7 @@ class DNDEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.DNDEvent");
+      throw new GidConstructException("Null instance pointer for gdk.dndevent.DNDEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }
@@ -32,7 +32,7 @@ class DNDEvent : gdk.event.Event
   {
     GdkDrop* _cretval;
     _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 }

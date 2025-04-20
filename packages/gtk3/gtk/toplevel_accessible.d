@@ -9,7 +9,7 @@ import gtk.types;
 import gtk.window;
 
 /** */
-class ToplevelAccessible : atk.object.ObjectAtk
+class ToplevelAccessible : atk.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class ToplevelAccessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToplevelAccessible self()
   {
     return this;

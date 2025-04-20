@@ -30,6 +30,7 @@ class Int16DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Int16DataType self()
   {
     return this;

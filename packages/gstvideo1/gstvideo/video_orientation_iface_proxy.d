@@ -5,7 +5,7 @@ import gobject.object;
 import gstvideo.video_orientation;
 import gstvideo.video_orientation_mixin;
 
-/// Proxy object for [GstVideo.VideoOrientation] interface when a GObject has no applicable D binding
+/// Proxy object for [gstvideo.video_orientation.VideoOrientation] interface when a GObject has no applicable D binding
 class VideoOrientationIfaceProxy : IfaceProxy, gstvideo.video_orientation.VideoOrientation
 {
   this(void* ptr, Flag!"Take" take = No.Take)

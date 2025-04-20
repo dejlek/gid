@@ -56,7 +56,7 @@ import gtk.widget;
     [gtk.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
     matching iter.
 */
-class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
+class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
 {
 
   /** */
@@ -78,9 +78,174 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EntryCompletion self()
   {
     return this;
+  }
+
+  /**
+      Get `inlineCompletion` property.
+      Returns: Determines whether the common prefix of the possible completions
+      should be inserted automatically in the entry.
+      
+      Note that this requires text-column to be set, even if you are
+      using a custom match function.
+  */
+  @property bool inlineCompletion()
+  {
+    return getInlineCompletion();
+  }
+
+  /**
+      Set `inlineCompletion` property.
+      Params:
+        propval = Determines whether the common prefix of the possible completions
+        should be inserted automatically in the entry.
+        
+        Note that this requires text-column to be set, even if you are
+        using a custom match function.
+  */
+  @property void inlineCompletion(bool propval)
+  {
+    return setInlineCompletion(propval);
+  }
+
+  /**
+      Get `inlineSelection` property.
+      Returns: Determines whether the possible completions on the popup
+      will appear in the entry as you navigate through them.
+  */
+  @property bool inlineSelection()
+  {
+    return getInlineSelection();
+  }
+
+  /**
+      Set `inlineSelection` property.
+      Params:
+        propval = Determines whether the possible completions on the popup
+        will appear in the entry as you navigate through them.
+  */
+  @property void inlineSelection(bool propval)
+  {
+    return setInlineSelection(propval);
+  }
+
+  /** */
+  @property int minimumKeyLength()
+  {
+    return getMinimumKeyLength();
+  }
+
+  /** */
+  @property void minimumKeyLength(int propval)
+  {
+    return setMinimumKeyLength(propval);
+  }
+
+  /** */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
+  }
+
+  /** */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `popupCompletion` property.
+      Returns: Determines whether the possible completions should be
+      shown in a popup window.
+  */
+  @property bool popupCompletion()
+  {
+    return getPopupCompletion();
+  }
+
+  /**
+      Set `popupCompletion` property.
+      Params:
+        propval = Determines whether the possible completions should be
+        shown in a popup window.
+  */
+  @property void popupCompletion(bool propval)
+  {
+    return setPopupCompletion(propval);
+  }
+
+  /**
+      Get `popupSetWidth` property.
+      Returns: Determines whether the completions popup window will be
+      resized to the width of the entry.
+  */
+  @property bool popupSetWidth()
+  {
+    return getPopupSetWidth();
+  }
+
+  /**
+      Set `popupSetWidth` property.
+      Params:
+        propval = Determines whether the completions popup window will be
+        resized to the width of the entry.
+  */
+  @property void popupSetWidth(bool propval)
+  {
+    return setPopupSetWidth(propval);
+  }
+
+  /**
+      Get `popupSingleMatch` property.
+      Returns: Determines whether the completions popup window will shown
+      for a single possible completion.
+      
+      You probably want to set this to false if you are using
+      `property@Gtk.EntryCompletion:inline-completion`.
+  */
+  @property bool popupSingleMatch()
+  {
+    return getPopupSingleMatch();
+  }
+
+  /**
+      Set `popupSingleMatch` property.
+      Params:
+        propval = Determines whether the completions popup window will shown
+        for a single possible completion.
+        
+        You probably want to set this to false if you are using
+        `property@Gtk.EntryCompletion:inline-completion`.
+  */
+  @property void popupSingleMatch(bool propval)
+  {
+    return setPopupSingleMatch(propval);
+  }
+
+  /**
+      Get `textColumn` property.
+      Returns: The column of the model containing the strings.
+      
+      Note that the strings must be UTF-8.
+  */
+  @property int textColumn()
+  {
+    return getTextColumn();
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The column of the model containing the strings.
+        
+        Note that the strings must be UTF-8.
+  */
+  @property void textColumn(int propval)
+  {
+    return setTextColumn(propval);
   }
 
   mixin BuildableT!();
@@ -116,7 +281,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,7 +347,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +403,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -354,7 +519,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -396,7 +561,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -453,7 +618,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
       
       This functions creates and adds a [gtk.cell_renderer_text.CellRendererText] for the selected
       column. If you need to set the text column, but don't want the cell
-      renderer, use [gobject.object.ObjectG.set] to set the
+      renderer, use [gobject.object.ObjectWrap.set] to set the
       `propertyGtk.EntryCompletion:text-column` property directly.
   
       Params:

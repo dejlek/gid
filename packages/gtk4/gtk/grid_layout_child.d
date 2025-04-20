@@ -32,9 +32,86 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GridLayoutChild self()
   {
     return this;
+  }
+
+  /**
+      Get `column` property.
+      Returns: The column to place the child in.
+  */
+  @property int column()
+  {
+    return getColumn();
+  }
+
+  /**
+      Set `column` property.
+      Params:
+        propval = The column to place the child in.
+  */
+  @property void column(int propval)
+  {
+    return setColumn(propval);
+  }
+
+  /**
+      Get `columnSpan` property.
+      Returns: The number of columns the child spans to.
+  */
+  @property int columnSpan()
+  {
+    return getColumnSpan();
+  }
+
+  /**
+      Set `columnSpan` property.
+      Params:
+        propval = The number of columns the child spans to.
+  */
+  @property void columnSpan(int propval)
+  {
+    return setColumnSpan(propval);
+  }
+
+  /**
+      Get `row` property.
+      Returns: The row to place the child in.
+  */
+  @property int row()
+  {
+    return getRow();
+  }
+
+  /**
+      Set `row` property.
+      Params:
+        propval = The row to place the child in.
+  */
+  @property void row(int propval)
+  {
+    return setRow(propval);
+  }
+
+  /**
+      Get `rowSpan` property.
+      Returns: The number of rows the child spans to.
+  */
+  @property int rowSpan()
+  {
+    return getRowSpan();
+  }
+
+  /**
+      Set `rowSpan` property.
+      Params:
+        propval = The number of rows the child spans to.
+  */
+  @property void rowSpan(int propval)
+  {
+    return setRowSpan(propval);
   }
 
   /**

@@ -38,6 +38,7 @@ class CairoContext : gdk.draw_context.DrawContext
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CairoContext self()
   {
     return this;

@@ -80,7 +80,7 @@ import gtk.window;
     [gtk.print_operation_preview.PrintOperationPreview.isSelected]
     are useful when implementing a print preview.
 */
-class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.PrintOperationPreview
+class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.PrintOperationPreview
 {
 
   /** */
@@ -102,9 +102,479 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintOperation self()
   {
     return this;
+  }
+
+  /**
+      Get `allowAsync` property.
+      Returns: Determines whether the print operation may run asynchronously or not.
+      
+      Some systems don't support asynchronous printing, but those that do
+      will return [gtk.types.PrintOperationResult.InProgress] as the status, and
+      emit the [gtk.print_operation.PrintOperation.done] signal when the operation
+      is actually done.
+      
+      The Windows port does not support asynchronous operation at all (this
+      is unlikely to change). On other platforms, all actions except for
+      [gtk.types.PrintOperationAction.Export] support asynchronous operation.
+  */
+  @property bool allowAsync()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("allow-async");
+  }
+
+  /**
+      Set `allowAsync` property.
+      Params:
+        propval = Determines whether the print operation may run asynchronously or not.
+        
+        Some systems don't support asynchronous printing, but those that do
+        will return [gtk.types.PrintOperationResult.InProgress] as the status, and
+        emit the [gtk.print_operation.PrintOperation.done] signal when the operation
+        is actually done.
+        
+        The Windows port does not support asynchronous operation at all (this
+        is unlikely to change). On other platforms, all actions except for
+        [gtk.types.PrintOperationAction.Export] support asynchronous operation.
+  */
+  @property void allowAsync(bool propval)
+  {
+    return setAllowAsync(propval);
+  }
+
+  /**
+      Get `currentPage` property.
+      Returns: The current page in the document.
+      
+      If this is set before [gtk.print_operation.PrintOperation.run],
+      the user will be able to select to print only the current page.
+      
+      Note that this only makes sense for pre-paginated documents.
+  */
+  @property int currentPage()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("current-page");
+  }
+
+  /**
+      Set `currentPage` property.
+      Params:
+        propval = The current page in the document.
+        
+        If this is set before [gtk.print_operation.PrintOperation.run],
+        the user will be able to select to print only the current page.
+        
+        Note that this only makes sense for pre-paginated documents.
+  */
+  @property void currentPage(int propval)
+  {
+    return setCurrentPage(propval);
+  }
+
+  /**
+      Get `customTabLabel` property.
+      Returns: Used as the label of the tab containing custom widgets.
+      
+      Note that this property may be ignored on some platforms.
+      
+      If this is null, GTK uses a default label.
+  */
+  @property string customTabLabel()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("custom-tab-label");
+  }
+
+  /**
+      Set `customTabLabel` property.
+      Params:
+        propval = Used as the label of the tab containing custom widgets.
+        
+        Note that this property may be ignored on some platforms.
+        
+        If this is null, GTK uses a default label.
+  */
+  @property void customTabLabel(string propval)
+  {
+    return setCustomTabLabel(propval);
+  }
+
+  /**
+      Get `defaultPageSetup` property.
+      Returns: The [gtk.page_setup.PageSetup] used by default.
+      
+      This page setup will be used by [gtk.print_operation.PrintOperation.run],
+      but it can be overridden on a per-page basis by connecting
+      to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+  */
+  @property gtk.page_setup.PageSetup defaultPageSetup()
+  {
+    return getDefaultPageSetup();
+  }
+
+  /**
+      Set `defaultPageSetup` property.
+      Params:
+        propval = The [gtk.page_setup.PageSetup] used by default.
+        
+        This page setup will be used by [gtk.print_operation.PrintOperation.run],
+        but it can be overridden on a per-page basis by connecting
+        to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+  */
+  @property void defaultPageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setDefaultPageSetup(propval);
+  }
+
+  /**
+      Get `embedPageSetup` property.
+      Returns: If true, page size combo box and orientation combo box
+      are embedded into page setup page.
+  */
+  @property bool embedPageSetup()
+  {
+    return getEmbedPageSetup();
+  }
+
+  /**
+      Set `embedPageSetup` property.
+      Params:
+        propval = If true, page size combo box and orientation combo box
+        are embedded into page setup page.
+  */
+  @property void embedPageSetup(bool propval)
+  {
+    return setEmbedPageSetup(propval);
+  }
+
+  /**
+      Get `exportFilename` property.
+      Returns: The name of a file to generate instead of showing the print dialog.
+      
+      Currently, PDF is the only supported format.
+      
+      The intended use of this property is for implementing
+      “Export to PDF” actions.
+      
+      “Print to PDF” support is independent of this and is done
+      by letting the user pick the “Print to PDF” item from the
+      list of printers in the print dialog.
+  */
+  @property string exportFilename()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("export-filename");
+  }
+
+  /**
+      Set `exportFilename` property.
+      Params:
+        propval = The name of a file to generate instead of showing the print dialog.
+        
+        Currently, PDF is the only supported format.
+        
+        The intended use of this property is for implementing
+        “Export to PDF” actions.
+        
+        “Print to PDF” support is independent of this and is done
+        by letting the user pick the “Print to PDF” item from the
+        list of printers in the print dialog.
+  */
+  @property void exportFilename(string propval)
+  {
+    return setExportFilename(propval);
+  }
+
+  /**
+      Get `hasSelection` property.
+      Returns: Determines whether there is a selection in your application.
+      
+      This can allow your application to print the selection.
+      This is typically used to make a "Selection" button sensitive.
+  */
+  @property bool hasSelection()
+  {
+    return getHasSelection();
+  }
+
+  /**
+      Set `hasSelection` property.
+      Params:
+        propval = Determines whether there is a selection in your application.
+        
+        This can allow your application to print the selection.
+        This is typically used to make a "Selection" button sensitive.
+  */
+  @property void hasSelection(bool propval)
+  {
+    return setHasSelection(propval);
+  }
+
+  /**
+      Get `jobName` property.
+      Returns: A string used to identify the job (e.g. in monitoring
+      applications like eggcups).
+      
+      If you don't set a job name, GTK picks a default one
+      by numbering successive print jobs.
+  */
+  @property string jobName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("job-name");
+  }
+
+  /**
+      Set `jobName` property.
+      Params:
+        propval = A string used to identify the job (e.g. in monitoring
+        applications like eggcups).
+        
+        If you don't set a job name, GTK picks a default one
+        by numbering successive print jobs.
+  */
+  @property void jobName(string propval)
+  {
+    return setJobName(propval);
+  }
+
+  /**
+      Get `nPages` property.
+      Returns: The number of pages in the document.
+      
+      This must be set to a positive number before the rendering
+      starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+      signal handler.
+      
+      Note that the page numbers passed to the
+      `signal@Gtk.PrintOperation::request-page-setup` and
+      `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+      if the user chooses to print all pages, the last ::draw-page signal
+      will be for page @n_pages - 1.
+  */
+  @property int nPages()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("n-pages");
+  }
+
+  /**
+      Set `nPages` property.
+      Params:
+        propval = The number of pages in the document.
+        
+        This must be set to a positive number before the rendering
+        starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+        signal handler.
+        
+        Note that the page numbers passed to the
+        `signal@Gtk.PrintOperation::request-page-setup` and
+        `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+        if the user chooses to print all pages, the last ::draw-page signal
+        will be for page @n_pages - 1.
+  */
+  @property void nPages(int propval)
+  {
+    return setNPages(propval);
+  }
+
+  /**
+      Get `nPagesToPrint` property.
+      Returns: The number of pages that will be printed.
+      
+      Note that this value is set during print preparation phase
+      ([gtk.types.PrintStatus.Preparing]), so this value should never be
+      get before the data generation phase ([gtk.types.PrintStatus.GeneratingData]).
+      You can connect to the `signal@Gtk.PrintOperation::status-changed` signal
+      and call [gtk.print_operation.PrintOperation.getNPagesToPrint] when
+      print status is [gtk.types.PrintStatus.GeneratingData].
+      
+      This is typically used to track the progress of print operation.
+  */
+  @property int nPagesToPrint()
+  {
+    return getNPagesToPrint();
+  }
+
+  /**
+      Get `printSettings` property.
+      Returns: The [gtk.print_settings.PrintSettings] used for initializing the dialog.
+      
+      Setting this property is typically used to re-establish
+      print settings from a previous print operation, see
+      [gtk.print_operation.PrintOperation.run].
+  */
+  @property gtk.print_settings.PrintSettings printSettings()
+  {
+    return getPrintSettings();
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The [gtk.print_settings.PrintSettings] used for initializing the dialog.
+        
+        Setting this property is typically used to re-establish
+        print settings from a previous print operation, see
+        [gtk.print_operation.PrintOperation.run].
+  */
+  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setPrintSettings(propval);
+  }
+
+  /**
+      Get `showProgress` property.
+      Returns: Determines whether to show a progress dialog during the
+      print operation.
+  */
+  @property bool showProgress()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-progress");
+  }
+
+  /**
+      Set `showProgress` property.
+      Params:
+        propval = Determines whether to show a progress dialog during the
+        print operation.
+  */
+  @property void showProgress(bool propval)
+  {
+    return setShowProgress(propval);
+  }
+
+  /**
+      Get `status` property.
+      Returns: The status of the print operation.
+  */
+  @property gtk.types.PrintStatus status()
+  {
+    return getStatus();
+  }
+
+  /**
+      Get `statusString` property.
+      Returns: A string representation of the status of the print operation.
+      
+      The string is translated and suitable for displaying the print
+      status e.g. in a [gtk.statusbar.Statusbar].
+      
+      See the [gtk.print_operation.PrintOperation.status] property for a status
+      value that is suitable for programmatic use.
+  */
+  @property string statusString()
+  {
+    return getStatusString();
+  }
+
+  /**
+      Get `supportSelection` property.
+      Returns: If true, the print operation will support print of selection.
+      
+      This allows the print dialog to show a "Selection" button.
+  */
+  @property bool supportSelection()
+  {
+    return getSupportSelection();
+  }
+
+  /**
+      Set `supportSelection` property.
+      Params:
+        propval = If true, the print operation will support print of selection.
+        
+        This allows the print dialog to show a "Selection" button.
+  */
+  @property void supportSelection(bool propval)
+  {
+    return setSupportSelection(propval);
+  }
+
+  /**
+      Get `trackPrintStatus` property.
+      Returns: If true, the print operation will try to continue report on
+      the status of the print job in the printer queues and printer.
+      
+      This can allow your application to show things like “out of paper”
+      issues, and when the print job actually reaches the printer.
+      However, this is often implemented using polling, and should
+      not be enabled unless needed.
+  */
+  @property bool trackPrintStatus()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("track-print-status");
+  }
+
+  /**
+      Set `trackPrintStatus` property.
+      Params:
+        propval = If true, the print operation will try to continue report on
+        the status of the print job in the printer queues and printer.
+        
+        This can allow your application to show things like “out of paper”
+        issues, and when the print job actually reaches the printer.
+        However, this is often implemented using polling, and should
+        not be enabled unless needed.
+  */
+  @property void trackPrintStatus(bool propval)
+  {
+    return setTrackPrintStatus(propval);
+  }
+
+  /**
+      Get `unit` property.
+      Returns: The transformation for the cairo context obtained from
+      [gtk.print_context.PrintContext] is set up in such a way that distances
+      are measured in units of @unit.
+  */
+  @property gtk.types.Unit unit()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.Unit)("unit");
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The transformation for the cairo context obtained from
+        [gtk.print_context.PrintContext] is set up in such a way that distances
+        are measured in units of @unit.
+  */
+  @property void unit(gtk.types.Unit propval)
+  {
+    return setUnit(propval);
+  }
+
+  /**
+      Get `useFullPage` property.
+      Returns: If true, the transformation for the cairo context obtained
+      from [gtk.print_context.PrintContext] puts the origin at the top left corner
+      of the page.
+      
+      This may not be the top left corner of the sheet, depending on
+      page orientation and the number of pages per sheet. Otherwise,
+      the origin is at the top left corner of the imageable area (i.e.
+      inside the margins).
+  */
+  @property bool useFullPage()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-full-page");
+  }
+
+  /**
+      Set `useFullPage` property.
+      Params:
+        propval = If true, the transformation for the cairo context obtained
+        from [gtk.print_context.PrintContext] puts the origin at the top left corner
+        of the page.
+        
+        This may not be the top left corner of the sheet, depending on
+        page orientation and the number of pages per sheet. Otherwise,
+        the origin is at the top left corner of the imageable area (i.e.
+        inside the margins).
+  */
+  @property void useFullPage(bool propval)
+  {
+    return setUseFullPage(propval);
   }
 
   mixin PrintOperationPreviewT!();
@@ -153,7 +623,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,15 +646,15 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
       returns, or in the [gtk.print_operation.PrintOperation.done] signal
       handler.
       
-      The returned [glib.error.ErrorG] will contain more details on what went wrong.
-      Throws: [ErrorG]
+      The returned [glib.error.ErrorWrap] will contain more details on what went wrong.
+      Throws: [ErrorWrap]
   */
   void getError()
   {
     GError *_err;
     gtk_print_operation_get_error(cast(GtkPrintOperation*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
   }
 
   /**
@@ -230,7 +700,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -367,7 +837,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
           [gtk.types.PrintOperationResult.InProgress] means the operation is running
           asynchronously, and will emit the [gtk.print_operation.PrintOperation.done]
           signal when done.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gtk.types.PrintOperationResult run(gtk.types.PrintOperationAction action, gtk.window.Window parent = null)
   {
@@ -375,7 +845,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     GError *_err;
     _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     gtk.types.PrintOperationResult _retval = cast(gtk.types.PrintOperationResult)_cretval;
     return _retval;
   }
@@ -693,7 +1163,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gobject.object.ObjectG callback(gtk.print_operation.PrintOperation printOperation))
+          $(D gobject.object.ObjectWrap callback(gtk.print_operation.PrintOperation printOperation))
   
           `printOperation` the instance the signal is connected to (optional)
   
@@ -704,7 +1174,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   ulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
-    && is(ReturnType!T : gobject.object.ObjectG)
+    && is(ReturnType!T : gobject.object.ObjectWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
@@ -718,7 +1188,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gobject.object.ObjectG(_returnValue, _retval);
+      setVal!gobject.object.ObjectWrap(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -41,6 +41,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBufferPool self()
   {
     return this;

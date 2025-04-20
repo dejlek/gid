@@ -49,7 +49,7 @@ import gobject.object;
     [gio.file_attribute_matcher.FileAttributeMatcher] allows for searching through a [gio.file_info.FileInfo]
     for attributes.
 */
-class FileInfo : gobject.object.ObjectG
+class FileInfo : gobject.object.ObjectWrap
 {
 
   /** */
@@ -71,6 +71,7 @@ class FileInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileInfo self()
   {
     return this;
@@ -115,7 +116,7 @@ class FileInfo : gobject.object.ObjectG
   {
     GFileInfo* _cretval;
     _cretval = g_file_info_dup(cast(GFileInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -279,12 +280,12 @@ class FileInfo : gobject.object.ObjectG
       Returns: a #GObject associated with the given attribute,
         or null otherwise.
   */
-  gobject.object.ObjectG getAttributeObject(string attribute)
+  gobject.object.ObjectWrap getAttributeObject(string attribute)
   {
     ObjectC* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_object(cast(GFileInfo*)cPtr, _attribute);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -526,7 +527,7 @@ class FileInfo : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_icon(cast(GFileInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -671,7 +672,7 @@ class FileInfo : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_symbolic_icon(cast(GFileInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -888,7 +889,7 @@ class FileInfo : gobject.object.ObjectG
         attribute = a file attribute key.
         attrValue = a #GObject.
   */
-  void setAttributeObject(string attribute, gobject.object.ObjectG attrValue)
+  void setAttributeObject(string attribute, gobject.object.ObjectWrap attrValue)
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_object(cast(GFileInfo*)cPtr, _attribute, attrValue ? cast(ObjectC*)attrValue.cPtr(No.Dup) : null);
@@ -1055,7 +1056,7 @@ class FileInfo : gobject.object.ObjectG
   */
   void setIcon(gio.icon.Icon icon)
   {
-    g_file_info_set_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    g_file_info_set_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1161,7 +1162,7 @@ class FileInfo : gobject.object.ObjectG
   */
   void setSymbolicIcon(gio.icon.Icon icon)
   {
-    g_file_info_set_symbolic_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    g_file_info_set_symbolic_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

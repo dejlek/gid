@@ -20,7 +20,7 @@ class ClockEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.ClockEntry");
+      throw new GidConstructException("Null instance pointer for gst.clock_entry.ClockEntry");
 
     cInstance = *cast(GstClockEntry*)ptr;
 
@@ -34,11 +34,20 @@ class ClockEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `refcount` field.
+      Returns: reference counter (read-only)
+  */
   @property int refcount()
   {
     return (cast(GstClockEntry*)cPtr).refcount;
   }
 
+  /**
+      Set `refcount` field.
+      Params:
+        propval = reference counter (read-only)
+  */
   @property void refcount(int propval)
   {
     (cast(GstClockEntry*)cPtr).refcount = propval;

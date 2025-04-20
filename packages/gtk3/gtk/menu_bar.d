@@ -44,9 +44,52 @@ class MenuBar : gtk.menu_shell.MenuShell
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuBar self()
   {
     return this;
+  }
+
+  /**
+      Get `childPackDirection` property.
+      Returns: The child pack direction of the menubar. It determines how
+      the widgets contained in child menuitems are arranged.
+  */
+  @property gtk.types.PackDirection childPackDirection()
+  {
+    return getChildPackDirection();
+  }
+
+  /**
+      Set `childPackDirection` property.
+      Params:
+        propval = The child pack direction of the menubar. It determines how
+        the widgets contained in child menuitems are arranged.
+  */
+  @property void childPackDirection(gtk.types.PackDirection propval)
+  {
+    return setChildPackDirection(propval);
+  }
+
+  /**
+      Get `packDirection` property.
+      Returns: The pack direction of the menubar. It determines how
+      menuitems are arranged in the menubar.
+  */
+  @property gtk.types.PackDirection packDirection()
+  {
+    return getPackDirection();
+  }
+
+  /**
+      Set `packDirection` property.
+      Params:
+        propval = The pack direction of the menubar. It determines how
+        menuitems are arranged in the menubar.
+  */
+  @property void packDirection(gtk.types.PackDirection propval)
+  {
+    return setPackDirection(propval);
   }
 
   /**
@@ -77,7 +120,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

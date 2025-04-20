@@ -2,6 +2,7 @@
 module gstcontroller.trigger_control_source;
 
 import gid.gid;
+import gobject.object;
 import gstcontroller.c.functions;
 import gstcontroller.c.types;
 import gstcontroller.timed_value_control_source;
@@ -39,9 +40,22 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TriggerControlSource self()
   {
     return this;
+  }
+
+  /** */
+  @property long tolerance()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
+  }
+
+  /** */
+  @property void tolerance(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
 
   /**

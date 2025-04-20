@@ -20,7 +20,7 @@ import gobject.dclosure;
     
     The main way to interact with the actions in a [gio.action_group.ActionGroup] is to
     activate them with [gio.action_group.ActionGroup.activateAction]. Activating an
-    action may require a [glib.variant.VariantG] parameter. The required type of the
+    action may require a [glib.variant.Variant] parameter. The required type of the
     parameter can be inquired with [gio.action_group.ActionGroup.getActionParameterType].
     Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
     Activating a disabled action has no effect.
@@ -106,7 +106,7 @@ interface ActionGroup
         actionName = the name of an action in the group
         state = the new state of the named action
   */
-  void actionStateChanged(string actionName, glib.variant.VariantG state);
+  void actionStateChanged(string actionName, glib.variant.Variant state);
 
   /**
       Activate the named action within action_group.
@@ -147,7 +147,7 @@ interface ActionGroup
         actionName = the name of the action to activate
         parameter = parameters to the activation
   */
-  void activateAction(string actionName, glib.variant.VariantG parameter = null);
+  void activateAction(string actionName, glib.variant.Variant parameter = null);
 
   /**
       Request for the state of the named action within action_group to be
@@ -166,7 +166,7 @@ interface ActionGroup
         actionName = the name of the action to request the change on
         value = the new state
   */
-  void changeActionState(string actionName, glib.variant.VariantG value);
+  void changeActionState(string actionName, glib.variant.Variant value);
 
   /**
       Checks if the named action within action_group is currently enabled.
@@ -209,13 +209,13 @@ interface ActionGroup
       given by [gio.action_group.ActionGroup.getActionStateType].
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
   
       Params:
         actionName = the name of the action to query
       Returns: the current state of the action
   */
-  glib.variant.VariantG getActionState(string actionName);
+  glib.variant.Variant getActionState(string actionName);
 
   /**
       Requests a hint about the valid range of values for the state of the
@@ -235,13 +235,13 @@ interface ActionGroup
       within the range may fail.
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
   
       Params:
         actionName = the name of the action to query
       Returns: the state range hint
   */
-  glib.variant.VariantG getActionStateHint(string actionName);
+  glib.variant.Variant getActionStateHint(string actionName);
 
   /**
       Queries the type of the state of the named action within
@@ -324,7 +324,7 @@ interface ActionGroup
         state = the current state, or null if stateless
       Returns: true if the action exists, else false
   */
-  bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.VariantG stateHint, out glib.variant.VariantG state);
+  bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.Variant stateHint, out glib.variant.Variant state);
 
   /**
       Connect to `ActionAdded` signal.
@@ -401,7 +401,7 @@ interface ActionGroup
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, glib.variant.VariantG value, gio.action_group.ActionGroup actionGroup))
+          $(D void callback(string actionName, glib.variant.Variant value, gio.action_group.ActionGroup actionGroup))
   
           `actionName` the name of the action in action_group (optional)
   

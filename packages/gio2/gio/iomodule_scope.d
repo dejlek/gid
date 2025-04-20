@@ -22,7 +22,7 @@ class IOModuleScope
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.IOModuleScope");
+      throw new GidConstructException("Null instance pointer for gio.iomodule_scope.IOModuleScope");
 
     cInstancePtr = cast(GIOModuleScope*)ptr;
 

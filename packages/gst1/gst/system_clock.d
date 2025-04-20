@@ -41,9 +41,22 @@ class SystemClock : gst.clock.Clock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SystemClock self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.types.ClockType clockType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.ClockType)("clock-type");
+  }
+
+  /** */
+  @property void clockType(gst.types.ClockType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.types.ClockType)("clock-type", propval);
   }
 
   /**
@@ -58,7 +71,7 @@ class SystemClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_system_clock_obtain();
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 

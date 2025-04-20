@@ -20,7 +20,7 @@ class AttrFontDesc
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrFontDesc");
+      throw new GidConstructException("Null instance pointer for pango.attr_font_desc.AttrFontDesc");
 
     cInstance = *cast(PangoAttrFontDesc*)ptr;
 
@@ -34,16 +34,29 @@ class AttrFontDesc
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)cPtr).attr);
   }
 
+  /**
+      Get `desc` field.
+      Returns: the font description which is the value of this attribute
+  */
   @property pango.font_description.FontDescription desc()
   {
     return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);
   }
 
+  /**
+      Set `desc` field.
+      Params:
+        propval = the font description which is the value of this attribute
+  */
   @property void desc(pango.font_description.FontDescription propval)
   {
     cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);

@@ -38,26 +38,45 @@ class MIKEYPayload : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MIKEYPayload self()
   {
     return this;
   }
 
+  /**
+      Get `type` field.
+      Returns: the payload type
+  */
   @property gstsdp.types.MIKEYPayloadType type()
   {
     return cast(gstsdp.types.MIKEYPayloadType)(cast(GstMIKEYPayload*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the payload type
+  */
   @property void type(gstsdp.types.MIKEYPayloadType propval)
   {
     (cast(GstMIKEYPayload*)cPtr).type = cast(GstMIKEYPayloadType)propval;
   }
 
+  /**
+      Get `len` field.
+      Returns: length of the payload
+  */
   @property uint len()
   {
     return (cast(GstMIKEYPayload*)cPtr).len;
   }
 
+  /**
+      Set `len` field.
+      Params:
+        propval = length of the payload
+  */
   @property void len(uint propval)
   {
     (cast(GstMIKEYPayload*)cPtr).len = propval;

@@ -38,46 +38,83 @@ class AllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AllocationParams self()
   {
     return this;
   }
 
+  /**
+      Get `flags` field.
+      Returns: flags to control allocation
+  */
   @property gst.types.MemoryFlags flags()
   {
     return cast(gst.types.MemoryFlags)(cast(GstAllocationParams*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = flags to control allocation
+  */
   @property void flags(gst.types.MemoryFlags propval)
   {
     (cast(GstAllocationParams*)cPtr).flags = cast(GstMemoryFlags)propval;
   }
 
+  /**
+      Get `align_` field.
+      Returns: the desired alignment of the memory
+  */
   @property size_t align_()
   {
     return (cast(GstAllocationParams*)cPtr).align_;
   }
 
+  /**
+      Set `align_` field.
+      Params:
+        propval = the desired alignment of the memory
+  */
   @property void align_(size_t propval)
   {
     (cast(GstAllocationParams*)cPtr).align_ = propval;
   }
 
+  /**
+      Get `prefix` field.
+      Returns: the desired prefix
+  */
   @property size_t prefix()
   {
     return (cast(GstAllocationParams*)cPtr).prefix;
   }
 
+  /**
+      Set `prefix` field.
+      Params:
+        propval = the desired prefix
+  */
   @property void prefix(size_t propval)
   {
     (cast(GstAllocationParams*)cPtr).prefix = propval;
   }
 
+  /**
+      Get `padding` field.
+      Returns: the desired padding
+  */
   @property size_t padding()
   {
     return (cast(GstAllocationParams*)cPtr).padding;
   }
 
+  /**
+      Set `padding` field.
+      Params:
+        propval = the desired padding
+  */
   @property void padding(size_t propval)
   {
     (cast(GstAllocationParams*)cPtr).padding = propval;

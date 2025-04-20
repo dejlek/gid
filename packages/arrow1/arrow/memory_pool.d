@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class MemoryPool : gobject.object.ObjectG
+class MemoryPool : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class MemoryPool : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MemoryPool self()
   {
     return this;
@@ -40,7 +41,7 @@ class MemoryPool : gobject.object.ObjectG
   {
     GArrowMemoryPool* _cretval;
     _cretval = garrow_memory_pool_default();
-    auto _retval = ObjectG.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
     return _retval;
   }
 

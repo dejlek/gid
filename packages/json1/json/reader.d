@@ -70,7 +70,7 @@ import json.types;
       }
     ```
 */
-class Reader : gobject.object.ObjectG
+class Reader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -92,9 +92,29 @@ class Reader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Reader self()
   {
     return this;
+  }
+
+  /**
+      Get `root` property.
+      Returns: The root of the JSON tree that the reader should read.
+  */
+  @property json.node.Node root()
+  {
+    return gobject.object.ObjectWrap.getProperty!(json.node.Node)("root");
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root of the JSON tree that the reader should read.
+  */
+  @property void root(json.node.Node propval)
+  {
+    return setRoot(propval);
   }
 
   /**
@@ -206,11 +226,11 @@ class Reader : gobject.object.ObjectG
       Retrieves the error currently set on the reader.
       Returns: the current error
   */
-  glib.error.ErrorG getError()
+  glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
     _cretval = json_reader_get_error(cast(JsonReader*)cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
 

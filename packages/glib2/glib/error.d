@@ -1,4 +1,4 @@
-/// Module for [ErrorG] class
+/// Module for [ErrorWrap] class
 module glib.error;
 
 import gid.gid;
@@ -11,10 +11,10 @@ import gobject.boxed;
 import glib.types;
 
 /**
-    The [glib.error.ErrorG] structure contains information about
+    The [glib.error.ErrorWrap] structure contains information about
     an error that has occurred.
 */
-class ErrorG : Exception
+class ErrorWrap : Exception
 {
   private GError* errPtr;
 
@@ -103,30 +103,30 @@ class ErrorG : Exception
   }
 
   /**
-  * Create a new `ErrorG`` object.
+  * Create a new `ErrorWrap`` object.
   * Params:
   *   domain = Error domain string quark
   *   code = Error code
   *   message = The error message
-  * Returns: New `ErrorG` object
+  * Returns: New `ErrorWrap` object
   */
-  static ErrorG newLiteral(Quark domain, int code, string message)
+  static ErrorWrap newLiteral(Quark domain, int code, string message)
   {
     GError* _cretval;
     const(char)* _message = message.toCString(No.Alloc);
     _cretval = g_error_new_literal(domain, code, _message);
-    ErrorG _retval = new ErrorG(cast(GError*)_cretval);
+    ErrorWrap _retval = new ErrorWrap(cast(GError*)_cretval);
     return _retval;
   }
 
   /**
-  * Copy a an `ErrorG` object.
+  * Copy a an `ErrorWrap` object.
   */
-  ErrorG copy()
+  ErrorWrap copy()
   {
     GError* _cretval;
     _cretval = g_error_copy(errPtr);
-    ErrorG _retval = new ErrorG(cast(GError*)_cretval);
+    ErrorWrap _retval = new ErrorWrap(cast(GError*)_cretval);
     return _retval;
   }
 

@@ -65,9 +65,194 @@ class SpringAnimation : adw.animation.Animation
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpringAnimation self()
   {
     return this;
+  }
+
+  /**
+      Get `clamp` property.
+      Returns: Whether the animation should be clamped.
+      
+      If set to `TRUE`, the animation will abruptly end as soon as it reaches the
+      final value, preventing overshooting.
+      
+      It won't prevent overshooting `property@SpringAnimation:value-from` if a
+      relative negative `property@SpringAnimation:initial-velocity` is set.
+  */
+  @property bool clamp()
+  {
+    return getClamp();
+  }
+
+  /**
+      Set `clamp` property.
+      Params:
+        propval = Whether the animation should be clamped.
+        
+        If set to `TRUE`, the animation will abruptly end as soon as it reaches the
+        final value, preventing overshooting.
+        
+        It won't prevent overshooting `property@SpringAnimation:value-from` if a
+        relative negative `property@SpringAnimation:initial-velocity` is set.
+  */
+  @property void clamp(bool propval)
+  {
+    return setClamp(propval);
+  }
+
+  /**
+      Get `epsilon` property.
+      Returns: Precision of the spring.
+      
+      The level of precision used to determine when the animation has come to a
+      rest, that is, when the amplitude of the oscillations becomes smaller than
+      this value.
+      
+      If the epsilon value is too small, the animation will take a long time to
+      stop after the animated value has stopped visibly changing.
+      
+      If the epsilon value is too large, the animation will end prematurely.
+      
+      The default value is 0.001.
+  */
+  @property double epsilon()
+  {
+    return getEpsilon();
+  }
+
+  /**
+      Set `epsilon` property.
+      Params:
+        propval = Precision of the spring.
+        
+        The level of precision used to determine when the animation has come to a
+        rest, that is, when the amplitude of the oscillations becomes smaller than
+        this value.
+        
+        If the epsilon value is too small, the animation will take a long time to
+        stop after the animated value has stopped visibly changing.
+        
+        If the epsilon value is too large, the animation will end prematurely.
+        
+        The default value is 0.001.
+  */
+  @property void epsilon(double propval)
+  {
+    return setEpsilon(propval);
+  }
+
+  /**
+      Get `estimatedDuration` property.
+      Returns: Estimated duration of the animation, in milliseconds.
+      
+      Can be `const@DURATION_INFINITE` if the spring damping is set to 0.
+  */
+  @property uint estimatedDuration()
+  {
+    return getEstimatedDuration();
+  }
+
+  /**
+      Get `initialVelocity` property.
+      Returns: The initial velocity to start the animation with.
+      
+      Initial velocity affects only the animation curve, but not its duration.
+  */
+  @property double initialVelocity()
+  {
+    return getInitialVelocity();
+  }
+
+  /**
+      Set `initialVelocity` property.
+      Params:
+        propval = The initial velocity to start the animation with.
+        
+        Initial velocity affects only the animation curve, but not its duration.
+  */
+  @property void initialVelocity(double propval)
+  {
+    return setInitialVelocity(propval);
+  }
+
+  /**
+      Get `springParams` property.
+      Returns: Physical parameters describing the spring.
+  */
+  @property adw.spring_params.SpringParams springParams()
+  {
+    return getSpringParams();
+  }
+
+  /**
+      Set `springParams` property.
+      Params:
+        propval = Physical parameters describing the spring.
+  */
+  @property void springParams(adw.spring_params.SpringParams propval)
+  {
+    return setSpringParams(propval);
+  }
+
+  /**
+      Get `valueFrom` property.
+      Returns: The value to animate from.
+      
+      The animation will start at this value and end at
+      `property@SpringAnimation:value-to`.
+  */
+  @property double valueFrom()
+  {
+    return getValueFrom();
+  }
+
+  /**
+      Set `valueFrom` property.
+      Params:
+        propval = The value to animate from.
+        
+        The animation will start at this value and end at
+        `property@SpringAnimation:value-to`.
+  */
+  @property void valueFrom(double propval)
+  {
+    return setValueFrom(propval);
+  }
+
+  /**
+      Get `valueTo` property.
+      Returns: The value to animate to.
+      
+      The animation will start at `property@SpringAnimation:value-from` and end
+      at this value.
+  */
+  @property double valueTo()
+  {
+    return getValueTo();
+  }
+
+  /**
+      Set `valueTo` property.
+      Params:
+        propval = The value to animate to.
+        
+        The animation will start at `property@SpringAnimation:value-from` and end
+        at this value.
+  */
+  @property void valueTo(double propval)
+  {
+    return setValueTo(propval);
+  }
+
+  /**
+      Get `velocity` property.
+      Returns: Current velocity of the animation.
+  */
+  @property double velocity()
+  {
+    return getVelocity();
   }
 
   /**

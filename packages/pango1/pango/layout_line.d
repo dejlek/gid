@@ -19,10 +19,23 @@ import pango.types;
 class LayoutLine : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `layout_line.LayoutLine` boxed type.
+      Params:
+        layout = the layout this line belongs to, might be null
+        startIndex = start of line as byte index into layout->text
+        length = length of line in bytes
+        isParagraphStart = #TRUE if this is the first line of the paragraph
+        resolvedDir = #Resolved PangoDirection of line
+  */
+  this(pango.layout.Layout layout = pango.layout.Layout.init, int startIndex = int.init, int length = int.init, uint isParagraphStart = uint.init, uint resolvedDir = uint.init)
   {
     super(gMalloc(PangoLayoutLine.sizeof), Yes.Take);
+    this.layout = layout;
+    this.startIndex = startIndex;
+    this.length = length;
+    this.isParagraphStart = isParagraphStart;
+    this.resolvedDir = resolvedDir;
   }
 
   /** */
@@ -50,57 +63,103 @@ class LayoutLine : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LayoutLine self()
   {
     return this;
   }
 
+  /**
+      Get `layout` field.
+      Returns: the layout this line belongs to, might be null
+  */
   @property pango.layout.Layout layout()
   {
     return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
   }
 
+  /**
+      Set `layout` field.
+      Params:
+        propval = the layout this line belongs to, might be null
+  */
   @property void layout(pango.layout.Layout propval)
   {
     cValueFree!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
     dToC(propval, cast(void*)&(cast(PangoLayoutLine*)cPtr).layout);
   }
 
+  /**
+      Get `startIndex` field.
+      Returns: start of line as byte index into layout->text
+  */
   @property int startIndex()
   {
     return (cast(PangoLayoutLine*)cPtr).startIndex;
   }
 
+  /**
+      Set `startIndex` field.
+      Params:
+        propval = start of line as byte index into layout->text
+  */
   @property void startIndex(int propval)
   {
     (cast(PangoLayoutLine*)cPtr).startIndex = propval;
   }
 
+  /**
+      Get `length` field.
+      Returns: length of line in bytes
+  */
   @property int length()
   {
     return (cast(PangoLayoutLine*)cPtr).length;
   }
 
+  /**
+      Set `length` field.
+      Params:
+        propval = length of line in bytes
+  */
   @property void length(int propval)
   {
     (cast(PangoLayoutLine*)cPtr).length = propval;
   }
 
+  /**
+      Get `isParagraphStart` field.
+      Returns: #TRUE if this is the first line of the paragraph
+  */
   @property uint isParagraphStart()
   {
     return (cast(PangoLayoutLine*)cPtr).isParagraphStart;
   }
 
+  /**
+      Set `isParagraphStart` field.
+      Params:
+        propval = #TRUE if this is the first line of the paragraph
+  */
   @property void isParagraphStart(uint propval)
   {
     (cast(PangoLayoutLine*)cPtr).isParagraphStart = propval;
   }
 
+  /**
+      Get `resolvedDir` field.
+      Returns: #Resolved PangoDirection of line
+  */
   @property uint resolvedDir()
   {
     return (cast(PangoLayoutLine*)cPtr).resolvedDir;
   }
 
+  /**
+      Set `resolvedDir` field.
+      Params:
+        propval = #Resolved PangoDirection of line
+  */
   @property void resolvedDir(uint propval)
   {
     (cast(PangoLayoutLine*)cPtr).resolvedDir = propval;

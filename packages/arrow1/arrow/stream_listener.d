@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class StreamListener : gobject.object.ObjectG
+class StreamListener : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class StreamListener : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StreamListener self()
   {
     return this;
@@ -41,7 +42,7 @@ class StreamListener : gobject.object.ObjectG
   /**
       Processes an EOS event.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool onEos()
   {
@@ -49,7 +50,7 @@ class StreamListener : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_listener_on_eos(cast(GArrowStreamListener*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -60,7 +61,7 @@ class StreamListener : gobject.object.ObjectG
         recordBatch = A decoded #GArrowRecordBatch.
         metadata = A decoded metadata.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata = null)
   {
@@ -70,7 +71,7 @@ class StreamListener : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, _metadata, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -81,7 +82,7 @@ class StreamListener : gobject.object.ObjectG
         schema = A decoded #GArrowSchema.
         filteredSchema = A decoded #GArrowSchema that only has read fields.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool onSchemaDecoded(arrow.schema.Schema schema, arrow.schema.Schema filteredSchema)
   {
@@ -89,7 +90,7 @@ class StreamListener : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

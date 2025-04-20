@@ -2,6 +2,7 @@
 module gstcontroller.interpolation_control_source;
 
 import gid.gid;
+import gobject.object;
 import gstcontroller.c.functions;
 import gstcontroller.c.types;
 import gstcontroller.timed_value_control_source;
@@ -39,9 +40,22 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InterpolationControlSource self()
   {
     return this;
+  }
+
+  /** */
+  @property gstcontroller.types.InterpolationMode mode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstcontroller.types.InterpolationMode)("mode");
+  }
+
+  /** */
+  @property void mode(gstcontroller.types.InterpolationMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstcontroller.types.InterpolationMode)("mode", propval);
   }
 
   /**

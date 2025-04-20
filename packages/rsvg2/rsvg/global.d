@@ -38,7 +38,7 @@ void init_()
     Params:
       filename = A file name
     Returns: A pixbuf, or null on error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -49,8 +49,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFile(string filename)
   GError *_err;
   _cretval = rsvg_pixbuf_from_file(_filename, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -65,7 +65,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFile(string filename)
       maxWidth = The requested max width
       maxHeight = The requested max height
     Returns: A pixbuf, or null on error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -76,8 +76,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, i
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_max_size(_filename, maxWidth, maxHeight, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -93,7 +93,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, i
       width = The new width, or -1
       height = The new height, or -1
     Returns: A pixbuf, or null on error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -104,8 +104,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtSize(string filename, int width, int hei
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_size(_filename, width, height, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -120,7 +120,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtSize(string filename, int width, int hei
       xZoom = The horizontal zoom factor
       yZoom = The vertical zoom factor
     Returns: A pixbuf, or null on error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -131,8 +131,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, doub
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_zoom(_filename, xZoom, yZoom, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -150,7 +150,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, doub
       maxWidth = The requested max width
       maxHeight = The requested max height
     Returns: A pixbuf, or null on error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -161,8 +161,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoomWithMax(string filename, double xZoo
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_zoom_with_max(_filename, xZoom, yZoom, maxWidth, maxHeight, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 

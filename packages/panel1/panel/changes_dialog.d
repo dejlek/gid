@@ -43,9 +43,29 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ChangesDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `closeAfterSave` property.
+      Returns: This property requests that the widget close after saving.
+  */
+  @property bool closeAfterSave()
+  {
+    return getCloseAfterSave();
+  }
+
+  /**
+      Set `closeAfterSave` property.
+      Params:
+        propval = This property requests that the widget close after saving.
+  */
+  @property void closeAfterSave(bool propval)
+  {
+    return setCloseAfterSave(propval);
   }
 
   /**
@@ -81,7 +101,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -94,9 +114,9 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   {
     bool _retval;
     GError *_err;
-    _retval = panel_changes_dialog_run_finish(cast(PanelChangesDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = panel_changes_dialog_run_finish(cast(PanelChangesDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

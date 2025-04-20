@@ -18,7 +18,7 @@ class RepeatNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RepeatNode");
+      throw new GidConstructException("Null instance pointer for gsk.repeat_node.RepeatNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

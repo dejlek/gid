@@ -38,7 +38,7 @@ import gobject.value;
     [gdk.clipboard.Clipboard.readTextureAsync]. For other data, use
     [gdk.clipboard.Clipboard.readAsync], which provides a [gio.input_stream.InputStream] object.
 */
-class Clipboard : gobject.object.ObjectG
+class Clipboard : gobject.object.ObjectWrap
 {
 
   /** */
@@ -60,9 +60,38 @@ class Clipboard : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Clipboard self()
   {
     return this;
+  }
+
+  /**
+      Get `content` property.
+      Returns: The [gdk.content_provider.ContentProvider] or null if the clipboard is empty or contents are
+      provided otherwise.
+  */
+  @property gdk.content_provider.ContentProvider content()
+  {
+    return getContent();
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The possible formats that the clipboard can provide its data in.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return getFormats();
+  }
+
+  /**
+      Get `local` property.
+      Returns: true if the contents of the clipboard are owned by this process.
+  */
+  @property bool local()
+  {
+    return isLocal();
   }
 
   /**
@@ -77,7 +106,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_clipboard_get_content(cast(GdkClipboard*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +118,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_clipboard_get_display(cast(GdkClipboard*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +174,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -169,17 +198,17 @@ class Clipboard : gobject.object.ObjectG
         outMimeType = location to store
             the chosen mime type
       Returns: a [gio.input_stream.InputStream]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream readFinish(gio.async_result.AsyncResult result, out string outMimeType)
   {
     GInputStream* _cretval;
     char* _outMimeType;
     GError *_err;
-    _cretval = gdk_clipboard_read_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_outMimeType, &_err);
+    _cretval = gdk_clipboard_read_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     outMimeType = _outMimeType.fromCString(No.Free);
     return _retval;
   }
@@ -205,7 +234,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -221,15 +250,15 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a new string
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string readTextFinish(gio.async_result.AsyncResult result)
   {
     char* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -255,7 +284,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -271,16 +300,16 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a new [gdk.texture.Texture]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.texture.Texture readTextureFinish(gio.async_result.AsyncResult result)
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_texture_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_clipboard_read_texture_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -308,7 +337,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -324,15 +353,15 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a [gobject.value.Value] containing the result.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gobject.value.Value readValueFinish(gio.async_result.AsyncResult result)
   {
     const(GValue)* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_value_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_clipboard_read_value_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -402,7 +431,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -418,15 +447,15 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: true if storing was successful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool storeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_clipboard_store_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gdk_clipboard_store_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

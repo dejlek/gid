@@ -30,7 +30,7 @@ import gtk.types;
     [gtk.media_stream.MediaStream.error],
     [gtk.media_stream.MediaStream.errorValist].
 */
-class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
+class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
@@ -52,9 +52,122 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MediaStream self()
   {
     return this;
+  }
+
+  /**
+      Get `duration` property.
+      Returns: The stream's duration in microseconds or 0 if unknown.
+  */
+  @property long duration()
+  {
+    return getDuration();
+  }
+
+  /**
+      Get `loop` property.
+      Returns: Try to restart the media from the beginning once it ended.
+  */
+  @property bool loop()
+  {
+    return getLoop();
+  }
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = Try to restart the media from the beginning once it ended.
+  */
+  @property void loop(bool propval)
+  {
+    return setLoop(propval);
+  }
+
+  /**
+      Get `muted` property.
+      Returns: Whether the audio stream should be muted.
+  */
+  @property bool muted()
+  {
+    return getMuted();
+  }
+
+  /**
+      Set `muted` property.
+      Params:
+        propval = Whether the audio stream should be muted.
+  */
+  @property void muted(bool propval)
+  {
+    return setMuted(propval);
+  }
+
+  /**
+      Get `playing` property.
+      Returns: Whether the stream is currently playing.
+  */
+  @property bool playing()
+  {
+    return getPlaying();
+  }
+
+  /**
+      Set `playing` property.
+      Params:
+        propval = Whether the stream is currently playing.
+  */
+  @property void playing(bool propval)
+  {
+    return setPlaying(propval);
+  }
+
+  /**
+      Get `seekable` property.
+      Returns: Set unless the stream is known to not support seeking.
+  */
+  @property bool seekable()
+  {
+    return isSeekable();
+  }
+
+  /**
+      Get `seeking` property.
+      Returns: Set while a seek is in progress.
+  */
+  @property bool seeking()
+  {
+    return isSeeking();
+  }
+
+  /**
+      Get `timestamp` property.
+      Returns: The current presentation timestamp in microseconds.
+  */
+  @property long timestamp()
+  {
+    return getTimestamp();
+  }
+
+  /**
+      Get `volume` property.
+      Returns: Volume of the audio stream.
+  */
+  @property double volume()
+  {
+    return getVolume();
+  }
+
+  /**
+      Set `volume` property.
+      Params:
+        propval = Volume of the audio stream.
+  */
+  @property void volume(double propval)
+  {
+    return setVolume(propval);
   }
 
   mixin PaintableT!();
@@ -74,9 +187,9 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
       [gtk.media_stream.MediaStream.unprepared].
   
       Params:
-        error = the [glib.error.ErrorG] to set
+        error = the [glib.error.ErrorWrap] to set
   */
-  void gerror(glib.error.ErrorG error)
+  void gerror(glib.error.ErrorWrap error)
   {
     gtk_media_stream_gerror(cast(GtkMediaStream*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -106,7 +219,7 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
   }
 
   /**
-      If the stream is in an error state, returns the [glib.error.ErrorG]
+      If the stream is in an error state, returns the [glib.error.ErrorWrap]
       explaining that state.
       
       Any type of error can be reported here depending on the
@@ -121,13 +234,13 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
       a [gtk.media_file.MediaFile] will unset errors when a new source is
       set, e.g. with [gtk.media_file.MediaFile.setFile].
       Returns: null if not in an
-          error state or the [glib.error.ErrorG] of the stream
+          error state or the [glib.error.ErrorWrap] of the stream
   */
-  glib.error.ErrorG getError()
+  glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
     _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -309,7 +422,7 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
       If timestamp is out of range, it will be clamped.
       
       Seek operations may not finish instantly. While a
-      seek operation is in process, the [gtk.media_stream.MediaStream.gboolean]
+      seek operation is in process, the [gtk.media_stream.MediaStream.seeking]
       property will be set.
       
       When calling [gtk.media_stream.MediaStream.seek] during an

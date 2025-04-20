@@ -31,6 +31,7 @@ class LiteralExpression : arrow.expression.Expression
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LiteralExpression self()
   {
     return this;

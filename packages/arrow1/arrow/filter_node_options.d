@@ -31,6 +31,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilterNodeOptions self()
   {
     return this;

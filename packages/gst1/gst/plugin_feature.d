@@ -12,7 +12,7 @@ import gst.types;
 /**
     This is a base class for anything that can be added to a #GstPlugin.
 */
-class PluginFeature : gst.object.ObjectGst
+class PluginFeature : gst.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class PluginFeature : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PluginFeature self()
   {
     return this;
@@ -118,14 +119,14 @@ class PluginFeature : gst.object.ObjectGst
   /**
       Get the plugin that provides this feature.
       Returns: the plugin that provides this
-            feature, or null.  Unref with [gst.object.ObjectGst.unref] when no
+            feature, or null.  Unref with [gst.object.ObjectWrap.unref] when no
             longer needed.
   */
   gst.plugin.Plugin getPlugin()
   {
     GstPlugin* _cretval;
     _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -174,7 +175,7 @@ class PluginFeature : gst.object.ObjectGst
   {
     GstPluginFeature* _cretval;
     _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
   }
 

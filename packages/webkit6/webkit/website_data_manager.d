@@ -31,7 +31,7 @@ import webkit.website_data;
     stored by particular websites, or clear data for all websites modified since a given
     period of time.
 */
-class WebsiteDataManager : gobject.object.ObjectG
+class WebsiteDataManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -84,7 +84,7 @@ class WebsiteDataManager : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -98,15 +98,15 @@ class WebsiteDataManager : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: true if website data was successfully cleared, or false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool clearFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class WebsiteDataManager : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -143,15 +143,15 @@ class WebsiteDataManager : gobject.object.ObjectG
         result = a #GAsyncResult
       Returns: a #GList of #WebKitWebsiteData. You must free the #GList with
            [glib.list.List.free] and unref the #WebKitWebsiteData<!-- -->s with [webkit.website_data.WebsiteData.unref] when you're done with them.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.website_data.WebsiteData[] fetchFinish(gio.async_result.AsyncResult result)
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_website_data_manager_fetch_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_website_data_manager_fetch_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.website_data.WebsiteData, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -190,7 +190,7 @@ class WebsiteDataManager : gobject.object.ObjectG
   {
     WebKitFaviconDatabase* _cretval;
     _cretval = webkit_website_data_manager_get_favicon_database(cast(WebKitWebsiteDataManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.favicon_database.FaviconDatabase)(cast(WebKitFaviconDatabase*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.favicon_database.FaviconDatabase)(cast(WebKitFaviconDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class WebsiteDataManager : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -241,15 +241,15 @@ class WebsiteDataManager : gobject.object.ObjectG
       Returns: a #GList of #WebKitITPThirdParty.
            You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty<!-- -->s with
            [webkit.itpthird_party.ITPThirdParty.unref] when you're done with them.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.itpthird_party.ITPThirdParty[] getItpSummaryFinish(gio.async_result.AsyncResult result)
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_website_data_manager_get_itp_summary_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_website_data_manager_get_itp_summary_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -289,7 +289,7 @@ class WebsiteDataManager : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -305,15 +305,15 @@ class WebsiteDataManager : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: true if website data resources were successfully removed, or false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

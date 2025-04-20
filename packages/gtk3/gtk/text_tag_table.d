@@ -33,7 +33,7 @@ import gtk.types;
     </object>
     ```
 */
-class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
+class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -55,6 +55,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextTagTable self()
   {
     return this;
@@ -106,7 +107,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     {
       auto _dlg = cast(gtk.types.TextTagTableForeach*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -138,7 +139,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
     return _retval;
   }
 

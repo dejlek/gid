@@ -16,10 +16,17 @@ import gstcontroller.types;
 class ControlPoint : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `control_point.ControlPoint` boxed type.
+      Params:
+        timestamp = timestamp of the value change
+        value = the new value
+  */
+  this(gst.types.ClockTime timestamp = gst.types.ClockTime.init, double value = 0.0)
   {
     super(gMalloc(GstControlPoint.sizeof), Yes.Take);
+    this.timestamp = timestamp;
+    this.value = value;
   }
 
   /** */
@@ -47,26 +54,45 @@ class ControlPoint : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ControlPoint self()
   {
     return this;
   }
 
+  /**
+      Get `timestamp` field.
+      Returns: timestamp of the value change
+  */
   @property gst.types.ClockTime timestamp()
   {
     return (cast(GstControlPoint*)cPtr).timestamp;
   }
 
+  /**
+      Set `timestamp` field.
+      Params:
+        propval = timestamp of the value change
+  */
   @property void timestamp(gst.types.ClockTime propval)
   {
     (cast(GstControlPoint*)cPtr).timestamp = propval;
   }
 
+  /**
+      Get `value` field.
+      Returns: the new value
+  */
   @property double value()
   {
     return (cast(GstControlPoint*)cPtr).value;
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the new value
+  */
   @property void value(double propval)
   {
     (cast(GstControlPoint*)cPtr).value = propval;

@@ -55,7 +55,7 @@ import pango.types;
     It is possible, as well, to ignore the 2-D setup,
     and simply treat the results of a [pango.layout.Layout] as a list of lines.
 */
-class Layout : gobject.object.ObjectG
+class Layout : gobject.object.ObjectWrap
 {
 
   /** */
@@ -77,6 +77,7 @@ class Layout : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Layout self()
   {
     return this;
@@ -111,7 +112,7 @@ class Layout : gobject.object.ObjectG
         bytes = the bytes containing the data
         flags = [pango.types.LayoutDeserializeFlags]
       Returns: a new [pango.layout.Layout]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static pango.layout.Layout deserialize(pango.context.Context context, glib.bytes.Bytes bytes, pango.types.LayoutDeserializeFlags flags)
   {
@@ -119,8 +120,8 @@ class Layout : gobject.object.ObjectG
     GError *_err;
     _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,7 +148,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_copy(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -246,7 +247,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoContext* _cretval;
     _cretval = pango_layout_get_context(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1297,7 +1298,7 @@ class Layout : gobject.object.ObjectG
         flags = [pango.types.LayoutSerializeFlags]
         filename = the file to save it to
       Returns: true if saving was successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeToFile(pango.types.LayoutSerializeFlags flags, string filename)
   {
@@ -1306,7 +1307,7 @@ class Layout : gobject.object.ObjectG
     GError *_err;
     _retval = pango_layout_write_to_file(cast(PangoLayout*)cPtr, flags, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

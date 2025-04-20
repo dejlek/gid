@@ -7,7 +7,6 @@ import arrow.decimal64;
 import arrow.fixed_size_binary_array;
 import arrow.types;
 import gid.gid;
-import glib.bytes;
 import gobject.object;
 
 /** */
@@ -33,6 +32,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Decimal64Array self()
   {
     return this;
@@ -54,7 +54,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_array_get_value(cast(GArrowDecimal64Array*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -33,6 +33,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SinkNodeOptions self()
   {
     return this;
@@ -51,7 +52,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   {
     GArrowRecordBatchReader* _cretval;
     _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 }

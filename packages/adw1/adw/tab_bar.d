@@ -64,9 +64,205 @@ class TabBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabBar self()
   {
     return this;
+  }
+
+  /**
+      Get `autohide` property.
+      Returns: Whether the tabs automatically hide.
+      
+      If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+      or 1 tab, no pinned tabs, and no tab is being transferred.
+      
+      See `property@TabBar:tabs-revealed`.
+  */
+  @property bool autohide()
+  {
+    return getAutohide();
+  }
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether the tabs automatically hide.
+        
+        If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+        or 1 tab, no pinned tabs, and no tab is being transferred.
+        
+        See `property@TabBar:tabs-revealed`.
+  */
+  @property void autohide(bool propval)
+  {
+    return setAutohide(propval);
+  }
+
+  /**
+      Get `endActionWidget` property.
+      Returns: The widget shown after the tabs.
+  */
+  @property gtk.widget.Widget endActionWidget()
+  {
+    return getEndActionWidget();
+  }
+
+  /**
+      Set `endActionWidget` property.
+      Params:
+        propval = The widget shown after the tabs.
+  */
+  @property void endActionWidget(gtk.widget.Widget propval)
+  {
+    return setEndActionWidget(propval);
+  }
+
+  /**
+      Get `expandTabs` property.
+      Returns: Whether tabs expand to full width.
+      
+      If set to `TRUE`, the tabs will always vary width filling the whole width
+      when possible, otherwise tabs will always have the minimum possible size.
+  */
+  @property bool expandTabs()
+  {
+    return getExpandTabs();
+  }
+
+  /**
+      Set `expandTabs` property.
+      Params:
+        propval = Whether tabs expand to full width.
+        
+        If set to `TRUE`, the tabs will always vary width filling the whole width
+        when possible, otherwise tabs will always have the minimum possible size.
+  */
+  @property void expandTabs(bool propval)
+  {
+    return setExpandTabs(propval);
+  }
+
+  /**
+      Get `extraDragPreferredAction` property.
+      Returns: The unique action on the `current-drop` of the
+      `signal@TabBar::extra-drag-drop`.
+      
+      This property should only be used during a `signal@TabBar::extra-drag-drop`
+      and is always a subset of what was originally passed to
+      [adw.tab_bar.TabBar.setupExtraDropTarget].
+  */
+  @property gdk.types.DragAction extraDragPreferredAction()
+  {
+    return getExtraDragPreferredAction();
+  }
+
+  /**
+      Get `extraDragPreload` property.
+      Returns: Whether the drop data should be preloaded on hover.
+      
+      See [gtk.drop_target.DropTarget.preload].
+  */
+  @property bool extraDragPreload()
+  {
+    return getExtraDragPreload();
+  }
+
+  /**
+      Set `extraDragPreload` property.
+      Params:
+        propval = Whether the drop data should be preloaded on hover.
+        
+        See [gtk.drop_target.DropTarget.preload].
+  */
+  @property void extraDragPreload(bool propval)
+  {
+    return setExtraDragPreload(propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Whether tabs use inverted layout.
+      
+      If set to `TRUE`, non-pinned tabs will have the close button at the
+      beginning and the indicator at the end rather than the opposite.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether tabs use inverted layout.
+        
+        If set to `TRUE`, non-pinned tabs will have the close button at the
+        beginning and the indicator at the end rather than the opposite.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /**
+      Get `isOverflowing` property.
+      Returns: Whether the tab bar is overflowing.
+      
+      If `TRUE`, all tabs cannot be displayed at once and require scrolling.
+  */
+  @property bool isOverflowing()
+  {
+    return getIsOverflowing();
+  }
+
+  /**
+      Get `startActionWidget` property.
+      Returns: The widget shown before the tabs.
+  */
+  @property gtk.widget.Widget startActionWidget()
+  {
+    return getStartActionWidget();
+  }
+
+  /**
+      Set `startActionWidget` property.
+      Params:
+        propval = The widget shown before the tabs.
+  */
+  @property void startActionWidget(gtk.widget.Widget propval)
+  {
+    return setStartActionWidget(propval);
+  }
+
+  /**
+      Get `tabsRevealed` property.
+      Returns: Whether the tabs are currently revealed.
+      
+      See `property@TabBar:autohide`.
+  */
+  @property bool tabsRevealed()
+  {
+    return getTabsRevealed();
+  }
+
+  /**
+      Get `view` property.
+      Returns: The tab view the tab bar controls.
+  */
+  @property adw.tab_view.TabView view()
+  {
+    return getView();
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The tab view the tab bar controls.
+  */
+  @property void view(adw.tab_view.TabView propval)
+  {
+    return setView(propval);
   }
 
   /**
@@ -99,7 +295,7 @@ class TabBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_bar_get_end_action_widget(cast(AdwTabBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,7 +365,7 @@ class TabBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_bar_get_start_action_widget(cast(AdwTabBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -194,7 +390,7 @@ class TabBar : gtk.widget.Widget
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_bar_get_view(cast(AdwTabBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +438,7 @@ class TabBar : gtk.widget.Widget
   /**
       Sets whether drop data should be preloaded on hover.
       
-      See [gtk.drop_target.DropTarget.gboolean].
+      See [gtk.drop_target.DropTarget.preload].
   
       Params:
         preload = whether to preload drop data
@@ -384,7 +580,7 @@ class TabBar : gtk.widget.Widget
       The content must be of one of the types set up via
       [adw.tab_bar.TabBar.setupExtraDropTarget].
       
-      See [gtk.drop_target.DropTarget.GObject.Value].
+      See [gtk.drop_target.DropTarget.value].
   
       Params:
         callback = signal callback delegate or function to connect

@@ -41,7 +41,7 @@ interface AppChooser
   /**
       Returns the currently selected application.
       Returns: a #GAppInfo for the currently selected
-            application, or null if none is selected. Free with [gobject.object.ObjectG.unref]
+            application, or null if none is selected. Free with [gobject.object.ObjectWrap.unref]
   */
   gio.app_info.AppInfo getAppInfo();
 

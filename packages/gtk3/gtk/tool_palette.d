@@ -17,7 +17,6 @@ import gtk.orientable_mixin;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.selection_data;
-import gtk.style;
 import gtk.target_entry;
 import gtk.tool_item;
 import gtk.tool_item_group;
@@ -117,9 +116,77 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToolPalette self()
   {
     return this;
+  }
+
+  /**
+      Get `iconSize` property.
+      Returns: The size of the icons in a tool palette. When this property is set,
+      it overrides the default setting.
+      
+      This should only be used for special-purpose tool palettes, normal
+      application tool palettes should respect the user preferences for the
+      size of icons.
+  */
+  @property gtk.types.IconSize iconSize()
+  {
+    return getIconSize();
+  }
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The size of the icons in a tool palette. When this property is set,
+        it overrides the default setting.
+        
+        This should only be used for special-purpose tool palettes, normal
+        application tool palettes should respect the user preferences for the
+        size of icons.
+  */
+  @property void iconSize(gtk.types.IconSize propval)
+  {
+    return setIconSize(propval);
+  }
+
+  /**
+      Get `iconSizeSet` property.
+      Returns: Is true if the #GtkToolPalette:icon-size property has been set.
+  */
+  @property bool iconSizeSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("icon-size-set");
+  }
+
+  /**
+      Set `iconSizeSet` property.
+      Params:
+        propval = Is true if the #GtkToolPalette:icon-size property has been set.
+  */
+  @property void iconSizeSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("icon-size-set", propval);
+  }
+
+  /**
+      Get `toolbarStyle` property.
+      Returns: The style of items in the tool palette.
+  */
+  @property gtk.types.ToolbarStyle toolbarStyle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ToolbarStyle)("toolbar-style");
+  }
+
+  /**
+      Set `toolbarStyle` property.
+      Params:
+        propval = The style of items in the tool palette.
+  */
+  @property void toolbarStyle(gtk.types.ToolbarStyle propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ToolbarStyle)("toolbar-style", propval);
   }
 
   mixin OrientableT!();
@@ -190,7 +257,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_palette_get_drag_item(cast(GtkToolPalette*)cPtr, selection ? cast(const(GtkSelectionData)*)selection.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +274,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   {
     GtkToolItemGroup* _cretval;
     _cretval = gtk_tool_palette_get_drop_group(cast(GtkToolPalette*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item_group.ToolItemGroup)(cast(GtkToolItemGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item_group.ToolItemGroup)(cast(GtkToolItemGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +291,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_palette_get_drop_item(cast(GtkToolPalette*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -283,7 +350,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tool_palette_get_hadjustment(cast(GtkToolPalette*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -324,7 +391,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tool_palette_get_vadjustment(cast(GtkToolPalette*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

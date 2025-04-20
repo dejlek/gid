@@ -169,9 +169,150 @@ class VideoDecoder : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoDecoder self()
   {
     return this;
+  }
+
+  /**
+      Get `automaticRequestSyncPointFlags` property.
+      Returns: GstVideoDecoderRequestSyncPointFlags to use for the automatically
+      requested sync points if `automatic-request-sync-points` is enabled.
+  */
+  @property gstvideo.types.VideoDecoderRequestSyncPointFlags automaticRequestSyncPointFlags()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoDecoderRequestSyncPointFlags)("automatic-request-sync-point-flags");
+  }
+
+  /**
+      Set `automaticRequestSyncPointFlags` property.
+      Params:
+        propval = GstVideoDecoderRequestSyncPointFlags to use for the automatically
+        requested sync points if `automatic-request-sync-points` is enabled.
+  */
+  @property void automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoDecoderRequestSyncPointFlags)("automatic-request-sync-point-flags", propval);
+  }
+
+  /**
+      Get `automaticRequestSyncPoints` property.
+      Returns: If set to true the decoder will automatically request sync points when
+      it seems like a good idea, e.g. if the first frames are not key frames or
+      if packet loss was reported by upstream.
+  */
+  @property bool automaticRequestSyncPoints()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("automatic-request-sync-points");
+  }
+
+  /**
+      Set `automaticRequestSyncPoints` property.
+      Params:
+        propval = If set to true the decoder will automatically request sync points when
+        it seems like a good idea, e.g. if the first frames are not key frames or
+        if packet loss was reported by upstream.
+  */
+  @property void automaticRequestSyncPoints(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("automatic-request-sync-points", propval);
+  }
+
+  /**
+      Get `discardCorruptedFrames` property.
+      Returns: If set to true the decoder will discard frames that are marked as
+      corrupted instead of outputting them.
+  */
+  @property bool discardCorruptedFrames()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("discard-corrupted-frames");
+  }
+
+  /**
+      Set `discardCorruptedFrames` property.
+      Params:
+        propval = If set to true the decoder will discard frames that are marked as
+        corrupted instead of outputting them.
+  */
+  @property void discardCorruptedFrames(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("discard-corrupted-frames", propval);
+  }
+
+  /**
+      Get `maxErrors` property.
+      Returns: Maximum number of tolerated consecutive decode errors. See
+      [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
+  */
+  @property int maxErrors()
+  {
+    return getMaxErrors();
+  }
+
+  /**
+      Set `maxErrors` property.
+      Params:
+        propval = Maximum number of tolerated consecutive decode errors. See
+        [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
+  */
+  @property void maxErrors(int propval)
+  {
+    return setMaxErrors(propval);
+  }
+
+  /**
+      Get `minForceKeyUnitInterval` property.
+      Returns: Minimum interval between force-key-unit events sent upstream by the
+      decoder. Setting this to 0 will cause every event to be handled, setting
+      this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+      
+      See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
+      force-key-unit events.
+  */
+  @property ulong minForceKeyUnitInterval()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("min-force-key-unit-interval");
+  }
+
+  /**
+      Set `minForceKeyUnitInterval` property.
+      Params:
+        propval = Minimum interval between force-key-unit events sent upstream by the
+        decoder. Setting this to 0 will cause every event to be handled, setting
+        this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+        
+        See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
+        force-key-unit events.
+  */
+  @property void minForceKeyUnitInterval(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("min-force-key-unit-interval", propval);
+  }
+
+  /**
+      Get `qos` property.
+      Returns: If set to true the decoder will handle QoS events received
+      from downstream elements.
+      This includes dropping output frames which are detected as late
+      using the metrics reported by those events.
+  */
+  @property bool qos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("qos");
+  }
+
+  /**
+      Set `qos` property.
+      Params:
+        propval = If set to true the decoder will handle QoS events received
+        from downstream elements.
+        This includes dropping output frames which are detected as late
+        using the metrics reported by those events.
+  */
+  @property void qos(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
 
   /**
@@ -339,7 +480,7 @@ class VideoDecoder : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_video_decoder_get_buffer_pool(cast(GstVideoDecoder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 

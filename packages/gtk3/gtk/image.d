@@ -125,9 +125,211 @@ class Image : gtk.misc.Misc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Image self()
   {
     return this;
+  }
+
+  /** */
+  @property string file()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("file");
+  }
+
+  /** */
+  @property void file(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("file", propval);
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: The GIcon displayed in the GtkImage. For themed icons,
+      If the icon theme is changed, the image will be updated
+      automatically.
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The GIcon displayed in the GtkImage. For themed icons,
+        If the icon theme is changed, the image will be updated
+        automatically.
+  */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("gicon", propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon in the icon theme. If the icon theme is
+      changed, the image will be updated automatically.
+  */
+  @property string iconName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon in the icon theme. If the icon theme is
+        changed, the image will be updated automatically.
+  */
+  @property void iconName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
+  }
+
+  /** */
+  @property gtk.icon_set.IconSet iconSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.icon_set.IconSet)("icon-set");
+  }
+
+  /** */
+  @property void iconSet(gtk.icon_set.IconSet propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.icon_set.IconSet)("icon-set", propval);
+  }
+
+  /** */
+  @property int iconSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("icon-size");
+  }
+
+  /** */
+  @property void iconSize(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("icon-size", propval);
+  }
+
+  /** */
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  {
+    return getPixbuf();
+  }
+
+  /** */
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf", propval);
+  }
+
+  /** */
+  @property gdkpixbuf.pixbuf_animation.PixbufAnimation pixbufAnimation()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf_animation.PixbufAnimation)("pixbuf-animation");
+  }
+
+  /** */
+  @property void pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf_animation.PixbufAnimation)("pixbuf-animation", propval);
+  }
+
+  /**
+      Get `pixelSize` property.
+      Returns: The "pixel-size" property can be used to specify a fixed size
+      overriding the #GtkImage:icon-size property for images of type
+      [gtk.types.ImageType.IconName].
+  */
+  @property int pixelSize()
+  {
+    return getPixelSize();
+  }
+
+  /**
+      Set `pixelSize` property.
+      Params:
+        propval = The "pixel-size" property can be used to specify a fixed size
+        overriding the #GtkImage:icon-size property for images of type
+        [gtk.types.ImageType.IconName].
+  */
+  @property void pixelSize(int propval)
+  {
+    return setPixelSize(propval);
+  }
+
+  /**
+      Get `resource` property.
+      Returns: A path to a resource file to display.
+  */
+  @property string resource()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("resource");
+  }
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = A path to a resource file to display.
+  */
+  @property void resource(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("resource", propval);
+  }
+
+  /** */
+  @property string stock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("stock");
+  }
+
+  /** */
+  @property void stock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("stock", propval);
+  }
+
+  /** */
+  @property gtk.types.ImageType storageType()
+  {
+    return getStorageType();
+  }
+
+  /** */
+  @property cairo.surface.Surface surface()
+  {
+    return gobject.object.ObjectWrap.getProperty!(cairo.surface.Surface)("surface");
+  }
+
+  /** */
+  @property void surface(cairo.surface.Surface propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(cairo.surface.Surface)("surface", propval);
+  }
+
+  /**
+      Get `useFallback` property.
+      Returns: Whether the icon displayed in the GtkImage will use
+      standard icon names fallback. The value of this property
+      is only relevant for images of type [gtk.types.ImageType.IconName]
+      and [gtk.types.ImageType.Gicon].
+  */
+  @property bool useFallback()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-fallback");
+  }
+
+  /**
+      Set `useFallback` property.
+      Params:
+        propval = Whether the icon displayed in the GtkImage will use
+        standard icon names fallback. The value of this property
+        is only relevant for images of type [gtk.types.ImageType.IconName]
+        and [gtk.types.ImageType.Gicon].
+  */
+  @property void useFallback(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-fallback", propval);
   }
 
   /**
@@ -160,7 +362,7 @@ class Image : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +393,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,8 +411,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,7 +432,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -258,7 +460,7 @@ class Image : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -280,7 +482,7 @@ class Image : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -311,7 +513,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -335,7 +537,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_image_new_from_stock(_stockId, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -353,7 +555,7 @@ class Image : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -378,7 +580,7 @@ class Image : gtk.misc.Misc
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gtk_image_get_animation(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -399,7 +601,7 @@ class Image : gtk.misc.Misc
   {
     GIcon* _gicon;
     gtk_image_get_gicon(cast(GtkImage*)cPtr, &_gicon, &size);
-    gicon = ObjectG.getDObject!(gio.icon.Icon)(_gicon, No.Take);
+    gicon = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(_gicon, No.Take);
   }
 
   /**
@@ -455,7 +657,7 @@ class Image : gtk.misc.Misc
   {
     PixbufC* _cretval;
     _cretval = gtk_image_get_pixbuf(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -539,7 +741,7 @@ class Image : gtk.misc.Misc
   */
   void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
-    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
+    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size);
   }
 
   /**

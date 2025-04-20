@@ -7,6 +7,7 @@ import gobject.closure;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accel_group;
+import gtk.action_group;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -67,7 +68,7 @@ import gtk.widget;
     
     When the proxy is activated, it should activate its action.
 */
-class Action : gobject.object.ObjectG, gtk.buildable.Buildable
+class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -89,9 +90,439 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Action self()
   {
     return this;
+  }
+
+  /**
+      Get `actionGroup` property.
+      Returns: The GtkActionGroup this GtkAction is associated with, or NULL
+      (for internal use).
+  
+      Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
+      instead
+  */
+  @property gtk.action_group.ActionGroup actionGroup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.action_group.ActionGroup)("action-group");
+  }
+
+  /**
+      Set `actionGroup` property.
+      Params:
+        propval = The GtkActionGroup this GtkAction is associated with, or NULL
+        (for internal use).
+  
+      Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
+      instead
+  */
+  @property void actionGroup(gtk.action_group.ActionGroup propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.action_group.ActionGroup)("action-group", propval);
+  }
+
+  /**
+      Get `alwaysShowImage` property.
+      Returns: If true, the action's menu item proxies will ignore the #GtkSettings:gtk-menu-images
+      setting and always show their image, if available.
+      
+      Use this property if the menu item would be useless or hard to use
+      without their image.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool alwaysShowImage()
+  {
+    return getAlwaysShowImage();
+  }
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the action's menu item proxies will ignore the #GtkSettings:gtk-menu-images
+        setting and always show their image, if available.
+        
+        Use this property if the menu item would be useless or hard to use
+        without their image.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void alwaysShowImage(bool propval)
+  {
+    return setAlwaysShowImage(propval);
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: The #GIcon displayed in the #GtkAction.
+      
+      Note that the stock icon is preferred, if the #GtkAction:stock-id
+      property holds the id of an existing stock icon.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return getGicon();
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon displayed in the #GtkAction.
+        
+        Note that the stock icon is preferred, if the #GtkAction:stock-id
+        property holds the id of an existing stock icon.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    return setGicon(propval);
+  }
+
+  /**
+      Get `hideIfEmpty` property.
+      Returns: When TRUE, empty menu proxies for this action are hidden.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool hideIfEmpty()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("hide-if-empty");
+  }
+
+  /**
+      Set `hideIfEmpty` property.
+      Params:
+        propval = When TRUE, empty menu proxies for this action are hidden.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void hideIfEmpty(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("hide-if-empty", propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon from the icon theme.
+      
+      Note that the stock icon is preferred, if the #GtkAction:stock-id
+      property holds the id of an existing stock icon, and the #GIcon is
+      preferred if the #GtkAction:gicon property is set.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon from the icon theme.
+        
+        Note that the stock icon is preferred, if the #GtkAction:stock-id
+        property holds the id of an existing stock icon, and the #GIcon is
+        preferred if the #GtkAction:gicon property is set.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `isImportant` property.
+      Returns: Whether the action is considered important. When TRUE, toolitem
+      proxies for this action show text in GTK_TOOLBAR_BOTH_HORIZ mode.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool isImportant()
+  {
+    return getIsImportant();
+  }
+
+  /**
+      Set `isImportant` property.
+      Params:
+        propval = Whether the action is considered important. When TRUE, toolitem
+        proxies for this action show text in GTK_TOOLBAR_BOTH_HORIZ mode.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void isImportant(bool propval)
+  {
+    return setIsImportant(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The label used for menu items and buttons that activate
+      this action. If the label is null, GTK+ uses the stock
+      label specified via the stock-id property.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "label" attribute on #GMenuItem instead
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label used for menu items and buttons that activate
+        this action. If the label is null, GTK+ uses the stock
+        label specified via the stock-id property.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: Use the "label" attribute on #GMenuItem instead
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `sensitive` property.
+      Returns: Whether the action is enabled.
+  
+      Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
+      instead
+  */
+  @property bool sensitive()
+  {
+    return getSensitive();
+  }
+
+  /**
+      Set `sensitive` property.
+      Params:
+        propval = Whether the action is enabled.
+  
+      Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
+      instead
+  */
+  @property void sensitive(bool propval)
+  {
+    return setSensitive(propval);
+  }
+
+  /**
+      Get `shortLabel` property.
+      Returns: A shorter label that may be used on toolbar buttons.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property string shortLabel()
+  {
+    return getShortLabel();
+  }
+
+  /**
+      Set `shortLabel` property.
+      Params:
+        propval = A shorter label that may be used on toolbar buttons.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void shortLabel(string propval)
+  {
+    return setShortLabel(propval);
+  }
+
+  /**
+      Get `stockId` property.
+      Returns: The stock icon displayed in widgets representing this action.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property string stockId()
+  {
+    return getStockId();
+  }
+
+  /**
+      Set `stockId` property.
+      Params:
+        propval = The stock icon displayed in widgets representing this action.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void stockId(string propval)
+  {
+    return setStockId(propval);
+  }
+
+  /**
+      Get `tooltip` property.
+      Returns: A tooltip for this action.
+  
+      Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
+  */
+  @property string tooltip()
+  {
+    return getTooltip();
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = A tooltip for this action.
+  
+      Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
+  */
+  @property void tooltip(string propval)
+  {
+    return setTooltip(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether the action is visible.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the action is visible.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
+  }
+
+  /**
+      Get `visibleHorizontal` property.
+      Returns: Whether the toolbar item is visible when the toolbar is in a horizontal orientation.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool visibleHorizontal()
+  {
+    return getVisibleHorizontal();
+  }
+
+  /**
+      Set `visibleHorizontal` property.
+      Params:
+        propval = Whether the toolbar item is visible when the toolbar is in a horizontal orientation.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void visibleHorizontal(bool propval)
+  {
+    return setVisibleHorizontal(propval);
+  }
+
+  /**
+      Get `visibleOverflown` property.
+      Returns: When true, toolitem proxies for this action are represented in the
+      toolbar overflow menu.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool visibleOverflown()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("visible-overflown");
+  }
+
+  /**
+      Set `visibleOverflown` property.
+      Params:
+        propval = When true, toolitem proxies for this action are represented in the
+        toolbar overflow menu.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void visibleOverflown(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("visible-overflown", propval);
+  }
+
+  /**
+      Get `visibleVertical` property.
+      Returns: Whether the toolbar item is visible when the toolbar is in a vertical orientation.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property bool visibleVertical()
+  {
+    return getVisibleVertical();
+  }
+
+  /**
+      Set `visibleVertical` property.
+      Params:
+        propval = Whether the toolbar item is visible when the toolbar is in a vertical orientation.
+  
+      Deprecated: There is no corresponding replacement when using
+      #GAction
+  */
+  @property void visibleVertical(bool propval)
+  {
+    return setVisibleVertical(propval);
   }
 
   mixin BuildableT!();
@@ -190,7 +621,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_icon(cast(GtkAction*)cPtr, iconSize);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -208,7 +639,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -223,7 +654,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu_item(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +669,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_tool_item(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -314,7 +745,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GIcon* _cretval;
     _cretval = gtk_action_get_gicon(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -594,7 +1025,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setGicon(gio.icon.Icon icon)
   {
-    gtk_action_set_gicon(cast(GtkAction*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_action_set_gicon(cast(GtkAction*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

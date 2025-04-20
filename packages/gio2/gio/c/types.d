@@ -3083,7 +3083,7 @@ enum GZlibCompressorFormat
     
     The main interface to an action is that it can be activated with
     [gio.action.Action.activate]. This results in the 'activate' signal being
-    emitted. An activation has a [glib.variant.VariantG] parameter (which may be
+    emitted. An activation has a [glib.variant.Variant] parameter (which may be
     `NULL`). The correct type for the parameter is determined by a static
     parameter type (which is given at construction time).
     
@@ -3139,7 +3139,7 @@ struct GActionEntry
                  to the state type) this will be a function that
                  just calls @change_state (which you should provide).
   */
-  extern(C) void function(GSimpleAction* action, VariantC* parameter, void* userData) activate;
+  extern(C) void function(GSimpleAction* action, GVariant* parameter, void* userData) activate;
 
   /**
       the type of the parameter that must be passed to the
@@ -3162,7 +3162,7 @@ struct GActionEntry
                      of the action.  All stateful actions should provide a
                      handler here; stateless actions should not.
   */
-  extern(C) void function(GSimpleAction* action, VariantC* value, void* userData) changeState;
+  extern(C) void function(GSimpleAction* action, GVariant* value, void* userData) changeState;
 
   /** */
   size_t[3] padding;
@@ -3178,7 +3178,7 @@ struct GActionEntry
     
     The main way to interact with the actions in a [gio.action_group.ActionGroup] is to
     activate them with [gio.action_group.ActionGroup.activateAction]. Activating an
-    action may require a [glib.variant.VariantG] parameter. The required type of the
+    action may require a [glib.variant.Variant] parameter. The required type of the
     parameter can be inquired with [gio.action_group.ActionGroup.getActionParameterType].
     Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
     Activating a disabled action has no effect.
@@ -3252,22 +3252,22 @@ struct GActionGroupInterface
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.getActionStateHint]
   */
-  extern(C) VariantC* function(GActionGroup* actionGroup, const(char)* actionName) getActionStateHint;
+  extern(C) GVariant* function(GActionGroup* actionGroup, const(char)* actionName) getActionStateHint;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.getActionState]
   */
-  extern(C) VariantC* function(GActionGroup* actionGroup, const(char)* actionName) getActionState;
+  extern(C) GVariant* function(GActionGroup* actionGroup, const(char)* actionName) getActionState;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.changeActionState]
   */
-  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* value) changeActionState;
+  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* value) changeActionState;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.activateAction]
   */
-  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* parameter) activateAction;
+  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* parameter) activateAction;
 
   /**
       the class closure for the #GActionGroup::action-added signal
@@ -3287,12 +3287,12 @@ struct GActionGroupInterface
   /**
       the class closure for the #GActionGroup::action-enabled-changed signal
   */
-  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* state) actionStateChanged;
+  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* state) actionStateChanged;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.queryAction]
   */
-  extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName, bool* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, VariantC** stateHint, VariantC** state) queryAction;
+  extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName, bool* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) queryAction;
 }
 
 /**
@@ -3321,7 +3321,7 @@ struct GActionInterface
   /**
       the virtual function pointer for [gio.action.Action.getStateHint]
   */
-  extern(C) VariantC* function(GAction* action) getStateHint;
+  extern(C) GVariant* function(GAction* action) getStateHint;
 
   /**
       the virtual function pointer for [gio.action.Action.getEnabled]
@@ -3331,18 +3331,18 @@ struct GActionInterface
   /**
       the virtual function pointer for [gio.action.Action.getState]
   */
-  extern(C) VariantC* function(GAction* action) getState;
+  extern(C) GVariant* function(GAction* action) getState;
 
   /**
       the virtual function pointer for [gio.action.Action.changeState]
   */
-  extern(C) void function(GAction* action, VariantC* value) changeState;
+  extern(C) void function(GAction* action, GVariant* value) changeState;
 
   /**
       the virtual function pointer for [gio.action.Action.activate].  Note that #GAction does not have an
                  'activate' signal but that implementations of it may have one.
   */
-  extern(C) void function(GAction* action, VariantC* parameter) activate;
+  extern(C) void function(GAction* action, GVariant* parameter) activate;
 }
 
 /**
@@ -3651,10 +3651,10 @@ struct GAppLaunchContextClass
   extern(C) void function(GAppLaunchContext* context, const(char)* startupNotifyId) launchFailed;
 
   /** */
-  extern(C) void function(GAppLaunchContext* context, GAppInfo* info, VariantC* platformData) launched;
+  extern(C) void function(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) launched;
 
   /** */
-  extern(C) void function(GAppLaunchContext* context, GAppInfo* info, VariantC* platformData) launchStarted;
+  extern(C) void function(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) launchStarted;
 
   /** */
   extern(C) void function() GReserved1;
@@ -3763,7 +3763,7 @@ struct GAppLaunchContextPrivate;
     Regardless of which of these entry points is used to start the
     application, [gio.application.Application] passes some ‘platform data’ from the
     launching instance to the primary instance, in the form of a
-    [glib.variant.VariantG] dictionary mapping strings to variants. To use platform
+    [glib.variant.Variant] dictionary mapping strings to variants. To use platform
     data, override the `vfunc@Gio.Application.before_emit` or
     `vfunc@Gio.Application.after_emit` virtual functions
     in your [gio.application.Application] subclass. When dealing with
@@ -3848,14 +3848,14 @@ struct GApplicationClass
           'command-line' or any action invocation, gets the 'platform data' from
           the calling instance
   */
-  extern(C) void function(GApplication* application, VariantC* platformData) beforeEmit;
+  extern(C) void function(GApplication* application, GVariant* platformData) beforeEmit;
 
   /**
       invoked on the primary instance after 'activate', 'open',
           'command-line' or any action invocation, gets the 'platform data' from
           the calling instance
   */
-  extern(C) void function(GApplication* application, VariantC* platformData) afterEmit;
+  extern(C) void function(GApplication* application, GVariant* platformData) afterEmit;
 
   /**
       invoked (locally) to add 'platform data' to be sent to
@@ -4141,7 +4141,7 @@ struct GApplicationPrivate;
     For C applications you generally just call [gio.async_initable.AsyncInitable.newAsync]
     directly, or indirectly via a foo_thing_new_async() wrapper. This will call
     [gio.async_initable.AsyncInitable.initAsync] under the covers, calling back with `NULL`
-    and a set [glib.error.ErrorG] on failure.
+    and a set [glib.error.ErrorWrap] on failure.
     
     A typical implementation might look something like this:
     
@@ -4846,13 +4846,13 @@ struct GDBusAuthObserver;
     initialize the connection.
     
     If you construct an uninitialized [gio.dbus_connection.DBusConnection], such as via
-    [gobject.object.ObjectG.new_], you must initialize it via [gio.initable.Initable.init_] or
+    [gobject.object.ObjectWrap.new_], you must initialize it via [gio.initable.Initable.init_] or
     [gio.async_initable.AsyncInitable.initAsync] before using its methods or properties.
     Calling methods or accessing properties on a [gio.dbus_connection.DBusConnection] that has not
     completed initialization successfully is considered to be invalid, and leads
     to undefined behaviour. In particular, if initialization fails with a
-    [glib.error.ErrorG], the only valid thing you can do with that [gio.dbus_connection.DBusConnection] is to
-    free it with [gobject.object.ObjectG.unref].
+    [glib.error.ErrorWrap], the only valid thing you can do with that [gio.dbus_connection.DBusConnection] is to
+    free it with [gobject.object.ObjectWrap.unref].
     
     ## An example D-Bus server
     
@@ -5003,7 +5003,7 @@ struct GDBusInterfaceSkeletonClass
   /**
       Returns a #GVariant with all properties. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.getProperties].
   */
-  extern(C) VariantC* function(GDBusInterfaceSkeleton* interface_) getProperties;
+  extern(C) GVariant* function(GDBusInterfaceSkeleton* interface_) getProperties;
 
   /**
       Emits outstanding changes, if any. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.flush].
@@ -5254,29 +5254,29 @@ struct GDBusObjectManager;
     case, [gio.dbus_object_manager_client.DBusObjectManagerClient] object construction still succeeds but
     there will be no object proxies
     (e.g. [gio.dbus_object_manager.DBusObjectManager.getObjects] returns the empty list) and
-    the [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] property is `NULL`.
+    the [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property is `NULL`.
     
     The owner of the requested name can come and go (for example
     consider a system service being restarted) – [gio.dbus_object_manager_client.DBusObjectManagerClient]
-    handles this case too; simply connect to the [gobject.object.ObjectG.notify]
+    handles this case too; simply connect to the [gobject.object.ObjectWrap.notify]
     signal to watch for changes on the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] property. When the name
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property. When the name
     owner vanishes, the behavior is that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is set to `NULL` (this
-    includes emission of the [gobject.object.ObjectG.notify] signal) and then
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to `NULL` (this
+    includes emission of the [gobject.object.ObjectWrap.notify] signal) and then
     `signal@Gio.DBusObjectManager::object-removed` signals are synthesized
     for all currently existing object proxies. Since
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is `NULL` when this
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is `NULL` when this
     happens, you can use this information to disambiguate a synthesized signal
     from a genuine signal caused by object removal on the remote
     [gio.dbus_object_manager.DBusObjectManager]. Similarly, when a new name owner appears,
     `signal@Gio.DBusObjectManager::object-added` signals are synthesized
-    while [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is still `NULL`. Only
+    while [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is still `NULL`. Only
     when all object proxies have been added, the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is set to the new name
-    owner (this includes emission of the [gobject.object.ObjectG.notify] signal).
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to the new name
+    owner (this includes emission of the [gobject.object.ObjectWrap.notify] signal).
     Furthermore, you are guaranteed that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] will alternate between a
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] will alternate between a
     name owner (e.g. `:1.42`) and `NULL` even in the case where
     the name of interest is atomically replaced
     
@@ -5333,12 +5333,12 @@ struct GDBusObjectManagerClientClass
   /**
       Signal class handler for the #GDBusObjectManagerClient::interface-proxy-signal signal.
   */
-  extern(C) void function(GDBusObjectManagerClient* manager, GDBusObjectProxy* objectProxy, GDBusProxy* interfaceProxy, const(char)* senderName, const(char)* signalName, VariantC* parameters) interfaceProxySignal;
+  extern(C) void function(GDBusObjectManagerClient* manager, GDBusObjectProxy* objectProxy, GDBusProxy* interfaceProxy, const(char)* senderName, const(char)* signalName, GVariant* parameters) interfaceProxySignal;
 
   /**
       Signal class handler for the #GDBusObjectManagerClient::interface-proxy-properties-changed signal.
   */
-  extern(C) void function(GDBusObjectManagerClient* manager, GDBusObjectProxy* objectProxy, GDBusProxy* interfaceProxy, VariantC* changedProperties, const(char*)* invalidatedProperties) interfaceProxyPropertiesChanged;
+  extern(C) void function(GDBusObjectManagerClient* manager, GDBusObjectProxy* objectProxy, GDBusProxy* interfaceProxy, GVariant* changedProperties, const(char*)* invalidatedProperties) interfaceProxyPropertiesChanged;
 
   /** */
   void*[8] padding;
@@ -5562,7 +5562,7 @@ struct GDBusPropertyInfo
     
     The unique name owner of the proxy’s name is tracked and can be read from
     `property@Gio.DBusProxy:g-name-owner`. Connect to the
-    [gobject.object.ObjectG.notify] signal to get notified of changes.
+    [gobject.object.ObjectWrap.notify] signal to get notified of changes.
     Additionally, only signals and property changes emitted from the current name
     owner are considered and calls are always sent to the current name owner.
     This avoids a number of race conditions when the name is lost by one owner
@@ -5589,7 +5589,7 @@ struct GDBusPropertyInfo
     A [gio.dbus_proxy.DBusProxy] instance can be used from multiple threads but note
     that all signals (e.g. `signal@Gio.DBusProxy::g-signal`,
     `signal@Gio.DBusProxy::g-properties-changed` and
-    [gobject.object.ObjectG.notify]) are emitted in the thread-default main
+    [gobject.object.ObjectWrap.notify]) are emitted in the thread-default main
     context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
     where the instance was constructed.
     
@@ -5616,12 +5616,12 @@ struct GDBusProxyClass
   /**
       Signal class handler for the #GDBusProxy::g-properties-changed signal.
   */
-  extern(C) void function(GDBusProxy* proxy, VariantC* changedProperties, const(char*)* invalidatedProperties) gPropertiesChanged;
+  extern(C) void function(GDBusProxy* proxy, GVariant* changedProperties, const(char*)* invalidatedProperties) gPropertiesChanged;
 
   /**
       Signal class handler for the #GDBusProxy::g-signal signal.
   */
-  extern(C) void function(GDBusProxy* proxy, const(char)* senderName, const(char)* signalName, VariantC* parameters) gSignal;
+  extern(C) void function(GDBusProxy* proxy, const(char)* senderName, const(char)* signalName, GVariant* parameters) gSignal;
 
   /** */
   void*[32] padding;
@@ -5885,7 +5885,7 @@ struct GDatagramBasedInterface
     Whether debug output is enabled is exposed as
     `property@Gio.DebugController:debug-enabled`. This controls
     `func@GLib.log_set_debug_enabled` by default. Application code may
-    connect to the [gobject.object.ObjectG.notify] signal for it
+    connect to the [gobject.object.ObjectWrap.notify] signal for it
     to control other parts of its debug infrastructure as necessary.
     
     If your application or service is using the default GLib log writer function,
@@ -5900,7 +5900,7 @@ struct GDebugController;
     
     It is a [gio.initable.Initable] object, and will register an object at
     `/org/gtk/Debugging` on the bus given as
-    [gio.debug_controller_dbus.DebugControllerDBus.DBusConnection] once it’s initialized. The
+    [gio.debug_controller_dbus.DebugControllerDBus.connection] once it’s initialized. The
     object will be unregistered when the last reference to the
     [gio.debug_controller_dbus.DebugControllerDBus] is dropped.
     
@@ -6643,7 +6643,7 @@ struct GFileDescriptorBasedIface
     To close a [gio.file_enumerator.FileEnumerator], use [gio.file_enumerator.FileEnumerator.close], or
     its asynchronous version, [gio.file_enumerator.FileEnumerator.closeAsync]. Once
     a [gio.file_enumerator.FileEnumerator] is closed, no further actions may be performed
-    on it, and it should be freed with [gobject.object.ObjectG.unref].
+    on it, and it should be freed with [gobject.object.ObjectWrap.unref].
 */
 struct GFileEnumerator
 {
@@ -7929,7 +7929,7 @@ struct GIconIface
   /**
       Serializes a #GIcon into a #GVariant. Since: 2.38
   */
-  extern(C) VariantC* function(GIcon* icon) serialize;
+  extern(C) GVariant* function(GIcon* icon) serialize;
 }
 
 /**
@@ -8028,8 +8028,8 @@ struct GInetSocketAddressPrivate;
     (the latter is only available if it also implements [gio.async_initable.AsyncInitable]).
     
     If the object is not initialized, or initialization returns with an
-    error, then all operations on the object except `[gobject.object.ObjectG.ref_]` and
-    `[gobject.object.ObjectG.unref]` are considered to be invalid, and have undefined
+    error, then all operations on the object except `[gobject.object.ObjectWrap.ref_]` and
+    `[gobject.object.ObjectWrap.unref]` are considered to be invalid, and have undefined
     behaviour. They will often fail with `func@GLib.critical` or
     `func@GLib.warning`, but this must not be relied on.
     
@@ -8038,7 +8038,7 @@ struct GInetSocketAddressPrivate;
     in various ways. For C applications you generally just call
     [gio.initable.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
     This will call [gio.initable.Initable.init_] under the cover, returning `NULL`
-    and setting a [glib.error.ErrorG] on failure (at which point the instance is
+    and setting a [glib.error.ErrorWrap] on failure (at which point the instance is
     unreferenced).
     
     For bindings in languages where the native constructor supports
@@ -8227,13 +8227,13 @@ struct GInputVector
 
 /**
     [gio.list_model.ListModel] is an interface that represents a mutable list of
-    [gobject.object.ObjectG]. Its main intention is as a model for various widgets
+    [gobject.object.ObjectWrap]. Its main intention is as a model for various widgets
     in user interfaces, such as list views, but it can also be used as a
     convenient method of returning lists of data, with support for
     updates.
     
     Each object in the list may also report changes in itself via some
-    mechanism (normally the [gobject.object.ObjectG.notify] signal).  Taken
+    mechanism (normally the [gobject.object.ObjectWrap.notify] signal).  Taken
     together with the `signal@Gio.ListModel::items-changed` signal, this provides
     for a list that can change its membership, and in which the members can
     change their individual properties.
@@ -8552,7 +8552,7 @@ struct GMenuAttributeIterClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GMenuAttributeIter* iter, const(char*)* outName, VariantC** value) getNext;
+  extern(C) bool function(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) getNext;
 }
 
 /** */
@@ -8738,7 +8738,7 @@ struct GMenuModelClass
   extern(C) GMenuAttributeIter* function(GMenuModel* model, int itemIndex) iterateItemAttributes;
 
   /** */
-  extern(C) VariantC* function(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) getItemAttributeValue;
+  extern(C) GVariant* function(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) getItemAttributeValue;
 
   /** */
   extern(C) void function(GMenuModel* model, int itemIndex, GHashTable** links) getItemLinks;
@@ -9571,7 +9571,7 @@ struct GPollableOutputStreamInterface
     or activity at all), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
     profile GPU usage.
     
-    Don’t forget to disconnect the [gobject.object.ObjectG.notify] signal for
+    Don’t forget to disconnect the [gobject.object.ObjectWrap.notify] signal for
     `property@Gio.PowerProfileMonitor:power-saver-enabled`, and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
@@ -9590,7 +9590,7 @@ struct GPowerProfileMonitorInterface
 
 /**
     A [gio.property_action.PropertyAction] is a way to get a [gio.action.Action] with a state value
-    reflecting and controlling the value of a [gobject.object.ObjectG] property.
+    reflecting and controlling the value of a [gobject.object.ObjectWrap] property.
     
     The state of the action will correspond to the value of the property.
     Changing it will change the property (assuming the requested value
@@ -9609,7 +9609,7 @@ struct GPowerProfileMonitorInterface
     Properties of object types, boxed types and pointer types are not
     supported and probably never will be.
     
-    Properties of [glib.variant.VariantG] types are not currently supported.
+    Properties of [glib.variant.Variant] types are not currently supported.
     
     If the property is boolean-valued then the action will have a `NULL`
     parameter type, and activating the action (with no parameter) will
@@ -9819,7 +9819,7 @@ struct GProxyResolverInterface
     methods on [gio.action_group.ActionGroup] used to activate actions:
     [gio.action_group.ActionGroup.activateAction] and
     [gio.action_group.ActionGroup.changeActionState]. These variants allow a
-    ‘platform data’ [glib.variant.VariantG] to be specified: a dictionary providing
+    ‘platform data’ [glib.variant.Variant] to be specified: a dictionary providing
     context for the action invocation (for example: timestamps, startup
     notification IDs, etc).
     
@@ -9845,12 +9845,12 @@ struct GRemoteActionGroupInterface
   /**
       the virtual function pointer for [gio.remote_action_group.RemoteActionGroup.activateActionFull]
   */
-  extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* parameter, VariantC* platformData) activateActionFull;
+  extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* parameter, GVariant* platformData) activateActionFull;
 
   /**
       the virtual function pointer for [gio.remote_action_group.RemoteActionGroup.changeActionStateFull]
   */
-  extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* value, VariantC* platformData) changeActionStateFull;
+  extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* value, GVariant* platformData) changeActionStateFull;
 }
 
 /**
@@ -10204,7 +10204,7 @@ struct GSeekableIface
     
     Unlike other configuration systems (like GConf), GSettings does not
     restrict keys to basic types like strings and numbers. GSettings stores
-    values as [glib.variant.VariantG], and allows any [glib.variant_type.VariantType] for
+    values as [glib.variant.Variant], and allows any [glib.variant_type.VariantType] for
     keys. Key names are restricted to lowercase characters, numbers and `-`.
     Furthermore, the names must begin with a lowercase character, must not end
     with a `-`, and must not contain consecutive dashes.
@@ -10237,7 +10237,7 @@ struct GSeekableIface
     ```
     
     Translations of default values must remain syntactically valid serialized
-    [glib.variant.VariantG]s (e.g. retaining any surrounding quotation marks) or
+    [glib.variant.Variant]s (e.g. retaining any surrounding quotation marks) or
     runtime errors will occur.
     
     GSettings uses schemas in a compact binary form that is created
@@ -10259,7 +10259,7 @@ struct GSeekableIface
     associated with one named application, the ID should not use
     StudlyCaps, e.g. `org.gnome.font-rendering`.
     
-    In addition to [glib.variant.VariantG] types, keys can have types that have
+    In addition to [glib.variant.Variant] types, keys can have types that have
     enumerated types. These can be described by a `<choice>`,
     `<enum>` or `<flags>` element, as seen in the
     second example below. The underlying type of such a key
@@ -10350,7 +10350,7 @@ struct GSeekableIface
     override’ files. These are keyfiles in the same directory as the XML
     schema sources which can override default values. The schema ID serves
     as the group name in the key file, and the values are expected in
-    serialized [glib.variant.VariantG] form, as in the following example:
+    serialized [glib.variant.Variant] form, as in the following example:
     ```
     [org.gtk.Example]
     key1='string'
@@ -10362,11 +10362,11 @@ struct GSeekableIface
     
     ## Binding
     
-    A very convenient feature of GSettings lets you bind [gobject.object.ObjectG]
+    A very convenient feature of GSettings lets you bind [gobject.object.ObjectWrap]
     properties directly to settings, using [gio.settings.Settings.bind]. Once a
-    [gobject.object.ObjectG] property has been bound to a setting, changes on
+    [gobject.object.ObjectWrap] property has been bound to a setting, changes on
     either side are automatically propagated to the other side. GSettings handles
-    details like mapping between [gobject.object.ObjectG] and [glib.variant.VariantG]
+    details like mapping between [gobject.object.ObjectWrap] and [glib.variant.Variant]
     types, and preventing infinite cycles.
     
     This makes it very easy to hook up a preferences dialog to the
@@ -10479,7 +10479,7 @@ struct GSettings
     
     Some of the [gio.settings_backend.SettingsBackend] functions accept or return a
     [glib.tree.Tree]. These trees always have strings as keys and
-    [glib.variant.VariantG] as values.
+    [glib.variant.Variant] as values.
     
     The [gio.settings_backend.SettingsBackend] API is exported to allow third-party
     implementations, but does not carry the same stability guarantees
@@ -10507,7 +10507,7 @@ struct GSettingsBackendClass
   /**
       virtual method to read a key's value
   */
-  extern(C) VariantC* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, bool defaultValue) read;
+  extern(C) GVariant* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, bool defaultValue) read;
 
   /**
       virtual method to get if a key is writable
@@ -10517,7 +10517,7 @@ struct GSettingsBackendClass
   /**
       virtual method to change key's value
   */
-  extern(C) bool function(GSettingsBackend* backend, const(char)* key, VariantC* value, void* originTag) write;
+  extern(C) bool function(GSettingsBackend* backend, const(char)* key, GVariant* value, void* originTag) write;
 
   /**
       virtual method to change a tree of keys
@@ -10552,7 +10552,7 @@ struct GSettingsBackendClass
   /**
       virtual method to read user's key value
   */
-  extern(C) VariantC* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType) readUserValue;
+  extern(C) GVariant* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType) readUserValue;
 
   /** */
   void*[23] padding;
@@ -10752,10 +10752,10 @@ struct GSimpleActionGroupPrivate;
     together correctly.
     
     To create a new [gio.simple_async_result.SimpleAsyncResult], call [gio.simple_async_result.SimpleAsyncResult.new_].
-    If the result needs to be created for a [glib.error.ErrorG], use
+    If the result needs to be created for a [glib.error.ErrorWrap], use
     [gio.simple_async_result.SimpleAsyncResult.newFromError] or
-    [gio.simple_async_result.SimpleAsyncResult.newTakeError]. If a [glib.error.ErrorG] is not available
-    (e.g. the asynchronous operation doesn’t take a [glib.error.ErrorG] argument),
+    [gio.simple_async_result.SimpleAsyncResult.newTakeError]. If a [glib.error.ErrorWrap] is not available
+    (e.g. the asynchronous operation doesn’t take a [glib.error.ErrorWrap] argument),
     but the result still needs to be created for an error condition, use
     [gio.simple_async_result.SimpleAsyncResult.newError] (or
     [gio.simple_async_result.SimpleAsyncResult.setErrorVa] if your application or binding
@@ -10978,7 +10978,7 @@ struct GSimpleProxyResolverPrivate;
     be cases where direct use of [gio.socket.Socket] is useful.
     
     [gio.socket.Socket] implements the [gio.initable.Initable] interface, so if it is manually
-    constructed by e.g. [gobject.object.ObjectG.new_] you must call
+    constructed by e.g. [gobject.object.ObjectWrap.new_] you must call
     [gio.initable.Initable.init_] and check the results before using the object.
     This is done automatically in [gio.socket.Socket.new_] and
     [gio.socket.Socket.newFromFd], so these functions can return `NULL`.
@@ -13283,7 +13283,7 @@ struct GVfsClass
   extern(C) void function(GVfs* vfs, const(char)* source, const(char)* dest) localFileMoved;
 
   /** */
-  extern(C) GIcon* function(GVfs* vfs, VariantC* value) deserializeIcon;
+  extern(C) GIcon* function(GVfs* vfs, GVariant* value) deserializeIcon;
 
   /** */
   extern(C) void function() GReserved1;
@@ -13325,7 +13325,7 @@ struct GVfsClass
     passed to the callback.  That callback should then call
     [gio.volume.Volume.mountFinish] with the [gio.volume.Volume] instance and the
     [gio.async_result.AsyncResult] data to see if the operation was completed
-    successfully.  If a [glib.error.ErrorG] is present when
+    successfully.  If a [glib.error.ErrorWrap] is present when
     [gio.volume.Volume.mountFinish] is called, then it will be filled with any
     error information.
     
@@ -13615,17 +13615,17 @@ alias extern(C) void function(GDBusConnection* connection, const(char)* name, vo
 
 alias extern(C) bool function(GCancellable* cancellable, void* data) GCancellableSourceFunc;
 
-alias extern(C) VariantC* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GError** error, void* userData) GDBusInterfaceGetPropertyFunc;
+alias extern(C) GVariant* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GError** error, void* userData) GDBusInterfaceGetPropertyFunc;
 
-alias extern(C) void function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, VariantC* parameters, GDBusMethodInvocation* invocation, void* userData) GDBusInterfaceMethodCallFunc;
+alias extern(C) void function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, GDBusMethodInvocation* invocation, void* userData) GDBusInterfaceMethodCallFunc;
 
-alias extern(C) bool function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, VariantC* value, GError** error, void* userData) GDBusInterfaceSetPropertyFunc;
+alias extern(C) bool function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GVariant* value, GError** error, void* userData) GDBusInterfaceSetPropertyFunc;
 
 alias extern(C) GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, bool incoming, void* userData) GDBusMessageFilterFunction;
 
 alias extern(C) GType function(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data) GDBusProxyTypeFunc;
 
-alias extern(C) void function(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, VariantC* parameters, void* userData) GDBusSignalCallback;
+alias extern(C) void function(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, void* userData) GDBusSignalCallback;
 
 alias extern(C) const(GDBusInterfaceVTable)* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* node, void** outUserData, void* userData) GDBusSubtreeDispatchFunc;
 
@@ -13649,11 +13649,11 @@ alias extern(C) bool function(ObjectC* pollableStream, void* data) GPollableSour
 
 alias extern(C) void* function(void* data, size_t size) GReallocFunc;
 
-alias extern(C) bool function(GValue* value, VariantC* variant, void* userData) GSettingsBindGetMapping;
+alias extern(C) bool function(GValue* value, GVariant* variant, void* userData) GSettingsBindGetMapping;
 
-alias extern(C) VariantC* function(const(GValue)* value, const(GVariantType)* expectedType, void* userData) GSettingsBindSetMapping;
+alias extern(C) GVariant* function(const(GValue)* value, const(GVariantType)* expectedType, void* userData) GSettingsBindSetMapping;
 
-alias extern(C) bool function(VariantC* value, void** result, void* userData) GSettingsGetMapping;
+alias extern(C) bool function(GVariant* value, void** result, void* userData) GSettingsGetMapping;
 
 alias extern(C) void function(GSimpleAsyncResult* res, ObjectC* object, GCancellable* cancellable) GSimpleAsyncThreadFunc;
 

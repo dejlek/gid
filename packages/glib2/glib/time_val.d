@@ -28,7 +28,7 @@ class TimeVal
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.TimeVal");
+      throw new GidConstructException("Null instance pointer for glib.time_val.TimeVal");
 
     cInstance = *cast(GTimeVal*)ptr;
 
@@ -42,21 +42,39 @@ class TimeVal
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `tvSec` field.
+      Returns: seconds
+  */
   @property glong tvSec()
   {
     return (cast(GTimeVal*)cPtr).tvSec;
   }
 
+  /**
+      Set `tvSec` field.
+      Params:
+        propval = seconds
+  */
   @property void tvSec(glong propval)
   {
     (cast(GTimeVal*)cPtr).tvSec = propval;
   }
 
+  /**
+      Get `tvUsec` field.
+      Returns: microseconds
+  */
   @property glong tvUsec()
   {
     return (cast(GTimeVal*)cPtr).tvUsec;
   }
 
+  /**
+      Set `tvUsec` field.
+      Params:
+        propval = microseconds
+  */
   @property void tvUsec(glong propval)
   {
     (cast(GTimeVal*)cPtr).tvUsec = propval;

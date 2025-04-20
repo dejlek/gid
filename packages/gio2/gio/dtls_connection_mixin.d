@@ -42,6 +42,209 @@ template DtlsConnectionT()
 {
 
   /**
+      Get `certificate` property.
+      Returns: The connection's certificate; see
+      [gio.dtls_connection.DtlsConnection.setCertificate].
+  */
+  @property gio.tls_certificate.TlsCertificate certificate()
+  {
+    return getCertificate();
+  }
+
+  /**
+      Set `certificate` property.
+      Params:
+        propval = The connection's certificate; see
+        [gio.dtls_connection.DtlsConnection.setCertificate].
+  */
+  @property void certificate(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setCertificate(propval);
+  }
+
+  /**
+      Get `ciphersuiteName` property.
+      Returns: The name of the DTLS ciphersuite in use. See [gio.dtls_connection.DtlsConnection.getCiphersuiteName].
+  */
+  @property string ciphersuiteName()
+  {
+    return getCiphersuiteName();
+  }
+
+  /**
+      Get `database` property.
+      Returns: The certificate database to use when verifying this TLS connection.
+      If no certificate database is set, then the default database will be
+      used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+      
+      When using a non-default database, #GDtlsConnection must fall back to using
+      the #GTlsDatabase to perform certificate verification using
+      [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+      not be able to make use of TLS session context. This may be less secure.
+      For example, if you create your own #GTlsDatabase that just wraps the
+      default #GTlsDatabase, you might expect that you have not changed anything,
+      but this is not true because you may have altered the behavior of
+      #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+      documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+      security checks that may not be performed. Accordingly, setting a
+      non-default database is discouraged except for specialty applications with
+      unusual security requirements.
+  */
+  @property gio.tls_database.TlsDatabase database()
+  {
+    return getDatabase();
+  }
+
+  /**
+      Set `database` property.
+      Params:
+        propval = The certificate database to use when verifying this TLS connection.
+        If no certificate database is set, then the default database will be
+        used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+        
+        When using a non-default database, #GDtlsConnection must fall back to using
+        the #GTlsDatabase to perform certificate verification using
+        [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+        not be able to make use of TLS session context. This may be less secure.
+        For example, if you create your own #GTlsDatabase that just wraps the
+        default #GTlsDatabase, you might expect that you have not changed anything,
+        but this is not true because you may have altered the behavior of
+        #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+        documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+        security checks that may not be performed. Accordingly, setting a
+        non-default database is discouraged except for specialty applications with
+        unusual security requirements.
+  */
+  @property void database(gio.tls_database.TlsDatabase propval)
+  {
+    return setDatabase(propval);
+  }
+
+  /**
+      Get `interaction` property.
+      Returns: A #GTlsInteraction object to be used when the connection or certificate
+      database need to interact with the user. This will be used to prompt the
+      user for passwords where necessary.
+  */
+  @property gio.tls_interaction.TlsInteraction interaction()
+  {
+    return getInteraction();
+  }
+
+  /**
+      Set `interaction` property.
+      Params:
+        propval = A #GTlsInteraction object to be used when the connection or certificate
+        database need to interact with the user. This will be used to prompt the
+        user for passwords where necessary.
+  */
+  @property void interaction(gio.tls_interaction.TlsInteraction propval)
+  {
+    return setInteraction(propval);
+  }
+
+  /**
+      Get `negotiatedProtocol` property.
+      Returns: The application-layer protocol negotiated during the TLS
+      handshake. See [gio.dtls_connection.DtlsConnection.getNegotiatedProtocol].
+  */
+  @property string negotiatedProtocol()
+  {
+    return getNegotiatedProtocol();
+  }
+
+  /**
+      Get `peerCertificate` property.
+      Returns: The connection's peer's certificate, after the TLS handshake has
+      completed or failed. Note in particular that this is not yet set
+      during the emission of #GDtlsConnection::accept-certificate.
+      
+      (You can watch for a #GObject::notify signal on this property to
+      detect when a handshake has occurred.)
+  */
+  @property gio.tls_certificate.TlsCertificate peerCertificate()
+  {
+    return getPeerCertificate();
+  }
+
+  /**
+      Get `peerCertificateErrors` property.
+      Returns: The errors noticed while verifying
+      #GDtlsConnection:peer-certificate. Normally this should be 0, but
+      it may not be if #GDtlsClientConnection:validation-flags is not
+      [gio.types.TlsCertificateFlags.ValidateAll], or if
+      #GDtlsConnection::accept-certificate overrode the default
+      behavior.
+      
+      GLib guarantees that if certificate verification fails, at least
+      one error will be set, but it does not guarantee that all possible
+      errors will be set. Accordingly, you may not safely decide to
+      ignore any particular type of error. For example, it would be
+      incorrect to mask [gio.types.TlsCertificateFlags.Expired] if you want to allow
+      expired certificates, because this could potentially be the only
+      error flag set even if other problems exist with the certificate.
+  */
+  @property gio.types.TlsCertificateFlags peerCertificateErrors()
+  {
+    return getPeerCertificateErrors();
+  }
+
+  /**
+      Get `protocolVersion` property.
+      Returns: The DTLS protocol version in use. See [gio.dtls_connection.DtlsConnection.getProtocolVersion].
+  */
+  @property gio.types.TlsProtocolVersion protocolVersion()
+  {
+    return getProtocolVersion();
+  }
+
+  /**
+      Get `rehandshakeMode` property.
+      Returns: The rehandshaking mode. See
+      [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+  
+      Deprecated: The rehandshake mode is ignored.
+  */
+  @property gio.types.TlsRehandshakeMode rehandshakeMode()
+  {
+    return getRehandshakeMode();
+  }
+
+  /**
+      Set `rehandshakeMode` property.
+      Params:
+        propval = The rehandshaking mode. See
+        [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+  
+      Deprecated: The rehandshake mode is ignored.
+  */
+  @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval)
+  {
+    return setRehandshakeMode(propval);
+  }
+
+  /**
+      Get `requireCloseNotify` property.
+      Returns: Whether or not proper TLS close notification is required.
+      See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+  */
+  @property bool requireCloseNotify()
+  {
+    return getRequireCloseNotify();
+  }
+
+  /**
+      Set `requireCloseNotify` property.
+      Params:
+        propval = Whether or not proper TLS close notification is required.
+        See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+  */
+  @property void requireCloseNotify(bool propval)
+  {
+    return setRequireCloseNotify(propval);
+  }
+
+  /**
       Close the DTLS connection. This is equivalent to calling
       [gio.dtls_connection.DtlsConnection.shutdown] to shut down both sides of the connection.
       
@@ -65,7 +268,7 @@ template DtlsConnectionT()
       Params:
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -73,7 +276,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = g_dtls_connection_close(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -93,7 +296,7 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -109,15 +312,15 @@ template DtlsConnectionT()
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -147,7 +350,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +382,7 @@ template DtlsConnectionT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_dtls_connection_get_database(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -193,7 +396,7 @@ template DtlsConnectionT()
   {
     GTlsInteraction* _cretval;
     _cretval = g_dtls_connection_get_interaction(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +428,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_peer_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -319,7 +522,7 @@ template DtlsConnectionT()
       Params:
         cancellable = a #GCancellable, or null
       Returns: success or failure
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool handshake(gio.cancellable.Cancellable cancellable = null)
   {
@@ -327,7 +530,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -347,7 +550,7 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -363,15 +566,15 @@ template DtlsConnectionT()
         result = a #GAsyncResult.
       Returns: true on success, false on failure, in which
         case error will be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool handshakeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -542,7 +745,7 @@ template DtlsConnectionT()
         shutdownWrite = true to stop sending outgoing datagrams
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable = null)
   {
@@ -550,7 +753,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -572,7 +775,7 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -588,15 +791,15 @@ template DtlsConnectionT()
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool shutdownFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

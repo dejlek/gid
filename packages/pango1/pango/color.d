@@ -14,10 +14,19 @@ import pango.types;
 class Color : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `color.Color` boxed type.
+      Params:
+        red = value of red component
+        green = value of green component
+        blue = value of blue component
+  */
+  this(ushort red = ushort.init, ushort green = ushort.init, ushort blue = ushort.init)
   {
     super(gMalloc(PangoColor.sizeof), Yes.Take);
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
   }
 
   /** */
@@ -45,36 +54,64 @@ class Color : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Color self()
   {
     return this;
   }
 
+  /**
+      Get `red` field.
+      Returns: value of red component
+  */
   @property ushort red()
   {
     return (cast(PangoColor*)cPtr).red;
   }
 
+  /**
+      Set `red` field.
+      Params:
+        propval = value of red component
+  */
   @property void red(ushort propval)
   {
     (cast(PangoColor*)cPtr).red = propval;
   }
 
+  /**
+      Get `green` field.
+      Returns: value of green component
+  */
   @property ushort green()
   {
     return (cast(PangoColor*)cPtr).green;
   }
 
+  /**
+      Set `green` field.
+      Params:
+        propval = value of green component
+  */
   @property void green(ushort propval)
   {
     (cast(PangoColor*)cPtr).green = propval;
   }
 
+  /**
+      Get `blue` field.
+      Returns: value of blue component
+  */
   @property ushort blue()
   {
     return (cast(PangoColor*)cPtr).blue;
   }
 
+  /**
+      Set `blue` field.
+      Params:
+        propval = value of blue component
+  */
   @property void blue(ushort propval)
   {
     (cast(PangoColor*)cPtr).blue = propval;

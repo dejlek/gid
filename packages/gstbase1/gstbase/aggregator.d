@@ -107,9 +107,92 @@ class Aggregator : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Aggregator self()
   {
     return this;
+  }
+
+  /**
+      Get `emitSignals` property.
+      Returns: Enables the emission of signals such as #GstAggregator::samples-selected
+  */
+  @property bool emitSignals()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("emit-signals");
+  }
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Enables the emission of signals such as #GstAggregator::samples-selected
+  */
+  @property void emitSignals(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("emit-signals", propval);
+  }
+
+  /** */
+  @property ulong latency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("latency");
+  }
+
+  /** */
+  @property void latency(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("latency", propval);
+  }
+
+  /**
+      Get `minUpstreamLatency` property.
+      Returns: Force minimum upstream latency (in nanoseconds). When sources with a
+      higher latency are expected to be plugged in dynamically after the
+      aggregator has started playing, this allows overriding the minimum
+      latency reported by the initial source(s). This is only taken into
+      account when larger than the actually reported minimum latency.
+  */
+  @property ulong minUpstreamLatency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("min-upstream-latency");
+  }
+
+  /**
+      Set `minUpstreamLatency` property.
+      Params:
+        propval = Force minimum upstream latency (in nanoseconds). When sources with a
+        higher latency are expected to be plugged in dynamically after the
+        aggregator has started playing, this allows overriding the minimum
+        latency reported by the initial source(s). This is only taken into
+        account when larger than the actually reported minimum latency.
+  */
+  @property void minUpstreamLatency(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("min-upstream-latency", propval);
+  }
+
+  /** */
+  @property ulong startTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("start-time");
+  }
+
+  /** */
+  @property void startTime(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("start-time", propval);
+  }
+
+  /** */
+  @property gstbase.types.AggregatorStartTimeSelection startTimeSelection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstbase.types.AggregatorStartTimeSelection)("start-time-selection");
+  }
+
+  /** */
+  @property void startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstbase.types.AggregatorStartTimeSelection)("start-time-selection", propval);
   }
 
   /**
@@ -172,7 +255,7 @@ class Aggregator : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_aggregator_get_buffer_pool(cast(GstAggregator*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 

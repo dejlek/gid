@@ -46,9 +46,247 @@ class View : gtk.text_view.TextView
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override View self()
   {
     return this;
+  }
+
+  /** */
+  @property bool autoIndent()
+  {
+    return getAutoIndent();
+  }
+
+  /** */
+  @property void autoIndent(bool propval)
+  {
+    return setAutoIndent(propval);
+  }
+
+  /**
+      Get `backgroundPattern` property.
+      Returns: Draw a specific background pattern on the view.
+  */
+  @property gtksource.types.BackgroundPatternType backgroundPattern()
+  {
+    return getBackgroundPattern();
+  }
+
+  /**
+      Set `backgroundPattern` property.
+      Params:
+        propval = Draw a specific background pattern on the view.
+  */
+  @property void backgroundPattern(gtksource.types.BackgroundPatternType propval)
+  {
+    return setBackgroundPattern(propval);
+  }
+
+  /**
+      Get `completion` property.
+      Returns: The completion object associated with the view
+  */
+  @property gtksource.completion.Completion completion()
+  {
+    return getCompletion();
+  }
+
+  /** */
+  @property bool highlightCurrentLine()
+  {
+    return getHighlightCurrentLine();
+  }
+
+  /** */
+  @property void highlightCurrentLine(bool propval)
+  {
+    return setHighlightCurrentLine(propval);
+  }
+
+  /** */
+  @property bool indentOnTab()
+  {
+    return getIndentOnTab();
+  }
+
+  /** */
+  @property void indentOnTab(bool propval)
+  {
+    return setIndentOnTab(propval);
+  }
+
+  /**
+      Get `indentWidth` property.
+      Returns: Width of an indentation step expressed in number of spaces.
+  */
+  @property int indentWidth()
+  {
+    return getIndentWidth();
+  }
+
+  /**
+      Set `indentWidth` property.
+      Params:
+        propval = Width of an indentation step expressed in number of spaces.
+  */
+  @property void indentWidth(int propval)
+  {
+    return setIndentWidth(propval);
+  }
+
+  /** */
+  @property bool insertSpacesInsteadOfTabs()
+  {
+    return getInsertSpacesInsteadOfTabs();
+  }
+
+  /** */
+  @property void insertSpacesInsteadOfTabs(bool propval)
+  {
+    return setInsertSpacesInsteadOfTabs(propval);
+  }
+
+  /**
+      Get `rightMarginPosition` property.
+      Returns: Position of the right margin.
+  */
+  @property uint rightMarginPosition()
+  {
+    return getRightMarginPosition();
+  }
+
+  /**
+      Set `rightMarginPosition` property.
+      Params:
+        propval = Position of the right margin.
+  */
+  @property void rightMarginPosition(uint propval)
+  {
+    return setRightMarginPosition(propval);
+  }
+
+  /**
+      Get `showLineMarks` property.
+      Returns: Whether to display line mark pixbufs
+  */
+  @property bool showLineMarks()
+  {
+    return getShowLineMarks();
+  }
+
+  /**
+      Set `showLineMarks` property.
+      Params:
+        propval = Whether to display line mark pixbufs
+  */
+  @property void showLineMarks(bool propval)
+  {
+    return setShowLineMarks(propval);
+  }
+
+  /**
+      Get `showLineNumbers` property.
+      Returns: Whether to display line numbers
+  */
+  @property bool showLineNumbers()
+  {
+    return getShowLineNumbers();
+  }
+
+  /**
+      Set `showLineNumbers` property.
+      Params:
+        propval = Whether to display line numbers
+  */
+  @property void showLineNumbers(bool propval)
+  {
+    return setShowLineNumbers(propval);
+  }
+
+  /**
+      Get `showRightMargin` property.
+      Returns: Whether to display the right margin.
+  */
+  @property bool showRightMargin()
+  {
+    return getShowRightMargin();
+  }
+
+  /**
+      Set `showRightMargin` property.
+      Params:
+        propval = Whether to display the right margin.
+  */
+  @property void showRightMargin(bool propval)
+  {
+    return setShowRightMargin(propval);
+  }
+
+  /**
+      Get `smartBackspace` property.
+      Returns: Whether smart Backspace should be used.
+  */
+  @property bool smartBackspace()
+  {
+    return getSmartBackspace();
+  }
+
+  /**
+      Set `smartBackspace` property.
+      Params:
+        propval = Whether smart Backspace should be used.
+  */
+  @property void smartBackspace(bool propval)
+  {
+    return setSmartBackspace(propval);
+  }
+
+  /**
+      Get `smartHomeEnd` property.
+      Returns: Set the behavior of the HOME and END keys.
+  */
+  @property gtksource.types.SmartHomeEndType smartHomeEnd()
+  {
+    return getSmartHomeEnd();
+  }
+
+  /**
+      Set `smartHomeEnd` property.
+      Params:
+        propval = Set the behavior of the HOME and END keys.
+  */
+  @property void smartHomeEnd(gtksource.types.SmartHomeEndType propval)
+  {
+    return setSmartHomeEnd(propval);
+  }
+
+  /**
+      Get `spaceDrawer` property.
+      Returns: The #GtkSourceSpaceDrawer object associated with the view.
+  */
+  @property gtksource.space_drawer.SpaceDrawer spaceDrawer()
+  {
+    return getSpaceDrawer();
+  }
+
+  /**
+      Get `tabWidth` property.
+      Returns: Width of a tab character expressed in number of spaces.
+  */
+  @property uint tabWidth()
+  {
+    return getTabWidth();
+  }
+
+  /**
+      Set `tabWidth` property.
+      Params:
+        propval = Width of a tab character expressed in number of spaces.
+  */
+  @property void tabWidth(uint propval)
+  {
+    return setTabWidth(propval);
   }
 
   /**
@@ -81,7 +319,7 @@ class View : gtk.text_view.TextView
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +357,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +375,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceGutter* _cretval;
     _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)cPtr, windowType);
-    auto _retval = ObjectG.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +440,7 @@ class View : gtk.text_view.TextView
     GtkSourceMarkAttributes* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
-    auto _retval = ObjectG.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +523,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
     return _retval;
   }
 

@@ -17,7 +17,7 @@ class DBusErrorEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.DBusErrorEntry");
+      throw new GidConstructException("Null instance pointer for gio.dbus_error_entry.DBusErrorEntry");
 
     cInstance = *cast(GDBusErrorEntry*)ptr;
 
@@ -31,21 +31,39 @@ class DBusErrorEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `errorCode` field.
+      Returns: An error code.
+  */
   @property int errorCode()
   {
     return (cast(GDBusErrorEntry*)cPtr).errorCode;
   }
 
+  /**
+      Set `errorCode` field.
+      Params:
+        propval = An error code.
+  */
   @property void errorCode(int propval)
   {
     (cast(GDBusErrorEntry*)cPtr).errorCode = propval;
   }
 
+  /**
+      Get `dbusErrorName` field.
+      Returns: The D-Bus error name to associate with @error_code.
+  */
   @property string dbusErrorName()
   {
     return cToD!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
   }
 
+  /**
+      Set `dbusErrorName` field.
+      Params:
+        propval = The D-Bus error name to associate with @error_code.
+  */
   @property void dbusErrorName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);

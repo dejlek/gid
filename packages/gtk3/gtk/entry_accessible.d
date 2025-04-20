@@ -39,6 +39,7 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EntryAccessible self()
   {
     return this;
@@ -47,7 +48,7 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
   mixin ActionT!();
   mixin EditableTextT!();
   mixin TextT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

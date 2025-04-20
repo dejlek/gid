@@ -3,6 +3,7 @@ module gtk.gesture_long_press;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -40,9 +41,22 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureLongPress self()
   {
     return this;
+  }
+
+  /** */
+  @property double delayFactor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("delay-factor");
+  }
+
+  /** */
+  @property void delayFactor(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("delay-factor", propval);
   }
 
   /**

@@ -181,7 +181,7 @@ import gobject.object;
     The complete example can be found here:
     [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
 */
-class ApplicationCommandLine : gobject.object.ObjectG
+class ApplicationCommandLine : gobject.object.ObjectWrap
 {
 
   /** */
@@ -203,9 +203,19 @@ class ApplicationCommandLine : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ApplicationCommandLine self()
   {
     return this;
+  }
+
+  /**
+      Get `isRemote` property.
+      Returns: Whether this is a remote commandline.
+  */
+  @property bool isRemote()
+  {
+    return getIsRemote();
   }
 
   /**
@@ -225,7 +235,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)cPtr, _arg);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -396,11 +406,11 @@ class ApplicationCommandLine : gobject.object.ObjectG
       For local invocation, it will be null.
       Returns: the platform data, or null
   */
-  glib.variant.VariantG getPlatformData()
+  glib.variant.Variant getPlatformData()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -421,7 +431,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

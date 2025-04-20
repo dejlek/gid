@@ -2,6 +2,7 @@
 module gstgl.glview_convert;
 
 import gid.gid;
+import gobject.object;
 import gst.buffer;
 import gst.caps;
 import gst.object;
@@ -10,11 +11,12 @@ import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glcontext;
 import gstgl.types;
+import gstvideo.types;
 
 /**
     Convert stereoscopic/multiview video using fragment shaders.
 */
-class GLViewConvert : gst.object.ObjectGst
+class GLViewConvert : gst.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +38,70 @@ class GLViewConvert : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLViewConvert self()
   {
     return this;
+  }
+
+  /** */
+  @property gstgl.types.GLStereoDownmix downmixMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstgl.types.GLStereoDownmix)("downmix-mode");
+  }
+
+  /** */
+  @property void downmixMode(gstgl.types.GLStereoDownmix propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstgl.types.GLStereoDownmix)("downmix-mode", propval);
+  }
+
+  /** */
+  @property gstvideo.types.VideoMultiviewFlags inputFlagsOverride()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewFlags)("input-flags-override");
+  }
+
+  /** */
+  @property void inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewFlags)("input-flags-override", propval);
+  }
+
+  /** */
+  @property gstvideo.types.VideoMultiviewMode inputModeOverride()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewMode)("input-mode-override");
+  }
+
+  /** */
+  @property void inputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewMode)("input-mode-override", propval);
+  }
+
+  /** */
+  @property gstvideo.types.VideoMultiviewFlags outputFlagsOverride()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewFlags)("output-flags-override");
+  }
+
+  /** */
+  @property void outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewFlags)("output-flags-override", propval);
+  }
+
+  /** */
+  @property gstvideo.types.VideoMultiviewMode outputModeOverride()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewMode)("output-mode-override");
+  }
+
+  /** */
+  @property void outputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewMode)("output-mode-override", propval);
   }
 
   /** */

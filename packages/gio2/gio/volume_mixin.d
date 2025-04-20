@@ -38,7 +38,7 @@ public import gobject.object;
     passed to the callback.  That callback should then call
     [gio.volume.Volume.mountFinish] with the [gio.volume.Volume] instance and the
     [gio.async_result.AsyncResult] data to see if the operation was completed
-    successfully.  If a [glib.error.ErrorG] is present when
+    successfully.  If a [glib.error.ErrorWrap] is present when
     [gio.volume.Volume.mountFinish] is called, then it will be filled with any
     error information.
     
@@ -104,7 +104,7 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -119,7 +119,7 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
   */
@@ -127,9 +127,9 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_eject_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -167,15 +167,15 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true if the volume was successfully ejected. false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -231,13 +231,13 @@ template VolumeT()
       implementations to find the underlying mount to shadow, see
       [gio.mount.Mount.isShadowed] for more details.
       Returns: the activation root of volume
-            or null. Use [gobject.object.ObjectG.unref] to free.
+            or null. Use [gobject.object.ObjectWrap.unref] to free.
   */
   override gio.file.File getActivationRoot()
   {
     GFile* _cretval;
     _cretval = g_volume_get_activation_root(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -245,27 +245,27 @@ template VolumeT()
       Gets the drive for the volume.
       Returns: a #GDrive or null if volume is not
             associated with a drive. The returned object should be unreffed
-            with [gobject.object.ObjectG.unref] when no longer needed.
+            with [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   override gio.drive.Drive getDrive()
   {
     GDrive* _cretval;
     _cretval = g_volume_get_drive(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Gets the icon for volume.
       Returns: a #GIcon.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -292,14 +292,14 @@ template VolumeT()
   /**
       Gets the mount for the volume.
       Returns: a #GMount or null if volume isn't mounted.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   override gio.mount.Mount getMount()
   {
     GMount* _cretval;
     _cretval = g_volume_get_mount(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -331,14 +331,14 @@ template VolumeT()
   /**
       Gets the symbolic icon for volume.
       Returns: a #GIcon.
-            The returned object should be unreffed with [gobject.object.ObjectG.unref]
+            The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
   override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_symbolic_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -398,15 +398,15 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool mountFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_mount_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_mount_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

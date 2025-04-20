@@ -4,6 +4,7 @@ module gtksource.snippet;
 import gid.gid;
 import glib.error;
 import gobject.object;
+import gtk.text_buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.snippet_chunk;
@@ -24,7 +25,7 @@ import gtksource.types;
     Snippet chunks can reference other snippet chunks as well as post-process
     the values from other chunks such as capitalization.
 */
-class Snippet : gobject.object.ObjectG
+class Snippet : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,9 +47,70 @@ class Snippet : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Snippet self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.text_buffer.TextBuffer buffer()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.text_buffer.TextBuffer)("buffer");
+  }
+
+  /** */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /** */
+  @property void description(string propval)
+  {
+    return setDescription(propval);
+  }
+
+  /** */
+  @property int focusPosition()
+  {
+    return getFocusPosition();
+  }
+
+  /** */
+  @property string languageId()
+  {
+    return getLanguageId();
+  }
+
+  /** */
+  @property void languageId(string propval)
+  {
+    return setLanguageId(propval);
+  }
+
+  /** */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /** */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /** */
+  @property string trigger()
+  {
+    return getTrigger();
+  }
+
+  /** */
+  @property void trigger(string propval)
+  {
+    return setTrigger(propval);
   }
 
   /**
@@ -76,7 +138,7 @@ class Snippet : gobject.object.ObjectG
         text = the formatted snippet text to parse
       Returns: the newly parsed #GtkSourceSnippet, or null upon
           failure and error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtksource.snippet.Snippet newParsed(string text)
   {
@@ -85,8 +147,8 @@ class Snippet : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_source_snippet_new_parsed(_text, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +173,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippet* _cretval;
     _cretval = gtk_source_snippet_copy(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,7 +185,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_get_context(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +265,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_get_nth_chunk(cast(GtkSourceSnippet*)cPtr, nth);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, No.Take);
     return _retval;
   }
 

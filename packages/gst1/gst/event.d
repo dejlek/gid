@@ -64,10 +64,19 @@ import gst.types;
 class Event : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `event.Event` boxed type.
+      Params:
+        type = the #GstEventType of the event
+        timestamp = the timestamp of the event
+        seqnum = the sequence number of the event
+  */
+  this(gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init)
   {
     super(gMalloc(GstEvent.sizeof), Yes.Take);
+    this.type = type;
+    this.timestamp = timestamp;
+    this.seqnum = seqnum;
   }
 
   /** */
@@ -95,41 +104,73 @@ class Event : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Event self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: the parent structure
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstEvent*)cPtr).miniObject);
   }
 
+  /**
+      Get `type` field.
+      Returns: the #GstEventType of the event
+  */
   @property gst.types.EventType type()
   {
     return cast(gst.types.EventType)(cast(GstEvent*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the #GstEventType of the event
+  */
   @property void type(gst.types.EventType propval)
   {
     (cast(GstEvent*)cPtr).type = cast(GstEventType)propval;
   }
 
+  /**
+      Get `timestamp` field.
+      Returns: the timestamp of the event
+  */
   @property ulong timestamp()
   {
     return (cast(GstEvent*)cPtr).timestamp;
   }
 
+  /**
+      Set `timestamp` field.
+      Params:
+        propval = the timestamp of the event
+  */
   @property void timestamp(ulong propval)
   {
     (cast(GstEvent*)cPtr).timestamp = propval;
   }
 
+  /**
+      Get `seqnum` field.
+      Returns: the sequence number of the event
+  */
   @property uint seqnum()
   {
     return (cast(GstEvent*)cPtr).seqnum;
   }
 
+  /**
+      Set `seqnum` field.
+      Params:
+        propval = the sequence number of the event
+  */
   @property void seqnum(uint propval)
   {
     (cast(GstEvent*)cPtr).seqnum = propval;

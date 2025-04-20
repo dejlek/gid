@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.section_model;
@@ -20,7 +21,7 @@ import gtk.types;
     
     [gtk.slice_list_model.SliceListModel] passes through sections from the underlying model.
 */
-class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
+class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   /** */
@@ -42,9 +43,85 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SliceListModel self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: Child model to take slice from.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Child model to take slice from.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `offset` property.
+      Returns: Offset of slice.
+  */
+  @property uint offset()
+  {
+    return getOffset();
+  }
+
+  /**
+      Set `offset` property.
+      Params:
+        propval = Offset of slice.
+  */
+  @property void offset(uint propval)
+  {
+    return setOffset(propval);
+  }
+
+  /**
+      Get `size` property.
+      Returns: Maximum size of slice.
+  */
+  @property uint size()
+  {
+    return getSize();
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Maximum size of slice.
+  */
+  @property void size(uint propval)
+  {
+    return setSize(propval);
   }
 
   mixin ListModelT!();
@@ -65,7 +142,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   this(gio.list_model.ListModel model, uint offset, uint size)
   {
     GtkSliceListModel* _cretval;
-    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, offset, size);
+    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, offset, size);
     this(_cretval, Yes.Take);
   }
 
@@ -77,7 +154,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   {
     GListModel* _cretval;
     _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +190,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

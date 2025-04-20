@@ -47,9 +47,48 @@ class MountOperation : gio.mount_operation.MountOperation
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MountOperation self()
   {
     return this;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display where dialogs will be shown.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display where dialogs will be shown.
+  */
+  @property void display(gdk.display.Display propval)
+  {
+    return setDisplay(propval);
+  }
+
+  /**
+      Get `parent` property.
+      Returns: The parent window.
+  */
+  @property gtk.window.Window parent()
+  {
+    return getParent();
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent window.
+  */
+  @property void parent(gtk.window.Window propval)
+  {
+    return setParent(propval);
   }
 
   /**
@@ -75,7 +114,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GdkDisplay* _cretval;
     _cretval = gtk_mount_operation_get_display(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,7 +126,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 

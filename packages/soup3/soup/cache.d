@@ -12,7 +12,7 @@ import soup.types;
 /**
     File-based cache for HTTP resources.
 */
-class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -34,6 +34,7 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Cache self()
   {
     return this;

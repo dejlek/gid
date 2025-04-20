@@ -13,7 +13,7 @@ import gobject.object;
 /**
     A #GdkCursor represents a cursor. Its contents are private.
 */
-class Cursor : gobject.object.ObjectG
+class Cursor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class Cursor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Cursor self()
   {
     return this;
@@ -71,7 +72,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, cursorType);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +131,7 @@ class Cursor : gobject.object.ObjectG
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_cursor_new_from_name(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,7 +166,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_pixbuf(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -195,7 +196,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_surface(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -219,7 +220,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_cursor_get_display(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -236,7 +237,7 @@ class Cursor : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_cursor_get_image(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

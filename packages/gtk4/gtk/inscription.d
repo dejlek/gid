@@ -53,9 +53,298 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Inscription self()
   {
     return this;
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: A list of style attributes to apply to the text of the inscription.
+  */
+  @property pango.attr_list.AttrList attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of style attributes to apply to the text of the inscription.
+  */
+  @property void attributes(pango.attr_list.AttrList propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /**
+      Set `markup` property.
+      Params:
+        propval = Utility property that sets both the [gtk.inscription.Inscription.text] and
+        [gtk.inscription.Inscription.attributes] properties, mainly intended for use in
+        GtkBuilder ui files to ease translation support and bindings.
+        
+        This function uses `func@Pango.parse_markup` to parse the markup into text and
+        attributes. The markup must be valid. If you cannot ensure that, consider using
+        `func@Pango.parse_markup` and setting the two properties yourself.
+  */
+  @property void markup(string propval)
+  {
+    return setMarkup(propval);
+  }
+
+  /**
+      Get `minChars` property.
+      Returns: The number of characters that should fit into the inscription at minimum.
+      
+      This influences the requested width, not the width actually given to the widget,
+      which might turn out to be larger.
+      
+      Note that this is an approximate character width, so some characters might be
+      wider and some might be thinner, so do not expect the number of characters to
+      exactly match.
+      
+      If you set this property to 0, the inscription will not request any width at all
+      and its width will be determined entirely by its surroundings.
+  */
+  @property uint minChars()
+  {
+    return getMinChars();
+  }
+
+  /**
+      Set `minChars` property.
+      Params:
+        propval = The number of characters that should fit into the inscription at minimum.
+        
+        This influences the requested width, not the width actually given to the widget,
+        which might turn out to be larger.
+        
+        Note that this is an approximate character width, so some characters might be
+        wider and some might be thinner, so do not expect the number of characters to
+        exactly match.
+        
+        If you set this property to 0, the inscription will not request any width at all
+        and its width will be determined entirely by its surroundings.
+  */
+  @property void minChars(uint propval)
+  {
+    return setMinChars(propval);
+  }
+
+  /**
+      Get `minLines` property.
+      Returns: The number of lines that should fit into the inscription at minimum.
+      
+      This influences the requested height, not the height actually given to the widget,
+      which might turn out to be larger.
+      
+      Note that this is an approximate line height, so if the text uses things like fancy
+      Unicode or attribute that influence the height, the text might not fit.
+      
+      If you set this property to 0, the inscription will not request any height at all
+      and its height will be determined entirely by its surroundings.
+  */
+  @property uint minLines()
+  {
+    return getMinLines();
+  }
+
+  /**
+      Set `minLines` property.
+      Params:
+        propval = The number of lines that should fit into the inscription at minimum.
+        
+        This influences the requested height, not the height actually given to the widget,
+        which might turn out to be larger.
+        
+        Note that this is an approximate line height, so if the text uses things like fancy
+        Unicode or attribute that influence the height, the text might not fit.
+        
+        If you set this property to 0, the inscription will not request any height at all
+        and its height will be determined entirely by its surroundings.
+  */
+  @property void minLines(uint propval)
+  {
+    return setMinLines(propval);
+  }
+
+  /**
+      Get `natChars` property.
+      Returns: The number of characters that should ideally fit into the inscription.
+      
+      This influences the requested width, not the width actually given to the widget.
+      The widget might turn out larger as well as smaller.
+      
+      If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+      that value will be used. In particular, for the default value of 0, this will always
+      be the case.
+  */
+  @property uint natChars()
+  {
+    return getNatChars();
+  }
+
+  /**
+      Set `natChars` property.
+      Params:
+        propval = The number of characters that should ideally fit into the inscription.
+        
+        This influences the requested width, not the width actually given to the widget.
+        The widget might turn out larger as well as smaller.
+        
+        If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+        that value will be used. In particular, for the default value of 0, this will always
+        be the case.
+  */
+  @property void natChars(uint propval)
+  {
+    return setNatChars(propval);
+  }
+
+  /**
+      Get `natLines` property.
+      Returns: The number of lines that should ideally fit into the inscription.
+      
+      This influences the requested height, not the height actually given to the widget.
+      The widget might turn out larger as well as smaller.
+      
+      If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+      that value will be used. In particular, for the default value of 0, this will always
+      be the case.
+  */
+  @property uint natLines()
+  {
+    return getNatLines();
+  }
+
+  /**
+      Set `natLines` property.
+      Params:
+        propval = The number of lines that should ideally fit into the inscription.
+        
+        This influences the requested height, not the height actually given to the widget.
+        The widget might turn out larger as well as smaller.
+        
+        If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+        that value will be used. In particular, for the default value of 0, this will always
+        be the case.
+  */
+  @property void natLines(uint propval)
+  {
+    return setNatLines(propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: The displayed text.
+  */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The displayed text.
+  */
+  @property void text(string propval)
+  {
+    return setText(propval);
+  }
+
+  /**
+      Get `textOverflow` property.
+      Returns: The overflow method to use for the text.
+  */
+  @property gtk.types.InscriptionOverflow textOverflow()
+  {
+    return getTextOverflow();
+  }
+
+  /**
+      Set `textOverflow` property.
+      Params:
+        propval = The overflow method to use for the text.
+  */
+  @property void textOverflow(gtk.types.InscriptionOverflow propval)
+  {
+    return setTextOverflow(propval);
+  }
+
+  /**
+      Get `wrapMode` property.
+      Returns: Controls how the line wrapping is done.
+      
+      Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
+  */
+  @property pango.types.WrapMode wrapMode()
+  {
+    return getWrapMode();
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Controls how the line wrapping is done.
+        
+        Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
+  */
+  @property void wrapMode(pango.types.WrapMode propval)
+  {
+    return setWrapMode(propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment of the text inside the allocated size.
+      
+      Compare this to [gtk.widget.Widget.halign], which determines how the
+      inscription's size allocation is positioned in the available space.
+  */
+  @property float xalign()
+  {
+    return getXalign();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the text inside the allocated size.
+        
+        Compare this to [gtk.widget.Widget.halign], which determines how the
+        inscription's size allocation is positioned in the available space.
+  */
+  @property void xalign(float propval)
+  {
+    return setXalign(propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The vertical alignment of the text inside the allocated size.
+      
+      Compare this to [gtk.widget.Widget.valign], which determines how the
+      inscription's size allocation is positioned in the available space.
+  */
+  @property float yalign()
+  {
+    return getYalign();
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the text inside the allocated size.
+        
+        Compare this to [gtk.widget.Widget.valign], which determines how the
+        inscription's size allocation is positioned in the available space.
+  */
+  @property void yalign(float propval)
+  {
+    return setYalign(propval);
   }
 
   mixin AccessibleTextT!();
@@ -180,7 +469,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `xalign` of the inscription.
       
-      See the [gtk.inscription.Inscription.gfloat] property.
+      See the [gtk.inscription.Inscription.xalign] property.
       Returns: the xalign property
   */
   float getXalign()
@@ -193,7 +482,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `yalign` of the inscription.
       
-      See the [gtk.inscription.Inscription.gfloat] property.
+      See the [gtk.inscription.Inscription.yalign] property.
       Returns: the yalign property
   */
   float getYalign()
@@ -219,7 +508,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Utility function to set the text and attributes to be displayed.
       
-      See the [gtk.inscription.Inscription.utf8] property.
+      See the [gtk.inscription.Inscription.markup] property.
   
       Params:
         markup = The markup to display
@@ -319,7 +608,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `xalign` of the inscription.
       
-      See the [gtk.inscription.Inscription.gfloat] property.
+      See the [gtk.inscription.Inscription.xalign] property.
   
       Params:
         xalign = the new xalign value, between 0 and 1
@@ -332,7 +621,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `yalign` of the inscription.
       
-      See the [gtk.inscription.Inscription.gfloat] property.
+      See the [gtk.inscription.Inscription.yalign] property.
   
       Params:
         yalign = the new yalign value, between 0 and 1

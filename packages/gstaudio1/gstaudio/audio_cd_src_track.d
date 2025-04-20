@@ -24,7 +24,7 @@ class AudioCdSrcTrack
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioCdSrcTrack");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_cd_src_track.AudioCdSrcTrack");
 
     cInstance = *cast(GstAudioCdSrcTrack*)ptr;
 
@@ -38,51 +38,96 @@ class AudioCdSrcTrack
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `isAudio` field.
+      Returns: Whether this is an audio track
+  */
   @property bool isAudio()
   {
     return (cast(GstAudioCdSrcTrack*)cPtr).isAudio;
   }
 
+  /**
+      Set `isAudio` field.
+      Params:
+        propval = Whether this is an audio track
+  */
   @property void isAudio(bool propval)
   {
     (cast(GstAudioCdSrcTrack*)cPtr).isAudio = propval;
   }
 
+  /**
+      Get `num` field.
+      Returns: Track number in TOC (usually starts from 1, but not always)
+  */
   @property uint num()
   {
     return (cast(GstAudioCdSrcTrack*)cPtr).num;
   }
 
+  /**
+      Set `num` field.
+      Params:
+        propval = Track number in TOC (usually starts from 1, but not always)
+  */
   @property void num(uint propval)
   {
     (cast(GstAudioCdSrcTrack*)cPtr).num = propval;
   }
 
+  /**
+      Get `start` field.
+      Returns: The first sector of this track (LBA)
+  */
   @property uint start()
   {
     return (cast(GstAudioCdSrcTrack*)cPtr).start;
   }
 
+  /**
+      Set `start` field.
+      Params:
+        propval = The first sector of this track (LBA)
+  */
   @property void start(uint propval)
   {
     (cast(GstAudioCdSrcTrack*)cPtr).start = propval;
   }
 
+  /**
+      Get `end` field.
+      Returns: The last sector of this track (LBA)
+  */
   @property uint end()
   {
     return (cast(GstAudioCdSrcTrack*)cPtr).end;
   }
 
+  /**
+      Set `end` field.
+      Params:
+        propval = The last sector of this track (LBA)
+  */
   @property void end(uint propval)
   {
     (cast(GstAudioCdSrcTrack*)cPtr).end = propval;
   }
 
+  /**
+      Get `tags` field.
+      Returns: Track-specific tags (e.g. from cd-text information), or NULL
+  */
   @property gst.tag_list.TagList tags()
   {
     return cToD!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
   }
 
+  /**
+      Set `tags` field.
+      Params:
+        propval = Track-specific tags (e.g. from cd-text information), or NULL
+  */
   @property void tags(gst.tag_list.TagList propval)
   {
     cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);

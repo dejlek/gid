@@ -33,6 +33,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListArrayBuilder self()
   {
     return this;
@@ -45,7 +46,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -56,7 +57,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_list_array_builder_append(cast(GArrowListArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -67,7 +68,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_list_array_builder_append_value(cast(GArrowListArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -76,7 +77,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

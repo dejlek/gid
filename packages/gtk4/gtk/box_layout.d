@@ -2,6 +2,7 @@
 module gtk.box_layout;
 
 import gid.gid;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -14,16 +15,16 @@ import gtk.types;
     row or column.
     
     Whether it is a row or column depends on the value of its
-    [gtk.orientable.Orientable.Orientation] property. Within the other dimension
+    [gtk.orientable.Orientable.orientation] property. Within the other dimension
     all children all allocated the same size. The [gtk.box_layout.BoxLayout] will respect
-    the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    the [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties of each child widget.
     
     If you want all children to be assigned the same size, you can use
-    the [gtk.box_layout.BoxLayout.gboolean] property.
+    the [gtk.box_layout.BoxLayout.homogeneous] property.
     
     If you want to specify the amount of space placed between each child,
-    you can use the [gtk.box_layout.BoxLayout.gint] property.
+    you can use the [gtk.box_layout.BoxLayout.spacing] property.
 */
 class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {
@@ -47,9 +48,106 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BoxLayout self()
   {
     return this;
+  }
+
+  /**
+      Get `baselineChild` property.
+      Returns: The child that determines the baseline of the box
+      in vertical layout.
+      
+      If the child does baseline positioning, then its baseline
+      is lined up with the baseline of the box. If it doesn't, then
+      the bottom edge of the child is used.
+  */
+  @property int baselineChild()
+  {
+    return getBaselineChild();
+  }
+
+  /**
+      Set `baselineChild` property.
+      Params:
+        propval = The child that determines the baseline of the box
+        in vertical layout.
+        
+        If the child does baseline positioning, then its baseline
+        is lined up with the baseline of the box. If it doesn't, then
+        the bottom edge of the child is used.
+  */
+  @property void baselineChild(int propval)
+  {
+    return setBaselineChild(propval);
+  }
+
+  /**
+      Get `baselinePosition` property.
+      Returns: The position of the allocated baseline within the extra space
+      allocated to each child.
+      
+      This property is only relevant for horizontal layouts containing
+      at least one child with a baseline alignment.
+  */
+  @property gtk.types.BaselinePosition baselinePosition()
+  {
+    return getBaselinePosition();
+  }
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the allocated baseline within the extra space
+        allocated to each child.
+        
+        This property is only relevant for horizontal layouts containing
+        at least one child with a baseline alignment.
+  */
+  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setBaselinePosition(propval);
+  }
+
+  /**
+      Get `homogeneous` property.
+      Returns: Whether the box layout should distribute the available space
+      equally among the children.
+  */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether the box layout should distribute the available space
+        equally among the children.
+  */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: The space to put between the children.
+  */
+  @property int spacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("spacing");
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The space to put between the children.
+  */
+  @property void spacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("spacing", propval);
   }
 
   mixin OrientableT!();

@@ -30,6 +30,7 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufSimpleAnimIter self()
   {
     return this;

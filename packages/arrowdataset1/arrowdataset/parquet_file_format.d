@@ -30,6 +30,7 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ParquetFileFormat self()
   {
     return this;

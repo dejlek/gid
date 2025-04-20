@@ -9,7 +9,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class DataType : gobject.object.ObjectG
+class DataType : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class DataType : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DataType self()
   {
     return this;
@@ -43,8 +44,8 @@ class DataType : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_data_type_import(cAbiSchema, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class DataType : gobject.object.ObjectG
     GError *_err;
     auto _retval = garrow_data_type_export(cast(GArrowDataType*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

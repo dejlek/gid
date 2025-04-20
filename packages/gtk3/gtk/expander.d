@@ -120,9 +120,141 @@ class Expander : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Expander self()
   {
     return this;
+  }
+
+  /** */
+  @property bool expanded()
+  {
+    return getExpanded();
+  }
+
+  /** */
+  @property void expanded(bool propval)
+  {
+    return setExpanded(propval);
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `labelFill` property.
+      Returns: Whether the label widget should fill all available horizontal space.
+      
+      Note that this property is ignored since 3.20.
+  */
+  @property bool labelFill()
+  {
+    return getLabelFill();
+  }
+
+  /**
+      Set `labelFill` property.
+      Params:
+        propval = Whether the label widget should fill all available horizontal space.
+        
+        Note that this property is ignored since 3.20.
+  */
+  @property void labelFill(bool propval)
+  {
+    return setLabelFill(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /** */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
+  }
+
+  /**
+      Get `resizeToplevel` property.
+      Returns: When this property is true, the expander will resize the toplevel
+      widget containing the expander upon expanding and collapsing.
+  */
+  @property bool resizeToplevel()
+  {
+    return getResizeToplevel();
+  }
+
+  /**
+      Set `resizeToplevel` property.
+      Params:
+        propval = When this property is true, the expander will resize the toplevel
+        widget containing the expander upon expanding and collapsing.
+  */
+  @property void resizeToplevel(bool propval)
+  {
+    return setResizeToplevel(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: Space to put between the label and the child when the
+      expander is expanded.
+  
+      Deprecated: This property is deprecated and ignored.
+          Use margins on the child instead.
+  */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Space to put between the label and the child when the
+        expander is expanded.
+  
+      Deprecated: This property is deprecated and ignored.
+          Use margins on the child instead.
+  */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
+  }
+
+  /** */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /** */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
+  }
+
+  /** */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /** */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**
@@ -158,7 +290,7 @@ class Expander : gtk.bin.Bin
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -222,7 +354,7 @@ class Expander : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

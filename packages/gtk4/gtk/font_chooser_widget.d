@@ -2,6 +2,8 @@
 module gtk.font_chooser_widget;
 
 import gid.gid;
+import gio.action;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -14,7 +16,6 @@ import gtk.font_chooser;
 import gtk.font_chooser_mixin;
 import gtk.types;
 import gtk.widget;
-import pango.font_map;
 
 /**
     The [gtk.font_chooser_widget.FontChooserWidget] widget lets the user select a font.
@@ -59,9 +60,24 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontChooserWidget self()
   {
     return this;
+  }
+
+  /**
+      Get `tweakAction` property.
+      Returns: A toggle action that can be used to switch to the tweak page
+      of the font chooser widget, which lets the user tweak the
+      OpenType features and variation axes of the selected font.
+      
+      The action will be enabled or disabled depending on whether
+      the selected font has any features or axes.
+  */
+  @property gio.action.Action tweakAction()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.action.Action)("tweak-action");
   }
 
   mixin FontChooserT!();

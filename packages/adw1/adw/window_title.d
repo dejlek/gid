@@ -50,9 +50,58 @@ class WindowTitle : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WindowTitle self()
   {
     return this;
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle to display.
+      
+      The subtitle should give the user additional details.
+  */
+  @property string subtitle()
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+        
+        The subtitle should give the user additional details.
+  */
+  @property void subtitle(string propval)
+  {
+    return setSubtitle(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title to display.
+      
+      The title typically identifies the current view or content item, and
+      generally does not use the application name.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+        
+        The title typically identifies the current view or content item, and
+        generally does not use the application name.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**

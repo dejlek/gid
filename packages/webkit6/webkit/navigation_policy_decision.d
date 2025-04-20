@@ -44,6 +44,15 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /**
+      Get `navigationAction` property.
+      Returns: The #WebKitNavigationAction that triggered this policy decision.
+  */
+  @property webkit.navigation_action.NavigationAction navigationAction()
+  {
+    return getNavigationAction();
+  }
+
+  /**
       Gets the value of the #WebKitNavigationPolicyDecision:navigation-action property.
       Returns: The #WebKitNavigationAction triggering this policy decision.
   */

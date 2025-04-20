@@ -63,6 +63,7 @@ class TimeZone : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TimeZone self()
   {
     return this;

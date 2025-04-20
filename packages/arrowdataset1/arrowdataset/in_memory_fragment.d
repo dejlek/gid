@@ -32,6 +32,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InMemoryFragment self()
   {
     return this;

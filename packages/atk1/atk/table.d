@@ -77,7 +77,7 @@ interface Table
       Returns: a AtkObject* representing the
         table caption, or null if value does not implement this interface.
   */
-  atk.object.ObjectAtk getCaption();
+  atk.object.ObjectWrap getCaption();
 
   /**
       Gets a #gint representing the column at the specified index_.
@@ -122,7 +122,7 @@ interface Table
         specified column header, or null if value does not implement this
         interface.
   */
-  atk.object.ObjectAtk getColumnHeader(int column);
+  atk.object.ObjectWrap getColumnHeader(int column);
 
   /**
       Gets a #gint representing the index at the specified row and
@@ -197,7 +197,7 @@ interface Table
         specified row header, or null if value does not implement this
         interface.
   */
-  atk.object.ObjectAtk getRowHeader(int row);
+  atk.object.ObjectWrap getRowHeader(int row);
 
   /**
       Gets the selected columns of the table by initializing **selected with
@@ -222,7 +222,7 @@ interface Table
       Returns: a AtkObject* representing a summary description
         of the table, or zero if value does not implement this interface.
   */
-  atk.object.ObjectAtk getSummary();
+  atk.object.ObjectWrap getSummary();
 
   /**
       Gets a boolean value indicating whether the specified column
@@ -268,7 +268,7 @@ interface Table
       Returns: an #AtkObject representing the referred
         to accessible
   */
-  atk.object.ObjectAtk refAt(int row, int column);
+  atk.object.ObjectWrap refAt(int row, int column);
 
   /**
       Adds the specified column to the selection.
@@ -296,7 +296,7 @@ interface Table
       Params:
         caption = a #AtkObject representing the caption to set for table
   */
-  void setCaption(atk.object.ObjectAtk caption);
+  void setCaption(atk.object.ObjectWrap caption);
 
   /**
       Sets the description text for the specified column of the table.
@@ -315,7 +315,7 @@ interface Table
         column = a #gint representing a column in table
         header = an #AtkTable
   */
-  void setColumnHeader(int column, atk.object.ObjectAtk header);
+  void setColumnHeader(int column, atk.object.ObjectWrap header);
 
   /**
       Sets the description text for the specified row of table.
@@ -334,7 +334,7 @@ interface Table
         row = a #gint representing a row in table
         header = an #AtkTable
   */
-  void setRowHeader(int row, atk.object.ObjectAtk header);
+  void setRowHeader(int row, atk.object.ObjectWrap header);
 
   /**
       Sets the summary description of the table.
@@ -343,7 +343,7 @@ interface Table
         accessible = an #AtkObject representing the summary description
           to set for table
   */
-  void setSummary(atk.object.ObjectAtk accessible);
+  void setSummary(atk.object.ObjectWrap accessible);
 
   /**
       Connect to `ColumnDeleted` signal.

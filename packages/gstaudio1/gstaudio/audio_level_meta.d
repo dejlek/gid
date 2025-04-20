@@ -19,7 +19,7 @@ class AudioLevelMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioLevelMeta");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_level_meta.AudioLevelMeta");
 
     cInstance = *cast(GstAudioLevelMeta*)ptr;
 
@@ -33,26 +33,48 @@ class AudioLevelMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioLevelMeta*)cPtr).meta);
   }
 
+  /**
+      Get `level` field.
+      Returns: the -dBov from 0-127 (127 is silence).
+  */
   @property ubyte level()
   {
     return (cast(GstAudioLevelMeta*)cPtr).level;
   }
 
+  /**
+      Set `level` field.
+      Params:
+        propval = the -dBov from 0-127 (127 is silence).
+  */
   @property void level(ubyte propval)
   {
     (cast(GstAudioLevelMeta*)cPtr).level = propval;
   }
 
+  /**
+      Get `voiceActivity` field.
+      Returns: whether the buffer contains voice activity
+  */
   @property bool voiceActivity()
   {
     return (cast(GstAudioLevelMeta*)cPtr).voiceActivity;
   }
 
+  /**
+      Set `voiceActivity` field.
+      Params:
+        propval = whether the buffer contains voice activity
+  */
   @property void voiceActivity(bool propval)
   {
     (cast(GstAudioLevelMeta*)cPtr).voiceActivity = propval;

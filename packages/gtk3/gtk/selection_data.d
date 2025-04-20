@@ -41,6 +41,7 @@ class SelectionData : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SelectionData self()
   {
     return this;
@@ -96,7 +97,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GdkDisplay* _cretval;
     _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,13 +129,13 @@ class SelectionData : gobject.boxed.Boxed
           contained a recognized image type and it could be converted to a
           #GdkPixbuf, a newly allocated pixbuf is returned, otherwise
           null.  If the result is non-null it must be freed with
-          [gobject.object.ObjectG.unref].
+          [gobject.object.ObjectWrap.unref].
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
     _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

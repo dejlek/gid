@@ -111,7 +111,7 @@ import gtk.types;
     }
     ```
 */
-class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
+class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
 {
 
   /** */
@@ -133,6 +133,7 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeModelSort self()
   {
     return this;
@@ -152,8 +153,8 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
   static gtk.tree_model_sort.TreeModelSort newWithModel(gtk.tree_model.TreeModel childModel)
   {
     GtkTreeModel* _cretval;
-    _cretval = gtk_tree_model_sort_new_with_model(childModel ? cast(GtkTreeModel*)(cast(ObjectG)childModel).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model_sort.TreeModelSort)(cast(GtkTreeModel*)_cretval, Yes.Take);
+    _cretval = gtk_tree_model_sort_new_with_model(childModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)childModel).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model_sort.TreeModelSort)(cast(GtkTreeModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -249,7 +250,7 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_sort_get_model(cast(GtkTreeModelSort*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 

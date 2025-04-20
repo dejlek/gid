@@ -81,7 +81,7 @@ template URIHandlerT()
       Params:
         uri = URI to set
       Returns: true if the URI was set successfully, else false.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setUri(string uri)
   {
@@ -90,7 +90,7 @@ template URIHandlerT()
     GError *_err;
     _retval = gst_uri_handler_set_uri(cast(GstURIHandler*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

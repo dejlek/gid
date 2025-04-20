@@ -20,7 +20,7 @@ public import gobject.dclosure;
     
     The main way to interact with the actions in a [gio.action_group.ActionGroup] is to
     activate them with [gio.action_group.ActionGroup.activateAction]. Activating an
-    action may require a [glib.variant.VariantG] parameter. The required type of the
+    action may require a [glib.variant.Variant] parameter. The required type of the
     parameter can be inquired with [gio.action_group.ActionGroup.getActionParameterType].
     Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
     Activating a disabled action has no effect.
@@ -111,10 +111,10 @@ template ActionGroupT()
         actionName = the name of an action in the group
         state = the new state of the named action
   */
-  override void actionStateChanged(string actionName, glib.variant.VariantG state)
+  override void actionStateChanged(string actionName, glib.variant.Variant state)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
+    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(GVariant*)state.cPtr(No.Dup) : null);
   }
 
   /**
@@ -156,10 +156,10 @@ template ActionGroupT()
         actionName = the name of the action to activate
         parameter = parameters to the activation
   */
-  override void activateAction(string actionName, glib.variant.VariantG parameter = null)
+  override void activateAction(string actionName, glib.variant.Variant parameter = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
+    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,10 +179,10 @@ template ActionGroupT()
         actionName = the name of the action to request the change on
         value = the new state
   */
-  override void changeActionState(string actionName, glib.variant.VariantG value)
+  override void changeActionState(string actionName, glib.variant.Variant value)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -239,18 +239,18 @@ template ActionGroupT()
       given by [gio.action_group.ActionGroup.getActionStateType].
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
   
       Params:
         actionName = the name of the action to query
       Returns: the current state of the action
   */
-  override glib.variant.VariantG getActionState(string actionName)
+  override glib.variant.Variant getActionState(string actionName)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -272,18 +272,18 @@ template ActionGroupT()
       within the range may fail.
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
   
       Params:
         actionName = the name of the action to query
       Returns: the state range hint
   */
-  override glib.variant.VariantG getActionStateHint(string actionName)
+  override glib.variant.Variant getActionStateHint(string actionName)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state_hint(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -397,19 +397,19 @@ template ActionGroupT()
         state = the current state, or null if stateless
       Returns: true if the action exists, else false
   */
-  override bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.VariantG stateHint, out glib.variant.VariantG state)
+  override bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.Variant stateHint, out glib.variant.Variant state)
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     const(GVariantType)* _parameterType;
     const(GVariantType)* _stateType;
-    VariantC* _stateHint;
-    VariantC* _state;
+    GVariant* _stateHint;
+    GVariant* _state;
     _retval = g_action_group_query_action(cast(GActionGroup*)cPtr, _actionName, cast(bool*)&enabled, &_parameterType, &_stateType, &_stateHint, &_state);
     parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.Take);
     stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.Take);
-    stateHint = new glib.variant.VariantG(cast(void*)_stateHint, Yes.Take);
-    state = new glib.variant.VariantG(cast(void*)_state, Yes.Take);
+    stateHint = new glib.variant.Variant(cast(void*)_stateHint, Yes.Take);
+    state = new glib.variant.Variant(cast(void*)_state, Yes.Take);
     return _retval;
   }
 
@@ -568,7 +568,7 @@ template ActionGroupT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, glib.variant.VariantG value, gio.action_group.ActionGroup actionGroup))
+          $(D void callback(string actionName, glib.variant.Variant value, gio.action_group.ActionGroup actionGroup))
   
           `actionName` the name of the action in action_group (optional)
   
@@ -583,7 +583,7 @@ template ActionGroupT()
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.VariantG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.Variant)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.action_group.ActionGroup)))
   && Parameters!T.length < 4)
   {

@@ -109,9 +109,48 @@ class ViewSwitcher : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ViewSwitcher self()
   {
     return this;
+  }
+
+  /**
+      Get `policy` property.
+      Returns: The policy to determine which mode to use.
+  */
+  @property adw.types.ViewSwitcherPolicy policy()
+  {
+    return getPolicy();
+  }
+
+  /**
+      Set `policy` property.
+      Params:
+        propval = The policy to determine which mode to use.
+  */
+  @property void policy(adw.types.ViewSwitcherPolicy propval)
+  {
+    return setPolicy(propval);
+  }
+
+  /**
+      Get `stack` property.
+      Returns: The stack the view switcher controls.
+  */
+  @property adw.view_stack.ViewStack stack()
+  {
+    return getStack();
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+  */
+  @property void stack(adw.view_stack.ViewStack propval)
+  {
+    return setStack(propval);
   }
 
   /**
@@ -145,7 +184,7 @@ class ViewSwitcher : gtk.widget.Widget
   {
     AdwViewStack* _cretval;
     _cretval = adw_view_switcher_get_stack(cast(AdwViewSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
     return _retval;
   }
 

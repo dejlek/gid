@@ -31,6 +31,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SlowFileSystem self()
   {
     return this;
@@ -51,7 +52,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
   {
     GArrowSlowFileSystem* _cretval;
     _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency);
-    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
   {
     GArrowSlowFileSystem* _cretval;
     _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency, seed);
-    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 }

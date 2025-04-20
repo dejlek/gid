@@ -43,6 +43,7 @@ class VPaned : gtk.paned.Paned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VPaned self()
   {
     return this;

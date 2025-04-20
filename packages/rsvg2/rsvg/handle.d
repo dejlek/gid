@@ -175,7 +175,7 @@ import rsvg.types;
     ordering, and panic if they are called out of order.  This will abort
     the program as if it had a failed assertion.
 */
-class Handle : gobject.object.ObjectG
+class Handle : gobject.object.ObjectWrap
 {
 
   /** */
@@ -197,13 +197,170 @@ class Handle : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Handle self()
   {
     return this;
   }
 
   /**
-      Returns a new rsvg handle.  Must be freed with [gobject.object.ObjectG.unref].  This
+      Get `baseUri` property.
+      Returns: Base URI, to be used to resolve relative references for resources.  See the section
+      "Security and locations of referenced files" for details.
+  */
+  @property string baseUri()
+  {
+    return getBaseUri();
+  }
+
+  /**
+      Set `baseUri` property.
+      Params:
+        propval = Base URI, to be used to resolve relative references for resources.  See the section
+        "Security and locations of referenced files" for details.
+  */
+  @property void baseUri(string propval)
+  {
+    return setBaseUri(propval);
+  }
+
+  /**
+      Get `desc` property.
+      Returns: SVG's description.
+  
+      Deprecated: Reading this property always returns `NULL`.
+  */
+  @property string desc()
+  {
+    return getDesc();
+  }
+
+  /**
+      Get `dpiX` property.
+      Returns: Horizontal resolution in dots per inch.
+  */
+  @property double dpiX()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("dpi-x");
+  }
+
+  /**
+      Set `dpiX` property.
+      Params:
+        propval = Horizontal resolution in dots per inch.
+  */
+  @property void dpiX(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("dpi-x", propval);
+  }
+
+  /**
+      Get `dpiY` property.
+      Returns: Horizontal resolution in dots per inch.
+  */
+  @property double dpiY()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("dpi-y");
+  }
+
+  /**
+      Set `dpiY` property.
+      Params:
+        propval = Horizontal resolution in dots per inch.
+  */
+  @property void dpiY(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("dpi-y", propval);
+  }
+
+  /**
+      Get `em` property.
+      Returns: Exact width, in pixels, of the rendered SVG before calling the size callback
+      as specified by [rsvg.handle.Handle.setSizeCallback].
+  
+      Deprecated: Reading each of the size properties causes the size of the
+      SVG to be recomputed, so reading both the `em` and
+      `ex` properties will cause two such computations.  Please
+      use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+  */
+  @property double em()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("em");
+  }
+
+  /**
+      Get `ex` property.
+      Returns: Exact height, in pixels, of the rendered SVG before calling the size callback
+      as specified by [rsvg.handle.Handle.setSizeCallback].
+  
+      Deprecated: Reading each of the size properties causes the size of the
+      SVG to be recomputed, so reading both the `em` and
+      `ex` properties will cause two such computations.  Please
+      use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+  */
+  @property double ex()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("ex");
+  }
+
+  /**
+      Get `height` property.
+      Returns: Height, in pixels, of the rendered SVG after calling the size callback
+      as specified by [rsvg.handle.Handle.setSizeCallback].
+  
+      Deprecated: For historical reasons, this property is of integer type,
+      which cannot give the exact size of SVG images that are not pixel-aligned.
+      Moreover, reading each of the size properties causes the size of the SVG to
+      be recomputed, so reading both the `width` and
+      `height` properties will cause two such computations.
+      Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+  */
+  @property int height()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("height");
+  }
+
+  /**
+      Get `metadata` property.
+      Returns: SVG's metadata
+  
+      Deprecated: Reading this property always returns `NULL`.
+  */
+  @property string metadata()
+  {
+    return getMetadata();
+  }
+
+  /**
+      Get `title` property.
+      Returns: SVG's title.
+  
+      Deprecated: Reading this property always returns `NULL`.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Get `width` property.
+      Returns: Width, in pixels, of the rendered SVG after calling the size callback
+      as specified by [rsvg.handle.Handle.setSizeCallback].
+  
+      Deprecated: For historical reasons, this property is of integer type,
+      which cannot give the exact size of SVG images that are not pixel-aligned.
+      Moreover, reading each of the size properties causes the size of the SVG to
+      be recomputed, so reading both the `width` and
+      `height` properties will cause two such computations.
+      Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+  */
+  @property int width()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("width");
+  }
+
+  /**
+      Returns a new rsvg handle.  Must be freed with [gobject.object.ObjectWrap.unref].  This
       handle can be used to load an image.
       
       The preferred way of loading SVG data into the returned [rsvg.handle.Handle] is with
@@ -216,7 +373,7 @@ class Handle : gobject.object.ObjectG
       [rsvg.handle.Handle.newFromGfileSync].
       
       After loading the [rsvg.handle.Handle] with data, you can render it using Cairo or get
-      a GdkPixbuf from it. When finished, free the handle with [gobject.object.ObjectG.unref]. No
+      a GdkPixbuf from it. When finished, free the handle with [gobject.object.ObjectWrap.unref]. No
       more than one image can be loaded with one handle.
       
       Note that this function creates an [rsvg.handle.Handle] with no flags set.  If you
@@ -241,7 +398,7 @@ class Handle : gobject.object.ObjectG
       Params:
         data = The SVG data
       Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static rsvg.handle.Handle newFromData(ubyte[] data)
   {
@@ -254,8 +411,8 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _cretval = rsvg_handle_new_from_data(_data, _dataLen, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -268,7 +425,7 @@ class Handle : gobject.object.ObjectG
       Params:
         filename = The file name to load, or a URI.
       Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static rsvg.handle.Handle newFromFile(string filename)
   {
@@ -277,8 +434,8 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _cretval = rsvg_handle_new_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -299,16 +456,16 @@ class Handle : gobject.object.ObjectG
         flags = flags from [rsvg.types.HandleFlags]
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static rsvg.handle.Handle newFromGfileSync(gio.file.File file, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     RsvgHandle* _cretval;
     GError *_err;
-    _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -330,16 +487,16 @@ class Handle : gobject.object.ObjectG
         flags = flags from [rsvg.types.HandleFlags]
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static rsvg.handle.Handle newFromStreamSync(gio.input_stream.InputStream inputStream, gio.file.File baseFile, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     RsvgHandle* _cretval;
     GError *_err;
-    _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, baseFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)baseFile).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -356,7 +513,7 @@ class Handle : gobject.object.ObjectG
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new_with_flags(flags);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -369,9 +526,9 @@ class Handle : gobject.object.ObjectG
       
       This will return `TRUE` if the loader closed successfully and the
       SVG data was parsed correctly.  Note that handle isn't freed until
-      [gobject.object.ObjectG.unref] is called.
+      [gobject.object.ObjectWrap.unref] is called.
       Returns: `TRUE` on success, or `FALSE` on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
         functions [rsvg.handle.Handle.newFromGfileSync] or
@@ -384,7 +541,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_close(cast(RsvgHandle*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -500,7 +657,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool getGeometryForElement(string id, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
@@ -509,7 +666,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)cPtr, _id, &outInkRect, &outLogicalRect, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -552,7 +709,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool getGeometryForLayer(string id, rsvg.types.Rectangle viewport, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
@@ -561,7 +718,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -716,7 +873,7 @@ class Handle : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -752,7 +909,7 @@ class Handle : gobject.object.ObjectG
     PixbufC* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = rsvg_handle_get_pixbuf_sub(cast(RsvgHandle*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -847,7 +1004,7 @@ class Handle : gobject.object.ObjectG
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: `TRUE` if reading stream succeeded, or `FALSE` otherwise
           with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool readStreamSync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -855,7 +1012,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_read_stream_sync(cast(RsvgHandle*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1006,7 +1163,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool renderDocument(cairo.context.Context cr, rsvg.types.Rectangle viewport)
   {
@@ -1014,7 +1171,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_render_document(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &viewport, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1050,7 +1207,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool renderElement(cairo.context.Context cr, string id, rsvg.types.Rectangle elementViewport)
   {
@@ -1059,7 +1216,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_render_element(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _id, &elementViewport, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1098,7 +1255,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool renderLayer(cairo.context.Context cr, string id, rsvg.types.Rectangle viewport)
   {
@@ -1107,7 +1264,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_render_layer(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _id, &viewport, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1122,7 +1279,7 @@ class Handle : gobject.object.ObjectG
   */
   void setBaseGfile(gio.file.File baseFile)
   {
-    rsvg_handle_set_base_gfile(cast(RsvgHandle*)cPtr, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null);
+    rsvg_handle_set_base_gfile(cast(RsvgHandle*)cPtr, baseFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)baseFile).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1231,7 +1388,7 @@ class Handle : gobject.object.ObjectG
         css = String with CSS data; must be valid UTF-8.
       Returns: `TRUE` on success, `FALSE` on error.  Errors are returned
         in the error argument.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setStylesheet(ubyte[] css)
   {
@@ -1244,7 +1401,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_set_stylesheet(cast(RsvgHandle*)cPtr, _css, _cssLen, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1262,7 +1419,7 @@ class Handle : gobject.object.ObjectG
       Params:
         buf = pointer to svg data
       Returns: `TRUE` on success, or `FALSE` on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
         functions [rsvg.handle.Handle.newFromGfileSync] or
@@ -1282,7 +1439,7 @@ class Handle : gobject.object.ObjectG
     GError *_err;
     _retval = rsvg_handle_write(cast(RsvgHandle*)cPtr, _buf, _count, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

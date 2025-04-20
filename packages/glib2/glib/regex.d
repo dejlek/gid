@@ -93,6 +93,7 @@ class Regex : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Regex self()
   {
     return this;
@@ -910,7 +911,7 @@ class Regex : gobject.boxed.Boxed
   }
 }
 
-class RegexException : ErrorG
+class RegexException : ErrorWrap
 {
   this(GError* err)
   {

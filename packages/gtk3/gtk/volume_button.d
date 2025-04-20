@@ -4,6 +4,7 @@ module gtk.volume_button;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
 import gtk.activatable;
@@ -44,9 +45,35 @@ class VolumeButton : gtk.scale_button.ScaleButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VolumeButton self()
   {
     return this;
+  }
+
+  /**
+      Get `useSymbolic` property.
+      Returns: Whether to use symbolic icons as the icons. Note that
+      if the symbolic icons are not available in your installed
+      theme, then the normal (potentially colorful) icons will
+      be used.
+  */
+  @property bool useSymbolic()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-symbolic");
+  }
+
+  /**
+      Set `useSymbolic` property.
+      Params:
+        propval = Whether to use symbolic icons as the icons. Note that
+        if the symbolic icons are not available in your installed
+        theme, then the normal (potentially colorful) icons will
+        be used.
+  */
+  @property void useSymbolic(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-symbolic", propval);
   }
 
   /**

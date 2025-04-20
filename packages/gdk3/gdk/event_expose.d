@@ -21,7 +21,7 @@ class EventExpose
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.EventExpose");
+      throw new GidConstructException("Null instance pointer for gdk.event_expose.EventExpose");
 
     cInstance = *cast(GdkEventExpose*)ptr;
 
@@ -35,58 +35,113 @@ class EventExpose
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gdk.types.EventType.Expose] or [gdk.types.EventType.Damage]).
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEventExpose*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gdk.types.EventType.Expose] or [gdk.types.EventType.Damage]).
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEventExpose*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
   @property gdk.window.Window window()
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
   }
 
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
   @property void window(gdk.window.Window propval)
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).window);
   }
 
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
   @property byte sendEvent()
   {
     return (cast(GdkEventExpose*)cPtr).sendEvent;
   }
 
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
   @property void sendEvent(byte propval)
   {
     (cast(GdkEventExpose*)cPtr).sendEvent = propval;
   }
 
+  /**
+      Get `area` field.
+      Returns: bounding box of @region.
+  */
   @property gdk.rectangle.Rectangle area()
   {
     return cToD!(gdk.rectangle.Rectangle)(cast(void*)&(cast(GdkEventExpose*)cPtr).area);
   }
 
+  /**
+      Get `region` field.
+      Returns: the region that needs to be redrawn.
+  */
   @property cairo.region.Region region()
   {
     return cToD!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
   }
 
+  /**
+      Set `region` field.
+      Params:
+        propval = the region that needs to be redrawn.
+  */
   @property void region(cairo.region.Region propval)
   {
     cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
     dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).region);
   }
 
+  /**
+      Get `count` field.
+      Returns: the number of contiguous [gdk.types.EventType.Expose] events following this one.
+        The only use for this is “exposure compression”, i.e. handling all
+        contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
+        exposure compression so this is not normally needed.
+  */
   @property int count()
   {
     return (cast(GdkEventExpose*)cPtr).count;
   }
 
+  /**
+      Set `count` field.
+      Params:
+        propval = the number of contiguous [gdk.types.EventType.Expose] events following this one.
+          The only use for this is “exposure compression”, i.e. handling all
+          contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
+          exposure compression so this is not normally needed.
+  */
   @property void count(int propval)
   {
     (cast(GdkEventExpose*)cPtr).count = propval;

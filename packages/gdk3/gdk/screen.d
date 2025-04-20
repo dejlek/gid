@@ -27,7 +27,7 @@ import gobject.value;
     the default visual ([gdk.screen.Screen.getSystemVisual]), the dimensions
     of the physical monitors ([gdk.screen.Screen.getMonitorGeometry]), etc.
 */
-class Screen : gobject.object.ObjectG
+class Screen : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,34 @@ class Screen : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Screen self()
   {
     return this;
+  }
+
+  /** */
+  @property void* fontOptions()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("font-options");
+  }
+
+  /** */
+  @property void fontOptions(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("font-options", propval);
+  }
+
+  /** */
+  @property double resolution()
+  {
+    return getResolution();
+  }
+
+  /** */
+  @property void resolution(double propval)
+  {
+    return setResolution(propval);
   }
 
   /**
@@ -64,7 +89,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_screen_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +166,7 @@ class Screen : gobject.object.ObjectG
       On other platforms, this function may return null, depending on whether
       it is implementable on that platform.
       
-      The returned window should be unrefed using [gobject.object.ObjectG.unref] when
+      The returned window should be unrefed using [gobject.object.ObjectWrap.unref] when
       no longer needed.
       Returns: the currently active window,
           or null.
@@ -150,7 +175,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_active_window(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -162,7 +187,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_screen_get_display(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -265,7 +290,7 @@ class Screen : gobject.object.ObjectG
         dest = a #GdkRectangle to be filled with
               the monitor geometry
   
-      Deprecated: Use [gdk.monitor.MonitorG.getGeometry] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getGeometry] instead
   */
   void getMonitorGeometry(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
@@ -281,7 +306,7 @@ class Screen : gobject.object.ObjectG
         monitorNum = number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
       Returns: the height of the monitor, or -1 if not available
   
-      Deprecated: Use [gdk.monitor.MonitorG.getHeightMm] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getHeightMm] instead
   */
   int getMonitorHeightMm(int monitorNum)
   {
@@ -300,7 +325,7 @@ class Screen : gobject.object.ObjectG
       Returns: a newly-allocated string containing the name
           of the monitor, or null if the name cannot be determined
   
-      Deprecated: Use [gdk.monitor.MonitorG.getModel] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getModel] instead
   */
   string getMonitorPlugName(int monitorNum)
   {
@@ -323,7 +348,7 @@ class Screen : gobject.object.ObjectG
         monitorNum = number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
       Returns: the scale factor
   
-      Deprecated: Use [gdk.monitor.MonitorG.getScaleFactor] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getScaleFactor] instead
   */
   int getMonitorScaleFactor(int monitorNum)
   {
@@ -339,7 +364,7 @@ class Screen : gobject.object.ObjectG
         monitorNum = number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
       Returns: the width of the monitor, or -1 if not available
   
-      Deprecated: Use [gdk.monitor.MonitorG.getWidthMm] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getWidthMm] instead
   */
   int getMonitorWidthMm(int monitorNum)
   {
@@ -370,7 +395,7 @@ class Screen : gobject.object.ObjectG
         dest = a #GdkRectangle to be filled with
               the monitor workarea
   
-      Deprecated: Use [gdk.monitor.MonitorG.getWorkarea] instead
+      Deprecated: Use [gdk.monitor.MonitorWrap.getWorkarea] instead
   */
   void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
@@ -459,7 +484,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_rgba_visual(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -471,7 +496,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_root_window(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -506,7 +531,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_system_visual(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -574,7 +599,7 @@ class Screen : gobject.object.ObjectG
       
       The returned list is newly allocated and owns references to the
       windows it contains, so it should be freed using [glib.list.List.free] and
-      its windows unrefed using [gobject.object.ObjectG.unref] when no longer needed.
+      its windows unrefed using [gobject.object.ObjectWrap.unref] when no longer needed.
       Returns: a
             list of #GdkWindows for the current window stack, or null.
   */

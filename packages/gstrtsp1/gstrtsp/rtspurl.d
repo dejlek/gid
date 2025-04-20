@@ -13,10 +13,29 @@ import gstrtsp.types;
 class RTSPUrl : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rtspurl.RTSPUrl` boxed type.
+      Params:
+        transports = the transports allowed
+        family = the family
+        user = the user
+        passwd = the password
+        host = the host
+        port = the port
+        abspath = the absolute path
+        query = additional query parameters
+  */
+  this(gstrtsp.types.RTSPLowerTrans transports = gstrtsp.types.RTSPLowerTrans.init, gstrtsp.types.RTSPFamily family = gstrtsp.types.RTSPFamily.init, string user = string.init, string passwd = string.init, string host = string.init, ushort port = ushort.init, string abspath = string.init, string query = string.init)
   {
     super(gMalloc(GstRTSPUrl.sizeof), Yes.Take);
+    this.transports = transports;
+    this.family = family;
+    this.user = user;
+    this.passwd = passwd;
+    this.host = host;
+    this.port = port;
+    this.abspath = abspath;
+    this.query = query;
   }
 
   /** */
@@ -44,90 +63,163 @@ class RTSPUrl : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTSPUrl self()
   {
     return this;
   }
 
+  /**
+      Get `transports` field.
+      Returns: the transports allowed
+  */
   @property gstrtsp.types.RTSPLowerTrans transports()
   {
     return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPUrl*)cPtr).transports;
   }
 
+  /**
+      Set `transports` field.
+      Params:
+        propval = the transports allowed
+  */
   @property void transports(gstrtsp.types.RTSPLowerTrans propval)
   {
     (cast(GstRTSPUrl*)cPtr).transports = cast(GstRTSPLowerTrans)propval;
   }
 
+  /**
+      Get `family` field.
+      Returns: the family
+  */
   @property gstrtsp.types.RTSPFamily family()
   {
     return cast(gstrtsp.types.RTSPFamily)(cast(GstRTSPUrl*)cPtr).family;
   }
 
+  /**
+      Set `family` field.
+      Params:
+        propval = the family
+  */
   @property void family(gstrtsp.types.RTSPFamily propval)
   {
     (cast(GstRTSPUrl*)cPtr).family = cast(GstRTSPFamily)propval;
   }
 
+  /**
+      Get `user` field.
+      Returns: the user
+  */
   @property string user()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
   }
 
+  /**
+      Set `user` field.
+      Params:
+        propval = the user
+  */
   @property void user(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).user);
   }
 
+  /**
+      Get `passwd` field.
+      Returns: the password
+  */
   @property string passwd()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
   }
 
+  /**
+      Set `passwd` field.
+      Params:
+        propval = the password
+  */
   @property void passwd(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).passwd);
   }
 
+  /**
+      Get `host` field.
+      Returns: the host
+  */
   @property string host()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
   }
 
+  /**
+      Set `host` field.
+      Params:
+        propval = the host
+  */
   @property void host(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).host);
   }
 
+  /**
+      Get `port` field.
+      Returns: the port
+  */
   @property ushort port()
   {
     return (cast(GstRTSPUrl*)cPtr).port;
   }
 
+  /**
+      Set `port` field.
+      Params:
+        propval = the port
+  */
   @property void port(ushort propval)
   {
     (cast(GstRTSPUrl*)cPtr).port = propval;
   }
 
+  /**
+      Get `abspath` field.
+      Returns: the absolute path
+  */
   @property string abspath()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
   }
 
+  /**
+      Set `abspath` field.
+      Params:
+        propval = the absolute path
+  */
   @property void abspath(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).abspath);
   }
 
+  /**
+      Get `query` field.
+      Returns: additional query parameters
+  */
   @property string query()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
   }
 
+  /**
+      Set `query` field.
+      Params:
+        propval = additional query parameters
+  */
   @property void query(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);

@@ -18,7 +18,7 @@ class DebugCategory
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.DebugCategory");
+      throw new GidConstructException("Null instance pointer for gst.debug_category.DebugCategory");
 
     cInstance = *cast(GstDebugCategory*)ptr;
 

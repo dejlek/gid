@@ -19,7 +19,7 @@ class VideoCaptionMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoCaptionMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_caption_meta.VideoCaptionMeta");
 
     cInstance = *cast(GstVideoCaptionMeta*)ptr;
 
@@ -33,26 +33,48 @@ class VideoCaptionMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCaptionMeta*)cPtr).meta);
   }
 
+  /**
+      Get `captionType` field.
+      Returns: The type of Closed Caption contained in the meta.
+  */
   @property gstvideo.types.VideoCaptionType captionType()
   {
     return cast(gstvideo.types.VideoCaptionType)(cast(GstVideoCaptionMeta*)cPtr).captionType;
   }
 
+  /**
+      Set `captionType` field.
+      Params:
+        propval = The type of Closed Caption contained in the meta.
+  */
   @property void captionType(gstvideo.types.VideoCaptionType propval)
   {
     (cast(GstVideoCaptionMeta*)cPtr).captionType = cast(GstVideoCaptionType)propval;
   }
 
+  /**
+      Get `size` field.
+      Returns: The size in bytes of @data
+  */
   @property size_t size()
   {
     return (cast(GstVideoCaptionMeta*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = The size in bytes of @data
+  */
   @property void size(size_t propval)
   {
     (cast(GstVideoCaptionMeta*)cPtr).size = propval;

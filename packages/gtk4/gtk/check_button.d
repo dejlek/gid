@@ -67,7 +67,7 @@ import gtk.widget;
     ```
     
     A [gtk.check_button.CheckButton] has a main node with name checkbutton. If the
-    [gtk.check_button.CheckButton.utf8] or [gtk.check_button.CheckButton.Widget]
+    [gtk.check_button.CheckButton.label] or [gtk.check_button.CheckButton.child]
     properties are set, it contains a child widget. The indicator node
     is named check when no group is set, and radio if the checkbutton
     is grouped together with other checkbuttons.
@@ -98,9 +98,129 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CheckButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: If the check button is active.
+      
+      Setting `active` to true will add the `:checked:` state to both
+      the check button and the indicator CSS node.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the check button is active.
+        
+        Setting `active` to true will add the `:checked:` state to both
+        the check button and the indicator CSS node.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The check button whose group this widget belongs to.
+  */
+  @property void group(gtk.check_button.CheckButton propval)
+  {
+    return setGroup(propval);
+  }
+
+  /**
+      Get `inconsistent` property.
+      Returns: If the check button is in an “in between” state.
+      
+      The inconsistent state only affects visual appearance,
+      not the semantics of the button.
+  */
+  @property bool inconsistent()
+  {
+    return getInconsistent();
+  }
+
+  /**
+      Set `inconsistent` property.
+      Params:
+        propval = If the check button is in an “in between” state.
+        
+        The inconsistent state only affects visual appearance,
+        not the semantics of the button.
+  */
+  @property void inconsistent(bool propval)
+  {
+    return setInconsistent(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: Text of the label inside the check button, if it contains a label widget.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the label inside the check button, if it contains a label widget.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: If set, an underline in the text indicates that the following
+      character is to be used as mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the text indicates that the following
+        character is to be used as mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -128,7 +248,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +265,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +288,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -358,7 +478,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Connect to `Toggled` signal.
   
-      Emitted when the buttons's [gtk.check_button.CheckButton.gboolean]
+      Emitted when the buttons's [gtk.check_button.CheckButton.active]
       property changes.
   
       Params:

@@ -45,7 +45,7 @@ import gobject.object;
     Since GLib 2.72, on Windows, the native credentials may contain the PID of a
     process. This corresponds to [gio.types.CredentialsType.Win32Pid].
 */
-class Credentials : gobject.object.ObjectG
+class Credentials : gobject.object.ObjectWrap
 {
 
   /** */
@@ -67,6 +67,7 @@ class Credentials : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Credentials self()
   {
     return this;
@@ -75,7 +76,7 @@ class Credentials : gobject.object.ObjectG
   /**
       Creates a new #GCredentials object with credentials matching the
       the current process.
-      Returns: A #GCredentials. Free with [gobject.object.ObjectG.unref].
+      Returns: A #GCredentials. Free with [gobject.object.ObjectWrap.unref].
   */
   this()
   {
@@ -92,7 +93,7 @@ class Credentials : gobject.object.ObjectG
       OS or if the native credentials type does not contain information
       about the UNIX process ID.
       Returns: The UNIX process ID, or `-1` if error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int getUnixPid()
   {
@@ -100,7 +101,7 @@ class Credentials : gobject.object.ObjectG
     GError *_err;
     _retval = g_credentials_get_unix_pid(cast(GCredentials*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -112,7 +113,7 @@ class Credentials : gobject.object.ObjectG
       OS or if the native credentials type does not contain information
       about the UNIX user.
       Returns: The UNIX user identifier or `-1` if error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   uint getUnixUser()
   {
@@ -120,7 +121,7 @@ class Credentials : gobject.object.ObjectG
     GError *_err;
     _retval = g_credentials_get_unix_user(cast(GCredentials*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -134,7 +135,7 @@ class Credentials : gobject.object.ObjectG
         otherCredentials = A #GCredentials.
       Returns: true if credentials and other_credentials has the same
         user, false otherwise or if error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool isSameUser(gio.credentials.Credentials otherCredentials)
   {
@@ -142,7 +143,7 @@ class Credentials : gobject.object.ObjectG
     GError *_err;
     _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -175,7 +176,7 @@ class Credentials : gobject.object.ObjectG
       Params:
         uid = The UNIX user identifier to set.
       Returns: true if uid was set, false if error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setUnixUser(uint uid)
   {
@@ -183,7 +184,7 @@ class Credentials : gobject.object.ObjectG
     GError *_err;
     _retval = g_credentials_set_unix_user(cast(GCredentials*)cPtr, uid, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

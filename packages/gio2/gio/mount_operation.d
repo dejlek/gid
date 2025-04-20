@@ -33,7 +33,7 @@ import gobject.object;
     [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
     improvements and auditing fixes.
 */
-class MountOperation : gobject.object.ObjectG
+class MountOperation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -55,9 +55,199 @@ class MountOperation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MountOperation self()
   {
     return this;
+  }
+
+  /**
+      Get `anonymous` property.
+      Returns: Whether to use an anonymous user when authenticating.
+  */
+  @property bool anonymous()
+  {
+    return getAnonymous();
+  }
+
+  /**
+      Set `anonymous` property.
+      Params:
+        propval = Whether to use an anonymous user when authenticating.
+  */
+  @property void anonymous(bool propval)
+  {
+    return setAnonymous(propval);
+  }
+
+  /**
+      Get `choice` property.
+      Returns: The index of the user's choice when a question is asked during the
+      mount operation. See the #GMountOperation::ask-question signal.
+  */
+  @property int choice()
+  {
+    return getChoice();
+  }
+
+  /**
+      Set `choice` property.
+      Params:
+        propval = The index of the user's choice when a question is asked during the
+        mount operation. See the #GMountOperation::ask-question signal.
+  */
+  @property void choice(int propval)
+  {
+    return setChoice(propval);
+  }
+
+  /**
+      Get `domain` property.
+      Returns: The domain to use for the mount operation.
+  */
+  @property string domain()
+  {
+    return getDomain();
+  }
+
+  /**
+      Set `domain` property.
+      Params:
+        propval = The domain to use for the mount operation.
+  */
+  @property void domain(string propval)
+  {
+    return setDomain(propval);
+  }
+
+  /**
+      Get `isTcryptHiddenVolume` property.
+      Returns: Whether the device to be unlocked is a TCRYPT hidden volume.
+      See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
+  */
+  @property bool isTcryptHiddenVolume()
+  {
+    return getIsTcryptHiddenVolume();
+  }
+
+  /**
+      Set `isTcryptHiddenVolume` property.
+      Params:
+        propval = Whether the device to be unlocked is a TCRYPT hidden volume.
+        See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
+  */
+  @property void isTcryptHiddenVolume(bool propval)
+  {
+    return setIsTcryptHiddenVolume(propval);
+  }
+
+  /**
+      Get `isTcryptSystemVolume` property.
+      Returns: Whether the device to be unlocked is a TCRYPT system volume.
+      In this context, a system volume is a volume with a bootloader
+      and operating system installed. This is only supported for Windows
+      operating systems. For further documentation, see
+      [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
+  */
+  @property bool isTcryptSystemVolume()
+  {
+    return getIsTcryptSystemVolume();
+  }
+
+  /**
+      Set `isTcryptSystemVolume` property.
+      Params:
+        propval = Whether the device to be unlocked is a TCRYPT system volume.
+        In this context, a system volume is a volume with a bootloader
+        and operating system installed. This is only supported for Windows
+        operating systems. For further documentation, see
+        [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
+  */
+  @property void isTcryptSystemVolume(bool propval)
+  {
+    return setIsTcryptSystemVolume(propval);
+  }
+
+  /**
+      Get `password` property.
+      Returns: The password that is used for authentication when carrying out
+      the mount operation.
+  */
+  @property string password()
+  {
+    return getPassword();
+  }
+
+  /**
+      Set `password` property.
+      Params:
+        propval = The password that is used for authentication when carrying out
+        the mount operation.
+  */
+  @property void password(string propval)
+  {
+    return setPassword(propval);
+  }
+
+  /**
+      Get `passwordSave` property.
+      Returns: Determines if and how the password information should be saved.
+  */
+  @property gio.types.PasswordSave passwordSave()
+  {
+    return getPasswordSave();
+  }
+
+  /**
+      Set `passwordSave` property.
+      Params:
+        propval = Determines if and how the password information should be saved.
+  */
+  @property void passwordSave(gio.types.PasswordSave propval)
+  {
+    return setPasswordSave(propval);
+  }
+
+  /**
+      Get `pim` property.
+      Returns: The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
+      [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
+  */
+  @property uint pim()
+  {
+    return getPim();
+  }
+
+  /**
+      Set `pim` property.
+      Params:
+        propval = The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
+        [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
+  */
+  @property void pim(uint propval)
+  {
+    return setPim(propval);
+  }
+
+  /**
+      Get `username` property.
+      Returns: The user name that is used for authentication when carrying out
+      the mount operation.
+  */
+  @property string username()
+  {
+    return getUsername();
+  }
+
+  /**
+      Set `username` property.
+      Params:
+        propval = The user name that is used for authentication when carrying out
+        the mount operation.
+  */
+  @property void username(string propval)
+  {
+    return setUsername(propval);
   }
 
   /**

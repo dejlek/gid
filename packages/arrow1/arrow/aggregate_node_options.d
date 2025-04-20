@@ -32,6 +32,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AggregateNodeOptions self()
   {
     return this;
@@ -55,7 +56,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _cretval = garrow_aggregate_node_options_new(_aggregations, _keys, _nKeys, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

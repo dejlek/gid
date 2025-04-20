@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -76,9 +77,64 @@ class ShortcutsWindow : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutsWindow self()
   {
     return this;
+  }
+
+  /**
+      Get `sectionName` property.
+      Returns: The name of the section to show.
+      
+      This should be the section-name of one of the #GtkShortcutsSection
+      objects that are in this shortcuts window.
+  */
+  @property string sectionName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("section-name");
+  }
+
+  /**
+      Set `sectionName` property.
+      Params:
+        propval = The name of the section to show.
+        
+        This should be the section-name of one of the #GtkShortcutsSection
+        objects that are in this shortcuts window.
+  */
+  @property void sectionName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("section-name", propval);
+  }
+
+  /**
+      Get `viewName` property.
+      Returns: The view name by which to filter the contents.
+      
+      This should correspond to the #GtkShortcutsGroup:view property of some of
+      the #GtkShortcutsGroup objects that are inside this shortcuts window.
+      
+      Set this to null to show all groups.
+  */
+  @property string viewName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("view-name");
+  }
+
+  /**
+      Set `viewName` property.
+      Params:
+        propval = The view name by which to filter the contents.
+        
+        This should correspond to the #GtkShortcutsGroup:view property of some of
+        the #GtkShortcutsGroup objects that are inside this shortcuts window.
+        
+        Set this to null to show all groups.
+  */
+  @property void viewName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
 
   /**

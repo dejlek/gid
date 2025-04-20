@@ -86,9 +86,46 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Box self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.types.BaselinePosition baselinePosition()
+  {
+    return getBaselinePosition();
+  }
+
+  /** */
+  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setBaselinePosition(propval);
+  }
+
+  /** */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /** */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /** */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /** */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
   }
 
   mixin OrientableT!();
@@ -129,7 +166,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_get_center_widget(cast(GtkBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -23,7 +23,7 @@ class VideoTimeCodeMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoTimeCodeMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_time_code_meta.VideoTimeCodeMeta");
 
     cInstance = *cast(GstVideoTimeCodeMeta*)ptr;
 
@@ -37,11 +37,19 @@ class VideoTimeCodeMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)cPtr).meta);
   }
 
+  /**
+      Get `tc` field.
+      Returns: the GstVideoTimeCode to attach
+  */
   @property gstvideo.video_time_code.VideoTimeCode tc()
   {
     return cToD!(gstvideo.video_time_code.VideoTimeCode)(cast(void*)&(cast(GstVideoTimeCodeMeta*)cPtr).tc);

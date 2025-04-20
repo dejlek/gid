@@ -80,11 +80,11 @@ template TableT()
       Returns: a AtkObject* representing the
         table caption, or null if value does not implement this interface.
   */
-  override atk.object.ObjectAtk getCaption()
+  override atk.object.ObjectWrap getCaption()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_caption(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,11 +147,11 @@ template TableT()
         specified column header, or null if value does not implement this
         interface.
   */
-  override atk.object.ObjectAtk getColumnHeader(int column)
+  override atk.object.ObjectWrap getColumnHeader(int column)
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_column_header(cast(AtkTable*)cPtr, column);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -259,11 +259,11 @@ template TableT()
         specified row header, or null if value does not implement this
         interface.
   */
-  override atk.object.ObjectAtk getRowHeader(int row)
+  override atk.object.ObjectWrap getRowHeader(int row)
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_row_header(cast(AtkTable*)cPtr, row);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,11 +304,11 @@ template TableT()
       Returns: a AtkObject* representing a summary description
         of the table, or zero if value does not implement this interface.
   */
-  override atk.object.ObjectAtk getSummary()
+  override atk.object.ObjectWrap getSummary()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_summary(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -371,11 +371,11 @@ template TableT()
       Returns: an #AtkObject representing the referred
         to accessible
   */
-  override atk.object.ObjectAtk refAt(int row, int column)
+  override atk.object.ObjectWrap refAt(int row, int column)
   {
     AtkObject* _cretval;
     _cretval = atk_table_ref_at(cast(AtkTable*)cPtr, row, column);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -415,7 +415,7 @@ template TableT()
       Params:
         caption = a #AtkObject representing the caption to set for table
   */
-  override void setCaption(atk.object.ObjectAtk caption)
+  override void setCaption(atk.object.ObjectWrap caption)
   {
     atk_table_set_caption(cast(AtkTable*)cPtr, caption ? cast(AtkObject*)caption.cPtr(No.Dup) : null);
   }
@@ -441,7 +441,7 @@ template TableT()
         column = a #gint representing a column in table
         header = an #AtkTable
   */
-  override void setColumnHeader(int column, atk.object.ObjectAtk header)
+  override void setColumnHeader(int column, atk.object.ObjectWrap header)
   {
     atk_table_set_column_header(cast(AtkTable*)cPtr, column, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
   }
@@ -467,7 +467,7 @@ template TableT()
         row = a #gint representing a row in table
         header = an #AtkTable
   */
-  override void setRowHeader(int row, atk.object.ObjectAtk header)
+  override void setRowHeader(int row, atk.object.ObjectWrap header)
   {
     atk_table_set_row_header(cast(AtkTable*)cPtr, row, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
   }
@@ -479,7 +479,7 @@ template TableT()
         accessible = an #AtkObject representing the summary description
           to set for table
   */
-  override void setSummary(atk.object.ObjectAtk accessible)
+  override void setSummary(atk.object.ObjectWrap accessible)
   {
     atk_table_set_summary(cast(AtkTable*)cPtr, accessible ? cast(AtkObject*)accessible.cPtr(No.Dup) : null);
   }

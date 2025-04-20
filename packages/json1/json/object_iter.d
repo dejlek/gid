@@ -28,7 +28,7 @@ class ObjectIter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Json.ObjectIter");
+      throw new GidConstructException("Null instance pointer for json.object_iter.ObjectIter");
 
     cInstance = *cast(JsonObjectIter*)ptr;
 
@@ -65,7 +65,7 @@ class ObjectIter
       Params:
         object = the JSON object to iterate over
   */
-  void init_(json.object.ObjectJson object)
+  void init_(json.object.ObjectWrap object)
   {
     json_object_iter_init(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
   }
@@ -90,7 +90,7 @@ class ObjectIter
       Params:
         object = the JSON object to iterate over
   */
-  void initOrdered(json.object.ObjectJson object)
+  void initOrdered(json.object.ObjectWrap object)
   {
     json_object_iter_init_ordered(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
   }
@@ -138,8 +138,8 @@ class ObjectIter
       member_node are set to invalid values. After that point, the iter is invalid.
       
       The order in which members are returned by the iterator is the same order in
-      which the members were added to the [json.object.ObjectJson]. The iterator is invalidated
-      if its [json.object.ObjectJson] is modified during iteration.
+      which the members were added to the [json.object.ObjectWrap]. The iterator is invalidated
+      if its [json.object.ObjectWrap] is modified during iteration.
       
       You must use this function with an iterator initialized with
       [json.object_iter.ObjectIter.initOrdered]; using this function with an iterator

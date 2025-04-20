@@ -14,7 +14,7 @@ import gstpbutils.types;
     The opaque base class object for all encoding profiles. This contains generic
     information like name, description, format and preset.
 */
-class EncodingProfile : gobject.object.ObjectG
+class EncodingProfile : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,55 @@ class EncodingProfile : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EncodingProfile self()
   {
     return this;
+  }
+
+  /**
+      Get `elementProperties` property.
+      Returns: A #GstStructure defining the properties to be set to the element
+      the profile represents.
+      
+      For example for `av1enc`:
+      
+      ```
+      element-properties,row-mt=true, end-usage=vbr
+      ```
+  */
+  @property gst.structure.Structure elementProperties()
+  {
+    return getElementProperties();
+  }
+
+  /**
+      Set `elementProperties` property.
+      Params:
+        propval = A #GstStructure defining the properties to be set to the element
+        the profile represents.
+        
+        For example for `av1enc`:
+        
+        ```
+        element-properties,row-mt=true, end-usage=vbr
+        ```
+  */
+  @property void elementProperties(gst.structure.Structure propval)
+  {
+    return setElementProperties(propval);
+  }
+
+  /** */
+  @property gst.caps.Caps restrictionCaps()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.caps.Caps)("restriction-caps");
+  }
+
+  /** */
+  @property void restrictionCaps(gst.caps.Caps propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.caps.Caps)("restriction-caps", propval);
   }
 
   /**
@@ -58,7 +104,7 @@ class EncodingProfile : gobject.object.ObjectG
     const(char)* _profilename = profilename.toCString(No.Alloc);
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gst_encoding_profile_find(_targetname, _profilename, _category);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,7 +121,7 @@ class EncodingProfile : gobject.object.ObjectG
   {
     GstEncodingProfile* _cretval;
     _cretval = gst_encoding_profile_from_discoverer(info ? cast(GstDiscovererInfo*)info.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +133,7 @@ class EncodingProfile : gobject.object.ObjectG
   {
     GstEncodingProfile* _cretval;
     _cretval = gst_encoding_profile_copy(cast(GstEncodingProfile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 

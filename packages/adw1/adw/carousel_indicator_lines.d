@@ -58,9 +58,29 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CarouselIndicatorLines self()
   {
     return this;
+  }
+
+  /**
+      Get `carousel` property.
+      Returns: The displayed carousel.
+  */
+  @property adw.carousel.Carousel carousel()
+  {
+    return getCarousel();
+  }
+
+  /**
+      Set `carousel` property.
+      Params:
+        propval = The displayed carousel.
+  */
+  @property void carousel(adw.carousel.Carousel propval)
+  {
+    return setCarousel(propval);
   }
 
   mixin OrientableT!();
@@ -84,7 +104,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
   {
     AdwCarousel* _cretval;
     _cretval = adw_carousel_indicator_lines_get_carousel(cast(AdwCarouselIndicatorLines*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.carousel.Carousel)(cast(AdwCarousel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.carousel.Carousel)(cast(AdwCarousel*)_cretval, No.Take);
     return _retval;
   }
 

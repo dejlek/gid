@@ -35,7 +35,7 @@ import gtk.widget;
     Usually applications should not need to use or modify the #GtkStyle of
     their widgets.
 */
-class Style : gobject.object.ObjectG
+class Style : gobject.object.ObjectWrap
 {
 
   /** */
@@ -57,6 +57,7 @@ class Style : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Style self()
   {
     return this;
@@ -91,7 +92,7 @@ class Style : gobject.object.ObjectG
   {
     GtkStyle* _cretval;
     _cretval = gtk_style_copy(cast(GtkStyle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -203,7 +204,7 @@ class Style : gobject.object.ObjectG
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_style_render_icon(cast(GtkStyle*)cPtr, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

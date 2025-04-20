@@ -47,9 +47,29 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureLongPress self()
   {
     return this;
+  }
+
+  /**
+      Get `delayFactor` property.
+      Returns: Factor by which to modify the default timeout.
+  */
+  @property double delayFactor()
+  {
+    return getDelayFactor();
+  }
+
+  /**
+      Set `delayFactor` property.
+      Params:
+        propval = Factor by which to modify the default timeout.
+  */
+  @property void delayFactor(double propval)
+  {
+    return setDelayFactor(propval);
   }
 
   /**

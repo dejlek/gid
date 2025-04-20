@@ -18,7 +18,7 @@ class RTSPTransport
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtsp.RTSPTransport");
+      throw new GidConstructException("Null instance pointer for gstrtsp.rtsptransport.RTSPTransport");
 
     cInstance = *cast(GstRTSPTransport*)ptr;
 
@@ -32,133 +32,252 @@ class RTSPTransport
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `trans` field.
+      Returns: the transport mode
+  */
   @property gstrtsp.types.RTSPTransMode trans()
   {
     return cast(gstrtsp.types.RTSPTransMode)(cast(GstRTSPTransport*)cPtr).trans;
   }
 
+  /**
+      Set `trans` field.
+      Params:
+        propval = the transport mode
+  */
   @property void trans(gstrtsp.types.RTSPTransMode propval)
   {
     (cast(GstRTSPTransport*)cPtr).trans = cast(GstRTSPTransMode)propval;
   }
 
+  /**
+      Get `profile` field.
+      Returns: the tansport profile
+  */
   @property gstrtsp.types.RTSPProfile profile()
   {
     return cast(gstrtsp.types.RTSPProfile)(cast(GstRTSPTransport*)cPtr).profile;
   }
 
+  /**
+      Set `profile` field.
+      Params:
+        propval = the tansport profile
+  */
   @property void profile(gstrtsp.types.RTSPProfile propval)
   {
     (cast(GstRTSPTransport*)cPtr).profile = cast(GstRTSPProfile)propval;
   }
 
+  /**
+      Get `lowerTransport` field.
+      Returns: the lower transport
+  */
   @property gstrtsp.types.RTSPLowerTrans lowerTransport()
   {
     return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPTransport*)cPtr).lowerTransport;
   }
 
+  /**
+      Set `lowerTransport` field.
+      Params:
+        propval = the lower transport
+  */
   @property void lowerTransport(gstrtsp.types.RTSPLowerTrans propval)
   {
     (cast(GstRTSPTransport*)cPtr).lowerTransport = cast(GstRTSPLowerTrans)propval;
   }
 
+  /**
+      Get `destination` field.
+      Returns: the destination ip/hostname
+  */
   @property string destination()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
   }
 
+  /**
+      Set `destination` field.
+      Params:
+        propval = the destination ip/hostname
+  */
   @property void destination(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
     dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).destination);
   }
 
+  /**
+      Get `source` field.
+      Returns: the source ip/hostname
+  */
   @property string source()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
   }
 
+  /**
+      Set `source` field.
+      Params:
+        propval = the source ip/hostname
+  */
   @property void source(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
     dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).source);
   }
 
+  /**
+      Get `layers` field.
+      Returns: the number of layers
+  */
   @property uint layers()
   {
     return (cast(GstRTSPTransport*)cPtr).layers;
   }
 
+  /**
+      Set `layers` field.
+      Params:
+        propval = the number of layers
+  */
   @property void layers(uint propval)
   {
     (cast(GstRTSPTransport*)cPtr).layers = propval;
   }
 
+  /**
+      Get `modePlay` field.
+      Returns: if play mode was selected
+  */
   @property bool modePlay()
   {
     return (cast(GstRTSPTransport*)cPtr).modePlay;
   }
 
+  /**
+      Set `modePlay` field.
+      Params:
+        propval = if play mode was selected
+  */
   @property void modePlay(bool propval)
   {
     (cast(GstRTSPTransport*)cPtr).modePlay = propval;
   }
 
+  /**
+      Get `modeRecord` field.
+      Returns: if record mode was selected
+  */
   @property bool modeRecord()
   {
     return (cast(GstRTSPTransport*)cPtr).modeRecord;
   }
 
+  /**
+      Set `modeRecord` field.
+      Params:
+        propval = if record mode was selected
+  */
   @property void modeRecord(bool propval)
   {
     (cast(GstRTSPTransport*)cPtr).modeRecord = propval;
   }
 
+  /**
+      Get `append` field.
+      Returns: is append mode was selected
+  */
   @property bool append()
   {
     return (cast(GstRTSPTransport*)cPtr).append;
   }
 
+  /**
+      Set `append` field.
+      Params:
+        propval = is append mode was selected
+  */
   @property void append(bool propval)
   {
     (cast(GstRTSPTransport*)cPtr).append = propval;
   }
 
+  /**
+      Get `interleaved` field.
+      Returns: the interleave range
+  */
   @property gstrtsp.rtsprange.RTSPRange interleaved()
   {
     return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).interleaved);
   }
 
+  /**
+      Get `ttl` field.
+      Returns: the time to live for multicast UDP
+  */
   @property uint ttl()
   {
     return (cast(GstRTSPTransport*)cPtr).ttl;
   }
 
+  /**
+      Set `ttl` field.
+      Params:
+        propval = the time to live for multicast UDP
+  */
   @property void ttl(uint propval)
   {
     (cast(GstRTSPTransport*)cPtr).ttl = propval;
   }
 
+  /**
+      Get `port` field.
+      Returns: the port pair for multicast sessions
+  */
   @property gstrtsp.rtsprange.RTSPRange port()
   {
     return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).port);
   }
 
+  /**
+      Get `clientPort` field.
+      Returns: the client port pair for receiving data. For TCP
+        based transports, applications can use this field to store the
+        sender and receiver ports of the client.
+  */
   @property gstrtsp.rtsprange.RTSPRange clientPort()
   {
     return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).clientPort);
   }
 
+  /**
+      Get `serverPort` field.
+      Returns: the server port pair for receiving data. For TCP
+        based transports, applications can use this field to store the
+        sender and receiver ports of the server.
+  */
   @property gstrtsp.rtsprange.RTSPRange serverPort()
   {
     return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).serverPort);
   }
 
+  /**
+      Get `ssrc` field.
+      Returns: the ssrc that the sender/receiver will use
+  */
   @property uint ssrc()
   {
     return (cast(GstRTSPTransport*)cPtr).ssrc;
   }
 
+  /**
+      Set `ssrc` field.
+      Params:
+        propval = the ssrc that the sender/receiver will use
+  */
   @property void ssrc(uint propval)
   {
     (cast(GstRTSPTransport*)cPtr).ssrc = propval;

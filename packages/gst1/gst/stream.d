@@ -23,7 +23,7 @@ import gst.types;
     Elements can subclass a #GstStream for internal usage (to contain information
     pertinent to streams of data).
 */
-class Stream : gst.object.ObjectGst
+class Stream : gst.object.ObjectWrap
 {
 
   /** */
@@ -45,9 +45,79 @@ class Stream : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Stream self()
   {
     return this;
+  }
+
+  /**
+      Get `caps` property.
+      Returns: The #GstCaps of the #GstStream.
+  */
+  @property gst.caps.Caps caps()
+  {
+    return getCaps();
+  }
+
+  /**
+      Set `caps` property.
+      Params:
+        propval = The #GstCaps of the #GstStream.
+  */
+  @property void caps(gst.caps.Caps propval)
+  {
+    return setCaps(propval);
+  }
+
+  /** */
+  @property gst.types.StreamFlags streamFlags()
+  {
+    return getStreamFlags();
+  }
+
+  /** */
+  @property void streamFlags(gst.types.StreamFlags propval)
+  {
+    return setStreamFlags(propval);
+  }
+
+  /**
+      Get `streamType` property.
+      Returns: The #GstStreamType of the #GstStream. Can only be set at construction time.
+  */
+  @property gst.types.StreamType streamType()
+  {
+    return getStreamType();
+  }
+
+  /**
+      Set `streamType` property.
+      Params:
+        propval = The #GstStreamType of the #GstStream. Can only be set at construction time.
+  */
+  @property void streamType(gst.types.StreamType propval)
+  {
+    return setStreamType(propval);
+  }
+
+  /**
+      Get `tags` property.
+      Returns: The #GstTagList of the #GstStream.
+  */
+  @property gst.tag_list.TagList tags()
+  {
+    return getTags();
+  }
+
+  /**
+      Set `tags` property.
+      Params:
+        propval = The #GstTagList of the #GstStream.
+  */
+  @property void tags(gst.tag_list.TagList propval)
+  {
+    return setTags(propval);
   }
 
   /**

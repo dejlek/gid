@@ -60,7 +60,7 @@ interface URIHandler
       Params:
         uri = URI to set
       Returns: true if the URI was set successfully, else false.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setUri(string uri);
 }

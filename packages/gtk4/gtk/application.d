@@ -108,9 +108,79 @@ class Application : gio.application.Application
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Application self()
   {
     return this;
+  }
+
+  /**
+      Get `activeWindow` property.
+      Returns: The currently focused window of the application.
+  */
+  @property gtk.window.Window activeWindow()
+  {
+    return getActiveWindow();
+  }
+
+  /**
+      Get `menubar` property.
+      Returns: The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+  */
+  @property gio.menu_model.MenuModel menubar()
+  {
+    return getMenubar();
+  }
+
+  /**
+      Set `menubar` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+  */
+  @property void menubar(gio.menu_model.MenuModel propval)
+  {
+    return setMenubar(propval);
+  }
+
+  /**
+      Get `registerSession` property.
+      Returns: Set this property to `TRUE` to register with the session manager.
+      
+      This will make GTK track the session state (such as the
+      `property@Gtk.Application:screensaver-active` property).
+  */
+  @property bool registerSession()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("register-session");
+  }
+
+  /**
+      Set `registerSession` property.
+      Params:
+        propval = Set this property to `TRUE` to register with the session manager.
+        
+        This will make GTK track the session state (such as the
+        `property@Gtk.Application:screensaver-active` property).
+  */
+  @property void registerSession(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("register-session", propval);
+  }
+
+  /**
+      Get `screensaverActive` property.
+      Returns: This property is `TRUE` if GTK believes that the screensaver is
+      currently active.
+      
+      GTK only tracks session state (including this) when
+      `property@Gtk.Application:register-session` is set to true.
+      
+      Tracking the screensaver state is currently only supported on
+      Linux.
+  */
+  @property bool screensaverActive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("screensaver-active");
   }
 
   /**
@@ -153,7 +223,7 @@ class Application : gio.application.Application
       typically, you should add new application windows in response
       to the emission of the `GApplication::activate` signal.
       
-      This call is equivalent to setting the [gtk.window.Window.Application]
+      This call is equivalent to setting the [gtk.window.Window.application]
       property of `window` to `application`.
       
       Normally, the connection between the application and the window
@@ -254,7 +324,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +344,7 @@ class Application : gio.application.Application
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -287,7 +357,7 @@ class Application : gio.application.Application
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -305,7 +375,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -401,7 +471,7 @@ class Application : gio.application.Application
       Remove a window from `application`.
       
       If `window` belongs to `application` then this call is equivalent to
-      setting the [gtk.window.Window.Application] property of `window` to
+      setting the [gtk.window.Window.application] property of `window` to
       `NULL`.
       
       The application may stop running as a result of a call to this

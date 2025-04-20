@@ -24,6 +24,184 @@ template RecentChooserT()
 {
 
   /**
+      Get `filter` property.
+      Returns: The #GtkRecentFilter object to be used when displaying
+      the recently used resources.
+  */
+  @property gtk.recent_filter.RecentFilter filter()
+  {
+    return getFilter();
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The #GtkRecentFilter object to be used when displaying
+        the recently used resources.
+  */
+  @property void filter(gtk.recent_filter.RecentFilter propval)
+  {
+    return setFilter(propval);
+  }
+
+  /**
+      Get `limit` property.
+      Returns: The maximum number of recently used resources to be displayed,
+      or -1 to display all items.
+  */
+  @property int limit()
+  {
+    return getLimit();
+  }
+
+  /**
+      Set `limit` property.
+      Params:
+        propval = The maximum number of recently used resources to be displayed,
+        or -1 to display all items.
+  */
+  @property void limit(int propval)
+  {
+    return setLimit(propval);
+  }
+
+  /**
+      Get `localOnly` property.
+      Returns: Whether this #GtkRecentChooser should display only local (file:)
+      resources.
+  */
+  @property bool localOnly()
+  {
+    return getLocalOnly();
+  }
+
+  /**
+      Set `localOnly` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display only local (file:)
+        resources.
+  */
+  @property void localOnly(bool propval)
+  {
+    return setLocalOnly(propval);
+  }
+
+  /**
+      Get `selectMultiple` property.
+      Returns: Allow the user to select multiple resources.
+  */
+  @property bool selectMultiple()
+  {
+    return getSelectMultiple();
+  }
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Allow the user to select multiple resources.
+  */
+  @property void selectMultiple(bool propval)
+  {
+    return setSelectMultiple(propval);
+  }
+
+  /**
+      Get `showIcons` property.
+      Returns: Whether this #GtkRecentChooser should display an icon near the item.
+  */
+  @property bool showIcons()
+  {
+    return getShowIcons();
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display an icon near the item.
+  */
+  @property void showIcons(bool propval)
+  {
+    return setShowIcons(propval);
+  }
+
+  /**
+      Get `showNotFound` property.
+      Returns: Whether this #GtkRecentChooser should display the recently used resources
+      even if not present anymore. Setting this to false will perform a
+      potentially expensive check on every local resource (every remote
+      resource will always be displayed).
+  */
+  @property bool showNotFound()
+  {
+    return getShowNotFound();
+  }
+
+  /**
+      Set `showNotFound` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display the recently used resources
+        even if not present anymore. Setting this to false will perform a
+        potentially expensive check on every local resource (every remote
+        resource will always be displayed).
+  */
+  @property void showNotFound(bool propval)
+  {
+    return setShowNotFound(propval);
+  }
+
+  /** */
+  @property bool showPrivate()
+  {
+    return getShowPrivate();
+  }
+
+  /** */
+  @property void showPrivate(bool propval)
+  {
+    return setShowPrivate(propval);
+  }
+
+  /**
+      Get `showTips` property.
+      Returns: Whether this #GtkRecentChooser should display a tooltip containing the
+      full path of the recently used resources.
+  */
+  @property bool showTips()
+  {
+    return getShowTips();
+  }
+
+  /**
+      Set `showTips` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display a tooltip containing the
+        full path of the recently used resources.
+  */
+  @property void showTips(bool propval)
+  {
+    return setShowTips(propval);
+  }
+
+  /**
+      Get `sortType` property.
+      Returns: Sorting order to be used when displaying the recently used resources.
+  */
+  @property gtk.types.RecentSortType sortType()
+  {
+    return getSortType();
+  }
+
+  /**
+      Set `sortType` property.
+      Params:
+        propval = Sorting order to be used when displaying the recently used resources.
+  */
+  @property void sortType(gtk.types.RecentSortType propval)
+  {
+    return setSortType(propval);
+  }
+
+  /**
       Adds filter to the list of #GtkRecentFilter objects held by chooser.
       
       If no previous filter objects were defined, this function will call
@@ -71,7 +249,7 @@ template RecentChooserT()
   {
     GtkRecentFilter* _cretval;
     _cretval = gtk_recent_chooser_get_filter(cast(GtkRecentChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,7 +435,7 @@ template RecentChooserT()
       Params:
         uri = a URI
       Returns: true if uri was found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool selectUri(string uri)
   {
@@ -266,7 +444,7 @@ template RecentChooserT()
     GError *_err;
     _retval = gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -276,7 +454,7 @@ template RecentChooserT()
       Params:
         uri = a URI
       Returns: true if the URI was found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setCurrentUri(string uri)
   {
@@ -285,7 +463,7 @@ template RecentChooserT()
     GError *_err;
     _retval = gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

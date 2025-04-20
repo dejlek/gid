@@ -32,6 +32,7 @@ class Time64Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Time64Array self()
   {
     return this;

@@ -48,6 +48,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GhostPad self()
   {
     return this;
@@ -91,7 +92,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ghost_pad_new_from_template(_name, target ? cast(GstPad*)target.cPtr(No.Dup) : null, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +114,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ghost_pad_new_no_target(_name, dir);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +133,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ghost_pad_new_no_target_from_template(_name, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +147,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
         active = whether the pad should be active or not.
       Returns: true if the operation was successful.
   */
-  static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
+  static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
     _retval = gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, mode, active);
@@ -164,7 +165,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
         active = whether the pad should be active or not.
       Returns: true if the operation was successful.
   */
-  static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
+  static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
     _retval = gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, mode, active);
@@ -200,7 +201,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   {
     GstPad* _cretval;
     _cretval = gst_ghost_pad_get_target(cast(GstGhostPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -46,7 +46,7 @@ import pango.attr_list;
     To connect a widget to the users preferred input method, you should use
     [gtk.immulticontext.IMMulticontext].
 */
-class IMContext : gobject.object.ObjectG
+class IMContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -68,9 +68,56 @@ class IMContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IMContext self()
   {
     return this;
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional hints that allow input methods to fine-tune
+      their behaviour.
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InputHints)("input-hints");
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune
+        their behaviour.
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InputHints)("input-hints", propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose of the text field that the `GtkIMContext is connected to.
+      
+      This property can be used by on-screen keyboards and other input
+      methods to adjust their behaviour.
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InputPurpose)("input-purpose");
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of the text field that the `GtkIMContext is connected to.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InputPurpose)("input-purpose", propval);
   }
 
   /**

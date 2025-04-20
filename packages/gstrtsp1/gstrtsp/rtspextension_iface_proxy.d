@@ -5,7 +5,7 @@ import gobject.object;
 import gstrtsp.rtspextension;
 import gstrtsp.rtspextension_mixin;
 
-/// Proxy object for [GstRtsp.RTSPExtension] interface when a GObject has no applicable D binding
+/// Proxy object for [gstrtsp.rtspextension.RTSPExtension] interface when a GObject has no applicable D binding
 class RTSPExtensionIfaceProxy : IfaceProxy, gstrtsp.rtspextension.RTSPExtension
 {
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -33,6 +33,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileSystemDataset self()
   {
     return this;
@@ -45,7 +46,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
     GError *_err;
     _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner.cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

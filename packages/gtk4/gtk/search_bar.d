@@ -83,9 +83,86 @@ class SearchBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SearchBar self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `keyCaptureWidget` property.
+      Returns: The key capture widget.
+  */
+  @property gtk.widget.Widget keyCaptureWidget()
+  {
+    return getKeyCaptureWidget();
+  }
+
+  /**
+      Set `keyCaptureWidget` property.
+      Params:
+        propval = The key capture widget.
+  */
+  @property void keyCaptureWidget(gtk.widget.Widget propval)
+  {
+    return setKeyCaptureWidget(propval);
+  }
+
+  /**
+      Get `searchModeEnabled` property.
+      Returns: Whether the search mode is on and the search bar shown.
+  */
+  @property bool searchModeEnabled()
+  {
+    return getSearchMode();
+  }
+
+  /**
+      Set `searchModeEnabled` property.
+      Params:
+        propval = Whether the search mode is on and the search bar shown.
+  */
+  @property void searchModeEnabled(bool propval)
+  {
+    return setSearchMode(propval);
+  }
+
+  /**
+      Get `showCloseButton` property.
+      Returns: Whether to show the close button in the search bar.
+  */
+  @property bool showCloseButton()
+  {
+    return getShowCloseButton();
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to show the close button in the search bar.
+  */
+  @property void showCloseButton(bool propval)
+  {
+    return setShowCloseButton(propval);
   }
 
   /**
@@ -115,7 +192,7 @@ class SearchBar : gtk.widget.Widget
   */
   void connectEntry(gtk.editable.Editable entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(gobject.object.ObjectWrap)entry).cPtr(No.Dup) : null);
   }
 
   /**
@@ -126,7 +203,7 @@ class SearchBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +215,7 @@ class SearchBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

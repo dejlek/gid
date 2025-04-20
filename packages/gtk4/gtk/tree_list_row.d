@@ -14,14 +14,14 @@ import gtk.types;
     It allows navigating the model as a tree and modify the state of rows.
     
     [gtk.tree_list_row.TreeListRow] instances are created by a [gtk.tree_list_model.TreeListModel] only
-    when the [gtk.tree_list_model.TreeListModel.gboolean] property is not set.
+    when the [gtk.tree_list_model.TreeListModel.passthrough] property is not set.
     
     There are various support objects that can make use of [gtk.tree_list_row.TreeListRow]
     objects, such as the [gtk.tree_expander.TreeExpander] widget that allows displaying
     an icon to expand or collapse a row or [gtk.tree_list_row_sorter.TreeListRowSorter] that
     makes it possible to sort trees properly.
 */
-class TreeListRow : gobject.object.ObjectG
+class TreeListRow : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,9 +43,65 @@ class TreeListRow : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeListRow self()
   {
     return this;
+  }
+
+  /**
+      Get `children` property.
+      Returns: The model holding the row's children.
+  */
+  @property gio.list_model.ListModel children()
+  {
+    return getChildren();
+  }
+
+  /**
+      Get `depth` property.
+      Returns: The depth in the tree of this row.
+  */
+  @property uint depth()
+  {
+    return getDepth();
+  }
+
+  /**
+      Get `expandable` property.
+      Returns: If this row can ever be expanded.
+  */
+  @property bool expandable()
+  {
+    return isExpandable();
+  }
+
+  /**
+      Get `expanded` property.
+      Returns: If this row is currently expanded.
+  */
+  @property bool expanded()
+  {
+    return getExpanded();
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = If this row is currently expanded.
+  */
+  @property void expanded(bool propval)
+  {
+    return setExpanded(propval);
+  }
+
+  /**
+      Get `item` property.
+      Returns: The item held in this row.
+  */
+  @property gobject.object.ObjectWrap item()
+  {
+    return getItem();
   }
 
   /**
@@ -60,7 +116,7 @@ class TreeListRow : gobject.object.ObjectG
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -70,14 +126,14 @@ class TreeListRow : gobject.object.ObjectG
       This model is the model created by the
       [gtk.types.TreeListModelCreateModelFunc]
       and contains the original items, no matter what value
-      [gtk.tree_list_model.TreeListModel.gboolean] is set to.
+      [gtk.tree_list_model.TreeListModel.passthrough] is set to.
       Returns: The model containing the children
   */
   gio.list_model.ListModel getChildren()
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,11 +172,11 @@ class TreeListRow : gobject.object.ObjectG
           of this row. This function is only marked as nullable for backwards
           compatibility reasons.
   */
-  gobject.object.ObjectG getItem()
+  gobject.object.ObjectWrap getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -142,7 +198,7 @@ class TreeListRow : gobject.object.ObjectG
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 

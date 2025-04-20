@@ -1081,7 +1081,7 @@ __gshared extern(C)
   AdwToast* function(const(char)* format,  ...) c_adw_toast_new_format; ///
   void function(AdwToast* self) c_adw_toast_dismiss; ///
   const(char)* function(AdwToast* self) c_adw_toast_get_action_name; ///
-  VariantC* function(AdwToast* self) c_adw_toast_get_action_target_value; ///
+  GVariant* function(AdwToast* self) c_adw_toast_get_action_target_value; ///
   const(char)* function(AdwToast* self) c_adw_toast_get_button_label; ///
   GtkWidget* function(AdwToast* self) c_adw_toast_get_custom_title; ///
   AdwToastPriority function(AdwToast* self) c_adw_toast_get_priority; ///
@@ -1090,7 +1090,7 @@ __gshared extern(C)
   bool function(AdwToast* self) c_adw_toast_get_use_markup; ///
   void function(AdwToast* self, const(char)* actionName) c_adw_toast_set_action_name; ///
   void function(AdwToast* self, const(char)* formatString,  ...) c_adw_toast_set_action_target; ///
-  void function(AdwToast* self, VariantC* actionTarget) c_adw_toast_set_action_target_value; ///
+  void function(AdwToast* self, GVariant* actionTarget) c_adw_toast_set_action_target_value; ///
   void function(AdwToast* self, const(char)* buttonLabel) c_adw_toast_set_button_label; ///
   void function(AdwToast* self, GtkWidget* widget) c_adw_toast_set_custom_title; ///
   void function(AdwToast* self, const(char)* detailedActionName) c_adw_toast_set_detailed_action_name; ///

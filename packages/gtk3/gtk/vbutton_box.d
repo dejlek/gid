@@ -36,6 +36,7 @@ class VButtonBox : gtk.button_box.ButtonBox
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VButtonBox self()
   {
     return this;

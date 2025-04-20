@@ -59,9 +59,95 @@ class Revealer : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Revealer self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `childRevealed` property.
+      Returns: Whether the child is revealed and the animation target reached.
+  */
+  @property bool childRevealed()
+  {
+    return getChildRevealed();
+  }
+
+  /**
+      Get `revealChild` property.
+      Returns: Whether the revealer should reveal the child.
+  */
+  @property bool revealChild()
+  {
+    return getRevealChild();
+  }
+
+  /**
+      Set `revealChild` property.
+      Params:
+        propval = Whether the revealer should reveal the child.
+  */
+  @property void revealChild(bool propval)
+  {
+    return setRevealChild(propval);
+  }
+
+  /**
+      Get `transitionDuration` property.
+      Returns: The animation duration, in milliseconds.
+  */
+  @property uint transitionDuration()
+  {
+    return getTransitionDuration();
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The animation duration, in milliseconds.
+  */
+  @property void transitionDuration(uint propval)
+  {
+    return setTransitionDuration(propval);
+  }
+
+  /**
+      Get `transitionType` property.
+      Returns: The type of animation used to transition.
+  */
+  @property gtk.types.RevealerTransitionType transitionType()
+  {
+    return getTransitionType();
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used to transition.
+  */
+  @property void transitionType(gtk.types.RevealerTransitionType propval)
+  {
+    return setTransitionType(propval);
   }
 
   /**
@@ -83,7 +169,7 @@ class Revealer : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_get_child(cast(GtkRevealer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

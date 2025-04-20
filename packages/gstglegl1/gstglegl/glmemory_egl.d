@@ -14,7 +14,9 @@ import gstglegl.types;
 class GLMemoryEGL : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `glmemory_egl.GLMemoryEGL` boxed type.
+  */
   this()
   {
     super(gMalloc(GstGLMemoryEGL.sizeof), Yes.Take);
@@ -45,6 +47,7 @@ class GLMemoryEGL : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemoryEGL self()
   {
     return this;

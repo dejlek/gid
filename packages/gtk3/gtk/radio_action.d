@@ -3,6 +3,7 @@ module gtk.radio_action;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -37,9 +38,68 @@ class RadioAction : gtk.toggle_action.ToggleAction
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RadioAction self()
   {
     return this;
+  }
+
+  /**
+      Get `currentValue` property.
+      Returns: The value property of the currently active member of the group to which
+      this action belongs.
+  */
+  @property int currentValue()
+  {
+    return getCurrentValue();
+  }
+
+  /**
+      Set `currentValue` property.
+      Params:
+        propval = The value property of the currently active member of the group to which
+        this action belongs.
+  */
+  @property void currentValue(int propval)
+  {
+    return setCurrentValue(propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio action.
+  */
+  @property void group(gtk.radio_action.RadioAction propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.radio_action.RadioAction)("group", propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The value is an arbitrary integer which can be used as a
+      convenient way to determine which action in the group is
+      currently active in an ::activate or ::changed signal handler.
+      See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
+      for convenient ways to get and set this property.
+  */
+  @property int value()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("value");
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value is an arbitrary integer which can be used as a
+        convenient way to determine which action in the group is
+        currently active in an ::activate or ::changed signal handler.
+        See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
+        for convenient ways to get and set this property.
+  */
+  @property void value(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("value", propval);
   }
 
   /**

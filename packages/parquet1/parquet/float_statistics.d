@@ -30,6 +30,7 @@ class FloatStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FloatStatistics self()
   {
     return this;

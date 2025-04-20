@@ -21,9 +21,9 @@ import gobject.object;
       to be implemented by ATK itself. As #AtkObject::focus-event was
       deprecated in favor of a #AtkObject::state-change signal, in order
       to notify a focus change on your implementation, you can use
-      [atk.object.ObjectAtk.notifyStateChange] instead.
+      [atk.object.ObjectWrap.notifyStateChange] instead.
 */
-void focusTrackerNotify(atk.object.ObjectAtk object)
+void focusTrackerNotify(atk.object.ObjectWrap object)
 {
   atk_focus_tracker_notify(object ? cast(AtkObject*)object.cPtr(No.Dup) : null);
 }
@@ -55,7 +55,7 @@ atk.registry.Registry getDefaultRegistry()
 {
   AtkRegistry* _cretval;
   _cretval = atk_get_default_registry();
-  auto _retval = ObjectG.getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -64,11 +64,11 @@ atk.registry.Registry getDefaultRegistry()
     Returns: the currently focused object for the current
       application
 */
-atk.object.ObjectAtk getFocusObject()
+atk.object.ObjectWrap getFocusObject()
 {
   AtkObject* _cretval;
   _cretval = atk_get_focus_object();
-  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
   return _retval;
 }
 
@@ -140,11 +140,11 @@ uint getMinorVersion()
     Returns: the root accessible container for the current
       application
 */
-atk.object.ObjectAtk getRoot()
+atk.object.ObjectWrap getRoot()
 {
   AtkObject* _cretval;
   _cretval = atk_get_root();
-  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
   return _retval;
 }
 

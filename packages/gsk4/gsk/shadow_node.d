@@ -18,7 +18,7 @@ class ShadowNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.ShadowNode");
+      throw new GidConstructException("Null instance pointer for gsk.shadow_node.ShadowNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

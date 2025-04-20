@@ -177,9 +177,232 @@ class NavigationSplitView : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NavigationSplitView self()
   {
     return this;
+  }
+
+  /**
+      Get `collapsed` property.
+      Returns: Whether the split view is collapsed.
+      
+      When collapsed, the children are put inside an `class@NavigationView`,
+      otherwise they are displayed side by side.
+      
+      The `property@NavigationSplitView:show-content` controls which child is
+      visible while collapsed.
+  */
+  @property bool collapsed()
+  {
+    return getCollapsed();
+  }
+
+  /**
+      Set `collapsed` property.
+      Params:
+        propval = Whether the split view is collapsed.
+        
+        When collapsed, the children are put inside an `class@NavigationView`,
+        otherwise they are displayed side by side.
+        
+        The `property@NavigationSplitView:show-content` controls which child is
+        visible while collapsed.
+  */
+  @property void collapsed(bool propval)
+  {
+    return setCollapsed(propval);
+  }
+
+  /**
+      Get `content` property.
+      Returns: The content widget.
+  */
+  @property adw.navigation_page.NavigationPage content()
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+  */
+  @property void content(adw.navigation_page.NavigationPage propval)
+  {
+    return setContent(propval);
+  }
+
+  /**
+      Get `maxSidebarWidth` property.
+      Returns: The maximum sidebar width.
+      
+      Maximum width is affected by
+      `property@NavigationSplitView:sidebar-width-unit`.
+      
+      The sidebar widget can still be allocated with larger width if its own
+      minimum width exceeds it.
+  */
+  @property double maxSidebarWidth()
+  {
+    return getMaxSidebarWidth();
+  }
+
+  /**
+      Set `maxSidebarWidth` property.
+      Params:
+        propval = The maximum sidebar width.
+        
+        Maximum width is affected by
+        `property@NavigationSplitView:sidebar-width-unit`.
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
+  */
+  @property void maxSidebarWidth(double propval)
+  {
+    return setMaxSidebarWidth(propval);
+  }
+
+  /**
+      Get `minSidebarWidth` property.
+      Returns: The minimum sidebar width.
+      
+      Minimum width is affected by
+      `property@NavigationSplitView:sidebar-width-unit`.
+      
+      The sidebar widget can still be allocated with larger width if its own
+      minimum width exceeds it.
+  */
+  @property double minSidebarWidth()
+  {
+    return getMinSidebarWidth();
+  }
+
+  /**
+      Set `minSidebarWidth` property.
+      Params:
+        propval = The minimum sidebar width.
+        
+        Minimum width is affected by
+        `property@NavigationSplitView:sidebar-width-unit`.
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
+  */
+  @property void minSidebarWidth(double propval)
+  {
+    return setMinSidebarWidth(propval);
+  }
+
+  /**
+      Get `showContent` property.
+      Returns: Determines the visible page when collapsed.
+      
+      If set to `TRUE`, the content widget will be the visible page when
+      `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+      widget will be visible.
+      
+      If the split view is already collapsed, the visible page changes
+      immediately.
+  */
+  @property bool showContent()
+  {
+    return getShowContent();
+  }
+
+  /**
+      Set `showContent` property.
+      Params:
+        propval = Determines the visible page when collapsed.
+        
+        If set to `TRUE`, the content widget will be the visible page when
+        `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+        widget will be visible.
+        
+        If the split view is already collapsed, the visible page changes
+        immediately.
+  */
+  @property void showContent(bool propval)
+  {
+    return setShowContent(propval);
+  }
+
+  /**
+      Get `sidebar` property.
+      Returns: The sidebar widget.
+  */
+  @property adw.navigation_page.NavigationPage sidebar()
+  {
+    return getSidebar();
+  }
+
+  /**
+      Set `sidebar` property.
+      Params:
+        propval = The sidebar widget.
+  */
+  @property void sidebar(adw.navigation_page.NavigationPage propval)
+  {
+    return setSidebar(propval);
+  }
+
+  /**
+      Get `sidebarWidthFraction` property.
+      Returns: The preferred sidebar width as a fraction of the total width.
+      
+      The preferred width is additionally limited by
+      `property@NavigationSplitView:min-sidebar-width` and
+      `property@NavigationSplitView:max-sidebar-width`.
+      
+      The sidebar widget can be allocated with larger width if its own minimum
+      width exceeds the preferred width.
+  */
+  @property double sidebarWidthFraction()
+  {
+    return getSidebarWidthFraction();
+  }
+
+  /**
+      Set `sidebarWidthFraction` property.
+      Params:
+        propval = The preferred sidebar width as a fraction of the total width.
+        
+        The preferred width is additionally limited by
+        `property@NavigationSplitView:min-sidebar-width` and
+        `property@NavigationSplitView:max-sidebar-width`.
+        
+        The sidebar widget can be allocated with larger width if its own minimum
+        width exceeds the preferred width.
+  */
+  @property void sidebarWidthFraction(double propval)
+  {
+    return setSidebarWidthFraction(propval);
+  }
+
+  /**
+      Get `sidebarWidthUnit` property.
+      Returns: The length unit for minimum and maximum sidebar widths.
+      
+      See `property@NavigationSplitView:min-sidebar-width` and
+      `property@NavigationSplitView:max-sidebar-width`.
+  */
+  @property adw.types.LengthUnit sidebarWidthUnit()
+  {
+    return getSidebarWidthUnit();
+  }
+
+  /**
+      Set `sidebarWidthUnit` property.
+      Params:
+        propval = The length unit for minimum and maximum sidebar widths.
+        
+        See `property@NavigationSplitView:min-sidebar-width` and
+        `property@NavigationSplitView:max-sidebar-width`.
+  */
+  @property void sidebarWidthUnit(adw.types.LengthUnit propval)
+  {
+    return setSidebarWidthUnit(propval);
   }
 
   /**
@@ -212,7 +435,7 @@ class NavigationSplitView : gtk.widget.Widget
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_split_view_get_content(cast(AdwNavigationSplitView*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,7 +480,7 @@ class NavigationSplitView : gtk.widget.Widget
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_split_view_get_sidebar(cast(AdwNavigationSplitView*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class ArraySortOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,29 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ArraySortOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `order` property.
+      Returns: How to order values.
+  */
+  @property arrow.types.SortOrder order()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.SortOrder)("order");
+  }
+
+  /**
+      Set `order` property.
+      Params:
+        propval = How to order values.
+  */
+  @property void order(arrow.types.SortOrder propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.SortOrder)("order", propval);
   }
 
   /** */

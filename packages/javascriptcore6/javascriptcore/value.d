@@ -15,7 +15,7 @@ import javascriptcore.types;
     JSCValue represents a reference to a value in a #JSCContext. The JSCValue
     protects the referenced value from being garbage collected.
 */
-class Value : gobject.object.ObjectG
+class Value : gobject.object.ObjectWrap
 {
 
   /** */
@@ -90,7 +90,7 @@ class Value : gobject.object.ObjectG
     JSCValue* _cretval;
     auto _destroyNotify = destroyNotify ? freezeDelegate(cast(void*)&destroyNotify) : null;
     _cretval = jsc_value_new_array_buffer(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, data, size, _destroyNotifyCB, _destroyNotify);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Value : gobject.object.ObjectG
     auto _array = gPtrArrayFromD!(javascriptcore.value.Value, false)(array);
     scope(exit) containerFree!(GPtrArray*, javascriptcore.value.Value, GidOwnership.None)(_array);
     _cretval = jsc_value_new_array_from_garray(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _array);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Value : gobject.object.ObjectG
     _tmpstrv ~= null;
     const(char*)* _strv = _tmpstrv.ptr;
     _cretval = jsc_value_new_array_from_strv(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _strv);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_boolean(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, value);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class Value : gobject.object.ObjectG
     JSCValue* _cretval;
     const(char)* _json = json.toCString(No.Alloc);
     _cretval = jsc_value_new_from_json(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _json);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_null(context ? cast(JSCContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_number(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, number);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_object(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, instance, jscClass ? cast(JSCClass*)jscClass.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -237,14 +237,14 @@ class Value : gobject.object.ObjectG
     {
       auto _dlg = cast(javascriptcore.types.Executor*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(javascriptcore.value.Value)(cast(void*)resolve, No.Take), ObjectG.getDObject!(javascriptcore.value.Value)(cast(void*)reject, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(void*)resolve, No.Take), gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(void*)reject, No.Take));
     }
     auto _executorCB = executor ? &_executorCallback : null;
 
     JSCValue* _cretval;
     auto _executor = executor ? cast(void*)&(executor) : null;
     _cretval = jsc_value_new_promise(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _executorCB, _executor);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Value : gobject.object.ObjectG
     JSCValue* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = jsc_value_new_string(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _string_);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_string_from_bytes(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_typed_array(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, type, length);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_undefined(context ? cast(JSCContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class Value : gobject.object.ObjectG
       _tmpparameters ~= obj ? cast(JSCValue*)obj.cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
     _cretval = jsc_value_constructor_callv(cast(JSCValue*)cPtr, _nParameters, _parameters);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class Value : gobject.object.ObjectG
       _tmpparameters ~= obj ? cast(JSCValue*)obj.cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
     _cretval = jsc_value_function_callv(cast(JSCValue*)cPtr, _nParameters, _parameters);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class Value : gobject.object.ObjectG
   {
     JSCContext* _cretval;
     _cretval = jsc_value_get_context(cast(JSCValue*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_typed_array_with_buffer(cast(JSCValue*)cPtr, type, offset, length);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class Value : gobject.object.ObjectG
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = jsc_value_object_get_property(cast(JSCValue*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -631,7 +631,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_object_get_property_at_index(cast(JSCValue*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Value : gobject.object.ObjectG
       _tmpparameters ~= obj ? cast(JSCValue*)obj.cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
     _cretval = jsc_value_object_invoke_methodv(cast(JSCValue*)cPtr, _name, _nParameters, _parameters);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -805,7 +805,7 @@ class Value : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_value_typed_array_get_buffer(cast(JSCValue*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 

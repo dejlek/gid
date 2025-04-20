@@ -31,6 +31,7 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProjectNodeOptions self()
   {
     return this;

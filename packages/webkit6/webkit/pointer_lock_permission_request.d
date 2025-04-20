@@ -19,7 +19,7 @@ import webkit.types;
     When a WebKitPointerLockPermissionRequest is not handled by the user,
     it is allowed by default.
 */
-class PointerLockPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

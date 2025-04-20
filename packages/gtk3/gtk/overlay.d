@@ -63,6 +63,7 @@ class Overlay : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Overlay self()
   {
     return this;

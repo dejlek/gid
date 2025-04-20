@@ -63,11 +63,11 @@ template CellAccessibleParentT()
   }
 
   /** */
-  override atk.object.ObjectAtk[] getColumnHeaderCells(gtk.cell_accessible.CellAccessible cell)
+  override atk.object.ObjectWrap[] getColumnHeaderCells(gtk.cell_accessible.CellAccessible cell)
   {
     GPtrArray* _cretval;
     _cretval = gtk_cell_accessible_parent_get_column_header_cells(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null);
-    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.Full)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 
@@ -81,11 +81,11 @@ template CellAccessibleParentT()
   }
 
   /** */
-  override atk.object.ObjectAtk[] getRowHeaderCells(gtk.cell_accessible.CellAccessible cell)
+  override atk.object.ObjectWrap[] getRowHeaderCells(gtk.cell_accessible.CellAccessible cell)
   {
     GPtrArray* _cretval;
     _cretval = gtk_cell_accessible_parent_get_row_header_cells(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null);
-    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.Full)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 

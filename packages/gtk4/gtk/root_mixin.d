@@ -36,7 +36,7 @@ template RootT()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_root_get_display(cast(GtkRoot*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ template RootT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_root_get_focus(cast(GtkRoot*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

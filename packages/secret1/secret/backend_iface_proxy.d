@@ -5,7 +5,7 @@ import gobject.object;
 import secret.backend;
 import secret.backend_mixin;
 
-/// Proxy object for [Secret.Backend] interface when a GObject has no applicable D binding
+/// Proxy object for [secret.backend.Backend] interface when a GObject has no applicable D binding
 class BackendIfaceProxy : IfaceProxy, secret.backend.Backend
 {
   this(void* ptr, Flag!"Take" take = No.Take)

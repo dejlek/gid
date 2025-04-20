@@ -84,7 +84,7 @@ import gtk.types;
     do implement reference counting, obtain references on these child levels
     yourself.
 */
-class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel
+class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel
 {
 
   /** */
@@ -106,6 +106,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeModelFilter self()
   {
     return this;
@@ -206,7 +207,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_get_model(cast(GtkTreeModelFilter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +243,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
       auto _dlg = cast(gtk.types.TreeModelFilterModifyFunc*)data;
       auto _value = new gobject.value.Value(value, No.Take);
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null, _value, column);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null, _value, column);
       *value = *cast(GValue*)_value.cPtr;
 
     }
@@ -322,7 +323,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
     {
       auto _dlg = cast(gtk.types.TreeModelFilterVisibleFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

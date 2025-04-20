@@ -64,9 +64,95 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToolButton self()
   {
     return this;
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the themed icon displayed on the item.
+      This property only has an effect if not overridden by
+      #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
+      #GtkToolButton:stock-id properties.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the themed icon displayed on the item.
+        This property only has an effect if not overridden by
+        #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
+        #GtkToolButton:stock-id properties.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget iconWidget()
+  {
+    return getIconWidget();
+  }
+
+  /** */
+  @property void iconWidget(gtk.widget.Widget propval)
+  {
+    return setIconWidget(propval);
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /** */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
+  }
+
+  /** */
+  @property string stockId()
+  {
+    return getStockId();
+  }
+
+  /** */
+  @property void stockId(string propval)
+  {
+    return setStockId(propval);
+  }
+
+  /** */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /** */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -107,7 +193,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +221,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_icon_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +249,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_label_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

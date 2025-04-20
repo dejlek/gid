@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class CallOptions : gobject.object.ObjectG
+class CallOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,33 @@ class CallOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CallOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: An optional timeout for this call. Negative durations mean an
+      implementation-defined default behavior will be used
+      instead. This is the default value.
+  */
+  @property double timeout()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("timeout");
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = An optional timeout for this call. Negative durations mean an
+        implementation-defined default behavior will be used
+        instead. This is the default value.
+  */
+  @property void timeout(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("timeout", propval);
   }
 
   /** */

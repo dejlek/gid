@@ -32,6 +32,7 @@ class GLBaseMemoryAllocator : gst.allocator.Allocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseMemoryAllocator self()
   {
     return this;

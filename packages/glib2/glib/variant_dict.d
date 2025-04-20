@@ -128,6 +128,7 @@ class VariantDict : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VariantDict self()
   {
     return this;
@@ -150,10 +151,10 @@ class VariantDict : gobject.boxed.Boxed
             dictionary
       Returns: a #GVariantDict
   */
-  this(glib.variant.VariantG fromAsv = null)
+  this(glib.variant.Variant fromAsv = null)
   {
     GVariantDict* _cretval;
-    _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(No.Dup) : null);
+    _cretval = g_variant_dict_new(fromAsv ? cast(GVariant*)fromAsv.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -203,11 +204,11 @@ class VariantDict : gobject.boxed.Boxed
       the case of stack-allocated).
       Returns: a new, floating, #GVariant
   */
-  glib.variant.VariantG end()
+  glib.variant.Variant end()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_variant_dict_end(cast(GVariantDict*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -220,10 +221,10 @@ class VariantDict : gobject.boxed.Boxed
         key = the key to insert a value for
         value = the value to insert
   */
-  void insertValue(string key, glib.variant.VariantG value)
+  void insertValue(string key, glib.variant.Variant value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -244,12 +245,12 @@ class VariantDict : gobject.boxed.Boxed
         expectedType = a #GVariantType, or null
       Returns: the value of the dictionary key, or null
   */
-  glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant lookupValue(string key, glib.variant_type.VariantType expectedType = null)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

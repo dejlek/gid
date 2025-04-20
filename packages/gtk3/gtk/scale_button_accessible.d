@@ -38,6 +38,7 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScaleButtonAccessible self()
   {
     return this;

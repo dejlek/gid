@@ -43,7 +43,7 @@ class VideoMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_meta.VideoMeta");
 
     cInstance = *cast(GstVideoMeta*)ptr;
 
@@ -57,89 +57,168 @@ class VideoMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)cPtr).meta);
   }
 
+  /**
+      Get `buffer` field.
+      Returns: the buffer this metadata belongs to
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = the buffer this metadata belongs to
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstVideoMeta*)cPtr).buffer);
   }
 
+  /**
+      Get `flags` field.
+      Returns: additional video flags
+  */
   @property gstvideo.types.VideoFrameFlags flags()
   {
     return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoMeta*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = additional video flags
+  */
   @property void flags(gstvideo.types.VideoFrameFlags propval)
   {
     (cast(GstVideoMeta*)cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
 
+  /**
+      Get `format` field.
+      Returns: the video format
+  */
   @property gstvideo.types.VideoFormat format()
   {
     return cast(gstvideo.types.VideoFormat)(cast(GstVideoMeta*)cPtr).format;
   }
 
+  /**
+      Set `format` field.
+      Params:
+        propval = the video format
+  */
   @property void format(gstvideo.types.VideoFormat propval)
   {
     (cast(GstVideoMeta*)cPtr).format = cast(GstVideoFormat)propval;
   }
 
+  /**
+      Get `id` field.
+      Returns: identifier of the frame
+  */
   @property int id()
   {
     return (cast(GstVideoMeta*)cPtr).id;
   }
 
+  /**
+      Set `id` field.
+      Params:
+        propval = identifier of the frame
+  */
   @property void id(int propval)
   {
     (cast(GstVideoMeta*)cPtr).id = propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: the video width
+  */
   @property uint width()
   {
     return (cast(GstVideoMeta*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the video width
+  */
   @property void width(uint propval)
   {
     (cast(GstVideoMeta*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the video height
+  */
   @property uint height()
   {
     return (cast(GstVideoMeta*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the video height
+  */
   @property void height(uint propval)
   {
     (cast(GstVideoMeta*)cPtr).height = propval;
   }
 
+  /**
+      Get `nPlanes` field.
+      Returns: the number of planes in the image
+  */
   @property uint nPlanes()
   {
     return (cast(GstVideoMeta*)cPtr).nPlanes;
   }
 
+  /**
+      Set `nPlanes` field.
+      Params:
+        propval = the number of planes in the image
+  */
   @property void nPlanes(uint propval)
   {
     (cast(GstVideoMeta*)cPtr).nPlanes = propval;
   }
 
+  /** Function alias for field `unmap` */
   alias UnmapFuncType = extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info);
 
+  /**
+      Get `unmap` field.
+      Returns: unmap the memory of a plane
+  */
   @property UnmapFuncType unmap()
   {
     return (cast(GstVideoMeta*)cPtr).unmap;
   }
 
+  /**
+      Get `alignment` field.
+      Returns: the paddings and alignment constraints of the video buffer.
+      It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
+      using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
+      to no padding and no alignment. Since: 1.18
+  */
   @property gstvideo.video_alignment.VideoAlignment alignment()
   {
     return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstVideoMeta*)cPtr).alignment);

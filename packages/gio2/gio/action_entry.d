@@ -26,7 +26,7 @@ class ActionEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.ActionEntry");
+      throw new GidConstructException("Null instance pointer for gio.action_entry.ActionEntry");
 
     cInstance = *cast(GActionEntry*)ptr;
 
@@ -40,48 +40,105 @@ class ActionEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `name` field.
+      Returns: the name of the action
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = the name of the action
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).name);
   }
 
-  alias ActivateFuncType = extern(C) void function(GSimpleAction* action, VariantC* parameter, void* userData);
+  /** Function alias for field `activate` */
+  alias ActivateFuncType = extern(C) void function(GSimpleAction* action, GVariant* parameter, void* userData);
 
+  /**
+      Get `activate` field.
+      Returns: the callback to connect to the "activate" signal of the
+                 action.  Since GLib 2.40, this can be null for stateful
+                 actions, in which case the default handler is used.  For
+                 boolean-stated actions with no parameter, this is a
+                 toggle.  For other state types (and parameter type equal
+                 to the state type) this will be a function that
+                 just calls @change_state (which you should provide).
+  */
   @property ActivateFuncType activate()
   {
     return (cast(GActionEntry*)cPtr).activate;
   }
 
+  /**
+      Get `parameterType` field.
+      Returns: the type of the parameter that must be passed to the
+                       activate function for this action, given as a single
+                       GVariant type string (or null for no parameter)
+  */
   @property string parameterType()
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
   }
 
+  /**
+      Set `parameterType` field.
+      Params:
+        propval = the type of the parameter that must be passed to the
+                         activate function for this action, given as a single
+                         GVariant type string (or null for no parameter)
+  */
   @property void parameterType(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
     dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).parameterType);
   }
 
+  /**
+      Get `state` field.
+      Returns: the initial state for this action, given in
+              [GVariant text format][gvariant-text].  The state is parsed
+              with no extra type information, so type tags must be added to
+              the string if they are necessary.  Stateless actions should
+              give null here.
+  */
   @property string state()
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
   }
 
+  /**
+      Set `state` field.
+      Params:
+        propval = the initial state for this action, given in
+                [GVariant text format][gvariant-text].  The state is parsed
+                with no extra type information, so type tags must be added to
+                the string if they are necessary.  Stateless actions should
+                give null here.
+  */
   @property void state(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
     dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).state);
   }
 
-  alias ChangeStateFuncType = extern(C) void function(GSimpleAction* action, VariantC* value, void* userData);
+  /** Function alias for field `changeState` */
+  alias ChangeStateFuncType = extern(C) void function(GSimpleAction* action, GVariant* value, void* userData);
 
+  /**
+      Get `changeState` field.
+      Returns: the callback to connect to the "change-state" signal
+                     of the action.  All stateful actions should provide a
+                     handler here; stateless actions should not.
+  */
   @property ChangeStateFuncType changeState()
   {
     return (cast(GActionEntry*)cPtr).changeState;

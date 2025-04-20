@@ -27,7 +27,7 @@ import webkit.types;
     authentication asynchronously, simply increase the reference count of the
     WebKitAuthenticationRequest object.
 */
-class AuthenticationRequest : gobject.object.ObjectG
+class AuthenticationRequest : gobject.object.ObjectWrap
 {
 
   /** */

@@ -768,7 +768,7 @@ enum AdwViewSwitcherPolicy
     The Details page displays the application comments and links.
     
     The comments can be set with the `property@AboutDialog:comments` property.
-    Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+    Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
     To set the application website, use `property@AboutDialog:website`.
@@ -950,7 +950,7 @@ struct AdwAboutDialogClass
     The Details page displays the application comments and links.
     
     The comments can be set with the `property@AboutWindow:comments` property.
-    Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+    Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
     To set the application website, use `property@AboutWindow:website`.
@@ -1312,7 +1312,7 @@ struct AdwAlertDialogClass
     
     The `signal@Animation::done` signal can be used to perform an action after
     the animation ends, for example hiding a widget after animating its
-    [gtk.widget.Widget.gdouble] to 0.
+    [gtk.widget.Widget.opacity] to 0.
     
     [adw.animation.Animation] will be kept alive while the animation is playing. As such,
     it's safe to create an animation, start it and immediately unref it:
@@ -1440,7 +1440,7 @@ struct AdwApplicationClass
     </object>
     ```
     
-    Using [gtk.application.Application.Gio.MenuModel] is not supported and may result in
+    Using [gtk.application.Application.menubar] is not supported and may result in
     visual glitches.
 */
 struct AdwApplicationWindow
@@ -1655,8 +1655,8 @@ struct AdwBreakpoint;
     changes. Make sure to leave enough space for text labels, and enable
     ellipsizing or wrapping if they might not fit.
     
-    For [gtk.label.Label] this can be done via [gtk.label.Label.Pango.EllipsizeMode], or
-    via [gtk.label.Label.gboolean] together with [gtk.label.Label.gboolean].
+    For [gtk.label.Label] this can be done via [gtk.label.Label.ellipsize], or
+    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrap].
     
     For buttons, use `property@Gtk.Button:can-shrink`,
     `property@Gtk.MenuButton:can-shrink`, `property@Adw.SplitButton:can-shrink`,
@@ -2021,7 +2021,7 @@ struct AdwClampScrollableClass
     
     [adw.combo_row.ComboRow] mirrors [gtk.drop_down.DropDown], see that widget for details.
     
-    [adw.combo_row.ComboRow] is [gtk.list_box_row.ListBoxRow.gboolean] if a model is set.
+    [adw.combo_row.ComboRow] is [gtk.list_box_row.ListBoxRow.activatable] if a model is set.
     
     ## CSS nodes
     
@@ -3377,7 +3377,7 @@ struct AdwPreferencesWindowClass
 
 /**
     An `class@AnimationTarget` changing the value of a property of a
-    [gobject.object.ObjectG] instance.
+    [gobject.object.ObjectWrap] instance.
 */
 struct AdwPropertyAnimationTarget;
 
@@ -4618,7 +4618,7 @@ struct AdwViewSwitcherTitleClass
     </object>
     ```
     
-    Using [gtk.window.Window.Widget] or [gtk.window.Window.Widget]
+    Using [gtk.window.Window.titlebar] or [gtk.window.Window.child]
     is not supported and will result in a crash. Use `property@Window:content`
     instead.
     

@@ -33,9 +33,29 @@ class TcpConnection : gio.socket_connection.SocketConnection
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TcpConnection self()
   {
     return this;
+  }
+
+  /**
+      Get `gracefulDisconnect` property.
+      Returns: Whether [gio.iostream.IOStream.close] does a graceful disconnect.
+  */
+  @property bool gracefulDisconnect()
+  {
+    return getGracefulDisconnect();
+  }
+
+  /**
+      Set `gracefulDisconnect` property.
+      Params:
+        propval = Whether [gio.iostream.IOStream.close] does a graceful disconnect.
+  */
+  @property void gracefulDisconnect(bool propval)
+  {
+    return setGracefulDisconnect(propval);
   }
 
   /**

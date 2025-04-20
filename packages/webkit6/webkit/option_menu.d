@@ -17,7 +17,7 @@ import webkit.types;
     #WebKitWebView::show-option-menu is emitted, providing a WebKitOptionMenu with the
     #WebKitOptionMenuItem<!-- -->s that should be displayed.
 */
-class OptionMenu : gobject.object.ObjectG
+class OptionMenu : gobject.object.ObjectWrap
 {
 
   /** */

@@ -20,4 +20,10 @@ interface VideoDirection
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_direction_get_type != &gidSymbolNotFound ? gst_video_direction_get_type() : cast(GType)0;
   }
+
+  /** */
+  @property gstvideo.types.VideoOrientationMethod videoDirection();
+
+  /** */
+  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval);
 }

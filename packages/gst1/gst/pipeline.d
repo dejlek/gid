@@ -19,7 +19,7 @@ import gst.types;
     application.
     
     [gst.pipeline.Pipeline.new_] is used to create a pipeline. when you are done with
-    the pipeline, use [gst.object.ObjectGst.unref] to free its resources including all
+    the pipeline, use [gst.object.ObjectWrap.unref] to free its resources including all
     added #GstElement objects (if not otherwise referenced).
     
     Elements are added and removed from the pipeline using the #GstBin
@@ -85,9 +85,75 @@ class Pipeline : gst.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Pipeline self()
   {
     return this;
+  }
+
+  /**
+      Get `autoFlushBus` property.
+      Returns: Whether or not to automatically flush all messages on the
+      pipeline's bus when going from READY to NULL state. Please see
+      [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
+  */
+  @property bool autoFlushBus()
+  {
+    return getAutoFlushBus();
+  }
+
+  /**
+      Set `autoFlushBus` property.
+      Params:
+        propval = Whether or not to automatically flush all messages on the
+        pipeline's bus when going from READY to NULL state. Please see
+        [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
+  */
+  @property void autoFlushBus(bool propval)
+  {
+    return setAutoFlushBus(propval);
+  }
+
+  /**
+      Get `delay` property.
+      Returns: The expected delay needed for elements to spin up to the
+      PLAYING state expressed in nanoseconds.
+      see [gst.pipeline.Pipeline.setDelay] for more information on this option.
+  */
+  @property ulong delay()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("delay");
+  }
+
+  /**
+      Set `delay` property.
+      Params:
+        propval = The expected delay needed for elements to spin up to the
+        PLAYING state expressed in nanoseconds.
+        see [gst.pipeline.Pipeline.setDelay] for more information on this option.
+  */
+  @property void delay(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("delay", propval);
+  }
+
+  /**
+      Get `latency` property.
+      Returns: Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
+  */
+  @property ulong latency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("latency");
+  }
+
+  /**
+      Set `latency` property.
+      Params:
+        propval = Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
+  */
+  @property void latency(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("latency", propval);
   }
 
   /**
@@ -148,7 +214,7 @@ class Pipeline : gst.bin.Bin
   {
     GstBus* _cretval;
     _cretval = gst_pipeline_get_bus(cast(GstPipeline*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -202,7 +268,7 @@ class Pipeline : gst.bin.Bin
   {
     GstClock* _cretval;
     _cretval = gst_pipeline_get_pipeline_clock(cast(GstPipeline*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 

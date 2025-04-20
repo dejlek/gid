@@ -19,7 +19,7 @@ import gobject.types;
     registry the factory type to be used to create an accessible of a
     particular GType.
 */
-class ObjectFactory : gobject.object.ObjectG
+class ObjectFactory : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,7 @@ class ObjectFactory : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ObjectFactory self()
   {
     return this;
@@ -55,11 +56,11 @@ class ObjectFactory : gobject.object.ObjectG
       Returns: an #AtkObject that implements an accessibility
         interface on behalf of obj
   */
-  atk.object.ObjectAtk createAccessible(gobject.object.ObjectG obj)
+  atk.object.ObjectWrap createAccessible(gobject.object.ObjectWrap obj)
   {
     AtkObject* _cretval;
     _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)cPtr, obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 

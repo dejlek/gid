@@ -27,7 +27,7 @@ import gobject.object;
     unlock” button in a dialog and to provide the mechanism to invoke
     when that button is clicked.
 */
-class Permission : gobject.object.ObjectG
+class Permission : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,40 @@ class Permission : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Permission self()
   {
     return this;
+  }
+
+  /**
+      Get `allowed` property.
+      Returns: true if the caller currently has permission to perform the action that
+      @permission represents the permission to perform.
+  */
+  @property bool allowed()
+  {
+    return getAllowed();
+  }
+
+  /**
+      Get `canAcquire` property.
+      Returns: true if it is generally possible to acquire the permission by calling
+      [gio.permission.Permission.acquire].
+  */
+  @property bool canAcquire()
+  {
+    return getCanAcquire();
+  }
+
+  /**
+      Get `canRelease` property.
+      Returns: true if it is generally possible to release the permission by calling
+      [gio.permission.Permission.release].
+  */
+  @property bool canRelease()
+  {
+    return getCanRelease();
   }
 
   /**
@@ -74,7 +105,7 @@ class Permission : gobject.object.ObjectG
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if the permission was successfully acquired
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool acquire(gio.cancellable.Cancellable cancellable = null)
   {
@@ -82,7 +113,7 @@ class Permission : gobject.object.ObjectG
     GError *_err;
     _retval = g_permission_acquire(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -103,7 +134,7 @@ class Permission : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -121,15 +152,15 @@ class Permission : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult given to the #GAsyncReadyCallback
       Returns: true if the permission was successfully acquired
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool acquireFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_acquire_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_acquire_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -209,7 +240,7 @@ class Permission : gobject.object.ObjectG
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if the permission was successfully released
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool release(gio.cancellable.Cancellable cancellable = null)
   {
@@ -217,7 +248,7 @@ class Permission : gobject.object.ObjectG
     GError *_err;
     _retval = g_permission_release(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -238,7 +269,7 @@ class Permission : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -256,15 +287,15 @@ class Permission : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult given to the #GAsyncReadyCallback
       Returns: true if the permission was successfully released
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool releaseFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_release_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_release_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

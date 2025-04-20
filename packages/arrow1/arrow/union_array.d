@@ -31,6 +31,7 @@ class UnionArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnionArray self()
   {
     return this;
@@ -49,7 +50,7 @@ class UnionArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_union_array_get_field(cast(GArrowUnionArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 

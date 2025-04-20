@@ -15,7 +15,7 @@ import gobject.types;
     
     [adw.enum_list_model.EnumListModel] contains objects of type `class@EnumListItem`.
 */
-class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
+class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -37,6 +37,7 @@ class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EnumListModel self()
   {
     return this;

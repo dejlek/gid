@@ -18,7 +18,7 @@ import gobject.object;
     The #GdkSeat object represents a collection of input devices
     that belong to a user.
 */
-class Seat : gobject.object.ObjectG
+class Seat : gobject.object.ObjectWrap
 {
 
   /** */
@@ -40,6 +40,7 @@ class Seat : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Seat self()
   {
     return this;
@@ -66,7 +67,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +80,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +93,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +166,7 @@ class Seat : gobject.object.ObjectG
     {
       auto _dlg = cast(gdk.types.SeatGrabPrepareFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
     }
     auto _prepareFuncCB = prepareFunc ? &_prepareFuncCallback : null;
 

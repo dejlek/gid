@@ -200,9 +200,52 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserNative self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptLabel` property.
+      Returns: The text used for the label on the accept button in the dialog, or
+      null to use the default text.
+  */
+  @property string acceptLabel()
+  {
+    return getAcceptLabel();
+  }
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = The text used for the label on the accept button in the dialog, or
+        null to use the default text.
+  */
+  @property void acceptLabel(string propval)
+  {
+    return setAcceptLabel(propval);
+  }
+
+  /**
+      Get `cancelLabel` property.
+      Returns: The text used for the label on the cancel button in the dialog, or
+      null to use the default text.
+  */
+  @property string cancelLabel()
+  {
+    return getCancelLabel();
+  }
+
+  /**
+      Set `cancelLabel` property.
+      Params:
+        propval = The text used for the label on the cancel button in the dialog, or
+        null to use the default text.
+  */
+  @property void cancelLabel(string propval)
+  {
+    return setCancelLabel(propval);
   }
 
   mixin FileChooserT!();

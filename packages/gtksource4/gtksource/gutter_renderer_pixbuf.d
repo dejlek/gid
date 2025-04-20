@@ -33,9 +33,46 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GutterRendererPixbuf self()
   {
     return this;
+  }
+
+  /** */
+  @property gio.icon.Icon gicon()
+  {
+    return getGicon();
+  }
+
+  /** */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    return setGicon(propval);
+  }
+
+  /** */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /** */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /** */
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  {
+    return getPixbuf();
+  }
+
+  /** */
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setPixbuf(propval);
   }
 
   /**
@@ -57,7 +94,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   {
     GIcon* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,14 +115,14 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   {
     PixbufC* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   void setGicon(gio.icon.Icon icon = null)
   {
-    gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /** */

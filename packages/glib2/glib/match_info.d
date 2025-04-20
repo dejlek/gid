@@ -41,6 +41,7 @@ class MatchInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MatchInfo self()
   {
     return this;
@@ -68,7 +69,7 @@ class MatchInfo : gobject.boxed.Boxed
       Params:
         stringToExpand = the string to expand
       Returns: the expanded string, or null if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string expandReferences(string stringToExpand)
   {
@@ -77,7 +78,7 @@ class MatchInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_match_info_expand_references(cast(const(GMatchInfo)*)cPtr, _stringToExpand, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -342,7 +343,7 @@ class MatchInfo : gobject.boxed.Boxed
       The match is done on the string passed to the match function, so you
       cannot free it before calling this function.
       Returns: true is the string matched, false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool next()
   {
@@ -350,7 +351,7 @@ class MatchInfo : gobject.boxed.Boxed
     GError *_err;
     _retval = g_match_info_next(cast(GMatchInfo*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

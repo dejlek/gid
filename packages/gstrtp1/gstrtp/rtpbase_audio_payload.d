@@ -62,9 +62,22 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTPBaseAudioPayload self()
   {
     return this;
+  }
+
+  /** */
+  @property bool bufferList()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("buffer-list");
+  }
+
+  /** */
+  @property void bufferList(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("buffer-list", propval);
   }
 
   /**
@@ -96,7 +109,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   {
     GstAdapter* _cretval;
     _cretval = gst_rtp_base_audio_payload_get_adapter(cast(GstRTPBaseAudioPayload*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.Take);
     return _retval;
   }
 

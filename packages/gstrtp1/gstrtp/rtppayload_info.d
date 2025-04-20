@@ -17,7 +17,7 @@ class RTPPayloadInfo
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtp.RTPPayloadInfo");
+      throw new GidConstructException("Null instance pointer for gstrtp.rtppayload_info.RTPPayloadInfo");
 
     cInstance = *cast(GstRTPPayloadInfo*)ptr;
 
@@ -31,64 +31,122 @@ class RTPPayloadInfo
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `payloadType` field.
+      Returns: payload type, -1 means dynamic
+  */
   @property ubyte payloadType()
   {
     return (cast(GstRTPPayloadInfo*)cPtr).payloadType;
   }
 
+  /**
+      Set `payloadType` field.
+      Params:
+        propval = payload type, -1 means dynamic
+  */
   @property void payloadType(ubyte propval)
   {
     (cast(GstRTPPayloadInfo*)cPtr).payloadType = propval;
   }
 
+  /**
+      Get `media` field.
+      Returns: the media type(s), usually "audio", "video", "application", "text",
+      "message".
+  */
   @property string media()
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
   }
 
+  /**
+      Set `media` field.
+      Params:
+        propval = the media type(s), usually "audio", "video", "application", "text",
+        "message".
+  */
   @property void media(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).media);
   }
 
+  /**
+      Get `encodingName` field.
+      Returns: the encoding name of @pt
+  */
   @property string encodingName()
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
   }
 
+  /**
+      Set `encodingName` field.
+      Params:
+        propval = the encoding name of @pt
+  */
   @property void encodingName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingName);
   }
 
+  /**
+      Get `clockRate` field.
+      Returns: default clock rate, 0 = unknown/variable
+  */
   @property uint clockRate()
   {
     return (cast(GstRTPPayloadInfo*)cPtr).clockRate;
   }
 
+  /**
+      Set `clockRate` field.
+      Params:
+        propval = default clock rate, 0 = unknown/variable
+  */
   @property void clockRate(uint propval)
   {
     (cast(GstRTPPayloadInfo*)cPtr).clockRate = propval;
   }
 
+  /**
+      Get `encodingParameters` field.
+      Returns: encoding parameters. For audio this is the number of
+      channels. NULL = not applicable.
+  */
   @property string encodingParameters()
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
   }
 
+  /**
+      Set `encodingParameters` field.
+      Params:
+        propval = encoding parameters. For audio this is the number of
+        channels. NULL = not applicable.
+  */
   @property void encodingParameters(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
   }
 
+  /**
+      Get `bitrate` field.
+      Returns: the bitrate of the media. 0 = unknown/variable.
+  */
   @property uint bitrate()
   {
     return (cast(GstRTPPayloadInfo*)cPtr).bitrate;
   }
 
+  /**
+      Set `bitrate` field.
+      Params:
+        propval = the bitrate of the media. 0 = unknown/variable.
+  */
   @property void bitrate(uint propval)
   {
     (cast(GstRTPPayloadInfo*)cPtr).bitrate = propval;

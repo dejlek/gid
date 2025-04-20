@@ -24,7 +24,7 @@ import pango.font_description;
     enough to allow themers to achieve their goals without the need
     to modify source code.
 */
-class ThemingEngine : gobject.object.ObjectG
+class ThemingEngine : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,6 +46,7 @@ class ThemingEngine : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ThemingEngine self()
   {
     return this;
@@ -65,7 +66,7 @@ class ThemingEngine : gobject.object.ObjectG
     GtkThemingEngine* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_theming_engine_load(_name);
-    auto _retval = ObjectG.getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +213,7 @@ class ThemingEngine : gobject.object.ObjectG
     return _retval;
   }
 
-  alias getProperty = gobject.object.ObjectG.getProperty;
+  alias getProperty = gobject.object.ObjectWrap.getProperty;
 
   /**
       Gets a property value as retrieved from the style settings that apply
@@ -241,7 +242,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_theming_engine_get_screen(cast(GtkThemingEngine*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 

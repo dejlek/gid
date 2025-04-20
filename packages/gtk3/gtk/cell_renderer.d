@@ -2,8 +2,10 @@
 module gtk.cell_renderer;
 
 import cairo.context;
+import gdk.color;
 import gdk.event;
 import gdk.rectangle;
+import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
 import gobject.initially_unowned;
@@ -74,9 +76,208 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRenderer self()
   {
     return this;
+  }
+
+  /** */
+  @property void cellBackground(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("cell-background", propval);
+  }
+
+  /**
+      Get `cellBackgroundGdk` property.
+      Returns: Cell background as a #GdkColor
+  
+      Deprecated: Use #GtkCellRenderer:cell-background-rgba instead.
+  */
+  @property gdk.color.Color cellBackgroundGdk()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("cell-background-gdk");
+  }
+
+  /**
+      Set `cellBackgroundGdk` property.
+      Params:
+        propval = Cell background as a #GdkColor
+  
+      Deprecated: Use #GtkCellRenderer:cell-background-rgba instead.
+  */
+  @property void cellBackgroundGdk(gdk.color.Color propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.color.Color)("cell-background-gdk", propval);
+  }
+
+  /**
+      Get `cellBackgroundRgba` property.
+      Returns: Cell background as a #GdkRGBA
+  */
+  @property gdk.rgba.RGBA cellBackgroundRgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("cell-background-rgba");
+  }
+
+  /**
+      Set `cellBackgroundRgba` property.
+      Params:
+        propval = Cell background as a #GdkRGBA
+  */
+  @property void cellBackgroundRgba(gdk.rgba.RGBA propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("cell-background-rgba", propval);
+  }
+
+  /** */
+  @property bool cellBackgroundSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("cell-background-set");
+  }
+
+  /** */
+  @property void cellBackgroundSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("cell-background-set", propval);
+  }
+
+  /** */
+  @property bool editing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("editing");
+  }
+
+  /** */
+  @property int height()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("height");
+  }
+
+  /** */
+  @property void height(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("height", propval);
+  }
+
+  /** */
+  @property bool isExpanded()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-expanded");
+  }
+
+  /** */
+  @property void isExpanded(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-expanded", propval);
+  }
+
+  /** */
+  @property bool isExpander()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-expander");
+  }
+
+  /** */
+  @property void isExpander(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-expander", propval);
+  }
+
+  /** */
+  @property gtk.types.CellRendererMode mode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.CellRendererMode)("mode");
+  }
+
+  /** */
+  @property void mode(gtk.types.CellRendererMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.CellRendererMode)("mode", propval);
+  }
+
+  /** */
+  @property bool sensitive()
+  {
+    return getSensitive();
+  }
+
+  /** */
+  @property void sensitive(bool propval)
+  {
+    return setSensitive(propval);
+  }
+
+  /** */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /** */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
+  }
+
+  /** */
+  @property int width()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("width");
+  }
+
+  /** */
+  @property void width(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("width", propval);
+  }
+
+  /** */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /** */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
+  }
+
+  /** */
+  @property uint xpad()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("xpad");
+  }
+
+  /** */
+  @property void xpad(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("xpad", propval);
+  }
+
+  /** */
+  @property float yalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yalign");
+  }
+
+  /** */
+  @property void yalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
+  }
+
+  /** */
+  @property uint ypad()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("ypad");
+  }
+
+  /** */
+  @property void ypad(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("ypad", propval);
   }
 
   /**
@@ -418,7 +619,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
     GtkCellEditable* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
 

@@ -36,6 +36,18 @@ interface StreamVolume
   }
 
   /** */
+  @property bool mute();
+
+  /** */
+  @property void mute(bool propval);
+
+  /** */
+  @property double volume();
+
+  /** */
+  @property void volume(double propval);
+
+  /** */
   static double convertVolume(gstaudio.types.StreamVolumeFormat from, gstaudio.types.StreamVolumeFormat to, double val)
   {
     double _retval;

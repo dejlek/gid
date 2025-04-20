@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import pango.c.functions;
 import pango.c.types;
 import pango.context;
@@ -22,7 +23,7 @@ import pango.types;
     This is a virtual object with implementations being specific to
     particular rendering systems.
 */
-class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
+class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -44,9 +45,28 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontMap self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items contained in this list.
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items contained in this list.
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -76,13 +96,13 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
       For instance, the GTK toolkit has, among others,
       [gtk.widget.Widget.getPangoContext]. Use those instead.
       Returns: the newly allocated [pango.context.Context],
-          which should be freed with [gobject.object.ObjectG.unref].
+          which should be freed with [gobject.object.ObjectWrap.unref].
   */
   pango.context.Context createContext()
   {
     PangoContext* _cretval;
     _cretval = pango_font_map_create_context(cast(PangoFontMap*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,7 +118,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     PangoFontFamily* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_map_get_family(cast(PangoFontMap*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +164,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     pango_font_map_list_families(cast(PangoFontMap*)cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
+      families[i] = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     gFree(cast(void*)_families);
   }
 
@@ -161,7 +181,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   {
     PangoFont* _cretval;
     _cretval = pango_font_map_load_font(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +200,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   {
     PangoFontset* _cretval;
     _cretval = pango_font_map_load_fontset(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -202,7 +222,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     PangoFont* _cretval;
     const(char)* _variations = variations.toCString(No.Alloc);
     _cretval = pango_font_map_reload_font(cast(PangoFontMap*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, scale, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _variations);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 }

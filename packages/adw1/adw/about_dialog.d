@@ -68,7 +68,7 @@ import gtk.types;
     The Details page displays the application comments and links.
     
     The comments can be set with the `property@AboutDialog:comments` property.
-    Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+    Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
     To set the application website, use `property@AboutDialog:website`.
@@ -211,9 +211,598 @@ class AboutDialog : adw.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AboutDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `applicationIcon` property.
+      Returns: The name of the application icon.
+      
+      The icon is displayed at the top of the main page.
+  */
+  @property string applicationIcon()
+  {
+    return getApplicationIcon();
+  }
+
+  /**
+      Set `applicationIcon` property.
+      Params:
+        propval = The name of the application icon.
+        
+        The icon is displayed at the top of the main page.
+  */
+  @property void applicationIcon(string propval)
+  {
+    return setApplicationIcon(propval);
+  }
+
+  /**
+      Get `applicationName` property.
+      Returns: The name of the application.
+      
+      The name is displayed at the top of the main page.
+  */
+  @property string applicationName()
+  {
+    return getApplicationName();
+  }
+
+  /**
+      Set `applicationName` property.
+      Params:
+        propval = The name of the application.
+        
+        The name is displayed at the top of the main page.
+  */
+  @property void applicationName(string propval)
+  {
+    return setApplicationName(propval);
+  }
+
+  /**
+      Get `comments` property.
+      Returns: The comments about the application.
+      
+      Comments will be shown on the Details page, above links.
+      
+      Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
+      detailed. It can also contain links and Pango markup.
+  */
+  @property string comments()
+  {
+    return getComments();
+  }
+
+  /**
+      Set `comments` property.
+      Params:
+        propval = The comments about the application.
+        
+        Comments will be shown on the Details page, above links.
+        
+        Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
+        detailed. It can also contain links and Pango markup.
+  */
+  @property void comments(string propval)
+  {
+    return setComments(propval);
+  }
+
+  /**
+      Get `copyright` property.
+      Returns: The copyright information.
+      
+      This should be a short string of one or two lines, for example:
+      `© 2022 Example`.
+      
+      The copyright information will be displayed on the Legal page, above the
+      application license.
+      
+      [adw.about_dialog.AboutDialog.addLegalSection] can be used to add copyright
+      information for the application dependencies or other components.
+  */
+  @property string copyright()
+  {
+    return getCopyright();
+  }
+
+  /**
+      Set `copyright` property.
+      Params:
+        propval = The copyright information.
+        
+        This should be a short string of one or two lines, for example:
+        `© 2022 Example`.
+        
+        The copyright information will be displayed on the Legal page, above the
+        application license.
+        
+        [adw.about_dialog.AboutDialog.addLegalSection] can be used to add copyright
+        information for the application dependencies or other components.
+  */
+  @property void copyright(string propval)
+  {
+    return setCopyright(propval);
+  }
+
+  /**
+      Get `debugInfo` property.
+      Returns: The debug information.
+      
+      Debug information will be shown on the Troubleshooting page. It's intended
+      to be attached to issue reports when reporting issues against the
+      application.
+      
+      [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
+      When saving, `property@AboutDialog:debug-info-filename` would be used as
+      the suggested filename.
+      
+      Debug information cannot contain markup or links.
+  */
+  @property string debugInfo()
+  {
+    return getDebugInfo();
+  }
+
+  /**
+      Set `debugInfo` property.
+      Params:
+        propval = The debug information.
+        
+        Debug information will be shown on the Troubleshooting page. It's intended
+        to be attached to issue reports when reporting issues against the
+        application.
+        
+        [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
+        When saving, `property@AboutDialog:debug-info-filename` would be used as
+        the suggested filename.
+        
+        Debug information cannot contain markup or links.
+  */
+  @property void debugInfo(string propval)
+  {
+    return setDebugInfo(propval);
+  }
+
+  /**
+      Get `debugInfoFilename` property.
+      Returns: The debug information filename.
+      
+      It will be used as the suggested filename when saving debug information to
+      a file.
+      
+      See `property@AboutDialog:debug-info`.
+  */
+  @property string debugInfoFilename()
+  {
+    return getDebugInfoFilename();
+  }
+
+  /**
+      Set `debugInfoFilename` property.
+      Params:
+        propval = The debug information filename.
+        
+        It will be used as the suggested filename when saving debug information to
+        a file.
+        
+        See `property@AboutDialog:debug-info`.
+  */
+  @property void debugInfoFilename(string propval)
+  {
+    return setDebugInfoFilename(propval);
+  }
+
+  /**
+      Get `developerName` property.
+      Returns: The developer name.
+      
+      The developer name is displayed on the main page, under the application
+      name.
+      
+      If the application is developed by multiple people, the developer name can
+      be set to values like "AppName team", "AppName developers" or
+      "The AppName project", and the individual contributors can be listed on the
+      Credits page, with `property@AboutDialog:developers` and related
+      properties.
+  */
+  @property string developerName()
+  {
+    return getDeveloperName();
+  }
+
+  /**
+      Set `developerName` property.
+      Params:
+        propval = The developer name.
+        
+        The developer name is displayed on the main page, under the application
+        name.
+        
+        If the application is developed by multiple people, the developer name can
+        be set to values like "AppName team", "AppName developers" or
+        "The AppName project", and the individual contributors can be listed on the
+        Credits page, with `property@AboutDialog:developers` and related
+        properties.
+  */
+  @property void developerName(string propval)
+  {
+    return setDeveloperName(propval);
+  }
+
+  /**
+      Get `issueUrl` property.
+      Returns: The URL for the application's issue tracker.
+      
+      The issue tracker link is displayed on the main page.
+  */
+  @property string issueUrl()
+  {
+    return getIssueUrl();
+  }
+
+  /**
+      Set `issueUrl` property.
+      Params:
+        propval = The URL for the application's issue tracker.
+        
+        The issue tracker link is displayed on the main page.
+  */
+  @property void issueUrl(string propval)
+  {
+    return setIssueUrl(propval);
+  }
+
+  /**
+      Get `license` property.
+      Returns: The license text.
+      
+      This can be used to set a custom text for the license if it can't be set
+      via `property@AboutDialog:license-type`.
+      
+      When set, `property@AboutDialog:license-type` will be set to
+      [gtk.types.License.Custom].
+      
+      The license text will be displayed on the Legal page, below the copyright
+      information.
+      
+      License text can contain Pango markup and links.
+      
+      [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
+      information for the application dependencies or other components.
+  */
+  @property string license()
+  {
+    return getLicense();
+  }
+
+  /**
+      Set `license` property.
+      Params:
+        propval = The license text.
+        
+        This can be used to set a custom text for the license if it can't be set
+        via `property@AboutDialog:license-type`.
+        
+        When set, `property@AboutDialog:license-type` will be set to
+        [gtk.types.License.Custom].
+        
+        The license text will be displayed on the Legal page, below the copyright
+        information.
+        
+        License text can contain Pango markup and links.
+        
+        [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
+        information for the application dependencies or other components.
+  */
+  @property void license(string propval)
+  {
+    return setLicense(propval);
+  }
+
+  /**
+      Get `licenseType` property.
+      Returns: The license type.
+      
+      Allows to set the application's license froma list of known licenses.
+      
+      If the application's license is not in the list,
+      `property@AboutDialog:license` can be used instead. The license type will
+      be automatically set to [gtk.types.License.Custom] in that case.
+      
+      If set to [gtk.types.License.Unknown], no information will be displayed.
+      
+      If the license type is different from [gtk.types.License.Custom].
+      `property@AboutDialog:license` will be cleared out.
+      
+      The license description will be displayed on the Legal page, below the
+      copyright information.
+      
+      [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
+      information for the application dependencies or other components.
+  */
+  @property gtk.types.License licenseType()
+  {
+    return getLicenseType();
+  }
+
+  /**
+      Set `licenseType` property.
+      Params:
+        propval = The license type.
+        
+        Allows to set the application's license froma list of known licenses.
+        
+        If the application's license is not in the list,
+        `property@AboutDialog:license` can be used instead. The license type will
+        be automatically set to [gtk.types.License.Custom] in that case.
+        
+        If set to [gtk.types.License.Unknown], no information will be displayed.
+        
+        If the license type is different from [gtk.types.License.Custom].
+        `property@AboutDialog:license` will be cleared out.
+        
+        The license description will be displayed on the Legal page, below the
+        copyright information.
+        
+        [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
+        information for the application dependencies or other components.
+  */
+  @property void licenseType(gtk.types.License propval)
+  {
+    return setLicenseType(propval);
+  }
+
+  /**
+      Get `releaseNotes` property.
+      Returns: The release notes of the application.
+      
+      Release notes are displayed on the the What's New page.
+      
+      Release notes are formatted the same way as
+      [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
+      
+      The supported formatting options are:
+      
+      $(LIST
+        * Paragraph (`<p>`)
+        * Ordered list (`<ol>`), with list items (`<li>`)
+        * Unordered list (`<ul>`), with list items (`<li>`)
+      )
+        
+      Within paragraphs and list items, emphasis (`<em>`) and inline code
+      (`<code>`) text styles are supported. The emphasis is rendered in italic,
+      while inline code is shown in a monospaced font.
+      
+      Any text outside paragraphs or list items is ignored.
+      
+      Nested lists are not supported.
+      
+      [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
+      `property@AboutDialog:release-notes-version` of the property will be used
+      as the version; otherwise, `property@AboutDialog:version` is used.
+  */
+  @property string releaseNotes()
+  {
+    return getReleaseNotes();
+  }
+
+  /**
+      Set `releaseNotes` property.
+      Params:
+        propval = The release notes of the application.
+        
+        Release notes are displayed on the the What's New page.
+        
+        Release notes are formatted the same way as
+        [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
+        
+        The supported formatting options are:
+        
+        $(LIST
+          * Paragraph (`<p>`)
+          * Ordered list (`<ol>`), with list items (`<li>`)
+          * Unordered list (`<ul>`), with list items (`<li>`)
+        )
+          
+        Within paragraphs and list items, emphasis (`<em>`) and inline code
+        (`<code>`) text styles are supported. The emphasis is rendered in italic,
+        while inline code is shown in a monospaced font.
+        
+        Any text outside paragraphs or list items is ignored.
+        
+        Nested lists are not supported.
+        
+        [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
+        `property@AboutDialog:release-notes-version` of the property will be used
+        as the version; otherwise, `property@AboutDialog:version` is used.
+  */
+  @property void releaseNotes(string propval)
+  {
+    return setReleaseNotes(propval);
+  }
+
+  /**
+      Get `releaseNotesVersion` property.
+      Returns: The version described by the application's release notes.
+      
+      The release notes version is displayed on the What's New page, above the
+      release notes.
+      
+      If not set, `property@AboutDialog:version` will be used instead.
+      
+      For example, an application with the current version 2.0.2 might want to
+      keep the release notes from 2.0.0, and set the release notes version
+      accordingly.
+      
+      See `property@AboutDialog:release-notes`.
+  */
+  @property string releaseNotesVersion()
+  {
+    return getReleaseNotesVersion();
+  }
+
+  /**
+      Set `releaseNotesVersion` property.
+      Params:
+        propval = The version described by the application's release notes.
+        
+        The release notes version is displayed on the What's New page, above the
+        release notes.
+        
+        If not set, `property@AboutDialog:version` will be used instead.
+        
+        For example, an application with the current version 2.0.2 might want to
+        keep the release notes from 2.0.0, and set the release notes version
+        accordingly.
+        
+        See `property@AboutDialog:release-notes`.
+  */
+  @property void releaseNotesVersion(string propval)
+  {
+    return setReleaseNotesVersion(propval);
+  }
+
+  /**
+      Get `supportUrl` property.
+      Returns: The URL of the application's support page.
+      
+      The support page link is displayed on the main page.
+  */
+  @property string supportUrl()
+  {
+    return getSupportUrl();
+  }
+
+  /**
+      Set `supportUrl` property.
+      Params:
+        propval = The URL of the application's support page.
+        
+        The support page link is displayed on the main page.
+  */
+  @property void supportUrl(string propval)
+  {
+    return setSupportUrl(propval);
+  }
+
+  /**
+      Get `translatorCredits` property.
+      Returns: The translator credits string.
+      
+      It will be displayed on the Credits page.
+      
+      This string should be `"translator-credits"` or `"translator_credits"` and
+      should be marked as translatable.
+      
+      The string may contain email addresses and URLs, see the introduction for
+      more details.
+      
+      See also:
+      
+      $(LIST
+        * `property@AboutDialog:developers`
+        * `property@AboutDialog:designers`
+        * `property@AboutDialog:artists`
+        * `property@AboutDialog:documenters`
+        * [adw.about_dialog.AboutDialog.addCreditSection]
+        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
+      )
+  */
+  @property string translatorCredits()
+  {
+    return getTranslatorCredits();
+  }
+
+  /**
+      Set `translatorCredits` property.
+      Params:
+        propval = The translator credits string.
+        
+        It will be displayed on the Credits page.
+        
+        This string should be `"translator-credits"` or `"translator_credits"` and
+        should be marked as translatable.
+        
+        The string may contain email addresses and URLs, see the introduction for
+        more details.
+        
+        See also:
+        
+        $(LIST
+          * `property@AboutDialog:developers`
+          * `property@AboutDialog:designers`
+          * `property@AboutDialog:artists`
+          * `property@AboutDialog:documenters`
+          * [adw.about_dialog.AboutDialog.addCreditSection]
+          * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
+        )
+  */
+  @property void translatorCredits(string propval)
+  {
+    return setTranslatorCredits(propval);
+  }
+
+  /**
+      Get `version_` property.
+      Returns: The version of the application.
+      
+      The version is displayed on the main page.
+      
+      If `property@AboutDialog:release-notes-version` is not set, the version
+      will also be displayed above the release notes on the What's New page.
+  */
+  @property string version_()
+  {
+    return getVersion();
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The version of the application.
+        
+        The version is displayed on the main page.
+        
+        If `property@AboutDialog:release-notes-version` is not set, the version
+        will also be displayed above the release notes on the What's New page.
+  */
+  @property void version_(string propval)
+  {
+    return setVersion(propval);
+  }
+
+  /**
+      Get `website` property.
+      Returns: The URL of the application's website.
+      
+      Website is displayed on the Details page, below comments, or on the main
+      page if the Details page doesn't have any other content.
+      
+      Applications can add other links below, see [adw.about_dialog.AboutDialog.addLink].
+  */
+  @property string website()
+  {
+    return getWebsite();
+  }
+
+  /**
+      Set `website` property.
+      Params:
+        propval = The URL of the application's website.
+        
+        Website is displayed on the Details page, below comments, or on the main
+        page if the Details page doesn't have any other content.
+        
+        Applications can add other links below, see [adw.about_dialog.AboutDialog.addLink].
+  */
+  @property void website(string propval)
+  {
+    return setWebsite(propval);
   }
 
   /**
@@ -263,7 +852,7 @@ class AboutDialog : adw.dialog.Dialog
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     const(char)* _releaseNotesVersion = releaseNotesVersion.toCString(No.Alloc);
     _cretval = adw_about_dialog_new_from_appdata(_resourcePath, _releaseNotesVersion);
-    auto _retval = ObjectG.getDObject!(adw.about_dialog.AboutDialog)(cast(AdwDialog*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.about_dialog.AboutDialog)(cast(AdwDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -758,7 +1347,7 @@ class AboutDialog : adw.dialog.Dialog
       
       Comments will be shown on the Details page, above links.
       
-      Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+      Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
       detailed. It can also contain links and Pango markup.
   
       Params:

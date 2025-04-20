@@ -34,6 +34,7 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoAggregatorParallelConvertPad self()
   {
     return this;

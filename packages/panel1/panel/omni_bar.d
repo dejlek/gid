@@ -2,6 +2,7 @@
 module panel.omni_bar;
 
 import gid.gid;
+import gio.menu_model;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -52,9 +53,105 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OmniBar self()
   {
     return this;
+  }
+
+  /**
+      Get `actionTooltip` property.
+      Returns: The tooltip for the action.
+  */
+  @property string actionTooltip()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("action-tooltip");
+  }
+
+  /**
+      Set `actionTooltip` property.
+      Params:
+        propval = The tooltip for the action.
+  */
+  @property void actionTooltip(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("action-tooltip", propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon to use.
+  */
+  @property string iconName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon to use.
+  */
+  @property void iconName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The menu model of the omni bar menu.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.menu_model.MenuModel)("menu-model");
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The menu model of the omni bar menu.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.menu_model.MenuModel)("menu-model", propval);
+  }
+
+  /**
+      Get `popover` property.
+      Returns: The popover to show.
+  */
+  @property gtk.popover.Popover popover()
+  {
+    return getPopover();
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The popover to show.
+  */
+  @property void popover(gtk.popover.Popover propval)
+  {
+    return setPopover(propval);
+  }
+
+  /**
+      Get `progress` property.
+      Returns: The current progress value.
+  */
+  @property double progress()
+  {
+    return getProgress();
+  }
+
+  /**
+      Set `progress` property.
+      Params:
+        propval = The current progress value.
+  */
+  @property void progress(double propval)
+  {
+    return setProgress(propval);
   }
 
   mixin ActionableT!();
@@ -104,7 +201,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkPopover* _cretval;
     _cretval = panel_omni_bar_get_popover(cast(PanelOmniBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 

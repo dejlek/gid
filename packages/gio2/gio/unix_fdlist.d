@@ -24,7 +24,7 @@ import gobject.object;
     
     Since 2.74, the API is available for Windows.
 */
-class UnixFDList : gobject.object.ObjectG
+class UnixFDList : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,6 +46,7 @@ class UnixFDList : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixFDList self()
   {
     return this;
@@ -85,7 +86,7 @@ class UnixFDList : gobject.object.ObjectG
 
     auto _fds = cast(const(int)*)fds.ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +108,7 @@ class UnixFDList : gobject.object.ObjectG
         fd = a valid open file descriptor
       Returns: the index of the appended fd in case of success, else -1
                  (and error is set)
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int append(int fd)
   {
@@ -115,7 +116,7 @@ class UnixFDList : gobject.object.ObjectG
     GError *_err;
     _retval = g_unix_fd_list_append(cast(GUnixFDList*)cPtr, fd, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -136,7 +137,7 @@ class UnixFDList : gobject.object.ObjectG
       Params:
         index = the index into the list
       Returns: the file descriptor, or -1 in case of error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int get(int index)
   {
@@ -144,7 +145,7 @@ class UnixFDList : gobject.object.ObjectG
     GError *_err;
     _retval = g_unix_fd_list_get(cast(GUnixFDList*)cPtr, index, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

@@ -25,7 +25,7 @@ import gobject.object;
     and so they are not normally needed in GTK applications. See the
     "Drag and Drop" section of the GTK documentation for more information.
 */
-class Drag : gobject.object.ObjectG
+class Drag : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,9 +47,57 @@ class Drag : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Drag self()
   {
     return this;
+  }
+
+  /**
+      Get `actions` property.
+      Returns: The possible actions of this drag.
+  */
+  @property gdk.types.DragAction actions()
+  {
+    return getActions();
+  }
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The possible actions of this drag.
+  */
+  @property void actions(gdk.types.DragAction propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.DragAction)("actions", propval);
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] that the drag belongs to.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `selectedAction` property.
+      Returns: The currently selected action of the drag.
+  */
+  @property gdk.types.DragAction selectedAction()
+  {
+    return getSelectedAction();
+  }
+
+  /**
+      Set `selectedAction` property.
+      Params:
+        propval = The currently selected action of the drag.
+  */
+  @property void selectedAction(gdk.types.DragAction propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.DragAction)("selected-action", propval);
   }
 
   /**
@@ -81,7 +129,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkDrag* _cretval;
     _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null, actions, dx, dy);
-    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +174,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_drag_get_content(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +186,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_get_device(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +198,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drag_get_display(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +216,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_drag_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +252,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

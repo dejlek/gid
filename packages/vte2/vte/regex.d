@@ -37,6 +37,7 @@ class Regex : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Regex self()
   {
     return this;
@@ -60,7 +61,7 @@ class Regex : gobject.boxed.Boxed
            string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.regex.Regex newForMatch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -69,7 +70,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_match(_pattern, patternLength, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -97,7 +98,7 @@ class Regex : gobject.boxed.Boxed
         extraFlags = PCRE2 extra compile flags
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.regex.Regex newForMatchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -106,7 +107,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_match_full(_pattern, patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -128,7 +129,7 @@ class Regex : gobject.boxed.Boxed
            string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.regex.Regex newForSearch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -137,7 +138,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_search(_pattern, patternLength, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -164,7 +165,7 @@ class Regex : gobject.boxed.Boxed
         extraFlags = 
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.regex.Regex newForSearchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -173,7 +174,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_search_full(_pattern, patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -185,7 +186,7 @@ class Regex : gobject.boxed.Boxed
         flags = PCRE2 JIT flags, or 0
       Returns: true if JITing succeeded (or PCRE2 was built without
           JIT support), or false with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool jit(uint flags)
   {
@@ -193,7 +194,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _retval = vte_regex_jit(cast(VteRegex*)cPtr, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -206,7 +207,7 @@ class Regex : gobject.boxed.Boxed
         flags = PCRE2 match flags
       Returns: the substituted string, or null
           if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string substitute(string subject, string replacement, uint flags)
   {
@@ -216,7 +217,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_substitute(cast(VteRegex*)cPtr, _subject, _replacement, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

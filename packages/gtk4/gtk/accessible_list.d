@@ -40,6 +40,7 @@ class AccessibleList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AccessibleList self()
   {
     return this;
@@ -61,7 +62,7 @@ class AccessibleList : gobject.boxed.Boxed
 
     GtkAccessible*[] _tmpaccessibles;
     foreach (obj; accessibles)
-      _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(ObjectG)obj).cPtr : null;
+      _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
     auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;

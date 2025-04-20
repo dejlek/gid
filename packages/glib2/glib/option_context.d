@@ -21,7 +21,7 @@ class OptionContext
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.OptionContext");
+      throw new GidConstructException("Null instance pointer for glib.option_context.OptionContext");
 
     cInstancePtr = cast(GOptionContext*)ptr;
 

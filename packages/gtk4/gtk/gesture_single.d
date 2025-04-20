@@ -46,9 +46,71 @@ class GestureSingle : gtk.gesture.Gesture
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureSingle self()
   {
     return this;
+  }
+
+  /**
+      Get `button` property.
+      Returns: Mouse button number to listen to, or 0 to listen for any button.
+  */
+  @property uint button()
+  {
+    return getButton();
+  }
+
+  /**
+      Set `button` property.
+      Params:
+        propval = Mouse button number to listen to, or 0 to listen for any button.
+  */
+  @property void button(uint propval)
+  {
+    return setButton(propval);
+  }
+
+  /**
+      Get `exclusive` property.
+      Returns: Whether the gesture is exclusive.
+      
+      Exclusive gestures only listen to pointer and pointer emulated events.
+  */
+  @property bool exclusive()
+  {
+    return getExclusive();
+  }
+
+  /**
+      Set `exclusive` property.
+      Params:
+        propval = Whether the gesture is exclusive.
+        
+        Exclusive gestures only listen to pointer and pointer emulated events.
+  */
+  @property void exclusive(bool propval)
+  {
+    return setExclusive(propval);
+  }
+
+  /**
+      Get `touchOnly` property.
+      Returns: Whether the gesture handles only touch events.
+  */
+  @property bool touchOnly()
+  {
+    return getTouchOnly();
+  }
+
+  /**
+      Set `touchOnly` property.
+      Params:
+        propval = Whether the gesture handles only touch events.
+  */
+  @property void touchOnly(bool propval)
+  {
+    return setTouchOnly(propval);
   }
 
   /**

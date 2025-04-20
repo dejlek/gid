@@ -51,6 +51,7 @@ class Value : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Value self()
   {
     return this;

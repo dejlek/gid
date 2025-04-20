@@ -16,7 +16,7 @@ import gobject.object;
     [gio.charset_converter.CharsetConverter] is an implementation of [gio.converter.Converter] based on
     [glib.types.void*].
 */
-class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.initable.Initable
+class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio.initable.Initable
 {
 
   /** */
@@ -38,9 +38,29 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CharsetConverter self()
   {
     return this;
+  }
+
+  /**
+      Get `useFallback` property.
+      Returns: Use fallback (of form `\<hexval>`) for invalid bytes.
+  */
+  @property bool useFallback()
+  {
+    return getUseFallback();
+  }
+
+  /**
+      Set `useFallback` property.
+      Params:
+        propval = Use fallback (of form `\<hexval>`) for invalid bytes.
+  */
+  @property void useFallback(bool propval)
+  {
+    return setUseFallback(propval);
   }
 
   mixin ConverterT!();
@@ -53,7 +73,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
         toCharset = destination charset
         fromCharset = source charset
       Returns: a new #GCharsetConverter or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   this(string toCharset, string fromCharset)
   {
@@ -63,7 +83,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
     GError *_err;
     _cretval = g_charset_converter_new(_toCharset, _fromCharset, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

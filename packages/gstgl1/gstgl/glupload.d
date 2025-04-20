@@ -17,7 +17,7 @@ import gstgl.types;
     
     A #GstGLUpload can be created with [gstgl.glupload.GLUpload.new_]
 */
-class GLUpload : gst.object.ObjectGst
+class GLUpload : gst.object.ObjectWrap
 {
 
   /** */
@@ -39,6 +39,7 @@ class GLUpload : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLUpload self()
   {
     return this;

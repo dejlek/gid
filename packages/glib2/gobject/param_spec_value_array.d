@@ -17,7 +17,7 @@ class ParamSpecValueArray : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecValueArray");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_value_array.ParamSpecValueArray");
 
     super(cast(GParamSpec*)ptr, take);
   }

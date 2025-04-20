@@ -28,7 +28,7 @@ class RecMutex
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.RecMutex");
+      throw new GidConstructException("Null instance pointer for glib.rec_mutex.RecMutex");
 
     cInstance = *cast(GRecMutex*)ptr;
 

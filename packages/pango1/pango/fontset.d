@@ -17,7 +17,7 @@ import pango.types;
     component font for a particular Unicode character, and for finding a
     composite set of metrics for the entire fontset.
 */
-class Fontset : gobject.object.ObjectG
+class Fontset : gobject.object.ObjectWrap
 {
 
   /** */
@@ -39,6 +39,7 @@ class Fontset : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Fontset self()
   {
     return this;
@@ -59,7 +60,7 @@ class Fontset : gobject.object.ObjectG
     {
       auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), ObjectG.getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(void*)font, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -80,7 +81,7 @@ class Fontset : gobject.object.ObjectG
   {
     PangoFont* _cretval;
     _cretval = pango_fontset_get_font(cast(PangoFontset*)cPtr, wc);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -27,7 +27,7 @@ import gtk.types;
     called for all signal callbacks which are referenced by the loaded XML,
     this functionality will require that [gmodule.module_.Module] be supported on the platform.
 */
-class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
+class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
 {
 
   /** */
@@ -49,6 +49,7 @@ class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BuilderCScope self()
   {
     return this;

@@ -32,6 +32,7 @@ class StackAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StackAccessible self()
   {
     return this;

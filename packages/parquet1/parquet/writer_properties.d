@@ -9,7 +9,7 @@ import parquet.c.types;
 import parquet.types;
 
 /** */
-class WriterProperties : gobject.object.ObjectG
+class WriterProperties : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class WriterProperties : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WriterProperties self()
   {
     return this;

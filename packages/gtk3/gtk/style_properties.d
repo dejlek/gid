@@ -29,7 +29,7 @@ import gtk.types;
     machinery does not use it anymore and all users of this object
     have been deprecated.
 */
-class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
+class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {
 
   /** */
@@ -51,6 +51,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleProperties self()
   {
     return this;
@@ -81,7 +82,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     gtk_style_properties_clear(cast(GtkStyleProperties*)cPtr);
   }
 
-  alias getProperty = gobject.object.ObjectG.getProperty;
+  alias getProperty = gobject.object.ObjectWrap.getProperty;
 
   /**
       Gets a style property from props for the given state. When done with value,
@@ -157,7 +158,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     gtk_style_properties_merge(cast(GtkStyleProperties*)cPtr, propsToMerge ? cast(const(GtkStyleProperties)*)propsToMerge.cPtr(No.Dup) : null, replace);
   }
 
-  alias setProperty = gobject.object.ObjectG.setProperty;
+  alias setProperty = gobject.object.ObjectWrap.setProperty;
 
   /**
       Sets a styling property in props.

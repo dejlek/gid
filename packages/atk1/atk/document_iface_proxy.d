@@ -5,7 +5,7 @@ import gobject.object;
 import atk.document;
 import atk.document_mixin;
 
-/// Proxy object for [Atk.Document] interface when a GObject has no applicable D binding
+/// Proxy object for [atk.document.Document] interface when a GObject has no applicable D binding
 class DocumentIfaceProxy : IfaceProxy, atk.document.Document
 {
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -19,7 +19,9 @@ import gtk.types;
 class BitsetIter : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `bitset_iter.BitsetIter` boxed type.
+  */
   this()
   {
     super(gMalloc(GtkBitsetIter.sizeof), Yes.Take);
@@ -50,6 +52,7 @@ class BitsetIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BitsetIter self()
   {
     return this;

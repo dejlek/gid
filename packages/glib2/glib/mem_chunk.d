@@ -16,7 +16,7 @@ class MemChunk
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.MemChunk");
+      throw new GidConstructException("Null instance pointer for glib.mem_chunk.MemChunk");
 
     cInstancePtr = cast(GMemChunk*)ptr;
 

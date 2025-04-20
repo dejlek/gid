@@ -77,7 +77,7 @@ class Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.Event");
+      throw new GidConstructException("Null instance pointer for gdk.event.Event");
 
     cInstance = *cast(GdkEvent*)ptr;
 
@@ -91,131 +91,236 @@ class Event
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the #GdkEventType
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEvent*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the #GdkEventType
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEvent*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `any` field.
+      Returns: a #GdkEventAny
+  */
   @property gdk.event_any.EventAny any()
   {
     return new gdk.event_any.EventAny(cast(GdkEventAny*)&(cast(GdkEvent*)cPtr).any);
   }
 
+  /**
+      Get `expose` field.
+      Returns: a #GdkEventExpose
+  */
   @property gdk.event_expose.EventExpose expose()
   {
     return new gdk.event_expose.EventExpose(cast(GdkEventExpose*)&(cast(GdkEvent*)cPtr).expose);
   }
 
+  /**
+      Get `visibility` field.
+      Returns: a #GdkEventVisibility
+  */
   @property gdk.event_visibility.EventVisibility visibility()
   {
     return new gdk.event_visibility.EventVisibility(cast(GdkEventVisibility*)&(cast(GdkEvent*)cPtr).visibility);
   }
 
+  /**
+      Get `motion` field.
+      Returns: a #GdkEventMotion
+  */
   @property gdk.event_motion.EventMotion motion()
   {
     return new gdk.event_motion.EventMotion(cast(GdkEventMotion*)&(cast(GdkEvent*)cPtr).motion);
   }
 
+  /**
+      Get `button` field.
+      Returns: a #GdkEventButton
+  */
   @property gdk.event_button.EventButton button()
   {
     return new gdk.event_button.EventButton(cast(GdkEventButton*)&(cast(GdkEvent*)cPtr).button);
   }
 
+  /**
+      Get `touch` field.
+      Returns: a #GdkEventTouch
+  */
   @property gdk.event_touch.EventTouch touch()
   {
     return new gdk.event_touch.EventTouch(cast(GdkEventTouch*)&(cast(GdkEvent*)cPtr).touch);
   }
 
+  /**
+      Get `scroll` field.
+      Returns: a #GdkEventScroll
+  */
   @property gdk.event_scroll.EventScroll scroll()
   {
     return new gdk.event_scroll.EventScroll(cast(GdkEventScroll*)&(cast(GdkEvent*)cPtr).scroll);
   }
 
+  /**
+      Get `key` field.
+      Returns: a #GdkEventKey
+  */
   @property gdk.event_key.EventKey key()
   {
     return new gdk.event_key.EventKey(cast(GdkEventKey*)&(cast(GdkEvent*)cPtr).key);
   }
 
+  /**
+      Get `crossing` field.
+      Returns: a #GdkEventCrossing
+  */
   @property gdk.event_crossing.EventCrossing crossing()
   {
     return new gdk.event_crossing.EventCrossing(cast(GdkEventCrossing*)&(cast(GdkEvent*)cPtr).crossing);
   }
 
+  /**
+      Get `focusChange` field.
+      Returns: a #GdkEventFocus
+  */
   @property gdk.event_focus.EventFocus focusChange()
   {
     return new gdk.event_focus.EventFocus(cast(GdkEventFocus*)&(cast(GdkEvent*)cPtr).focusChange);
   }
 
+  /**
+      Get `configure` field.
+      Returns: a #GdkEventConfigure
+  */
   @property gdk.event_configure.EventConfigure configure()
   {
     return new gdk.event_configure.EventConfigure(cast(GdkEventConfigure*)&(cast(GdkEvent*)cPtr).configure);
   }
 
+  /**
+      Get `property` field.
+      Returns: a #GdkEventProperty
+  */
   @property gdk.event_property.EventProperty property()
   {
     return new gdk.event_property.EventProperty(cast(GdkEventProperty*)&(cast(GdkEvent*)cPtr).property);
   }
 
+  /**
+      Get `selection` field.
+      Returns: a #GdkEventSelection
+  */
   @property gdk.event_selection.EventSelection selection()
   {
     return new gdk.event_selection.EventSelection(cast(GdkEventSelection*)&(cast(GdkEvent*)cPtr).selection);
   }
 
+  /**
+      Get `ownerChange` field.
+      Returns: a #GdkEventOwnerChange
+  */
   @property gdk.event_owner_change.EventOwnerChange ownerChange()
   {
     return new gdk.event_owner_change.EventOwnerChange(cast(GdkEventOwnerChange*)&(cast(GdkEvent*)cPtr).ownerChange);
   }
 
+  /**
+      Get `proximity` field.
+      Returns: a #GdkEventProximity
+  */
   @property gdk.event_proximity.EventProximity proximity()
   {
     return new gdk.event_proximity.EventProximity(cast(GdkEventProximity*)&(cast(GdkEvent*)cPtr).proximity);
   }
 
+  /**
+      Get `dnd` field.
+      Returns: a #GdkEventDND
+  */
   @property gdk.event_dnd.EventDND dnd()
   {
     return new gdk.event_dnd.EventDND(cast(GdkEventDND*)&(cast(GdkEvent*)cPtr).dnd);
   }
 
+  /**
+      Get `windowState` field.
+      Returns: a #GdkEventWindowState
+  */
   @property gdk.event_window_state.EventWindowState windowState()
   {
     return new gdk.event_window_state.EventWindowState(cast(GdkEventWindowState*)&(cast(GdkEvent*)cPtr).windowState);
   }
 
+  /**
+      Get `setting` field.
+      Returns: a #GdkEventSetting
+  */
   @property gdk.event_setting.EventSetting setting()
   {
     return new gdk.event_setting.EventSetting(cast(GdkEventSetting*)&(cast(GdkEvent*)cPtr).setting);
   }
 
+  /**
+      Get `grabBroken` field.
+      Returns: a #GdkEventGrabBroken
+  */
   @property gdk.event_grab_broken.EventGrabBroken grabBroken()
   {
     return new gdk.event_grab_broken.EventGrabBroken(cast(GdkEventGrabBroken*)&(cast(GdkEvent*)cPtr).grabBroken);
   }
 
+  /**
+      Get `touchpadSwipe` field.
+      Returns: a #GdkEventTouchpadSwipe
+  */
   @property gdk.event_touchpad_swipe.EventTouchpadSwipe touchpadSwipe()
   {
     return new gdk.event_touchpad_swipe.EventTouchpadSwipe(cast(GdkEventTouchpadSwipe*)&(cast(GdkEvent*)cPtr).touchpadSwipe);
   }
 
+  /**
+      Get `touchpadPinch` field.
+      Returns: a #GdkEventTouchpadPinch
+  */
   @property gdk.event_touchpad_pinch.EventTouchpadPinch touchpadPinch()
   {
     return new gdk.event_touchpad_pinch.EventTouchpadPinch(cast(GdkEventTouchpadPinch*)&(cast(GdkEvent*)cPtr).touchpadPinch);
   }
 
+  /**
+      Get `padButton` field.
+      Returns: a #GdkEventPadButton
+  */
   @property gdk.event_pad_button.EventPadButton padButton()
   {
     return new gdk.event_pad_button.EventPadButton(cast(GdkEventPadButton*)&(cast(GdkEvent*)cPtr).padButton);
   }
 
+  /**
+      Get `padAxis` field.
+      Returns: a #GdkEventPadAxis
+  */
   @property gdk.event_pad_axis.EventPadAxis padAxis()
   {
     return new gdk.event_pad_axis.EventPadAxis(cast(GdkEventPadAxis*)&(cast(GdkEvent*)cPtr).padAxis);
   }
 
+  /**
+      Get `padGroupMode` field.
+      Returns: a #GdkEventPadGroupMode
+  */
   @property gdk.event_pad_group_mode.EventPadGroupMode padGroupMode()
   {
     return new gdk.event_pad_group_mode.EventPadGroupMode(cast(GdkEventPadGroupMode*)&(cast(GdkEvent*)cPtr).padGroupMode);
@@ -318,7 +423,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -337,7 +442,7 @@ class Event
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -454,7 +559,7 @@ class Event
   {
     GdkScreen* _cretval;
     _cretval = gdk_event_get_screen(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -536,7 +641,7 @@ class Event
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -556,7 +661,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_source_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -597,7 +702,7 @@ class Event
   {
     GdkWindow* _cretval;
     _cretval = gdk_event_get_window(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

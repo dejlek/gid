@@ -8,7 +8,7 @@ import gobject.object;
 import gobject.types;
 
 /**
-    [gobject.object.ObjectG] instance (or source) and another property on another [gobject.object.ObjectG]
+    [gobject.object.ObjectWrap] instance (or source) and another property on another [gobject.object.ObjectWrap]
     instance (or target).
     
     Whenever the source property changes, the same value is applied to the
@@ -25,7 +25,7 @@ import gobject.types;
     the property "property-a" of @object1.
     
     It is possible to create a bidirectional binding between two properties
-    of two [gobject.object.ObjectG] instances, so that if either property changes, the
+    of two [gobject.object.ObjectWrap] instances, so that if either property changes, the
     other is updated as well, for instance:
     
     ```c
@@ -76,7 +76,7 @@ import gobject.types;
     or `func@GObject.signal_handler_block`.
     
     A binding will be severed, and the resources it allocates freed, whenever
-    either one of the [gobject.object.ObjectG] instances it refers to are finalized, or when
+    either one of the [gobject.object.ObjectWrap] instances it refers to are finalized, or when
     the #GBinding instance loses its last reference.
     
     Bindings for languages with garbage collection can use
@@ -84,7 +84,7 @@ import gobject.types;
     and target properties, instead of relying on the last reference on the
     binding, source, and target instances to drop.
 */
-class Binding : gobject.object.ObjectG
+class Binding : gobject.object.ObjectWrap
 {
 
   /** */
@@ -106,6 +106,7 @@ class Binding : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Binding self()
   {
     return this;
@@ -120,11 +121,11 @@ class Binding : gobject.object.ObjectG
       Returns: the source #GObject, or null if the
             source does not exist any more.
   */
-  gobject.object.ObjectG dupSource()
+  gobject.object.ObjectWrap dupSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -137,11 +138,11 @@ class Binding : gobject.object.ObjectG
       Returns: the target #GObject, or null if the
             target does not exist any more.
   */
-  gobject.object.ObjectG dupTarget()
+  gobject.object.ObjectWrap dupTarget()
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,11 +174,11 @@ class Binding : gobject.object.ObjectG
       Deprecated: Use [gobject.binding.Binding.dupSource] for a safer version of this
         function.
   */
-  gobject.object.ObjectG getSource()
+  gobject.object.ObjectWrap getSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,11 +211,11 @@ class Binding : gobject.object.ObjectG
       Deprecated: Use [gobject.binding.Binding.dupTarget] for a safer version of this
         function.
   */
-  gobject.object.ObjectG getTarget()
+  gobject.object.ObjectWrap getTarget()
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +243,7 @@ class Binding : gobject.object.ObjectG
       
       Note however that this function does not take ownership of binding, it
       only unrefs the reference that was initially created by
-      [gobject.object.ObjectG.bindProperty] and is owned by the binding.
+      [gobject.object.ObjectWrap.bindProperty] and is owned by the binding.
   */
   void unbind()
   {

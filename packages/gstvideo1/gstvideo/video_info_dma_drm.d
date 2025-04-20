@@ -42,31 +42,54 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoInfoDmaDrm self()
   {
     return this;
   }
 
+  /**
+      Get `vinfo` field.
+      Returns: the associated #GstVideoInfo
+  */
   @property gstvideo.video_info.VideoInfo vinfo()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)cPtr).vinfo);
   }
 
+  /**
+      Get `drmFourcc` field.
+      Returns: the fourcc defined by drm
+  */
   @property uint drmFourcc()
   {
     return (cast(GstVideoInfoDmaDrm*)cPtr).drmFourcc;
   }
 
+  /**
+      Set `drmFourcc` field.
+      Params:
+        propval = the fourcc defined by drm
+  */
   @property void drmFourcc(uint propval)
   {
     (cast(GstVideoInfoDmaDrm*)cPtr).drmFourcc = propval;
   }
 
+  /**
+      Get `drmModifier` field.
+      Returns: the drm modifier
+  */
   @property ulong drmModifier()
   {
     return (cast(GstVideoInfoDmaDrm*)cPtr).drmModifier;
   }
 
+  /**
+      Set `drmModifier` field.
+      Params:
+        propval = the drm modifier
+  */
   @property void drmModifier(ulong propval)
   {
     (cast(GstVideoInfoDmaDrm*)cPtr).drmModifier = propval;

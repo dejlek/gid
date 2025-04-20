@@ -25,7 +25,7 @@ import gtk.types;
     [gtk.column_view_column.ColumnViewColumn.setSorter], to let users influence sorting
     by clicking on the column header.
 */
-class ColumnViewColumn : gobject.object.ObjectG
+class ColumnViewColumn : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,9 +47,204 @@ class ColumnViewColumn : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnViewColumn self()
   {
     return this;
+  }
+
+  /**
+      Get `columnView` property.
+      Returns: The [gtk.column_view.ColumnView] this column is a part of.
+  */
+  @property gtk.column_view.ColumnView columnView()
+  {
+    return getColumnView();
+  }
+
+  /**
+      Get `expand` property.
+      Returns: Column gets share of extra width allocated to the view.
+  */
+  @property bool expand()
+  {
+    return getExpand();
+  }
+
+  /**
+      Set `expand` property.
+      Params:
+        propval = Column gets share of extra width allocated to the view.
+  */
+  @property void expand(bool propval)
+  {
+    return setExpand(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+  */
+  @property gtk.list_item_factory.ListItemFactory factory()
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+  */
+  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setFactory(propval);
+  }
+
+  /**
+      Get `fixedWidth` property.
+      Returns: If not -1, this is the width that the column is allocated,
+      regardless of the size of its content.
+  */
+  @property int fixedWidth()
+  {
+    return getFixedWidth();
+  }
+
+  /**
+      Set `fixedWidth` property.
+      Params:
+        propval = If not -1, this is the width that the column is allocated,
+        regardless of the size of its content.
+  */
+  @property void fixedWidth(int propval)
+  {
+    return setFixedWidth(propval);
+  }
+
+  /**
+      Get `headerMenu` property.
+      Returns: Menu model used to create the context menu for the column header.
+  */
+  @property gio.menu_model.MenuModel headerMenu()
+  {
+    return getHeaderMenu();
+  }
+
+  /**
+      Set `headerMenu` property.
+      Params:
+        propval = Menu model used to create the context menu for the column header.
+  */
+  @property void headerMenu(gio.menu_model.MenuModel propval)
+  {
+    return setHeaderMenu(propval);
+  }
+
+  /**
+      Get `id` property.
+      Returns: An ID for the column.
+      
+      GTK is not currently using the ID for anything, but
+      it can be used by applications when saving column view
+      configurations.
+      
+      It is up to applications to ensure uniqueness of IDs.
+  */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = An ID for the column.
+        
+        GTK is not currently using the ID for anything, but
+        it can be used by applications when saving column view
+        configurations.
+        
+        It is up to applications to ensure uniqueness of IDs.
+  */
+  @property void id(string propval)
+  {
+    return setId(propval);
+  }
+
+  /**
+      Get `resizable` property.
+      Returns: Whether this column is resizable.
+  */
+  @property bool resizable()
+  {
+    return getResizable();
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = Whether this column is resizable.
+  */
+  @property void resizable(bool propval)
+  {
+    return setResizable(propval);
+  }
+
+  /**
+      Get `sorter` property.
+      Returns: Sorter for sorting items according to this column.
+  */
+  @property gtk.sorter.Sorter sorter()
+  {
+    return getSorter();
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = Sorter for sorting items according to this column.
+  */
+  @property void sorter(gtk.sorter.Sorter propval)
+  {
+    return setSorter(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: Title displayed in the header.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = Title displayed in the header.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether this column is visible.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this column is visible.
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
   }
 
   /**
@@ -88,7 +283,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkColumnView* _cretval;
     _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +307,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +331,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GMenuModel* _cretval;
     _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +366,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 

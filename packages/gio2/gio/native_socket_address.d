@@ -37,6 +37,7 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NativeSocketAddress self()
   {
     return this;

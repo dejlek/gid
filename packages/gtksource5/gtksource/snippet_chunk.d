@@ -39,9 +39,82 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SnippetChunk self()
   {
     return this;
+  }
+
+  /** */
+  @property gtksource.snippet_context.SnippetContext context()
+  {
+    return getContext();
+  }
+
+  /** */
+  @property void context(gtksource.snippet_context.SnippetContext propval)
+  {
+    return setContext(propval);
+  }
+
+  /** */
+  @property int focusPosition()
+  {
+    return getFocusPosition();
+  }
+
+  /** */
+  @property void focusPosition(int propval)
+  {
+    return setFocusPosition(propval);
+  }
+
+  /** */
+  @property string spec()
+  {
+    return getSpec();
+  }
+
+  /** */
+  @property void spec(string propval)
+  {
+    return setSpec(propval);
+  }
+
+  /** */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /** */
+  @property void text(string propval)
+  {
+    return setText(propval);
+  }
+
+  /** */
+  @property bool textSet()
+  {
+    return getTextSet();
+  }
+
+  /** */
+  @property void textSet(bool propval)
+  {
+    return setTextSet(propval);
+  }
+
+  /** */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /** */
+  @property void tooltipText(string propval)
+  {
+    return setTooltipText(propval);
   }
 
   /**
@@ -64,7 +137,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +149,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 

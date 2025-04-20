@@ -23,7 +23,7 @@ class ParamSpecPool
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecPool");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_pool.ParamSpecPool");
 
     cInstancePtr = cast(GParamSpecPool*)ptr;
 

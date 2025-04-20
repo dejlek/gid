@@ -15,7 +15,7 @@ import gstgl.types;
     GstGLWindow represents a window that elements can render into.  A window can
     either be a user visible window (onscreen) or hidden (offscreen).
 */
-class GLWindow : gst.object.ObjectGst
+class GLWindow : gst.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class GLWindow : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLWindow self()
   {
     return this;
@@ -74,7 +75,7 @@ class GLWindow : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_window_get_context(cast(GstGLWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 

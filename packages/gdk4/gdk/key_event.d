@@ -17,7 +17,7 @@ class KeyEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.KeyEvent");
+      throw new GidConstructException("Null instance pointer for gdk.key_event.KeyEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

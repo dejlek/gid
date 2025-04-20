@@ -18,7 +18,7 @@ class DebugKey
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.DebugKey");
+      throw new GidConstructException("Null instance pointer for glib.debug_key.DebugKey");
 
     cInstance = *cast(GDebugKey*)ptr;
 
@@ -32,22 +32,40 @@ class DebugKey
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `key` field.
+      Returns: the string
+  */
   @property string key()
   {
     return cToD!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
   }
 
+  /**
+      Set `key` field.
+      Params:
+        propval = the string
+  */
   @property void key(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
     dToC(propval, cast(void*)&(cast(GDebugKey*)cPtr).key);
   }
 
+  /**
+      Get `value` field.
+      Returns: the flag
+  */
   @property uint value()
   {
     return (cast(GDebugKey*)cPtr).value;
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the flag
+  */
   @property void value(uint propval)
   {
     (cast(GDebugKey*)cPtr).value = propval;

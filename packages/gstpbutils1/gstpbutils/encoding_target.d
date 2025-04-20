@@ -15,7 +15,7 @@ import gstpbutils.types;
     When being stored/loaded, targets come from a specific category, like
     #GST_ENCODING_CATEGORY_DEVICE.
 */
-class EncodingTarget : gobject.object.ObjectG
+class EncodingTarget : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class EncodingTarget : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EncodingTarget self()
   {
     return this;
@@ -91,7 +92,7 @@ class EncodingTarget : gobject.object.ObjectG
         category = the name of the target category, like
           #GST_ENCODING_CATEGORY_DEVICE. Can be null
       Returns: The #GstEncodingTarget if available, else null.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstpbutils.encoding_target.EncodingTarget load(string name, string category = null)
   {
@@ -101,8 +102,8 @@ class EncodingTarget : gobject.object.ObjectG
     GError *_err;
     _cretval = gst_encoding_target_load(_name, _category, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -113,7 +114,7 @@ class EncodingTarget : gobject.object.ObjectG
         filepath = The file location to load the #GstEncodingTarget from
       Returns: The #GstEncodingTarget contained in the file, else
         null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstpbutils.encoding_target.EncodingTarget loadFromFile(string filepath)
   {
@@ -122,8 +123,8 @@ class EncodingTarget : gobject.object.ObjectG
     GError *_err;
     _cretval = gst_encoding_target_load_from_file(_filepath, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -188,7 +189,7 @@ class EncodingTarget : gobject.object.ObjectG
     GstEncodingProfile* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_encoding_target_get_profile(cast(GstEncodingTarget*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -204,7 +205,7 @@ class EncodingTarget : gobject.object.ObjectG
   /**
       Saves the target to a default user-local directory.
       Returns: true if the target was correctly saved, else false.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool save()
   {
@@ -212,7 +213,7 @@ class EncodingTarget : gobject.object.ObjectG
     GError *_err;
     _retval = gst_encoding_target_save(cast(GstEncodingTarget*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -222,7 +223,7 @@ class EncodingTarget : gobject.object.ObjectG
       Params:
         filepath = the location to store the target at.
       Returns: true if the target was correctly saved, else false.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool saveToFile(string filepath)
   {
@@ -231,7 +232,7 @@ class EncodingTarget : gobject.object.ObjectG
     GError *_err;
     _retval = gst_encoding_target_save_to_file(cast(GstEncodingTarget*)cPtr, _filepath, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

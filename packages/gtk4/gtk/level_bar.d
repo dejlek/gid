@@ -140,9 +140,129 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LevelBar self()
   {
     return this;
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Whether the `GtkLeveBar` is inverted.
+      
+      Level bars normally grow from top to bottom or left to right.
+      Inverted level bars grow in the opposite direction.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether the `GtkLeveBar` is inverted.
+        
+        Level bars normally grow from top to bottom or left to right.
+        Inverted level bars grow in the opposite direction.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /**
+      Get `maxValue` property.
+      Returns: Determines the maximum value of the interval that can be displayed by the bar.
+  */
+  @property double maxValue()
+  {
+    return getMaxValue();
+  }
+
+  /**
+      Set `maxValue` property.
+      Params:
+        propval = Determines the maximum value of the interval that can be displayed by the bar.
+  */
+  @property void maxValue(double propval)
+  {
+    return setMaxValue(propval);
+  }
+
+  /**
+      Get `minValue` property.
+      Returns: Determines the minimum value of the interval that can be displayed by the bar.
+  */
+  @property double minValue()
+  {
+    return getMinValue();
+  }
+
+  /**
+      Set `minValue` property.
+      Params:
+        propval = Determines the minimum value of the interval that can be displayed by the bar.
+  */
+  @property void minValue(double propval)
+  {
+    return setMinValue(propval);
+  }
+
+  /**
+      Get `mode` property.
+      Returns: Determines the way [gtk.level_bar.LevelBar] interprets the value properties to draw the
+      level fill area.
+      
+      Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
+      [gtk.level_bar.LevelBar] will draw a single block representing the current value in
+      that area; when the value is [gtk.types.LevelBarMode.Discrete],
+      the widget will draw a succession of separate blocks filling the
+      draw area, with the number of blocks being equal to the units separating
+      the integral roundings of `property@Gtk.LevelBar:min-value` and
+      `property@Gtk.LevelBar:max-value`.
+  */
+  @property gtk.types.LevelBarMode mode()
+  {
+    return getMode();
+  }
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = Determines the way [gtk.level_bar.LevelBar] interprets the value properties to draw the
+        level fill area.
+        
+        Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
+        [gtk.level_bar.LevelBar] will draw a single block representing the current value in
+        that area; when the value is [gtk.types.LevelBarMode.Discrete],
+        the widget will draw a succession of separate blocks filling the
+        draw area, with the number of blocks being equal to the units separating
+        the integral roundings of `property@Gtk.LevelBar:min-value` and
+        `property@Gtk.LevelBar:max-value`.
+  */
+  @property void mode(gtk.types.LevelBarMode propval)
+  {
+    return setMode(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: Determines the currently filled value of the level bar.
+  */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = Determines the currently filled value of the level bar.
+  */
+  @property void value(double propval)
+  {
+    return setValue(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -171,7 +291,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

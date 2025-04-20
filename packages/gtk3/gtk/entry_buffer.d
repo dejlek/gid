@@ -21,7 +21,7 @@ import gtk.types;
     useful in the case of important passwords. Or a derived class could
     integrate with an application’s concept of undo/redo.
 */
-class EntryBuffer : gobject.object.ObjectG
+class EntryBuffer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,9 +43,57 @@ class EntryBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EntryBuffer self()
   {
     return this;
+  }
+
+  /**
+      Get `length` property.
+      Returns: The length (in characters) of the text in buffer.
+  */
+  @property uint length()
+  {
+    return getLength();
+  }
+
+  /**
+      Get `maxLength` property.
+      Returns: The maximum length (in characters) of the text in the buffer.
+  */
+  @property int maxLength()
+  {
+    return getMaxLength();
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = The maximum length (in characters) of the text in the buffer.
+  */
+  @property void maxLength(int propval)
+  {
+    return setMaxLength(propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: The contents of the buffer.
+  */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The contents of the buffer.
+  */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
 
   /**

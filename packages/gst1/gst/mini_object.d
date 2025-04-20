@@ -40,10 +40,27 @@ import gst.types;
 class MiniObject : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `mini_object.MiniObject` boxed type.
+      Params:
+        type = the GType of the object
+        refcount = atomic refcount
+        lockstate = atomic state of the locks
+        flags = extra flags.
+        copy = a copy function
+        dispose = a dispose function
+        free = the free function
+  */
+  this(gobject.types.GType type = gobject.types.GType.init, int refcount = int.init, int lockstate = int.init, uint flags = uint.init, GstMiniObjectCopyFunction copy = GstMiniObjectCopyFunction.init, GstMiniObjectDisposeFunction dispose = GstMiniObjectDisposeFunction.init, GstMiniObjectFreeFunction free = GstMiniObjectFreeFunction.init)
   {
     super(gMalloc(GstMiniObject.sizeof), Yes.Take);
+    this.type = type;
+    this.refcount = refcount;
+    this.lockstate = lockstate;
+    this.flags = flags;
+    this.copy = copy;
+    this.dispose = dispose;
+    this.free = free;
   }
 
   /** */
@@ -71,75 +88,142 @@ class MiniObject : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MiniObject self()
   {
     return this;
   }
 
+  /**
+      Get `type` field.
+      Returns: the GType of the object
+  */
   @property gobject.types.GType type()
   {
     return (cast(GstMiniObject*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the GType of the object
+  */
   @property void type(gobject.types.GType propval)
   {
     (cast(GstMiniObject*)cPtr).type = propval;
   }
 
+  /**
+      Get `refcount` field.
+      Returns: atomic refcount
+  */
   @property int refcount()
   {
     return (cast(GstMiniObject*)cPtr).refcount;
   }
 
+  /**
+      Set `refcount` field.
+      Params:
+        propval = atomic refcount
+  */
   @property void refcount(int propval)
   {
     (cast(GstMiniObject*)cPtr).refcount = propval;
   }
 
+  /**
+      Get `lockstate` field.
+      Returns: atomic state of the locks
+  */
   @property int lockstate()
   {
     return (cast(GstMiniObject*)cPtr).lockstate;
   }
 
+  /**
+      Set `lockstate` field.
+      Params:
+        propval = atomic state of the locks
+  */
   @property void lockstate(int propval)
   {
     (cast(GstMiniObject*)cPtr).lockstate = propval;
   }
 
+  /**
+      Get `flags` field.
+      Returns: extra flags.
+  */
   @property uint flags()
   {
     return (cast(GstMiniObject*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = extra flags.
+  */
   @property void flags(uint propval)
   {
     (cast(GstMiniObject*)cPtr).flags = propval;
   }
 
+  /**
+      Get `copy` field.
+      Returns: a copy function
+  */
   @property GstMiniObjectCopyFunction copy()
   {
     return (cast(GstMiniObject*)cPtr).copy;
   }
+
+  /**
+      Set `copy` field.
+      Params:
+        propval = a copy function
+  */
 
   @property void copy(GstMiniObjectCopyFunction propval)
   {
     (cast(GstMiniObject*)cPtr).copy = propval;
   }
 
+  /**
+      Get `dispose` field.
+      Returns: a dispose function
+  */
   @property GstMiniObjectDisposeFunction dispose()
   {
     return (cast(GstMiniObject*)cPtr).dispose;
   }
+
+  /**
+      Set `dispose` field.
+      Params:
+        propval = a dispose function
+  */
 
   @property void dispose(GstMiniObjectDisposeFunction propval)
   {
     (cast(GstMiniObject*)cPtr).dispose = propval;
   }
 
+  /**
+      Get `free` field.
+      Returns: the free function
+  */
   @property GstMiniObjectFreeFunction free()
   {
     return (cast(GstMiniObject*)cPtr).free;
   }
+
+  /**
+      Set `free` field.
+      Params:
+        propval = the free function
+  */
 
   @property void free(GstMiniObjectFreeFunction propval)
   {

@@ -81,9 +81,164 @@ class ActionRow : adw.preferences_row.PreferencesRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ActionRow self()
   {
     return this;
+  }
+
+  /**
+      Get `activatableWidget` property.
+      Returns: The widget to activate when the row is activated.
+      
+      The row can be activated either by clicking on it, calling
+      [adw.action_row.ActionRow.activate], or via mnemonics in the title.
+      See the `property@PreferencesRow:use-underline` property to enable
+      mnemonics.
+      
+      The target widget will be activated by emitting the
+      `signal@Gtk.Widget::mnemonic-activate` signal on it.
+  */
+  @property gtk.widget.Widget activatableWidget()
+  {
+    return getActivatableWidget();
+  }
+
+  /**
+      Set `activatableWidget` property.
+      Params:
+        propval = The widget to activate when the row is activated.
+        
+        The row can be activated either by clicking on it, calling
+        [adw.action_row.ActionRow.activate], or via mnemonics in the title.
+        See the `property@PreferencesRow:use-underline` property to enable
+        mnemonics.
+        
+        The target widget will be activated by emitting the
+        `signal@Gtk.Widget::mnemonic-activate` signal on it.
+  */
+  @property void activatableWidget(gtk.widget.Widget propval)
+  {
+    return setActivatableWidget(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for this row.
+  
+      Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+  
+      Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle for this row.
+      
+      The subtitle is interpreted as Pango markup unless
+      `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property string subtitle()
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+        
+        The subtitle is interpreted as Pango markup unless
+        `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property void subtitle(string propval)
+  {
+    return setSubtitle(propval);
+  }
+
+  /**
+      Get `subtitleLines` property.
+      Returns: The number of lines at the end of which the subtitle label will be
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  */
+  @property int subtitleLines()
+  {
+    return getSubtitleLines();
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+        ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property void subtitleLines(int propval)
+  {
+    return setSubtitleLines(propval);
+  }
+
+  /**
+      Get `subtitleSelectable` property.
+      Returns: Whether the user can copy the subtitle from the label.
+      
+      See also [gtk.label.Label.selectable].
+  */
+  @property bool subtitleSelectable()
+  {
+    return getSubtitleSelectable();
+  }
+
+  /**
+      Set `subtitleSelectable` property.
+      Params:
+        propval = Whether the user can copy the subtitle from the label.
+        
+        See also [gtk.label.Label.selectable].
+  */
+  @property void subtitleSelectable(bool propval)
+  {
+    return setSubtitleSelectable(propval);
+  }
+
+  /**
+      Get `titleLines` property.
+      Returns: The number of lines at the end of which the title label will be ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  */
+  @property int titleLines()
+  {
+    return getTitleLines();
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property void titleLines(int propval)
+  {
+    return setTitleLines(propval);
   }
 
   /**
@@ -137,7 +292,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   {
     GtkWidget* _cretval;
     _cretval = adw_action_row_get_activatable_widget(cast(AdwActionRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +434,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   /**
       Sets whether the user can copy the subtitle from the label
       
-      See also [gtk.label.Label.gboolean].
+      See also [gtk.label.Label.selectable].
   
       Params:
         subtitleSelectable = `TRUE` if the user can copy the subtitle from the label

@@ -33,6 +33,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override KeyvalTrigger self()
   {
     return this;

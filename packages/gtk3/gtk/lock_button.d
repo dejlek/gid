@@ -71,9 +71,82 @@ class LockButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LockButton self()
   {
     return this;
+  }
+
+  /** */
+  @property gio.permission.Permission permission()
+  {
+    return getPermission();
+  }
+
+  /** */
+  @property void permission(gio.permission.Permission propval)
+  {
+    return setPermission(propval);
+  }
+
+  /** */
+  @property string textLock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text-lock");
+  }
+
+  /** */
+  @property void textLock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text-lock", propval);
+  }
+
+  /** */
+  @property string textUnlock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text-unlock");
+  }
+
+  /** */
+  @property void textUnlock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text-unlock", propval);
+  }
+
+  /** */
+  @property string tooltipLock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-lock");
+  }
+
+  /** */
+  @property void tooltipLock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-lock", propval);
+  }
+
+  /** */
+  @property string tooltipNotAuthorized()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-not-authorized");
+  }
+
+  /** */
+  @property void tooltipNotAuthorized(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-not-authorized", propval);
+  }
+
+  /** */
+  @property string tooltipUnlock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-unlock");
+  }
+
+  /** */
+  @property void tooltipUnlock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-unlock", propval);
   }
 
   /**
@@ -98,7 +171,7 @@ class LockButton : gtk.button.Button
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 

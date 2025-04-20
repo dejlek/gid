@@ -75,7 +75,7 @@ import gst.types;
       }
     ```
 */
-class PadTemplate : gst.object.ObjectGst
+class PadTemplate : gst.object.ObjectWrap
 {
 
   /** */
@@ -97,6 +97,7 @@ class PadTemplate : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PadTemplate self()
   {
     return this;
@@ -133,7 +134,7 @@ class PadTemplate : gst.object.ObjectGst
   {
     GstPadTemplate* _cretval;
     _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate.cPtr : null, padType);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +155,7 @@ class PadTemplate : gst.object.ObjectGst
     GstPadTemplate* _cretval;
     const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
     _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, padType);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 

@@ -15,10 +15,19 @@ import harfbuzz.types;
 class SegmentProperties : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `segment_properties.SegmentProperties` boxed type.
+      Params:
+        direction = the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
+        script = the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
+        language = the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
+  */
+  this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init, harfbuzz.types.Language language = harfbuzz.types.Language.init)
   {
     super(gMalloc(hb_segment_properties_t.sizeof), Yes.Take);
+    this.direction = direction;
+    this.script = script;
+    this.language = language;
   }
 
   /** */
@@ -46,36 +55,64 @@ class SegmentProperties : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SegmentProperties self()
   {
     return this;
   }
 
+  /**
+      Get `direction` field.
+      Returns: the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
+  */
   @property harfbuzz.types.Direction direction()
   {
     return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)cPtr).direction;
   }
 
+  /**
+      Set `direction` field.
+      Params:
+        propval = the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
+  */
   @property void direction(harfbuzz.types.Direction propval)
   {
     (cast(hb_segment_properties_t*)cPtr).direction = cast(hb_direction_t)propval;
   }
 
+  /**
+      Get `script` field.
+      Returns: the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
+  */
   @property harfbuzz.types.Script script()
   {
     return cast(harfbuzz.types.Script)(cast(hb_segment_properties_t*)cPtr).script;
   }
 
+  /**
+      Set `script` field.
+      Params:
+        propval = the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
+  */
   @property void script(harfbuzz.types.Script propval)
   {
     (cast(hb_segment_properties_t*)cPtr).script = cast(hb_script_t)propval;
   }
 
+  /**
+      Get `language` field.
+      Returns: the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
+  */
   @property harfbuzz.types.Language language()
   {
     return (cast(hb_segment_properties_t*)cPtr).language;
   }
 
+  /**
+      Set `language` field.
+      Params:
+        propval = the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
+  */
   @property void language(harfbuzz.types.Language propval)
   {
     (cast(hb_segment_properties_t*)cPtr).language = propval;

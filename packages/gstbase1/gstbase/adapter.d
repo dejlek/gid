@@ -19,7 +19,7 @@ import gstbase.types;
     this object is for you.
     
     An adapter is created with [gstbase.adapter.Adapter.new_]. It can be freed again with
-    [gobject.object.ObjectG.unref].
+    [gobject.object.ObjectWrap.unref].
     
     The theory of operation is like this: All buffers received are put
     into the adapter using [gstbase.adapter.Adapter.push] and the data is then read back
@@ -112,7 +112,7 @@ import gstbase.types;
     access the buffer later. The adapter will never modify the data in the
     buffer pushed in it.
 */
-class Adapter : gobject.object.ObjectG
+class Adapter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -134,13 +134,14 @@ class Adapter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Adapter self()
   {
     return this;
   }
 
   /**
-      Creates a new #GstAdapter. Free with [gobject.object.ObjectG.unref].
+      Creates a new #GstAdapter. Free with [gobject.object.ObjectWrap.unref].
       Returns: a new #GstAdapter
   */
   this()

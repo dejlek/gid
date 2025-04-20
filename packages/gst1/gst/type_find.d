@@ -20,7 +20,7 @@ class TypeFind
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.TypeFind");
+      throw new GidConstructException("Null instance pointer for gst.type_find.TypeFind");
 
     cInstance = *cast(GstTypeFind*)ptr;
 

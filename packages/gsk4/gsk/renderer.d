@@ -27,7 +27,7 @@ import gsk.types;
     in order to create the appropriate windowing system resources needed
     to render the scene.
 */
-class Renderer : gobject.object.ObjectG
+class Renderer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,28 @@ class Renderer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Renderer self()
   {
     return this;
+  }
+
+  /**
+      Get `realized` property.
+      Returns: Whether the renderer has been associated with a surface or draw context.
+  */
+  @property bool realized()
+  {
+    return isRealized();
+  }
+
+  /**
+      Get `surface` property.
+      Returns: The surface associated with renderer.
+  */
+  @property gdk.surface.Surface surface()
+  {
+    return getSurface();
   }
 
   /**
@@ -71,7 +90,7 @@ class Renderer : gobject.object.ObjectG
   {
     GskRenderer* _cretval;
     _cretval = gsk_renderer_new_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,7 +104,7 @@ class Renderer : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gsk_renderer_get_surface(cast(GskRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +134,7 @@ class Renderer : gobject.object.ObjectG
       Params:
         surface = the [gdk.surface.Surface] renderer will be used on
       Returns: Whether the renderer was successfully realized
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool realize(gdk.surface.Surface surface = null)
   {
@@ -123,7 +142,7 @@ class Renderer : gobject.object.ObjectG
     GError *_err;
     _retval = gsk_renderer_realize(cast(GskRenderer*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -137,7 +156,7 @@ class Renderer : gobject.object.ObjectG
       Params:
         display = the [gdk.display.Display] renderer will be used on
       Returns: Whether the renderer was successfully realized
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool realizeForDisplay(gdk.display.Display display)
   {
@@ -145,7 +164,7 @@ class Renderer : gobject.object.ObjectG
     GError *_err;
     _retval = gsk_renderer_realize_for_display(cast(GskRenderer*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -192,7 +211,7 @@ class Renderer : gobject.object.ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gsk_renderer_render_texture(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 

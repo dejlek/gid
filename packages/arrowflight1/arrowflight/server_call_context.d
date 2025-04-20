@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ServerCallContext : gobject.object.ObjectG
+class ServerCallContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class ServerCallContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerCallContext self()
   {
     return this;

@@ -4,6 +4,7 @@ module gtk.aspect_frame;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -46,9 +47,58 @@ class AspectFrame : gtk.frame.Frame
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AspectFrame self()
   {
     return this;
+  }
+
+  /** */
+  @property bool obeyChild()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("obey-child");
+  }
+
+  /** */
+  @property void obeyChild(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("obey-child", propval);
+  }
+
+  /** */
+  @property float ratio()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("ratio");
+  }
+
+  /** */
+  @property void ratio(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("ratio", propval);
+  }
+
+  /** */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /** */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
+  }
+
+  /** */
+  @property float yalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yalign");
+  }
+
+  /** */
+  @property void yalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
 
   /**

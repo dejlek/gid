@@ -30,7 +30,7 @@ class RTCPBuffer
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtp.RTCPBuffer");
+      throw new GidConstructException("Null instance pointer for gstrtp.rtcpbuffer.RTCPBuffer");
 
     cInstance = *cast(GstRTCPBuffer*)ptr;
 
@@ -44,17 +44,20 @@ class RTCPBuffer
     return cast(void*)&cInstance;
   }
 
+  /** */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)cPtr).buffer);
   }
 
+  /** */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstRTCPBuffer*)cPtr).buffer);
   }
 
+  /** */
   @property gst.map_info.MapInfo map()
   {
     return new gst.map_info.MapInfo(cast(GstMapInfo*)&(cast(GstRTCPBuffer*)cPtr).map);

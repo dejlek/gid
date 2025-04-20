@@ -19,7 +19,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.ColorMatrixNode");
+      throw new GidConstructException("Null instance pointer for gsk.color_matrix_node.ColorMatrixNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

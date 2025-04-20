@@ -29,10 +29,18 @@ import pango.types;
 class Attribute : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `attribute.Attribute` boxed type.
+      Params:
+        startIndex = the start index of the range (in bytes).
+        endIndex = end index of the range (in bytes). The character at this index
+            is not included in the range.
+  */
+  this(uint startIndex = uint.init, uint endIndex = uint.init)
   {
     super(gMalloc(PangoAttribute.sizeof), Yes.Take);
+    this.startIndex = startIndex;
+    this.endIndex = endIndex;
   }
 
   /** */
@@ -60,26 +68,47 @@ class Attribute : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Attribute self()
   {
     return this;
   }
 
+  /**
+      Get `startIndex` field.
+      Returns: the start index of the range (in bytes).
+  */
   @property uint startIndex()
   {
     return (cast(PangoAttribute*)cPtr).startIndex;
   }
 
+  /**
+      Set `startIndex` field.
+      Params:
+        propval = the start index of the range (in bytes).
+  */
   @property void startIndex(uint propval)
   {
     (cast(PangoAttribute*)cPtr).startIndex = propval;
   }
 
+  /**
+      Get `endIndex` field.
+      Returns: end index of the range (in bytes). The character at this index
+        is not included in the range.
+  */
   @property uint endIndex()
   {
     return (cast(PangoAttribute*)cPtr).endIndex;
   }
 
+  /**
+      Set `endIndex` field.
+      Params:
+        propval = end index of the range (in bytes). The character at this index
+          is not included in the range.
+  */
   @property void endIndex(uint propval)
   {
     (cast(PangoAttribute*)cPtr).endIndex = propval;

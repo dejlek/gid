@@ -26,7 +26,7 @@ class AudioDownmixMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioDownmixMeta");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_downmix_meta.AudioDownmixMeta");
 
     cInstance = *cast(GstAudioDownmixMeta*)ptr;
 
@@ -40,26 +40,48 @@ class AudioDownmixMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioDownmixMeta*)cPtr).meta);
   }
 
+  /**
+      Get `fromChannels` field.
+      Returns: the number of channels of the source
+  */
   @property int fromChannels()
   {
     return (cast(GstAudioDownmixMeta*)cPtr).fromChannels;
   }
 
+  /**
+      Set `fromChannels` field.
+      Params:
+        propval = the number of channels of the source
+  */
   @property void fromChannels(int propval)
   {
     (cast(GstAudioDownmixMeta*)cPtr).fromChannels = propval;
   }
 
+  /**
+      Get `toChannels` field.
+      Returns: the number of channels of the destination
+  */
   @property int toChannels()
   {
     return (cast(GstAudioDownmixMeta*)cPtr).toChannels;
   }
 
+  /**
+      Set `toChannels` field.
+      Params:
+        propval = the number of channels of the destination
+  */
   @property void toChannels(int propval)
   {
     (cast(GstAudioDownmixMeta*)cPtr).toChannels = propval;

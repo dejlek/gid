@@ -13,10 +13,21 @@ import gobject.boxed;
 class Rectangle : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rectangle.Rectangle` boxed type.
+      Params:
+        x = X coordinate of the left side of the rectangle
+        y = Y coordinate of the top side of the rectangle
+        width = width of the rectangle
+        height = height of the rectangle
+  */
+  this(double x = 0.0, double y = 0.0, double width = 0.0, double height = 0.0)
   {
     super(gMalloc(cairo_rectangle_t.sizeof), Yes.Take);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   /** */
@@ -44,46 +55,83 @@ class Rectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Rectangle self()
   {
     return this;
   }
 
+  /**
+      Get `x` field.
+      Returns: X coordinate of the left side of the rectangle
+  */
   @property double x()
   {
     return (cast(cairo_rectangle_t*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = X coordinate of the left side of the rectangle
+  */
   @property void x(double propval)
   {
     (cast(cairo_rectangle_t*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: Y coordinate of the top side of the rectangle
+  */
   @property double y()
   {
     return (cast(cairo_rectangle_t*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = Y coordinate of the top side of the rectangle
+  */
   @property void y(double propval)
   {
     (cast(cairo_rectangle_t*)cPtr).y = propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: width of the rectangle
+  */
   @property double width()
   {
     return (cast(cairo_rectangle_t*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = width of the rectangle
+  */
   @property void width(double propval)
   {
     (cast(cairo_rectangle_t*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: height of the rectangle
+  */
   @property double height()
   {
     return (cast(cairo_rectangle_t*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = height of the rectangle
+  */
   @property void height(double propval)
   {
     (cast(cairo_rectangle_t*)cPtr).height = propval;

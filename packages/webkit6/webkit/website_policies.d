@@ -13,7 +13,7 @@ import webkit.types;
     WebKitWebsitePolicies allows you to configure per-page policies,
     currently only autoplay policies are supported.
 */
-class WebsitePolicies : gobject.object.ObjectG
+class WebsitePolicies : gobject.object.ObjectWrap
 {
 
   /** */

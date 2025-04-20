@@ -52,6 +52,7 @@ class ScaledFont : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScaledFont self()
   {
     return this;

@@ -33,6 +33,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MonthDayNanoIntervalArray self()
   {
     return this;
@@ -51,7 +52,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_interval_array_get_value(cast(GArrowMonthDayNanoIntervalArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, Yes.Take);
     return _retval;
   }
 

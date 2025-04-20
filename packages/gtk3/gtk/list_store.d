@@ -159,7 +159,7 @@ import gtk.types;
     </object>
     ```
 */
-class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
+class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
 {
 
   /** */
@@ -181,6 +181,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListStore self()
   {
     return this;
@@ -208,7 +209,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
     auto _types = cast(GType*)types.ptr;
     _cretval = gtk_list_store_newv(_nColumns, _types);
-    auto _retval = ObjectG.getDObject!(gtk.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
     return _retval;
   }
 

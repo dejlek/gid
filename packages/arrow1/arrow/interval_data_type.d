@@ -30,6 +30,7 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IntervalDataType self()
   {
     return this;

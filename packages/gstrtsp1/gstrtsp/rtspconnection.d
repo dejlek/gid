@@ -31,7 +31,7 @@ class RTSPConnection
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtsp.RTSPConnection");
+      throw new GidConstructException("Null instance pointer for gstrtsp.rtspconnection.RTSPConnection");
 
     cInstancePtr = cast(GstRTSPConnection*)ptr;
 
@@ -240,7 +240,7 @@ class RTSPConnection
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_read_socket(cast(const(GstRTSPConnection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class RTSPConnection
       when called the first time and will return that same connection on subsequent
       calls. The server is then responsible for configuring the TLS connection.
       Returns: the TLS connection for conn.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.tls_connection.TlsConnection getTls()
   {
@@ -270,8 +270,8 @@ class RTSPConnection
     GError *_err;
     _cretval = gst_rtsp_connection_get_tls(cast(GstRTSPConnection*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(GTlsConnection*)_cretval, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_connection.TlsConnection)(cast(GTlsConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -280,14 +280,14 @@ class RTSPConnection
       after a server certificate can't be verified with the default
       certificate database.
       Returns: the anchor certificate authorities database, or NULL if no
-        database has been previously set. Use [gobject.object.ObjectG.unref] to release the
+        database has been previously set. Use [gobject.object.ObjectWrap.unref] to release the
         certificate database.
   */
   gio.tls_database.TlsDatabase getTlsDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = gst_rtsp_connection_get_tls_database(cast(GstRTSPConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -296,13 +296,13 @@ class RTSPConnection
       database need to interact with the user. This will be used to prompt the
       user for passwords where necessary.
       Returns: a reference on the #GTlsInteraction. Use
-        [gobject.object.ObjectG.unref] to release.
+        [gobject.object.ObjectWrap.unref] to release.
   */
   gio.tls_interaction.TlsInteraction getTlsInteraction()
   {
     GTlsInteraction* _cretval;
     _cretval = gst_rtsp_connection_get_tls_interaction(cast(GstRTSPConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -362,7 +362,7 @@ class RTSPConnection
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_write_socket(cast(const(GstRTSPConnection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -666,7 +666,7 @@ class RTSPConnection
     {
       auto _dlg = cast(gstrtsp.types.RTSPConnectionAcceptCertificateFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

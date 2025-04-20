@@ -52,7 +52,7 @@ template TlsBackendT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 

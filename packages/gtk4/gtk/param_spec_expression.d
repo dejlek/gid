@@ -17,7 +17,7 @@ class ParamSpecExpression : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.ParamSpecExpression");
+      throw new GidConstructException("Null instance pointer for gtk.param_spec_expression.ParamSpecExpression");
 
     super(cast(GParamSpec*)ptr, take);
   }

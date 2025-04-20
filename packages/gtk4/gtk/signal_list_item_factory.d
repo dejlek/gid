@@ -20,7 +20,7 @@ import gtk.types;
      the row and adding them to the listitem.
     
      2. [gtk.signal_list_item_factory.SignalListItemFactory.bind] is emitted to bind the item passed
-     via [gtk.list_item.ListItem.GObject.Object] to the widgets that have been created in
+     via [gtk.list_item.ListItem.item] to the widgets that have been created in
      step 1 or to add item-specific widgets. Signals are connected to listen to
      changes - both to changes in the item to update the widgets or to changes
      in the widgets to update the item. After this signal has been called, the
@@ -44,7 +44,7 @@ import gtk.types;
     
     Note that during the signal emissions, changing properties on the
     listitems passed will not trigger notify signals as the listitem's
-    notifications are frozen. See [gobject.object.ObjectG.freezeNotify] for details.
+    notifications are frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
     
     For tracking changes in other properties in the listitem, the
     ::notify signal is recommended. The signal can be connected in the
@@ -73,6 +73,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SignalListItemFactory self()
   {
     return this;
@@ -95,7 +96,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Connect to `Bind` signal.
   
       Emitted when an object has been bound, for example when a
-      new [gtk.list_item.ListItem.GObject.Object] has been set on a
+      new [gtk.list_item.ListItem.item] has been set on a
       listitem and should be bound for use.
       
       After this signal was emitted, the object might be shown in
@@ -108,9 +109,9 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
   
-          `object` The [gobject.object.ObjectG] to bind (optional)
+          `object` The [gobject.object.ObjectWrap] to bind (optional)
   
           `signalListItemFactory` the instance the signal is connected to (optional)
   
@@ -120,7 +121,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   ulong connectBind(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
@@ -157,9 +158,9 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
   
-          `object` The [gobject.object.ObjectG] to set up (optional)
+          `object` The [gobject.object.ObjectWrap] to set up (optional)
   
           `signalListItemFactory` the instance the signal is connected to (optional)
   
@@ -169,7 +170,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   ulong connectSetup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
@@ -206,9 +207,9 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
   
-          `object` The [gobject.object.ObjectG] to tear down (optional)
+          `object` The [gobject.object.ObjectWrap] to tear down (optional)
   
           `signalListItemFactory` the instance the signal is connected to (optional)
   
@@ -218,7 +219,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   ulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
@@ -247,7 +248,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   
       Emitted when an object has been unbound from its item, for example when
       a listitem was removed from use in a list widget
-      and its [gtk.list_item.ListItem.GObject.Object] is about to be unset.
+      and its [gtk.list_item.ListItem.item] is about to be unset.
       
       This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.bind]
       signal and should be used to undo everything done in that signal.
@@ -255,9 +256,9 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
   
-          `object` The [gobject.object.ObjectG] to unbind (optional)
+          `object` The [gobject.object.ObjectWrap] to unbind (optional)
   
           `signalListItemFactory` the instance the signal is connected to (optional)
   
@@ -267,7 +268,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {

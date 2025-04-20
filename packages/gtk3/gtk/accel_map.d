@@ -67,7 +67,7 @@ import gtk.types;
     monitor only single accelerator path by using it as a detail of
     the #GtkAccelMap::changed signal.
 */
-class AccelMap : gobject.object.ObjectG
+class AccelMap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -89,6 +89,7 @@ class AccelMap : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AccelMap self()
   {
     return this;
@@ -227,7 +228,7 @@ class AccelMap : gobject.object.ObjectG
   {
     GtkAccelMap* _cretval;
     _cretval = gtk_accel_map_get();
-    auto _retval = ObjectG.getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.Take);
     return _retval;
   }
 

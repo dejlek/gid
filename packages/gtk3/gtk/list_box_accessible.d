@@ -34,6 +34,7 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListBoxAccessible self()
   {
     return this;

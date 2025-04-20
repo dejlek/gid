@@ -18,7 +18,7 @@ class GLAsyncDebug
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstGL.GLAsyncDebug");
+      throw new GidConstructException("Null instance pointer for gstgl.glasync_debug.GLAsyncDebug");
 
     cInstance = *cast(GstGLAsyncDebug*)ptr;
 

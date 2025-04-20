@@ -17,7 +17,7 @@ import gobject.object;
     of the base address are relevant for matching purposes. These are
     often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
 */
-class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
+class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
@@ -39,9 +39,57 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InetAddressMask self()
   {
     return this;
+  }
+
+  /**
+      Get `address` property.
+      Returns: The base address.
+  */
+  @property gio.inet_address.InetAddress address()
+  {
+    return getAddress();
+  }
+
+  /**
+      Set `address` property.
+      Params:
+        propval = The base address.
+  */
+  @property void address(gio.inet_address.InetAddress propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.inet_address.InetAddress)("address", propval);
+  }
+
+  /**
+      Get `family` property.
+      Returns: The address family (IPv4 or IPv6).
+  */
+  @property gio.types.SocketFamily family()
+  {
+    return getFamily();
+  }
+
+  /**
+      Get `length` property.
+      Returns: The prefix length, in bytes.
+  */
+  @property uint length()
+  {
+    return getLength();
+  }
+
+  /**
+      Set `length` property.
+      Params:
+        propval = The prefix length, in bytes.
+  */
+  @property void length(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("length", propval);
   }
 
   mixin InitableT!();
@@ -54,7 +102,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
         addr = a #GInetAddress
         length = number of bits of addr to use
       Returns: a new #GInetAddressMask, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   this(gio.inet_address.InetAddress addr, uint length)
   {
@@ -62,7 +110,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr.cPtr(No.Dup) : null, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -76,7 +124,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
         maskString = an IP address or address/length string
       Returns: a new #GInetAddressMask corresponding to string, or null
         on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.inet_address_mask.InetAddressMask newFromString(string maskString)
   {
@@ -85,8 +133,8 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,7 +160,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 

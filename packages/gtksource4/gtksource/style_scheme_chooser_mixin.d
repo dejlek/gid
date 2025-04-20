@@ -14,6 +14,29 @@ template StyleSchemeChooserT()
 {
 
   /**
+      Get `styleScheme` property.
+      Returns: The :style-scheme property contains the currently selected style
+      scheme. The property can be set to change
+      the current selection programmatically.
+  */
+  @property gtksource.style_scheme.StyleScheme styleScheme()
+  {
+    return getStyleScheme();
+  }
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = The :style-scheme property contains the currently selected style
+        scheme. The property can be set to change
+        the current selection programmatically.
+  */
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
+  {
+    return setStyleScheme(propval);
+  }
+
+  /**
       Gets the currently-selected scheme.
       Returns: the currently-selected scheme.
   */
@@ -21,7 +44,7 @@ template StyleSchemeChooserT()
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_chooser_get_style_scheme(cast(GtkSourceStyleSchemeChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 

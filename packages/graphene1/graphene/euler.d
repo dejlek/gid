@@ -19,7 +19,9 @@ import graphene.vec3;
 class Euler : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `euler.Euler` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_euler_t.sizeof), Yes.Take);
@@ -50,6 +52,7 @@ class Euler : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Euler self()
   {
     return this;

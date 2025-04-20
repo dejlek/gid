@@ -11,7 +11,7 @@ import gobject.param_spec;
 
 /**
     An `class@AnimationTarget` changing the value of a property of a
-    [gobject.object.ObjectG] instance.
+    [gobject.object.ObjectWrap] instance.
 */
 class PropertyAnimationTarget : adw.animation_target.AnimationTarget
 {
@@ -35,6 +35,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PropertyAnimationTarget self()
   {
     return this;
@@ -49,7 +50,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
         propertyName = the name of the property on object to animate
       Returns: the newly created [adw.property_animation_target.PropertyAnimationTarget]
   */
-  this(gobject.object.ObjectG object, string propertyName)
+  this(gobject.object.ObjectWrap object, string propertyName)
   {
     AdwAnimationTarget* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -66,11 +67,11 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
         pspec = the param spec of the property on object to animate
       Returns: new newly created [adw.property_animation_target.PropertyAnimationTarget]
   */
-  static adw.property_animation_target.PropertyAnimationTarget newForPspec(gobject.object.ObjectG object, gobject.param_spec.ParamSpec pspec)
+  static adw.property_animation_target.PropertyAnimationTarget newForPspec(gobject.object.ObjectWrap object, gobject.param_spec.ParamSpec pspec)
   {
     AdwAnimationTarget* _cretval;
     _cretval = adw_property_animation_target_new_for_pspec(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.property_animation_target.PropertyAnimationTarget)(cast(AdwAnimationTarget*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.property_animation_target.PropertyAnimationTarget)(cast(AdwAnimationTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,11 +83,11 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
       lifetime.
       Returns: the animated object
   */
-  gobject.object.ObjectG getObject()
+  gobject.object.ObjectWrap getObject()
   {
     ObjectC* _cretval;
     _cretval = adw_property_animation_target_get_object(cast(AdwPropertyAnimationTarget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

@@ -7,6 +7,7 @@ import atk.object;
 import atk.types;
 import gid.gid;
 import gobject.object;
+import gobject.value_array;
 
 /**
     An object used to describe a relation between a
@@ -17,7 +18,7 @@ import gobject.object;
     other objects are defined as an AtkRelationSet, which is a set of
     AtkRelations.
 */
-class Relation : gobject.object.ObjectG
+class Relation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -39,14 +40,39 @@ class Relation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Relation self()
   {
     return this;
   }
 
+  /** */
+  @property atk.types.RelationType relationType()
+  {
+    return getRelationType();
+  }
+
+  /** */
+  @property void relationType(atk.types.RelationType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.types.RelationType)("relation-type", propval);
+  }
+
+  /** */
+  @property gobject.value_array.ValueArray target()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.value_array.ValueArray)("target");
+  }
+
+  /** */
+  @property void target(gobject.value_array.ValueArray propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gobject.value_array.ValueArray)("target", propval);
+  }
+
   /**
       Create a new relation for the specified key and the specified list
-      of targets.  See also [atk.object.ObjectAtk.addRelationship].
+      of targets.  See also [atk.object.ObjectWrap.addRelationship].
   
       Params:
         targets = an array of pointers to
@@ -55,7 +81,7 @@ class Relation : gobject.object.ObjectG
            #AtkRelation
       Returns: a pointer to a new #AtkRelation
   */
-  this(atk.object.ObjectAtk[] targets, atk.types.RelationType relationship)
+  this(atk.object.ObjectWrap[] targets, atk.types.RelationType relationship)
   {
     AtkRelation* _cretval;
     int _nTargets;
@@ -72,12 +98,12 @@ class Relation : gobject.object.ObjectG
 
   /**
       Adds the specified AtkObject to the target for the relation, if it is
-      not already present.  See also [atk.object.ObjectAtk.addRelationship].
+      not already present.  See also [atk.object.ObjectWrap.addRelationship].
   
       Params:
         target = an #AtkObject
   */
-  void addTarget(atk.object.ObjectAtk target)
+  void addTarget(atk.object.ObjectWrap target)
   {
     atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
   }
@@ -98,11 +124,11 @@ class Relation : gobject.object.ObjectG
       Gets the target list of relation
       Returns: the target list of relation
   */
-  atk.object.ObjectAtk[] getTarget()
+  atk.object.ObjectWrap[] getTarget()
   {
     GPtrArray* _cretval;
     _cretval = atk_relation_get_target(cast(AtkRelation*)cPtr);
-    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.None)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.None)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 
@@ -113,7 +139,7 @@ class Relation : gobject.object.ObjectG
         target = an #AtkObject
       Returns: TRUE if the removal is successful.
   */
-  bool removeTarget(atk.object.ObjectAtk target)
+  bool removeTarget(atk.object.ObjectWrap target)
   {
     bool _retval;
     _retval = atk_relation_remove_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);

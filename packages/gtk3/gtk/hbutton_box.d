@@ -36,6 +36,7 @@ class HButtonBox : gtk.button_box.ButtonBox
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HButtonBox self()
   {
     return this;

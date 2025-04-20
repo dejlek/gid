@@ -20,7 +20,7 @@ class AncillaryMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.AncillaryMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.ancillary_meta.AncillaryMeta");
 
     cInstance = *cast(GstAncillaryMeta*)ptr;
 
@@ -34,86 +34,182 @@ class AncillaryMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: Parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)cPtr).meta);
   }
 
+  /**
+      Get `field` field.
+      Returns: The field where the ancillary data is located
+  */
   @property gstvideo.types.AncillaryMetaField field()
   {
     return cast(gstvideo.types.AncillaryMetaField)(cast(GstAncillaryMeta*)cPtr).field;
   }
 
+  /**
+      Set `field` field.
+      Params:
+        propval = The field where the ancillary data is located
+  */
   @property void field(gstvideo.types.AncillaryMetaField propval)
   {
     (cast(GstAncillaryMeta*)cPtr).field = cast(GstAncillaryMetaField)propval;
   }
 
+  /**
+      Get `cNotYChannel` field.
+      Returns: Which channel (luminance or chrominance) the ancillary
+         data is located. 0 if content is SD or stored in the luminance channel
+         (default). 1 if HD and stored in the chrominance channel.
+  */
   @property bool cNotYChannel()
   {
     return (cast(GstAncillaryMeta*)cPtr).cNotYChannel;
   }
 
+  /**
+      Set `cNotYChannel` field.
+      Params:
+        propval = Which channel (luminance or chrominance) the ancillary
+           data is located. 0 if content is SD or stored in the luminance channel
+           (default). 1 if HD and stored in the chrominance channel.
+  */
   @property void cNotYChannel(bool propval)
   {
     (cast(GstAncillaryMeta*)cPtr).cNotYChannel = propval;
   }
 
+  /**
+      Get `line` field.
+      Returns: The line on which the ancillary data is located (max 11bit). There
+         are two special values: 0x7ff if no line is specified (default), 0x7fe
+         to specify the ancillary data is on any valid line before active video
+  */
   @property ushort line()
   {
     return (cast(GstAncillaryMeta*)cPtr).line;
   }
 
+  /**
+      Set `line` field.
+      Params:
+        propval = The line on which the ancillary data is located (max 11bit). There
+           are two special values: 0x7ff if no line is specified (default), 0x7fe
+           to specify the ancillary data is on any valid line before active video
+  */
   @property void line(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).line = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: The location of the ancillary data packet in a SDI raster relative
+         to the start of active video (max 12bits). A value of 0 means the ADF of
+         the ancillary packet starts immediately following SAV. There are 3
+         special values: 0xfff: No specified location (default), 0xffe: within
+         HANC data space, 0xffd: within the ancillary data space located between
+         SAV and EAV
+  */
   @property ushort offset()
   {
     return (cast(GstAncillaryMeta*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = The location of the ancillary data packet in a SDI raster relative
+           to the start of active video (max 12bits). A value of 0 means the ADF of
+           the ancillary packet starts immediately following SAV. There are 3
+           special values: 0xfff: No specified location (default), 0xffe: within
+           HANC data space, 0xffd: within the ancillary data space located between
+           SAV and EAV
+  */
   @property void offset(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).offset = propval;
   }
 
+  /**
+      Get `DID` field.
+      Returns: Data Identified
+  */
   @property ushort DID()
   {
     return (cast(GstAncillaryMeta*)cPtr).DID;
   }
 
+  /**
+      Set `DID` field.
+      Params:
+        propval = Data Identified
+  */
   @property void DID(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).DID = propval;
   }
 
+  /**
+      Get `SDIDBlockNumber` field.
+      Returns: Secondary Data identification (if type 2) or Data block
+         number (if type 1)
+  */
   @property ushort SDIDBlockNumber()
   {
     return (cast(GstAncillaryMeta*)cPtr).SDIDBlockNumber;
   }
 
+  /**
+      Set `SDIDBlockNumber` field.
+      Params:
+        propval = Secondary Data identification (if type 2) or Data block
+           number (if type 1)
+  */
   @property void SDIDBlockNumber(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).SDIDBlockNumber = propval;
   }
 
+  /**
+      Get `dataCount` field.
+      Returns: The amount of user data
+  */
   @property ushort dataCount()
   {
     return (cast(GstAncillaryMeta*)cPtr).dataCount;
   }
 
+  /**
+      Set `dataCount` field.
+      Params:
+        propval = The amount of user data
+  */
   @property void dataCount(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).dataCount = propval;
   }
 
+  /**
+      Get `checksum` field.
+      Returns: The checksum of the ADF
+  */
   @property ushort checksum()
   {
     return (cast(GstAncillaryMeta*)cPtr).checksum;
   }
 
+  /**
+      Set `checksum` field.
+      Params:
+        propval = The checksum of the ADF
+  */
   @property void checksum(ushort propval)
   {
     (cast(GstAncillaryMeta*)cPtr).checksum = propval;

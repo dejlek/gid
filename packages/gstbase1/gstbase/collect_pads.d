@@ -54,7 +54,7 @@ import gstbase.types;
             All pads are in waiting mode by default.
       )
 */
-class CollectPads : gst.object.ObjectGst
+class CollectPads : gst.object.ObjectWrap
 {
 
   /** */
@@ -76,6 +76,7 @@ class CollectPads : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CollectPads self()
   {
     return this;
@@ -296,7 +297,7 @@ class CollectPads : gst.object.ObjectGst
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsBufferFunction*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -322,7 +323,7 @@ class CollectPads : gst.object.ObjectGst
       auto _dlg = cast(gstbase.types.CollectPadsClipFunction*)userData;
       auto _outbuffer = new gst.buffer.Buffer(outbuffer, No.Take);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
       auto _retval = cast(GstFlowReturn)_dretval;
       *outbuffer = *cast(GstBuffer**)_outbuffer.cPtr;
 
@@ -348,7 +349,7 @@ class CollectPads : gst.object.ObjectGst
     {
       auto _dlg = cast(gstbase.types.CollectPadsCompareFunction*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -376,7 +377,7 @@ class CollectPads : gst.object.ObjectGst
     {
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -399,7 +400,7 @@ class CollectPads : gst.object.ObjectGst
     {
       auto _dlg = cast(gstbase.types.CollectPadsFlushFunction*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -447,7 +448,7 @@ class CollectPads : gst.object.ObjectGst
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsFunction*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -477,7 +478,7 @@ class CollectPads : gst.object.ObjectGst
     {
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

@@ -17,10 +17,10 @@ import webkit.types;
     an image or a media.
     
     You can get the context of the HitTestResult with
-    [webkit.hit_test_result.HitTestResult.getContext] that returns a bitmask of
+    [webkitwebprocessextension.hit_test_result.HitTestResult.getContext] that returns a bitmask of
     #WebKitHitTestResultContext flags. You can also use
-    [webkit.hit_test_result.HitTestResult.contextIsLink], [webkit.hit_test_result.HitTestResult.contextIsImage] and
-    [webkit.hit_test_result.HitTestResult.contextIsMedia] to determine whether there's
+    [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsLink], [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsImage] and
+    [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsMedia] to determine whether there's
     a link, image or a media element at the coordinates of the Hit Test.
     Note that it's possible that several #WebKitHitTestResultContext flags
     are active at the same time, for example if there's a link containing an image.
@@ -29,7 +29,7 @@ import webkit.types;
     for the mouse coordinates and #WebKitWebView::mouse-target-changed
     signal is emitted with a #WebKitHitTestResult.
 */
-class HitTestResult : gobject.object.ObjectG
+class HitTestResult : gobject.object.ObjectWrap
 {
 
   /** */

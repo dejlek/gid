@@ -151,9 +151,106 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpinButton self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /** */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
+  }
+
+  /** */
+  @property double climbRate()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("climb-rate");
+  }
+
+  /** */
+  @property void climbRate(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("climb-rate", propval);
+  }
+
+  /** */
+  @property uint digits()
+  {
+    return getDigits();
+  }
+
+  /** */
+  @property void digits(uint propval)
+  {
+    return setDigits(propval);
+  }
+
+  /** */
+  @property bool numeric()
+  {
+    return getNumeric();
+  }
+
+  /** */
+  @property void numeric(bool propval)
+  {
+    return setNumeric(propval);
+  }
+
+  /** */
+  @property bool snapToTicks()
+  {
+    return getSnapToTicks();
+  }
+
+  /** */
+  @property void snapToTicks(bool propval)
+  {
+    return setSnapToTicks(propval);
+  }
+
+  /** */
+  @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
+  {
+    return getUpdatePolicy();
+  }
+
+  /** */
+  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  {
+    return setUpdatePolicy(propval);
+  }
+
+  /** */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /** */
+  @property void value(double propval)
+  {
+    return setValue(propval);
+  }
+
+  /** */
+  @property bool wrap()
+  {
+    return getWrap();
+  }
+
+  /** */
+  @property void wrap(bool propval)
+  {
+    return setWrap(propval);
   }
 
   mixin OrientableT!();
@@ -197,7 +294,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +321,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

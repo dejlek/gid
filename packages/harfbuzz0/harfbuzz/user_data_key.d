@@ -13,7 +13,9 @@ import harfbuzz.types;
 class UserDataKey : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `user_data_key.UserDataKey` boxed type.
+  */
   this()
   {
     super(gMalloc(hb_user_data_key_t.sizeof), Yes.Take);
@@ -44,6 +46,7 @@ class UserDataKey : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UserDataKey self()
   {
     return this;

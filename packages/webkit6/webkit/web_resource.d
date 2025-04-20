@@ -28,7 +28,7 @@ import webkit.uriresponse;
     [webkit.web_resource.WebResource.getResponse], as well as the raw data, using
     [webkit.web_resource.WebResource.getData].
 */
-class WebResource : gobject.object.ObjectG
+class WebResource : gobject.object.ObjectWrap
 {
 
   /** */
@@ -56,7 +56,26 @@ class WebResource : gobject.object.ObjectG
     return this;
   }
 
-  alias getData = gobject.object.ObjectG.getData;
+  /**
+      Get `response` property.
+      Returns: The #WebKitURIResponse associated with this resource.
+  */
+  @property webkit.uriresponse.URIResponse response()
+  {
+    return getResponse();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The current active URI of the #WebKitWebResource.
+      See [webkit.web_resource.WebResource.getUri] for more details.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  alias getData = gobject.object.ObjectWrap.getData;
 
   /**
       Asynchronously get the raw data for resource.
@@ -75,7 +94,7 @@ class WebResource : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -91,16 +110,16 @@ class WebResource : gobject.object.ObjectG
       Returns: a
            string with the data of resource, or null in case of error. if length
            is not null, the size of the data will be assigned to it.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ubyte[] getDataFinish(gio.async_result.AsyncResult result)
   {
     ubyte* _cretval;
     size_t _cretlength;
     GError *_err;
-    _cretval = webkit_web_resource_get_data_finish(cast(WebKitWebResource*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_cretlength, &_err);
+    _cretval = webkit_web_resource_get_data_finish(cast(WebKitWebResource*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_cretlength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     ubyte[] _retval;
 
     if (_cretval)
@@ -123,7 +142,7 @@ class WebResource : gobject.object.ObjectG
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_web_resource_get_response(cast(WebKitWebResource*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 
@@ -174,7 +193,7 @@ class WebResource : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorG error, webkit.web_resource.WebResource webResource))
+          $(D void callback(glib.error.ErrorWrap error, webkit.web_resource.WebResource webResource))
   
           `error` the #GError that was triggered (optional)
   
@@ -186,7 +205,7 @@ class WebResource : gobject.object.ObjectG
   ulong connectFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_resource.WebResource)))
   && Parameters!T.length < 3)
   {

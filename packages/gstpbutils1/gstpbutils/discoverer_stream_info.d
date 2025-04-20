@@ -28,7 +28,7 @@ import gstpbutils.types;
     #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
     for the audio and video streams respectively.
 */
-class DiscovererStreamInfo : gobject.object.ObjectG
+class DiscovererStreamInfo : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,6 +50,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DiscovererStreamInfo self()
   {
     return this;
@@ -92,7 +93,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_next(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +102,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_previous(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 

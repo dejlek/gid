@@ -36,6 +36,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilterOutputStream self()
   {
     return this;
@@ -49,7 +50,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
   {
     GOutputStream* _cretval;
     _cretval = g_filter_output_stream_get_base_stream(cast(GFilterOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 

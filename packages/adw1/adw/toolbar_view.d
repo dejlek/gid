@@ -138,9 +138,317 @@ class ToolbarView : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToolbarView self()
   {
     return this;
+  }
+
+  /**
+      Get `bottomBarHeight` property.
+      Returns: The current bottom bar height.
+      
+      Bottom bar height does change depending on
+      `property@ToolbarView:reveal-bottom-bars`, including during the transition.
+      
+      See `property@ToolbarView:top-bar-height`.
+  */
+  @property int bottomBarHeight()
+  {
+    return getBottomBarHeight();
+  }
+
+  /**
+      Get `bottomBarStyle` property.
+      Returns: Appearance of the bottom bars.
+      
+      If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
+      has a subtle undershoot shadow when touching them, same as the
+      [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
+      style class. This works well for simple content, e.g. `class@StatusPage` or
+      `class@PreferencesPage`, where the background at the bottom of the page is
+      uniform. Additionally, windows with sidebars should always use this style.
+      
+      Undershoot shadow is only present if a bottom bar is actually present and
+      visible. It is also never present if
+      `property@ToolbarView:extend-content-to-bottom-edge` is set to `TRUE`.
+      
+      If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
+      persistent shadow, this is suitable for content such as
+      [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+      where some elements are directly adjacent to the bottom bars, or
+      `class@TabView`, where each page can have a different background.
+      
+      [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+      shadow is replaced with a more subtle border. This can be useful for
+      applications like image viewers.
+      
+      See also `property@ToolbarView:top-bar-style`.
+  */
+  @property adw.types.ToolbarStyle bottomBarStyle()
+  {
+    return getBottomBarStyle();
+  }
+
+  /**
+      Set `bottomBarStyle` property.
+      Params:
+        propval = Appearance of the bottom bars.
+        
+        If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
+        has a subtle undershoot shadow when touching them, same as the
+        [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
+        style class. This works well for simple content, e.g. `class@StatusPage` or
+        `class@PreferencesPage`, where the background at the bottom of the page is
+        uniform. Additionally, windows with sidebars should always use this style.
+        
+        Undershoot shadow is only present if a bottom bar is actually present and
+        visible. It is also never present if
+        `property@ToolbarView:extend-content-to-bottom-edge` is set to `TRUE`.
+        
+        If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
+        persistent shadow, this is suitable for content such as
+        [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+        where some elements are directly adjacent to the bottom bars, or
+        `class@TabView`, where each page can have a different background.
+        
+        [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+        shadow is replaced with a more subtle border. This can be useful for
+        applications like image viewers.
+        
+        See also `property@ToolbarView:top-bar-style`.
+  */
+  @property void bottomBarStyle(adw.types.ToolbarStyle propval)
+  {
+    return setBottomBarStyle(propval);
+  }
+
+  /**
+      Get `content` property.
+      Returns: The content widget.
+  */
+  @property gtk.widget.Widget content()
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+  */
+  @property void content(gtk.widget.Widget propval)
+  {
+    return setContent(propval);
+  }
+
+  /**
+      Get `extendContentToBottomEdge` property.
+      Returns: Whether the content widget can extend behind bottom bars.
+      
+      This can be used in combination with
+      `property@ToolbarView:reveal-bottom-bars` to show and hide toolbars in
+      fullscreen.
+      
+      See `property@ToolbarView:extend-content-to-top-edge`.
+  */
+  @property bool extendContentToBottomEdge()
+  {
+    return getExtendContentToBottomEdge();
+  }
+
+  /**
+      Set `extendContentToBottomEdge` property.
+      Params:
+        propval = Whether the content widget can extend behind bottom bars.
+        
+        This can be used in combination with
+        `property@ToolbarView:reveal-bottom-bars` to show and hide toolbars in
+        fullscreen.
+        
+        See `property@ToolbarView:extend-content-to-top-edge`.
+  */
+  @property void extendContentToBottomEdge(bool propval)
+  {
+    return setExtendContentToBottomEdge(propval);
+  }
+
+  /**
+      Get `extendContentToTopEdge` property.
+      Returns: Whether the content widget can extend behind top bars.
+      
+      This can be used in combination with `property@ToolbarView:reveal-top-bars`
+      to show and hide toolbars in fullscreen.
+      
+      See `property@ToolbarView:extend-content-to-bottom-edge`.
+  */
+  @property bool extendContentToTopEdge()
+  {
+    return getExtendContentToTopEdge();
+  }
+
+  /**
+      Set `extendContentToTopEdge` property.
+      Params:
+        propval = Whether the content widget can extend behind top bars.
+        
+        This can be used in combination with `property@ToolbarView:reveal-top-bars`
+        to show and hide toolbars in fullscreen.
+        
+        See `property@ToolbarView:extend-content-to-bottom-edge`.
+  */
+  @property void extendContentToTopEdge(bool propval)
+  {
+    return setExtendContentToTopEdge(propval);
+  }
+
+  /**
+      Get `revealBottomBars` property.
+      Returns: Whether bottom bars are visible.
+      
+      The transition will be animated.
+      
+      This can be used in combination with
+      `property@ToolbarView:extend-content-to-bottom-edge` to show and hide
+      toolbars in fullscreen.
+      
+      See `property@ToolbarView:reveal-top-bars`.
+  */
+  @property bool revealBottomBars()
+  {
+    return getRevealBottomBars();
+  }
+
+  /**
+      Set `revealBottomBars` property.
+      Params:
+        propval = Whether bottom bars are visible.
+        
+        The transition will be animated.
+        
+        This can be used in combination with
+        `property@ToolbarView:extend-content-to-bottom-edge` to show and hide
+        toolbars in fullscreen.
+        
+        See `property@ToolbarView:reveal-top-bars`.
+  */
+  @property void revealBottomBars(bool propval)
+  {
+    return setRevealBottomBars(propval);
+  }
+
+  /**
+      Get `revealTopBars` property.
+      Returns: Whether top bars are revealed.
+      
+      The transition will be animated.
+      
+      This can be used in combination with
+      `property@ToolbarView:extend-content-to-top-edge` to show and hide toolbars
+      in fullscreen.
+      
+      See `property@ToolbarView:reveal-bottom-bars`.
+  */
+  @property bool revealTopBars()
+  {
+    return getRevealTopBars();
+  }
+
+  /**
+      Set `revealTopBars` property.
+      Params:
+        propval = Whether top bars are revealed.
+        
+        The transition will be animated.
+        
+        This can be used in combination with
+        `property@ToolbarView:extend-content-to-top-edge` to show and hide toolbars
+        in fullscreen.
+        
+        See `property@ToolbarView:reveal-bottom-bars`.
+  */
+  @property void revealTopBars(bool propval)
+  {
+    return setRevealTopBars(propval);
+  }
+
+  /**
+      Get `topBarHeight` property.
+      Returns: The current top bar height.
+      
+      Top bar height does change depending `property@ToolbarView:reveal-top-bars`,
+      including during the transition.
+      
+      See `property@ToolbarView:bottom-bar-height`.
+  */
+  @property int topBarHeight()
+  {
+    return getTopBarHeight();
+  }
+
+  /**
+      Get `topBarStyle` property.
+      Returns: Appearance of the top bars.
+      
+      If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
+      subtle undershoot shadow when touching them, same as the
+      [`.undershoot-top`](style-classes.html#undershoot-indicators)
+      style class. This works well for simple content, e.g. `class@StatusPage` or
+      `class@PreferencesPage`, where the background at the top of the page is
+      uniform. Additionally, windows with sidebars should always use this style.
+      
+      Undershoot shadow is only present if a top bar is actually present and
+      visible. It is also never present if
+      `property@ToolbarView:extend-content-to-top-edge` is set to `TRUE`.
+      
+      If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
+      persistent shadow, this is suitable for content such as
+      [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+      where some elements are directly adjacent to the top bars, or
+      `class@TabView`, where each page can have a different background.
+      
+      [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+      shadow is replaced with a more subtle border. This can be useful for
+      applications like image viewers.
+      
+      See also `property@ToolbarView:bottom-bar-style`.
+  */
+  @property adw.types.ToolbarStyle topBarStyle()
+  {
+    return getTopBarStyle();
+  }
+
+  /**
+      Set `topBarStyle` property.
+      Params:
+        propval = Appearance of the top bars.
+        
+        If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
+        subtle undershoot shadow when touching them, same as the
+        [`.undershoot-top`](style-classes.html#undershoot-indicators)
+        style class. This works well for simple content, e.g. `class@StatusPage` or
+        `class@PreferencesPage`, where the background at the top of the page is
+        uniform. Additionally, windows with sidebars should always use this style.
+        
+        Undershoot shadow is only present if a top bar is actually present and
+        visible. It is also never present if
+        `property@ToolbarView:extend-content-to-top-edge` is set to `TRUE`.
+        
+        If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
+        persistent shadow, this is suitable for content such as
+        [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+        where some elements are directly adjacent to the top bars, or
+        `class@TabView`, where each page can have a different background.
+        
+        [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+        shadow is replaced with a more subtle border. This can be useful for
+        applications like image viewers.
+        
+        See also `property@ToolbarView:bottom-bar-style`.
+  */
+  @property void topBarStyle(adw.types.ToolbarStyle propval)
+  {
+    return setTopBarStyle(propval);
   }
 
   /**
@@ -212,7 +520,7 @@ class ToolbarView : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_toolbar_view_get_content(cast(AdwToolbarView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

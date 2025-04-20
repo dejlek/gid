@@ -37,6 +37,7 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ComboBoxAccessible self()
   {
     return this;
@@ -44,7 +45,7 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
 
   mixin ActionT!();
   mixin SelectionT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

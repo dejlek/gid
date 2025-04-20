@@ -87,9 +87,161 @@ class Stack : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Stack self()
   {
     return this;
+  }
+
+  /**
+      Get `hhomogeneous` property.
+      Returns: true if the stack allocates the same width for all children.
+  */
+  @property bool hhomogeneous()
+  {
+    return getHhomogeneous();
+  }
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+  */
+  @property void hhomogeneous(bool propval)
+  {
+    return setHhomogeneous(propval);
+  }
+
+  /**
+      Get `interpolateSize` property.
+      Returns: Whether or not the size should smoothly change during the transition.
+  */
+  @property bool interpolateSize()
+  {
+    return getInterpolateSize();
+  }
+
+  /**
+      Set `interpolateSize` property.
+      Params:
+        propval = Whether or not the size should smoothly change during the transition.
+  */
+  @property void interpolateSize(bool propval)
+  {
+    return setInterpolateSize(propval);
+  }
+
+  /**
+      Get `pages` property.
+      Returns: A selection model with the stack pages.
+  */
+  @property gtk.selection_model.SelectionModel pages()
+  {
+    return getPages();
+  }
+
+  /**
+      Get `transitionDuration` property.
+      Returns: The animation duration, in milliseconds.
+  */
+  @property uint transitionDuration()
+  {
+    return getTransitionDuration();
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The animation duration, in milliseconds.
+  */
+  @property void transitionDuration(uint propval)
+  {
+    return setTransitionDuration(propval);
+  }
+
+  /**
+      Get `transitionRunning` property.
+      Returns: Whether or not the transition is currently running.
+  */
+  @property bool transitionRunning()
+  {
+    return getTransitionRunning();
+  }
+
+  /**
+      Get `transitionType` property.
+      Returns: The type of animation used to transition.
+  */
+  @property gtk.types.StackTransitionType transitionType()
+  {
+    return getTransitionType();
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used to transition.
+  */
+  @property void transitionType(gtk.types.StackTransitionType propval)
+  {
+    return setTransitionType(propval);
+  }
+
+  /**
+      Get `vhomogeneous` property.
+      Returns: true if the stack allocates the same height for all children.
+  */
+  @property bool vhomogeneous()
+  {
+    return getVhomogeneous();
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+  */
+  @property void vhomogeneous(bool propval)
+  {
+    return setVhomogeneous(propval);
+  }
+
+  /**
+      Get `visibleChild` property.
+      Returns: The widget currently visible in the stack.
+  */
+  @property gtk.widget.Widget visibleChild()
+  {
+    return getVisibleChild();
+  }
+
+  /**
+      Set `visibleChild` property.
+      Params:
+        propval = The widget currently visible in the stack.
+  */
+  @property void visibleChild(gtk.widget.Widget propval)
+  {
+    return setVisibleChild(propval);
+  }
+
+  /**
+      Get `visibleChildName` property.
+      Returns: The name of the widget currently visible in the stack.
+  */
+  @property string visibleChildName()
+  {
+    return getVisibleChildName();
+  }
+
+  /**
+      Set `visibleChildName` property.
+      Params:
+        propval = The name of the widget currently visible in the stack.
+  */
+  @property void visibleChildName(string propval)
+  {
+    return setVisibleChildName(propval);
   }
 
   /**
@@ -114,7 +266,7 @@ class Stack : gtk.widget.Widget
   {
     GtkStackPage* _cretval;
     _cretval = gtk_stack_add_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +285,7 @@ class Stack : gtk.widget.Widget
     GtkStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_stack_add_named(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +308,7 @@ class Stack : gtk.widget.Widget
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
     _cretval = gtk_stack_add_titled(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
-    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +327,7 @@ class Stack : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +365,7 @@ class Stack : gtk.widget.Widget
   {
     GtkStackPage* _cretval;
     _cretval = gtk_stack_get_page(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,7 +381,7 @@ class Stack : gtk.widget.Widget
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_stack_get_pages(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -291,7 +443,7 @@ class Stack : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_get_visible_child(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

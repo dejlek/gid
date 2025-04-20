@@ -26,7 +26,9 @@ import pango.types;
 class FontMetrics : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `font_metrics.FontMetrics` boxed type.
+  */
   this()
   {
     super(gMalloc(PangoFontMetrics.sizeof), Yes.Take);
@@ -57,6 +59,7 @@ class FontMetrics : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontMetrics self()
   {
     return this;

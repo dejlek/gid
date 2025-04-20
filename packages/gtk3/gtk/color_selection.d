@@ -7,6 +7,7 @@ import gdk.color;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -39,9 +40,88 @@ class ColorSelection : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorSelection self()
   {
     return this;
+  }
+
+  /** */
+  @property uint currentAlpha()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("current-alpha");
+  }
+
+  /** */
+  @property void currentAlpha(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("current-alpha", propval);
+  }
+
+  /**
+      Get `currentColor` property.
+      Returns: The current GdkColor color.
+  
+      Deprecated: Use #GtkColorSelection:current-rgba instead.
+  */
+  @property gdk.color.Color currentColor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("current-color");
+  }
+
+  /**
+      Set `currentColor` property.
+      Params:
+        propval = The current GdkColor color.
+  
+      Deprecated: Use #GtkColorSelection:current-rgba instead.
+  */
+  @property void currentColor(gdk.color.Color propval)
+  {
+    return setCurrentColor(propval);
+  }
+
+  /**
+      Get `currentRgba` property.
+      Returns: The current RGBA color.
+  */
+  @property gdk.rgba.RGBA currentRgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("current-rgba");
+  }
+
+  /**
+      Set `currentRgba` property.
+      Params:
+        propval = The current RGBA color.
+  */
+  @property void currentRgba(gdk.rgba.RGBA propval)
+  {
+    return setCurrentRgba(propval);
+  }
+
+  /** */
+  @property bool hasOpacityControl()
+  {
+    return getHasOpacityControl();
+  }
+
+  /** */
+  @property void hasOpacityControl(bool propval)
+  {
+    return setHasOpacityControl(propval);
+  }
+
+  /** */
+  @property bool hasPalette()
+  {
+    return getHasPalette();
+  }
+
+  /** */
+  @property void hasPalette(bool propval)
+  {
+    return setHasPalette(propval);
   }
 
   /**

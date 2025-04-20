@@ -10,7 +10,7 @@ import gtksource.encoding;
 import gtksource.types;
 
 /** */
-class File : gobject.object.ObjectG
+class File : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,9 +32,67 @@ class File : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override File self()
   {
     return this;
+  }
+
+  /**
+      Get `compressionType` property.
+      Returns: The compression type.
+  */
+  @property gtksource.types.CompressionType compressionType()
+  {
+    return getCompressionType();
+  }
+
+  /**
+      Get `encoding` property.
+      Returns: The character encoding, initially null. After a successful file
+      loading or saving operation, the encoding is non-null.
+  */
+  @property gtksource.encoding.Encoding encoding()
+  {
+    return getEncoding();
+  }
+
+  /**
+      Get `location` property.
+      Returns: The location.
+  */
+  @property gio.file.File location()
+  {
+    return getLocation();
+  }
+
+  /**
+      Set `location` property.
+      Params:
+        propval = The location.
+  */
+  @property void location(gio.file.File propval)
+  {
+    return setLocation(propval);
+  }
+
+  /**
+      Get `newlineType` property.
+      Returns: The line ending type.
+  */
+  @property gtksource.types.NewlineType newlineType()
+  {
+    return getNewlineType();
+  }
+
+  /**
+      Get `readOnly` property.
+      Returns: Whether the file is read-only or not. The value of this property is
+      not updated automatically (there is no file monitors).
+  */
+  @property bool readOnly()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("read-only");
   }
 
   /** */
@@ -88,7 +146,7 @@ class File : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,6 +224,6 @@ class File : gobject.object.ObjectG
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
   }
 }

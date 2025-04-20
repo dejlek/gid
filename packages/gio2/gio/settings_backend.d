@@ -24,7 +24,7 @@ import gobject.object;
     
     Some of the [gio.settings_backend.SettingsBackend] functions accept or return a
     [glib.tree.Tree]. These trees always have strings as keys and
-    [glib.variant.VariantG] as values.
+    [glib.variant.Variant] as values.
     
     The [gio.settings_backend.SettingsBackend] API is exported to allow third-party
     implementations, but does not carry the same stability guarantees
@@ -32,7 +32,7 @@ import gobject.object;
     C preprocessor symbol `G_SETTINGS_ENABLE_BACKEND` before including
     `gio/gsettingsbackend.h`.
 */
-class SettingsBackend : gobject.object.ObjectG
+class SettingsBackend : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,6 +54,7 @@ class SettingsBackend : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SettingsBackend self()
   {
     return this;
@@ -73,7 +74,7 @@ class SettingsBackend : gobject.object.ObjectG
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
-    auto _retval = ObjectG.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -53,9 +53,142 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorButton self()
   {
     return this;
+  }
+
+  /**
+      Get `alpha` property.
+      Returns: The selected opacity value (0 fully transparent, 65535 fully opaque).
+  */
+  @property uint alpha()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("alpha");
+  }
+
+  /**
+      Set `alpha` property.
+      Params:
+        propval = The selected opacity value (0 fully transparent, 65535 fully opaque).
+  */
+  @property void alpha(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("alpha", propval);
+  }
+
+  /**
+      Get `color` property.
+      Returns: The selected color.
+  
+      Deprecated: Use #GtkColorButton:rgba instead.
+  */
+  @property gdk.color.Color color()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("color");
+  }
+
+  /**
+      Set `color` property.
+      Params:
+        propval = The selected color.
+  
+      Deprecated: Use #GtkColorButton:rgba instead.
+  */
+  @property void color(gdk.color.Color propval)
+  {
+    return setColor(propval);
+  }
+
+  /**
+      Get `rgba` property.
+      Returns: The RGBA color.
+  */
+  @property gdk.rgba.RGBA rgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The RGBA color.
+  */
+  @property void rgba(gdk.rgba.RGBA propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("rgba", propval);
+  }
+
+  /**
+      Get `showEditor` property.
+      Returns: Set this property to true to skip the palette
+      in the dialog and go directly to the color editor.
+      
+      This property should be used in cases where the palette
+      in the editor would be redundant, such as when the color
+      button is already part of a palette.
+  */
+  @property bool showEditor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
+  }
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Set this property to true to skip the palette
+        in the dialog and go directly to the color editor.
+        
+        This property should be used in cases where the palette
+        in the editor would be redundant, such as when the color
+        button is already part of a palette.
+  */
+  @property void showEditor(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the color selection dialog
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the color selection dialog
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useAlpha` property.
+      Returns: If this property is set to true, the color swatch on the button is
+      rendered against a checkerboard background to show its opacity and
+      the opacity slider is displayed in the color selection dialog.
+  */
+  @property bool useAlpha()
+  {
+    return getUseAlpha();
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = If this property is set to true, the color swatch on the button is
+        rendered against a checkerboard background to show its opacity and
+        the opacity slider is displayed in the color selection dialog.
+  */
+  @property void useAlpha(bool propval)
+  {
+    return setUseAlpha(propval);
   }
 
   mixin ColorChooserT!();
@@ -90,7 +223,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_color(color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +238,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

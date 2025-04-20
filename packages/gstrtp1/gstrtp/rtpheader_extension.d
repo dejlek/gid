@@ -35,6 +35,7 @@ class RTPHeaderExtension : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTPHeaderExtension self()
   {
     return this;
@@ -46,7 +47,7 @@ class RTPHeaderExtension : gst.element.Element
     GstRTPHeaderExtension* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = gst_rtp_header_extension_create_from_uri(_uri);
-    auto _retval = ObjectG.getDObject!(gstrtp.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstrtp.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.Take);
     return _retval;
   }
 

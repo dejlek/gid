@@ -144,6 +144,158 @@ public import gtk.widget;
 template FileChooserT()
 {
 
+  /** */
+  @property gtk.types.FileChooserAction action()
+  {
+    return getAction();
+  }
+
+  /** */
+  @property void action(gtk.types.FileChooserAction propval)
+  {
+    return setAction(propval);
+  }
+
+  /**
+      Get `createFolders` property.
+      Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+      will offer the user to create new folders.
+  */
+  @property bool createFolders()
+  {
+    return getCreateFolders();
+  }
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+        will offer the user to create new folders.
+  */
+  @property void createFolders(bool propval)
+  {
+    return setCreateFolders(propval);
+  }
+
+  /**
+      Get `doOverwriteConfirmation` property.
+      Returns: Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+      will present an overwrite confirmation dialog if the user
+      selects a file name that already exists.
+  */
+  @property bool doOverwriteConfirmation()
+  {
+    return getDoOverwriteConfirmation();
+  }
+
+  /**
+      Set `doOverwriteConfirmation` property.
+      Params:
+        propval = Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+        will present an overwrite confirmation dialog if the user
+        selects a file name that already exists.
+  */
+  @property void doOverwriteConfirmation(bool propval)
+  {
+    return setDoOverwriteConfirmation(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget extraWidget()
+  {
+    return getExtraWidget();
+  }
+
+  /** */
+  @property void extraWidget(gtk.widget.Widget propval)
+  {
+    return setExtraWidget(propval);
+  }
+
+  /** */
+  @property gtk.file_filter.FileFilter filter()
+  {
+    return getFilter();
+  }
+
+  /** */
+  @property void filter(gtk.file_filter.FileFilter propval)
+  {
+    return setFilter(propval);
+  }
+
+  /** */
+  @property bool localOnly()
+  {
+    return getLocalOnly();
+  }
+
+  /** */
+  @property void localOnly(bool propval)
+  {
+    return setLocalOnly(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget previewWidget()
+  {
+    return getPreviewWidget();
+  }
+
+  /** */
+  @property void previewWidget(gtk.widget.Widget propval)
+  {
+    return setPreviewWidget(propval);
+  }
+
+  /** */
+  @property bool previewWidgetActive()
+  {
+    return getPreviewWidgetActive();
+  }
+
+  /** */
+  @property void previewWidgetActive(bool propval)
+  {
+    return setPreviewWidgetActive(propval);
+  }
+
+  /** */
+  @property bool selectMultiple()
+  {
+    return getSelectMultiple();
+  }
+
+  /** */
+  @property void selectMultiple(bool propval)
+  {
+    return setSelectMultiple(propval);
+  }
+
+  /** */
+  @property bool showHidden()
+  {
+    return getShowHidden();
+  }
+
+  /** */
+  @property void showHidden(bool propval)
+  {
+    return setShowHidden(propval);
+  }
+
+  /** */
+  @property bool usePreviewLabel()
+  {
+    return getUsePreviewLabel();
+  }
+
+  /** */
+  @property void usePreviewLabel(bool propval)
+  {
+    return setUsePreviewLabel(propval);
+  }
+
   /**
       Adds a 'choice' to the file chooser. This is typically implemented
       as a combobox or, for boolean choices, as a checkbutton. You can select
@@ -203,7 +355,7 @@ template FileChooserT()
         folder = filename of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool addShortcutFolder(string folder)
   {
@@ -212,7 +364,7 @@ template FileChooserT()
     GError *_err;
     _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, _folder, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -226,7 +378,7 @@ template FileChooserT()
         uri = URI of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool addShortcutFolderUri(string uri)
   {
@@ -235,7 +387,7 @@ template FileChooserT()
     GError *_err;
     _retval = gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -315,7 +467,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -388,7 +540,7 @@ template FileChooserT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_get_extra_widget(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -400,13 +552,13 @@ template FileChooserT()
       If the file chooser is in folder mode, this function returns the selected
       folder.
       Returns: a selected #GFile. You own the returned file;
-            use [gobject.object.ObjectG.unref] to release it.
+            use [gobject.object.ObjectWrap.unref] to release it.
   */
   override gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -454,7 +606,7 @@ template FileChooserT()
       Returns: a #GSList
           containing a #GFile for each selected file and subfolder in the
           current folder.  Free the returned list with [glib.slist.SList.free], and
-          the files with [gobject.object.ObjectG.unref].
+          the files with [gobject.object.ObjectWrap.unref].
   */
   override gio.file.File[] getFiles()
   {
@@ -472,7 +624,7 @@ template FileChooserT()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -492,13 +644,13 @@ template FileChooserT()
       Gets the #GFile that should be previewed in a custom preview
       Internal function, see [gtk.file_chooser.FileChooser.getPreviewUri].
       Returns: the #GFile for the file to preview,
-            or null if no file is selected. Free with [gobject.object.ObjectG.unref].
+            or null if no file is selected. Free with [gobject.object.ObjectWrap.unref].
   */
   override gio.file.File getPreviewFile()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_preview_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -540,7 +692,7 @@ template FileChooserT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_get_preview_widget(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -708,7 +860,7 @@ template FileChooserT()
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolder]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool removeShortcutFolder(string folder)
   {
@@ -717,7 +869,7 @@ template FileChooserT()
     GError *_err;
     _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, _folder, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -730,7 +882,7 @@ template FileChooserT()
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolderUri]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool removeShortcutFolderUri(string uri)
   {
@@ -739,7 +891,7 @@ template FileChooserT()
     GError *_err;
     _retval = gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -758,15 +910,15 @@ template FileChooserT()
       Params:
         file = the file to select
       Returns: Not useful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool selectFile(gio.file.File file)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_select_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_select_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -879,15 +1031,15 @@ template FileChooserT()
         file = the #GFile for the new folder
       Returns: true if the folder could be changed successfully, false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setCurrentFolderFile(gio.file.File file)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1004,15 +1156,15 @@ template FileChooserT()
       Params:
         file = the #GFile to set as current
       Returns: Not useful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setFile(gio.file.File file)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1242,7 +1394,7 @@ template FileChooserT()
   */
   override void unselectFile(gio.file.File file)
   {
-    gtk_file_chooser_unselect_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_file_chooser_unselect_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**

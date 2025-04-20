@@ -54,6 +54,7 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TearoffMenuItem self()
   {
     return this;

@@ -162,21 +162,21 @@ __gshared extern(C)
   void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_layered_settings_bind; ///
   void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_layered_settings_bind_with_mapping; ///
   bool function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_boolean; ///
-  VariantC* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_default_value; ///
+  GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_default_value; ///
   double function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_double; ///
   int function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_int; ///
   GSettingsSchemaKey* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_key; ///
   char* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_string; ///
   uint function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_uint; ///
-  VariantC* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_user_value; ///
-  VariantC* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_value; ///
+  GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_user_value; ///
+  GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_value; ///
   char** function(PanelLayeredSettings* self) c_panel_layered_settings_list_keys; ///
   void function(PanelLayeredSettings* self, const(char)* key, bool val) c_panel_layered_settings_set_boolean; ///
   void function(PanelLayeredSettings* self, const(char)* key, double val) c_panel_layered_settings_set_double; ///
   void function(PanelLayeredSettings* self, const(char)* key, int val) c_panel_layered_settings_set_int; ///
   void function(PanelLayeredSettings* self, const(char)* key, const(char)* val) c_panel_layered_settings_set_string; ///
   void function(PanelLayeredSettings* self, const(char)* key, uint val) c_panel_layered_settings_set_uint; ///
-  void function(PanelLayeredSettings* self, const(char)* key, VariantC* value) c_panel_layered_settings_set_value; ///
+  void function(PanelLayeredSettings* self, const(char)* key, GVariant* value) c_panel_layered_settings_set_value; ///
   void function(PanelLayeredSettings* self, const(char)* property) c_panel_layered_settings_unbind; ///
 
   // MenuManager
@@ -218,7 +218,7 @@ __gshared extern(C)
   // Position
   GType function() c_panel_position_get_type; ///
   PanelPosition* function() c_panel_position_new; ///
-  PanelPosition* function(VariantC* variant) c_panel_position_new_from_variant; ///
+  PanelPosition* function(GVariant* variant) c_panel_position_new_from_variant; ///
   bool function(PanelPosition* a, PanelPosition* b) c_panel_position_equal; ///
   PanelArea function(PanelPosition* self) c_panel_position_get_area; ///
   bool function(PanelPosition* self) c_panel_position_get_area_set; ///
@@ -237,7 +237,7 @@ __gshared extern(C)
   void function(PanelPosition* self, bool depthSet) c_panel_position_set_depth_set; ///
   void function(PanelPosition* self, uint row) c_panel_position_set_row; ///
   void function(PanelPosition* self, bool rowSet) c_panel_position_set_row_set; ///
-  VariantC* function(PanelPosition* self) c_panel_position_to_variant; ///
+  GVariant* function(PanelPosition* self) c_panel_position_to_variant; ///
 
   // SaveDelegate
   GType function() c_panel_save_delegate_get_type; ///
@@ -271,7 +271,7 @@ __gshared extern(C)
   // Session
   GType function() c_panel_session_get_type; ///
   PanelSession* function() c_panel_session_new; ///
-  PanelSession* function(VariantC* variant, GError** _err) c_panel_session_new_from_variant; ///
+  PanelSession* function(GVariant* variant, GError** _err) c_panel_session_new_from_variant; ///
   void function(PanelSession* self, PanelSessionItem* item) c_panel_session_append; ///
   PanelSessionItem* function(PanelSession* self, uint position) c_panel_session_get_item; ///
   uint function(PanelSession* self) c_panel_session_get_n_items; ///
@@ -280,14 +280,14 @@ __gshared extern(C)
   void function(PanelSession* self, PanelSessionItem* item) c_panel_session_prepend; ///
   void function(PanelSession* self, PanelSessionItem* item) c_panel_session_remove; ///
   void function(PanelSession* self, uint position) c_panel_session_remove_at; ///
-  VariantC* function(PanelSession* self) c_panel_session_to_variant; ///
+  GVariant* function(PanelSession* self) c_panel_session_to_variant; ///
 
   // SessionItem
   GType function() c_panel_session_item_get_type; ///
   PanelSessionItem* function() c_panel_session_item_new; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_id; ///
   bool function(PanelSessionItem* self, const(char)* key, const(char)* format,  ...) c_panel_session_item_get_metadata; ///
-  VariantC* function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_get_metadata_value; ///
+  GVariant* function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_get_metadata_value; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_module_name; ///
   PanelPosition* function(PanelSessionItem* self) c_panel_session_item_get_position; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_type_hint; ///
@@ -296,7 +296,7 @@ __gshared extern(C)
   bool function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_has_metadata_with_type; ///
   void function(PanelSessionItem* self, const(char)* id) c_panel_session_item_set_id; ///
   void function(PanelSessionItem* self, const(char)* key, const(char)* format,  ...) c_panel_session_item_set_metadata; ///
-  void function(PanelSessionItem* self, const(char)* key, VariantC* value) c_panel_session_item_set_metadata_value; ///
+  void function(PanelSessionItem* self, const(char)* key, GVariant* value) c_panel_session_item_set_metadata_value; ///
   void function(PanelSessionItem* self, const(char)* moduleName) c_panel_session_item_set_module_name; ///
   void function(PanelSessionItem* self, PanelPosition* position) c_panel_session_item_set_position; ///
   void function(PanelSessionItem* self, const(char)* typeHint) c_panel_session_item_set_type_hint; ///
@@ -311,20 +311,20 @@ __gshared extern(C)
   void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_settings_bind; ///
   void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_settings_bind_with_mapping; ///
   bool function(PanelSettings* self, const(char)* key) c_panel_settings_get_boolean; ///
-  VariantC* function(PanelSettings* self, const(char)* key) c_panel_settings_get_default_value; ///
+  GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_default_value; ///
   double function(PanelSettings* self, const(char)* key) c_panel_settings_get_double; ///
   int function(PanelSettings* self, const(char)* key) c_panel_settings_get_int; ///
   const(char)* function(PanelSettings* self) c_panel_settings_get_schema_id; ///
   char* function(PanelSettings* self, const(char)* key) c_panel_settings_get_string; ///
   uint function(PanelSettings* self, const(char)* key) c_panel_settings_get_uint; ///
-  VariantC* function(PanelSettings* self, const(char)* key) c_panel_settings_get_user_value; ///
-  VariantC* function(PanelSettings* self, const(char)* key) c_panel_settings_get_value; ///
+  GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_user_value; ///
+  GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_value; ///
   void function(PanelSettings* self, const(char)* key, bool val) c_panel_settings_set_boolean; ///
   void function(PanelSettings* self, const(char)* key, double val) c_panel_settings_set_double; ///
   void function(PanelSettings* self, const(char)* key, int val) c_panel_settings_set_int; ///
   void function(PanelSettings* self, const(char)* key, const(char)* val) c_panel_settings_set_string; ///
   void function(PanelSettings* self, const(char)* key, uint val) c_panel_settings_set_uint; ///
-  void function(PanelSettings* self, const(char)* key, VariantC* value) c_panel_settings_set_value; ///
+  void function(PanelSettings* self, const(char)* key, GVariant* value) c_panel_settings_set_value; ///
   void function(PanelSettings* self, const(char)* property) c_panel_settings_unbind; ///
 
   // Statusbar

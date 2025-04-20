@@ -39,9 +39,50 @@ class ShortcutLabel : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutLabel self()
   {
     return this;
+  }
+
+  /**
+      Get `accelerator` property.
+      Returns: The accelerator that @self displays. See #GtkShortcutsShortcut:accelerator
+      for the accepted syntax.
+  */
+  @property string accelerator()
+  {
+    return getAccelerator();
+  }
+
+  /**
+      Set `accelerator` property.
+      Params:
+        propval = The accelerator that @self displays. See #GtkShortcutsShortcut:accelerator
+        for the accepted syntax.
+  */
+  @property void accelerator(string propval)
+  {
+    return setAccelerator(propval);
+  }
+
+  /**
+      Get `disabledText` property.
+      Returns: The text that is displayed when no accelerator is set.
+  */
+  @property string disabledText()
+  {
+    return getDisabledText();
+  }
+
+  /**
+      Set `disabledText` property.
+      Params:
+        propval = The text that is displayed when no accelerator is set.
+  */
+  @property void disabledText(string propval)
+  {
+    return setDisabledText(propval);
   }
 
   /**

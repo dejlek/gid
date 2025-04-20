@@ -9,7 +9,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Codec : gobject.object.ObjectG
+class Codec : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class Codec : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Codec self()
   {
     return this;
@@ -43,7 +44,7 @@ class Codec : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_codec_new(type, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

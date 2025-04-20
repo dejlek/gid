@@ -39,6 +39,7 @@ class Rand : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Rand self()
   {
     return this;

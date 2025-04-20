@@ -76,9 +76,48 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserButton self()
   {
     return this;
+  }
+
+  /**
+      Get `title` property.
+      Returns: Title to put on the #GtkFileChooserDialog associated with the button.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = Title to put on the #GtkFileChooserDialog associated with the button.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `widthChars` property.
+      Returns: The width of the entry and label inside the button, in characters.
+  */
+  @property int widthChars()
+  {
+    return getWidthChars();
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The width of the entry and label inside the button, in characters.
+  */
+  @property void widthChars(int propval)
+  {
+    return setWidthChars(propval);
   }
 
   mixin FileChooserT!();
@@ -119,7 +158,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

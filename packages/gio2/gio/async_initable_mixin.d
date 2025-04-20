@@ -27,7 +27,7 @@ public import gobject.types;
     For C applications you generally just call [gio.async_initable.AsyncInitable.newAsync]
     directly, or indirectly via a foo_thing_new_async() wrapper. This will call
     [gio.async_initable.AsyncInitable.initAsync] under the covers, calling back with `NULL`
-    and a set [glib.error.ErrorG] on failure.
+    and a set [glib.error.ErrorWrap] on failure.
     
     A typical implementation might look something like this:
     
@@ -142,7 +142,7 @@ template AsyncInitableT()
       
       As with #GInitable, if the object is not initialized, or initialization
       returns with an error, then all operations on the object except
-      [gobject.object.ObjectG.ref_] and [gobject.object.ObjectG.unref] are considered to be invalid, and
+      [gobject.object.ObjectWrap.ref_] and [gobject.object.ObjectWrap.unref] are considered to be invalid, and
       have undefined behaviour. They will often fail with g_critical() or
       g_warning(), but this must not be relied on.
       
@@ -170,7 +170,7 @@ template AsyncInitableT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -186,15 +186,15 @@ template AsyncInitableT()
         res = a #GAsyncResult.
       Returns: true if successful. If an error has occurred, this function
         will return false and set error appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool initFinish(gio.async_result.AsyncResult res)
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -205,17 +205,17 @@ template AsyncInitableT()
       Params:
         res = the #GAsyncResult from the callback
       Returns: a newly created #GObject,
-             or null on error. Free with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+             or null on error. Free with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
-  override gobject.object.ObjectG newFinish(gio.async_result.AsyncResult res)
+  override gobject.object.ObjectWrap newFinish(gio.async_result.AsyncResult res)
   {
     ObjectC* _cretval;
     GError *_err;
-    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 }

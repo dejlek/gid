@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class EqualOptions : gobject.object.ObjectG
+class EqualOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,69 @@ class EqualOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EqualOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `absoluteTolerance` property.
+      Returns: The absolute tolerance for approximate comparison of
+      floating-point values.
+  */
+  @property double absoluteTolerance()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("absolute-tolerance");
+  }
+
+  /**
+      Set `absoluteTolerance` property.
+      Params:
+        propval = The absolute tolerance for approximate comparison of
+        floating-point values.
+  */
+  @property void absoluteTolerance(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("absolute-tolerance", propval);
+  }
+
+  /**
+      Get `approx` property.
+      Returns: Whether or not approximate comparison is used.
+  */
+  @property bool approx()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("approx");
+  }
+
+  /**
+      Set `approx` property.
+      Params:
+        propval = Whether or not approximate comparison is used.
+  */
+  @property void approx(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("approx", propval);
+  }
+
+  /**
+      Get `nansEqual` property.
+      Returns: Whether or not NaNs are considered equal.
+  */
+  @property bool nansEqual()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("nans-equal");
+  }
+
+  /**
+      Set `nansEqual` property.
+      Params:
+        propval = Whether or not NaNs are considered equal.
+  */
+  @property void nansEqual(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("nans-equal", propval);
   }
 
   /** */

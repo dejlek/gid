@@ -18,7 +18,7 @@ import webkit.types;
     UNIX file descriptors. Messages can be sent from a #WebKitWebContext to all web process extensions,
     from a web process extension to its corresponding #WebKitWebContext, and from a #WebKitWebView to its
     corresponding #WebKitWebPage (and vice versa). One to one messages can be replied to directly with
-    [webkit.user_message.UserMessage.sendReply].
+    [webkitwebprocessextension.user_message.UserMessage.sendReply].
 */
 class UserMessage : gobject.initially_unowned.InitiallyUnowned
 {
@@ -56,11 +56,11 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
         parameters = the message parameters as a #GVariant, or null
       Returns: the newly created #WebKitUserMessage object.
   */
-  this(string name, glib.variant.VariantG parameters = null)
+  this(string name, glib.variant.Variant parameters = null)
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = webkit_user_message_new(_name, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null);
+    _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -73,12 +73,12 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
         fdList = the message file descriptors
       Returns: the newly created #WebKitUserMessage object.
   */
-  static webkit.user_message.UserMessage newWithFdList(string name, glib.variant.VariantG parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
+  static webkit.user_message.UserMessage newWithFdList(string name, glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = webkit_user_message_new_with_fd_list(_name, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, No.Take);
+    _cretval = webkit_user_message_new_with_fd_list(_name, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   {
     GUnixFDList* _cretval;
     _cretval = webkit_user_message_get_fd_list(cast(WebKitUserMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,11 +110,11 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get the message parameters.
       Returns: the message parameters
   */
-  glib.variant.VariantG getParameters()
+  glib.variant.Variant getParameters()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = webkit_user_message_get_parameters(cast(WebKitUserMessage*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 

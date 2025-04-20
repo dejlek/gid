@@ -19,7 +19,7 @@ class VideoConverter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoConverter");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_converter.VideoConverter");
 
     cInstancePtr = cast(GstVideoConverter*)ptr;
 

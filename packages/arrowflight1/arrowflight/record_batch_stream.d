@@ -32,6 +32,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchStream self()
   {
     return this;

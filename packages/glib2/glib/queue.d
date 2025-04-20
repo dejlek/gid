@@ -18,7 +18,7 @@ class Queue
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Queue");
+      throw new GidConstructException("Null instance pointer for glib.queue.Queue");
 
     cInstance = *cast(GQueue*)ptr;
 
@@ -37,11 +37,20 @@ class Queue
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `length` field.
+      Returns: the number of elements in the queue
+  */
   @property uint length()
   {
     return (cast(GQueue*)cPtr).length;
   }
 
+  /**
+      Set `length` field.
+      Params:
+        propval = the number of elements in the queue
+  */
   @property void length(uint propval)
   {
     (cast(GQueue*)cPtr).length = propval;

@@ -15,7 +15,7 @@ class Simd4X4F
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Graphene.Simd4X4F");
+      throw new GidConstructException("Null instance pointer for graphene.simd4_x4_f.Simd4X4F");
 
     cInstance = *cast(graphene_simd4x4f_t*)ptr;
 

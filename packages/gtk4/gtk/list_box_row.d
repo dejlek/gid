@@ -42,9 +42,69 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListBoxRow self()
   {
     return this;
+  }
+
+  /**
+      Get `activatable` property.
+      Returns: Determines whether the ::row-activated
+      signal will be emitted for this row.
+  */
+  @property bool activatable()
+  {
+    return getActivatable();
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = Determines whether the ::row-activated
+        signal will be emitted for this row.
+  */
+  @property void activatable(bool propval)
+  {
+    return setActivatable(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `selectable` property.
+      Returns: Determines whether this row can be selected.
+  */
+  @property bool selectable()
+  {
+    return getSelectable();
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = Determines whether this row can be selected.
+  */
+  @property void selectable(bool propval)
+  {
+    return setSelectable(propval);
   }
 
   mixin ActionableT!();
@@ -104,7 +164,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_child(cast(GtkListBoxRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +181,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

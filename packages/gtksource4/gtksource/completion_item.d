@@ -12,7 +12,7 @@ import gtksource.completion_proposal_mixin;
 import gtksource.types;
 
 /** */
-class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.CompletionProposal
+class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.CompletionProposal
 {
 
   /** */
@@ -34,9 +34,143 @@ class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.Com
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompletionItem self()
   {
     return this;
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: The #GIcon for the icon to be shown for this proposal.
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon for the icon to be shown for this proposal.
+  */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    return setGicon(propval);
+  }
+
+  /**
+      Get `icon` property.
+      Returns: The #GdkPixbuf for the icon to be shown for this proposal.
+  */
+  @property gdkpixbuf.pixbuf.Pixbuf icon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("icon");
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The #GdkPixbuf for the icon to be shown for this proposal.
+  */
+  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setIcon(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for the icon to be shown for this proposal.
+  */
+  @property string iconName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for the icon to be shown for this proposal.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `info` property.
+      Returns: Optional extra information to be shown for this proposal.
+  */
+  @property string info()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("info");
+  }
+
+  /**
+      Set `info` property.
+      Params:
+        propval = Optional extra information to be shown for this proposal.
+  */
+  @property void info(string propval)
+  {
+    return setInfo(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: Label to be shown for this proposal.
+  */
+  @property string label()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("label");
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Label to be shown for this proposal.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `markup` property.
+      Returns: Label with markup to be shown for this proposal.
+  */
+  @property string markup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("markup");
+  }
+
+  /**
+      Set `markup` property.
+      Params:
+        propval = Label with markup to be shown for this proposal.
+  */
+  @property void markup(string propval)
+  {
+    return setMarkup(propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: Proposal text.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Proposal text.
+  */
+  @property void text(string propval)
+  {
+    return setText(propval);
   }
 
   mixin CompletionProposalT!();
@@ -56,7 +190,7 @@ class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.Com
   /** */
   void setGicon(gio.icon.Icon gicon = null)
   {
-    gtk_source_completion_item_set_gicon(cast(GtkSourceCompletionItem*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    gtk_source_completion_item_set_gicon(cast(GtkSourceCompletionItem*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
   }
 
   /** */

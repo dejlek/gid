@@ -122,9 +122,41 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ApplicationWindow self()
   {
     return this;
+  }
+
+  /**
+      Get `showMenubar` property.
+      Returns: If this property is true, the window will display a menubar
+      unless it is shown by the desktop shell.
+      
+      See [gtk.application.Application.setMenubar].
+      
+      If false, the window will not display a menubar, regardless
+      of whether the desktop shell is showing it or not.
+  */
+  @property bool showMenubar()
+  {
+    return getShowMenubar();
+  }
+
+  /**
+      Set `showMenubar` property.
+      Params:
+        propval = If this property is true, the window will display a menubar
+        unless it is shown by the desktop shell.
+        
+        See [gtk.application.Application.setMenubar].
+        
+        If false, the window will not display a menubar, regardless
+        of whether the desktop shell is showing it or not.
+  */
+  @property void showMenubar(bool propval)
+  {
+    return setShowMenubar(propval);
   }
 
   mixin ActionGroupT!();
@@ -156,7 +188,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   {
     GtkShortcutsWindow* _cretval;
     _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.Take);
     return _retval;
   }
 

@@ -117,7 +117,7 @@ template ConverterT()
         bytesWritten = will be set to the number of bytes
              written to outbuf on success
       Returns: a #GConverterResult, [gio.types.ConverterResult.Error] on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten)
   {
@@ -135,7 +135,7 @@ template ConverterT()
     GError *_err;
     _cretval = g_converter_convert(cast(GConverter*)cPtr, _inbuf, _inbufSize, _outbuf, _outbufSize, flags, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     gio.types.ConverterResult _retval = cast(gio.types.ConverterResult)_cretval;
     return _retval;
   }

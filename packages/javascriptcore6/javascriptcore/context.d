@@ -21,7 +21,7 @@ import javascriptcore.virtual_machine;
     the context by using [javascriptcore.context.Context.evaluate] or [javascriptcore.context.Context.evaluateWithSourceUri].
     It's also possible to register custom objects in the context with [javascriptcore.context.Context.registerClass].
 */
-class Context : gobject.object.ObjectG
+class Context : gobject.object.ObjectWrap
 {
 
   /** */
@@ -73,7 +73,7 @@ class Context : gobject.object.ObjectG
   {
     JSCContext* _cretval;
     _cretval = jsc_context_new_with_virtual_machine(vm ? cast(JSCVirtualMachine*)vm.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class Context : gobject.object.ObjectG
   {
     JSCContext* _cretval;
     _cretval = jsc_context_get_current();
-    auto _retval = ObjectG.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Context : gobject.object.ObjectG
         exception = return location for a #JSCException, or null to ignore
       Returns: a #JSCCheckSyntaxResult
   */
-  javascriptcore.types.CheckSyntaxResult checkSyntax(string code, ptrdiff_t length, javascriptcore.types.CheckSyntaxMode mode, string uri, uint lineNumber, out javascriptcore.exception.Exception exception)
+  javascriptcore.types.CheckSyntaxResult checkSyntax(string code, ptrdiff_t length, javascriptcore.types.CheckSyntaxMode mode, string uri, uint lineNumber, out javascriptcore.exception.ExceptionWrap exception)
   {
     JSCCheckSyntaxResult _cretval;
     const(char)* _code = code.toCString(No.Alloc);
@@ -113,7 +113,7 @@ class Context : gobject.object.ObjectG
     JSCException* _exception;
     _cretval = jsc_context_check_syntax(cast(JSCContext*)cPtr, _code, length, mode, _uri, lineNumber, &_exception);
     javascriptcore.types.CheckSyntaxResult _retval = cast(javascriptcore.types.CheckSyntaxResult)_cretval;
-    exception = new javascriptcore.exception.Exception(cast(void*)_exception, Yes.Take);
+    exception = new javascriptcore.exception.ExceptionWrap(cast(void*)_exception, Yes.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class Context : gobject.object.ObjectG
     JSCValue* _cretval;
     const(char)* _code = code.toCString(No.Alloc);
     _cretval = jsc_context_evaluate(cast(JSCContext*)cPtr, _code, length);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Context : gobject.object.ObjectG
     const(char)* _uri = uri.toCString(No.Alloc);
     JSCValue* _object;
     _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)cPtr, _code, length, objectInstance, objectClass ? cast(JSCClass*)objectClass.cPtr(No.Dup) : null, _uri, lineNumber, &_object);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     object = new javascriptcore.value.Value(cast(void*)_object, Yes.Take);
     return _retval;
   }
@@ -189,7 +189,7 @@ class Context : gobject.object.ObjectG
     const(char)* _code = code.toCString(No.Alloc);
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)cPtr, _code, length, _uri, lineNumber);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -198,11 +198,11 @@ class Context : gobject.object.ObjectG
       Returns: a #JSCException or null if there isn't any
            unhandled exception in the #JSCContext.
   */
-  javascriptcore.exception.Exception getException()
+  javascriptcore.exception.ExceptionWrap getException()
   {
     JSCException* _cretval;
     _cretval = jsc_context_get_exception(cast(JSCContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.exception.Exception)(cast(JSCException*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class Context : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_context_get_global_object(cast(JSCContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Context : gobject.object.ObjectG
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = jsc_context_get_value(cast(JSCContext*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Context : gobject.object.ObjectG
   {
     JSCVirtualMachine* _cretval;
     _cretval = jsc_context_get_virtual_machine(cast(JSCContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.virtual_machine.VirtualMachine)(cast(JSCVirtualMachine*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.virtual_machine.VirtualMachine)(cast(JSCVirtualMachine*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Context : gobject.object.ObjectG
     {
       auto _dlg = cast(javascriptcore.types.ExceptionHandler*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), ObjectG.getDObject!(javascriptcore.exception.Exception)(cast(void*)exception, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
     }
     auto _handlerCB = handler ? &_handlerCallback : null;
 
@@ -312,7 +312,7 @@ class Context : gobject.object.ObjectG
     JSCClass* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = jsc_context_register_class(cast(JSCContext*)cPtr, _name, parentClass ? cast(JSCClass*)parentClass.cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);
-    auto _retval = ObjectG.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class Context : gobject.object.ObjectG
       Params:
         exception = a #JSCException
   */
-  void throwException(javascriptcore.exception.Exception exception)
+  void throwException(javascriptcore.exception.ExceptionWrap exception)
   {
     jsc_context_throw_exception(cast(JSCContext*)cPtr, exception ? cast(JSCException*)exception.cPtr(No.Dup) : null);
   }

@@ -35,7 +35,7 @@ import soup.types;
     Content-Encoding when sending a request body, or to pick specific
     encoding types to support.)
 */
-class ContentDecoder : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class ContentDecoder : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -57,6 +57,7 @@ class ContentDecoder : gobject.object.ObjectG, soup.session_feature.SessionFeatu
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ContentDecoder self()
   {
     return this;

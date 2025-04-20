@@ -16,7 +16,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Writable
+class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.Writable
 {
 
   /** */
@@ -38,6 +38,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OutputStream self()
   {
     return this;
@@ -53,7 +54,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     GError *_err;
     _retval = garrow_output_stream_align(cast(GArrowOutputStream*)cPtr, alignment, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -64,7 +65,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     GError *_err;
     _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -75,7 +76,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     GError *_err;
     _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)cPtr, tensor ? cast(GArrowTensor*)tensor.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

@@ -3,6 +3,7 @@ module gstaudio.audio_base_src;
 
 import gid.gid;
 import gobject.object;
+import gst.element;
 import gstaudio.audio_ring_buffer;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -36,22 +37,93 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioBaseSrc self()
   {
     return this;
   }
 
   /**
+      Get `actualBufferTime` property.
+      Returns: Actual configured size of audio buffer in microseconds.
+  */
+  @property long actualBufferTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("actual-buffer-time");
+  }
+
+  /**
+      Get `actualLatencyTime` property.
+      Returns: Actual configured audio latency in microseconds.
+  */
+  @property long actualLatencyTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("actual-latency-time");
+  }
+
+  /** */
+  @property long bufferTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("buffer-time");
+  }
+
+  /** */
+  @property void bufferTime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("buffer-time", propval);
+  }
+
+  /** */
+  @property long latencyTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("latency-time");
+  }
+
+  /** */
+  @property void latencyTime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("latency-time", propval);
+  }
+
+  alias provideClock = gst.element.Element.provideClock;
+
+  /** */
+  @property bool provideClock()
+  {
+    return getProvideClock();
+  }
+
+  alias provideClock = gst.element.Element.provideClock;
+
+  /** */
+  @property void provideClock(bool propval)
+  {
+    return setProvideClock(propval);
+  }
+
+  /** */
+  @property gstaudio.types.AudioBaseSrcSlaveMethod slaveMethod()
+  {
+    return getSlaveMethod();
+  }
+
+  /** */
+  @property void slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval)
+  {
+    return setSlaveMethod(propval);
+  }
+
+  /**
       Create and return the #GstAudioRingBuffer for src. This function will call
       the ::create_ringbuffer vmethod and will set src as the parent of the
-      returned buffer (see [gst.object.ObjectGst.setParent]).
+      returned buffer (see [gst.object.ObjectWrap.setParent]).
       Returns: The new ringbuffer of src.
   */
   gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
     return _retval;
   }
 

@@ -3,12 +3,14 @@ module arrowflight.do_put_result;
 
 import arrowflight.c.functions;
 import arrowflight.c.types;
+import arrowflight.metadata_reader;
+import arrowflight.stream_writer;
 import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
 /** */
-class DoPutResult : gobject.object.ObjectG
+class DoPutResult : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,8 +32,27 @@ class DoPutResult : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DoPutResult self()
   {
     return this;
+  }
+
+  /**
+      Get `reader` property.
+      Returns: A reader for application metadata from the server.
+  */
+  @property arrowflight.metadata_reader.MetadataReader reader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.metadata_reader.MetadataReader)("reader");
+  }
+
+  /**
+      Get `writer` property.
+      Returns: A writer to write record batches to.
+  */
+  @property arrowflight.stream_writer.StreamWriter writer()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.stream_writer.StreamWriter)("writer");
   }
 }

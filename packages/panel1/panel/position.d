@@ -12,7 +12,7 @@ import panel.types;
     Specifies a position in the dock. You receive a #PanelPosition in the
     handler to `signal@PanelDock::create-frame`.
 */
-class Position : gobject.object.ObjectG
+class Position : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,9 +34,134 @@ class Position : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Position self()
   {
     return this;
+  }
+
+  /**
+      Get `area` property.
+      Returns: The area.
+  */
+  @property panel.types.Area area()
+  {
+    return getArea();
+  }
+
+  /**
+      Set `area` property.
+      Params:
+        propval = The area.
+  */
+  @property void area(panel.types.Area propval)
+  {
+    return setArea(propval);
+  }
+
+  /**
+      Get `areaSet` property.
+      Returns: The area is set.
+  */
+  @property bool areaSet()
+  {
+    return getAreaSet();
+  }
+
+  /**
+      Set `areaSet` property.
+      Params:
+        propval = The area is set.
+  */
+  @property void areaSet(bool propval)
+  {
+    return setAreaSet(propval);
+  }
+
+  /**
+      Get `column` property.
+      Returns: The column in the position.
+  */
+  @property uint column()
+  {
+    return getColumn();
+  }
+
+  /**
+      Set `column` property.
+      Params:
+        propval = The column in the position.
+  */
+  @property void column(uint propval)
+  {
+    return setColumn(propval);
+  }
+
+  /**
+      Get `columnSet` property.
+      Returns: The column is set.
+  */
+  @property bool columnSet()
+  {
+    return getColumnSet();
+  }
+
+  /**
+      Set `columnSet` property.
+      Params:
+        propval = The column is set.
+  */
+  @property void columnSet(bool propval)
+  {
+    return setColumnSet(propval);
+  }
+
+  /** */
+  @property uint depth()
+  {
+    return getDepth();
+  }
+
+  /** */
+  @property void depth(uint propval)
+  {
+    return setDepth(propval);
+  }
+
+  /** */
+  @property bool depthSet()
+  {
+    return getDepthSet();
+  }
+
+  /** */
+  @property void depthSet(bool propval)
+  {
+    return setDepthSet(propval);
+  }
+
+  /** */
+  @property uint row()
+  {
+    return getRow();
+  }
+
+  /** */
+  @property void row(uint propval)
+  {
+    return setRow(propval);
+  }
+
+  /** */
+  @property bool rowSet()
+  {
+    return getRowSet();
+  }
+
+  /** */
+  @property void rowSet(bool propval)
+  {
+    return setRowSet(propval);
   }
 
   /**
@@ -58,11 +183,11 @@ class Position : gobject.object.ObjectG
       Returns: A newly created #PanelPosition
           from the #GVariant.
   */
-  static panel.position.Position newFromVariant(glib.variant.VariantG variant)
+  static panel.position.Position newFromVariant(glib.variant.Variant variant)
   {
     PanelPosition* _cretval;
-    _cretval = panel_position_new_from_variant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    _cretval = panel_position_new_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -225,11 +350,11 @@ class Position : gobject.object.ObjectG
       Returns: the new #GVariant containing
         the positon values
   */
-  glib.variant.VariantG toVariant()
+  glib.variant.Variant toVariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = panel_position_to_variant(cast(PanelPosition*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

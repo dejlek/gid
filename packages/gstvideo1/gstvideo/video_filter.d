@@ -35,6 +35,7 @@ class VideoFilter : gstbase.base_transform.BaseTransform
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoFilter self()
   {
     return this;

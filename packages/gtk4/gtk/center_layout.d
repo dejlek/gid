@@ -40,9 +40,43 @@ class CenterLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CenterLayout self()
   {
     return this;
+  }
+
+  /**
+      Get `shrinkCenterLast` property.
+      Returns: Whether to shrink the center widget after other children.
+      
+      By default, when there's no space to give all three children their
+      natural widths, the start and end widgets start shrinking and the
+      center child keeps natural width until they reach minimum width.
+      
+      If set to `FALSE`, start and end widgets keep natural width and the
+      center widget starts shrinking instead.
+  */
+  @property bool shrinkCenterLast()
+  {
+    return getShrinkCenterLast();
+  }
+
+  /**
+      Set `shrinkCenterLast` property.
+      Params:
+        propval = Whether to shrink the center widget after other children.
+        
+        By default, when there's no space to give all three children their
+        natural widths, the start and end widgets start shrinking and the
+        center child keeps natural width until they reach minimum width.
+        
+        If set to `FALSE`, start and end widgets keep natural width and the
+        center widget starts shrinking instead.
+  */
+  @property void shrinkCenterLast(bool propval)
+  {
+    return setShrinkCenterLast(propval);
   }
 
   /**
@@ -76,7 +110,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_center_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -88,7 +122,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_end_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +157,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_start_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

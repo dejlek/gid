@@ -32,6 +32,7 @@ class MapDataType : arrow.list_data_type.ListDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MapDataType self()
   {
     return this;
@@ -50,7 +51,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_item_type(cast(GArrowMapDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -59,7 +60,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_key_type(cast(GArrowMapDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 }

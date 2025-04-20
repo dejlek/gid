@@ -24,13 +24,13 @@ import gtk.types;
     
     GTK provides various pre-made sorter implementations for common sorting
     operations. [gtk.column_view.ColumnView] has built-in support for sorting lists
-    via the [gtk.column_view_column.ColumnViewColumn.Sorter] property, where the user can
+    via the [gtk.column_view_column.ColumnViewColumn.sorter] property, where the user can
     change the sorting by clicking on list headers.
     
     Of course, in particular for large lists, it is also possible to subclass
     [gtk.sorter.Sorter] and provide one's own sorter.
 */
-class Sorter : gobject.object.ObjectG
+class Sorter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -52,6 +52,7 @@ class Sorter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Sorter self()
   {
     return this;
@@ -102,7 +103,7 @@ class Sorter : gobject.object.ObjectG
           [gtk.types.Ordering.Smaller] if item1 < item2,
           [gtk.types.Ordering.Larger] if item1 > item2
   */
-  gtk.types.Ordering compare(gobject.object.ObjectG item1, gobject.object.ObjectG item2)
+  gtk.types.Ordering compare(gobject.object.ObjectWrap item1, gobject.object.ObjectWrap item2)
   {
     GtkOrdering _cretval;
     _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.Dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.Dup) : null);

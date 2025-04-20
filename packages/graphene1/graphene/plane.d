@@ -20,7 +20,9 @@ import graphene.vec4;
 class Plane : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `plane.Plane` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_plane_t.sizeof), Yes.Take);
@@ -51,6 +53,7 @@ class Plane : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Plane self()
   {
     return this;

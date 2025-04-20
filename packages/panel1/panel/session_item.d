@@ -11,7 +11,7 @@ import panel.position;
 import panel.types;
 
 /** */
-class SessionItem : gobject.object.ObjectG
+class SessionItem : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,9 +33,70 @@ class SessionItem : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SessionItem self()
   {
     return this;
+  }
+
+  /** */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /** */
+  @property void id(string propval)
+  {
+    return setId(propval);
+  }
+
+  /** */
+  @property string moduleName()
+  {
+    return getModuleName();
+  }
+
+  /** */
+  @property void moduleName(string propval)
+  {
+    return setModuleName(propval);
+  }
+
+  /** */
+  @property panel.position.Position position()
+  {
+    return getPosition();
+  }
+
+  /** */
+  @property void position(panel.position.Position propval)
+  {
+    return setPosition(propval);
+  }
+
+  /** */
+  @property string typeHint()
+  {
+    return getTypeHint();
+  }
+
+  /** */
+  @property void typeHint(string propval)
+  {
+    return setTypeHint(propval);
+  }
+
+  /** */
+  @property string workspace()
+  {
+    return getWorkspace();
+  }
+
+  /** */
+  @property void workspace(string propval)
+  {
+    return setWorkspace(propval);
   }
 
   /** */
@@ -68,14 +129,14 @@ class SessionItem : gobject.object.ObjectG
         key = the metadata key
         expectedType = a #GVariantType or null
       Returns: a non-floating #GVariant which should
-          be released with [glib.variant.VariantG.unref]; otherwise null.
+          be released with [glib.variant.Variant.unref]; otherwise null.
   */
-  glib.variant.VariantG getMetadataValue(string key, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getMetadataValue(string key, glib.variant_type.VariantType expectedType = null)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_session_item_get_metadata_value(cast(PanelSessionItem*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -99,7 +160,7 @@ class SessionItem : gobject.object.ObjectG
   {
     PanelPosition* _cretval;
     _cretval = panel_session_item_get_position(cast(PanelSessionItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,10 +251,10 @@ class SessionItem : gobject.object.ObjectG
         key = the metadata key
         value = the value for key or null
   */
-  void setMetadataValue(string key, glib.variant.VariantG value = null)
+  void setMetadataValue(string key, glib.variant.Variant value = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_session_item_set_metadata_value(cast(PanelSessionItem*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    panel_session_item_set_metadata_value(cast(PanelSessionItem*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**

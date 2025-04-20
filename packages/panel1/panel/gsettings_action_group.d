@@ -11,7 +11,7 @@ import panel.c.types;
 import panel.types;
 
 /** */
-class GSettingsActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup
+class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 {
 
   /** */
@@ -33,6 +33,7 @@ class GSettingsActionGroup : gobject.object.ObjectG, gio.action_group.ActionGrou
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GSettingsActionGroup self()
   {
     return this;
@@ -51,7 +52,7 @@ class GSettingsActionGroup : gobject.object.ObjectG, gio.action_group.ActionGrou
   {
     GActionGroup* _cretval;
     _cretval = panel_gsettings_action_group_new(settings ? cast(GSettings*)settings.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

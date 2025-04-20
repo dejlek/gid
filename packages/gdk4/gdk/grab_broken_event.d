@@ -19,7 +19,7 @@ class GrabBrokenEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.GrabBrokenEvent");
+      throw new GidConstructException("Null instance pointer for gdk.grab_broken_event.GrabBrokenEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }
@@ -32,7 +32,7 @@ class GrabBrokenEvent : gdk.event.Event
   {
     GdkSurface* _cretval;
     _cretval = gdk_grab_broken_event_get_grab_surface(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

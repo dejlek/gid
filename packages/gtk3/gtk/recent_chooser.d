@@ -31,6 +31,130 @@ interface RecentChooser
   }
 
   /**
+      Get `filter` property.
+      Returns: The #GtkRecentFilter object to be used when displaying
+      the recently used resources.
+  */
+  @property gtk.recent_filter.RecentFilter filter();
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The #GtkRecentFilter object to be used when displaying
+        the recently used resources.
+  */
+  @property void filter(gtk.recent_filter.RecentFilter propval);
+
+  /**
+      Get `limit` property.
+      Returns: The maximum number of recently used resources to be displayed,
+      or -1 to display all items.
+  */
+  @property int limit();
+
+  /**
+      Set `limit` property.
+      Params:
+        propval = The maximum number of recently used resources to be displayed,
+        or -1 to display all items.
+  */
+  @property void limit(int propval);
+
+  /**
+      Get `localOnly` property.
+      Returns: Whether this #GtkRecentChooser should display only local (file:)
+      resources.
+  */
+  @property bool localOnly();
+
+  /**
+      Set `localOnly` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display only local (file:)
+        resources.
+  */
+  @property void localOnly(bool propval);
+
+  /**
+      Get `selectMultiple` property.
+      Returns: Allow the user to select multiple resources.
+  */
+  @property bool selectMultiple();
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Allow the user to select multiple resources.
+  */
+  @property void selectMultiple(bool propval);
+
+  /**
+      Get `showIcons` property.
+      Returns: Whether this #GtkRecentChooser should display an icon near the item.
+  */
+  @property bool showIcons();
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display an icon near the item.
+  */
+  @property void showIcons(bool propval);
+
+  /**
+      Get `showNotFound` property.
+      Returns: Whether this #GtkRecentChooser should display the recently used resources
+      even if not present anymore. Setting this to false will perform a
+      potentially expensive check on every local resource (every remote
+      resource will always be displayed).
+  */
+  @property bool showNotFound();
+
+  /**
+      Set `showNotFound` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display the recently used resources
+        even if not present anymore. Setting this to false will perform a
+        potentially expensive check on every local resource (every remote
+        resource will always be displayed).
+  */
+  @property void showNotFound(bool propval);
+
+  /** */
+  @property bool showPrivate();
+
+  /** */
+  @property void showPrivate(bool propval);
+
+  /**
+      Get `showTips` property.
+      Returns: Whether this #GtkRecentChooser should display a tooltip containing the
+      full path of the recently used resources.
+  */
+  @property bool showTips();
+
+  /**
+      Set `showTips` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display a tooltip containing the
+        full path of the recently used resources.
+  */
+  @property void showTips(bool propval);
+
+  /**
+      Get `sortType` property.
+      Returns: Sorting order to be used when displaying the recently used resources.
+  */
+  @property gtk.types.RecentSortType sortType();
+
+  /**
+      Set `sortType` property.
+      Params:
+        propval = Sorting order to be used when displaying the recently used resources.
+  */
+  @property void sortType(gtk.types.RecentSortType propval);
+
+  /**
       Adds filter to the list of #GtkRecentFilter objects held by chooser.
       
       If no previous filter objects were defined, this function will call
@@ -170,7 +294,7 @@ interface RecentChooser
       Params:
         uri = a URI
       Returns: true if uri was found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool selectUri(string uri);
 
@@ -180,7 +304,7 @@ interface RecentChooser
       Params:
         uri = a URI
       Returns: true if the URI was found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setCurrentUri(string uri);
 

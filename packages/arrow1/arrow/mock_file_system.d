@@ -30,6 +30,7 @@ class MockFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MockFileSystem self()
   {
     return this;

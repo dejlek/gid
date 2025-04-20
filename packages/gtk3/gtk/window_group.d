@@ -21,13 +21,13 @@ import gtk.window;
     
     GtkWindowGroup objects are referenced by each window in the group,
     so once you have added all windows to a GtkWindowGroup, you can drop
-    the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the window group with [gobject.object.ObjectWrap.unref]. If the
     windows in the window group are subsequently destroyed, then they will
     be removed from the window group and drop their references on the window
     group; when all window have been removed, the window group will be
     freed.
 */
-class WindowGroup : gobject.object.ObjectG
+class WindowGroup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,6 +49,7 @@ class WindowGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WindowGroup self()
   {
     return this;
@@ -88,7 +89,7 @@ class WindowGroup : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_group_get_current_device_grab(cast(GtkWindowGroup*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +102,7 @@ class WindowGroup : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_group_get_current_grab(cast(GtkWindowGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

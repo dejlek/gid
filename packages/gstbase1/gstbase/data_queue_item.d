@@ -19,7 +19,7 @@ class DataQueueItem
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstBase.DataQueueItem");
+      throw new GidConstructException("Null instance pointer for gstbase.data_queue_item.DataQueueItem");
 
     cInstance = *cast(GstDataQueueItem*)ptr;
 
@@ -33,51 +33,103 @@ class DataQueueItem
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `object` field.
+      Returns: the #GstMiniObject to queue.
+  */
   @property gst.mini_object.MiniObject object()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
   }
 
+  /**
+      Set `object` field.
+      Params:
+        propval = the #GstMiniObject to queue.
+  */
   @property void object(gst.mini_object.MiniObject propval)
   {
     cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
     dToC(propval, cast(void*)&(cast(GstDataQueueItem*)cPtr).object);
   }
 
+  /**
+      Get `size` field.
+      Returns: the size in bytes of the miniobject.
+  */
   @property uint size()
   {
     return (cast(GstDataQueueItem*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = the size in bytes of the miniobject.
+  */
   @property void size(uint propval)
   {
     (cast(GstDataQueueItem*)cPtr).size = propval;
   }
 
+  /**
+      Get `duration` field.
+      Returns: the duration in #GstClockTime of the miniobject. Can not be
+      `GST_CLOCK_TIME_NONE`.
+  */
   @property ulong duration()
   {
     return (cast(GstDataQueueItem*)cPtr).duration;
   }
 
+  /**
+      Set `duration` field.
+      Params:
+        propval = the duration in #GstClockTime of the miniobject. Can not be
+        `GST_CLOCK_TIME_NONE`.
+  */
   @property void duration(ulong propval)
   {
     (cast(GstDataQueueItem*)cPtr).duration = propval;
   }
 
+  /**
+      Get `visible` field.
+      Returns: true if @object should be considered as a visible object.
+  */
   @property bool visible()
   {
     return (cast(GstDataQueueItem*)cPtr).visible;
   }
 
+  /**
+      Set `visible` field.
+      Params:
+        propval = true if @object should be considered as a visible object.
+  */
   @property void visible(bool propval)
   {
     (cast(GstDataQueueItem*)cPtr).visible = propval;
   }
 
+  /**
+      Get `destroy` field.
+      Returns: The #GDestroyNotify function to use to free the #GstDataQueueItem.
+      This function should also drop the reference to @object the owner of the
+      #GstDataQueueItem is assumed to hold.
+  */
   @property GDestroyNotify destroy()
   {
     return (cast(GstDataQueueItem*)cPtr).destroy;
   }
+
+  /**
+      Set `destroy` field.
+      Params:
+        propval = The #GDestroyNotify function to use to free the #GstDataQueueItem.
+        This function should also drop the reference to @object the owner of the
+        #GstDataQueueItem is assumed to hold.
+  */
 
   @property void destroy(GDestroyNotify propval)
   {

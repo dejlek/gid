@@ -40,7 +40,7 @@ import gst.types;
     not running anymore. Use [gst.task.Task.join] to make sure the task is completely
     stopped and the thread is stopped.
     
-    After creating a #GstTask, use [gst.object.ObjectGst.unref] to free its resources. This can
+    After creating a #GstTask, use [gst.object.ObjectWrap.unref] to free its resources. This can
     only be done when the task is not running anymore.
     
     Task functions can send a #GstMessage to send out-of-band data to the
@@ -52,7 +52,7 @@ import gst.types;
     task is started; changing the object name after the task has been started, has
     no effect on the thread name.
 */
-class Task : gst.object.ObjectGst
+class Task : gst.object.ObjectWrap
 {
 
   /** */
@@ -74,6 +74,7 @@ class Task : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Task self()
   {
     return this;
@@ -133,14 +134,14 @@ class Task : gst.object.ObjectGst
       threads.
       
       MT safe.
-      Returns: the #GstTaskPool used by task. [gst.object.ObjectGst.unref]
+      Returns: the #GstTaskPool used by task. [gst.object.ObjectWrap.unref]
         after usage.
   */
   gst.task_pool.TaskPool getPool()
   {
     GstTaskPool* _cretval;
     _cretval = gst_task_get_pool(cast(GstTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -222,7 +223,7 @@ class Task : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
 
@@ -245,7 +246,7 @@ class Task : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
 

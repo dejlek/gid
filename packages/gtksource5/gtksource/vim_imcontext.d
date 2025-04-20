@@ -82,9 +82,22 @@ class VimIMContext : gtk.imcontext.IMContext
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VimIMContext self()
   {
     return this;
+  }
+
+  /** */
+  @property string commandBarText()
+  {
+    return getCommandBarText();
+  }
+
+  /** */
+  @property string commandText()
+  {
+    return getCommandText();
   }
 
   /** */

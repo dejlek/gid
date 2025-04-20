@@ -36,9 +36,54 @@ class ToggleAction : gtk.action.Action
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToggleAction self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the toggle action should be active.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the toggle action should be active.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `drawAsRadio` property.
+      Returns: Whether the proxies for this action look like radio action proxies.
+      
+      This is an appearance property and thus only applies if
+      #GtkActivatable:use-action-appearance is true.
+  */
+  @property bool drawAsRadio()
+  {
+    return getDrawAsRadio();
+  }
+
+  /**
+      Set `drawAsRadio` property.
+      Params:
+        propval = Whether the proxies for this action look like radio action proxies.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
+  */
+  @property void drawAsRadio(bool propval)
+  {
+    return setDrawAsRadio(propval);
   }
 
   /**

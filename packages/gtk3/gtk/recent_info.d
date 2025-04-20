@@ -47,6 +47,7 @@ class RecentInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentInfo self()
   {
     return this;
@@ -62,7 +63,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the newly created #GAppInfo, or null.
           In case of error, error will be set either with a
           `GTK_RECENT_MANAGER_ERROR` or a `G_IO_ERROR`
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.app_info.AppInfo createAppInfo(string appName = null)
   {
@@ -71,8 +72,8 @@ class RecentInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = gtk_recent_info_create_app_info(cast(GtkRecentInfo*)cPtr, _appName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -195,13 +196,13 @@ class RecentInfo : gobject.boxed.Boxed
   /**
       Retrieves the icon associated to the resource MIME type.
       Returns: a #GIcon containing the icon, or null.
-          Use [gobject.object.ObjectG.unref] when finished using the icon
+          Use [gobject.object.ObjectWrap.unref] when finished using the icon
   */
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
     _cretval = gtk_recent_info_get_gicon(cast(GtkRecentInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -234,13 +235,13 @@ class RecentInfo : gobject.boxed.Boxed
       Params:
         size = the size of the icon in pixels
       Returns: a #GdkPixbuf containing the icon,
-            or null. Use [gobject.object.ObjectG.unref] when finished using the icon.
+            or null. Use [gobject.object.ObjectWrap.unref] when finished using the icon.
   */
   gdkpixbuf.pixbuf.Pixbuf getIcon(int size)
   {
     PixbufC* _cretval;
     _cretval = gtk_recent_info_get_icon(cast(GtkRecentInfo*)cPtr, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -70,9 +70,33 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppChooserDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `heading` property.
+      Returns: The text to show at the top of the dialog.
+      
+      The string may contain Pango markup.
+  */
+  @property string heading()
+  {
+    return getHeading();
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The text to show at the top of the dialog.
+        
+        The string may contain Pango markup.
+  */
+  @property void heading(string propval)
+  {
+    return setHeading(propval);
   }
 
   mixin AppChooserT!();
@@ -93,7 +117,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -115,7 +139,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
     GtkWidget* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_app_chooser_dialog_new_for_content_type(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, _contentType);
-    auto _retval = ObjectG.getDObject!(gtk.app_chooser_dialog.AppChooserDialog)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.app_chooser_dialog.AppChooserDialog)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +168,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_get_widget(cast(GtkAppChooserDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

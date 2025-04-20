@@ -42,7 +42,7 @@ class ReferenceTimestampMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.ReferenceTimestampMeta");
+      throw new GidConstructException("Null instance pointer for gst.reference_timestamp_meta.ReferenceTimestampMeta");
 
     cInstance = *cast(GstReferenceTimestampMeta*)ptr;
 
@@ -56,37 +56,68 @@ class ReferenceTimestampMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `parent` field.
+      Returns: the parent #GstMeta structure
+  */
   @property gst.meta.Meta parent()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)cPtr).parent);
   }
 
+  /**
+      Get `reference` field.
+      Returns: identifier for the timestamp reference.
+  */
   @property gst.caps.Caps reference()
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
   }
 
+  /**
+      Set `reference` field.
+      Params:
+        propval = identifier for the timestamp reference.
+  */
   @property void reference(gst.caps.Caps propval)
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
     dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)cPtr).reference);
   }
 
+  /**
+      Get `timestamp` field.
+      Returns: timestamp
+  */
   @property gst.types.ClockTime timestamp()
   {
     return (cast(GstReferenceTimestampMeta*)cPtr).timestamp;
   }
 
+  /**
+      Set `timestamp` field.
+      Params:
+        propval = timestamp
+  */
   @property void timestamp(gst.types.ClockTime propval)
   {
     (cast(GstReferenceTimestampMeta*)cPtr).timestamp = propval;
   }
 
+  /**
+      Get `duration` field.
+      Returns: duration, or `GST_CLOCK_TIME_NONE`
+  */
   @property gst.types.ClockTime duration()
   {
     return (cast(GstReferenceTimestampMeta*)cPtr).duration;
   }
 
+  /**
+      Set `duration` field.
+      Params:
+        propval = duration, or `GST_CLOCK_TIME_NONE`
+  */
   @property void duration(gst.types.ClockTime propval)
   {
     (cast(GstReferenceTimestampMeta*)cPtr).duration = propval;

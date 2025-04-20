@@ -32,9 +32,50 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OverlayLayoutChild self()
   {
     return this;
+  }
+
+  /**
+      Get `clipOverlay` property.
+      Returns: Whether the child should be clipped to fit the parent's size.
+  */
+  @property bool clipOverlay()
+  {
+    return getClipOverlay();
+  }
+
+  /**
+      Set `clipOverlay` property.
+      Params:
+        propval = Whether the child should be clipped to fit the parent's size.
+  */
+  @property void clipOverlay(bool propval)
+  {
+    return setClipOverlay(propval);
+  }
+
+  /**
+      Get `measure` property.
+      Returns: Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
+      measurement.
+  */
+  @property bool measure()
+  {
+    return getMeasure();
+  }
+
+  /**
+      Set `measure` property.
+      Params:
+        propval = Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
+        measurement.
+  */
+  @property void measure(bool propval)
+  {
+    return setMeasure(propval);
   }
 
   /**

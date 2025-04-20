@@ -25,7 +25,7 @@ import gtk.widget;
     an overview of the basic concepts, such as the capture and bubble
     phases of event propagation.
 */
-class EventController : gobject.object.ObjectG
+class EventController : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,9 +47,76 @@ class EventController : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventController self()
   {
     return this;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name for this controller, typically used for debugging purposes.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name for this controller, typically used for debugging purposes.
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `propagationLimit` property.
+      Returns: The limit for which events this controller will handle.
+  */
+  @property gtk.types.PropagationLimit propagationLimit()
+  {
+    return getPropagationLimit();
+  }
+
+  /**
+      Set `propagationLimit` property.
+      Params:
+        propval = The limit for which events this controller will handle.
+  */
+  @property void propagationLimit(gtk.types.PropagationLimit propval)
+  {
+    return setPropagationLimit(propval);
+  }
+
+  /**
+      Get `propagationPhase` property.
+      Returns: The propagation phase at which this controller will handle events.
+  */
+  @property gtk.types.PropagationPhase propagationPhase()
+  {
+    return getPropagationPhase();
+  }
+
+  /**
+      Set `propagationPhase` property.
+      Params:
+        propval = The propagation phase at which this controller will handle events.
+  */
+  @property void propagationPhase(gtk.types.PropagationPhase propval)
+  {
+    return setPropagationPhase(propval);
+  }
+
+  /**
+      Get `widget` property.
+      Returns: The widget receiving the `GdkEvents` that the controller will handle.
+  */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
   }
 
   /**
@@ -79,7 +146,7 @@ class EventController : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +223,7 @@ class EventController : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

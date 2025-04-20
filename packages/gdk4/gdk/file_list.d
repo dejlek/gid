@@ -40,6 +40,7 @@ class FileList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileList self()
   {
     return this;
@@ -63,7 +64,7 @@ class FileList : gobject.boxed.Boxed
 
     GFile*[] _tmpfiles;
     foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
+      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
     auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;

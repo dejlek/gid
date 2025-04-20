@@ -28,7 +28,7 @@ import webkit.user_style_sheet;
     User style sheets can be added and removed at any time, but
     they will affect the web pages loaded afterwards.
 */
-class UserContentManager : gobject.object.ObjectG
+class UserContentManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -349,7 +349,7 @@ class UserContentManager : gobject.object.ObjectG
       called, an automatic reply with an undefined value will be sent.
       
       It is possible to handle the reply asynchronously, by simply calling
-      [gobject.object.ObjectG.ref_] on the reply and returning true.
+      [gobject.object.ObjectWrap.ref_] on the reply and returning true.
   
       Params:
         detail = Signal detail or null (default)

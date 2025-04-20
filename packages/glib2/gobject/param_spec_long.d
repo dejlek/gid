@@ -17,7 +17,7 @@ class ParamSpecLong : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecLong");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_long.ParamSpecLong");
 
     super(cast(GParamSpec*)ptr, take);
   }

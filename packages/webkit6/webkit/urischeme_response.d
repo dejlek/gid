@@ -23,7 +23,7 @@ import webkit.types;
     When you finished setting up your #WebKitURISchemeResponse, call
     webkit_uri_request_finish_with_response() with it to return the response.
 */
-class URISchemeResponse : gobject.object.ObjectG
+class URISchemeResponse : gobject.object.ObjectWrap
 {
 
   /** */

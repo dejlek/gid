@@ -47,6 +47,7 @@ class IMContextSimple : gtk.imcontext.IMContext
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IMContextSimple self()
   {
     return this;

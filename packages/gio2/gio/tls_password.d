@@ -12,7 +12,7 @@ import gobject.object;
     An abstract interface representing a password used in TLS. Often used in
     user interaction such as unlocking a key storage token.
 */
-class TlsPassword : gobject.object.ObjectG
+class TlsPassword : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,9 +34,67 @@ class TlsPassword : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TlsPassword self()
   {
     return this;
+  }
+
+  /**
+      Get `description` property.
+      Returns: Description of what the password is for.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Set `description` property.
+      Params:
+        propval = Description of what the password is for.
+  */
+  @property void description(string propval)
+  {
+    return setDescription(propval);
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags about the password.
+  */
+  @property gio.types.TlsPasswordFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags about the password.
+  */
+  @property void flags(gio.types.TlsPasswordFlags propval)
+  {
+    return setFlags(propval);
+  }
+
+  /**
+      Get `warning` property.
+      Returns: Warning about the password.
+  */
+  @property string warning()
+  {
+    return getWarning();
+  }
+
+  /**
+      Set `warning` property.
+      Params:
+        propval = Warning about the password.
+  */
+  @property void warning(string propval)
+  {
+    return setWarning(propval);
   }
 
   /**

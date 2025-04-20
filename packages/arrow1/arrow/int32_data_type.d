@@ -30,6 +30,7 @@ class Int32DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Int32DataType self()
   {
     return this;

@@ -31,6 +31,7 @@ class Time64Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Time64Scalar self()
   {
     return this;

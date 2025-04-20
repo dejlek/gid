@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class FeatherWriteProperties : gobject.object.ObjectG
+class FeatherWriteProperties : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,43 @@ class FeatherWriteProperties : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FeatherWriteProperties self()
   {
     return this;
+  }
+
+  /**
+      Get `compression` property.
+      Returns: Compression type to use. Only
+      [arrow.types.CompressionType.Uncompressed],
+      [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
+      are supported. The default compression is
+      [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
+      support for it, otherwise [arrow.types.CompressionType.Uncompressed].
+      [arrow.types.CompressionType.Uncompressed] is set as the object
+      default here.
+  */
+  @property arrow.types.CompressionType compression()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.CompressionType)("compression");
+  }
+
+  /**
+      Set `compression` property.
+      Params:
+        propval = Compression type to use. Only
+        [arrow.types.CompressionType.Uncompressed],
+        [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
+        are supported. The default compression is
+        [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
+        support for it, otherwise [arrow.types.CompressionType.Uncompressed].
+        [arrow.types.CompressionType.Uncompressed] is set as the object
+        default here.
+  */
+  @property void compression(arrow.types.CompressionType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.CompressionType)("compression", propval);
   }
 
   /** */

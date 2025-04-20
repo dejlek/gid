@@ -21,7 +21,7 @@ import gobject.object;
     allows specification of a start and end offset within the host
     AtkHypertext object.
 */
-class Hyperlink : gobject.object.ObjectG, atk.action.Action
+class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
 {
 
   /** */
@@ -43,9 +43,40 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Hyperlink self()
   {
     return this;
+  }
+
+  /** */
+  @property int endIndex()
+  {
+    return getEndIndex();
+  }
+
+  /** */
+  @property int numberOfAnchors()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("number-of-anchors");
+  }
+
+  /**
+      Get `selectedLink` property.
+      Returns: Selected link
+  
+      Deprecated: Please use ATK_STATE_FOCUSABLE for all links, and
+      ATK_STATE_FOCUSED for focused links.
+  */
+  @property bool selectedLink()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("selected-link");
+  }
+
+  /** */
+  @property int startIndex()
+  {
+    return getStartIndex();
   }
 
   mixin ActionT!();
@@ -85,11 +116,11 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
       Returns: an #AtkObject associated with this hyperlinks
         i-th anchor
   */
-  atk.object.ObjectAtk getObject(int i)
+  atk.object.ObjectWrap getObject(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 

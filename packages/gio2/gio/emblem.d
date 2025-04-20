@@ -17,7 +17,7 @@ import gobject.object;
     Currently, only metainformation about the emblem's origin is
     supported. More may be added in the future.
 */
-class Emblem : gobject.object.ObjectG, gio.icon.Icon
+class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
@@ -39,6 +39,7 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Emblem self()
   {
     return this;
@@ -56,7 +57,7 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   this(gio.icon.Icon icon)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,8 +72,8 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, origin);
-    auto _retval = ObjectG.getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.Take);
+    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, origin);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,7 +86,7 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   {
     GIcon* _cretval;
     _cretval = g_emblem_get_icon(cast(GEmblem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 

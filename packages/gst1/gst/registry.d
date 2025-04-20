@@ -76,7 +76,7 @@ import gst.types;
     process are marked with the [gst.types.PluginFlags.Cached] bit. These plugins are
     removed at the end of initialization.
 */
-class Registry : gst.object.ObjectGst
+class Registry : gst.object.ObjectWrap
 {
 
   /** */
@@ -98,6 +98,7 @@ class Registry : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Registry self()
   {
     return this;
@@ -143,7 +144,7 @@ class Registry : gst.object.ObjectGst
   {
     GstRegistry* _cretval;
     _cretval = gst_registry_get();
-    auto _retval = ObjectG.getDObject!(gst.registry.Registry)(cast(GstRegistry*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.registry.Registry)(cast(GstRegistry*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +152,7 @@ class Registry : gst.object.ObjectGst
       Add the feature to the registry. The feature-added signal will be emitted.
       
       feature's reference count will be incremented, and any floating
-      reference will be removed (see [gst.object.ObjectGst.refSink])
+      reference will be removed (see [gst.object.ObjectWrap.refSink])
   
       Params:
         feature = the feature to add
@@ -170,7 +171,7 @@ class Registry : gst.object.ObjectGst
       Add the plugin to the registry. The plugin-added signal will be emitted.
       
       plugin's reference count will be incremented, and any floating
-      reference will be removed (see [gst.object.ObjectGst.refSink])
+      reference will be removed (see [gst.object.ObjectWrap.refSink])
   
       Params:
         plugin = the plugin to add
@@ -226,7 +227,7 @@ class Registry : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PluginFeatureFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -246,7 +247,7 @@ class Registry : gst.object.ObjectGst
         type = the pluginfeature type to find
       Returns: the pluginfeature with the
             given name and type or null if the plugin was not
-            found. [gst.object.ObjectGst.unref] after usage.
+            found. [gst.object.ObjectWrap.unref] after usage.
         
         MT safe.
   */
@@ -255,7 +256,7 @@ class Registry : gst.object.ObjectGst
     GstPluginFeature* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_registry_find_feature(cast(GstRegistry*)cPtr, _name, type);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -266,7 +267,7 @@ class Registry : gst.object.ObjectGst
       Params:
         name = the plugin name to find
       Returns: the plugin with the given name
-            or null if the plugin was not found. [gst.object.ObjectGst.unref] after
+            or null if the plugin was not found. [gst.object.ObjectWrap.unref] after
             usage.
         
         MT safe.
@@ -276,7 +277,7 @@ class Registry : gst.object.ObjectGst
     GstPlugin* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_registry_find_plugin(cast(GstRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -350,14 +351,14 @@ class Registry : gst.object.ObjectGst
       Params:
         filename = the name of the file to look up
       Returns: the #GstPlugin if found, or
-            null if not.  [gst.object.ObjectGst.unref] after usage.
+            null if not.  [gst.object.ObjectWrap.unref] after usage.
   */
   gst.plugin.Plugin lookup(string filename)
   {
     GstPlugin* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gst_registry_lookup(cast(GstRegistry*)cPtr, _filename);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -367,7 +368,7 @@ class Registry : gst.object.ObjectGst
       Params:
         name = a #GstPluginFeature name
       Returns: a #GstPluginFeature with its refcount incremented,
-            use [gst.object.ObjectGst.unref] after usage.
+            use [gst.object.ObjectWrap.unref] after usage.
         
         MT safe.
   */
@@ -376,7 +377,7 @@ class Registry : gst.object.ObjectGst
     GstPluginFeature* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_registry_lookup_feature(cast(GstRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -401,7 +402,7 @@ class Registry : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PluginFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;

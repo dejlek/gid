@@ -19,7 +19,7 @@ class RTCPPacket
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtp.RTCPPacket");
+      throw new GidConstructException("Null instance pointer for gstrtp.rtcppacket.RTCPPacket");
 
     cInstance = *cast(GstRTCPPacket*)ptr;
 
@@ -33,16 +33,29 @@ class RTCPPacket
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `rtcp` field.
+      Returns: pointer to RTCP buffer
+  */
   @property gstrtp.rtcpbuffer.RTCPBuffer rtcp()
   {
     return new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)cPtr).rtcp);
   }
 
+  /**
+      Get `offset` field.
+      Returns: offset of packet in buffer data
+  */
   @property uint offset()
   {
     return (cast(GstRTCPPacket*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = offset of packet in buffer data
+  */
   @property void offset(uint propval)
   {
     (cast(GstRTCPPacket*)cPtr).offset = propval;

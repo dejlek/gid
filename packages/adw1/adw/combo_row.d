@@ -53,7 +53,7 @@ import gtk.list_item_factory;
     
     [adw.combo_row.ComboRow] mirrors [gtk.drop_down.DropDown], see that widget for details.
     
-    [adw.combo_row.ComboRow] is [gtk.list_box_row.ListBoxRow.gboolean] if a model is set.
+    [adw.combo_row.ComboRow] is [gtk.list_box_row.ListBoxRow.activatable] if a model is set.
     
     ## CSS nodes
     
@@ -90,9 +90,206 @@ class ComboRow : adw.action_row.ActionRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ComboRow self()
   {
     return this;
+  }
+
+  /**
+      Get `enableSearch` property.
+      Returns: Whether to show a search entry in the popup.
+      
+      If set to `TRUE`, a search entry will be shown in the popup that
+      allows to search for items in the list.
+      
+      Search requires `property@ComboRow:expression` to be set.
+  */
+  @property bool enableSearch()
+  {
+    return getEnableSearch();
+  }
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to show a search entry in the popup.
+        
+        If set to `TRUE`, a search entry will be shown in the popup that
+        allows to search for items in the list.
+        
+        Search requires `property@ComboRow:expression` to be set.
+  */
+  @property void enableSearch(bool propval)
+  {
+    return setEnableSearch(propval);
+  }
+
+  /**
+      Get `expression` property.
+      Returns: An expression used to obtain strings from items.
+      
+      The expression must have a value type of `G_TYPE_STRING`.
+      
+      It's used to bind strings to labels produced by the default factory if
+      `property@ComboRow:factory` is not set, or when
+      `property@ComboRow:use-subtitle` is set to `TRUE`.
+  */
+  @property gtk.expression.Expression expression()
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = An expression used to obtain strings from items.
+        
+        The expression must have a value type of `G_TYPE_STRING`.
+        
+        It's used to bind strings to labels produced by the default factory if
+        `property@ComboRow:factory` is not set, or when
+        `property@ComboRow:use-subtitle` is set to `TRUE`.
+  */
+  @property void expression(gtk.expression.Expression propval)
+  {
+    return setExpression(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+      
+      This factory is always used for the item in the row. It is also used for
+      items in the popup unless `property@ComboRow:list-factory` is set.
+  */
+  @property gtk.list_item_factory.ListItemFactory factory()
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+        
+        This factory is always used for the item in the row. It is also used for
+        items in the popup unless `property@ComboRow:list-factory` is set.
+  */
+  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setFactory(propval);
+  }
+
+  /**
+      Get `listFactory` property.
+      Returns: The factory for populating list items in the popup.
+      
+      If this is not set, `property@ComboRow:factory` is used.
+  */
+  @property gtk.list_item_factory.ListItemFactory listFactory()
+  {
+    return getListFactory();
+  }
+
+  /**
+      Set `listFactory` property.
+      Params:
+        propval = The factory for populating list items in the popup.
+        
+        If this is not set, `property@ComboRow:factory` is used.
+  */
+  @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setListFactory(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model that provides the displayed items.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model that provides the displayed items.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `selected` property.
+      Returns: The position of the selected item.
+      
+      If no item is selected, the property has the value
+      [gtk.types.INVALID_LIST_POSITION]
+  */
+  @property uint selected()
+  {
+    return getSelected();
+  }
+
+  /**
+      Set `selected` property.
+      Params:
+        propval = The position of the selected item.
+        
+        If no item is selected, the property has the value
+        [gtk.types.INVALID_LIST_POSITION]
+  */
+  @property void selected(uint propval)
+  {
+    return setSelected(propval);
+  }
+
+  /**
+      Get `selectedItem` property.
+      Returns: The selected item.
+  */
+  @property gobject.object.ObjectWrap selectedItem()
+  {
+    return getSelectedItem();
+  }
+
+  /**
+      Get `useSubtitle` property.
+      Returns: Whether to use the current value as the subtitle.
+      
+      If you use a custom list item factory, you will need to give the row a
+      name conversion expression with `property@ComboRow:expression`.
+      
+      If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+      
+      The subtitle is interpreted as Pango markup if
+      `property@PreferencesRow:use-markup` is set to `TRUE`.
+  */
+  @property bool useSubtitle()
+  {
+    return getUseSubtitle();
+  }
+
+  /**
+      Set `useSubtitle` property.
+      Params:
+        propval = Whether to use the current value as the subtitle.
+        
+        If you use a custom list item factory, you will need to give the row a
+        name conversion expression with `property@ComboRow:expression`.
+        
+        If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+        
+        The subtitle is interpreted as Pango markup if
+        `property@PreferencesRow:use-markup` is set to `TRUE`.
+  */
+  @property void useSubtitle(bool propval)
+  {
+    return setUseSubtitle(propval);
   }
 
   /**
@@ -142,7 +339,7 @@ class ComboRow : adw.action_row.ActionRow
   {
     GtkListItemFactory* _cretval;
     _cretval = adw_combo_row_get_factory(cast(AdwComboRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +351,7 @@ class ComboRow : adw.action_row.ActionRow
   {
     GtkListItemFactory* _cretval;
     _cretval = adw_combo_row_get_list_factory(cast(AdwComboRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +363,7 @@ class ComboRow : adw.action_row.ActionRow
   {
     GListModel* _cretval;
     _cretval = adw_combo_row_get_model(cast(AdwComboRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,11 +383,11 @@ class ComboRow : adw.action_row.ActionRow
       Gets the selected item.
       Returns: the selected item
   */
-  gobject.object.ObjectG getSelectedItem()
+  gobject.object.ObjectWrap getSelectedItem()
   {
     ObjectC* _cretval;
     _cretval = adw_combo_row_get_selected_item(cast(AdwComboRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,7 +470,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    adw_combo_row_set_model(cast(AdwComboRow*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    adw_combo_row_set_model(cast(AdwComboRow*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

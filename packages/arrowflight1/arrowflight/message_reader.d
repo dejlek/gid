@@ -32,6 +32,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MessageReader self()
   {
     return this;
@@ -42,7 +43,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 }

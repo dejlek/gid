@@ -35,6 +35,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMixer self()
   {
     return this;
@@ -45,7 +46,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_mixer_get_framebuffer(cast(GstGLMixer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.Take);
     return _retval;
   }
 

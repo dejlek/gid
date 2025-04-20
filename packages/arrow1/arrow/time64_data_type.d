@@ -31,6 +31,7 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Time64DataType self()
   {
     return this;
@@ -43,7 +44,7 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     GError *_err;
     _cretval = garrow_time64_data_type_new(unit, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

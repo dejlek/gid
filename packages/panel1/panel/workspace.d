@@ -52,9 +52,35 @@ class Workspace : adw.application_window.ApplicationWindow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Workspace self()
   {
     return this;
+  }
+
+  /**
+      Get `id` property.
+      Returns: The "id" of the workspace.
+      
+      This is generally used by applications to help destinguish between
+      types of workspaces, particularly when saving session state.
+  */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The "id" of the workspace.
+        
+        This is generally used by applications to help destinguish between
+        types of workspaces, particularly when saving session state.
+  */
+  @property void id(string propval)
+  {
+    return setId(propval);
   }
 
   /**
@@ -68,7 +94,7 @@ class Workspace : adw.application_window.ApplicationWindow
   {
     PanelWorkspace* _cretval;
     _cretval = panel_workspace_find_from_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +124,7 @@ class Workspace : adw.application_window.ApplicationWindow
   {
     PanelWorkbench* _cretval;
     _cretval = panel_workspace_get_workbench(cast(PanelWorkspace*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +145,7 @@ class Workspace : adw.application_window.ApplicationWindow
     PanelInhibitor* _cretval;
     const(char)* _reason = reason.toCString(No.Alloc);
     _cretval = panel_workspace_inhibit(cast(PanelWorkspace*)cPtr, flags, _reason);
-    auto _retval = ObjectG.getDObject!(panel.inhibitor.Inhibitor)(cast(PanelInhibitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.inhibitor.Inhibitor)(cast(PanelInhibitor*)_cretval, Yes.Take);
     return _retval;
   }
 

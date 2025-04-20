@@ -19,7 +19,7 @@ class VideoMasteringDisplayInfo
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoMasteringDisplayInfo");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo");
 
     cInstance = *cast(GstVideoMasteringDisplayInfo*)ptr;
 
@@ -33,31 +33,64 @@ class VideoMasteringDisplayInfo
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `whitePoint` field.
+      Returns: the xy coordinates of white point in the CIE 1931 color space.
+        each value is normalized to 50000 (meaning that in unit of 0.00002)
+  */
   @property gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint()
   {
     return cToD!(gstvideo.types.VideoMasteringDisplayInfoCoordinates)(cast(void*)&(cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint);
   }
 
+  /**
+      Set `whitePoint` field.
+      Params:
+        propval = the xy coordinates of white point in the CIE 1931 color space.
+          each value is normalized to 50000 (meaning that in unit of 0.00002)
+  */
   @property void whitePoint(gstvideo.types.VideoMasteringDisplayInfoCoordinates propval)
   {
     (cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint = propval;
   }
 
+  /**
+      Get `maxDisplayMasteringLuminance` field.
+      Returns: the maximum value of display luminance
+        in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+  */
   @property uint maxDisplayMasteringLuminance()
   {
     return (cast(GstVideoMasteringDisplayInfo*)cPtr).maxDisplayMasteringLuminance;
   }
 
+  /**
+      Set `maxDisplayMasteringLuminance` field.
+      Params:
+        propval = the maximum value of display luminance
+          in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+  */
   @property void maxDisplayMasteringLuminance(uint propval)
   {
     (cast(GstVideoMasteringDisplayInfo*)cPtr).maxDisplayMasteringLuminance = propval;
   }
 
+  /**
+      Get `minDisplayMasteringLuminance` field.
+      Returns: the minimum value of display luminance
+        in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+  */
   @property uint minDisplayMasteringLuminance()
   {
     return (cast(GstVideoMasteringDisplayInfo*)cPtr).minDisplayMasteringLuminance;
   }
 
+  /**
+      Set `minDisplayMasteringLuminance` field.
+      Params:
+        propval = the minimum value of display luminance
+          in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+  */
   @property void minDisplayMasteringLuminance(uint propval)
   {
     (cast(GstVideoMasteringDisplayInfo*)cPtr).minDisplayMasteringLuminance = propval;

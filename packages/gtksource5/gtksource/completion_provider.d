@@ -165,7 +165,7 @@ interface CompletionProvider
       Params:
         result = a #GAsyncResult provided to callback
       Returns: a #GListModel of #GtkSourceCompletionProposal
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.list_model.ListModel populateFinish(gio.async_result.AsyncResult result);
 

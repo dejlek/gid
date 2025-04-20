@@ -17,7 +17,7 @@ class OtNameEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for HarfBuzz.OtNameEntry");
+      throw new GidConstructException("Null instance pointer for harfbuzz.ot_name_entry.OtNameEntry");
 
     cInstance = *cast(hb_ot_name_entry_t*)ptr;
 
@@ -31,21 +31,39 @@ class OtNameEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `nameId` field.
+      Returns: name ID
+  */
   @property harfbuzz.types.OtNameId nameId()
   {
     return (cast(hb_ot_name_entry_t*)cPtr).nameId;
   }
 
+  /**
+      Set `nameId` field.
+      Params:
+        propval = name ID
+  */
   @property void nameId(harfbuzz.types.OtNameId propval)
   {
     (cast(hb_ot_name_entry_t*)cPtr).nameId = propval;
   }
 
+  /**
+      Get `language` field.
+      Returns: language
+  */
   @property harfbuzz.types.Language language()
   {
     return (cast(hb_ot_name_entry_t*)cPtr).language;
   }
 
+  /**
+      Set `language` field.
+      Params:
+        propval = language
+  */
   @property void language(harfbuzz.types.Language propval)
   {
     (cast(hb_ot_name_entry_t*)cPtr).language = propval;

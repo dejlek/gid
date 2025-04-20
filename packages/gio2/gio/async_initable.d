@@ -27,7 +27,7 @@ import gobject.types;
     For C applications you generally just call [gio.async_initable.AsyncInitable.newAsync]
     directly, or indirectly via a foo_thing_new_async() wrapper. This will call
     [gio.async_initable.AsyncInitable.initAsync] under the covers, calling back with `NULL`
-    and a set [glib.error.ErrorG] on failure.
+    and a set [glib.error.ErrorWrap] on failure.
     
     A typical implementation might look something like this:
     
@@ -128,7 +128,7 @@ interface AsyncInitable
 
   /**
       Helper function for constructing #GAsyncInitable object. This is
-      similar to [gobject.object.ObjectG.newv] but also initializes the object asynchronously.
+      similar to [gobject.object.ObjectWrap.newv] but also initializes the object asynchronously.
       
       When the initialization is finished, callback will be called. You can
       then call [gio.async_initable.AsyncInitable.newFinish] to get the new object and check
@@ -143,7 +143,7 @@ interface AsyncInitable
         callback = a #GAsyncReadyCallback to call when the initialization is
               finished
   
-      Deprecated: Use [gobject.object.ObjectG.newWithProperties] and
+      Deprecated: Use [gobject.object.ObjectWrap.newWithProperties] and
         [gio.async_initable.AsyncInitable.initAsync] instead. See #GParameter for more information.
   */
   static void newvAsync(gobject.types.GType objectType, uint nParameters, gobject.parameter.Parameter parameters, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
@@ -153,7 +153,7 @@ interface AsyncInitable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -183,7 +183,7 @@ interface AsyncInitable
       
       As with #GInitable, if the object is not initialized, or initialization
       returns with an error, then all operations on the object except
-      [gobject.object.ObjectG.ref_] and [gobject.object.ObjectG.unref] are considered to be invalid, and
+      [gobject.object.ObjectWrap.ref_] and [gobject.object.ObjectWrap.unref] are considered to be invalid, and
       have undefined behaviour. They will often fail with g_critical() or
       g_warning(), but this must not be relied on.
       
@@ -214,7 +214,7 @@ interface AsyncInitable
         res = a #GAsyncResult.
       Returns: true if successful. If an error has occurred, this function
         will return false and set error appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool initFinish(gio.async_result.AsyncResult res);
 
@@ -225,8 +225,8 @@ interface AsyncInitable
       Params:
         res = the #GAsyncResult from the callback
       Returns: a newly created #GObject,
-             or null on error. Free with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+             or null on error. Free with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
-  gobject.object.ObjectG newFinish(gio.async_result.AsyncResult res);
+  gobject.object.ObjectWrap newFinish(gio.async_result.AsyncResult res);
 }

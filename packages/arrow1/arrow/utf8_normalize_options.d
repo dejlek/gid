@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,29 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UTF8NormalizeOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `form` property.
+      Returns: The Unicode normalization form to apply.
+  */
+  @property arrow.types.UTF8NormalizeForm form()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.UTF8NormalizeForm)("form");
+  }
+
+  /**
+      Set `form` property.
+      Params:
+        propval = The Unicode normalization form to apply.
+  */
+  @property void form(arrow.types.UTF8NormalizeForm propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.UTF8NormalizeForm)("form", propval);
   }
 
   /** */

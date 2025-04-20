@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class SplitPatternOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,62 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SplitPatternOptions self()
   {
     return this;
+  }
+
+  /** */
+  @property long maxSplits()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("max-splits");
+  }
+
+  /** */
+  @property void maxSplits(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("max-splits", propval);
+  }
+
+  /**
+      Get `pattern` property.
+      Returns: The exact substring to split on.
+  */
+  @property string pattern()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("pattern");
+  }
+
+  /**
+      Set `pattern` property.
+      Params:
+        propval = The exact substring to split on.
+  */
+  @property void pattern(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("pattern", propval);
+  }
+
+  /**
+      Get `reverse` property.
+      Returns: Start splitting from the end of the string (only relevant when
+      max_splits != -1)
+  */
+  @property bool reverse()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("reverse");
+  }
+
+  /**
+      Set `reverse` property.
+      Params:
+        propval = Start splitting from the end of the string (only relevant when
+        max_splits != -1)
+  */
+  @property void reverse(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("reverse", propval);
   }
 
   /** */

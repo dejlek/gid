@@ -30,6 +30,7 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NumericDataType self()
   {
     return this;

@@ -16,7 +16,6 @@ import gtk.font_chooser;
 import gtk.font_chooser_mixin;
 import gtk.types;
 import gtk.widget;
-import pango.font_map;
 
 /**
     The [gtk.font_button.FontButton] allows to open a font chooser dialog to change
@@ -61,9 +60,86 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontButton self()
   {
     return this;
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the font chooser dialog should be modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the font chooser dialog should be modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the font chooser dialog.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the font chooser dialog.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useFont` property.
+      Returns: Whether the buttons label will be drawn in the selected font.
+  */
+  @property bool useFont()
+  {
+    return getUseFont();
+  }
+
+  /**
+      Set `useFont` property.
+      Params:
+        propval = Whether the buttons label will be drawn in the selected font.
+  */
+  @property void useFont(bool propval)
+  {
+    return setUseFont(propval);
+  }
+
+  /**
+      Get `useSize` property.
+      Returns: Whether the buttons label will use the selected font size.
+  */
+  @property bool useSize()
+  {
+    return getUseSize();
+  }
+
+  /**
+      Set `useSize` property.
+      Params:
+        propval = Whether the buttons label will use the selected font size.
+  */
+  @property void useSize(bool propval)
+  {
+    return setUseSize(propval);
   }
 
   mixin FontChooserT!();
@@ -95,7 +171,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
     GtkWidget* _cretval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
     _cretval = gtk_font_button_new_with_font(_fontname);
-    auto _retval = ObjectG.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

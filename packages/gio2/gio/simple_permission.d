@@ -37,6 +37,7 @@ class SimplePermission : gio.permission.Permission
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SimplePermission self()
   {
     return this;

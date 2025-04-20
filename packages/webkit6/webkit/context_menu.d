@@ -19,13 +19,13 @@ import webkit.types;
     When a #WebKitWebView is about to display the context menu, it
     emits the #WebKitWebView::context-menu signal, which has the
     #WebKitContextMenu as an argument. You can modify it, adding new
-    submenus that you can create with [webkit.context_menu.ContextMenu.new_], adding
+    submenus that you can create with [webkitwebprocessextension.context_menu.ContextMenu.new_], adding
     new #WebKitContextMenuItem<!-- -->s with
-    [webkit.context_menu.ContextMenu.prepend], [webkit.context_menu.ContextMenu.append] or
-    [webkit.context_menu.ContextMenu.insert], maybe after having removed the
-    existing ones with [webkit.context_menu.ContextMenu.removeAll].
+    [webkitwebprocessextension.context_menu.ContextMenu.prepend], [webkitwebprocessextension.context_menu.ContextMenu.append] or
+    [webkitwebprocessextension.context_menu.ContextMenu.insert], maybe after having removed the
+    existing ones with [webkitwebprocessextension.context_menu.ContextMenu.removeAll].
 */
-class ContextMenu : gobject.object.ObjectG
+class ContextMenu : gobject.object.ObjectWrap
 {
 
   /** */
@@ -59,9 +59,9 @@ class ContextMenu : gobject.object.ObjectG
       Creates a new #WebKitContextMenu object to be used as a submenu of an existing
       #WebKitContextMenu. The context menu of a #WebKitWebView is created by the view
       and passed as an argument of #WebKitWebView::context-menu signal.
-      To add items to the menu use [webkit.context_menu.ContextMenu.prepend],
-      [webkit.context_menu.ContextMenu.append] or [webkit.context_menu.ContextMenu.insert].
-      See also [webkit.context_menu.ContextMenu.newWithItems] to create a #WebKitContextMenu with
+      To add items to the menu use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
+      [webkitwebprocessextension.context_menu.ContextMenu.append] or [webkitwebprocessextension.context_menu.ContextMenu.insert].
+      See also [webkitwebprocessextension.context_menu.ContextMenu.newWithItems] to create a #WebKitContextMenu with
       a list of initial items.
       Returns: The newly created #WebKitContextMenu object
   */
@@ -77,7 +77,7 @@ class ContextMenu : gobject.object.ObjectG
       
       Creates a new #WebKitContextMenu object to be used as a submenu of an existing
       #WebKitContextMenu with the given initial items.
-      See also [webkit.context_menu.ContextMenu.new_]
+      See also [webkitwebprocessextension.context_menu.ContextMenu.new_]
   
       Params:
         items = a #GList of #WebKitContextMenuItem
@@ -89,7 +89,7 @@ class ContextMenu : gobject.object.ObjectG
     auto _items = gListFromD!(webkit.context_menu_item.ContextMenuItem)(items);
     scope(exit) containerFree!(GList*, webkit.context_menu_item.ContextMenuItem, GidOwnership.None)(_items);
     _cretval = webkit_context_menu_new_with_items(_items);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_first(cast(WebKitContextMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_get_item_at_position(cast(WebKitContextMenu*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,14 +188,14 @@ class ContextMenu : gobject.object.ObjectG
       Gets the user data of menu.
       
       This function can be used from the UI Process to get user data previously set
-      from the Web Process with [webkit.context_menu.ContextMenu.setUserData].
+      from the Web Process with [webkitwebprocessextension.context_menu.ContextMenu.setUserData].
       Returns: the user data of menu, or null if menu doesn't have user data
   */
-  glib.variant.VariantG getUserData()
+  glib.variant.Variant getUserData()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = webkit_context_menu_get_user_data(cast(WebKitContextMenu*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_last(cast(WebKitContextMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class ContextMenu : gobject.object.ObjectG
   /**
       Removes item from the menu.
       
-      See also [webkit.context_menu.ContextMenu.removeAll] to remove all items.
+      See also [webkitwebprocessextension.context_menu.ContextMenu.removeAll] to remove all items.
   
       Params:
         item = the #WebKitContextMenuItem to remove
@@ -281,14 +281,14 @@ class ContextMenu : gobject.object.ObjectG
       Sets user data to menu.
       
       This function can be used from a Web Process extension to set user data
-      that can be retrieved from the UI Process using [webkit.context_menu.ContextMenu.getUserData].
+      that can be retrieved from the UI Process using [webkitwebprocessextension.context_menu.ContextMenu.getUserData].
       If the user_data #GVariant is floating, it is consumed.
   
       Params:
         userData = a #GVariant
   */
-  void setUserData(glib.variant.VariantG userData)
+  void setUserData(glib.variant.Variant userData)
   {
-    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)cPtr, userData ? cast(VariantC*)userData.cPtr(No.Dup) : null);
+    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)cPtr, userData ? cast(GVariant*)userData.cPtr(No.Dup) : null);
   }
 }

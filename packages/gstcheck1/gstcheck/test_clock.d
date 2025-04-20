@@ -177,9 +177,22 @@ class TestClock : gst.clock.Clock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TestClock self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.types.ClockType clockType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.ClockType)("clock-type");
+  }
+
+  /** */
+  @property void clockType(gst.types.ClockType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.types.ClockType)("clock-type", propval);
   }
 
   /**
@@ -208,7 +221,7 @@ class TestClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_test_clock_new_with_start_time(startTime);
-    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstcheck.test_clock.TestClock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 

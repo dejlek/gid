@@ -30,7 +30,7 @@ interface DBusInterface
   /**
       Gets the #GDBusObject that interface_ belongs to, if any.
       Returns: A #GDBusObject or null. The returned
-        reference should be freed with [gobject.object.ObjectG.unref].
+        reference should be freed with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_object.DBusObject getObject();
 

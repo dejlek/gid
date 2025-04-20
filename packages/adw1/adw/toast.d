@@ -133,7 +133,7 @@ import gtk.widget;
       <img src="toast-undo.png" alt="toast-undo">
     </picture>
 */
-class Toast : gobject.object.ObjectG
+class Toast : gobject.object.ObjectWrap
 {
 
   /** */
@@ -155,9 +155,236 @@ class Toast : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Toast self()
   {
     return this;
+  }
+
+  /**
+      Get `actionName` property.
+      Returns: The name of the associated action.
+      
+      It will be activated when clicking the button.
+      
+      See `property@Toast:action-target`.
+  */
+  @property string actionName()
+  {
+    return getActionName();
+  }
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the associated action.
+        
+        It will be activated when clicking the button.
+        
+        See `property@Toast:action-target`.
+  */
+  @property void actionName(string propval)
+  {
+    return setActionName(propval);
+  }
+
+  /**
+      Get `actionTarget` property.
+      Returns: The parameter for action invocations.
+  */
+  @property glib.variant.Variant actionTarget()
+  {
+    return getActionTargetValue();
+  }
+
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The parameter for action invocations.
+  */
+  @property void actionTarget(glib.variant.Variant propval)
+  {
+    return setActionTargetValue(propval);
+  }
+
+  /**
+      Get `buttonLabel` property.
+      Returns: The label to show on the button.
+      
+      Underlines in the button text can be used to indicate a mnemonic.
+      
+      If set to `NULL`, the button won't be shown.
+      
+      See `property@Toast:action-name`.
+  */
+  @property string buttonLabel()
+  {
+    return getButtonLabel();
+  }
+
+  /**
+      Set `buttonLabel` property.
+      Params:
+        propval = The label to show on the button.
+        
+        Underlines in the button text can be used to indicate a mnemonic.
+        
+        If set to `NULL`, the button won't be shown.
+        
+        See `property@Toast:action-name`.
+  */
+  @property void buttonLabel(string propval)
+  {
+    return setButtonLabel(propval);
+  }
+
+  /**
+      Get `customTitle` property.
+      Returns: The custom title widget.
+      
+      It will be displayed instead of the title if set. In this case,
+      `property@Toast:title` is ignored.
+      
+      Setting a custom title will unset `property@Toast:title`.
+  */
+  @property gtk.widget.Widget customTitle()
+  {
+    return getCustomTitle();
+  }
+
+  /**
+      Set `customTitle` property.
+      Params:
+        propval = The custom title widget.
+        
+        It will be displayed instead of the title if set. In this case,
+        `property@Toast:title` is ignored.
+        
+        Setting a custom title will unset `property@Toast:title`.
+  */
+  @property void customTitle(gtk.widget.Widget propval)
+  {
+    return setCustomTitle(propval);
+  }
+
+  /**
+      Get `priority` property.
+      Returns: The priority of the toast.
+      
+      Priority controls how the toast behaves when another toast is already
+      being displayed.
+      
+      If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+      
+      If the priority is [adw.types.ToastPriority.High], the toast will be displayed
+      immediately, pushing the previous toast into the queue instead.
+  */
+  @property adw.types.ToastPriority priority()
+  {
+    return getPriority();
+  }
+
+  /**
+      Set `priority` property.
+      Params:
+        propval = The priority of the toast.
+        
+        Priority controls how the toast behaves when another toast is already
+        being displayed.
+        
+        If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+        
+        If the priority is [adw.types.ToastPriority.High], the toast will be displayed
+        immediately, pushing the previous toast into the queue instead.
+  */
+  @property void priority(adw.types.ToastPriority propval)
+  {
+    return setPriority(propval);
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: The timeout of the toast, in seconds.
+      
+      If timeout is 0, the toast is displayed indefinitely until manually
+      dismissed.
+      
+      Toasts cannot disappear while being hovered, pressed (on touchscreen), or
+      have keyboard focus inside them.
+  */
+  @property uint timeout()
+  {
+    return getTimeout();
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout of the toast, in seconds.
+        
+        If timeout is 0, the toast is displayed indefinitely until manually
+        dismissed.
+        
+        Toasts cannot disappear while being hovered, pressed (on touchscreen), or
+        have keyboard focus inside them.
+  */
+  @property void timeout(uint propval)
+  {
+    return setTimeout(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the toast.
+      
+      The title can be marked up with the Pango text markup language.
+      
+      Setting a title will unset `property@Toast:custom-title`.
+      
+      If `property@Toast:custom-title` is set, it will be used instead.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the toast.
+        
+        The title can be marked up with the Pango text markup language.
+        
+        Setting a title will unset `property@Toast:custom-title`.
+        
+        If `property@Toast:custom-title` is set, it will be used instead.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: Whether to use Pango markup for the toast title.
+      
+      See also `func@Pango.parse_markup`.
+  */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the toast title.
+        
+        See also `func@Pango.parse_markup`.
+  */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
   }
 
   /**
@@ -206,11 +433,11 @@ class Toast : gobject.object.ObjectG
       Gets the parameter for action invocations.
       Returns: the action target
   */
-  glib.variant.VariantG getActionTargetValue()
+  glib.variant.Variant getActionTargetValue()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = adw_toast_get_action_target_value(cast(AdwToast*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -234,7 +461,7 @@ class Toast : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = adw_toast_get_custom_title(cast(AdwToast*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -312,9 +539,9 @@ class Toast : gobject.object.ObjectG
       Params:
         actionTarget = the action target
   */
-  void setActionTargetValue(glib.variant.VariantG actionTarget = null)
+  void setActionTargetValue(glib.variant.Variant actionTarget = null)
   {
-    adw_toast_set_action_target_value(cast(AdwToast*)cPtr, actionTarget ? cast(VariantC*)actionTarget.cPtr(No.Dup) : null);
+    adw_toast_set_action_target_value(cast(AdwToast*)cPtr, actionTarget ? cast(GVariant*)actionTarget.cPtr(No.Dup) : null);
   }
 
   /**

@@ -11,7 +11,7 @@ import gst.types;
     Tracing modules will create instances of this class to announce the data they
     will log and create a log formatter.
 */
-class TracerRecord : gst.object.ObjectGst
+class TracerRecord : gst.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class TracerRecord : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TracerRecord self()
   {
     return this;

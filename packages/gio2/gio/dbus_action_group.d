@@ -19,7 +19,7 @@ import gobject.object;
     [gio.dbus_action_group.DBusActionGroup] can be used as a proxy for an action group
     that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
 */
-class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.remote_action_group.RemoteActionGroup
+class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio.remote_action_group.RemoteActionGroup
 {
 
   /** */
@@ -41,6 +41,7 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusActionGroup self()
   {
     return this;
@@ -77,7 +78,7 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

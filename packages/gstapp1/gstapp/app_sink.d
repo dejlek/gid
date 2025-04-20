@@ -3,6 +3,7 @@ module gstapp.app_sink;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gst.caps;
 import gst.mini_object;
 import gst.query;
@@ -75,9 +76,146 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppSink self()
   {
     return this;
+  }
+
+  /** */
+  @property bool bufferList()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("buffer-list");
+  }
+
+  /** */
+  @property void bufferList(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("buffer-list", propval);
+  }
+
+  /** */
+  @property gst.caps.Caps caps()
+  {
+    return getCaps();
+  }
+
+  /** */
+  @property void caps(gst.caps.Caps propval)
+  {
+    return setCaps(propval);
+  }
+
+  /** */
+  @property bool drop()
+  {
+    return getDrop();
+  }
+
+  /** */
+  @property void drop(bool propval)
+  {
+    return setDrop(propval);
+  }
+
+  /** */
+  @property bool emitSignals()
+  {
+    return getEmitSignals();
+  }
+
+  /** */
+  @property void emitSignals(bool propval)
+  {
+    return setEmitSignals(propval);
+  }
+
+  /** */
+  @property bool eos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("eos");
+  }
+
+  /**
+      Get `maxBuffers` property.
+      Returns: Maximum amount of buffers in the queue (0 = unlimited).
+  */
+  @property uint maxBuffers()
+  {
+    return getMaxBuffers();
+  }
+
+  /**
+      Set `maxBuffers` property.
+      Params:
+        propval = Maximum amount of buffers in the queue (0 = unlimited).
+  */
+  @property void maxBuffers(uint propval)
+  {
+    return setMaxBuffers(propval);
+  }
+
+  /**
+      Get `maxBytes` property.
+      Returns: Maximum amount of bytes in the queue (0 = unlimited)
+  */
+  @property ulong maxBytes()
+  {
+    return getMaxBytes();
+  }
+
+  /**
+      Set `maxBytes` property.
+      Params:
+        propval = Maximum amount of bytes in the queue (0 = unlimited)
+  */
+  @property void maxBytes(ulong propval)
+  {
+    return setMaxBytes(propval);
+  }
+
+  /**
+      Get `maxTime` property.
+      Returns: Maximum total duration of data in the queue (0 = unlimited)
+  */
+  @property ulong maxTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("max-time");
+  }
+
+  /**
+      Set `maxTime` property.
+      Params:
+        propval = Maximum total duration of data in the queue (0 = unlimited)
+  */
+  @property void maxTime(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("max-time", propval);
+  }
+
+  /**
+      Get `waitOnEos` property.
+      Returns: Wait for all buffers to be processed after receiving an EOS.
+      
+      In cases where it is uncertain if an @appsink will have a consumer for its buffers
+      when it receives an EOS, set to false to ensure that the @appsink will not hang.
+  */
+  @property bool waitOnEos()
+  {
+    return getWaitOnEos();
+  }
+
+  /**
+      Set `waitOnEos` property.
+      Params:
+        propval = Wait for all buffers to be processed after receiving an EOS.
+        
+        In cases where it is uncertain if an @appsink will have a consumer for its buffers
+        when it receives an EOS, set to false to ensure that the @appsink will not hang.
+  */
+  @property void waitOnEos(bool propval)
+  {
+    return setWaitOnEos(propval);
   }
 
   mixin URIHandlerT!();

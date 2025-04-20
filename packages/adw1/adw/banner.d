@@ -62,9 +62,104 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Banner self()
   {
     return this;
+  }
+
+  /**
+      Get `buttonLabel` property.
+      Returns: The label to show on the button.
+      
+      If set to `""` or `NULL`, the button won't be shown.
+      
+      The button can be used with a [gio.action.Action], or with the
+      `signal@Banner::button-clicked` signal.
+  */
+  @property string buttonLabel()
+  {
+    return getButtonLabel();
+  }
+
+  /**
+      Set `buttonLabel` property.
+      Params:
+        propval = The label to show on the button.
+        
+        If set to `""` or `NULL`, the button won't be shown.
+        
+        The button can be used with a [gio.action.Action], or with the
+        `signal@Banner::button-clicked` signal.
+  */
+  @property void buttonLabel(string propval)
+  {
+    return setButtonLabel(propval);
+  }
+
+  /**
+      Get `revealed` property.
+      Returns: Whether the banner is currently revealed.
+  */
+  @property bool revealed()
+  {
+    return getRevealed();
+  }
+
+  /**
+      Set `revealed` property.
+      Params:
+        propval = Whether the banner is currently revealed.
+  */
+  @property void revealed(bool propval)
+  {
+    return setRevealed(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title for this banner.
+      
+      See also: `property@Banner:use-markup`.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this banner.
+        
+        See also: `property@Banner:use-markup`.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: Whether to use Pango markup for the banner title.
+      
+      See also `func@Pango.parse_markup`.
+  */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the banner title.
+        
+        See also `func@Pango.parse_markup`.
+  */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
   }
 
   mixin ActionableT!();

@@ -37,6 +37,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CookieJarText self()
   {
     return this;

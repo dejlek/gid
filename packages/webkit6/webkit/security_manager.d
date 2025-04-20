@@ -16,7 +16,7 @@ import webkit.types;
     URI scheme with a certain security level, or to check if it already
     has it.
 */
-class SecurityManager : gobject.object.ObjectG
+class SecurityManager : gobject.object.ObjectWrap
 {
 
   /** */

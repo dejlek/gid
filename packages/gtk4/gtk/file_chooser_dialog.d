@@ -223,6 +223,7 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserDialog self()
   {
     return this;

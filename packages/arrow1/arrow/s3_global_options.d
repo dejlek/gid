@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class S3GlobalOptions : gobject.object.ObjectG
+class S3GlobalOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,29 @@ class S3GlobalOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override S3GlobalOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `logLevel` property.
+      Returns: The log level of S3 APIs.
+  */
+  @property arrow.types.S3LogLevel logLevel()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.S3LogLevel)("log-level");
+  }
+
+  /**
+      Set `logLevel` property.
+      Params:
+        propval = The log level of S3 APIs.
+  */
+  @property void logLevel(arrow.types.S3LogLevel propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.S3LogLevel)("log-level", propval);
   }
 
   /** */

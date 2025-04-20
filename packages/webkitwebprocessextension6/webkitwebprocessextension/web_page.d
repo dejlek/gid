@@ -25,7 +25,7 @@ import webkitwebprocessextension.web_hit_test_result;
 /**
     A loaded web page.
 */
-class WebPage : gobject.object.ObjectG
+class WebPage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,6 +54,15 @@ class WebPage : gobject.object.ObjectG
   }
 
   /**
+      Get `uri` property.
+      Returns: The current active URI of the #WebKitWebPage.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
       Gets the #WebKitWebEditor of a #WebKitWebPage.
       Returns: the #WebKitWebEditor
   */
@@ -61,7 +70,7 @@ class WebPage : gobject.object.ObjectG
   {
     WebKitWebEditor* _cretval;
     _cretval = webkit_web_page_get_editor(cast(WebKitWebPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.web_editor.WebEditor)(cast(WebKitWebEditor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_editor.WebEditor)(cast(WebKitWebEditor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -76,7 +85,7 @@ class WebPage : gobject.object.ObjectG
   {
     WebKitWebFormManager* _cretval;
     _cretval = webkit_web_page_get_form_manager(cast(WebKitWebPage*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.web_form_manager.WebFormManager)(cast(WebKitWebFormManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_form_manager.WebFormManager)(cast(WebKitWebFormManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +108,7 @@ class WebPage : gobject.object.ObjectG
   {
     WebKitFrame* _cretval;
     _cretval = webkit_web_page_get_main_frame(cast(WebKitWebPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.frame.Frame)(cast(WebKitFrame*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.frame.Frame)(cast(WebKitFrame*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +147,7 @@ class WebPage : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -152,16 +161,16 @@ class WebPage : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserMessage with the reply or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkitwebprocessextension.user_message.UserMessage sendMessageToViewFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_page_send_message_to_view_finish(cast(WebKitWebPage*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_page_send_message_to_view_finish(cast(WebKitWebPage*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -386,7 +395,7 @@ class WebPage : gobject.object.ObjectG
       #WebKitWebView corresponding to web_page. You can reply to the message
       using [webkitwebprocessextension.user_message.UserMessage.sendReply].
       
-      You can handle the user message asynchronously by calling [gobject.object.ObjectG.ref_] on
+      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
       message and returning true. If the last reference of message is removed
       and the message has been replied, the operation in the #WebKitWebView will
       finish with error [webkit.types.UserMessageError.Message].

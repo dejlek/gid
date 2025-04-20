@@ -32,6 +32,7 @@ class PrimitiveArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrimitiveArray self()
   {
     return this;
@@ -42,7 +43,7 @@ class PrimitiveArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,7 +52,7 @@ class PrimitiveArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

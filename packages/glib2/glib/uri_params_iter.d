@@ -26,7 +26,7 @@ class UriParamsIter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.UriParamsIter");
+      throw new GidConstructException("Null instance pointer for glib.uri_params_iter.UriParamsIter");
 
     cInstance = *cast(GUriParamsIter*)ptr;
 
@@ -111,7 +111,7 @@ class UriParamsIter
               the value, or null.
       Returns: false if the end of the parameters has been reached or an error was
             encountered. true otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool next(out string attribute, out string value)
   {
@@ -121,7 +121,7 @@ class UriParamsIter
     GError *_err;
     _retval = g_uri_params_iter_next(cast(GUriParamsIter*)cPtr, &_attribute, &_value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     attribute = _attribute.fromCString(Yes.Free);
     value = _value.fromCString(Yes.Free);
     return _retval;

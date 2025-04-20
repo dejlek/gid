@@ -36,6 +36,7 @@ class AuthNTLM : soup.auth.Auth
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthNTLM self()
   {
     return this;

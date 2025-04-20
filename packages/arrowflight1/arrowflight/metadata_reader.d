@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class MetadataReader : gobject.object.ObjectG
+class MetadataReader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class MetadataReader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MetadataReader self()
   {
     return this;
@@ -44,8 +45,8 @@ class MetadataReader : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_metadata_reader_read(cast(GAFlightMetadataReader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

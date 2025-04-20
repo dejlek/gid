@@ -42,9 +42,19 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MemoryOutputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `dataSize` property.
+      Returns: Size of data written to the buffer.
+  */
+  @property gulong dataSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gulong)("data-size");
   }
 
   mixin PollableOutputStreamT!();
@@ -59,11 +69,11 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
-    auto _retval = ObjectG.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
-  alias getData = gobject.object.ObjectG.getData;
+  alias getData = gobject.object.ObjectWrap.getData;
 
   /**
       Gets any loaded data from the ostream.
@@ -129,7 +139,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     return _retval;
   }
 
-  alias stealData = gobject.object.ObjectG.stealData;
+  alias stealData = gobject.object.ObjectWrap.stealData;
 
   /**
       Gets any loaded data from the ostream. Ownership of the data

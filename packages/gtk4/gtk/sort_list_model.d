@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.section_model;
@@ -37,10 +38,10 @@ import gtk.types;
     implements [gtk.section_model.SectionModel] and when `property@Gtk.SortListModel:section-sorter`
     is set, it will sort all items with that sorter and items comparing
     equal with it will be put into the same section.
-    The [gtk.sort_list_model.SortListModel.Sorter] will then be used to sort items
+    The [gtk.sort_list_model.SortListModel.sorter] will then be used to sort items
     inside their sections.
 */
-class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
+class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   /** */
@@ -62,9 +63,113 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SortListModel self()
   {
     return this;
+  }
+
+  /**
+      Get `incremental` property.
+      Returns: If the model should sort items incrementally.
+  */
+  @property bool incremental()
+  {
+    return getIncremental();
+  }
+
+  /**
+      Set `incremental` property.
+      Params:
+        propval = If the model should sort items incrementally.
+  */
+  @property void incremental(bool propval)
+  {
+    return setIncremental(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being sorted.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being sorted.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `pending` property.
+      Returns: Estimate of unsorted items remaining.
+  */
+  @property uint pending()
+  {
+    return getPending();
+  }
+
+  /**
+      Get `sectionSorter` property.
+      Returns: The section sorter for this model, if one is set.
+  */
+  @property gtk.sorter.Sorter sectionSorter()
+  {
+    return getSectionSorter();
+  }
+
+  /**
+      Set `sectionSorter` property.
+      Params:
+        propval = The section sorter for this model, if one is set.
+  */
+  @property void sectionSorter(gtk.sorter.Sorter propval)
+  {
+    return setSectionSorter(propval);
+  }
+
+  /**
+      Get `sorter` property.
+      Returns: The sorter for this model.
+  */
+  @property gtk.sorter.Sorter sorter()
+  {
+    return getSorter();
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = The sorter for this model.
+  */
+  @property void sorter(gtk.sorter.Sorter propval)
+  {
+    return setSorter(propval);
   }
 
   mixin ListModelT!();
@@ -81,7 +186,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   this(gio.list_model.ListModel model = null, gtk.sorter.Sorter sorter = null)
   {
     GtkSortListModel* _cretval;
-    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
+    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -106,7 +211,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GListModel* _cretval;
     _cretval = gtk_sort_list_model_get_model(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +231,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
       ```
       
       If no sort operation is ongoing - in particular when
-      [gtk.sort_list_model.SortListModel.gboolean] is false - this
+      [gtk.sort_list_model.SortListModel.incremental] is false - this
       function returns 0.
       Returns: a progress estimate of remaining items to sort
   */
@@ -146,7 +251,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_section_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +263,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,7 +303,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

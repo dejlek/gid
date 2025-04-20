@@ -30,6 +30,7 @@ class ExtensionScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExtensionScalar self()
   {
     return this;

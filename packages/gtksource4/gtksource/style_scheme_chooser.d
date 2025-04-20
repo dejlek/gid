@@ -21,6 +21,23 @@ interface StyleSchemeChooser
   }
 
   /**
+      Get `styleScheme` property.
+      Returns: The :style-scheme property contains the currently selected style
+      scheme. The property can be set to change
+      the current selection programmatically.
+  */
+  @property gtksource.style_scheme.StyleScheme styleScheme();
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = The :style-scheme property contains the currently selected style
+        scheme. The property can be set to change
+        the current selection programmatically.
+  */
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval);
+
+  /**
       Gets the currently-selected scheme.
       Returns: the currently-selected scheme.
   */

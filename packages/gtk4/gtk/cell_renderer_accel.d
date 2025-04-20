@@ -4,6 +4,7 @@ module gtk.cell_renderer_accel;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer_text;
@@ -42,9 +43,96 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRendererAccel self()
   {
     return this;
+  }
+
+  /**
+      Get `accelKey` property.
+      Returns: The keyval of the accelerator.
+  */
+  @property uint accelKey()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("accel-key");
+  }
+
+  /**
+      Set `accelKey` property.
+      Params:
+        propval = The keyval of the accelerator.
+  */
+  @property void accelKey(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("accel-key", propval);
+  }
+
+  /**
+      Get `accelMode` property.
+      Returns: Determines if the edited accelerators are GTK accelerators. If
+      they are, consumed modifiers are suppressed, only accelerators
+      accepted by GTK are allowed, and the accelerators are rendered
+      in the same way as they are in menus.
+  */
+  @property gtk.types.CellRendererAccelMode accelMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.CellRendererAccelMode)("accel-mode");
+  }
+
+  /**
+      Set `accelMode` property.
+      Params:
+        propval = Determines if the edited accelerators are GTK accelerators. If
+        they are, consumed modifiers are suppressed, only accelerators
+        accepted by GTK are allowed, and the accelerators are rendered
+        in the same way as they are in menus.
+  */
+  @property void accelMode(gtk.types.CellRendererAccelMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.CellRendererAccelMode)("accel-mode", propval);
+  }
+
+  /**
+      Get `accelMods` property.
+      Returns: The modifier mask of the accelerator.
+  */
+  @property gdk.types.ModifierType accelMods()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.ModifierType)("accel-mods");
+  }
+
+  /**
+      Set `accelMods` property.
+      Params:
+        propval = The modifier mask of the accelerator.
+  */
+  @property void accelMods(gdk.types.ModifierType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.ModifierType)("accel-mods", propval);
+  }
+
+  /**
+      Get `keycode` property.
+      Returns: The hardware keycode of the accelerator. Note that the hardware keycode is
+      only relevant if the key does not have a keyval. Normally, the keyboard
+      configuration should assign keyvals to all keys.
+  */
+  @property uint keycode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("keycode");
+  }
+
+  /**
+      Set `keycode` property.
+      Params:
+        propval = The hardware keycode of the accelerator. Note that the hardware keycode is
+        only relevant if the key does not have a keyval. Normally, the keyboard
+        configuration should assign keyvals to all keys.
+  */
+  @property void keycode(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("keycode", propval);
   }
 
   /**

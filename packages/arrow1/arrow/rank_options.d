@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.sort_key;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class RankOptions : arrow.function_options.FunctionOptions
@@ -31,9 +32,48 @@ class RankOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RankOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `nullPlacement` property.
+      Returns: Whether nulls and NaNs are placed at the start or at the end.
+  */
+  @property arrow.types.NullPlacement nullPlacement()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.NullPlacement)("null-placement");
+  }
+
+  /**
+      Set `nullPlacement` property.
+      Params:
+        propval = Whether nulls and NaNs are placed at the start or at the end.
+  */
+  @property void nullPlacement(arrow.types.NullPlacement propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.NullPlacement)("null-placement", propval);
+  }
+
+  /**
+      Get `tiebreaker` property.
+      Returns: Tiebreaker for dealing with equal values in ranks.
+  */
+  @property arrow.types.RankTiebreaker tiebreaker()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.RankTiebreaker)("tiebreaker");
+  }
+
+  /**
+      Set `tiebreaker` property.
+      Params:
+        propval = Tiebreaker for dealing with equal values in ranks.
+  */
+  @property void tiebreaker(arrow.types.RankTiebreaker propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.RankTiebreaker)("tiebreaker", propval);
   }
 
   /** */

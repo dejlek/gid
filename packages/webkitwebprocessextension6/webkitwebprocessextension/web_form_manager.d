@@ -13,7 +13,7 @@ import webkitwebprocessextension.types;
 /**
     Form manager of a #WebKitWebPage in a #WebKitScriptWorld
 */
-class WebFormManager : gobject.object.ObjectG
+class WebFormManager : gobject.object.ObjectWrap
 {
 
   /** */

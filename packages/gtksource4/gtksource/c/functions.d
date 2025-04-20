@@ -391,10 +391,10 @@ __gshared extern(C)
   GtkSourceSpaceDrawer* function() c_gtk_source_space_drawer_new; ///
   void function(GtkSourceSpaceDrawer* drawer, GSettings* settings, const(char)* key, GSettingsBindFlags flags) c_gtk_source_space_drawer_bind_matrix_setting; ///
   bool function(GtkSourceSpaceDrawer* drawer) c_gtk_source_space_drawer_get_enable_matrix; ///
-  VariantC* function(GtkSourceSpaceDrawer* drawer) c_gtk_source_space_drawer_get_matrix; ///
+  GVariant* function(GtkSourceSpaceDrawer* drawer) c_gtk_source_space_drawer_get_matrix; ///
   GtkSourceSpaceTypeFlags function(GtkSourceSpaceDrawer* drawer, GtkSourceSpaceLocationFlags locations) c_gtk_source_space_drawer_get_types_for_locations; ///
   void function(GtkSourceSpaceDrawer* drawer, bool enableMatrix) c_gtk_source_space_drawer_set_enable_matrix; ///
-  void function(GtkSourceSpaceDrawer* drawer, VariantC* matrix) c_gtk_source_space_drawer_set_matrix; ///
+  void function(GtkSourceSpaceDrawer* drawer, GVariant* matrix) c_gtk_source_space_drawer_set_matrix; ///
   void function(GtkSourceSpaceDrawer* drawer, GtkSourceSpaceLocationFlags locations, GtkSourceSpaceTypeFlags types) c_gtk_source_space_drawer_set_types_for_locations; ///
 
   // Style

@@ -4,6 +4,7 @@ module gtk.spinner;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -46,9 +47,22 @@ class Spinner : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Spinner self()
   {
     return this;
+  }
+
+  /** */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
 
   /**

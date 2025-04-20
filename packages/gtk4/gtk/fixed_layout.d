@@ -64,6 +64,7 @@ class FixedLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FixedLayout self()
   {
     return this;

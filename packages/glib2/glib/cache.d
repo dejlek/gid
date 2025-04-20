@@ -27,7 +27,7 @@ class Cache
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Cache");
+      throw new GidConstructException("Null instance pointer for glib.cache.Cache");
 
     cInstancePtr = cast(GCache*)ptr;
 

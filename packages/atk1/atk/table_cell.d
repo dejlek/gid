@@ -33,7 +33,7 @@ interface TableCell
       Returns: a GPtrArray of AtkObjects
         representing the column header cells.
   */
-  atk.object.ObjectAtk[] getColumnHeaderCells();
+  atk.object.ObjectWrap[] getColumnHeaderCells();
 
   /**
       Returns the number of columns occupied by this cell accessible.
@@ -73,7 +73,7 @@ interface TableCell
       Returns: a GPtrArray of AtkObjects
         representing the row header cells.
   */
-  atk.object.ObjectAtk[] getRowHeaderCells();
+  atk.object.ObjectWrap[] getRowHeaderCells();
 
   /**
       Returns the number of rows occupied by this cell accessible.
@@ -86,5 +86,5 @@ interface TableCell
       Returns a reference to the accessible of the containing table.
       Returns: the atk object for the containing table.
   */
-  atk.object.ObjectAtk getTable();
+  atk.object.ObjectWrap getTable();
 }

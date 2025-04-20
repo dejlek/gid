@@ -14,7 +14,7 @@ import gtksource.types;
     search settings can be associated with one or several
     `class@SearchContext`s.
 */
-class SearchSettings : gobject.object.ObjectG
+class SearchSettings : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,140 @@ class SearchSettings : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SearchSettings self()
   {
     return this;
+  }
+
+  /**
+      Get `atWordBoundaries` property.
+      Returns: If true, a search match must start and end a word. The match can
+      span multiple words.
+  */
+  @property bool atWordBoundaries()
+  {
+    return getAtWordBoundaries();
+  }
+
+  /**
+      Set `atWordBoundaries` property.
+      Params:
+        propval = If true, a search match must start and end a word. The match can
+        span multiple words.
+  */
+  @property void atWordBoundaries(bool propval)
+  {
+    return setAtWordBoundaries(propval);
+  }
+
+  /**
+      Get `caseSensitive` property.
+      Returns: Whether the search is case sensitive.
+  */
+  @property bool caseSensitive()
+  {
+    return getCaseSensitive();
+  }
+
+  /**
+      Set `caseSensitive` property.
+      Params:
+        propval = Whether the search is case sensitive.
+  */
+  @property void caseSensitive(bool propval)
+  {
+    return setCaseSensitive(propval);
+  }
+
+  /**
+      Get `regexEnabled` property.
+      Returns: Search by regular expressions with
+      `property@SearchSettings:search-text` as the pattern.
+  */
+  @property bool regexEnabled()
+  {
+    return getRegexEnabled();
+  }
+
+  /**
+      Set `regexEnabled` property.
+      Params:
+        propval = Search by regular expressions with
+        `property@SearchSettings:search-text` as the pattern.
+  */
+  @property void regexEnabled(bool propval)
+  {
+    return setRegexEnabled(propval);
+  }
+
+  /**
+      Get `searchText` property.
+      Returns: A search string, or null if the search is disabled.
+      
+      If the regular expression search is enabled, `property@SearchSettings:search-text` is
+      the pattern.
+  */
+  @property string searchText()
+  {
+    return getSearchText();
+  }
+
+  /**
+      Set `searchText` property.
+      Params:
+        propval = A search string, or null if the search is disabled.
+        
+        If the regular expression search is enabled, `property@SearchSettings:search-text` is
+        the pattern.
+  */
+  @property void searchText(string propval)
+  {
+    return setSearchText(propval);
+  }
+
+  /**
+      Get `visibleOnly` property.
+      Returns: Exclude invisible text from the search.
+      A search match may have invisible text interspersed.
+  */
+  @property bool visibleOnly()
+  {
+    return getVisibleOnly();
+  }
+
+  /**
+      Set `visibleOnly` property.
+      Params:
+        propval = Exclude invisible text from the search.
+        A search match may have invisible text interspersed.
+  */
+  @property void visibleOnly(bool propval)
+  {
+    return setVisibleOnly(propval);
+  }
+
+  /**
+      Get `wrapAround` property.
+      Returns: For a forward search, continue at the beginning of the buffer if no
+      search occurrence is found. For a backward search, continue at the
+      end of the buffer.
+  */
+  @property bool wrapAround()
+  {
+    return getWrapAround();
+  }
+
+  /**
+      Set `wrapAround` property.
+      Params:
+        propval = For a forward search, continue at the beginning of the buffer if no
+        search occurrence is found. For a backward search, continue at the
+        end of the buffer.
+  */
+  @property void wrapAround(bool propval)
+  {
+    return setWrapAround(propval);
   }
 
   /**

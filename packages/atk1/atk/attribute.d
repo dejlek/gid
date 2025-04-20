@@ -9,7 +9,7 @@ import gid.gid;
 /**
     AtkAttribute is a string name/value pair representing a generic
     attribute. This can be used to expose additional information from
-    an accessible object as a whole (see [atk.object.ObjectAtk.getAttributes])
+    an accessible object as a whole (see [atk.object.ObjectWrap.getAttributes])
     or an document (see [atk.document.Document.getAttributes]). In the case of
     text attributes (see [atk.text.Text.getDefaultAttributes]),
     #AtkTextAttribute enum defines all the possible text attribute
@@ -27,7 +27,7 @@ class Attribute
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Atk.Attribute");
+      throw new GidConstructException("Null instance pointer for atk.attribute.Attribute");
 
     cInstance = *cast(AtkAttribute*)ptr;
 
@@ -41,22 +41,40 @@ class Attribute
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `name` field.
+      Returns: The attribute name.
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = The attribute name.
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
     dToC(propval, cast(void*)&(cast(AtkAttribute*)cPtr).name);
   }
 
+  /**
+      Get `value` field.
+      Returns: the value of the attribute, represented as a string.
+  */
   @property string value()
   {
     return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the value of the attribute, represented as a string.
+  */
   @property void value(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);

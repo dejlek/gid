@@ -16,7 +16,7 @@ import gtksource.types;
     Use `class@LanguageManager` to obtain a [gtksource.language.Language] instance, and
     [gtksource.buffer.Buffer.setLanguage] to apply it to a `class@Buffer`.
 */
-class Language : gobject.object.ObjectG
+class Language : gobject.object.ObjectWrap
 {
 
   /** */
@@ -38,9 +38,34 @@ class Language : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Language self()
   {
     return this;
+  }
+
+  /** */
+  @property bool hidden()
+  {
+    return getHidden();
+  }
+
+  /** */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /** */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /** */
+  @property string section()
+  {
+    return getSection();
   }
 
   /**

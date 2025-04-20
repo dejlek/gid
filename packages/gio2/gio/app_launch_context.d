@@ -16,7 +16,7 @@ import gobject.object;
     handle for instance startup notification and launching the new application
     on the same screen as the launching window.
 */
-class AppLaunchContext : gobject.object.ObjectG
+class AppLaunchContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -38,6 +38,7 @@ class AppLaunchContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppLaunchContext self()
   {
     return this;
@@ -70,7 +71,7 @@ class AppLaunchContext : gobject.object.ObjectG
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
+    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info).cPtr(No.Dup) : null, _files);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -126,7 +127,7 @@ class AppLaunchContext : gobject.object.ObjectG
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
+    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info).cPtr(No.Dup) : null, _files);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -247,7 +248,7 @@ class AppLaunchContext : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
+          $(D void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
   
           `info` the #GAppInfo that is about to be launched (optional)
   
@@ -262,7 +263,7 @@ class AppLaunchContext : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.VariantG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.Variant)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.app_launch_context.AppLaunchContext)))
   && Parameters!T.length < 4)
   {
@@ -317,7 +318,7 @@ class AppLaunchContext : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
+          $(D void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
   
           `info` the #GAppInfo that was just launched (optional)
   
@@ -332,7 +333,7 @@ class AppLaunchContext : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.VariantG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.variant.Variant)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.app_launch_context.AppLaunchContext)))
   && Parameters!T.length < 4)
   {

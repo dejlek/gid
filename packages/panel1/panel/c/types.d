@@ -493,7 +493,7 @@ struct PanelThemeSelectorClass
     </picture>
     
     It will automatically reveal or hide the specified area from
-    [panel.toggle_button.ToggleButton.Dock].
+    [panel.toggle_button.ToggleButton.dock].
 */
 struct PanelToggleButton;
 
@@ -573,7 +573,7 @@ struct PanelWorkspaceClass
   void*[8] Reserved;
 }
 
-alias extern(C) void function(void* instance, const(char)* actionName, VariantC* param) PanelActionActivateFunc;
+alias extern(C) void function(void* instance, const(char)* actionName, GVariant* param) PanelActionActivateFunc;
 
 alias extern(C) void function(PanelFrame* frame, void* userData) PanelFrameCallback;
 

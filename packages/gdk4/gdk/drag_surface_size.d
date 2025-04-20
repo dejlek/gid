@@ -19,7 +19,7 @@ class DragSurfaceSize
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.DragSurfaceSize");
+      throw new GidConstructException("Null instance pointer for gdk.drag_surface_size.DragSurfaceSize");
 
     cInstancePtr = cast(GdkDragSurfaceSize*)ptr;
 

@@ -244,9 +244,9 @@ enum GdkPixbufRotation
     [gdkpixbuf.pixbuf.Pixbuf] structures are reference counted. This means that an
     application can share a single pixbuf among many parts of the
     code. When a piece of the program needs to use a pixbuf, it should
-    acquire a reference to it by calling `[gobject.object.ObjectG.ref_]`; when it no
+    acquire a reference to it by calling `[gobject.object.ObjectWrap.ref_]`; when it no
     longer needs the pixbuf, it should release the reference it acquired
-    by calling `[gobject.object.ObjectG.unref]`. The resources associated with a
+    by calling `[gobject.object.ObjectWrap.unref]`. The resources associated with a
     [gdkpixbuf.pixbuf.Pixbuf] will be freed when its reference count drops to zero.
     Newly-created [gdkpixbuf.pixbuf.Pixbuf] instances start with a reference count
     of one.

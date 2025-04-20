@@ -62,6 +62,130 @@ template FileChooserT()
 {
 
   /**
+      Get `action` property.
+      Returns: The type of operation that the file chooser is performing.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gtk.types.FileChooserAction action()
+  {
+    return getAction();
+  }
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The type of operation that the file chooser is performing.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void action(gtk.types.FileChooserAction propval)
+  {
+    return setAction(propval);
+  }
+
+  /**
+      Get `createFolders` property.
+      Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+      will offer the user to create new folders.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property bool createFolders()
+  {
+    return getCreateFolders();
+  }
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+        will offer the user to create new folders.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void createFolders(bool propval)
+  {
+    return setCreateFolders(propval);
+  }
+
+  /**
+      Get `filter` property.
+      Returns: The current filter for selecting files that are displayed.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gtk.file_filter.FileFilter filter()
+  {
+    return getFilter();
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The current filter for selecting files that are displayed.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void filter(gtk.file_filter.FileFilter propval)
+  {
+    return setFilter(propval);
+  }
+
+  /**
+      Get `filters` property.
+      Returns: A [gio.list_model.ListModel] containing the filters that have been
+      added with [gtk.file_chooser.FileChooser.addFilter].
+      
+      The returned object should not be modified. It may
+      or may not be updated for later changes.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gio.list_model.ListModel filters()
+  {
+    return getFilters();
+  }
+
+  /**
+      Get `selectMultiple` property.
+      Returns: Whether to allow multiple files to be selected.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property bool selectMultiple()
+  {
+    return getSelectMultiple();
+  }
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Whether to allow multiple files to be selected.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void selectMultiple(bool propval)
+  {
+    return setSelectMultiple(propval);
+  }
+
+  /**
+      Get `shortcutFolders` property.
+      Returns: A [gio.list_model.ListModel] containing the shortcut folders that have been
+      added with [gtk.file_chooser.FileChooser.addShortcutFolder].
+      
+      The returned object should not be modified. It may
+      or may not be updated for later changes.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gio.list_model.ListModel shortcutFolders()
+  {
+    return getShortcutFolders();
+  }
+
+  /**
       Adds a 'choice' to the file chooser.
       
       This is typically implemented as a combobox or, for boolean choices,
@@ -124,7 +248,7 @@ template FileChooserT()
         folder = a [gio.file.File] for the folder to add
       Returns: true if the folder could be added successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -132,9 +256,9 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -193,7 +317,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -228,7 +352,7 @@ template FileChooserT()
       If the file chooser is in folder mode, this function returns
       the selected folder.
       Returns: a selected [gio.file.File]. You own the
-          returned file; use [gobject.object.ObjectG.unref] to release it.
+          returned file; use [gobject.object.ObjectWrap.unref] to release it.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -236,7 +360,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -245,7 +369,7 @@ template FileChooserT()
       of chooser as [gio.file.File].
       Returns: a list model containing a [gio.file.File] for each
           selected file and subfolder in the current folder. Free the returned
-          list with [gobject.object.ObjectG.unref].
+          list with [gobject.object.ObjectWrap.unref].
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -253,7 +377,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_files(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -267,7 +391,7 @@ template FileChooserT()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -288,7 +412,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_filters(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -319,7 +443,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_shortcut_folders(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -357,7 +481,7 @@ template FileChooserT()
         folder = a [gio.file.File] for the folder to remove
       Returns: true if the folder could be removed successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -365,9 +489,9 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -432,7 +556,7 @@ template FileChooserT()
         file = the [gio.file.File] for the new folder
       Returns: true if the folder could be changed successfully, false
           otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -440,9 +564,9 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -519,7 +643,7 @@ template FileChooserT()
       Params:
         file = the [gio.file.File] to set as current
       Returns: Not useful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -527,9 +651,9 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

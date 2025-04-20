@@ -31,7 +31,7 @@ import gst.types;
     repository in which case [gst.plugin.Plugin.load] can be needed to bring the plugin
     into memory.
 */
-class Plugin : gst.object.ObjectGst
+class Plugin : gst.object.ObjectWrap
 {
 
   /** */
@@ -53,6 +53,7 @@ class Plugin : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Plugin self()
   {
     return this;
@@ -71,7 +72,7 @@ class Plugin : gst.object.ObjectGst
     GstPlugin* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_plugin_load_by_name(_name);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,7 +83,7 @@ class Plugin : gst.object.ObjectGst
         filename = the plugin filename to load
       Returns: a reference to the existing loaded GstPlugin, a
         reference to the newly-loaded GstPlugin, or null if an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gst.plugin.Plugin loadFile(string filename)
   {
@@ -91,8 +92,8 @@ class Plugin : gst.object.ObjectGst
     GError *_err;
     _cretval = gst_plugin_load_file(_filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +129,7 @@ class Plugin : gst.object.ObjectGst
 
     extern(C) bool _initFuncCallback(GstPlugin* plugin)
     {
-      bool _retval = _static_initFunc(ObjectG.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      bool _retval = _static_initFunc(gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _initFuncCB = initFunc ? &_initFuncCallback : null;
@@ -182,7 +183,7 @@ class Plugin : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PluginInitFullFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _initFullFuncCB = initFullFunc ? &_initFullFuncCallback : null;
@@ -519,7 +520,7 @@ class Plugin : gst.object.ObjectGst
   {
     GstPlugin* _cretval;
     _cretval = gst_plugin_load(cast(GstPlugin*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 

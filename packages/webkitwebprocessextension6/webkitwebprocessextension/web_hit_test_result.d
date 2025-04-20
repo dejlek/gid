@@ -15,7 +15,7 @@ import webkitwebprocessextension.types;
     WebKitWebHitTestResult extends #WebKitHitTestResult to provide information
     about the #WebKitDOMNode in the coordinates of the Hit Test.
 */
-class WebHitTestResult : gobject.object.ObjectG
+class WebHitTestResult : gobject.object.ObjectWrap
 {
 
   /** */
@@ -161,7 +161,7 @@ class WebHitTestResult : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = webkit_web_hit_test_result_get_js_node(cast(WebKitWebHitTestResult*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 

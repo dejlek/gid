@@ -56,9 +56,103 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ClampLayout self()
   {
     return this;
+  }
+
+  /**
+      Get `maximumSize` property.
+      Returns: The maximum size to allocate to the children.
+      
+      It is the width if the layout is horizontal, or the height if it is
+      vertical.
+  */
+  @property int maximumSize()
+  {
+    return getMaximumSize();
+  }
+
+  /**
+      Set `maximumSize` property.
+      Params:
+        propval = The maximum size to allocate to the children.
+        
+        It is the width if the layout is horizontal, or the height if it is
+        vertical.
+  */
+  @property void maximumSize(int propval)
+  {
+    return setMaximumSize(propval);
+  }
+
+  /**
+      Get `tighteningThreshold` property.
+      Returns: The size above which the children are clamped.
+      
+      Starting from this size, the layout will tighten its grip on the children,
+      slowly allocating less and less of the available size up to the maximum
+      allocated size. Below that threshold and below the maximum size, the
+      children will be allocated all the available size.
+      
+      If the threshold is greater than the maximum size to allocate to the
+      children, they will be allocated the whole size up to the maximum. If the
+      threshold is lower than the minimum size to allocate to the children, that
+      size will be used as the tightening threshold.
+      
+      Effectively, tightening the grip on a child before it reaches its maximum
+      size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property int tighteningThreshold()
+  {
+    return getTighteningThreshold();
+  }
+
+  /**
+      Set `tighteningThreshold` property.
+      Params:
+        propval = The size above which the children are clamped.
+        
+        Starting from this size, the layout will tighten its grip on the children,
+        slowly allocating less and less of the available size up to the maximum
+        allocated size. Below that threshold and below the maximum size, the
+        children will be allocated all the available size.
+        
+        If the threshold is greater than the maximum size to allocate to the
+        children, they will be allocated the whole size up to the maximum. If the
+        threshold is lower than the minimum size to allocate to the children, that
+        size will be used as the tightening threshold.
+        
+        Effectively, tightening the grip on a child before it reaches its maximum
+        size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property void tighteningThreshold(int propval)
+  {
+    return setTighteningThreshold(propval);
+  }
+
+  /**
+      Get `unit` property.
+      Returns: The length unit for maximum size and tightening threshold.
+      
+      Allows the sizes to vary depending on the text scale factor.
+  */
+  @property adw.types.LengthUnit unit()
+  {
+    return getUnit();
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The length unit for maximum size and tightening threshold.
+        
+        Allows the sizes to vary depending on the text scale factor.
+  */
+  @property void unit(adw.types.LengthUnit propval)
+  {
+    return setUnit(propval);
   }
 
   mixin OrientableT!();

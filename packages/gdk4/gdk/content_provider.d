@@ -27,7 +27,7 @@ import gobject.value;
     [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
     to add support for application-specific data formats.
 */
-class ContentProvider : gobject.object.ObjectG
+class ContentProvider : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,28 @@ class ContentProvider : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ContentProvider self()
   {
     return this;
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The possible formats that the provider can provide its data in.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return refFormats();
+  }
+
+  /**
+      Get `storableFormats` property.
+      Returns: The subset of formats that clipboard managers should store this provider's data in.
+  */
+  @property gdk.content_formats.ContentFormats storableFormats()
+  {
+    return refStorableFormats();
   }
 
   /**
@@ -68,7 +87,7 @@ class ContentProvider : gobject.object.ObjectG
     GdkContentProvider* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _cretval = gdk_content_provider_new_for_bytes(_mimeType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -83,7 +102,7 @@ class ContentProvider : gobject.object.ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_content_provider_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +127,7 @@ class ContentProvider : gobject.object.ObjectG
         value = the [gobject.value.Value] to fill
       Returns: true if the value was set successfully. Otherwise
           error will be set to describe the failure.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool getValue(out gobject.value.Value value)
   {
@@ -117,7 +136,7 @@ class ContentProvider : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_content_provider_get_value(cast(GdkContentProvider*)cPtr, &_value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
@@ -179,7 +198,7 @@ class ContentProvider : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -197,15 +216,15 @@ class ContentProvider : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: true if the operation was completed successfully. Otherwise
           error will be set to describe the failure.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeMimeTypeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

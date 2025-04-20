@@ -63,9 +63,123 @@ class Avatar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Avatar self()
   {
     return this;
+  }
+
+  /**
+      Get `customImage` property.
+      Returns: A custom image paintable.
+      
+      Custom image is displayed instead of initials or icon.
+  */
+  @property gdk.paintable.Paintable customImage()
+  {
+    return getCustomImage();
+  }
+
+  /**
+      Set `customImage` property.
+      Params:
+        propval = A custom image paintable.
+        
+        Custom image is displayed instead of initials or icon.
+  */
+  @property void customImage(gdk.paintable.Paintable propval)
+  {
+    return setCustomImage(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of an icon to use as a fallback.
+      
+      If no name is set, `avatar-default-symbolic` will be used.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of an icon to use as a fallback.
+        
+        If no name is set, `avatar-default-symbolic` will be used.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `showInitials` property.
+      Returns: Whether initials are used instead of an icon on the fallback avatar.
+      
+      See `property@Avatar:icon-name` for how to change the fallback icon.
+  */
+  @property bool showInitials()
+  {
+    return getShowInitials();
+  }
+
+  /**
+      Set `showInitials` property.
+      Params:
+        propval = Whether initials are used instead of an icon on the fallback avatar.
+        
+        See `property@Avatar:icon-name` for how to change the fallback icon.
+  */
+  @property void showInitials(bool propval)
+  {
+    return setShowInitials(propval);
+  }
+
+  /**
+      Get `size` property.
+      Returns: The size of the avatar.
+  */
+  @property int size()
+  {
+    return getSize();
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The size of the avatar.
+  */
+  @property void size(int propval)
+  {
+    return setSize(propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: Sets the text used to generate the fallback initials and color.
+      
+      It's only used to generate the color if `property@Avatar:show-initials` is
+      `FALSE`.
+  */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Sets the text used to generate the fallback initials and color.
+        
+        It's only used to generate the color if `property@Avatar:show-initials` is
+        `FALSE`.
+  */
+  @property void text(string propval)
+  {
+    return setText(propval);
   }
 
   /**
@@ -98,7 +212,7 @@ class Avatar : gtk.widget.Widget
   {
     GdkTexture* _cretval;
     _cretval = adw_avatar_draw_to_texture(cast(AdwAvatar*)cPtr, scaleFactor);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +224,7 @@ class Avatar : gtk.widget.Widget
   {
     GdkPaintable* _cretval;
     _cretval = adw_avatar_get_custom_image(cast(AdwAvatar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +287,7 @@ class Avatar : gtk.widget.Widget
   */
   void setCustomImage(gdk.paintable.Paintable customImage = null)
   {
-    adw_avatar_set_custom_image(cast(AdwAvatar*)cPtr, customImage ? cast(GdkPaintable*)(cast(ObjectG)customImage).cPtr(No.Dup) : null);
+    adw_avatar_set_custom_image(cast(AdwAvatar*)cPtr, customImage ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)customImage).cPtr(No.Dup) : null);
   }
 
   /**

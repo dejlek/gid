@@ -74,9 +74,135 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CenterBox self()
   {
     return this;
+  }
+
+  /**
+      Get `baselinePosition` property.
+      Returns: The position of the baseline aligned widget if extra space is available.
+  */
+  @property gtk.types.BaselinePosition baselinePosition()
+  {
+    return getBaselinePosition();
+  }
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the baseline aligned widget if extra space is available.
+  */
+  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setBaselinePosition(propval);
+  }
+
+  /**
+      Get `centerWidget` property.
+      Returns: The widget that is placed at the center position.
+  */
+  @property gtk.widget.Widget centerWidget()
+  {
+    return getCenterWidget();
+  }
+
+  /**
+      Set `centerWidget` property.
+      Params:
+        propval = The widget that is placed at the center position.
+  */
+  @property void centerWidget(gtk.widget.Widget propval)
+  {
+    return setCenterWidget(propval);
+  }
+
+  /**
+      Get `endWidget` property.
+      Returns: The widget that is placed at the end position.
+      
+      In vertical orientation, the end position is at the bottom.
+      In horizontal orientation, the end position is at the trailing
+      edge wrt. to the text direction.
+  */
+  @property gtk.widget.Widget endWidget()
+  {
+    return getEndWidget();
+  }
+
+  /**
+      Set `endWidget` property.
+      Params:
+        propval = The widget that is placed at the end position.
+        
+        In vertical orientation, the end position is at the bottom.
+        In horizontal orientation, the end position is at the trailing
+        edge wrt. to the text direction.
+  */
+  @property void endWidget(gtk.widget.Widget propval)
+  {
+    return setEndWidget(propval);
+  }
+
+  /**
+      Get `shrinkCenterLast` property.
+      Returns: Whether to shrink the center widget after other children.
+      
+      By default, when there's no space to give all three children their
+      natural widths, the start and end widgets start shrinking and the
+      center child keeps natural width until they reach minimum width.
+      
+      If set to `FALSE`, start and end widgets keep natural width and the
+      center widget starts shrinking instead.
+  */
+  @property bool shrinkCenterLast()
+  {
+    return getShrinkCenterLast();
+  }
+
+  /**
+      Set `shrinkCenterLast` property.
+      Params:
+        propval = Whether to shrink the center widget after other children.
+        
+        By default, when there's no space to give all three children their
+        natural widths, the start and end widgets start shrinking and the
+        center child keeps natural width until they reach minimum width.
+        
+        If set to `FALSE`, start and end widgets keep natural width and the
+        center widget starts shrinking instead.
+  */
+  @property void shrinkCenterLast(bool propval)
+  {
+    return setShrinkCenterLast(propval);
+  }
+
+  /**
+      Get `startWidget` property.
+      Returns: The widget that is placed at the start position.
+      
+      In vertical orientation, the start position is at the top.
+      In horizontal orientation, the start position is at the leading
+      edge wrt. to the text direction.
+  */
+  @property gtk.widget.Widget startWidget()
+  {
+    return getStartWidget();
+  }
+
+  /**
+      Set `startWidget` property.
+      Params:
+        propval = The widget that is placed at the start position.
+        
+        In vertical orientation, the start position is at the top.
+        In horizontal orientation, the start position is at the leading
+        edge wrt. to the text direction.
+  */
+  @property void startWidget(gtk.widget.Widget propval)
+  {
+    return setStartWidget(propval);
   }
 
   mixin OrientableT!();
@@ -112,7 +238,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +250,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,7 +273,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -52,9 +52,156 @@ class HeaderBar : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HeaderBar self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.widget.Widget customTitle()
+  {
+    return getCustomTitle();
+  }
+
+  /** */
+  @property void customTitle(gtk.widget.Widget propval)
+  {
+    return setCustomTitle(propval);
+  }
+
+  /**
+      Get `decorationLayout` property.
+      Returns: The decoration layout for buttons. If this property is
+      not set, the #GtkSettings:gtk-decoration-layout setting
+      is used.
+      
+      See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
+      about the format of this string.
+  */
+  @property string decorationLayout()
+  {
+    return getDecorationLayout();
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons. If this property is
+        not set, the #GtkSettings:gtk-decoration-layout setting
+        is used.
+        
+        See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
+        about the format of this string.
+  */
+  @property void decorationLayout(string propval)
+  {
+    return setDecorationLayout(propval);
+  }
+
+  /**
+      Get `decorationLayoutSet` property.
+      Returns: Set to true if #GtkHeaderBar:decoration-layout is set.
+  */
+  @property bool decorationLayoutSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("decoration-layout-set");
+  }
+
+  /**
+      Set `decorationLayoutSet` property.
+      Params:
+        propval = Set to true if #GtkHeaderBar:decoration-layout is set.
+  */
+  @property void decorationLayoutSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("decoration-layout-set", propval);
+  }
+
+  /**
+      Get `hasSubtitle` property.
+      Returns: If true, reserve space for a subtitle, even if none
+      is currently set.
+  */
+  @property bool hasSubtitle()
+  {
+    return getHasSubtitle();
+  }
+
+  /**
+      Set `hasSubtitle` property.
+      Params:
+        propval = If true, reserve space for a subtitle, even if none
+        is currently set.
+  */
+  @property void hasSubtitle(bool propval)
+  {
+    return setHasSubtitle(propval);
+  }
+
+  /**
+      Get `showCloseButton` property.
+      Returns: Whether to show window decorations.
+      
+      Which buttons are actually shown and where is determined
+      by the #GtkHeaderBar:decoration-layout property, and by
+      the state of the window (e.g. a close button will not be
+      shown if the window can't be closed).
+  */
+  @property bool showCloseButton()
+  {
+    return getShowCloseButton();
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to show window decorations.
+        
+        Which buttons are actually shown and where is determined
+        by the #GtkHeaderBar:decoration-layout property, and by
+        the state of the window (e.g. a close button will not be
+        shown if the window can't be closed).
+  */
+  @property void showCloseButton(bool propval)
+  {
+    return setShowCloseButton(propval);
+  }
+
+  /** */
+  @property int spacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("spacing");
+  }
+
+  /** */
+  @property void spacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("spacing", propval);
+  }
+
+  /** */
+  @property string subtitle()
+  {
+    return getSubtitle();
+  }
+
+  /** */
+  @property void subtitle(string propval)
+  {
+    return setSubtitle(propval);
+  }
+
+  /** */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /** */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -78,7 +225,7 @@ class HeaderBar : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_custom_title(cast(GtkHeaderBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

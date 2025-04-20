@@ -54,7 +54,7 @@ import json.types;
     you should use a [gio.task.Task] and the synchronous [json.parser.Parser] API inside the
     task itself.
 */
-class Parser : gobject.object.ObjectG
+class Parser : gobject.object.ObjectWrap
 {
 
   /** */
@@ -76,6 +76,7 @@ class Parser : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Parser self()
   {
     return this;
@@ -96,7 +97,7 @@ class Parser : gobject.object.ObjectG
   }
 
   /**
-      Creates a new parser instance with its [json.parser.Parser.gboolean]
+      Creates a new parser instance with its [json.parser.Parser.immutable_]
       property set to `TRUE` to create immutable output trees.
       Returns: the newly created parser
   */
@@ -104,7 +105,7 @@ class Parser : gobject.object.ObjectG
   {
     JsonParser* _cretval;
     _cretval = json_parser_new_immutable();
-    auto _retval = ObjectG.getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -192,7 +193,7 @@ class Parser : gobject.object.ObjectG
         data = the buffer to parse
         length = the length of the buffer, or -1 if it is `NUL` terminated
       Returns: `TRUE` if the buffer was succesfully parsed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromData(string data, ptrdiff_t length)
   {
@@ -201,7 +202,7 @@ class Parser : gobject.object.ObjectG
     GError *_err;
     _retval = json_parser_load_from_data(cast(JsonParser*)cPtr, _data, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -217,7 +218,7 @@ class Parser : gobject.object.ObjectG
       Params:
         filename = the path for the file to parse
       Returns: `TRUE` if the file was successfully loaded and parsed.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromFile(string filename)
   {
@@ -226,7 +227,7 @@ class Parser : gobject.object.ObjectG
     GError *_err;
     _retval = json_parser_load_from_file(cast(JsonParser*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -242,7 +243,7 @@ class Parser : gobject.object.ObjectG
       Params:
         filename = the path for the file to parse
       Returns: `TRUE` if the file was successfully loaded and parsed.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromMappedFile(string filename)
   {
@@ -251,7 +252,7 @@ class Parser : gobject.object.ObjectG
     GError *_err;
     _retval = json_parser_load_from_mapped_file(cast(JsonParser*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -268,7 +269,7 @@ class Parser : gobject.object.ObjectG
         cancellable = a #GCancellable
       Returns: `TRUE` if the data stream was successfully read and
           parsed, and `FALSE` otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -276,7 +277,7 @@ class Parser : gobject.object.ObjectG
     GError *_err;
     _retval = json_parser_load_from_stream(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -302,7 +303,7 @@ class Parser : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -318,15 +319,15 @@ class Parser : gobject.object.ObjectG
         result = the result of the asynchronous operation
       Returns: `TRUE` if the content of the stream was successfully retrieved
           and parsed, and `FALSE` otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromStreamFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -534,7 +535,7 @@ class Parser : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.object.ObjectJson object, json.parser.Parser parser))
+          $(D void callback(json.object.ObjectWrap object, json.parser.Parser parser))
   
           `object` the parsed JSON object (optional)
   
@@ -546,7 +547,7 @@ class Parser : gobject.object.ObjectG
   ulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectJson)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
   {
@@ -579,7 +580,7 @@ class Parser : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.object.ObjectJson object, string memberName, json.parser.Parser parser))
+          $(D void callback(json.object.ObjectWrap object, string memberName, json.parser.Parser parser))
   
           `object` the JSON object being parsed (optional)
   
@@ -593,7 +594,7 @@ class Parser : gobject.object.ObjectG
   ulong connectObjectMember(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectJson)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : json.parser.Parser)))
   && Parameters!T.length < 4)

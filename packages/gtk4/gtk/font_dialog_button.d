@@ -59,9 +59,183 @@ class FontDialogButton : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontDialogButton self()
   {
     return this;
+  }
+
+  /**
+      Get `dialog` property.
+      Returns: The [gtk.font_dialog.FontDialog] that contains parameters for
+      the font chooser dialog.
+  */
+  @property gtk.font_dialog.FontDialog dialog()
+  {
+    return getDialog();
+  }
+
+  /**
+      Set `dialog` property.
+      Params:
+        propval = The [gtk.font_dialog.FontDialog] that contains parameters for
+        the font chooser dialog.
+  */
+  @property void dialog(gtk.font_dialog.FontDialog propval)
+  {
+    return setDialog(propval);
+  }
+
+  /**
+      Get `fontDesc` property.
+      Returns: The selected font.
+      
+      This property can be set to give the button its initial
+      font, and it will be updated to reflect the users choice
+      in the font chooser dialog.
+      
+      Listen to `notify::font-desc` to get informed about changes
+      to the buttons font.
+  */
+  @property pango.font_description.FontDescription fontDesc()
+  {
+    return getFontDesc();
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = The selected font.
+        
+        This property can be set to give the button its initial
+        font, and it will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::font-desc` to get informed about changes
+        to the buttons font.
+  */
+  @property void fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setFontDesc(propval);
+  }
+
+  /**
+      Get `fontFeatures` property.
+      Returns: The selected font features.
+      
+      This property will be updated to reflect the users choice
+      in the font chooser dialog.
+      
+      Listen to `notify::font-features` to get informed about changes
+      to the buttons font features.
+  */
+  @property string fontFeatures()
+  {
+    return getFontFeatures();
+  }
+
+  /**
+      Set `fontFeatures` property.
+      Params:
+        propval = The selected font features.
+        
+        This property will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::font-features` to get informed about changes
+        to the buttons font features.
+  */
+  @property void fontFeatures(string propval)
+  {
+    return setFontFeatures(propval);
+  }
+
+  /**
+      Get `language` property.
+      Returns: The selected language for font features.
+      
+      This property will be updated to reflect the users choice
+      in the font chooser dialog.
+      
+      Listen to `notify::language` to get informed about changes
+      to the buttons language.
+  */
+  @property pango.language.Language language()
+  {
+    return getLanguage();
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The selected language for font features.
+        
+        This property will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::language` to get informed about changes
+        to the buttons language.
+  */
+  @property void language(pango.language.Language propval)
+  {
+    return setLanguage(propval);
+  }
+
+  /**
+      Get `level` property.
+      Returns: The level of detail for the font chooser dialog.
+  */
+  @property gtk.types.FontLevel level()
+  {
+    return getLevel();
+  }
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of detail for the font chooser dialog.
+  */
+  @property void level(gtk.types.FontLevel propval)
+  {
+    return setLevel(propval);
+  }
+
+  /**
+      Get `useFont` property.
+      Returns: Whether the buttons label will be drawn in the selected font.
+  */
+  @property bool useFont()
+  {
+    return getUseFont();
+  }
+
+  /**
+      Set `useFont` property.
+      Params:
+        propval = Whether the buttons label will be drawn in the selected font.
+  */
+  @property void useFont(bool propval)
+  {
+    return setUseFont(propval);
+  }
+
+  /**
+      Get `useSize` property.
+      Returns: Whether the buttons label will use the selected font size.
+  */
+  @property bool useSize()
+  {
+    return getUseSize();
+  }
+
+  /**
+      Set `useSize` property.
+      Params:
+        propval = Whether the buttons label will use the selected font size.
+  */
+  @property void useSize(bool propval)
+  {
+    return setUseSize(propval);
   }
 
   /**
@@ -90,7 +264,7 @@ class FontDialogButton : gtk.widget.Widget
   {
     GtkFontDialog* _cretval;
     _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +292,7 @@ class FontDialogButton : gtk.widget.Widget
       to "notify::font-features".
       
       Note that the button will only let users choose font features
-      if [gtk.font_dialog_button.FontDialogButton.FontLevel] is set to
+      if [gtk.font_dialog_button.FontDialogButton.level] is set to
       [gtk.types.FontLevel.Features].
       Returns: the font features
   */

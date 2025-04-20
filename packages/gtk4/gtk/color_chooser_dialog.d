@@ -2,6 +2,7 @@
 module gtk.color_chooser_dialog;
 
 import gid.gid;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -67,9 +68,22 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorChooserDialog self()
   {
     return this;
+  }
+
+  /** */
+  @property bool showEditor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
+  }
+
+  /** */
+  @property void showEditor(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
 
   mixin ColorChooserT!();

@@ -32,6 +32,7 @@ class GLMemoryEGLAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemoryEGLAllocator self()
   {
     return this;

@@ -24,7 +24,7 @@ class CustomMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.CustomMeta");
+      throw new GidConstructException("Null instance pointer for gst.custom_meta.CustomMeta");
 
     cInstance = *cast(GstCustomMeta*)ptr;
 
@@ -38,16 +38,29 @@ class CustomMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)cPtr).meta);
   }
 
+  /**
+      Get `structure` field.
+      Returns: #GstStructure containing custom metadata.
+  */
   @property gst.structure.Structure structure()
   {
     return cToD!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);
   }
 
+  /**
+      Set `structure` field.
+      Params:
+        propval = #GstStructure containing custom metadata.
+  */
   @property void structure(gst.structure.Structure propval)
   {
     cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);

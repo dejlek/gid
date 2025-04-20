@@ -91,9 +91,111 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuItem self()
   {
     return this;
+  }
+
+  /**
+      Get `accelPath` property.
+      Returns: Sets the accelerator path of the menu item, through which runtime
+      changes of the menu item's accelerator caused by the user can be
+      identified and saved to persistant storage.
+  */
+  @property string accelPath()
+  {
+    return getAccelPath();
+  }
+
+  /**
+      Set `accelPath` property.
+      Params:
+        propval = Sets the accelerator path of the menu item, through which runtime
+        changes of the menu item's accelerator caused by the user can be
+        identified and saved to persistant storage.
+  */
+  @property void accelPath(string propval)
+  {
+    return setAccelPath(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The text for the child label.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The text for the child label.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `rightJustified` property.
+      Returns: Sets whether the menu item appears justified
+      at the right side of a menu bar.
+  */
+  @property bool rightJustified()
+  {
+    return getRightJustified();
+  }
+
+  /**
+      Set `rightJustified` property.
+      Params:
+        propval = Sets whether the menu item appears justified
+        at the right side of a menu bar.
+  */
+  @property void rightJustified(bool propval)
+  {
+    return setRightJustified(propval);
+  }
+
+  /**
+      Get `submenu` property.
+      Returns: The submenu attached to the menu item, or null if it has none.
+  */
+  @property gtk.menu.Menu submenu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("submenu");
+  }
+
+  /**
+      Set `submenu` property.
+      Params:
+        propval = The submenu attached to the menu item, or null if it has none.
+  */
+  @property void submenu(gtk.menu.Menu propval)
+  {
+    return setSubmenu(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: true if underlines in the text indicate mnemonics.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = true if underlines in the text indicate mnemonics.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -122,7 +224,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -142,7 +244,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,7 +332,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_item_get_submenu(cast(GtkMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

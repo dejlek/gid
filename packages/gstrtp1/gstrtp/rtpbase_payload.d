@@ -3,6 +3,7 @@ module gstrtp.rtpbase_payload;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
 import gst.element;
@@ -38,9 +39,303 @@ class RTPBasePayload : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTPBasePayload self()
   {
     return this;
+  }
+
+  /**
+      Get `autoHeaderExtension` property.
+      Returns: If enabled, the payloader will automatically try to enable all the
+      RTP header extensions provided in the src caps, saving the application
+      the need to handle these extensions manually using the
+      GstRTPBasePayload::request-extension: signal.
+  */
+  @property bool autoHeaderExtension()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("auto-header-extension");
+  }
+
+  /**
+      Set `autoHeaderExtension` property.
+      Params:
+        propval = If enabled, the payloader will automatically try to enable all the
+        RTP header extensions provided in the src caps, saving the application
+        the need to handle these extensions manually using the
+        GstRTPBasePayload::request-extension: signal.
+  */
+  @property void autoHeaderExtension(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("auto-header-extension", propval);
+  }
+
+  /** */
+  @property long maxPtime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("max-ptime");
+  }
+
+  /** */
+  @property void maxPtime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("max-ptime", propval);
+  }
+
+  /**
+      Get `minPtime` property.
+      Returns: Minimum duration of the packet data in ns (can't go above MTU)
+  */
+  @property long minPtime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("min-ptime");
+  }
+
+  /**
+      Set `minPtime` property.
+      Params:
+        propval = Minimum duration of the packet data in ns (can't go above MTU)
+  */
+  @property void minPtime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("min-ptime", propval);
+  }
+
+  /** */
+  @property uint mtu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("mtu");
+  }
+
+  /** */
+  @property void mtu(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("mtu", propval);
+  }
+
+  /**
+      Get `onvifNoRateControl` property.
+      Returns: Make the payloader timestamp packets according to the Rate-Control=no
+      behaviour specified in the ONVIF replay spec.
+  */
+  @property bool onvifNoRateControl()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("onvif-no-rate-control");
+  }
+
+  /**
+      Set `onvifNoRateControl` property.
+      Params:
+        propval = Make the payloader timestamp packets according to the Rate-Control=no
+        behaviour specified in the ONVIF replay spec.
+  */
+  @property void onvifNoRateControl(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("onvif-no-rate-control", propval);
+  }
+
+  /**
+      Get `perfectRtptime` property.
+      Returns: Try to use the offset fields to generate perfect RTP timestamps. When this
+      option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
+      each payloaded buffer. The PTSes of buffers may not necessarily increment
+      with the amount of data in each input buffer, consider e.g. the case where
+      the buffer arrives from a network which means that the PTS is unrelated to
+      the amount of data. Because the RTP timestamps are generated from
+      GST_BUFFER_PTS this can result in RTP timestamps that also don't increment
+      with the amount of data in the payloaded packet. To circumvent this it is
+      possible to set the perfect rtptime option enabled. When this option is
+      enabled the payloader will increment the RTP timestamps based on
+      GST_BUFFER_OFFSET which relates to the amount of data in each packet
+      rather than the GST_BUFFER_PTS of each buffer and therefore the RTP
+      timestamps will more closely correlate with the amount of data in each
+      buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
+      timestamps for audio streams.
+  */
+  @property bool perfectRtptime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("perfect-rtptime");
+  }
+
+  /**
+      Set `perfectRtptime` property.
+      Params:
+        propval = Try to use the offset fields to generate perfect RTP timestamps. When this
+        option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
+        each payloaded buffer. The PTSes of buffers may not necessarily increment
+        with the amount of data in each input buffer, consider e.g. the case where
+        the buffer arrives from a network which means that the PTS is unrelated to
+        the amount of data. Because the RTP timestamps are generated from
+        GST_BUFFER_PTS this can result in RTP timestamps that also don't increment
+        with the amount of data in the payloaded packet. To circumvent this it is
+        possible to set the perfect rtptime option enabled. When this option is
+        enabled the payloader will increment the RTP timestamps based on
+        GST_BUFFER_OFFSET which relates to the amount of data in each packet
+        rather than the GST_BUFFER_PTS of each buffer and therefore the RTP
+        timestamps will more closely correlate with the amount of data in each
+        buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
+        timestamps for audio streams.
+  */
+  @property void perfectRtptime(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("perfect-rtptime", propval);
+  }
+
+  /** */
+  @property uint pt()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("pt");
+  }
+
+  /** */
+  @property void pt(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("pt", propval);
+  }
+
+  /**
+      Get `ptimeMultiple` property.
+      Returns: Force buffers to be multiples of this duration in ns (0 disables)
+  */
+  @property long ptimeMultiple()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("ptime-multiple");
+  }
+
+  /**
+      Set `ptimeMultiple` property.
+      Params:
+        propval = Force buffers to be multiples of this duration in ns (0 disables)
+  */
+  @property void ptimeMultiple(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("ptime-multiple", propval);
+  }
+
+  /**
+      Get `scaleRtptime` property.
+      Returns: Make the RTP packets' timestamps be scaled with the segment's rate
+      (corresponding to RTSP speed parameter). Disabling this property means
+      the timestamps will not be affected by the set delivery speed (RTSP speed).
+      
+      Example: A server wants to allow streaming a recorded video in double
+      speed but still have the timestamps correspond to the position in the
+      video. This is achieved by the client setting RTSP Speed to 2 while the
+      server has this property disabled.
+  */
+  @property bool scaleRtptime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("scale-rtptime");
+  }
+
+  /**
+      Set `scaleRtptime` property.
+      Params:
+        propval = Make the RTP packets' timestamps be scaled with the segment's rate
+        (corresponding to RTSP speed parameter). Disabling this property means
+        the timestamps will not be affected by the set delivery speed (RTSP speed).
+        
+        Example: A server wants to allow streaming a recorded video in double
+        speed but still have the timestamps correspond to the position in the
+        video. This is achieved by the client setting RTSP Speed to 2 while the
+        server has this property disabled.
+  */
+  @property void scaleRtptime(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("scale-rtptime", propval);
+  }
+
+  /** */
+  @property uint seqnum()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("seqnum");
+  }
+
+  /** */
+  @property int seqnumOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("seqnum-offset");
+  }
+
+  /** */
+  @property void seqnumOffset(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("seqnum-offset", propval);
+  }
+
+  /**
+      Get `sourceInfo` property.
+      Returns: Enable writing the CSRC field in allocated RTP header based on RTP source
+      information found in the input buffer's #GstRTPSourceMeta.
+  */
+  @property bool sourceInfo()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("source-info");
+  }
+
+  /**
+      Set `sourceInfo` property.
+      Params:
+        propval = Enable writing the CSRC field in allocated RTP header based on RTP source
+        information found in the input buffer's #GstRTPSourceMeta.
+  */
+  @property void sourceInfo(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("source-info", propval);
+  }
+
+  /** */
+  @property uint ssrc()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("ssrc");
+  }
+
+  /** */
+  @property void ssrc(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("ssrc", propval);
+  }
+
+  /**
+      Get `stats` property.
+      Returns: Various payloader statistics retrieved atomically (and are therefore
+      synchroized with each other), these can be used e.g. to generate an
+      RTP-Info header. This property return a GstStructure named
+      application/x-rtp-payload-stats containing the following fields relating to
+      the last processed buffer and current state of the stream being payloaded:
+      
+        $(LIST
+            * `clock-rate` :#G_TYPE_UINT, clock-rate of the stream
+            * `running-time` :#G_TYPE_UINT64, running time
+            * `seqnum` :#G_TYPE_UINT, sequence number, same as #GstRTPBasePayload:seqnum
+            * `timestamp` :#G_TYPE_UINT, RTP timestamp, same as #GstRTPBasePayload:timestamp
+            * `ssrc` :#G_TYPE_UINT, The SSRC in use
+            * `pt` :#G_TYPE_UINT, The Payload type in use, same as #GstRTPBasePayload:pt
+            * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
+            * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
+        )
+  */
+  @property gst.structure.Structure stats()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("stats");
+  }
+
+  /** */
+  @property uint timestamp()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("timestamp");
+  }
+
+  /** */
+  @property uint timestampOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("timestamp-offset");
+  }
+
+  /** */
+  @property void timestampOffset(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("timestamp-offset", propval);
   }
 
   /**

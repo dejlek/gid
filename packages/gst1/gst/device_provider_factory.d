@@ -42,6 +42,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DeviceProviderFactory self()
   {
     return this;
@@ -61,7 +62,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     GstDeviceProviderFactory* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_device_provider_factory_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +80,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     GstDeviceProvider* _cretval;
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
     _cretval = gst_device_provider_factory_get_by_name(_factoryname);
-    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +111,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   {
     GstDeviceProvider* _cretval;
     _cretval = gst_device_provider_factory_get(cast(GstDeviceProviderFactory*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
     return _retval;
   }
 

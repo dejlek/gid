@@ -31,6 +31,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnionArrayBuilder self()
   {
     return this;
@@ -60,7 +61,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
       Params:
         value = A type ID value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValue(byte value)
   {
@@ -68,7 +69,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)cPtr, value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

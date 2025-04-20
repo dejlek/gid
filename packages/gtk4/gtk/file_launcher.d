@@ -27,7 +27,7 @@ import gtk.window;
     
     To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
 */
-class FileLauncher : gobject.object.ObjectG
+class FileLauncher : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,69 @@ class FileLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileLauncher self()
   {
     return this;
+  }
+
+  /**
+      Get `alwaysAsk` property.
+      Returns: Whether to ask the user to choose an app for opening the file. If `FALSE`,
+      the file might be opened with a default app or the previous choice.
+  */
+  @property bool alwaysAsk()
+  {
+    return getAlwaysAsk();
+  }
+
+  /**
+      Set `alwaysAsk` property.
+      Params:
+        propval = Whether to ask the user to choose an app for opening the file. If `FALSE`,
+        the file might be opened with a default app or the previous choice.
+  */
+  @property void alwaysAsk(bool propval)
+  {
+    return setAlwaysAsk(propval);
+  }
+
+  /**
+      Get `file` property.
+      Returns: The file to launch.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file to launch.
+  */
+  @property void file(gio.file.File propval)
+  {
+    return setFile(propval);
+  }
+
+  /**
+      Get `writable` property.
+      Returns: Whether to make the file writable for the handler.
+  */
+  @property bool writable()
+  {
+    return getWritable();
+  }
+
+  /**
+      Set `writable` property.
+      Params:
+        propval = Whether to make the file writable for the handler.
+  */
+  @property void writable(bool propval)
+  {
+    return setWritable(propval);
   }
 
   /**
@@ -64,7 +124,7 @@ class FileLauncher : gobject.object.ObjectG
   this(gio.file.File file = null)
   {
     GtkFileLauncher* _cretval;
-    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -87,7 +147,7 @@ class FileLauncher : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +183,7 @@ class FileLauncher : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -139,15 +199,15 @@ class FileLauncher : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if an application was launched,
             or `FALSE` and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -173,7 +233,7 @@ class FileLauncher : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -189,15 +249,15 @@ class FileLauncher : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if an application was launched,
             or `FALSE` and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool openContainingFolderFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -221,7 +281,7 @@ class FileLauncher : gobject.object.ObjectG
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**

@@ -210,9 +210,80 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NavigationView self()
   {
     return this;
+  }
+
+  /**
+      Get `animateTransitions` property.
+      Returns: Whether to animate page transitions.
+      
+      Gesture-based transitions are always animated.
+  */
+  @property bool animateTransitions()
+  {
+    return getAnimateTransitions();
+  }
+
+  /**
+      Set `animateTransitions` property.
+      Params:
+        propval = Whether to animate page transitions.
+        
+        Gesture-based transitions are always animated.
+  */
+  @property void animateTransitions(bool propval)
+  {
+    return setAnimateTransitions(propval);
+  }
+
+  /**
+      Get `navigationStack` property.
+      Returns: A list model that contains the pages in navigation stack.
+      
+      The pages are sorted from root page to visible page.
+      
+      This can be used to keep an up-to-date view.
+  */
+  @property gio.list_model.ListModel navigationStack()
+  {
+    return getNavigationStack();
+  }
+
+  /**
+      Get `popOnEscape` property.
+      Returns: Whether pressing Escape pops the current page.
+      
+      Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
+      disable it.
+  */
+  @property bool popOnEscape()
+  {
+    return getPopOnEscape();
+  }
+
+  /**
+      Set `popOnEscape` property.
+      Params:
+        propval = Whether pressing Escape pops the current page.
+        
+        Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
+        disable it.
+  */
+  @property void popOnEscape(bool propval)
+  {
+    return setPopOnEscape(propval);
+  }
+
+  /**
+      Get `visiblePage` property.
+      Returns: The currently visible page.
+  */
+  @property adw.navigation_page.NavigationPage visiblePage()
+  {
+    return getVisiblePage();
   }
 
   mixin SwipeableT!();
@@ -261,7 +332,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     AdwNavigationPage* _cretval;
     const(char)* _tag = tag.toCString(No.Alloc);
     _cretval = adw_navigation_view_find_page(cast(AdwNavigationView*)cPtr, _tag);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -288,7 +359,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     GListModel* _cretval;
     _cretval = adw_navigation_view_get_navigation_stack(cast(AdwNavigationView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -319,7 +390,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_view_get_previous_page(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -331,7 +402,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_view_get_visible_page(cast(AdwNavigationView*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 

@@ -40,7 +40,7 @@ void debugAddLogFunction(gst.types.LogFunction func)
     string _file = file.fromCString(No.Free);
     string _function_ = function_.fromCString(No.Free);
 
-    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
@@ -234,7 +234,7 @@ bool debugIsColored()
       message = the actual message
       userData = the FILE* to log to
 */
-void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message, void* userData = null)
+void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, gst.debug_message.DebugMessage message, void* userData = null)
 {
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _function_ = function_.toCString(No.Alloc);
@@ -259,7 +259,7 @@ void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugL
       message = the actual message
     Returns: 
 */
-string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message)
+string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, gst.debug_message.DebugMessage message)
 {
   char* _cretval;
   const(char)* _file = file.toCString(No.Alloc);
@@ -304,7 +304,7 @@ void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.Debu
             or null if none
       messageString = a message string
 */
-void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, string messageString)
+void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, string messageString)
 {
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _function_ = function_.toCString(No.Alloc);
@@ -337,7 +337,7 @@ uint debugRemoveLogFunction(gst.types.LogFunction func = null)
     string _file = file.fromCString(No.Free);
     string _function_ = function_.fromCString(No.Free);
 
-    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
@@ -569,7 +569,7 @@ string errorGetMessage(glib.types.Quark domain, int code)
       filename = absolute or relative file name path
     Returns: newly-allocated URI string, or NULL on error. The caller must
         free the URI string with [glib.global.gfree] when no longer needed.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string filenameToUri(string filename)
 {
@@ -578,7 +578,7 @@ string filenameToUri(string filename)
   GError *_err;
   _cretval = gst_filename_to_uri(_filename, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -754,7 +754,7 @@ gobject.types.GType parentBufferMetaApiGetType()
             for unlinked source or sink pads within the bin
     Returns: a
         newly-created bin, or null if an error occurred.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPads)
 {
@@ -763,8 +763,8 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
   GError *_err;
   _cretval = gst_parse_bin_from_description(_binDescription, ghostUnlinkedPads, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.bin.Bin)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bin.Bin)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -790,7 +790,7 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
         element, which is guaranteed to be a bin unless
         #GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or null if an error
         occurred.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghostUnlinkedPads, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -799,8 +799,8 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
   GError *_err;
   _cretval = gst_parse_bin_from_description_full(_binDescription, ghostUnlinkedPads, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -819,7 +819,7 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
         failure. If more than one toplevel element is specified by the
         pipeline_description, all elements are put into a #GstPipeline, which
         than is returned.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.element.Element parseLaunch(string pipelineDescription)
 {
@@ -828,8 +828,8 @@ gst.element.Element parseLaunch(string pipelineDescription)
   GError *_err;
   _cretval = gst_parse_launch(_pipelineDescription, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -852,7 +852,7 @@ gst.element.Element parseLaunch(string pipelineDescription)
          pipeline_description, all elements are put into a #GstPipeline, which
          then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in
          which case they are put in a #GstBin instead).
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -861,8 +861,8 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
   GError *_err;
   _cretval = gst_parse_launch_full(_pipelineDescription, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -875,7 +875,7 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
       argv = null-terminated array of arguments
     Returns: a new element on success and null
       on failure.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.element.Element parseLaunchv(string[] argv)
 {
@@ -889,8 +889,8 @@ gst.element.Element parseLaunchv(string[] argv)
   GError *_err;
   _cretval = gst_parse_launchv(_argv, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -909,7 +909,7 @@ gst.element.Element parseLaunchv(string[] argv)
         returned and error will be set (unless you passed
         #GST_PARSE_FLAG_FATAL_ERRORS in flags, then null will always be returned
         on failure)
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -923,8 +923,8 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
   GError *_err;
   _cretval = gst_parse_launchv_full(_argv, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1460,7 +1460,7 @@ ulong utilGdoubleToGuint64(double value)
       array = a return #GValueArray
     Returns: 
 */
-bool utilGetObjectArray(gobject.object.ObjectG object, string name, out gobject.value_array.ValueArray array)
+bool utilGetObjectArray(gobject.object.ObjectWrap object, string name, out gobject.value_array.ValueArray array)
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1589,7 +1589,7 @@ uint utilSeqnumNext()
       name = the name of the argument to set
       value = the string value to set
 */
-void utilSetObjectArg(gobject.object.ObjectG object, string name, string value)
+void utilSetObjectArg(gobject.object.ObjectWrap object, string name, string value)
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
@@ -1607,7 +1607,7 @@ void utilSetObjectArg(gobject.object.ObjectG object, string name, string value)
       array = a #GValueArray containing the values
     Returns: 
 */
-bool utilSetObjectArray(gobject.object.ObjectG object, string name, gobject.value_array.ValueArray array)
+bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.value_array.ValueArray array)
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);

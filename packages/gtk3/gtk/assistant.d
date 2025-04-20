@@ -67,6 +67,7 @@ class Assistant : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Assistant self()
   {
     return this;
@@ -161,7 +162,7 @@ class Assistant : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -208,7 +209,7 @@ class Assistant : gtk.window.Window
   {
     PixbufC* _cretval;
     _cretval = gtk_assistant_get_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +228,7 @@ class Assistant : gtk.window.Window
   {
     PixbufC* _cretval;
     _cretval = gtk_assistant_get_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

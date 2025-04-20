@@ -59,7 +59,7 @@ import gtk.widget;
     </object>
     ```
     
-    Using [gtk.application.Application.Gio.MenuModel] is not supported and may result in
+    Using [gtk.application.Application.menubar] is not supported and may result in
     visual glitches.
 */
 class ApplicationWindow : gtk.application_window.ApplicationWindow
@@ -84,9 +84,60 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ApplicationWindow self()
   {
     return this;
+  }
+
+  /**
+      Get `content` property.
+      Returns: The content widget.
+      
+      This property should always be used instead of [gtk.window.Window.child].
+  */
+  @property gtk.widget.Widget content()
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+        
+        This property should always be used instead of [gtk.window.Window.child].
+  */
+  @property void content(gtk.widget.Widget propval)
+  {
+    return setContent(propval);
+  }
+
+  /**
+      Get `currentBreakpoint` property.
+      Returns: The current breakpoint.
+  */
+  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  {
+    return getCurrentBreakpoint();
+  }
+
+  /**
+      Get `dialogs` property.
+      Returns: The open dialogs.
+  */
+  @property gio.list_model.ListModel dialogs()
+  {
+    return getDialogs();
+  }
+
+  /**
+      Get `visibleDialog` property.
+      Returns: The currently visible dialog
+  */
+  @property adw.dialog.Dialog visibleDialog()
+  {
+    return getVisibleDialog();
   }
 
   /**
@@ -124,7 +175,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   {
     GtkWidget* _cretval;
     _cretval = adw_application_window_get_content(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +187,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_application_window_get_current_breakpoint(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +201,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   {
     GListModel* _cretval;
     _cretval = adw_application_window_get_dialogs(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -162,7 +213,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   {
     AdwDialog* _cretval;
     _cretval = adw_application_window_get_visible_dialog(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.dialog.Dialog)(cast(AdwDialog*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.dialog.Dialog)(cast(AdwDialog*)_cretval, No.Take);
     return _retval;
   }
 

@@ -101,9 +101,273 @@ class TabOverview : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabOverview self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `enableNewTab` property.
+      Returns: Whether to enable new tab button.
+      
+      Connect to the `signal@TabOverview::create-tab` signal to use it.
+  */
+  @property bool enableNewTab()
+  {
+    return getEnableNewTab();
+  }
+
+  /**
+      Set `enableNewTab` property.
+      Params:
+        propval = Whether to enable new tab button.
+        
+        Connect to the `signal@TabOverview::create-tab` signal to use it.
+  */
+  @property void enableNewTab(bool propval)
+  {
+    return setEnableNewTab(propval);
+  }
+
+  /**
+      Get `enableSearch` property.
+      Returns: Whether to enable search in tabs.
+      
+      Search matches tab titles and tooltips, as well as keywords, set via
+      `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+      web browser.
+      
+      During search, tab reordering and drag-n-drop are disabled.
+      
+      Use `property@TabOverview:search-active` to check out if search is
+      currently active.
+  */
+  @property bool enableSearch()
+  {
+    return getEnableSearch();
+  }
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to enable search in tabs.
+        
+        Search matches tab titles and tooltips, as well as keywords, set via
+        `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+        web browser.
+        
+        During search, tab reordering and drag-n-drop are disabled.
+        
+        Use `property@TabOverview:search-active` to check out if search is
+        currently active.
+  */
+  @property void enableSearch(bool propval)
+  {
+    return setEnableSearch(propval);
+  }
+
+  /**
+      Get `extraDragPreferredAction` property.
+      Returns: The unique action on the `current-drop` of the
+      `signal@TabOverview::extra-drag-drop`.
+      
+      This property should only be used during a
+      `signal@TabOverview::extra-drag-drop` and is always a subset of what was
+      originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
+  */
+  @property gdk.types.DragAction extraDragPreferredAction()
+  {
+    return getExtraDragPreferredAction();
+  }
+
+  /**
+      Get `extraDragPreload` property.
+      Returns: Whether the drop data should be preloaded on hover.
+      
+      See [gtk.drop_target.DropTarget.preload].
+  */
+  @property bool extraDragPreload()
+  {
+    return getExtraDragPreload();
+  }
+
+  /**
+      Set `extraDragPreload` property.
+      Params:
+        propval = Whether the drop data should be preloaded on hover.
+        
+        See [gtk.drop_target.DropTarget.preload].
+  */
+  @property void extraDragPreload(bool propval)
+  {
+    return setExtraDragPreload(propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Whether thumbnails use inverted layout.
+      
+      If set to `TRUE`, thumbnails will have the close or unpin buttons at the
+      beginning and the indicator at the end rather than the other way around.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether thumbnails use inverted layout.
+        
+        If set to `TRUE`, thumbnails will have the close or unpin buttons at the
+        beginning and the indicator at the end rather than the other way around.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /**
+      Get `open` property.
+      Returns: Whether the overview is open.
+  */
+  @property bool open()
+  {
+    return getOpen();
+  }
+
+  /**
+      Set `open` property.
+      Params:
+        propval = Whether the overview is open.
+  */
+  @property void open(bool propval)
+  {
+    return setOpen(propval);
+  }
+
+  /**
+      Get `searchActive` property.
+      Returns: Whether search is currently active.
+      
+      See `property@TabOverview:enable-search`.
+  */
+  @property bool searchActive()
+  {
+    return getSearchActive();
+  }
+
+  /**
+      Get `secondaryMenu` property.
+      Returns: The secondary menu model.
+      
+      Use it to add extra actions, e.g. to open a new window or undo closed tab.
+  */
+  @property gio.menu_model.MenuModel secondaryMenu()
+  {
+    return getSecondaryMenu();
+  }
+
+  /**
+      Set `secondaryMenu` property.
+      Params:
+        propval = The secondary menu model.
+        
+        Use it to add extra actions, e.g. to open a new window or undo closed tab.
+  */
+  @property void secondaryMenu(gio.menu_model.MenuModel propval)
+  {
+    return setSecondaryMenu(propval);
+  }
+
+  /**
+      Get `showEndTitleButtons` property.
+      Returns: Whether to show end title buttons in the overview's header bar.
+      
+      See `property@HeaderBar:show-start-title-buttons` for the other side.
+  */
+  @property bool showEndTitleButtons()
+  {
+    return getShowEndTitleButtons();
+  }
+
+  /**
+      Set `showEndTitleButtons` property.
+      Params:
+        propval = Whether to show end title buttons in the overview's header bar.
+        
+        See `property@HeaderBar:show-start-title-buttons` for the other side.
+  */
+  @property void showEndTitleButtons(bool propval)
+  {
+    return setShowEndTitleButtons(propval);
+  }
+
+  /**
+      Get `showStartTitleButtons` property.
+      Returns: Whether to show start title buttons in the overview's header bar.
+      
+      See `property@HeaderBar:show-end-title-buttons` for the other side.
+  */
+  @property bool showStartTitleButtons()
+  {
+    return getShowStartTitleButtons();
+  }
+
+  /**
+      Set `showStartTitleButtons` property.
+      Params:
+        propval = Whether to show start title buttons in the overview's header bar.
+        
+        See `property@HeaderBar:show-end-title-buttons` for the other side.
+  */
+  @property void showStartTitleButtons(bool propval)
+  {
+    return setShowStartTitleButtons(propval);
+  }
+
+  /**
+      Get `view` property.
+      Returns: The tab view the overview controls.
+      
+      The view must be inside the tab overview, see `property@TabOverview:child`.
+  */
+  @property adw.tab_view.TabView view()
+  {
+    return getView();
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The tab view the overview controls.
+        
+        The view must be inside the tab overview, see `property@TabOverview:child`.
+  */
+  @property void view(adw.tab_view.TabView propval)
+  {
+    return setView(propval);
   }
 
   /**
@@ -125,7 +389,7 @@ class TabOverview : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_overview_get_child(cast(AdwTabOverview*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -217,7 +481,7 @@ class TabOverview : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = adw_tab_overview_get_secondary_menu(cast(AdwTabOverview*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +515,7 @@ class TabOverview : gtk.widget.Widget
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_overview_get_view(cast(AdwTabOverview*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,7 +566,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Sets whether drop data should be preloaded on hover.
       
-      See [gtk.drop_target.DropTarget.gboolean].
+      See [gtk.drop_target.DropTarget.preload].
   
       Params:
         preload = whether to preload drop data
@@ -531,7 +795,7 @@ class TabOverview : gtk.widget.Widget
       The content must be of one of the types set up via
       [adw.tab_overview.TabOverview.setupExtraDropTarget].
       
-      See [gtk.drop_target.DropTarget.GObject.Value].
+      See [gtk.drop_target.DropTarget.value].
   
       Params:
         callback = signal callback delegate or function to connect

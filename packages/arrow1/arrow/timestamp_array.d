@@ -32,6 +32,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TimestampArray self()
   {
     return this;

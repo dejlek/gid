@@ -57,7 +57,7 @@ import gtk.types;
     [gtk.list_view.ListView.setFactory]. Reusing factories across different
     views is allowed, but very uncommon.
 */
-class ListItemFactory : gobject.object.ObjectG
+class ListItemFactory : gobject.object.ObjectWrap
 {
 
   /** */
@@ -79,6 +79,7 @@ class ListItemFactory : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListItemFactory self()
   {
     return this;

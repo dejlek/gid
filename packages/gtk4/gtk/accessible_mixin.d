@@ -28,7 +28,7 @@ public import gtk.types;
     The attributes are updated every time a UI element's state changes in
     a way that should be reflected by assistive technologies. For instance,
     if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.Hidden]
-    state will also change to reflect the [gtk.widget.Widget.gboolean] property.
+    state will also change to reflect the [gtk.widget.Widget.visible] property.
     
     Every accessible implementation is part of a tree of accessible objects.
     Normally, this tree corresponds to the widget tree, but can be customized
@@ -45,6 +45,29 @@ public import gtk.types;
 */
 template AccessibleT()
 {
+
+  /**
+      Get `accessibleRole` property.
+      Returns: The accessible role of the given [gtk.accessible.Accessible] implementation.
+      
+      The accessible role cannot be changed once set.
+  */
+  @property gtk.types.AccessibleRole accessibleRole()
+  {
+    return getAccessibleRole();
+  }
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
+        
+        The accessible role cannot be changed once set.
+  */
+  @property void accessibleRole(gtk.types.AccessibleRole propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.AccessibleRole)("accessible-role", propval);
+  }
 
   /**
       Requests the user's screen reader to announce the given message.
@@ -77,7 +100,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_accessible_parent(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +124,7 @@ template AccessibleT()
   {
     GtkATContext* _cretval;
     _cretval = gtk_accessible_get_at_context(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -134,7 +157,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_first_accessible_child(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,7 +169,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_next_accessible_sibling(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -220,7 +243,7 @@ template AccessibleT()
   */
   override void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null)
   {
-    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(ObjectG)parent).cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(ObjectG)nextSibling).cPtr(No.Dup) : null);
+    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)parent).cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)nextSibling).cPtr(No.Dup) : null);
   }
 
   /**
@@ -234,7 +257,7 @@ template AccessibleT()
   */
   override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null)
   {
-    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(ObjectG)newSibling).cPtr(No.Dup) : null);
+    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)newSibling).cPtr(No.Dup) : null);
   }
 
   /**

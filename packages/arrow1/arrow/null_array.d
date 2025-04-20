@@ -30,6 +30,7 @@ class NullArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NullArray self()
   {
     return this;

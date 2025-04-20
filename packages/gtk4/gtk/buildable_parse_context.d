@@ -18,7 +18,7 @@ class BuildableParseContext
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.BuildableParseContext");
+      throw new GidConstructException("Null instance pointer for gtk.buildable_parse_context.BuildableParseContext");
 
     cInstancePtr = cast(GtkBuildableParseContext*)ptr;
 

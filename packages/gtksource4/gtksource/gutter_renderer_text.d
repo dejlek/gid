@@ -2,6 +2,7 @@
 module gtksource.gutter_renderer_text;
 
 import gid.gid;
+import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.gutter_renderer;
@@ -30,9 +31,34 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GutterRendererText self()
   {
     return this;
+  }
+
+  /** */
+  @property string markup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("markup");
+  }
+
+  /** */
+  @property void markup(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("markup", propval);
+  }
+
+  /** */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /** */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
 
   /**

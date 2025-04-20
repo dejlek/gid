@@ -21,7 +21,7 @@ class VideoRegionOfInterestMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoRegionOfInterestMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta");
 
     cInstance = *cast(GstVideoRegionOfInterestMeta*)ptr;
 
@@ -35,76 +35,143 @@ class VideoRegionOfInterestMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)cPtr).meta);
   }
 
+  /**
+      Get `roiType` field.
+      Returns: GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+  */
   @property glib.types.Quark roiType()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).roiType;
   }
 
+  /**
+      Set `roiType` field.
+      Params:
+        propval = GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+  */
   @property void roiType(glib.types.Quark propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).roiType = propval;
   }
 
+  /**
+      Get `id` field.
+      Returns: identifier of this particular ROI
+  */
   @property int id()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).id;
   }
 
+  /**
+      Set `id` field.
+      Params:
+        propval = identifier of this particular ROI
+  */
   @property void id(int propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).id = propval;
   }
 
+  /**
+      Get `parentId` field.
+      Returns: identifier of its parent ROI, used f.i. for ROI hierarchisation.
+  */
   @property int parentId()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).parentId;
   }
 
+  /**
+      Set `parentId` field.
+      Params:
+        propval = identifier of its parent ROI, used f.i. for ROI hierarchisation.
+  */
   @property void parentId(int propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).parentId = propval;
   }
 
+  /**
+      Get `x` field.
+      Returns: x component of upper-left corner
+  */
   @property uint x()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = x component of upper-left corner
+  */
   @property void x(uint propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: y component of upper-left corner
+  */
   @property uint y()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = y component of upper-left corner
+  */
   @property void y(uint propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).y = propval;
   }
 
+  /**
+      Get `w` field.
+      Returns: bounding box width
+  */
   @property uint w()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).w;
   }
 
+  /**
+      Set `w` field.
+      Params:
+        propval = bounding box width
+  */
   @property void w(uint propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).w = propval;
   }
 
+  /**
+      Get `h` field.
+      Returns: bounding box height
+  */
   @property uint h()
   {
     return (cast(GstVideoRegionOfInterestMeta*)cPtr).h;
   }
 
+  /**
+      Set `h` field.
+      Params:
+        propval = bounding box height
+  */
   @property void h(uint propval)
   {
     (cast(GstVideoRegionOfInterestMeta*)cPtr).h = propval;

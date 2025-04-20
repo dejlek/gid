@@ -2,6 +2,7 @@
 module gstaudio.audio_decoder;
 
 import gid.gid;
+import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
 import gst.buffer;
@@ -135,9 +136,67 @@ class AudioDecoder : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioDecoder self()
   {
     return this;
+  }
+
+  /**
+      Get `maxErrors` property.
+      Returns: Maximum number of tolerated consecutive decode errors. See
+      [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
+  */
+  @property int maxErrors()
+  {
+    return getMaxErrors();
+  }
+
+  /**
+      Set `maxErrors` property.
+      Params:
+        propval = Maximum number of tolerated consecutive decode errors. See
+        [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
+  */
+  @property void maxErrors(int propval)
+  {
+    return setMaxErrors(propval);
+  }
+
+  /** */
+  @property long minLatency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("min-latency");
+  }
+
+  /** */
+  @property void minLatency(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("min-latency", propval);
+  }
+
+  /** */
+  @property bool plc()
+  {
+    return getPlc();
+  }
+
+  /** */
+  @property void plc(bool propval)
+  {
+    return setPlc(propval);
+  }
+
+  /** */
+  @property long tolerance()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
+  }
+
+  /** */
+  @property void tolerance(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
 
   /**

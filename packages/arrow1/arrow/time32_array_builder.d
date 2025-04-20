@@ -32,6 +32,7 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Time32ArrayBuilder self()
   {
     return this;
@@ -52,7 +53,7 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_time32_array_builder_append(cast(GArrowTime32ArrayBuilder*)cPtr, value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -63,7 +64,7 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_time32_array_builder_append_value(cast(GArrowTime32ArrayBuilder*)cPtr, value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -79,7 +80,7 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValues(int[] values, bool[] isValids = null)
   {
@@ -97,7 +98,7 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_time32_array_builder_append_values(cast(GArrowTime32ArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

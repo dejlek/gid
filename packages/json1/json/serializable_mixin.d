@@ -12,7 +12,7 @@ public import json.types;
 
 /**
     [json.serializable.Serializable] is an interface for controlling the serialization
-    and deserialization of [gobject.object.ObjectG] classes.
+    and deserialization of [gobject.object.ObjectWrap] classes.
     
     Implementing this interface allows controlling how the class is going
     to be serialized or deserialized by `func@Json.construct_gobject` and

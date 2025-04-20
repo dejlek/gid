@@ -22,7 +22,7 @@ class Tuples
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Tuples");
+      throw new GidConstructException("Null instance pointer for glib.tuples.Tuples");
 
     cInstance = *cast(GTuples*)ptr;
 
@@ -36,11 +36,20 @@ class Tuples
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `len` field.
+      Returns: the number of records that matched.
+  */
   @property uint len()
   {
     return (cast(GTuples*)cPtr).len;
   }
 
+  /**
+      Set `len` field.
+      Params:
+        propval = the number of records that matched.
+  */
   @property void len(uint propval)
   {
     (cast(GTuples*)cPtr).len = propval;

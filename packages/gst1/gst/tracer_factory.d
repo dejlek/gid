@@ -34,6 +34,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TracerFactory self()
   {
     return this;

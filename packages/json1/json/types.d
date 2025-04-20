@@ -107,7 +107,7 @@ alias BoxedDeserializeFunc = void* delegate(json.node.Node node);
 alias BoxedSerializeFunc = json.node.Node delegate(const(void)* boxed);
 
 /**
-    The function to be passed to [json.object.ObjectJson.foreachMember].
+    The function to be passed to [json.object.ObjectWrap.foreachMember].
     
     You should not add or remove members to and from object within
     this function.
@@ -119,7 +119,7 @@ alias BoxedSerializeFunc = json.node.Node delegate(const(void)* boxed);
       memberName = the name of the member
       memberNode = the value of the member
 */
-alias ObjectForeach = void delegate(json.object.ObjectJson object, string memberName, json.node.Node memberNode);
+alias ObjectForeach = void delegate(json.object.ObjectWrap object, string memberName, json.node.Node memberNode);
 
 /**
     Json major version component (e.g. 1 if `JSON_VERSION` is "1.2.3")

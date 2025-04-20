@@ -46,6 +46,7 @@ class LayoutIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LayoutIter self()
   {
     return this;
@@ -143,7 +144,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 

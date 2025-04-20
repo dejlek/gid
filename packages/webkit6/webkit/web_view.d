@@ -22,7 +22,6 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
-import gtk.settings;
 import gtk.widget;
 import javascriptcore.value;
 import webkit.authentication_request;
@@ -99,6 +98,259 @@ class WebView : webkit.web_view_base.WebViewBase
   override WebView self()
   {
     return this;
+  }
+
+  /**
+      Get `cameraCaptureState` property.
+      Returns: Capture state of the camera device. Whenever the user grants a media-request sent by the web
+      page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
+      true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+      
+      The application can monitor this property and provide a visual indicator allowing to optionally
+      deactivate or mute the capture device by setting this property respectively to
+      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+      
+      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+      can still re-request the permission to the user. Permission desision caching is left to the
+      application.
+  */
+  @property webkit.types.MediaCaptureState cameraCaptureState()
+  {
+    return getCameraCaptureState();
+  }
+
+  /**
+      Set `cameraCaptureState` property.
+      Params:
+        propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
+        page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
+        true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+        
+        The application can monitor this property and provide a visual indicator allowing to optionally
+        deactivate or mute the capture device by setting this property respectively to
+        [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+        
+        If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+        can still re-request the permission to the user. Permission desision caching is left to the
+        application.
+  */
+  @property void cameraCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setCameraCaptureState(propval);
+  }
+
+  /**
+      Get `displayCaptureState` property.
+      Returns: Capture state of the display device. Whenever the user grants a media-request sent by the web
+      page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+      property will be set to [webkit.types.MediaCaptureState.Active].
+      
+      The application can monitor this property and provide a visual indicator allowing to
+      optionally deactivate or mute the capture device by setting this property respectively to
+      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+      
+      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+      can still re-request the permission to the user. Permission desision caching is left to the
+      application.
+  */
+  @property webkit.types.MediaCaptureState displayCaptureState()
+  {
+    return getDisplayCaptureState();
+  }
+
+  /**
+      Set `displayCaptureState` property.
+      Params:
+        propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
+        page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+        property will be set to [webkit.types.MediaCaptureState.Active].
+        
+        The application can monitor this property and provide a visual indicator allowing to
+        optionally deactivate or mute the capture device by setting this property respectively to
+        [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+        
+        If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+        can still re-request the permission to the user. Permission desision caching is left to the
+        application.
+  */
+  @property void displayCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setDisplayCaptureState(propval);
+  }
+
+  /**
+      Get `editable` property.
+      Returns: Whether the pages loaded inside #WebKitWebView are editable. For more
+      information see [webkit.web_view.WebView.setEditable].
+  */
+  @property bool editable()
+  {
+    return isEditable();
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the pages loaded inside #WebKitWebView are editable. For more
+        information see [webkit.web_view.WebView.setEditable].
+  */
+  @property void editable(bool propval)
+  {
+    return setEditable(propval);
+  }
+
+  /**
+      Get `estimatedLoadProgress` property.
+      Returns: An estimate of the percent completion for the current loading operation.
+      This value will range from 0.0 to 1.0 and, once a load completes,
+      will remain at 1.0 until a new load starts, at which point it
+      will be reset to 0.0.
+      The value is an estimate based on the total number of bytes expected
+      to be received for a document, including all its possible subresources
+      and child documents.
+  */
+  @property double estimatedLoadProgress()
+  {
+    return getEstimatedLoadProgress();
+  }
+
+  /**
+      Get `favicon` property.
+      Returns: The favicon currently associated to the #WebKitWebView.
+      See [webkit.web_view.WebView.getFavicon] for more details.
+  */
+  @property gdk.texture.Texture favicon()
+  {
+    return getFavicon();
+  }
+
+  /**
+      Get `isMuted` property.
+      Returns: Whether the #WebKitWebView audio is muted. When true, audio is silenced.
+      It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
+  */
+  @property bool isMuted()
+  {
+    return getIsMuted();
+  }
+
+  /**
+      Set `isMuted` property.
+      Params:
+        propval = Whether the #WebKitWebView audio is muted. When true, audio is silenced.
+        It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
+  */
+  @property void isMuted(bool propval)
+  {
+    return setIsMuted(propval);
+  }
+
+  /**
+      Get `isWebProcessResponsive` property.
+      Returns: Whether the web process currently associated to the #WebKitWebView is responsive.
+  */
+  @property bool isWebProcessResponsive()
+  {
+    return getIsWebProcessResponsive();
+  }
+
+  /**
+      Get `microphoneCaptureState` property.
+      Returns: Capture state of the microphone device. Whenever the user grants a media-request sent by the web
+      page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
+      true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+      
+      The application can monitor this property and provide a visual indicator allowing to
+      optionally deactivate or mute the capture device by setting this property respectively to
+      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+      
+      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+      can still re-request the permission to the user. Permission desision caching is left to the
+      application.
+  */
+  @property webkit.types.MediaCaptureState microphoneCaptureState()
+  {
+    return getMicrophoneCaptureState();
+  }
+
+  /**
+      Set `microphoneCaptureState` property.
+      Params:
+        propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
+        page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
+        true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+        
+        The application can monitor this property and provide a visual indicator allowing to
+        optionally deactivate or mute the capture device by setting this property respectively to
+        [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+        
+        If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+        can still re-request the permission to the user. Permission desision caching is left to the
+        application.
+  */
+  @property void microphoneCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setMicrophoneCaptureState(propval);
+  }
+
+  /**
+      Get `pageId` property.
+      Returns: The identifier of the #WebKitWebPage corresponding to the #WebKitWebView.
+  */
+  @property ulong pageId()
+  {
+    return getPageId();
+  }
+
+  /**
+      Set `settings` property.
+      Params:
+        propval = The #WebKitSettings of the view.
+  */
+  @property void settings(webkit.settings.Settings propval)
+  {
+    return setSettings(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The main frame document title of this #WebKitWebView. If
+      the title has not been received yet, it will be null.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The current active URI of the #WebKitWebView.
+      See [webkit.web_view.WebView.getUri] for more details.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Get `zoomLevel` property.
+      Returns: The zoom level of the #WebKitWebView content.
+      See [webkit.web_view.WebView.setZoomLevel] for more details.
+  */
+  @property double zoomLevel()
+  {
+    return getZoomLevel();
+  }
+
+  /**
+      Set `zoomLevel` property.
+      Params:
+        propval = The zoom level of the #WebKitWebView content.
+        See [webkit.web_view.WebView.setZoomLevel] for more details.
+  */
+  @property void zoomLevel(double propval)
+  {
+    return setZoomLevel(propval);
   }
 
   /**
@@ -187,14 +439,14 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the script finished
   */
-  void callAsyncJavascriptFunction(string body_, ptrdiff_t length, glib.variant.VariantG arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void callAsyncJavascriptFunction(string body_, ptrdiff_t length, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -202,7 +454,7 @@ class WebView : webkit.web_view_base.WebViewBase
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)cPtr, _body_, length, arguments ? cast(VariantC*)arguments.cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)cPtr, _body_, length, arguments ? cast(GVariant*)arguments.cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -212,16 +464,16 @@ class WebView : webkit.web_view_base.WebViewBase
         result = a #GAsyncResult
       Returns: a #JSCValue with the return value of the async function
            or null in case of error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   javascriptcore.value.Value callAsyncJavascriptFunctionFinish(gio.async_result.AsyncResult result)
   {
     JSCValue* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_call_async_javascript_function_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_call_async_javascript_function_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -243,7 +495,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -258,15 +510,15 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         result = a #GAsyncResult
       Returns: true if the editing command can be executed or false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool canExecuteEditingCommandFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -320,7 +572,7 @@ class WebView : webkit.web_view_base.WebViewBase
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = webkit_web_view_download_uri(cast(WebKitWebView*)cPtr, _uri);
-    auto _retval = ObjectG.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -395,7 +647,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -413,16 +665,16 @@ class WebView : webkit.web_view_base.WebViewBase
         result = a #GAsyncResult
       Returns: a #JSCValue with the result of the last executed statement in script
            or null in case of error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   javascriptcore.value.Value evaluateJavascriptFinish(gio.async_result.AsyncResult result)
   {
     JSCValue* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_evaluate_javascript_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_evaluate_javascript_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -481,7 +733,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitBackForwardList* _cretval;
     _cretval = webkit_web_view_get_back_forward_list(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.back_forward_list.BackForwardList)(cast(WebKitBackForwardList*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list.BackForwardList)(cast(WebKitBackForwardList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -523,7 +775,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_view_get_context(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -573,7 +825,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitEditorState* _cretval;
     _cretval = webkit_web_view_get_editor_state(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.editor_state.EditorState)(cast(WebKitEditorState*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.editor_state.EditorState)(cast(WebKitEditorState*)_cretval, No.Take);
     return _retval;
   }
 
@@ -605,7 +857,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     GdkTexture* _cretval;
     _cretval = webkit_web_view_get_favicon(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -621,7 +873,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitFindController* _cretval;
     _cretval = webkit_web_view_get_find_controller(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.find_controller.FindController)(cast(WebKitFindController*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.find_controller.FindController)(cast(WebKitFindController*)_cretval, No.Take);
     return _retval;
   }
 
@@ -635,7 +887,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitInputMethodContext* _cretval;
     _cretval = webkit_web_view_get_input_method_context(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.input_method_context.InputMethodContext)(cast(WebKitInputMethodContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.input_method_context.InputMethodContext)(cast(WebKitInputMethodContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -647,7 +899,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitWebInspector* _cretval;
     _cretval = webkit_web_view_get_inspector(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_inspector.WebInspector)(cast(WebKitWebInspector*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_inspector.WebInspector)(cast(WebKitWebInspector*)_cretval, No.Take);
     return _retval;
   }
 
@@ -682,7 +934,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitWebResource* _cretval;
     _cretval = webkit_web_view_get_main_resource(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_resource.WebResource)(cast(WebKitWebResource*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_resource.WebResource)(cast(WebKitWebResource*)_cretval, No.Take);
     return _retval;
   }
 
@@ -707,7 +959,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_web_view_get_network_session(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -735,6 +987,8 @@ class WebView : webkit.web_view_base.WebViewBase
     return _retval;
   }
 
+  alias getSettings = gtk.widget.Widget.getSettings;
+
   /**
       Gets the #WebKitSettings currently applied to web_view.
       
@@ -752,11 +1006,11 @@ class WebView : webkit.web_view_base.WebViewBase
       #WebKitWebView<!-- -->s using the same #WebKitSettings.
       Returns: the #WebKitSettings attached to web_view
   */
-  override webkit.settings.Settings getSettings()
+  webkit.settings.Settings getSettings()
   {
     WebKitSettings* _cretval;
     _cretval = webkit_web_view_get_settings(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.settings.Settings)(cast(WebKitSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.settings.Settings)(cast(WebKitSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -782,7 +1036,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -796,16 +1050,16 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         result = a #GAsyncResult
       Returns: an image with the retrieved snapshot, or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.texture.Texture getSnapshotFinish(gio.async_result.AsyncResult result)
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_get_snapshot_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_get_snapshot_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -929,7 +1183,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitUserContentManager* _cretval;
     _cretval = webkit_web_view_get_user_content_manager(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.user_content_manager.UserContentManager)(cast(WebKitUserContentManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_content_manager.UserContentManager)(cast(WebKitUserContentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -960,7 +1214,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitWebsitePolicies* _cretval;
     _cretval = webkit_web_view_get_website_policies(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.website_policies.WebsitePolicies)(cast(WebKitWebsitePolicies*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.website_policies.WebsitePolicies)(cast(WebKitWebsitePolicies*)_cretval, No.Take);
     return _retval;
   }
 
@@ -975,7 +1229,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitWindowProperties* _cretval;
     _cretval = webkit_web_view_get_window_properties(cast(WebKitWebView*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.window_properties.WindowProperties)(cast(WebKitWindowProperties*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.window_properties.WindowProperties)(cast(WebKitWindowProperties*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1255,7 +1509,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1270,16 +1524,16 @@ class WebView : webkit.web_view_base.WebViewBase
         result = a #GAsyncResult
       Returns: a #GInputStream with the result of saving
            the current web page or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream saveFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_save_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_save_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1307,12 +1561,12 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_save_to_file(cast(WebKitWebView*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, saveMode, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_save_to_file(cast(WebKitWebView*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, saveMode, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1321,15 +1575,15 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         result = a #GAsyncResult
       Returns: true if the web page was successfully saved to a file or false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool saveToFileFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_save_to_file_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_web_view_save_to_file_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1353,7 +1607,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1367,16 +1621,16 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserMessage with the reply or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.user_message.UserMessage sendMessageToPageFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_send_message_to_page_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_send_message_to_page_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1710,10 +1964,10 @@ class WebView : webkit.web_view_base.WebViewBase
       or build its own context menu.
       <itemizedlist>
       <listitem><para>
-       To customize the proposed menu you can use [webkit.context_menu.ContextMenu.prepend],
-       [webkit.context_menu.ContextMenu.append] or [webkit.context_menu.ContextMenu.insert] to add new
-       #WebKitContextMenuItem<!-- -->s to context_menu, [webkit.context_menu.ContextMenu.moveItem]
-       to reorder existing items, or [webkit.context_menu.ContextMenu.remove] to remove an
+       To customize the proposed menu you can use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
+       [webkitwebprocessextension.context_menu.ContextMenu.append] or [webkitwebprocessextension.context_menu.ContextMenu.insert] to add new
+       #WebKitContextMenuItem<!-- -->s to context_menu, [webkitwebprocessextension.context_menu.ContextMenu.moveItem]
+       to reorder existing items, or [webkitwebprocessextension.context_menu.ContextMenu.remove] to remove an
        existing item. The signal handler should return false, and the menu represented
        by context_menu will be shown.
       </para></listitem>
@@ -1723,7 +1977,7 @@ class WebView : webkit.web_view_base.WebViewBase
       </para></listitem>
       <listitem><para>
        To build your own menu, you can remove all items from the proposed menu with
-       [webkit.context_menu.ContextMenu.removeAll], add your own items and return false so
+       [webkitwebprocessextension.context_menu.ContextMenu.removeAll], add your own items and return false so
        that the menu will be shown. You can also ignore the proposed #WebKitContextMenu,
        build your own #GtkMenu and return true to prevent the proposed menu from being shown.
       </para></listitem>
@@ -1925,7 +2179,7 @@ class WebView : webkit.web_view_base.WebViewBase
       }
       ```
       
-      It is possible to make policy decision asynchronously, by simply calling [gobject.object.ObjectG.ref_]
+      It is possible to make policy decision asynchronously, by simply calling [gobject.object.ObjectWrap.ref_]
       on the decision argument and returning true to block the default signal handler.
       If the last reference is removed on a #WebKitPolicyDecision and no decision has been
       made explicitly, [webkit.policy_decision.PolicyDecision.use] will be the default policy decision. The
@@ -2221,7 +2475,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.types.LoadEvent loadEvent, string failingUri, glib.error.ErrorG error, webkit.web_view.WebView webView))
+          $(D bool callback(webkit.types.LoadEvent loadEvent, string failingUri, glib.error.ErrorWrap error, webkit.web_view.WebView webView))
   
           `loadEvent` the #WebKitLoadEvent of the load operation (optional)
   
@@ -2241,7 +2495,7 @@ class WebView : webkit.web_view_base.WebViewBase
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == glib.error.ErrorG)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : webkit.web_view.WebView)))
   && Parameters!T.length < 5)
   {
@@ -2281,7 +2535,7 @@ class WebView : webkit.web_view_base.WebViewBase
       To allow an exception for this certificate
       and the host of failing_uri use webkit_web_context_allow_tls_certificate_for_host().
       
-      To handle this signal asynchronously you should call [gobject.object.ObjectG.ref_] on certificate
+      To handle this signal asynchronously you should call [gobject.object.ObjectWrap.ref_] on certificate
       and return true.
       
       If false is returned, #WebKitWebView::load-failed will be emitted. The load
@@ -2440,7 +2694,7 @@ class WebView : webkit.web_view_base.WebViewBase
       ```
       
       It is possible to handle permission requests asynchronously, by
-      simply calling [gobject.object.ObjectG.ref_] on the request argument and
+      simply calling [gobject.object.ObjectWrap.ref_] on the request argument and
       returning true to block the default signal handler.  If the
       last reference is removed on a #WebKitPermissionRequest and the
       request has not been handled, [webkit.permission_request.PermissionRequest.deny]
@@ -3050,7 +3304,7 @@ class WebView : webkit.web_view_base.WebViewBase
       The form will not be submitted until [webkit.form_submission_request.FormSubmissionRequest.submit] is called.
       
       It is possible to handle the form submission request asynchronously, by
-      simply calling [gobject.object.ObjectG.ref_] on the request argument and calling
+      simply calling [gobject.object.ObjectWrap.ref_] on the request argument and calling
       [webkit.form_submission_request.FormSubmissionRequest.submit] when done to continue with the form submission.
       If the last reference is removed on a #WebKitFormSubmissionRequest and the
       form has not been submitted, [webkit.form_submission_request.FormSubmissionRequest.submit] will be called.
@@ -3099,9 +3353,9 @@ class WebView : webkit.web_view_base.WebViewBase
   
       This signal is emitted when a #WebKitUserMessage is received from the
       #WebKitWebPage corresponding to web_view. You can reply to the message
-      using [webkit.user_message.UserMessage.sendReply].
+      using [webkitwebprocessextension.user_message.UserMessage.sendReply].
       
-      You can handle the user message asynchronously by calling [gobject.object.ObjectG.ref_] on
+      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
       message and returning true. If the last reference of message is removed
       and the message has not been replied to, the operation in the #WebKitWebPage will
       finish with error [webkit.types.UserMessageError.Message].

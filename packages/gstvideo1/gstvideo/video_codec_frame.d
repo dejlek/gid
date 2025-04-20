@@ -17,10 +17,39 @@ import gstvideo.types;
 class VideoCodecFrame : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `video_codec_frame.VideoCodecFrame` boxed type.
+      Params:
+        systemFrameNumber = Unique identifier for the frame. Use this if you need
+                to get hold of the frame later (like when data is being decoded).
+                Typical usage in decoders is to set this on the opaque value provided
+                to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
+        dts = Decoding timestamp
+        pts = Presentation timestamp
+        duration = Duration of the frame
+        distanceFromSync = Distance in frames from the last synchronization point.
+        inputBuffer = the input #GstBuffer that created this frame. The buffer is owned
+                    by the frame and references to the frame instead of the buffer should
+                    be kept.
+        outputBuffer = the output #GstBuffer. Implementations should set this either
+                    directly, or by using the
+                    [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
+                    [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
+                    owned by the frame and references to the frame instead of the
+                    buffer should be kept.
+        deadline = Running time when the frame will be used.
+  */
+  this(uint systemFrameNumber = uint.init, gst.types.ClockTime dts = gst.types.ClockTime.init, gst.types.ClockTime pts = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init, int distanceFromSync = int.init, gst.buffer.Buffer inputBuffer = gst.buffer.Buffer.init, gst.buffer.Buffer outputBuffer = gst.buffer.Buffer.init, gst.types.ClockTime deadline = gst.types.ClockTime.init)
   {
     super(gMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
+    this.systemFrameNumber = systemFrameNumber;
+    this.dts = dts;
+    this.pts = pts;
+    this.duration = duration;
+    this.distanceFromSync = distanceFromSync;
+    this.inputBuffer = inputBuffer;
+    this.outputBuffer = outputBuffer;
+    this.deadline = deadline;
   }
 
   /** */
@@ -48,88 +77,181 @@ class VideoCodecFrame : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoCodecFrame self()
   {
     return this;
   }
 
+  /**
+      Get `systemFrameNumber` field.
+      Returns: Unique identifier for the frame. Use this if you need
+            to get hold of the frame later (like when data is being decoded).
+            Typical usage in decoders is to set this on the opaque value provided
+            to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
+  */
   @property uint systemFrameNumber()
   {
     return (cast(GstVideoCodecFrame*)cPtr).systemFrameNumber;
   }
 
+  /**
+      Set `systemFrameNumber` field.
+      Params:
+        propval = Unique identifier for the frame. Use this if you need
+              to get hold of the frame later (like when data is being decoded).
+              Typical usage in decoders is to set this on the opaque value provided
+              to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
+  */
   @property void systemFrameNumber(uint propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).systemFrameNumber = propval;
   }
 
+  /**
+      Get `dts` field.
+      Returns: Decoding timestamp
+  */
   @property gst.types.ClockTime dts()
   {
     return (cast(GstVideoCodecFrame*)cPtr).dts;
   }
 
+  /**
+      Set `dts` field.
+      Params:
+        propval = Decoding timestamp
+  */
   @property void dts(gst.types.ClockTime propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).dts = propval;
   }
 
+  /**
+      Get `pts` field.
+      Returns: Presentation timestamp
+  */
   @property gst.types.ClockTime pts()
   {
     return (cast(GstVideoCodecFrame*)cPtr).pts;
   }
 
+  /**
+      Set `pts` field.
+      Params:
+        propval = Presentation timestamp
+  */
   @property void pts(gst.types.ClockTime propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).pts = propval;
   }
 
+  /**
+      Get `duration` field.
+      Returns: Duration of the frame
+  */
   @property gst.types.ClockTime duration()
   {
     return (cast(GstVideoCodecFrame*)cPtr).duration;
   }
 
+  /**
+      Set `duration` field.
+      Params:
+        propval = Duration of the frame
+  */
   @property void duration(gst.types.ClockTime propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).duration = propval;
   }
 
+  /**
+      Get `distanceFromSync` field.
+      Returns: Distance in frames from the last synchronization point.
+  */
   @property int distanceFromSync()
   {
     return (cast(GstVideoCodecFrame*)cPtr).distanceFromSync;
   }
 
+  /**
+      Set `distanceFromSync` field.
+      Params:
+        propval = Distance in frames from the last synchronization point.
+  */
   @property void distanceFromSync(int propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).distanceFromSync = propval;
   }
 
+  /**
+      Get `inputBuffer` field.
+      Returns: the input #GstBuffer that created this frame. The buffer is owned
+                by the frame and references to the frame instead of the buffer should
+                be kept.
+  */
   @property gst.buffer.Buffer inputBuffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
   }
 
+  /**
+      Set `inputBuffer` field.
+      Params:
+        propval = the input #GstBuffer that created this frame. The buffer is owned
+                  by the frame and references to the frame instead of the buffer should
+                  be kept.
+  */
   @property void inputBuffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
     dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
   }
 
+  /**
+      Get `outputBuffer` field.
+      Returns: the output #GstBuffer. Implementations should set this either
+                directly, or by using the
+                [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
+                [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
+                owned by the frame and references to the frame instead of the
+                buffer should be kept.
+  */
   @property gst.buffer.Buffer outputBuffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
   }
 
+  /**
+      Set `outputBuffer` field.
+      Params:
+        propval = the output #GstBuffer. Implementations should set this either
+                  directly, or by using the
+                  [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
+                  [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
+                  owned by the frame and references to the frame instead of the
+                  buffer should be kept.
+  */
   @property void outputBuffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
     dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
   }
 
+  /**
+      Get `deadline` field.
+      Returns: Running time when the frame will be used.
+  */
   @property gst.types.ClockTime deadline()
   {
     return (cast(GstVideoCodecFrame*)cPtr).deadline;
   }
 
+  /**
+      Set `deadline` field.
+      Params:
+        propval = Running time when the frame will be used.
+  */
   @property void deadline(gst.types.ClockTime propval)
   {
     (cast(GstVideoCodecFrame*)cPtr).deadline = propval;

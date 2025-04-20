@@ -44,6 +44,7 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FrameSwitcher self()
   {
     return this;

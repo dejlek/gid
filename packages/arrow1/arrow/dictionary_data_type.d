@@ -32,6 +32,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DictionaryDataType self()
   {
     return this;
@@ -50,7 +51,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_index_data_type(cast(GArrowDictionaryDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -59,7 +60,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_value_data_type(cast(GArrowDictionaryDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 

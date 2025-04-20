@@ -34,7 +34,7 @@ import gtk.types;
     The [gtk.list_store.ListStore] can accept most [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s as a column type, though
     it can’t accept all custom types.  Internally, it will keep a copy of
     data passed in (such as a string or a boxed pointer).  Columns that
-    accept [gobject.object.ObjectG]s are handled a little differently.  The
+    accept [gobject.object.ObjectWrap]s are handled a little differently.  The
     [gtk.list_store.ListStore] will keep a reference to the object instead of copying the
     value.  As a result, if the object is modified, it is up to the
     application writer to call [gtk.tree_model.TreeModel.rowChanged] to emit the
@@ -167,7 +167,7 @@ import gtk.types;
 
     Deprecated: Use [gio.list_store.ListStore] instead
 */
-class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
+class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
 {
 
   /** */
@@ -189,6 +189,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListStore self()
   {
     return this;
@@ -220,7 +221,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
     auto _types = cast(GType*)types.ptr;
     _cretval = gtk_list_store_newv(_nColumns, _types);
-    auto _retval = ObjectG.getDObject!(gtk.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
     return _retval;
   }
 

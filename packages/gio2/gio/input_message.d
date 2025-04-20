@@ -35,7 +35,7 @@ class InputMessage
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.InputMessage");
+      throw new GidConstructException("Null instance pointer for gio.input_message.InputMessage");
 
     cInstance = *cast(GInputMessage*)ptr;
 
@@ -49,31 +49,62 @@ class InputMessage
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `numVectors` field.
+      Returns: the number of input vectors pointed to by @vectors
+  */
   @property uint numVectors()
   {
     return (cast(GInputMessage*)cPtr).numVectors;
   }
 
+  /**
+      Set `numVectors` field.
+      Params:
+        propval = the number of input vectors pointed to by @vectors
+  */
   @property void numVectors(uint propval)
   {
     (cast(GInputMessage*)cPtr).numVectors = propval;
   }
 
+  /**
+      Get `bytesReceived` field.
+      Returns: will be set to the number of bytes that have been
+        received
+  */
   @property size_t bytesReceived()
   {
     return (cast(GInputMessage*)cPtr).bytesReceived;
   }
 
+  /**
+      Set `bytesReceived` field.
+      Params:
+        propval = will be set to the number of bytes that have been
+          received
+  */
   @property void bytesReceived(size_t propval)
   {
     (cast(GInputMessage*)cPtr).bytesReceived = propval;
   }
 
+  /**
+      Get `flags` field.
+      Returns: collection of #GSocketMsgFlags for the received message,
+        outputted by the call
+  */
   @property int flags()
   {
     return (cast(GInputMessage*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = collection of #GSocketMsgFlags for the received message,
+          outputted by the call
+  */
   @property void flags(int propval)
   {
     (cast(GInputMessage*)cPtr).flags = propval;

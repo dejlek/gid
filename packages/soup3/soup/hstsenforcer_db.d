@@ -37,6 +37,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HSTSEnforcerDB self()
   {
     return this;

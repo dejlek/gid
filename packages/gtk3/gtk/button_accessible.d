@@ -37,6 +37,7 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ButtonAccessible self()
   {
     return this;
@@ -44,7 +45,7 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
 
   mixin ActionT!();
   mixin ImageT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

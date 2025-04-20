@@ -124,9 +124,105 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Grid self()
   {
     return this;
+  }
+
+  /**
+      Get `baselineRow` property.
+      Returns: The row to align to the baseline when valign is using baseline alignment.
+  */
+  @property int baselineRow()
+  {
+    return getBaselineRow();
+  }
+
+  /**
+      Set `baselineRow` property.
+      Params:
+        propval = The row to align to the baseline when valign is using baseline alignment.
+  */
+  @property void baselineRow(int propval)
+  {
+    return setBaselineRow(propval);
+  }
+
+  /**
+      Get `columnHomogeneous` property.
+      Returns: If true, the columns are all the same width.
+  */
+  @property bool columnHomogeneous()
+  {
+    return getColumnHomogeneous();
+  }
+
+  /**
+      Set `columnHomogeneous` property.
+      Params:
+        propval = If true, the columns are all the same width.
+  */
+  @property void columnHomogeneous(bool propval)
+  {
+    return setColumnHomogeneous(propval);
+  }
+
+  /**
+      Get `columnSpacing` property.
+      Returns: The amount of space between two consecutive columns.
+  */
+  @property int columnSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("column-spacing");
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The amount of space between two consecutive columns.
+  */
+  @property void columnSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("column-spacing", propval);
+  }
+
+  /**
+      Get `rowHomogeneous` property.
+      Returns: If true, the rows are all the same height.
+  */
+  @property bool rowHomogeneous()
+  {
+    return getRowHomogeneous();
+  }
+
+  /**
+      Set `rowHomogeneous` property.
+      Params:
+        propval = If true, the rows are all the same height.
+  */
+  @property void rowHomogeneous(bool propval)
+  {
+    return setRowHomogeneous(propval);
+  }
+
+  /**
+      Get `rowSpacing` property.
+      Returns: The amount of space between two consecutive rows.
+  */
+  @property int rowSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("row-spacing");
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The amount of space between two consecutive rows.
+  */
+  @property void rowSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("row-spacing", propval);
   }
 
   mixin OrientableT!();
@@ -209,7 +305,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, column, row);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -21,10 +21,19 @@ import harfbuzz.types;
 class ColorStop : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `color_stop.ColorStop` boxed type.
+      Params:
+        offset = the offset of the color stop
+        isForeground = whether the color is the foreground
+        color = the color, unpremultiplied
+  */
+  this(float offset = 0.0, harfbuzz.types.Bool isForeground = harfbuzz.types.Bool.init, harfbuzz.types.Color color = harfbuzz.types.Color.init)
   {
     super(gMalloc(hb_color_stop_t.sizeof), Yes.Take);
+    this.offset = offset;
+    this.isForeground = isForeground;
+    this.color = color;
   }
 
   /** */
@@ -52,36 +61,64 @@ class ColorStop : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorStop self()
   {
     return this;
   }
 
+  /**
+      Get `offset` field.
+      Returns: the offset of the color stop
+  */
   @property float offset()
   {
     return (cast(hb_color_stop_t*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = the offset of the color stop
+  */
   @property void offset(float propval)
   {
     (cast(hb_color_stop_t*)cPtr).offset = propval;
   }
 
+  /**
+      Get `isForeground` field.
+      Returns: whether the color is the foreground
+  */
   @property harfbuzz.types.Bool isForeground()
   {
     return (cast(hb_color_stop_t*)cPtr).isForeground;
   }
 
+  /**
+      Set `isForeground` field.
+      Params:
+        propval = whether the color is the foreground
+  */
   @property void isForeground(harfbuzz.types.Bool propval)
   {
     (cast(hb_color_stop_t*)cPtr).isForeground = propval;
   }
 
+  /**
+      Get `color` field.
+      Returns: the color, unpremultiplied
+  */
   @property harfbuzz.types.Color color()
   {
     return (cast(hb_color_stop_t*)cPtr).color;
   }
 
+  /**
+      Set `color` field.
+      Params:
+        propval = the color, unpremultiplied
+  */
   @property void color(harfbuzz.types.Color propval)
   {
     (cast(hb_color_stop_t*)cPtr).color = propval;

@@ -33,6 +33,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DiscovererContainerInfo self()
   {
     return this;

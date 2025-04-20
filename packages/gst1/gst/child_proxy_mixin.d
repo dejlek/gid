@@ -36,7 +36,7 @@ template ChildProxyT()
         child = the newly added child
         name = the name of the new child
   */
-  override void childAdded(gobject.object.ObjectG child, string name)
+  override void childAdded(gobject.object.ObjectWrap child, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_child_proxy_child_added(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
@@ -49,7 +49,7 @@ template ChildProxyT()
         child = the removed child
         name = the name of the old child
   */
-  override void childRemoved(gobject.object.ObjectG child, string name)
+  override void childRemoved(gobject.object.ObjectWrap child, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_child_proxy_child_removed(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
@@ -63,11 +63,11 @@ template ChildProxyT()
       Returns: the child object or null if
             not found (index too high).
   */
-  override gobject.object.ObjectG getChildByIndex(uint index)
+  override gobject.object.ObjectWrap getChildByIndex(uint index)
   {
     ObjectC* _cretval;
     _cretval = gst_child_proxy_get_child_by_index(cast(GstChildProxy*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ template ChildProxyT()
       Looks up a child element by the given name.
       
       This virtual method has a default implementation that uses #GstObject
-      together with [gst.object.ObjectGst.getName]. If the interface is to be used with
+      together with [gst.object.ObjectWrap.getName]. If the interface is to be used with
       #GObjects, this methods needs to be overridden.
   
       Params:
@@ -83,12 +83,12 @@ template ChildProxyT()
       Returns: the child object or null if
             not found.
   */
-  override gobject.object.ObjectG getChildByName(string name)
+  override gobject.object.ObjectWrap getChildByName(string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_child_proxy_get_child_by_name(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,12 +107,12 @@ template ChildProxyT()
       Returns: the child object or null if
             not found.
   */
-  override gobject.object.ObjectG getChildByNameRecurse(string name)
+  override gobject.object.ObjectWrap getChildByNameRecurse(string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_child_proxy_get_child_by_name_recurse(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,14 +156,14 @@ template ChildProxyT()
         case the values for pspec and target are not modified. Unref target after
         usage. For plain #GObject target is the same as object.
   */
-  override bool lookup(string name, out gobject.object.ObjectG target, out gobject.param_spec.ParamSpec pspec)
+  override bool lookup(string name, out gobject.object.ObjectWrap target, out gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     ObjectC* _target;
     GParamSpec* _pspec;
     _retval = gst_child_proxy_lookup(cast(GstChildProxy*)cPtr, _name, &_target, &_pspec);
-    target = new gobject.object.ObjectG(cast(void*)_target, Yes.Take);
+    target = new gobject.object.ObjectWrap(cast(void*)_target, Yes.Take);
     pspec = new gobject.param_spec.ParamSpec(cast(void*)_pspec, No.Take);
     return _retval;
   }
@@ -189,7 +189,7 @@ template ChildProxyT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, string name, gst.child_proxy.ChildProxy childProxy))
+          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
   
           `object` the #GObject that was added (optional)
   
@@ -203,7 +203,7 @@ template ChildProxyT()
   ulong connectChildAdded(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.child_proxy.ChildProxy)))
   && Parameters!T.length < 4)
@@ -240,7 +240,7 @@ template ChildProxyT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, string name, gst.child_proxy.ChildProxy childProxy))
+          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
   
           `object` the #GObject that was removed (optional)
   
@@ -254,7 +254,7 @@ template ChildProxyT()
   ulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.child_proxy.ChildProxy)))
   && Parameters!T.length < 4)

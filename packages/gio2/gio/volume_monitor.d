@@ -24,7 +24,7 @@ import gobject.object;
     In order to receive updates about volumes and mounts monitored through GVFS,
     a main loop must be running.
 */
-class VolumeMonitor : gobject.object.ObjectG
+class VolumeMonitor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,6 +46,7 @@ class VolumeMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VolumeMonitor self()
   {
     return this;
@@ -95,21 +96,21 @@ class VolumeMonitor : gobject.object.ObjectG
   static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount)
   {
     GVolume* _cretval;
-    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(gobject.object.ObjectWrap)mount).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Gets the volume monitor used by gio.
       Returns: a reference to the #GVolumeMonitor used by gio. Call
-           [gobject.object.ObjectG.unref] when done with it.
+           [gobject.object.ObjectWrap.unref] when done with it.
   */
   static gio.volume_monitor.VolumeMonitor get()
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
-    auto _retval = ObjectG.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +118,7 @@ class VolumeMonitor : gobject.object.ObjectG
       Gets a list of drives connected to the system.
       
       The returned list should be freed with [glib.list.List.free], after
-      its elements have been unreffed with [gobject.object.ObjectG.unref].
+      its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of connected #GDrive objects.
   */
   gio.drive.Drive[] getConnectedDrives()
@@ -134,14 +135,14 @@ class VolumeMonitor : gobject.object.ObjectG
       Params:
         uuid = the UUID to look for
       Returns: a #GMount or null if no such mount is available.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.mount.Mount getMountForUuid(string uuid)
   {
     GMount* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -149,7 +150,7 @@ class VolumeMonitor : gobject.object.ObjectG
       Gets a list of the mounts on the system.
       
       The returned list should be freed with [glib.list.List.free], after
-      its elements have been unreffed with [gobject.object.ObjectG.unref].
+      its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of #GMount objects.
   */
   gio.mount.Mount[] getMounts()
@@ -166,14 +167,14 @@ class VolumeMonitor : gobject.object.ObjectG
       Params:
         uuid = the UUID to look for
       Returns: a #GVolume or null if no such volume is available.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.volume.Volume getVolumeForUuid(string uuid)
   {
     GVolume* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -181,7 +182,7 @@ class VolumeMonitor : gobject.object.ObjectG
       Gets a list of the volumes on the system.
       
       The returned list should be freed with [glib.list.List.free], after
-      its elements have been unreffed with [gobject.object.ObjectG.unref].
+      its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of #GVolume objects.
   */
   gio.volume.Volume[] getVolumes()

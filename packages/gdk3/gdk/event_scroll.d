@@ -26,7 +26,7 @@ class EventScroll
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.EventScroll");
+      throw new GidConstructException("Null instance pointer for gdk.event_scroll.EventScroll");
 
     cInstance = *cast(GdkEventScroll*)ptr;
 
@@ -40,143 +40,276 @@ class EventScroll
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gdk.types.EventType.Scroll]).
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEventScroll*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gdk.types.EventType.Scroll]).
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEventScroll*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
   @property gdk.window.Window window()
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
   }
 
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
   @property void window(gdk.window.Window propval)
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).window);
   }
 
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
   @property byte sendEvent()
   {
     return (cast(GdkEventScroll*)cPtr).sendEvent;
   }
 
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
   @property void sendEvent(byte propval)
   {
     (cast(GdkEventScroll*)cPtr).sendEvent = propval;
   }
 
+  /**
+      Get `time` field.
+      Returns: the time of the event in milliseconds.
+  */
   @property uint time()
   {
     return (cast(GdkEventScroll*)cPtr).time;
   }
 
+  /**
+      Set `time` field.
+      Params:
+        propval = the time of the event in milliseconds.
+  */
   @property void time(uint propval)
   {
     (cast(GdkEventScroll*)cPtr).time = propval;
   }
 
+  /**
+      Get `x` field.
+      Returns: the x coordinate of the pointer relative to the window.
+  */
   @property double x()
   {
     return (cast(GdkEventScroll*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = the x coordinate of the pointer relative to the window.
+  */
   @property void x(double propval)
   {
     (cast(GdkEventScroll*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: the y coordinate of the pointer relative to the window.
+  */
   @property double y()
   {
     return (cast(GdkEventScroll*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = the y coordinate of the pointer relative to the window.
+  */
   @property void y(double propval)
   {
     (cast(GdkEventScroll*)cPtr).y = propval;
   }
 
+  /**
+      Get `state` field.
+      Returns: a bit-mask representing the state of
+        the modifier keys (e.g. Control, Shift and Alt) and the pointer
+        buttons. See #GdkModifierType.
+  */
   @property gdk.types.ModifierType state()
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventScroll*)cPtr).state;
   }
 
+  /**
+      Set `state` field.
+      Params:
+        propval = a bit-mask representing the state of
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
+  */
   @property void state(gdk.types.ModifierType propval)
   {
     (cast(GdkEventScroll*)cPtr).state = cast(GdkModifierType)propval;
   }
 
+  /**
+      Get `direction` field.
+      Returns: the direction to scroll to (one of [gdk.types.ScrollDirection.Up],
+        [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
+        [gdk.types.ScrollDirection.Smooth]).
+  */
   @property gdk.types.ScrollDirection direction()
   {
     return cast(gdk.types.ScrollDirection)(cast(GdkEventScroll*)cPtr).direction;
   }
 
+  /**
+      Set `direction` field.
+      Params:
+        propval = the direction to scroll to (one of [gdk.types.ScrollDirection.Up],
+          [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
+          [gdk.types.ScrollDirection.Smooth]).
+  */
   @property void direction(gdk.types.ScrollDirection propval)
   {
     (cast(GdkEventScroll*)cPtr).direction = cast(GdkScrollDirection)propval;
   }
 
+  /**
+      Get `device` field.
+      Returns: the master device that the event originated from. Use
+      [gdk.event.Event.getSourceDevice] to get the slave device.
+  */
   @property gdk.device.Device device()
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
   }
 
+  /**
+      Set `device` field.
+      Params:
+        propval = the master device that the event originated from. Use
+        [gdk.event.Event.getSourceDevice] to get the slave device.
+  */
   @property void device(gdk.device.Device propval)
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).device);
   }
 
+  /**
+      Get `xRoot` field.
+      Returns: the x coordinate of the pointer relative to the root of the
+        screen.
+  */
   @property double xRoot()
   {
     return (cast(GdkEventScroll*)cPtr).xRoot;
   }
 
+  /**
+      Set `xRoot` field.
+      Params:
+        propval = the x coordinate of the pointer relative to the root of the
+          screen.
+  */
   @property void xRoot(double propval)
   {
     (cast(GdkEventScroll*)cPtr).xRoot = propval;
   }
 
+  /**
+      Get `yRoot` field.
+      Returns: the y coordinate of the pointer relative to the root of the
+        screen.
+  */
   @property double yRoot()
   {
     return (cast(GdkEventScroll*)cPtr).yRoot;
   }
 
+  /**
+      Set `yRoot` field.
+      Params:
+        propval = the y coordinate of the pointer relative to the root of the
+          screen.
+  */
   @property void yRoot(double propval)
   {
     (cast(GdkEventScroll*)cPtr).yRoot = propval;
   }
 
+  /**
+      Get `deltaX` field.
+      Returns: the x coordinate of the scroll delta
+  */
   @property double deltaX()
   {
     return (cast(GdkEventScroll*)cPtr).deltaX;
   }
 
+  /**
+      Set `deltaX` field.
+      Params:
+        propval = the x coordinate of the scroll delta
+  */
   @property void deltaX(double propval)
   {
     (cast(GdkEventScroll*)cPtr).deltaX = propval;
   }
 
+  /**
+      Get `deltaY` field.
+      Returns: the y coordinate of the scroll delta
+  */
   @property double deltaY()
   {
     return (cast(GdkEventScroll*)cPtr).deltaY;
   }
 
+  /**
+      Set `deltaY` field.
+      Params:
+        propval = the y coordinate of the scroll delta
+  */
   @property void deltaY(double propval)
   {
     (cast(GdkEventScroll*)cPtr).deltaY = propval;
   }
 
+  /** */
   @property uint isStop()
   {
     return (cast(GdkEventScroll*)cPtr).isStop;
   }
 
+  /** */
   @property void isStop(uint propval)
   {
     (cast(GdkEventScroll*)cPtr).isStop = propval;

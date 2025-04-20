@@ -20,7 +20,7 @@ class CairoNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.CairoNode");
+      throw new GidConstructException("Null instance pointer for gsk.cairo_node.CairoNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

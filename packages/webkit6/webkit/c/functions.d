@@ -89,18 +89,18 @@ __gshared extern(C)
   WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) c_webkit_context_menu_get_item_at_position; ///
   GList* function(WebKitContextMenu* menu) c_webkit_context_menu_get_items; ///
   uint function(WebKitContextMenu* menu) c_webkit_context_menu_get_n_items; ///
-  VariantC* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
+  GVariant* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_insert; ///
   WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_last; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_move_item; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_prepend; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_remove; ///
   void function(WebKitContextMenu* menu) c_webkit_context_menu_remove_all; ///
-  void function(WebKitContextMenu* menu, VariantC* userData) c_webkit_context_menu_set_user_data; ///
+  void function(WebKitContextMenu* menu, GVariant* userData) c_webkit_context_menu_set_user_data; ///
 
   // ContextMenuItem
   GType function() c_webkit_context_menu_item_get_type; ///
-  WebKitContextMenuItem* function(GAction* action, const(char)* label, VariantC* target) c_webkit_context_menu_item_new_from_gaction; ///
+  WebKitContextMenuItem* function(GAction* action, const(char)* label, GVariant* target) c_webkit_context_menu_item_new_from_gaction; ///
   WebKitContextMenuItem* function(WebKitContextMenuAction action) c_webkit_context_menu_item_new_from_stock_action; ///
   WebKitContextMenuItem* function(WebKitContextMenuAction action, const(char)* label) c_webkit_context_menu_item_new_from_stock_action_with_label; ///
   WebKitContextMenuItem* function() c_webkit_context_menu_item_new_separator; ///
@@ -678,11 +678,11 @@ __gshared extern(C)
 
   // UserMessage
   GType function() c_webkit_user_message_get_type; ///
-  WebKitUserMessage* function(const(char)* name, VariantC* parameters) c_webkit_user_message_new; ///
-  WebKitUserMessage* function(const(char)* name, VariantC* parameters, GUnixFDList* fdList) c_webkit_user_message_new_with_fd_list; ///
+  WebKitUserMessage* function(const(char)* name, GVariant* parameters) c_webkit_user_message_new; ///
+  WebKitUserMessage* function(const(char)* name, GVariant* parameters, GUnixFDList* fdList) c_webkit_user_message_new_with_fd_list; ///
   GUnixFDList* function(WebKitUserMessage* message) c_webkit_user_message_get_fd_list; ///
   const(char)* function(WebKitUserMessage* message) c_webkit_user_message_get_name; ///
-  VariantC* function(WebKitUserMessage* message) c_webkit_user_message_get_parameters; ///
+  GVariant* function(WebKitUserMessage* message) c_webkit_user_message_get_parameters; ///
   void function(WebKitUserMessage* message, WebKitUserMessage* reply) c_webkit_user_message_send_reply; ///
 
   // UserScript
@@ -721,7 +721,7 @@ __gshared extern(C)
   void function(WebKitWebContext* context, bool enabled) c_webkit_web_context_set_spell_checking_enabled; ///
   void function(WebKitWebContext* context, const(char*)* languages) c_webkit_web_context_set_spell_checking_languages; ///
   void function(WebKitWebContext* context, const(char)* directory) c_webkit_web_context_set_web_process_extensions_directory; ///
-  void function(WebKitWebContext* context, VariantC* userData) c_webkit_web_context_set_web_process_extensions_initialization_user_data; ///
+  void function(WebKitWebContext* context, GVariant* userData) c_webkit_web_context_set_web_process_extensions_initialization_user_data; ///
 
   // WebExtensionMatchPattern
   GType function() c_webkit_web_extension_match_pattern_get_type; ///
@@ -763,7 +763,7 @@ __gshared extern(C)
   // WebView
   GType function() c_webkit_web_view_get_type; ///
   GtkWidget* function() c_webkit_web_view_new; ///
-  void function(WebKitWebView* webView, const(char)* body_, ptrdiff_t length, VariantC* arguments, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_call_async_javascript_function; ///
+  void function(WebKitWebView* webView, const(char)* body_, ptrdiff_t length, GVariant* arguments, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_call_async_javascript_function; ///
   JSCValue* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_call_async_javascript_function_finish; ///
   void function(WebKitWebView* webView, const(char)* command, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_can_execute_editing_command; ///
   bool function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_can_execute_editing_command_finish; ///

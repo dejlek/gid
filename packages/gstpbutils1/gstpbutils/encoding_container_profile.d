@@ -33,6 +33,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EncodingContainerProfile self()
   {
     return this;

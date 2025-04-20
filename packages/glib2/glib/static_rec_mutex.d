@@ -33,7 +33,7 @@ class StaticRecMutex
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.StaticRecMutex");
+      throw new GidConstructException("Null instance pointer for glib.static_rec_mutex.StaticRecMutex");
 
     cInstance = *cast(GStaticRecMutex*)ptr;
 

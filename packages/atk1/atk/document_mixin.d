@@ -95,7 +95,7 @@ template DocumentT()
                  locale of the document content as a whole, or NULL if
                  the document content does not specify a locale.
   
-      Deprecated: Please use [atk.object.ObjectAtk.getObjectLocale] instead.
+      Deprecated: Please use [atk.object.ObjectWrap.getObjectLocale] instead.
   */
   override string getLocale()
   {

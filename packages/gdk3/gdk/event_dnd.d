@@ -19,7 +19,7 @@ class EventDND
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.EventDND");
+      throw new GidConstructException("Null instance pointer for gdk.event_dnd.EventDND");
 
     cInstance = *cast(GdkEventDND*)ptr;
 
@@ -33,73 +33,144 @@ class EventDND
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
+        [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
+        [gdk.types.EventType.DropFinished]).
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEventDND*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
+          [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
+          [gdk.types.EventType.DropFinished]).
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEventDND*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
   @property gdk.window.Window window()
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
   }
 
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
   @property void window(gdk.window.Window propval)
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).window);
   }
 
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
   @property byte sendEvent()
   {
     return (cast(GdkEventDND*)cPtr).sendEvent;
   }
 
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
   @property void sendEvent(byte propval)
   {
     (cast(GdkEventDND*)cPtr).sendEvent = propval;
   }
 
+  /**
+      Get `context` field.
+      Returns: the #GdkDragContext for the current DND operation.
+  */
   @property gdk.drag_context.DragContext context()
   {
     return cToD!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
   }
 
+  /**
+      Set `context` field.
+      Params:
+        propval = the #GdkDragContext for the current DND operation.
+  */
   @property void context(gdk.drag_context.DragContext propval)
   {
     cValueFree!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
     dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).context);
   }
 
+  /**
+      Get `time` field.
+      Returns: the time of the event in milliseconds.
+  */
   @property uint time()
   {
     return (cast(GdkEventDND*)cPtr).time;
   }
 
+  /**
+      Set `time` field.
+      Params:
+        propval = the time of the event in milliseconds.
+  */
   @property void time(uint propval)
   {
     (cast(GdkEventDND*)cPtr).time = propval;
   }
 
+  /**
+      Get `xRoot` field.
+      Returns: the x coordinate of the pointer relative to the root of the
+        screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+  */
   @property short xRoot()
   {
     return (cast(GdkEventDND*)cPtr).xRoot;
   }
 
+  /**
+      Set `xRoot` field.
+      Params:
+        propval = the x coordinate of the pointer relative to the root of the
+          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+  */
   @property void xRoot(short propval)
   {
     (cast(GdkEventDND*)cPtr).xRoot = propval;
   }
 
+  /**
+      Get `yRoot` field.
+      Returns: the y coordinate of the pointer relative to the root of the
+        screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+  */
   @property short yRoot()
   {
     return (cast(GdkEventDND*)cPtr).yRoot;
   }
 
+  /**
+      Set `yRoot` field.
+      Params:
+        propval = the y coordinate of the pointer relative to the root of the
+          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+  */
   @property void yRoot(short propval)
   {
     (cast(GdkEventDND*)cPtr).yRoot = propval;

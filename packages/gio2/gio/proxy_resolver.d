@@ -40,7 +40,7 @@ interface ProxyResolver
   {
     GProxyResolver* _cretval;
     _cretval = g_proxy_resolver_get_default();
-    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ interface ProxyResolver
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null);
 
@@ -100,7 +100,7 @@ interface ProxyResolver
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string[] lookupFinish(gio.async_result.AsyncResult result);
 }

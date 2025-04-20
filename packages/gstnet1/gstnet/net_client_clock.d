@@ -2,6 +2,9 @@
 module gstnet.net_client_clock;
 
 import gid.gid;
+import gobject.object;
+import gst.bus;
+import gst.clock;
 import gst.system_clock;
 import gst.types;
 import gstnet.c.functions;
@@ -54,9 +57,88 @@ class NetClientClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NetClientClock self()
   {
     return this;
+  }
+
+  /** */
+  @property string address()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("address");
+  }
+
+  /** */
+  @property void address(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("address", propval);
+  }
+
+  /** */
+  @property gst.bus.Bus bus()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.bus.Bus)("bus");
+  }
+
+  /** */
+  @property void bus(gst.bus.Bus propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.bus.Bus)("bus", propval);
+  }
+
+  /** */
+  @property gst.clock.Clock internalClock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("internal-clock");
+  }
+
+  /** */
+  @property ulong minimumUpdateInterval()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("minimum-update-interval");
+  }
+
+  /** */
+  @property void minimumUpdateInterval(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("minimum-update-interval", propval);
+  }
+
+  /** */
+  @property int port()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("port");
+  }
+
+  /** */
+  @property void port(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("port", propval);
+  }
+
+  /** */
+  @property int qosDscp()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("qos-dscp");
+  }
+
+  /** */
+  @property void qosDscp(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("qos-dscp", propval);
+  }
+
+  /** */
+  @property ulong roundTripLimit()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("round-trip-limit");
+  }
+
+  /** */
+  @property void roundTripLimit(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("round-trip-limit", propval);
   }
 
   /**

@@ -34,7 +34,7 @@ Params:
 instance = The instance to remove the signal handler from.
 handlerId = Handler id of the handler to be disconnected.
 */
-void signalHandlerDisconnect(gobject.object.ObjectG instance, gulong handlerId)
+void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   g_signal_handler_disconnect(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
   instance.signalClosures.remove(handlerId);
@@ -48,7 +48,7 @@ and should not be used outside of the type system.
 Params:
 instance = The instance whose signal handlers are destroyed
 */
-void signalHandlersDestroy(gobject.object.ObjectG instance)
+void signalHandlersDestroy(gobject.object.ObjectWrap instance)
 {
   g_signal_handlers_destroy(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
   instance.signalClosures.clear;
@@ -133,7 +133,7 @@ void boxedFree(gobject.types.GType boxedType, void* boxed)
       instance = The instance to remove the signal handler from.
           This pointer may be null or invalid, if the handler ID is zero.
 */
-void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectG instance)
+void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap instance)
 {
   g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
 }
@@ -872,13 +872,13 @@ gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string b
       flags = flags for the property specified
     Returns: the newly created #GParamSpec
 */
-gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string blurb, glib.variant_type.VariantType type, glib.variant.VariantG defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string blurb, glib.variant_type.VariantType type, glib.variant.Variant defaultValue, gobject.types.ParamFlags flags)
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _nick = nick.toCString(No.Alloc);
   const(char)* _blurb = blurb.toCString(No.Alloc);
-  _cretval = g_param_spec_variant(_name, _nick, _blurb, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null, defaultValue ? cast(VariantC*)defaultValue.cPtr(Yes.Dup) : null, flags);
+  _cretval = g_param_spec_variant(_name, _nick, _blurb, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null, defaultValue ? cast(GVariant*)defaultValue.cPtr(Yes.Dup) : null, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1127,7 +1127,7 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
          default handler of the signal.
     Returns: the handler ID (always greater than 0)
 */
-gulong signalConnectClosure(gobject.object.ObjectG instance, string detailedSignal, gobject.closure.Closure closure, bool after)
+gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedSignal, gobject.closure.Closure closure, bool after)
 {
   gulong _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
@@ -1153,7 +1153,7 @@ gulong signalConnectClosure(gobject.object.ObjectG instance, string detailedSign
          default handler of the signal.
     Returns: the handler ID (always greater than 0)
 */
-gulong signalConnectClosureById(gobject.object.ObjectG instance, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, bool after)
+gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, bool after)
 {
   gulong _retval;
   _retval = g_signal_connect_closure_by_id(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
@@ -1168,7 +1168,7 @@ gulong signalConnectClosureById(gobject.object.ObjectG instance, uint signalId, 
     Returns: the invocation hint of the innermost
           signal emission, or null if not found.
 */
-gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.ObjectG instance)
+gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.ObjectWrap instance)
 {
   GSignalInvocationHint* _cretval;
   _cretval = g_signal_get_invocation_hint(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
@@ -1192,7 +1192,7 @@ gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.Object
       instance = The instance to block the signal handler of.
       handlerId = Handler id of the handler to be blocked.
 */
-void signalHandlerBlock(gobject.object.ObjectG instance, gulong handlerId)
+void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   g_signal_handler_block(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
 }
@@ -1214,7 +1214,7 @@ void signalHandlerBlock(gobject.object.ObjectG instance, gulong handlerId)
       func = The C closure callback of the handler (useless for non-C closures).
     Returns: A valid non-0 signal handler id for a successful match.
 */
-gulong signalHandlerFind(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   gulong _retval;
   _retval = g_signal_handler_find(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1229,7 +1229,7 @@ gulong signalHandlerFind(gobject.object.ObjectG instance, gobject.types.SignalMa
       handlerId = the handler ID.
     Returns: whether handler_id identifies a handler connected to instance.
 */
-bool signalHandlerIsConnected(gobject.object.ObjectG instance, gulong handlerId)
+bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   bool _retval;
   _retval = g_signal_handler_is_connected(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
@@ -1255,7 +1255,7 @@ bool signalHandlerIsConnected(gobject.object.ObjectG instance, gulong handlerId)
       instance = The instance to unblock the signal handler of.
       handlerId = Handler id of the handler to be unblocked.
 */
-void signalHandlerUnblock(gobject.object.ObjectG instance, gulong handlerId)
+void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   g_signal_handler_unblock(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
 }
@@ -1285,7 +1285,7 @@ void signalHandlerUnblock(gobject.object.ObjectG instance, gulong handlerId)
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersBlockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_block_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1318,7 +1318,7 @@ uint signalHandlersBlockMatched(gobject.object.ObjectG instance, gobject.types.S
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersDisconnectMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_disconnect_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1352,7 +1352,7 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectG instance, gobject.ty
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersUnblockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_unblock_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1385,7 +1385,7 @@ uint signalHandlersUnblockMatched(gobject.object.ObjectG instance, gobject.types
     Returns: true if a handler is connected to the signal, false
                otherwise.
 */
-bool signalHasHandlerPending(gobject.object.ObjectG instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked)
+bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked)
 {
   bool _retval;
   _retval = g_signal_has_handler_pending(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
@@ -1627,7 +1627,7 @@ void signalRemoveEmissionHook(uint signalId, gulong hookId)
       signalId = the signal identifier, as returned by [gobject.global.signalLookup].
       detail = the detail which the signal was emitted with.
 */
-void signalStopEmission(gobject.object.ObjectG instance, uint signalId, glib.types.Quark detail)
+void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail)
 {
   g_signal_stop_emission(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail);
 }
@@ -1642,7 +1642,7 @@ void signalStopEmission(gobject.object.ObjectG instance, uint signalId, glib.typ
       instance = the object whose signal handlers you wish to stop.
       detailedSignal = a string of the form "signal-name::detail".
 */
-void signalStopEmissionByName(gobject.object.ObjectG instance, string detailedSignal)
+void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detailedSignal)
 {
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
   g_signal_stop_emission_by_name(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, _detailedSignal);

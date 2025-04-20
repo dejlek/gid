@@ -132,6 +132,7 @@ class Gesture : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Gesture self()
   {
     return this;
@@ -193,7 +194,7 @@ class Gesture : gtk.event_controller.EventController
   {
     GdkDevice* _cretval;
     _cretval = gtk_gesture_get_device(cast(GtkGesture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 

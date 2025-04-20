@@ -124,7 +124,7 @@ interface Converter
         bytesWritten = will be set to the number of bytes
              written to outbuf on success
       Returns: a #GConverterResult, [gio.types.ConverterResult.Error] on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten);
 

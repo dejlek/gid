@@ -74,7 +74,7 @@ import gst.types;
       }
     ```
 */
-class DeviceMonitor : gst.object.ObjectGst
+class DeviceMonitor : gst.object.ObjectWrap
 {
 
   /** */
@@ -96,9 +96,22 @@ class DeviceMonitor : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DeviceMonitor self()
   {
     return this;
+  }
+
+  /** */
+  @property bool showAll()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-all");
+  }
+
+  /** */
+  @property void showAll(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-all", propval);
   }
 
   /**
@@ -147,7 +160,7 @@ class DeviceMonitor : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_device_monitor_get_bus(cast(GstDeviceMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 

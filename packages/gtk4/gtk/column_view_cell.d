@@ -20,11 +20,11 @@ import gtk.widget;
     [gtk.column_view_cell.ColumnViewCell]s exist in 2 stages:
     
     1. The unbound stage where the listitem is not currently connected to
-       an item in the list. In that case, the [gtk.column_view_cell.ColumnViewCell.GObject.Object]
+       an item in the list. In that case, the [gtk.column_view_cell.ColumnViewCell.item]
        property is set to null.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.column_view_cell.ColumnViewCell.GObject.Object] property is not null.
+       The [gtk.column_view_cell.ColumnViewCell.item] property is not null.
 */
 class ColumnViewCell : gtk.list_item.ListItem
 {
@@ -48,9 +48,75 @@ class ColumnViewCell : gtk.list_item.ListItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnViewCell self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: Widget used for display.
+  */
+  override @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+  */
+  override @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `focusable` property.
+      Returns: If the item can be focused with the keyboard.
+  */
+  override @property bool focusable()
+  {
+    return getFocusable();
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the item can be focused with the keyboard.
+  */
+  override @property void focusable(bool propval)
+  {
+    return setFocusable(propval);
+  }
+
+  /**
+      Get `item` property.
+      Returns: Displayed item.
+  */
+  override @property gobject.object.ObjectWrap item()
+  {
+    return getItem();
+  }
+
+  /**
+      Get `position` property.
+      Returns: Position of the item.
+  */
+  override @property uint position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `selected` property.
+      Returns: If the item is currently selected.
+  */
+  override @property bool selected()
+  {
+    return getSelected();
   }
 
   /**
@@ -62,7 +128,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,11 +150,11 @@ class ColumnViewCell : gtk.list_item.ListItem
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  override gobject.object.ObjectG getItem()
+  override gobject.object.ObjectWrap getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

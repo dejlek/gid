@@ -4,6 +4,8 @@ module gtk.model_button;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gio.icon;
+import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
 import gtk.activatable;
@@ -138,9 +140,205 @@ class ModelButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ModelButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: The state of the button. This is reflecting the state of the associated
+      #GAction.
+  */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The state of the button. This is reflecting the state of the associated
+        #GAction.
+  */
+  @property void active(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
+  }
+
+  /**
+      Get `centered` property.
+      Returns: Whether to render the button contents centered instead of left-aligned.
+      This property should be set for title-like items.
+  */
+  @property bool centered()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("centered");
+  }
+
+  /**
+      Set `centered` property.
+      Params:
+        propval = Whether to render the button contents centered instead of left-aligned.
+        This property should be set for title-like items.
+  */
+  @property void centered(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("centered", propval);
+  }
+
+  /**
+      Get `icon` property.
+      Returns: A #GIcon that will be used if iconic appearance for the button is
+      desired.
+  */
+  @property gio.icon.Icon icon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("icon");
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = A #GIcon that will be used if iconic appearance for the button is
+        desired.
+  */
+  @property void icon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("icon", propval);
+  }
+
+  /**
+      Get `iconic` property.
+      Returns: If this property is set, the button will show an icon if one is set.
+      If no icon is set, the text will be used. This is typically used for
+      horizontal sections of linked buttons.
+  */
+  @property bool iconic()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("iconic");
+  }
+
+  /**
+      Set `iconic` property.
+      Params:
+        propval = If this property is set, the button will show an icon if one is set.
+        If no icon is set, the text will be used. This is typically used for
+        horizontal sections of linked buttons.
+  */
+  @property void iconic(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("iconic", propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Whether to show the submenu indicator at the opposite side than normal.
+      This property should be set for model buttons that 'go back' to a parent
+      menu.
+  */
+  @property bool inverted()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("inverted");
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether to show the submenu indicator at the opposite side than normal.
+        This property should be set for model buttons that 'go back' to a parent
+        menu.
+  */
+  @property void inverted(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("inverted", propval);
+  }
+
+  /**
+      Get `menuName` property.
+      Returns: The name of a submenu to open when the button is activated.
+      If this is set, the button should not have an action associated with it.
+  */
+  @property string menuName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("menu-name");
+  }
+
+  /**
+      Set `menuName` property.
+      Params:
+        propval = The name of a submenu to open when the button is activated.
+        If this is set, the button should not have an action associated with it.
+  */
+  @property void menuName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("menu-name", propval);
+  }
+
+  /**
+      Get `role` property.
+      Returns: Specifies whether the button is a plain, check or radio button.
+      When #GtkActionable:action-name is set, the role will be determined
+      from the action and does not have to be set explicitly.
+  */
+  @property gtk.types.ButtonRole role()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ButtonRole)("role");
+  }
+
+  /**
+      Set `role` property.
+      Params:
+        propval = Specifies whether the button is a plain, check or radio button.
+        When #GtkActionable:action-name is set, the role will be determined
+        from the action and does not have to be set explicitly.
+  */
+  @property void role(gtk.types.ButtonRole propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ButtonRole)("role", propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: The label for the button.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The label for the button.
+  */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: If true, XML tags in the text of the button are interpreted as by
+      [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
+      text will be displayed verbatim.
+  */
+  @property bool useMarkup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-markup");
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = If true, XML tags in the text of the button are interpreted as by
+        [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
+        text will be displayed verbatim.
+  */
+  @property void useMarkup(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-markup", propval);
   }
 
   /**

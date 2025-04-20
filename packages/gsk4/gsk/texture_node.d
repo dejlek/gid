@@ -20,7 +20,7 @@ class TextureNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.TextureNode");
+      throw new GidConstructException("Null instance pointer for gsk.texture_node.TextureNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }
@@ -53,7 +53,7 @@ class TextureNode : gsk.render_node.RenderNode
   {
     GdkTexture* _cretval;
     _cretval = gsk_texture_node_get_texture(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

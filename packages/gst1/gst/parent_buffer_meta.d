@@ -27,7 +27,7 @@ class ParentBufferMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.ParentBufferMeta");
+      throw new GidConstructException("Null instance pointer for gst.parent_buffer_meta.ParentBufferMeta");
 
     cInstance = *cast(GstParentBufferMeta*)ptr;
 
@@ -41,16 +41,29 @@ class ParentBufferMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `parent` field.
+      Returns: the parent #GstMeta structure
+  */
   @property gst.meta.Meta parent()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)cPtr).parent);
   }
 
+  /**
+      Get `buffer` field.
+      Returns: the #GstBuffer on which a reference is being held.
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = the #GstBuffer on which a reference is being held.
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);

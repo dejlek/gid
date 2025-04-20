@@ -34,6 +34,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PanedAccessible self()
   {
     return this;

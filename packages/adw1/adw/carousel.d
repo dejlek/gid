@@ -60,9 +60,197 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Carousel self()
   {
     return this;
+  }
+
+  /**
+      Get `allowLongSwipes` property.
+      Returns: Whether to allow swiping for more than one page at a time.
+      
+      If the value is `FALSE`, each swipe can only move to the adjacent pages.
+  */
+  @property bool allowLongSwipes()
+  {
+    return getAllowLongSwipes();
+  }
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one page at a time.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent pages.
+  */
+  @property void allowLongSwipes(bool propval)
+  {
+    return setAllowLongSwipes(propval);
+  }
+
+  /**
+      Get `allowMouseDrag` property.
+      Returns: Sets whether the [adw.carousel.Carousel] can be dragged with mouse pointer.
+      
+      If the value is `FALSE`, dragging is only available on touch.
+  */
+  @property bool allowMouseDrag()
+  {
+    return getAllowMouseDrag();
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Sets whether the [adw.carousel.Carousel] can be dragged with mouse pointer.
+        
+        If the value is `FALSE`, dragging is only available on touch.
+  */
+  @property void allowMouseDrag(bool propval)
+  {
+    return setAllowMouseDrag(propval);
+  }
+
+  /**
+      Get `allowScrollWheel` property.
+      Returns: Whether the widget will respond to scroll wheel events.
+      
+      If the value is `FALSE`, wheel events will be ignored.
+  */
+  @property bool allowScrollWheel()
+  {
+    return getAllowScrollWheel();
+  }
+
+  /**
+      Set `allowScrollWheel` property.
+      Params:
+        propval = Whether the widget will respond to scroll wheel events.
+        
+        If the value is `FALSE`, wheel events will be ignored.
+  */
+  @property void allowScrollWheel(bool propval)
+  {
+    return setAllowScrollWheel(propval);
+  }
+
+  /**
+      Get `interactive` property.
+      Returns: Whether the carousel can be navigated.
+      
+      This can be used to temporarily disable the carousel to only allow
+      navigating it in a certain state.
+  */
+  @property bool interactive()
+  {
+    return getInteractive();
+  }
+
+  /**
+      Set `interactive` property.
+      Params:
+        propval = Whether the carousel can be navigated.
+        
+        This can be used to temporarily disable the carousel to only allow
+        navigating it in a certain state.
+  */
+  @property void interactive(bool propval)
+  {
+    return setInteractive(propval);
+  }
+
+  /**
+      Get `nPages` property.
+      Returns: The number of pages in a [adw.carousel.Carousel].
+  */
+  @property uint nPages()
+  {
+    return getNPages();
+  }
+
+  /**
+      Get `position` property.
+      Returns: Current scrolling position, unitless.
+      
+      1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
+  */
+  @property double position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `revealDuration` property.
+      Returns: Page reveal duration, in milliseconds.
+      
+      Reveal duration is used when animating adding or removing pages.
+  */
+  @property uint revealDuration()
+  {
+    return getRevealDuration();
+  }
+
+  /**
+      Set `revealDuration` property.
+      Params:
+        propval = Page reveal duration, in milliseconds.
+        
+        Reveal duration is used when animating adding or removing pages.
+  */
+  @property void revealDuration(uint propval)
+  {
+    return setRevealDuration(propval);
+  }
+
+  /**
+      Get `scrollParams` property.
+      Returns: Scroll animation spring parameters.
+      
+      The default value is equivalent to:
+      
+      ```c
+      adw_spring_params_new (1, 0.5, 500)
+      ```
+  */
+  @property adw.spring_params.SpringParams scrollParams()
+  {
+    return getScrollParams();
+  }
+
+  /**
+      Set `scrollParams` property.
+      Params:
+        propval = Scroll animation spring parameters.
+        
+        The default value is equivalent to:
+        
+        ```c
+        adw_spring_params_new (1, 0.5, 500)
+        ```
+  */
+  @property void scrollParams(adw.spring_params.SpringParams propval)
+  {
+    return setScrollParams(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: Spacing between pages in pixels.
+  */
+  @property uint spacing()
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Spacing between pages in pixels.
+  */
+  @property void spacing(uint propval)
+  {
+    return setSpacing(propval);
   }
 
   mixin SwipeableT!();
@@ -156,7 +344,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   {
     GtkWidget* _cretval;
     _cretval = adw_carousel_get_nth_page(cast(AdwCarousel*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

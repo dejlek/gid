@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class RecordBatchWriter : gobject.object.ObjectG
+class RecordBatchWriter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchWriter self()
   {
     return this;
@@ -45,7 +46,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_record_batch_writer_close(cast(GArrowRecordBatchWriter*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -64,7 +65,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_record_batch_writer_write_record_batch(cast(GArrowRecordBatchWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -75,7 +76,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_record_batch_writer_write_table(cast(GArrowRecordBatchWriter*)cPtr, table ? cast(GArrowTable*)table.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

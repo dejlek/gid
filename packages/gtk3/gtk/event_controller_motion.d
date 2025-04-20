@@ -37,6 +37,7 @@ class EventControllerMotion : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventControllerMotion self()
   {
     return this;

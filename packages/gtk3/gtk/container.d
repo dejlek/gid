@@ -244,9 +244,40 @@ class Container : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Container self()
   {
     return this;
+  }
+
+  /** */
+  @property uint borderWidth()
+  {
+    return getBorderWidth();
+  }
+
+  /** */
+  @property void borderWidth(uint propval)
+  {
+    return setBorderWidth(propval);
+  }
+
+  /** */
+  @property void child(gtk.widget.Widget propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("child", propval);
+  }
+
+  /** */
+  @property gtk.types.ResizeMode resizeMode()
+  {
+    return getResizeMode();
+  }
+
+  /** */
+  @property void resizeMode(gtk.types.ResizeMode propval)
+  {
+    return setResizeMode(propval);
   }
 
   /**
@@ -298,7 +329,7 @@ class Container : gtk.widget.Widget
       [child property][child-properties]
       child_property on the child.
       
-      This is an analogue of [gobject.object.ObjectG.notify] for child properties.
+      This is an analogue of [gobject.object.ObjectWrap.notify] for child properties.
       
       Also see [gtk.widget.Widget.childNotify].
   
@@ -318,7 +349,7 @@ class Container : gtk.widget.Widget
       [child property][child-properties] specified by
       pspec on the child.
       
-      This is an analogue of [gobject.object.ObjectG.notifyByPspec] for child properties.
+      This is an analogue of [gobject.object.ObjectWrap.notifyByPspec] for child properties.
   
       Params:
         child = the child widget
@@ -378,7 +409,7 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -408,7 +439,7 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -482,7 +513,7 @@ class Container : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_container_get_focus_child(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -496,7 +527,7 @@ class Container : gtk.widget.Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_hadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -510,7 +541,7 @@ class Container : gtk.widget.Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_vadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -581,7 +612,7 @@ class Container : gtk.widget.Widget
       may be the last reference held; so removing a widget from its
       container can destroy that widget. If you want to use widget
       again, you need to add a reference to it before removing it from
-      a container, using [gobject.object.ObjectG.ref_]. If you don’t want to use widget
+      a container, using [gobject.object.ObjectWrap.ref_]. If you don’t want to use widget
       again it’s usually more efficient to simply destroy it directly
       using [gtk.widget.Widget.destroy] since this will remove it from the
       container and help break any circular reference count cycles.

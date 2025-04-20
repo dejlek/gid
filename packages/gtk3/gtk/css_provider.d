@@ -38,7 +38,7 @@ import gtk.types;
     In the same way, GTK+ tries to load a gtk-keys.css file for the current
     key theme, as defined by #GtkSettings:gtk-key-theme-name.
 */
-class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
+class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {
 
   /** */
@@ -60,6 +60,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CssProvider self()
   {
     return this;
@@ -90,7 +91,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,7 +111,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _variant = variant.toCString(No.Alloc);
     _cretval = gtk_css_provider_get_named(_name, _variant);
-    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +125,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromData(ubyte[] data)
   {
@@ -137,7 +138,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     GError *_err;
     _retval = gtk_css_provider_load_from_data(cast(GtkCssProvider*)cPtr, _data, _length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -151,15 +152,15 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromFile(gio.file.File file)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -173,7 +174,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFromPath(string path)
   {
@@ -182,7 +183,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     GError *_err;
     _retval = gtk_css_provider_load_from_path(cast(GtkCssProvider*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -238,7 +239,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.css_section.CssSection section, glib.error.ErrorG error, gtk.css_provider.CssProvider cssProvider))
+          $(D void callback(gtk.css_section.CssSection section, glib.error.ErrorWrap error, gtk.css_provider.CssProvider cssProvider))
   
           `section` section the error happened in (optional)
   
@@ -253,7 +254,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.css_section.CssSection)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.css_provider.CssProvider)))
   && Parameters!T.length < 4)
   {

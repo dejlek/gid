@@ -17,7 +17,7 @@ import gobject.types;
     Like #GValue, #GWeakRef can be statically allocated, stack- or
     heap-allocated, or embedded in larger structures.
     
-    Unlike [gobject.object.ObjectG.weakRef] and [gobject.object.ObjectG.addWeakPointer], this weak
+    Unlike [gobject.object.ObjectWrap.weakRef] and [gobject.object.ObjectWrap.addWeakPointer], this weak
     reference is thread-safe: converting a weak pointer to a reference is
     atomic with respect to invalidation of weak pointers to destroyed
     objects.
@@ -40,7 +40,7 @@ class WeakRef
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.WeakRef");
+      throw new GidConstructException("Null instance pointer for gobject.weak_ref.WeakRef");
 
     cInstance = *cast(GWeakRef*)ptr;
 

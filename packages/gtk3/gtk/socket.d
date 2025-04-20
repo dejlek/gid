@@ -90,6 +90,7 @@ class Socket : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Socket self()
   {
     return this;
@@ -154,7 +155,7 @@ class Socket : gtk.container.Container
   {
     GdkWindow* _cretval;
     _cretval = gtk_socket_get_plug_window(cast(GtkSocket*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

@@ -32,6 +32,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RunEndEncodedDataType self()
   {
     return this;
@@ -50,7 +51,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_run_end_encoded_data_type_get_run_end_data_type(cast(GArrowRunEndEncodedDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -59,7 +60,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_run_end_encoded_data_type_get_value_data_type(cast(GArrowRunEndEncodedDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 }

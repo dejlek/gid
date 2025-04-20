@@ -46,9 +46,29 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FrameHeaderBar self()
   {
     return this;
+  }
+
+  /**
+      Get `showIcon` property.
+      Returns: Whether to show the icon or not.
+  */
+  @property bool showIcon()
+  {
+    return getShowIcon();
+  }
+
+  /**
+      Set `showIcon` property.
+      Params:
+        propval = Whether to show the icon or not.
+  */
+  @property void showIcon(bool propval)
+  {
+    return setShowIcon(propval);
   }
 
   mixin FrameHeaderT!();
@@ -72,7 +92,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   {
     GtkPopoverMenu* _cretval;
     _cretval = panel_frame_header_bar_get_menu_popover(cast(PanelFrameHeaderBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkPopoverMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkPopoverMenu*)_cretval, No.Take);
     return _retval;
   }
 

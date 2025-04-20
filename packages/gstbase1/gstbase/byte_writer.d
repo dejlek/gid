@@ -24,7 +24,7 @@ class ByteWriter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstBase.ByteWriter");
+      throw new GidConstructException("Null instance pointer for gstbase.byte_writer.ByteWriter");
 
     cInstance = *cast(GstByteWriter*)ptr;
 
@@ -38,36 +38,67 @@ class ByteWriter
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `parent` field.
+      Returns: #GstByteReader parent
+  */
   @property gstbase.byte_reader.ByteReader parent()
   {
     return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)cPtr).parent);
   }
 
+  /**
+      Get `allocSize` field.
+      Returns: Allocation size of the data
+  */
   @property uint allocSize()
   {
     return (cast(GstByteWriter*)cPtr).allocSize;
   }
 
+  /**
+      Set `allocSize` field.
+      Params:
+        propval = Allocation size of the data
+  */
   @property void allocSize(uint propval)
   {
     (cast(GstByteWriter*)cPtr).allocSize = propval;
   }
 
+  /**
+      Get `fixed` field.
+      Returns: If true no reallocations are allowed
+  */
   @property bool fixed()
   {
     return (cast(GstByteWriter*)cPtr).fixed;
   }
 
+  /**
+      Set `fixed` field.
+      Params:
+        propval = If true no reallocations are allowed
+  */
   @property void fixed(bool propval)
   {
     (cast(GstByteWriter*)cPtr).fixed = propval;
   }
 
+  /**
+      Get `owned` field.
+      Returns: If false no reallocations are allowed and copies of data are returned
+  */
   @property bool owned()
   {
     return (cast(GstByteWriter*)cPtr).owned;
   }
 
+  /**
+      Set `owned` field.
+      Params:
+        propval = If false no reallocations are allowed and copies of data are returned
+  */
   @property void owned(bool propval)
   {
     (cast(GstByteWriter*)cPtr).owned = propval;

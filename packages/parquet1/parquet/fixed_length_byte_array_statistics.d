@@ -31,6 +31,7 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FixedLengthByteArrayStatistics self()
   {
     return this;

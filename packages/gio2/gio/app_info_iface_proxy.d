@@ -5,7 +5,7 @@ import gobject.object;
 import gio.app_info;
 import gio.app_info_mixin;
 
-/// Proxy object for [Gio.AppInfo] interface when a GObject has no applicable D binding
+/// Proxy object for [gio.app_info.AppInfo] interface when a GObject has no applicable D binding
 class AppInfoIfaceProxy : IfaceProxy, gio.app_info.AppInfo
 {
   this(void* ptr, Flag!"Take" take = No.Take)

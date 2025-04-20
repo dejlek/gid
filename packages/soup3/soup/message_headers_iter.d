@@ -24,7 +24,7 @@ class MessageHeadersIter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Soup.MessageHeadersIter");
+      throw new GidConstructException("Null instance pointer for soup.message_headers_iter.MessageHeadersIter");
 
     cInstance = *cast(SoupMessageHeadersIter*)ptr;
 

@@ -38,10 +38,10 @@ import gobject.object;
     together correctly.
     
     To create a new [gio.simple_async_result.SimpleAsyncResult], call [gio.simple_async_result.SimpleAsyncResult.new_].
-    If the result needs to be created for a [glib.error.ErrorG], use
+    If the result needs to be created for a [glib.error.ErrorWrap], use
     [gio.simple_async_result.SimpleAsyncResult.newFromError] or
-    [gio.simple_async_result.SimpleAsyncResult.newTakeError]. If a [glib.error.ErrorG] is not available
-    (e.g. the asynchronous operation doesn’t take a [glib.error.ErrorG] argument),
+    [gio.simple_async_result.SimpleAsyncResult.newTakeError]. If a [glib.error.ErrorWrap] is not available
+    (e.g. the asynchronous operation doesn’t take a [glib.error.ErrorWrap] argument),
     but the result still needs to be created for an error condition, use
     [gio.simple_async_result.SimpleAsyncResult.newError] (or
     [gio.simple_async_result.SimpleAsyncResult.setErrorVa] if your application or binding
@@ -179,7 +179,7 @@ import gobject.object;
     }
     ```
 */
-class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
+class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 {
 
   /** */
@@ -201,6 +201,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SimpleAsyncResult self()
   {
     return this;
@@ -228,14 +229,14 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   
       Deprecated: Use [gio.task.Task.new_] instead.
   */
-  this(gobject.object.ObjectG sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null)
+  this(gobject.object.ObjectWrap sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -256,21 +257,21 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   
       Deprecated: Use [gio.task.Task.new_] and [gio.task.Task.returnError] instead.
   */
-  static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorG error)
+  static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -296,10 +297,10 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   
       Deprecated: Use #GTask and [gio.task.Task.isValid] instead.
   */
-  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG source = null, void* sourceTag = null)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap source = null, void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
+    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
     return _retval;
   }
 
@@ -370,7 +371,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
       [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is cancelled then this
       function will return true with dest set appropriately.
       Returns: true if the error was propagated to dest. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use #GTask instead.
   */
@@ -380,7 +381,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
     GError *_err;
     _retval = g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -419,7 +420,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   
       Deprecated: Use #GTask and [gio.task.Task.returnError] instead.
   */
-  void setFromError(glib.error.ErrorG error)
+  void setFromError(glib.error.ErrorWrap error)
   {
     g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }

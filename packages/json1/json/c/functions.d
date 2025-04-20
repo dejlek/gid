@@ -134,7 +134,7 @@ __gshared extern(C)
   bool function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) c_json_object_iter_next; ///
   bool function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) c_json_object_iter_next_ordered; ///
 
-  // ObjectJson
+  // ObjectWrap
   GType function() c_json_object_get_type; ///
   JsonObject* function() c_json_object_new; ///
   void function(JsonObject* object, const(char)* memberName, JsonNode* node) c_json_object_add_member; ///
@@ -243,10 +243,10 @@ __gshared extern(C)
   ObjectC* function(GType gtype, const(char)* data, ptrdiff_t length, GError** _err) c_json_gobject_from_data; ///
   JsonNode* function(ObjectC* gobject) c_json_gobject_serialize; ///
   char* function(ObjectC* gobject, size_t* length) c_json_gobject_to_data; ///
-  VariantC* function(JsonNode* jsonNode, const(char)* signature, GError** _err) c_json_gvariant_deserialize; ///
-  VariantC* function(const(char)* json, ptrdiff_t length, const(char)* signature, GError** _err) c_json_gvariant_deserialize_data; ///
-  JsonNode* function(VariantC* variant) c_json_gvariant_serialize; ///
-  char* function(VariantC* variant, size_t* length) c_json_gvariant_serialize_data; ///
+  GVariant* function(JsonNode* jsonNode, const(char)* signature, GError** _err) c_json_gvariant_deserialize; ///
+  GVariant* function(const(char)* json, ptrdiff_t length, const(char)* signature, GError** _err) c_json_gvariant_deserialize_data; ///
+  JsonNode* function(GVariant* variant) c_json_gvariant_serialize; ///
+  char* function(GVariant* variant, size_t* length) c_json_gvariant_serialize_data; ///
   char* function(ObjectC* gobject, size_t* length) c_json_serialize_gobject; ///
   int function(const(void)* a, const(void)* b) c_json_string_compare; ///
   bool function(const(void)* a, const(void)* b) c_json_string_equal; ///
@@ -588,7 +588,7 @@ alias json_object_iter_next = c_json_object_iter_next;
 /** */
 alias json_object_iter_next_ordered = c_json_object_iter_next_ordered;
 
-// ObjectJson
+// ObjectWrap
 
 /** */
 alias json_object_get_type = c_json_object_get_type;
@@ -1041,7 +1041,7 @@ shared static this()
   gidLink(cast(void**)&json_object_iter_next, "json_object_iter_next", LIBS);
   gidLink(cast(void**)&json_object_iter_next_ordered, "json_object_iter_next_ordered", LIBS);
 
-  // ObjectJson
+  // ObjectWrap
   gidLink(cast(void**)&json_object_get_type, "json_object_get_type", LIBS);
   gidLink(cast(void**)&json_object_new, "json_object_new", LIBS);
   gidLink(cast(void**)&json_object_add_member, "json_object_add_member", LIBS);

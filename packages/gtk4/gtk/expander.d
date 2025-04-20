@@ -34,7 +34,7 @@ import gtk.widget;
     expanded widget yourself, such as when you want to actually create
     the widget at expansion time. In this case, create a [gtk.expander.Expander]
     but do not add a child to it. The expander widget has an
-    [gtk.expander.Expander.gboolean] property which can be used to
+    [gtk.expander.Expander.expanded] property which can be used to
     monitor its expansion state. You should watch this property with
     a signal connection as follows:
     
@@ -131,9 +131,145 @@ class Expander : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Expander self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `expanded` property.
+      Returns: Whether the expander has been opened to reveal the child.
+  */
+  @property bool expanded()
+  {
+    return getExpanded();
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the expander has been opened to reveal the child.
+  */
+  @property void expanded(bool propval)
+  {
+    return setExpanded(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The text of the expanders label.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The text of the expanders label.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `labelWidget` property.
+      Returns: A widget to display instead of the usual expander label.
+  */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /**
+      Set `labelWidget` property.
+      Params:
+        propval = A widget to display instead of the usual expander label.
+  */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
+  }
+
+  /**
+      Get `resizeToplevel` property.
+      Returns: When this property is true, the expander will resize the toplevel
+      widget containing the expander upon expanding and collapsing.
+  */
+  @property bool resizeToplevel()
+  {
+    return getResizeToplevel();
+  }
+
+  /**
+      Set `resizeToplevel` property.
+      Params:
+        propval = When this property is true, the expander will resize the toplevel
+        widget containing the expander upon expanding and collapsing.
+  */
+  @property void resizeToplevel(bool propval)
+  {
+    return setResizeToplevel(propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: Whether the text in the label is Pango markup.
+  */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether the text in the label is Pango markup.
+  */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an underline in the text indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an underline in the text indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**
@@ -171,7 +307,7 @@ class Expander : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +319,7 @@ class Expander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_child(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +363,7 @@ class Expander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

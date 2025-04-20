@@ -37,7 +37,7 @@ interface LoadableIcon
         cancellable = optional #GCancellable object, null to
           ignore.
       Returns: a #GInputStream to read the icon from.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable = null);
 
@@ -62,7 +62,7 @@ interface LoadableIcon
         type = a location to store the type of the loaded
                  icon, null to ignore.
       Returns: a #GInputStream to read the icon from.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type);
 }

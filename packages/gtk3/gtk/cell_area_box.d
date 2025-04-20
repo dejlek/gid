@@ -55,9 +55,29 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellAreaBox self()
   {
     return this;
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: The amount of space to reserve between cells.
+  */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The amount of space to reserve between cells.
+  */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
   }
 
   mixin OrientableT!();

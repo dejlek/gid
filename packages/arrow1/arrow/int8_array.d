@@ -32,6 +32,7 @@ class Int8Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Int8Array self()
   {
     return this;
@@ -75,7 +76,7 @@ class Int8Array : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_int8_array_sum(cast(GArrowInt8Array*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

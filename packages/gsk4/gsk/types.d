@@ -68,7 +68,7 @@ alias ParseLocation = GskParseLocation;
       end = end of the error location
       error = the error
 */
-alias ParseErrorFunc = void delegate(gsk.types.ParseLocation start, gsk.types.ParseLocation end, glib.error.ErrorG error);
+alias ParseErrorFunc = void delegate(gsk.types.ParseLocation start, gsk.types.ParseLocation end, glib.error.ErrorWrap error);
 
 /**
     Prototype of the callback to iterate through the operations of

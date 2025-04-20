@@ -23,7 +23,7 @@ import gtksource.view;
     requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
     of the pointer when the request was made.
 */
-class HoverContext : gobject.object.ObjectG
+class HoverContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -45,6 +45,7 @@ class HoverContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HoverContext self()
   {
     return this;
@@ -83,7 +84,7 @@ class HoverContext : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +101,7 @@ class HoverContext : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 }

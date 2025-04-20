@@ -20,7 +20,7 @@ import soup.types;
     #SoupAuth objects store the authentication data associated with a given bit
     of web space. They are created automatically by `class@Session`.
 */
-class Auth : gobject.object.ObjectG
+class Auth : gobject.object.ObjectWrap
 {
 
   /** */
@@ -42,9 +42,57 @@ class Auth : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Auth self()
   {
     return this;
+  }
+
+  /**
+      Get `authority` property.
+      Returns: The authority (host:port) being authenticated to.
+  */
+  @property string authority()
+  {
+    return getAuthority();
+  }
+
+  /**
+      Set `authority` property.
+      Params:
+        propval = The authority (host:port) being authenticated to.
+  */
+  @property void authority(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("authority", propval);
+  }
+
+  /**
+      Get `realm` property.
+      Returns: The authentication realm.
+  */
+  @property string realm()
+  {
+    return getRealm();
+  }
+
+  /**
+      Set `realm` property.
+      Params:
+        propval = The authentication realm.
+  */
+  @property void realm(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("realm", propval);
+  }
+
+  /**
+      Get `schemeName` property.
+      Returns: The authentication scheme name.
+  */
+  @property string schemeName()
+  {
+    return getSchemeName();
   }
 
   /**

@@ -36,6 +36,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GIOOutputStream self()
   {
     return this;
@@ -54,7 +55,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   {
     GOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 }

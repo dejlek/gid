@@ -18,7 +18,9 @@ import graphene.vec3;
 class Vec4 : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `vec4.Vec4` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_vec4_t.sizeof), Yes.Take);
@@ -49,6 +51,7 @@ class Vec4 : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Vec4 self()
   {
     return this;

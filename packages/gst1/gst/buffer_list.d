@@ -46,6 +46,7 @@ class BufferList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferList self()
   {
     return this;

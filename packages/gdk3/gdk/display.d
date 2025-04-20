@@ -39,7 +39,7 @@ import gobject.object;
     device manager, which you can obtain using
     [gdk.display.Display.getDeviceManager].
 */
-class Display : gobject.object.ObjectG
+class Display : gobject.object.ObjectWrap
 {
 
   /** */
@@ -61,6 +61,7 @@ class Display : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Display self()
   {
     return this;
@@ -77,7 +78,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +95,7 @@ class Display : gobject.object.ObjectG
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,7 +115,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_open_default_libgtk_only();
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,13 +170,13 @@ class Display : gobject.object.ObjectG
       Returns a #GdkAppLaunchContext suitable for launching
       applications on the given display.
       Returns: a new #GdkAppLaunchContext for display.
-            Free with [gobject.object.ObjectG.unref] when done
+            Free with [gobject.object.ObjectWrap.unref] when done
   */
   gdk.app_launch_context.AppLaunchContext getAppLaunchContext()
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,7 +202,7 @@ class Display : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_display_get_default_group(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +214,7 @@ class Display : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_display_get_default_screen(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +226,7 @@ class Display : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +242,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDeviceManager* _cretval;
     _cretval = gdk_display_get_device_manager(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_manager.DeviceManager)(cast(GdkDeviceManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_manager.DeviceManager)(cast(GdkDeviceManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -280,11 +281,11 @@ class Display : gobject.object.ObjectG
       Returns: the #GdkMonitor, or null if
            monitor_num is not a valid monitor number
   */
-  gdk.monitor.MonitorG getMonitor(int monitorNum)
+  gdk.monitor.MonitorWrap getMonitor(int monitorNum)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor(cast(GdkDisplay*)cPtr, monitorNum);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,11 +298,11 @@ class Display : gobject.object.ObjectG
         y = the y coordinate of the point
       Returns: the monitor containing the point
   */
-  gdk.monitor.MonitorG getMonitorAtPoint(int x, int y)
+  gdk.monitor.MonitorWrap getMonitorAtPoint(int x, int y)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_point(cast(GdkDisplay*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -314,11 +315,11 @@ class Display : gobject.object.ObjectG
         window = a #GdkWindow
       Returns: the monitor with the largest overlap with window
   */
-  gdk.monitor.MonitorG getMonitorAtWindow(gdk.window.Window window)
+  gdk.monitor.MonitorWrap getMonitorAtWindow(gdk.window.Window window)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_window(cast(GdkDisplay*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -392,11 +393,11 @@ class Display : gobject.object.ObjectG
       Returns: the primary monitor, or null if no primary
             monitor is configured by the user
   */
-  gdk.monitor.MonitorG getPrimaryMonitor()
+  gdk.monitor.MonitorWrap getPrimaryMonitor()
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_primary_monitor(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,7 +414,7 @@ class Display : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_display_get_screen(cast(GdkDisplay*)cPtr, screenNum);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -437,7 +438,7 @@ class Display : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_display_get_window_at_pointer(cast(GdkDisplay*)cPtr, cast(int*)&winX, cast(int*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -817,7 +818,7 @@ class Display : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitor, gdk.display.Display display))
+          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display))
   
           `monitor` the monitor that was just added (optional)
   
@@ -829,7 +830,7 @@ class Display : gobject.object.ObjectG
   ulong connectMonitorAdded(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {
@@ -862,7 +863,7 @@ class Display : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitor, gdk.display.Display display))
+          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display))
   
           `monitor` the monitor that was just removed (optional)
   
@@ -874,7 +875,7 @@ class Display : gobject.object.ObjectG
   ulong connectMonitorRemoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {

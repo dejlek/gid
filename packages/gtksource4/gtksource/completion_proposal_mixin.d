@@ -37,7 +37,7 @@ template CompletionProposalT()
   override bool equal(gtksource.completion_proposal.CompletionProposal other)
   {
     bool _retval;
-    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(ObjectG)other).cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ template CompletionProposalT()
   {
     GIcon* _cretval;
     _cretval = gtk_source_completion_proposal_get_gicon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template CompletionProposalT()
   {
     PixbufC* _cretval;
     _cretval = gtk_source_completion_proposal_get_icon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

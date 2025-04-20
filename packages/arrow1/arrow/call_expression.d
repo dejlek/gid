@@ -31,6 +31,7 @@ class CallExpression : arrow.expression.Expression
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CallExpression self()
   {
     return this;

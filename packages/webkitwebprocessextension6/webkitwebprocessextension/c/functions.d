@@ -37,18 +37,18 @@ __gshared extern(C)
   WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) c_webkit_context_menu_get_item_at_position; ///
   GList* function(WebKitContextMenu* menu) c_webkit_context_menu_get_items; ///
   uint function(WebKitContextMenu* menu) c_webkit_context_menu_get_n_items; ///
-  VariantC* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
+  GVariant* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_insert; ///
   WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_last; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_move_item; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_prepend; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_remove; ///
   void function(WebKitContextMenu* menu) c_webkit_context_menu_remove_all; ///
-  void function(WebKitContextMenu* menu, VariantC* userData) c_webkit_context_menu_set_user_data; ///
+  void function(WebKitContextMenu* menu, GVariant* userData) c_webkit_context_menu_set_user_data; ///
 
   // ContextMenuItem
   GType function() c_webkit_context_menu_item_get_type; ///
-  WebKitContextMenuItem* function(GAction* action, const(char)* label, VariantC* target) c_webkit_context_menu_item_new_from_gaction; ///
+  WebKitContextMenuItem* function(GAction* action, const(char)* label, GVariant* target) c_webkit_context_menu_item_new_from_gaction; ///
   WebKitContextMenuItem* function(WebKitContextMenuAction action) c_webkit_context_menu_item_new_from_stock_action; ///
   WebKitContextMenuItem* function(WebKitContextMenuAction action, const(char)* label) c_webkit_context_menu_item_new_from_stock_action_with_label; ///
   WebKitContextMenuItem* function() c_webkit_context_menu_item_new_separator; ///
@@ -108,12 +108,11 @@ __gshared extern(C)
 
   // UserMessage
   GType function() c_webkit_user_message_get_type; ///
-  WebKitUserMessage* function(const(char)* name, VariantC* parameters) c_webkit_user_message_new; ///
-  WebKitUserMessage* function(const(char)* name, VariantC* parameters, GUnixFDList* fdList) c_webkit_user_message_new_with_fd_list; ///
-  GQuark function() c_webkit_user_message_error_quark; ///
+  WebKitUserMessage* function(const(char)* name, GVariant* parameters) c_webkit_user_message_new; ///
+  WebKitUserMessage* function(const(char)* name, GVariant* parameters, GUnixFDList* fdList) c_webkit_user_message_new_with_fd_list; ///
   GUnixFDList* function(WebKitUserMessage* message) c_webkit_user_message_get_fd_list; ///
   const(char)* function(WebKitUserMessage* message) c_webkit_user_message_get_name; ///
-  VariantC* function(WebKitUserMessage* message) c_webkit_user_message_get_parameters; ///
+  GVariant* function(WebKitUserMessage* message) c_webkit_user_message_get_parameters; ///
   void function(WebKitUserMessage* message, WebKitUserMessage* reply) c_webkit_user_message_send_reply; ///
 
   // WebEditor
@@ -406,9 +405,6 @@ alias webkit_user_message_new = c_webkit_user_message_new;
 alias webkit_user_message_new_with_fd_list = c_webkit_user_message_new_with_fd_list;
 
 /** */
-alias webkit_user_message_error_quark = c_webkit_user_message_error_quark;
-
-/** */
 alias webkit_user_message_get_fd_list = c_webkit_user_message_get_fd_list;
 
 /** */
@@ -621,7 +617,6 @@ shared static this()
   gidLink(cast(void**)&webkit_user_message_get_type, "webkit_user_message_get_type", LIBS);
   gidLink(cast(void**)&webkit_user_message_new, "webkit_user_message_new", LIBS);
   gidLink(cast(void**)&webkit_user_message_new_with_fd_list, "webkit_user_message_new_with_fd_list", LIBS);
-  gidLink(cast(void**)&webkit_user_message_error_quark, "webkit_user_message_error_quark", LIBS);
   gidLink(cast(void**)&webkit_user_message_get_fd_list, "webkit_user_message_get_fd_list", LIBS);
   gidLink(cast(void**)&webkit_user_message_get_name, "webkit_user_message_get_name", LIBS);
   gidLink(cast(void**)&webkit_user_message_get_parameters, "webkit_user_message_get_parameters", LIBS);

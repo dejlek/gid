@@ -65,9 +65,35 @@ class ColumnViewSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnViewSorter self()
   {
     return this;
+  }
+
+  /**
+      Get `primarySortColumn` property.
+      Returns: The primary sort column.
+      
+      The primary sort column is the one that displays the triangle
+      in a column view header.
+  */
+  @property gtk.column_view_column.ColumnViewColumn primarySortColumn()
+  {
+    return getPrimarySortColumn();
+  }
+
+  /**
+      Get `primarySortOrder` property.
+      Returns: The primary sort order.
+      
+      The primary sort order determines whether the triangle displayed
+      in the column view header of the primary sort column points upwards
+      or downwards.
+  */
+  @property gtk.types.SortType primarySortOrder()
+  {
+    return getPrimarySortOrder();
   }
 
   /**
@@ -104,7 +130,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)cPtr, position, &sortOrder);
-    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +145,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 

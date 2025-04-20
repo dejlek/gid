@@ -30,6 +30,7 @@ class DoubleStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DoubleStatistics self()
   {
     return this;

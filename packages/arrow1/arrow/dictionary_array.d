@@ -34,6 +34,7 @@ class DictionaryArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DictionaryArray self()
   {
     return this;
@@ -46,7 +47,7 @@ class DictionaryArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_dictionary_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, dictionary ? cast(GArrowArray*)dictionary.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -55,7 +56,7 @@ class DictionaryArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -64,7 +65,7 @@ class DictionaryArray : arrow.array.Array
   {
     GArrowDictionaryDataType* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary_data_type(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.dictionary_data_type.DictionaryDataType)(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.dictionary_data_type.DictionaryDataType)(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +74,7 @@ class DictionaryArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

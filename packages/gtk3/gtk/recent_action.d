@@ -45,9 +45,29 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentAction self()
   {
     return this;
+  }
+
+  /**
+      Get `showNumbers` property.
+      Returns: Whether the items should be displayed with a number.
+  */
+  @property bool showNumbers()
+  {
+    return getShowNumbers();
+  }
+
+  /**
+      Set `showNumbers` property.
+      Params:
+        propval = Whether the items should be displayed with a number.
+  */
+  @property void showNumbers(bool propval)
+  {
+    return setShowNumbers(propval);
   }
 
   mixin RecentChooserT!();
@@ -101,7 +121,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
     return _retval;
   }
 

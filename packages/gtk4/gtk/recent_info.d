@@ -44,6 +44,7 @@ class RecentInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentInfo self()
   {
     return this;
@@ -60,7 +61,7 @@ class RecentInfo : gobject.boxed.Boxed
             be mapped to a [gio.app_info.AppInfo]; if null is used then the default
             application for the MIME type is used
       Returns: the newly created [gio.app_info.AppInfo]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.app_info.AppInfo createAppInfo(string appName = null)
   {
@@ -69,8 +70,8 @@ class RecentInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = gtk_recent_info_create_app_info(cast(GtkRecentInfo*)cPtr, _appName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -203,7 +204,7 @@ class RecentInfo : gobject.boxed.Boxed
   {
     GIcon* _cretval;
     _cretval = gtk_recent_info_get_gicon(cast(GtkRecentInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 

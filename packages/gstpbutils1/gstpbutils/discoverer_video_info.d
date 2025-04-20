@@ -32,6 +32,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DiscovererVideoInfo self()
   {
     return this;

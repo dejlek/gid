@@ -48,126 +48,234 @@ class VideoInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoInfo self()
   {
     return this;
   }
 
+  /**
+      Get `finfo` field.
+      Returns: the format info of the video
+  */
   @property gstvideo.video_format_info.VideoFormatInfo finfo()
   {
     return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)cPtr).finfo);
   }
 
+  /**
+      Get `interlaceMode` field.
+      Returns: the interlace mode
+  */
   @property gstvideo.types.VideoInterlaceMode interlaceMode()
   {
     return cast(gstvideo.types.VideoInterlaceMode)(cast(GstVideoInfo*)cPtr).interlaceMode;
   }
 
+  /**
+      Set `interlaceMode` field.
+      Params:
+        propval = the interlace mode
+  */
   @property void interlaceMode(gstvideo.types.VideoInterlaceMode propval)
   {
     (cast(GstVideoInfo*)cPtr).interlaceMode = cast(GstVideoInterlaceMode)propval;
   }
 
+  /**
+      Get `flags` field.
+      Returns: additional video flags
+  */
   @property gstvideo.types.VideoFlags flags()
   {
     return cast(gstvideo.types.VideoFlags)(cast(GstVideoInfo*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = additional video flags
+  */
   @property void flags(gstvideo.types.VideoFlags propval)
   {
     (cast(GstVideoInfo*)cPtr).flags = cast(GstVideoFlags)propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: the width of the video
+  */
   @property int width()
   {
     return (cast(GstVideoInfo*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the width of the video
+  */
   @property void width(int propval)
   {
     (cast(GstVideoInfo*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the height of the video
+  */
   @property int height()
   {
     return (cast(GstVideoInfo*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the height of the video
+  */
   @property void height(int propval)
   {
     (cast(GstVideoInfo*)cPtr).height = propval;
   }
 
+  /**
+      Get `size` field.
+      Returns: the default size of one frame
+  */
   @property size_t size()
   {
     return (cast(GstVideoInfo*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = the default size of one frame
+  */
   @property void size(size_t propval)
   {
     (cast(GstVideoInfo*)cPtr).size = propval;
   }
 
+  /**
+      Get `views` field.
+      Returns: the number of views for multiview video
+  */
   @property int views()
   {
     return (cast(GstVideoInfo*)cPtr).views;
   }
 
+  /**
+      Set `views` field.
+      Params:
+        propval = the number of views for multiview video
+  */
   @property void views(int propval)
   {
     (cast(GstVideoInfo*)cPtr).views = propval;
   }
 
+  /**
+      Get `chromaSite` field.
+      Returns: a #GstVideoChromaSite.
+  */
   @property gstvideo.types.VideoChromaSite chromaSite()
   {
     return cast(gstvideo.types.VideoChromaSite)(cast(GstVideoInfo*)cPtr).chromaSite;
   }
 
+  /**
+      Set `chromaSite` field.
+      Params:
+        propval = a #GstVideoChromaSite.
+  */
   @property void chromaSite(gstvideo.types.VideoChromaSite propval)
   {
     (cast(GstVideoInfo*)cPtr).chromaSite = cast(GstVideoChromaSite)propval;
   }
 
+  /**
+      Get `colorimetry` field.
+      Returns: the colorimetry info
+  */
   @property gstvideo.video_colorimetry.VideoColorimetry colorimetry()
   {
     return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)cPtr).colorimetry);
   }
 
+  /**
+      Get `parN` field.
+      Returns: the pixel-aspect-ratio numerator
+  */
   @property int parN()
   {
     return (cast(GstVideoInfo*)cPtr).parN;
   }
 
+  /**
+      Set `parN` field.
+      Params:
+        propval = the pixel-aspect-ratio numerator
+  */
   @property void parN(int propval)
   {
     (cast(GstVideoInfo*)cPtr).parN = propval;
   }
 
+  /**
+      Get `parD` field.
+      Returns: the pixel-aspect-ratio denominator
+  */
   @property int parD()
   {
     return (cast(GstVideoInfo*)cPtr).parD;
   }
 
+  /**
+      Set `parD` field.
+      Params:
+        propval = the pixel-aspect-ratio denominator
+  */
   @property void parD(int propval)
   {
     (cast(GstVideoInfo*)cPtr).parD = propval;
   }
 
+  /**
+      Get `fpsN` field.
+      Returns: the framerate numerator
+  */
   @property int fpsN()
   {
     return (cast(GstVideoInfo*)cPtr).fpsN;
   }
 
+  /**
+      Set `fpsN` field.
+      Params:
+        propval = the framerate numerator
+  */
   @property void fpsN(int propval)
   {
     (cast(GstVideoInfo*)cPtr).fpsN = propval;
   }
 
+  /**
+      Get `fpsD` field.
+      Returns: the framerate denominator
+  */
   @property int fpsD()
   {
     return (cast(GstVideoInfo*)cPtr).fpsD;
   }
 
+  /**
+      Set `fpsD` field.
+      Params:
+        propval = the framerate denominator
+  */
   @property void fpsD(int propval)
   {
     (cast(GstVideoInfo*)cPtr).fpsD = propval;

@@ -179,9 +179,179 @@ class MessageDialog : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MessageDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `body_` property.
+      Returns: The body text of the dialog.
+  */
+  @property string body_()
+  {
+    return getBody();
+  }
+
+  /**
+      Set `body_` property.
+      Params:
+        propval = The body text of the dialog.
+  */
+  @property void body_(string propval)
+  {
+    return setBody(propval);
+  }
+
+  /**
+      Get `bodyUseMarkup` property.
+      Returns: Whether the body text includes Pango markup.
+      
+      See `func@Pango.parse_markup`.
+  */
+  @property bool bodyUseMarkup()
+  {
+    return getBodyUseMarkup();
+  }
+
+  /**
+      Set `bodyUseMarkup` property.
+      Params:
+        propval = Whether the body text includes Pango markup.
+        
+        See `func@Pango.parse_markup`.
+  */
+  @property void bodyUseMarkup(bool propval)
+  {
+    return setBodyUseMarkup(propval);
+  }
+
+  /**
+      Get `closeResponse` property.
+      Returns: The ID of the close response.
+      
+      It will be passed to `signal@MessageDialog::response` if the window is
+      closed by pressing <kbd>Escape</kbd> or with a system action.
+      
+      It doesn't have to correspond to any of the responses in the dialog.
+      
+      The default close response is `close`.
+  */
+  @property string closeResponse()
+  {
+    return getCloseResponse();
+  }
+
+  /**
+      Set `closeResponse` property.
+      Params:
+        propval = The ID of the close response.
+        
+        It will be passed to `signal@MessageDialog::response` if the window is
+        closed by pressing <kbd>Escape</kbd> or with a system action.
+        
+        It doesn't have to correspond to any of the responses in the dialog.
+        
+        The default close response is `close`.
+  */
+  @property void closeResponse(string propval)
+  {
+    return setCloseResponse(propval);
+  }
+
+  /**
+      Get `defaultResponse` property.
+      Returns: The response ID of the default response.
+      
+      If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+      
+      If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
+      will do nothing.
+  */
+  @property string defaultResponse()
+  {
+    return getDefaultResponse();
+  }
+
+  /**
+      Set `defaultResponse` property.
+      Params:
+        propval = The response ID of the default response.
+        
+        If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+        
+        If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
+        will do nothing.
+  */
+  @property void defaultResponse(string propval)
+  {
+    return setDefaultResponse(propval);
+  }
+
+  /**
+      Get `extraChild` property.
+      Returns: The child widget.
+      
+      Displayed below the heading and body.
+  */
+  @property gtk.widget.Widget extraChild()
+  {
+    return getExtraChild();
+  }
+
+  /**
+      Set `extraChild` property.
+      Params:
+        propval = The child widget.
+        
+        Displayed below the heading and body.
+  */
+  @property void extraChild(gtk.widget.Widget propval)
+  {
+    return setExtraChild(propval);
+  }
+
+  /**
+      Get `heading` property.
+      Returns: The heading of the dialog.
+  */
+  @property string heading()
+  {
+    return getHeading();
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The heading of the dialog.
+  */
+  @property void heading(string propval)
+  {
+    return setHeading(propval);
+  }
+
+  /**
+      Get `headingUseMarkup` property.
+      Returns: Whether the heading includes Pango markup.
+      
+      See `func@Pango.parse_markup`.
+  */
+  @property bool headingUseMarkup()
+  {
+    return getHeadingUseMarkup();
+  }
+
+  /**
+      Set `headingUseMarkup` property.
+      Params:
+        propval = Whether the heading includes Pango markup.
+        
+        See `func@Pango.parse_markup`.
+  */
+  @property void headingUseMarkup(bool propval)
+  {
+    return setHeadingUseMarkup(propval);
   }
 
   /**
@@ -261,7 +431,7 @@ class MessageDialog : gtk.window.Window
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -280,7 +450,7 @@ class MessageDialog : gtk.window.Window
   string chooseFinish(gio.async_result.AsyncResult result)
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null);
+    _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -340,7 +510,7 @@ class MessageDialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = adw_message_dialog_get_extra_child(cast(AdwMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -593,7 +763,7 @@ class MessageDialog : gtk.window.Window
       Sets whether response is enabled.
       
       If response is not enabled, the corresponding button will have
-      [gtk.widget.Widget.gboolean] set to `FALSE` and it can't be activated as
+      [gtk.widget.Widget.sensitive] set to `FALSE` and it can't be activated as
       a default response.
       
       response can still be used as `propertyMessageDialog:close-response` while

@@ -40,6 +40,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InetSocketAddress self()
   {
     return this;
@@ -77,20 +78,20 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     GSocketAddress* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
-    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Gets address's #GInetAddress.
       Returns: the #GInetAddress for address, which must be
-        [gobject.object.ObjectG.ref_]'d if it will be stored
+        [gobject.object.ObjectWrap.ref_]'d if it will be stored
   */
   gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
     _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 

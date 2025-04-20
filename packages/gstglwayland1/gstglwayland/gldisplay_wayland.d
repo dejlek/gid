@@ -34,6 +34,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLDisplayWayland self()
   {
     return this;
@@ -66,7 +67,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayWayland* _cretval;
     _cretval = gst_gl_display_wayland_new_with_display(display);
-    auto _retval = ObjectG.getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
     return _retval;
   }
 }

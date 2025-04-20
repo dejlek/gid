@@ -204,6 +204,7 @@ class Resource : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Resource self()
   {
     return this;
@@ -226,7 +227,7 @@ class Resource : gobject.boxed.Boxed
       Params:
         data = A #GBytes
       Returns: a new #GResource, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.resource.Resource newFromData(glib.bytes.Bytes data)
   {
@@ -234,7 +235,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_new_from_data(data ? cast(GBytes*)data.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -253,7 +254,7 @@ class Resource : gobject.boxed.Boxed
         path = A pathname inside the resource
         lookupFlags = A #GResourceLookupFlags
       Returns: an array of constant strings
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string[] enumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -262,7 +263,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_enumerate_children(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string[] _retval;
 
     if (_cretval)
@@ -291,7 +292,7 @@ class Resource : gobject.boxed.Boxed
         flags = a location to place the flags about the file,
              or null if the length is not needed
       Returns: true if the file was found. false if there were errors
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
@@ -300,7 +301,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _retval = g_resource_get_info(cast(GResource*)cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -325,7 +326,7 @@ class Resource : gobject.boxed.Boxed
         lookupFlags = A #GResourceLookupFlags
       Returns: #GBytes or null on error.
             Free the returned object with [glib.bytes.Bytes.unref]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -334,7 +335,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_lookup_data(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -349,8 +350,8 @@ class Resource : gobject.boxed.Boxed
         path = A pathname inside the resource
         lookupFlags = A #GResourceLookupFlags
       Returns: #GInputStream or null on error.
-            Free the returned object with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+            Free the returned object with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -359,8 +360,8 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_open_stream(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -379,7 +380,7 @@ class Resource : gobject.boxed.Boxed
       Params:
         filename = the path of a filename to load, in the GLib filename encoding
       Returns: a new #GResource, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.resource.Resource load(string filename)
   {
@@ -388,7 +389,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_load(_filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

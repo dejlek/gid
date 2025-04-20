@@ -21,7 +21,7 @@ class GLSyncMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstGL.GLSyncMeta");
+      throw new GidConstructException("Null instance pointer for gstgl.glsync_meta.GLSyncMeta");
 
     cInstance = *cast(GstGLSyncMeta*)ptr;
 
@@ -35,80 +35,138 @@ class GLSyncMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `parent` field.
+      Returns: the parent #GstMeta
+  */
   @property gst.meta.Meta parent()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)cPtr).parent);
   }
 
+  /**
+      Get `context` field.
+      Returns: the #GstGLContext used to allocate the meta
+  */
   @property gstgl.glcontext.GLContext context()
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
   }
 
+  /**
+      Set `context` field.
+      Params:
+        propval = the #GstGLContext used to allocate the meta
+  */
   @property void context(gstgl.glcontext.GLContext propval)
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)cPtr).context);
   }
 
+  /** Function alias for field `setSync` */
   alias SetSyncFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `setSync` field.
+      Returns: set a sync point in the OpenGL command stream
+  */
   @property SetSyncFuncType setSync()
   {
     return (cast(GstGLSyncMeta*)cPtr).setSync;
   }
 
+  /** Function alias for field `setSyncGl` */
   alias SetSyncGlFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `setSyncGl` field.
+      Returns: the same as @set_sync but called from @context's thread
+  */
   @property SetSyncGlFuncType setSyncGl()
   {
     return (cast(GstGLSyncMeta*)cPtr).setSyncGl;
   }
 
+  /** Function alias for field `wait` */
   alias WaitFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `wait` field.
+      Returns: execute a wait on the previously set sync point into the OpenGL command stream
+  */
   @property WaitFuncType wait()
   {
     return (cast(GstGLSyncMeta*)cPtr).wait;
   }
 
+  /** Function alias for field `waitGl` */
   alias WaitGlFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `waitGl` field.
+      Returns: the same as @wait but called from @context's thread
+  */
   @property WaitGlFuncType waitGl()
   {
     return (cast(GstGLSyncMeta*)cPtr).waitGl;
   }
 
+  /** Function alias for field `waitCpu` */
   alias WaitCpuFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `waitCpu` field.
+      Returns: wait for the previously set sync point to pass from the CPU
+  */
   @property WaitCpuFuncType waitCpu()
   {
     return (cast(GstGLSyncMeta*)cPtr).waitCpu;
   }
 
+  /** Function alias for field `waitCpuGl` */
   alias WaitCpuGlFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `waitCpuGl` field.
+      Returns: the same as @wait_cpu but called from @context's thread
+  */
   @property WaitCpuGlFuncType waitCpuGl()
   {
     return (cast(GstGLSyncMeta*)cPtr).waitCpuGl;
   }
 
+  /** Function alias for field `copy` */
   alias CopyFuncType = extern(C) void function(GstGLSyncMeta* src, GstBuffer* sbuffer, GstGLSyncMeta* dest, GstBuffer* dbuffer);
 
+  /**
+      Get `copy` field.
+      Returns: copy @data into a new #GstGLSyncMeta
+  */
   @property CopyFuncType copy()
   {
     return (cast(GstGLSyncMeta*)cPtr).copy;
   }
 
+  /** Function alias for field `free` */
   alias FreeFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `free` field.
+      Returns: free @data
+  */
   @property FreeFuncType free()
   {
     return (cast(GstGLSyncMeta*)cPtr).free;
   }
 
+  /** Function alias for field `freeGl` */
   alias FreeGlFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
+  /**
+      Get `freeGl` field.
+      Returns: free @data in @context's thread
+  */
   @property FreeGlFuncType freeGl()
   {
     return (cast(GstGLSyncMeta*)cPtr).freeGl;

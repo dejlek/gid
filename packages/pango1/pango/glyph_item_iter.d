@@ -53,10 +53,29 @@ import pango.types;
 class GlyphItemIter : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glyph_item_iter.GlyphItemIter` boxed type.
+      Params:
+        glyphItem = 
+        text = 
+        startGlyph = 
+        startIndex = 
+        startChar = 
+        endGlyph = 
+        endIndex = 
+        endChar = 
+  */
+  this(pango.glyph_item.GlyphItem glyphItem = pango.glyph_item.GlyphItem.init, string text = string.init, int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init)
   {
     super(gMalloc(PangoGlyphItemIter.sizeof), Yes.Take);
+    this.glyphItem = glyphItem;
+    this.text = text;
+    this.startGlyph = startGlyph;
+    this.startIndex = startIndex;
+    this.startChar = startChar;
+    this.endGlyph = endGlyph;
+    this.endIndex = endIndex;
+    this.endChar = endChar;
   }
 
   /** */
@@ -84,88 +103,105 @@ class GlyphItemIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GlyphItemIter self()
   {
     return this;
   }
 
+  /** */
   @property pango.glyph_item.GlyphItem glyphItem()
   {
     return cToD!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
   }
 
+  /** */
   @property void glyphItem(pango.glyph_item.GlyphItem propval)
   {
     cValueFree!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
     dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)cPtr).glyphItem);
   }
 
+  /** */
   @property string text()
   {
     return cToD!(string)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).text);
   }
 
+  /** */
   @property void text(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).text);
     dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)cPtr).text);
   }
 
+  /** */
   @property int startGlyph()
   {
     return (cast(PangoGlyphItemIter*)cPtr).startGlyph;
   }
 
+  /** */
   @property void startGlyph(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).startGlyph = propval;
   }
 
+  /** */
   @property int startIndex()
   {
     return (cast(PangoGlyphItemIter*)cPtr).startIndex;
   }
 
+  /** */
   @property void startIndex(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).startIndex = propval;
   }
 
+  /** */
   @property int startChar()
   {
     return (cast(PangoGlyphItemIter*)cPtr).startChar;
   }
 
+  /** */
   @property void startChar(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).startChar = propval;
   }
 
+  /** */
   @property int endGlyph()
   {
     return (cast(PangoGlyphItemIter*)cPtr).endGlyph;
   }
 
+  /** */
   @property void endGlyph(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).endGlyph = propval;
   }
 
+  /** */
   @property int endIndex()
   {
     return (cast(PangoGlyphItemIter*)cPtr).endIndex;
   }
 
+  /** */
   @property void endIndex(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).endIndex = propval;
   }
 
+  /** */
   @property int endChar()
   {
     return (cast(PangoGlyphItemIter*)cPtr).endChar;
   }
 
+  /** */
   @property void endChar(int propval)
   {
     (cast(PangoGlyphItemIter*)cPtr).endChar = propval;

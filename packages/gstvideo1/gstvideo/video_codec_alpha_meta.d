@@ -25,7 +25,7 @@ class VideoCodecAlphaMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoCodecAlphaMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta");
 
     cInstance = *cast(GstVideoCodecAlphaMeta*)ptr;
 
@@ -39,16 +39,29 @@ class VideoCodecAlphaMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)cPtr).meta);
   }
 
+  /**
+      Get `buffer` field.
+      Returns: the encoded alpha frame
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = the encoded alpha frame
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)cPtr).buffer);

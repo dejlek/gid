@@ -117,9 +117,310 @@ class Menu : gtk.menu_shell.MenuShell
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Menu self()
   {
     return this;
+  }
+
+  /**
+      Get `accelGroup` property.
+      Returns: The accel group holding accelerators for the menu.
+  */
+  @property gtk.accel_group.AccelGroup accelGroup()
+  {
+    return getAccelGroup();
+  }
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The accel group holding accelerators for the menu.
+  */
+  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setAccelGroup(propval);
+  }
+
+  /**
+      Get `accelPath` property.
+      Returns: An accel path used to conveniently construct accel paths of child items.
+  */
+  @property string accelPath()
+  {
+    return getAccelPath();
+  }
+
+  /**
+      Set `accelPath` property.
+      Params:
+        propval = An accel path used to conveniently construct accel paths of child items.
+  */
+  @property void accelPath(string propval)
+  {
+    return setAccelPath(propval);
+  }
+
+  /**
+      Get `active` property.
+      Returns: The index of the currently selected menu item, or -1 if no
+      menu item is selected.
+  */
+  @property int active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("active");
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The index of the currently selected menu item, or -1 if no
+        menu item is selected.
+  */
+  @property void active(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("active", propval);
+  }
+
+  /**
+      Get `anchorHints` property.
+      Returns: Positioning hints for aligning the menu relative to a rectangle.
+      
+      These hints determine how the menu should be positioned in the case that
+      the menu would fall off-screen if placed in its ideal position.
+      
+      ![](popup-flip.png)
+      
+      For example, [gdk.types.AnchorHints.FlipY] will replace [gdk.types.Gravity.NorthWest] with
+      [gdk.types.Gravity.SouthWest] and vice versa if the menu extends beyond the
+      bottom edge of the monitor.
+      
+      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+      gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
+      #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property gdk.types.AnchorHints anchorHints()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.AnchorHints)("anchor-hints");
+  }
+
+  /**
+      Set `anchorHints` property.
+      Params:
+        propval = Positioning hints for aligning the menu relative to a rectangle.
+        
+        These hints determine how the menu should be positioned in the case that
+        the menu would fall off-screen if placed in its ideal position.
+        
+        ![](popup-flip.png)
+        
+        For example, [gdk.types.AnchorHints.FlipY] will replace [gdk.types.Gravity.NorthWest] with
+        [gdk.types.Gravity.SouthWest] and vice versa if the menu extends beyond the
+        bottom edge of the monitor.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
+        #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property void anchorHints(gdk.types.AnchorHints propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.AnchorHints)("anchor-hints", propval);
+  }
+
+  /**
+      Get `attachWidget` property.
+      Returns: The widget the menu is attached to. Setting this property attaches
+      the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
+      use [gtk.menu.Menu.attachToWidget] directly.
+  */
+  @property gtk.widget.Widget attachWidget()
+  {
+    return getAttachWidget();
+  }
+
+  /**
+      Set `attachWidget` property.
+      Params:
+        propval = The widget the menu is attached to. Setting this property attaches
+        the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
+        use [gtk.menu.Menu.attachToWidget] directly.
+  */
+  @property void attachWidget(gtk.widget.Widget propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("attach-widget", propval);
+  }
+
+  /**
+      Get `menuTypeHint` property.
+      Returns: The #GdkWindowTypeHint to use for the menu's #GdkWindow.
+      
+      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+      #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+  */
+  @property gdk.types.WindowTypeHint menuTypeHint()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.WindowTypeHint)("menu-type-hint");
+  }
+
+  /**
+      Set `menuTypeHint` property.
+      Params:
+        propval = The #GdkWindowTypeHint to use for the menu's #GdkWindow.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+  */
+  @property void menuTypeHint(gdk.types.WindowTypeHint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.WindowTypeHint)("menu-type-hint", propval);
+  }
+
+  /**
+      Get `monitor` property.
+      Returns: The monitor the menu will be popped up on.
+  */
+  @property int monitor()
+  {
+    return getMonitor();
+  }
+
+  /**
+      Set `monitor` property.
+      Params:
+        propval = The monitor the menu will be popped up on.
+  */
+  @property void monitor(int propval)
+  {
+    return setMonitor(propval);
+  }
+
+  /**
+      Get `rectAnchorDx` property.
+      Returns: Horizontal offset to apply to the menu, i.e. the rectangle or widget
+      anchor.
+      
+      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+      #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property int rectAnchorDx()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("rect-anchor-dx");
+  }
+
+  /**
+      Set `rectAnchorDx` property.
+      Params:
+        propval = Horizontal offset to apply to the menu, i.e. the rectangle or widget
+        anchor.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property void rectAnchorDx(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("rect-anchor-dx", propval);
+  }
+
+  /**
+      Get `rectAnchorDy` property.
+      Returns: Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
+      
+      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+      #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property int rectAnchorDy()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("rect-anchor-dy");
+  }
+
+  /**
+      Set `rectAnchorDy` property.
+      Params:
+        propval = Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
+  @property void rectAnchorDy(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("rect-anchor-dy", propval);
+  }
+
+  /**
+      Get `reserveToggleSize` property.
+      Returns: A boolean that indicates whether the menu reserves space for
+      toggles and icons, regardless of their actual presence.
+      
+      This property should only be changed from its default value
+      for special-purposes such as tabular menus. Regular menus that
+      are connected to a menu bar or context menus should reserve
+      toggle space for consistency.
+  */
+  @property bool reserveToggleSize()
+  {
+    return getReserveToggleSize();
+  }
+
+  /**
+      Set `reserveToggleSize` property.
+      Params:
+        propval = A boolean that indicates whether the menu reserves space for
+        toggles and icons, regardless of their actual presence.
+        
+        This property should only be changed from its default value
+        for special-purposes such as tabular menus. Regular menus that
+        are connected to a menu bar or context menus should reserve
+        toggle space for consistency.
+  */
+  @property void reserveToggleSize(bool propval)
+  {
+    return setReserveToggleSize(propval);
+  }
+
+  /**
+      Get `tearoffState` property.
+      Returns: A boolean that indicates whether the menu is torn-off.
+  */
+  @property bool tearoffState()
+  {
+    return getTearoffState();
+  }
+
+  /**
+      Set `tearoffState` property.
+      Params:
+        propval = A boolean that indicates whether the menu is torn-off.
+  */
+  @property void tearoffState(bool propval)
+  {
+    return setTearoffState(propval);
+  }
+
+  /**
+      Get `tearoffTitle` property.
+      Returns: A title that may be displayed by the window manager when this
+      menu is torn-off.
+  */
+  @property string tearoffTitle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tearoff-title");
+  }
+
+  /**
+      Set `tearoffTitle` property.
+      Params:
+        propval = A title that may be displayed by the window manager when this
+        menu is torn-off.
+  */
+  @property void tearoffTitle(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tearoff-title", propval);
   }
 
   /**
@@ -153,7 +454,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu.Menu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,7 +515,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_menu_get_accel_group(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +542,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_active(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,7 +554,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_attach_widget(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -313,7 +614,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         monitor = the monitor to place the menu on
   */
-  void placeOnMonitor(gdk.monitor.MonitorG monitor)
+  void placeOnMonitor(gdk.monitor.MonitorWrap monitor)
   {
     gtk_menu_place_on_monitor(cast(GtkMenu*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
@@ -372,7 +673,7 @@ class Menu : gtk.menu_shell.MenuShell
       ptrThawGC(userData);
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -516,7 +817,7 @@ class Menu : gtk.menu_shell.MenuShell
     {
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -612,7 +913,7 @@ class Menu : gtk.menu_shell.MenuShell
 
   /**
       Informs GTK+ on which monitor a menu should be popped up.
-      See [gdk.monitor.MonitorG.getGeometry].
+      See [gdk.monitor.MonitorWrap.getGeometry].
       
       This function should be called from a #GtkMenuPositionFunc
       if the menu should not appear on the same monitor as the pointer.

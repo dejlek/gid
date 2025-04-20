@@ -30,6 +30,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ISO8601TimestampParser self()
   {
     return this;

@@ -46,6 +46,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HScrollbar self()
   {
     return this;

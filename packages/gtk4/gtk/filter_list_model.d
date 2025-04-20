@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.filter;
@@ -25,7 +26,7 @@ import gtk.types;
     
     [gtk.filter_list_model.FilterListModel] passes through sections from the underlying model.
 */
-class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
+class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   /** */
@@ -47,9 +48,94 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilterListModel self()
   {
     return this;
+  }
+
+  /**
+      Get `filter` property.
+      Returns: The filter for this model.
+  */
+  @property gtk.filter.Filter filter()
+  {
+    return getFilter();
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The filter for this model.
+  */
+  @property void filter(gtk.filter.Filter propval)
+  {
+    return setFilter(propval);
+  }
+
+  /**
+      Get `incremental` property.
+      Returns: If the model should filter items incrementally.
+  */
+  @property bool incremental()
+  {
+    return getIncremental();
+  }
+
+  /**
+      Set `incremental` property.
+      Params:
+        propval = If the model should filter items incrementally.
+  */
+  @property void incremental(bool propval)
+  {
+    return setIncremental(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being filtered.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being filtered.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `pending` property.
+      Returns: Number of items not yet filtered.
+  */
+  @property uint pending()
+  {
+    return getPending();
   }
 
   mixin ListModelT!();
@@ -67,7 +153,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null)
   {
     GtkFilterListModel* _cretval;
-    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
+    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -79,7 +165,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GtkFilter* _cretval;
     _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +190,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GListModel* _cretval;
     _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +209,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
       ```
       
       If no filter operation is ongoing - in particular when
-      [gtk.filter_list_model.FilterListModel.gboolean] is false - this
+      [gtk.filter_list_model.FilterListModel.incremental] is false - this
       function returns 0.
       Returns: The number of items not yet filtered
   */
@@ -184,6 +270,6 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 }

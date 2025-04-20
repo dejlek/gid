@@ -53,6 +53,7 @@ class SrvTarget : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SrvTarget self()
   {
     return this;

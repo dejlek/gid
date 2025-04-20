@@ -5113,12 +5113,12 @@ struct GtkActionableInterface
   /**
       virtual function for [gtk.actionable.Actionable.getActionTargetValue]
   */
-  extern(C) VariantC* function(GtkActionable* actionable) getActionTargetValue;
+  extern(C) GVariant* function(GtkActionable* actionable) getActionTargetValue;
 
   /**
       virtual function for [gtk.actionable.Actionable.setActionTargetValue]
   */
-  extern(C) void function(GtkActionable* actionable, VariantC* targetValue) setActionTargetValue;
+  extern(C) void function(GtkActionable* actionable, GVariant* targetValue) setActionTargetValue;
 }
 
 /**
@@ -6494,7 +6494,7 @@ struct GtkBuildableIface
 
   /**
       Sets a property of a buildable object.
-       It is normally not necessary to implement this, [gobject.object.ObjectG.setProperty]
+       It is normally not necessary to implement this, [gobject.object.ObjectWrap.setProperty]
        is used by default. #GtkWindow implements this to delay showing itself
        (i.e. setting the #GtkWidget:visible property) until the whole interface
        is created.
@@ -6579,7 +6579,7 @@ struct GtkBuildableIface
     larger hierarchy constructed by the builder (in which case you should
     not have to worry about their lifecycle), or without a parent, in which
     case they have to be added to some container to make use of them.
-    Non-widget objects need to be reffed with [gobject.object.ObjectG.ref_] to keep them
+    Non-widget objects need to be reffed with [gobject.object.ObjectWrap.ref_] to keep them
     beyond the lifespan of the builder.
     
     The function [gtk.builder.Builder.connectSignals] and variants thereof can be
@@ -6651,7 +6651,7 @@ struct GtkBuildableIface
     value, optionally combined with “|”, e.g. “GTK_VISIBLE|GTK_REALIZED”)
     and colors (in a format understood by [gdk.rgba.RGBA.parse]).
     
-    GVariants can be specified in the format understood by [glib.variant.VariantG.parse],
+    GVariants can be specified in the format understood by [glib.variant.Variant.parse],
     and pixbufs can be specified as a filename of an image file to load.
     
     Objects can be referred to by their name and by default refer to
@@ -6668,7 +6668,7 @@ struct GtkBuildableIface
     "bind-property" to specify the source property and optionally
     "bind-flags" to specify the binding flags.
     Internally builder implements this using GBinding objects.
-    For more information see [gobject.object.ObjectG.bindProperty]
+    For more information see [gobject.object.ObjectWrap.bindProperty]
     
     Signal handlers are set up with the `<signal>` element. The “name”
     attribute specifies the name of the signal, and the “handler” attribute
@@ -15480,7 +15480,7 @@ struct _GtkMountOperationHandlerIface
   /**
       Handler for the #_GtkMountOperationHandler::handle-show-processes signal.
   */
-  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, VariantC* argApplicationPids, const(char*)* argChoices) handleShowProcesses;
+  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, GVariant* argApplicationPids, const(char*)* argChoices) handleShowProcesses;
 }
 
 /**
@@ -18861,7 +18861,7 @@ struct GtkSeparatorToolItemPrivate;
     next to their `gtk.css` file.
     
     Applications can override system-wide settings by setting the property
-    of the GtkSettings object with [gobject.object.ObjectG.set]. This should be restricted
+    of the GtkSettings object with [gobject.object.ObjectWrap.set]. This should be restricted
     to special cases though; GtkSettings are not meant as an application
     configuration facility. When doing so, you need to be aware that settings
     that are specific to individual widgets may not be available before the
@@ -19058,7 +19058,7 @@ struct GtkShortcutsWindowClass
     
     #GtkSizeGroup objects are referenced by each widget in the size group,
     so once you have added all widgets to a #GtkSizeGroup, you can drop
-    the initial reference to the size group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the size group with [gobject.object.ObjectWrap.unref]. If the
     widgets in the size group are subsequently destroyed, then they will
     be removed from the size group and drop their references on the size
     group; when all widgets have been removed, the size group will be
@@ -24875,7 +24875,7 @@ struct GtkWindowGeometryInfo;
     
     GtkWindowGroup objects are referenced by each window in the group,
     so once you have added all windows to a GtkWindowGroup, you can drop
-    the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the window group with [gobject.object.ObjectWrap.unref]. If the
     windows in the window group are subsequently destroyed, then they will
     be removed from the window group and drop their references on the window
     group; when all window have been removed, the window group will be

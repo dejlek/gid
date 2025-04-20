@@ -52,9 +52,111 @@ class AspectFrame : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AspectFrame self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `obeyChild` property.
+      Returns: Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
+  */
+  @property bool obeyChild()
+  {
+    return getObeyChild();
+  }
+
+  /**
+      Set `obeyChild` property.
+      Params:
+        propval = Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
+  */
+  @property void obeyChild(bool propval)
+  {
+    return setObeyChild(propval);
+  }
+
+  /**
+      Get `ratio` property.
+      Returns: The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
+      
+      This property is only used if
+      `property@Gtk.AspectFrame:obey-child` is set to false.
+  */
+  @property float ratio()
+  {
+    return getRatio();
+  }
+
+  /**
+      Set `ratio` property.
+      Params:
+        propval = The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
+        
+        This property is only used if
+        `property@Gtk.AspectFrame:obey-child` is set to false.
+  */
+  @property void ratio(float propval)
+  {
+    return setRatio(propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment of the child.
+  */
+  @property float xalign()
+  {
+    return getXalign();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the child.
+  */
+  @property void xalign(float propval)
+  {
+    return setXalign(propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The vertical alignment of the child.
+  */
+  @property float yalign()
+  {
+    return getYalign();
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the child.
+  */
+  @property void yalign(float propval)
+  {
+    return setYalign(propval);
   }
 
   /**
@@ -85,7 +187,7 @@ class AspectFrame : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -2,6 +2,7 @@
 module panel.toggle_button;
 
 import gid.gid;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -24,7 +25,7 @@ import panel.types;
     </picture>
     
     It will automatically reveal or hide the specified area from
-    [panel.toggle_button.ToggleButton.Dock].
+    [panel.toggle_button.ToggleButton.dock].
 */
 class ToggleButton : gtk.widget.Widget
 {
@@ -48,9 +49,29 @@ class ToggleButton : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToggleButton self()
   {
     return this;
+  }
+
+  /**
+      Get `dock` property.
+      Returns: The associated [panel.dock.Dock]
+  */
+  @property panel.dock.Dock dock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(panel.dock.Dock)("dock");
+  }
+
+  /**
+      Set `dock` property.
+      Params:
+        propval = The associated [panel.dock.Dock]
+  */
+  @property void dock(panel.dock.Dock propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(panel.dock.Dock)("dock", propval);
   }
 
   /**

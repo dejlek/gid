@@ -38,7 +38,7 @@ template HypertextT()
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hypertext_get_link(cast(AtkHypertext*)cPtr, linkIndex);
-    auto _retval = ObjectG.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, No.Take);
     return _retval;
   }
 

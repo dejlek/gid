@@ -39,9 +39,136 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Adjustment self()
   {
     return this;
+  }
+
+  /**
+      Get `lower` property.
+      Returns: The minimum value of the adjustment.
+  */
+  @property double lower()
+  {
+    return getLower();
+  }
+
+  /**
+      Set `lower` property.
+      Params:
+        propval = The minimum value of the adjustment.
+  */
+  @property void lower(double propval)
+  {
+    return setLower(propval);
+  }
+
+  /**
+      Get `pageIncrement` property.
+      Returns: The page increment of the adjustment.
+  */
+  @property double pageIncrement()
+  {
+    return getPageIncrement();
+  }
+
+  /**
+      Set `pageIncrement` property.
+      Params:
+        propval = The page increment of the adjustment.
+  */
+  @property void pageIncrement(double propval)
+  {
+    return setPageIncrement(propval);
+  }
+
+  /**
+      Get `pageSize` property.
+      Returns: The page size of the adjustment.
+      Note that the page-size is irrelevant and should be set to zero
+      if the adjustment is used for a simple scalar value, e.g. in a
+      #GtkSpinButton.
+  */
+  @property double pageSize()
+  {
+    return getPageSize();
+  }
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The page size of the adjustment.
+        Note that the page-size is irrelevant and should be set to zero
+        if the adjustment is used for a simple scalar value, e.g. in a
+        #GtkSpinButton.
+  */
+  @property void pageSize(double propval)
+  {
+    return setPageSize(propval);
+  }
+
+  /**
+      Get `stepIncrement` property.
+      Returns: The step increment of the adjustment.
+  */
+  @property double stepIncrement()
+  {
+    return getStepIncrement();
+  }
+
+  /**
+      Set `stepIncrement` property.
+      Params:
+        propval = The step increment of the adjustment.
+  */
+  @property void stepIncrement(double propval)
+  {
+    return setStepIncrement(propval);
+  }
+
+  /**
+      Get `upper` property.
+      Returns: The maximum value of the adjustment.
+      Note that values will be restricted by
+      `upper - page-size` if the page-size
+      property is nonzero.
+  */
+  @property double upper()
+  {
+    return getUpper();
+  }
+
+  /**
+      Set `upper` property.
+      Params:
+        propval = The maximum value of the adjustment.
+        Note that values will be restricted by
+        `upper - page-size` if the page-size
+        property is nonzero.
+  */
+  @property void upper(double propval)
+  {
+    return setUpper(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The value of the adjustment.
+  */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the adjustment.
+  */
+  @property void value(double propval)
+  {
+    return setValue(propval);
   }
 
   /**
@@ -201,10 +328,10 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       However, since the emission of the #GtkAdjustment::changed signal
       is tied to the emission of the #GObject::notify signals of the changed
       properties, it’s possible to compress the #GtkAdjustment::changed
-      signals into one by calling [gobject.object.ObjectG.freezeNotify] and
-      [gobject.object.ObjectG.thawNotify] around the calls to the individual setters.
+      signals into one by calling [gobject.object.ObjectWrap.freezeNotify] and
+      [gobject.object.ObjectWrap.thawNotify] around the calls to the individual setters.
       
-      Alternatively, using a single [gobject.object.ObjectG.set] for all the properties
+      Alternatively, using a single [gobject.object.ObjectWrap.set] for all the properties
       to change, or using [gtk.adjustment.Adjustment.configure] has the same effect
       of compressing #GtkAdjustment::changed emissions.
   

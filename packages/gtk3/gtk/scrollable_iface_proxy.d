@@ -5,7 +5,7 @@ import gobject.object;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 
-/// Proxy object for [Gtk.Scrollable] interface when a GObject has no applicable D binding
+/// Proxy object for [gtk.scrollable.Scrollable] interface when a GObject has no applicable D binding
 class ScrollableIfaceProxy : IfaceProxy, gtk.scrollable.Scrollable
 {
   this(void* ptr, Flag!"Take" take = No.Take)

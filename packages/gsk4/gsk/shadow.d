@@ -18,7 +18,7 @@ class Shadow
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.Shadow");
+      throw new GidConstructException("Null instance pointer for gsk.shadow.Shadow");
 
     cInstance = *cast(GskShadow*)ptr;
 
@@ -32,36 +32,67 @@ class Shadow
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `color` field.
+      Returns: the color of the shadow
+  */
   @property gdk.rgba.RGBA color()
   {
     return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskShadow*)cPtr).color);
   }
 
+  /**
+      Get `dx` field.
+      Returns: the horizontal offset of the shadow
+  */
   @property float dx()
   {
     return (cast(GskShadow*)cPtr).dx;
   }
 
+  /**
+      Set `dx` field.
+      Params:
+        propval = the horizontal offset of the shadow
+  */
   @property void dx(float propval)
   {
     (cast(GskShadow*)cPtr).dx = propval;
   }
 
+  /**
+      Get `dy` field.
+      Returns: the vertical offset of the shadow
+  */
   @property float dy()
   {
     return (cast(GskShadow*)cPtr).dy;
   }
 
+  /**
+      Set `dy` field.
+      Params:
+        propval = the vertical offset of the shadow
+  */
   @property void dy(float propval)
   {
     (cast(GskShadow*)cPtr).dy = propval;
   }
 
+  /**
+      Get `radius` field.
+      Returns: the radius of the shadow
+  */
   @property float radius()
   {
     return (cast(GskShadow*)cPtr).radius;
   }
 
+  /**
+      Set `radius` field.
+      Params:
+        propval = the radius of the shadow
+  */
   @property void radius(float propval)
   {
     (cast(GskShadow*)cPtr).radius = propval;

@@ -35,6 +35,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MnemonicTrigger self()
   {
     return this;

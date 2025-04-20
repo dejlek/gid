@@ -53,9 +53,126 @@ class Stack : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Stack self()
   {
     return this;
+  }
+
+  /**
+      Get `hhomogeneous` property.
+      Returns: true if the stack allocates the same width for all children.
+  */
+  @property bool hhomogeneous()
+  {
+    return getHhomogeneous();
+  }
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+  */
+  @property void hhomogeneous(bool propval)
+  {
+    return setHhomogeneous(propval);
+  }
+
+  /** */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /** */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /** */
+  @property bool interpolateSize()
+  {
+    return getInterpolateSize();
+  }
+
+  /** */
+  @property void interpolateSize(bool propval)
+  {
+    return setInterpolateSize(propval);
+  }
+
+  /** */
+  @property uint transitionDuration()
+  {
+    return getTransitionDuration();
+  }
+
+  /** */
+  @property void transitionDuration(uint propval)
+  {
+    return setTransitionDuration(propval);
+  }
+
+  /** */
+  @property bool transitionRunning()
+  {
+    return getTransitionRunning();
+  }
+
+  /** */
+  @property gtk.types.StackTransitionType transitionType()
+  {
+    return getTransitionType();
+  }
+
+  /** */
+  @property void transitionType(gtk.types.StackTransitionType propval)
+  {
+    return setTransitionType(propval);
+  }
+
+  /**
+      Get `vhomogeneous` property.
+      Returns: true if the stack allocates the same height for all children.
+  */
+  @property bool vhomogeneous()
+  {
+    return getVhomogeneous();
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+  */
+  @property void vhomogeneous(bool propval)
+  {
+    return setVhomogeneous(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget visibleChild()
+  {
+    return getVisibleChild();
+  }
+
+  /** */
+  @property void visibleChild(gtk.widget.Widget propval)
+  {
+    return setVisibleChild(propval);
+  }
+
+  /** */
+  @property string visibleChildName()
+  {
+    return getVisibleChildName();
+  }
+
+  /** */
+  @property void visibleChildName(string propval)
+  {
+    return setVisibleChildName(propval);
   }
 
   /**
@@ -115,7 +232,7 @@ class Stack : gtk.container.Container
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +330,7 @@ class Stack : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_get_visible_child(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

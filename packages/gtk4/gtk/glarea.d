@@ -148,9 +148,163 @@ class GLArea : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLArea self()
   {
     return this;
+  }
+
+  /**
+      Get `allowedApis` property.
+      Returns: The allowed APIs.
+  */
+  @property gdk.types.GLAPI allowedApis()
+  {
+    return getAllowedApis();
+  }
+
+  /**
+      Set `allowedApis` property.
+      Params:
+        propval = The allowed APIs.
+  */
+  @property void allowedApis(gdk.types.GLAPI propval)
+  {
+    return setAllowedApis(propval);
+  }
+
+  /**
+      Get `api` property.
+      Returns: The API currently in use.
+  */
+  @property gdk.types.GLAPI api()
+  {
+    return getApi();
+  }
+
+  /**
+      Get `autoRender` property.
+      Returns: If set to true the ::render signal will be emitted every time
+      the widget draws.
+      
+      This is the default and is useful if drawing the widget is faster.
+      
+      If set to false the data from previous rendering is kept around and will
+      be used for drawing the widget the next time, unless the window is resized.
+      In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+      This mode is useful when the scene changes seldom, but takes a long time
+      to redraw.
+  */
+  @property bool autoRender()
+  {
+    return getAutoRender();
+  }
+
+  /**
+      Set `autoRender` property.
+      Params:
+        propval = If set to true the ::render signal will be emitted every time
+        the widget draws.
+        
+        This is the default and is useful if drawing the widget is faster.
+        
+        If set to false the data from previous rendering is kept around and will
+        be used for drawing the widget the next time, unless the window is resized.
+        In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+        This mode is useful when the scene changes seldom, but takes a long time
+        to redraw.
+  */
+  @property void autoRender(bool propval)
+  {
+    return setAutoRender(propval);
+  }
+
+  /**
+      Get `context` property.
+      Returns: The [gdk.glcontext.GLContext] used by the [gtk.glarea.GLArea] widget.
+      
+      The [gtk.glarea.GLArea] widget is responsible for creating the [gdk.glcontext.GLContext]
+      instance. If you need to render with other kinds of buffers (stencil,
+      depth, etc), use render buffers.
+  */
+  @property gdk.glcontext.GLContext context()
+  {
+    return getContext();
+  }
+
+  /**
+      Get `hasDepthBuffer` property.
+      Returns: If set to true the widget will allocate and enable a depth buffer for the
+      target framebuffer.
+      
+      Setting this property will enable GL's depth testing as a side effect. If
+      you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
+      in your `GtkGLArea::render` handler.
+  */
+  @property bool hasDepthBuffer()
+  {
+    return getHasDepthBuffer();
+  }
+
+  /**
+      Set `hasDepthBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a depth buffer for the
+        target framebuffer.
+        
+        Setting this property will enable GL's depth testing as a side effect. If
+        you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
+        in your `GtkGLArea::render` handler.
+  */
+  @property void hasDepthBuffer(bool propval)
+  {
+    return setHasDepthBuffer(propval);
+  }
+
+  /**
+      Get `hasStencilBuffer` property.
+      Returns: If set to true the widget will allocate and enable a stencil buffer for the
+      target framebuffer.
+  */
+  @property bool hasStencilBuffer()
+  {
+    return getHasStencilBuffer();
+  }
+
+  /**
+      Set `hasStencilBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a stencil buffer for the
+        target framebuffer.
+  */
+  @property void hasStencilBuffer(bool propval)
+  {
+    return setHasStencilBuffer(propval);
+  }
+
+  /**
+      Get `useEs` property.
+      Returns: If set to true the widget will try to create a [gdk.glcontext.GLContext] using
+      OpenGL ES instead of OpenGL.
+  
+      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+  */
+  @property bool useEs()
+  {
+    return getUseEs();
+  }
+
+  /**
+      Set `useEs` property.
+      Params:
+        propval = If set to true the widget will try to create a [gdk.glcontext.GLContext] using
+        OpenGL ES instead of OpenGL.
+  
+      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+  */
+  @property void useEs(bool propval)
+  {
+    return setUseEs(propval);
   }
 
   /**
@@ -227,19 +381,19 @@ class GLArea : gtk.widget.Widget
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
   /**
       Gets the current error set on the area.
-      Returns: the [glib.error.ErrorG]
+      Returns: the [glib.error.ErrorWrap]
   */
-  glib.error.ErrorG getError()
+  glib.error.ErrorWrap getError()
   {
     GError* _cretval;
     _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -327,7 +481,7 @@ class GLArea : gtk.widget.Widget
   /**
       Sets the allowed APIs to create a context with.
       
-      You should check [gtk.glarea.GLArea.Gdk.GLAPI] before drawing
+      You should check [gtk.glarea.GLArea.api] before drawing
       with either API.
       
       By default, all APIs are allowed.
@@ -369,9 +523,9 @@ class GLArea : gtk.widget.Widget
       signal if GL context creation fails.
   
       Params:
-        error = a new [glib.error.ErrorG], or null to unset the error
+        error = a new [glib.error.ErrorWrap], or null to unset the error
   */
-  void setError(glib.error.ErrorG error = null)
+  void setError(glib.error.ErrorWrap error = null)
   {
     gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }

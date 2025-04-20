@@ -4,6 +4,7 @@ module gtk.alignment;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -52,9 +53,210 @@ class Alignment : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Alignment self()
   {
     return this;
+  }
+
+  /**
+      Get `bottomPadding` property.
+      Returns: The padding to insert at the bottom of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
+  */
+  @property uint bottomPadding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("bottom-padding");
+  }
+
+  /**
+      Set `bottomPadding` property.
+      Params:
+        propval = The padding to insert at the bottom of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
+  */
+  @property void bottomPadding(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("bottom-padding", propval);
+  }
+
+  /**
+      Get `leftPadding` property.
+      Returns: The padding to insert at the left of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
+  */
+  @property uint leftPadding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("left-padding");
+  }
+
+  /**
+      Set `leftPadding` property.
+      Params:
+        propval = The padding to insert at the left of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
+  */
+  @property void leftPadding(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("left-padding", propval);
+  }
+
+  /**
+      Get `rightPadding` property.
+      Returns: The padding to insert at the right of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
+  */
+  @property uint rightPadding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("right-padding");
+  }
+
+  /**
+      Set `rightPadding` property.
+      Params:
+        propval = The padding to insert at the right of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
+  */
+  @property void rightPadding(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("right-padding", propval);
+  }
+
+  /**
+      Get `topPadding` property.
+      Returns: The padding to insert at the top of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
+  */
+  @property uint topPadding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("top-padding");
+  }
+
+  /**
+      Set `topPadding` property.
+      Params:
+        propval = The padding to insert at the top of the widget.
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
+  */
+  @property void topPadding(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("top-padding", propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: Horizontal position of child in available space. A value of 0.0
+      will flush the child left (or right, in RTL locales); a value
+      of 1.0 will flush the child right (or left, in RTL locales).
+  
+      Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
+  */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = Horizontal position of child in available space. A value of 0.0
+        will flush the child left (or right, in RTL locales); a value
+        of 1.0 will flush the child right (or left, in RTL locales).
+  
+      Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
+  */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
+  }
+
+  /**
+      Get `xscale` property.
+      Returns: If available horizontal space is bigger than needed, how much
+      of it to use for the child. A value of 0.0 means none; a value
+      of 1.0 means all.
+  
+      Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
+  */
+  @property float xscale()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xscale");
+  }
+
+  /**
+      Set `xscale` property.
+      Params:
+        propval = If available horizontal space is bigger than needed, how much
+        of it to use for the child. A value of 0.0 means none; a value
+        of 1.0 means all.
+  
+      Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
+  */
+  @property void xscale(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xscale", propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: Vertical position of child in available space. A value of 0.0
+      will flush the child to the top; a value of 1.0 will flush the
+      child to the bottom.
+  
+      Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
+  */
+  @property float yalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yalign");
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = Vertical position of child in available space. A value of 0.0
+        will flush the child to the top; a value of 1.0 will flush the
+        child to the bottom.
+  
+      Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
+  */
+  @property void yalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
+  }
+
+  /**
+      Get `yscale` property.
+      Returns: If available vertical space is bigger than needed, how much
+      of it to use for the child. A value of 0.0 means none; a value
+      of 1.0 means all.
+  
+      Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
+  */
+  @property float yscale()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yscale");
+  }
+
+  /**
+      Set `yscale` property.
+      Params:
+        propval = If available vertical space is bigger than needed, how much
+        of it to use for the child. A value of 0.0 means none; a value
+        of 1.0 means all.
+  
+      Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
+  */
+  @property void yscale(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yscale", propval);
   }
 
   /**

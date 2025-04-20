@@ -18,7 +18,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RadialGradientNode");
+      throw new GidConstructException("Null instance pointer for gsk.radial_gradient_node.RadialGradientNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

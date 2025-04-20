@@ -25,7 +25,7 @@ class BindingSet
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.BindingSet");
+      throw new GidConstructException("Null instance pointer for gtk.binding_set.BindingSet");
 
     cInstance = *cast(GtkBindingSet*)ptr;
 
@@ -39,42 +39,77 @@ class BindingSet
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `setName` field.
+      Returns: unique name of this binding set
+  */
   @property string setName()
   {
     return cToD!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
   }
 
+  /**
+      Set `setName` field.
+      Params:
+        propval = unique name of this binding set
+  */
   @property void setName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
     dToC(propval, cast(void*)&(cast(GtkBindingSet*)cPtr).setName);
   }
 
+  /**
+      Get `priority` field.
+      Returns: unused
+  */
   @property int priority()
   {
     return (cast(GtkBindingSet*)cPtr).priority;
   }
 
+  /**
+      Set `priority` field.
+      Params:
+        propval = unused
+  */
   @property void priority(int propval)
   {
     (cast(GtkBindingSet*)cPtr).priority = propval;
   }
 
+  /**
+      Get `entries` field.
+      Returns: the key binding entries in this binding set
+  */
   @property gtk.binding_entry.BindingEntry entries()
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)cPtr).entries);
   }
 
+  /**
+      Get `current` field.
+      Returns: implementation detail
+  */
   @property gtk.binding_entry.BindingEntry current()
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)cPtr).current);
   }
 
+  /**
+      Get `parsed` field.
+      Returns: whether this binding set stems from a CSS file and is reset upon theme changes
+  */
   @property uint parsed()
   {
     return (cast(GtkBindingSet*)cPtr).parsed;
   }
 
+  /**
+      Set `parsed` field.
+      Params:
+        propval = whether this binding set stems from a CSS file and is reset upon theme changes
+  */
   @property void parsed(uint propval)
   {
     (cast(GtkBindingSet*)cPtr).parsed = propval;
@@ -90,7 +125,7 @@ class BindingSet
         object = object to activate when binding found
       Returns: true if a binding was found and activated
   */
-  bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectG object)
+  bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectWrap object)
   {
     bool _retval;
     _retval = gtk_binding_set_activate(cast(GtkBindingSet*)cPtr, keyval, modifiers, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);

@@ -18,7 +18,7 @@ class ClosureExpression : gtk.expression.Expression
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.ClosureExpression");
+      throw new GidConstructException("Null instance pointer for gtk.closure_expression.ClosureExpression");
 
     super(cast(GtkExpression*)ptr, take);
   }

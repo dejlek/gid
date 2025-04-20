@@ -62,7 +62,7 @@ import gobject.object;
     [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter] to retrieve the pixbuf for the
     desired time stamp.
 */
-class PixbufLoader : gobject.object.ObjectG
+class PixbufLoader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -84,6 +84,7 @@ class PixbufLoader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufLoader self()
   {
     return this;
@@ -120,7 +121,7 @@ class PixbufLoader : gobject.object.ObjectG
       Params:
         mimeType = the mime type to be loaded
       Returns: A newly-created pixbuf loader.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithMimeType(string mimeType)
   {
@@ -129,8 +130,8 @@ class PixbufLoader : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,7 +154,7 @@ class PixbufLoader : gobject.object.ObjectG
       Params:
         imageType = name of the image format to be loaded with the image
       Returns: A newly-created pixbuf loader.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithType(string imageType)
   {
@@ -162,8 +163,8 @@ class PixbufLoader : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -185,7 +186,7 @@ class PixbufLoader : gobject.object.ObjectG
       you will need to explicitly release any reference you hold.
       Returns: `TRUE` if all image data written so far was successfully
           passed out via the update_area signal
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool close()
   {
@@ -193,7 +194,7 @@ class PixbufLoader : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_pixbuf_loader_close(cast(GdkPixbufLoader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -213,7 +214,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,7 +254,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -283,7 +284,7 @@ class PixbufLoader : gobject.object.ObjectG
         buf = Pointer to image data.
       Returns: `TRUE` if the write was successful, or
           `FALSE` if the loader cannot parse the buffer
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool write(ubyte[] buf)
   {
@@ -296,7 +297,7 @@ class PixbufLoader : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)cPtr, _buf, _count, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -307,7 +308,7 @@ class PixbufLoader : gobject.object.ObjectG
         buffer = The image data as a [glib.bytes.Bytes] buffer.
       Returns: `TRUE` if the write was successful, or `FALSE` if
           the loader cannot parse the buffer
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeBytes(glib.bytes.Bytes buffer)
   {
@@ -315,7 +316,7 @@ class PixbufLoader : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

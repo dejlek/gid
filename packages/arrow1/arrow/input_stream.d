@@ -40,6 +40,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InputStream self()
   {
     return this;
@@ -58,7 +59,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _retval = garrow_input_stream_advance(cast(GArrowInputStream*)cPtr, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _retval = garrow_input_stream_align(cast(GArrowInputStream*)cPtr, alignment, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -80,8 +81,8 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,8 +93,8 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
     return _retval;
   }
 }

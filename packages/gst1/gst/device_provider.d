@@ -25,7 +25,7 @@ import gst.types;
     Applications would normally use a #GstDeviceMonitor to monitor devices
     from all relevant providers.
 */
-class DeviceProvider : gst.object.ObjectGst
+class DeviceProvider : gst.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,7 @@ class DeviceProvider : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DeviceProvider self()
   {
     return this;
@@ -87,7 +88,7 @@ class DeviceProvider : gst.object.ObjectGst
       This is for use by subclasses.
       
       device's reference count will be incremented, and any floating reference
-      will be removed (see [gst.object.ObjectGst.refSink]).
+      will be removed (see [gst.object.ObjectWrap.refSink]).
   
       Params:
         device = a #GstDevice that has been added
@@ -135,7 +136,7 @@ class DeviceProvider : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_device_provider_get_bus(cast(GstDeviceProvider*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,7 +166,7 @@ class DeviceProvider : gst.object.ObjectGst
   {
     GstDeviceProviderFactory* _cretval;
     _cretval = gst_device_provider_get_factory(cast(GstDeviceProvider*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.Take);
     return _retval;
   }
 

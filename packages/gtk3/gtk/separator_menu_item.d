@@ -46,6 +46,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SeparatorMenuItem self()
   {
     return this;

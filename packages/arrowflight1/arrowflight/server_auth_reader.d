@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class ServerAuthReader : gobject.object.ObjectG
+class ServerAuthReader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class ServerAuthReader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerAuthReader self()
   {
     return this;
@@ -41,7 +42,7 @@ class ServerAuthReader : gobject.object.ObjectG
       Reads a message from the client.
       Returns: Read data as #GBytes on
           success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes read()
   {
@@ -49,7 +50,7 @@ class ServerAuthReader : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_server_auth_reader_read(cast(GAFlightServerAuthReader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

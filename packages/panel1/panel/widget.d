@@ -46,9 +46,223 @@ class Widget : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Widget self()
   {
     return this;
+  }
+
+  /** */
+  @property bool busy()
+  {
+    return getBusy();
+  }
+
+  /** */
+  @property bool canMaximize()
+  {
+    return getCanMaximize();
+  }
+
+  /** */
+  @property void canMaximize(bool propval)
+  {
+    return setCanMaximize(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child inside this widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child inside this widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `icon` property.
+      Returns: The icon for this widget.
+  */
+  @property gio.icon.Icon icon()
+  {
+    return getIcon();
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The icon for this widget.
+  */
+  @property void icon(gio.icon.Icon propval)
+  {
+    return setIcon(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for this widget.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this widget.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /** */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /** */
+  @property void id(string propval)
+  {
+    return setId(propval);
+  }
+
+  /** */
+  @property string kind()
+  {
+    return getKind();
+  }
+
+  /** */
+  @property void kind(string propval)
+  {
+    return setKind(propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: A menu model to display additional options for the page to the user via
+      menus.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = A menu model to display additional options for the page to the user via
+        menus.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
+  }
+
+  /** */
+  @property bool modified()
+  {
+    return getModified();
+  }
+
+  /** */
+  @property void modified(bool propval)
+  {
+    return setModified(propval);
+  }
+
+  /** */
+  @property bool needsAttention()
+  {
+    return getNeedsAttention();
+  }
+
+  /** */
+  @property void needsAttention(bool propval)
+  {
+    return setNeedsAttention(propval);
+  }
+
+  /** */
+  @property bool reorderable()
+  {
+    return getReorderable();
+  }
+
+  /** */
+  @property void reorderable(bool propval)
+  {
+    return setReorderable(propval);
+  }
+
+  /**
+      Get `saveDelegate` property.
+      Returns: The save delegate attached to this widget.
+  */
+  @property panel.save_delegate.SaveDelegate saveDelegate()
+  {
+    return getSaveDelegate();
+  }
+
+  /**
+      Set `saveDelegate` property.
+      Params:
+        propval = The save delegate attached to this widget.
+  */
+  @property void saveDelegate(panel.save_delegate.SaveDelegate propval)
+  {
+    return setSaveDelegate(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title for this widget.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this widget.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `tooltip` property.
+      Returns: The tooltip to display in tabs for the widget.
+  */
+  @property string tooltip()
+  {
+    return getTooltip();
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = The tooltip to display in tabs for the widget.
+  */
+  @property void tooltip(string propval)
+  {
+    return setTooltip(propval);
   }
 
   /**
@@ -115,7 +329,7 @@ class Widget : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = panel_widget_get_child(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +346,7 @@ class Widget : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = panel_widget_get_default_focus(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +358,7 @@ class Widget : gtk.widget.Widget
   {
     GIcon* _cretval;
     _cretval = panel_widget_get_icon(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +406,7 @@ class Widget : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = panel_widget_get_menu_model(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +438,7 @@ class Widget : gtk.widget.Widget
   {
     PanelPosition* _cretval;
     _cretval = panel_widget_get_position(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -249,7 +463,7 @@ class Widget : gtk.widget.Widget
   {
     PanelSaveDelegate* _cretval;
     _cretval = panel_widget_get_save_delegate(cast(PanelWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.save_delegate.SaveDelegate)(cast(PanelSaveDelegate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.save_delegate.SaveDelegate)(cast(PanelSaveDelegate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -281,7 +495,7 @@ class Widget : gtk.widget.Widget
   override void insertActionGroup(string prefix, gio.action_group.ActionGroup group)
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    panel_widget_insert_action_group(cast(PanelWidget*)cPtr, _prefix, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
+    panel_widget_insert_action_group(cast(PanelWidget*)cPtr, _prefix, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null);
   }
 
   /** */
@@ -327,7 +541,7 @@ class Widget : gtk.widget.Widget
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    panel_widget_set_icon(cast(PanelWidget*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    panel_widget_set_icon(cast(PanelWidget*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

@@ -21,7 +21,7 @@ import gobject.object;
     GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
     file or the `GioUnix-2.0` GIR namespace when using it.
 */
-class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
+class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
 {
 
   /** */
@@ -43,6 +43,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DesktopAppInfo self()
   {
     return this;
@@ -89,7 +90,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     GDesktopAppInfo* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = g_desktop_app_info_new_from_filename(_filename);
-    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +105,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     GDesktopAppInfo* _cretval;
     _cretval = g_desktop_app_info_new_from_keyfile(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -452,7 +453,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
               for each process.
         pidCallback = Callback for child processes
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup = null, gio.types.DesktopAppLaunchCallback pidCallback = null)
   {
@@ -469,7 +470,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
@@ -481,7 +482,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     GError *_err;
     _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -504,7 +505,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
         stdoutFd = file descriptor to use for child's stdout, or -1
         stderrFd = file descriptor to use for child's stderr, or -1
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchUrisAsManagerWithFds(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
   {
@@ -521,7 +522,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
@@ -533,7 +534,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     GError *_err;
     _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

@@ -22,7 +22,7 @@ class IOSchedulerJob
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.IOSchedulerJob");
+      throw new GidConstructException("Null instance pointer for gio.ioscheduler_job.IOSchedulerJob");
 
     cInstancePtr = cast(GIOSchedulerJob*)ptr;
 

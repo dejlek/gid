@@ -66,9 +66,77 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppChooserButton self()
   {
     return this;
+  }
+
+  /**
+      Get `heading` property.
+      Returns: The text to show at the top of the dialog that can be
+      opened from the button. The string may contain Pango markup.
+  */
+  @property string heading()
+  {
+    return getHeading();
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The text to show at the top of the dialog that can be
+        opened from the button. The string may contain Pango markup.
+  */
+  @property void heading(string propval)
+  {
+    return setHeading(propval);
+  }
+
+  /**
+      Get `showDefaultItem` property.
+      Returns: The #GtkAppChooserButton:show-default-item property determines
+      whether the dropdown menu should show the default application
+      on top for the provided content type.
+  */
+  @property bool showDefaultItem()
+  {
+    return getShowDefaultItem();
+  }
+
+  /**
+      Set `showDefaultItem` property.
+      Params:
+        propval = The #GtkAppChooserButton:show-default-item property determines
+        whether the dropdown menu should show the default application
+        on top for the provided content type.
+  */
+  @property void showDefaultItem(bool propval)
+  {
+    return setShowDefaultItem(propval);
+  }
+
+  /**
+      Get `showDialogItem` property.
+      Returns: The #GtkAppChooserButton:show-dialog-item property determines
+      whether the dropdown menu should show an item that triggers
+      a #GtkAppChooserDialog when clicked.
+  */
+  @property bool showDialogItem()
+  {
+    return getShowDialogItem();
+  }
+
+  /**
+      Set `showDialogItem` property.
+      Params:
+        propval = The #GtkAppChooserButton:show-dialog-item property determines
+        whether the dropdown menu should show an item that triggers
+        a #GtkAppChooserDialog when clicked.
+  */
+  @property void showDialogItem(bool propval)
+  {
+    return setShowDialogItem(propval);
   }
 
   mixin AppChooserT!();
@@ -106,7 +174,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

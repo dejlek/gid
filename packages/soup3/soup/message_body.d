@@ -51,16 +51,26 @@ class MessageBody : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MessageBody self()
   {
     return this;
   }
 
+  /**
+      Get `length` field.
+      Returns: length of @data
+  */
   @property long length()
   {
     return (cast(SoupMessageBody*)cPtr).length;
   }
 
+  /**
+      Set `length` field.
+      Params:
+        propval = length of @data
+  */
   @property void length(long propval)
   {
     (cast(SoupMessageBody*)cPtr).length = propval;

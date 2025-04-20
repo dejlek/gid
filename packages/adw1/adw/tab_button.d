@@ -70,9 +70,29 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabButton self()
   {
     return this;
+  }
+
+  /**
+      Get `view` property.
+      Returns: The view the tab button displays.
+  */
+  @property adw.tab_view.TabView view()
+  {
+    return getView();
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The view the tab button displays.
+  */
+  @property void view(adw.tab_view.TabView propval)
+  {
+    return setView(propval);
   }
 
   mixin ActionableT!();
@@ -96,7 +116,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_button_get_view(cast(AdwTabButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
     return _retval;
   }
 

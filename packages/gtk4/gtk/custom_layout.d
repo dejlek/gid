@@ -39,6 +39,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CustomLayout self()
   {
     return this;
@@ -68,7 +69,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     {
       gtk.types.SizeRequestMode _dretval;
 
-      _dretval = _static_requestMode(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      _dretval = _static_requestMode(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
       auto _retval = cast(GtkSizeRequestMode)_dretval;
 
       return _retval;
@@ -80,7 +81,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
     extern(C) void _measureCallback(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline)
     {
-      _static_measure(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+      _static_measure(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
     }
     auto _measureCB = measure ? &_measureCallback : null;
 
@@ -89,7 +90,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
     extern(C) void _allocateCallback(GtkWidget* widget, int width, int height, int baseline)
     {
-      _static_allocate(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
+      _static_allocate(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
     }
     auto _allocateCB = allocate ? &_allocateCallback : null;
 

@@ -22,7 +22,7 @@ import gst.types;
     These are then used by [gst.control_source.ControlSource.controlSourceGetValue] and
     [gst.control_source.ControlSource.controlSourceGetValueArray] to get values for specific timestamps.
 */
-class ControlSource : gst.object.ObjectGst
+class ControlSource : gst.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class ControlSource : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ControlSource self()
   {
     return this;

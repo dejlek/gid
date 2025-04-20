@@ -32,6 +32,7 @@ class StructDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StructDataType self()
   {
     return this;
@@ -52,7 +53,7 @@ class StructDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_struct_data_type_get_field(cast(GArrowStructDataType*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class StructDataType : arrow.data_type.DataType
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_struct_data_type_get_field_by_name(cast(GArrowStructDataType*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 

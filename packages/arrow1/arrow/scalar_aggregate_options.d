@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class ScalarAggregateOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,48 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScalarAggregateOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `minCount` property.
+      Returns: The minimum required number of values.
+  */
+  @property uint minCount()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("min-count");
+  }
+
+  /**
+      Set `minCount` property.
+      Params:
+        propval = The minimum required number of values.
+  */
+  @property void minCount(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("min-count", propval);
+  }
+
+  /**
+      Get `skipNulls` property.
+      Returns: Whether NULLs are skipped or not.
+  */
+  @property bool skipNulls()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("skip-nulls");
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = Whether NULLs are skipped or not.
+  */
+  @property void skipNulls(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("skip-nulls", propval);
   }
 
   /** */

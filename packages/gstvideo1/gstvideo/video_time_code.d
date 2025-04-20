@@ -48,61 +48,111 @@ class VideoTimeCode : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoTimeCode self()
   {
     return this;
   }
 
+  /**
+      Get `config` field.
+      Returns: the corresponding #GstVideoTimeCodeConfig
+  */
   @property gstvideo.video_time_code_config.VideoTimeCodeConfig config()
   {
     return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)cPtr).config);
   }
 
+  /**
+      Get `hours` field.
+      Returns: the hours field of #GstVideoTimeCode
+  */
   @property uint hours()
   {
     return (cast(GstVideoTimeCode*)cPtr).hours;
   }
 
+  /**
+      Set `hours` field.
+      Params:
+        propval = the hours field of #GstVideoTimeCode
+  */
   @property void hours(uint propval)
   {
     (cast(GstVideoTimeCode*)cPtr).hours = propval;
   }
 
+  /**
+      Get `minutes` field.
+      Returns: the minutes field of #GstVideoTimeCode
+  */
   @property uint minutes()
   {
     return (cast(GstVideoTimeCode*)cPtr).minutes;
   }
 
+  /**
+      Set `minutes` field.
+      Params:
+        propval = the minutes field of #GstVideoTimeCode
+  */
   @property void minutes(uint propval)
   {
     (cast(GstVideoTimeCode*)cPtr).minutes = propval;
   }
 
+  /**
+      Get `seconds` field.
+      Returns: the seconds field of #GstVideoTimeCode
+  */
   @property uint seconds()
   {
     return (cast(GstVideoTimeCode*)cPtr).seconds;
   }
 
+  /**
+      Set `seconds` field.
+      Params:
+        propval = the seconds field of #GstVideoTimeCode
+  */
   @property void seconds(uint propval)
   {
     (cast(GstVideoTimeCode*)cPtr).seconds = propval;
   }
 
+  /**
+      Get `frames` field.
+      Returns: the frames field of #GstVideoTimeCode
+  */
   @property uint frames()
   {
     return (cast(GstVideoTimeCode*)cPtr).frames;
   }
 
+  /**
+      Set `frames` field.
+      Params:
+        propval = the frames field of #GstVideoTimeCode
+  */
   @property void frames(uint propval)
   {
     (cast(GstVideoTimeCode*)cPtr).frames = propval;
   }
 
+  /**
+      Get `fieldCount` field.
+      Returns: Interlaced video field count
+  */
   @property uint fieldCount()
   {
     return (cast(GstVideoTimeCode*)cPtr).fieldCount;
   }
 
+  /**
+      Set `fieldCount` field.
+      Params:
+        propval = Interlaced video field count
+  */
   @property void fieldCount(uint propval)
   {
     (cast(GstVideoTimeCode*)cPtr).fieldCount = propval;

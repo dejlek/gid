@@ -37,7 +37,7 @@ class DsdPlaneOffsetMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.DsdPlaneOffsetMeta");
+      throw new GidConstructException("Null instance pointer for gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta");
 
     cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
 
@@ -51,26 +51,48 @@ class DsdPlaneOffsetMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)cPtr).meta);
   }
 
+  /**
+      Get `numChannels` field.
+      Returns: number of channels in the DSD data
+  */
   @property int numChannels()
   {
     return (cast(GstDsdPlaneOffsetMeta*)cPtr).numChannels;
   }
 
+  /**
+      Set `numChannels` field.
+      Params:
+        propval = number of channels in the DSD data
+  */
   @property void numChannels(int propval)
   {
     (cast(GstDsdPlaneOffsetMeta*)cPtr).numChannels = propval;
   }
 
+  /**
+      Get `numBytesPerChannel` field.
+      Returns: the number of valid bytes per channel in the buffer
+  */
   @property size_t numBytesPerChannel()
   {
     return (cast(GstDsdPlaneOffsetMeta*)cPtr).numBytesPerChannel;
   }
 
+  /**
+      Set `numBytesPerChannel` field.
+      Params:
+        propval = the number of valid bytes per channel in the buffer
+  */
   @property void numBytesPerChannel(size_t propval)
   {
     (cast(GstDsdPlaneOffsetMeta*)cPtr).numBytesPerChannel = propval;

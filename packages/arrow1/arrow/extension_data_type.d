@@ -34,6 +34,7 @@ class ExtensionDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExtensionDataType self()
   {
     return this;
@@ -53,7 +54,7 @@ class ExtensionDataType : arrow.data_type.DataType
   {
     GArrowExtensionArray* _cretval;
     _cretval = garrow_extension_data_type_wrap_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.extension_array.ExtensionArray)(cast(GArrowExtensionArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_array.ExtensionArray)(cast(GArrowExtensionArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class ExtensionDataType : arrow.data_type.DataType
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_extension_data_type_wrap_chunked_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowChunkedArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -2,6 +2,7 @@
 module gstvideo.video_sink;
 
 import gid.gid;
+import gobject.object;
 import gstbase.base_sink;
 import gstvideo.c.functions;
 import gstvideo.c.types;
@@ -36,8 +37,30 @@ class VideoSink : gstbase.base_sink.BaseSink
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoSink self()
   {
     return this;
+  }
+
+  /**
+      Get `showPrerollFrame` property.
+      Returns: Whether to show video frames during preroll. If set to false, video
+      frames will only be rendered in PLAYING state.
+  */
+  @property bool showPrerollFrame()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-preroll-frame");
+  }
+
+  /**
+      Set `showPrerollFrame` property.
+      Params:
+        propval = Whether to show video frames during preroll. If set to false, video
+        frames will only be rendered in PLAYING state.
+  */
+  @property void showPrerollFrame(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-preroll-frame", propval);
   }
 }

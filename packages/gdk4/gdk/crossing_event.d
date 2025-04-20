@@ -17,7 +17,7 @@ class CrossingEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.CrossingEvent");
+      throw new GidConstructException("Null instance pointer for gdk.crossing_event.CrossingEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

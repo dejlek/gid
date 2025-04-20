@@ -39,9 +39,29 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureStylus self()
   {
     return this;
+  }
+
+  /**
+      Get `stylusOnly` property.
+      Returns: If this gesture should exclusively react to stylus input devices.
+  */
+  @property bool stylusOnly()
+  {
+    return getStylusOnly();
+  }
+
+  /**
+      Set `stylusOnly` property.
+      Params:
+        propval = If this gesture should exclusively react to stylus input devices.
+  */
+  @property void stylusOnly(bool propval)
+  {
+    return setStylusOnly(propval);
   }
 
   /**
@@ -144,7 +164,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 

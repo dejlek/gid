@@ -34,6 +34,7 @@ class VulkanRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VulkanRenderer self()
   {
     return this;

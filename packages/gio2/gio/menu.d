@@ -40,6 +40,7 @@ class Menu : gio.menu_model.MenuModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Menu self()
   {
     return this;

@@ -47,6 +47,7 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioSrc self()
   {
     return this;

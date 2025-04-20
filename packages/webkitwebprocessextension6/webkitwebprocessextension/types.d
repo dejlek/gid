@@ -46,4 +46,4 @@ alias WebProcessExtensionInitializeFunction = void delegate(webkitwebprocessexte
       extension = a #WebKitWebProcessExtension
       userData = a #GVariant
 */
-alias WebProcessExtensionInitializeWithUserDataFunction = void delegate(webkitwebprocessextension.web_process_extension.WebProcessExtension extension, glib.variant.VariantG userData);
+alias WebProcessExtensionInitializeWithUserDataFunction = void delegate(webkitwebprocessextension.web_process_extension.WebProcessExtension extension, glib.variant.Variant userData);

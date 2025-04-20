@@ -10,7 +10,7 @@ import gobject.object;
 /**
     [adw.enum_list_item.EnumListItem] is the type of items in a `class@EnumListModel`.
 */
-class EnumListItem : gobject.object.ObjectG
+class EnumListItem : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,9 +32,37 @@ class EnumListItem : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EnumListItem self()
   {
     return this;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The enum value name.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `nick` property.
+      Returns: The enum value nick.
+  */
+  @property string nick()
+  {
+    return getNick();
+  }
+
+  /**
+      Get `value` property.
+      Returns: The enum value.
+  */
+  @property int value()
+  {
+    return getValue();
   }
 
   /**

@@ -32,6 +32,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SharedTaskPool self()
   {
     return this;
@@ -44,7 +45,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
       Do not use a #GstSharedTaskPool to manage potentially inter-dependent tasks such
       as pad tasks, as having one task waiting on another to return before returning
       would cause obvious deadlocks if they happen to share the same thread.
-      Returns: a new #GstSharedTaskPool. [gst.object.ObjectGst.unref] after usage.
+      Returns: a new #GstSharedTaskPool. [gst.object.ObjectWrap.unref] after usage.
   */
   this()
   {

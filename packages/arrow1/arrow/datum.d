@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Datum : gobject.object.ObjectG
+class Datum : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Datum : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Datum self()
   {
     return this;

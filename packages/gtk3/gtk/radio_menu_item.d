@@ -76,9 +76,20 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RadioMenuItem self()
   {
     return this;
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The radio menu item whose group this widget belongs to.
+  */
+  @property void group(gtk.radio_menu_item.RadioMenuItem propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.radio_menu_item.RadioMenuItem)("group", propval);
   }
 
   /**
@@ -109,7 +120,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_menu_item_new_from_widget(group ? cast(GtkRadioMenuItem*)group.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +139,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     scope(exit) containerFree!(GSList*, gtk.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_menu_item_new_with_label(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +157,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_menu_item_new_with_label_from_widget(group ? cast(GtkRadioMenuItem*)group.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +179,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     scope(exit) containerFree!(GSList*, gtk.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_menu_item_new_with_mnemonic(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,7 +201,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_menu_item_new_with_mnemonic_from_widget(group ? cast(GtkRadioMenuItem*)group.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_menu_item.RadioMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

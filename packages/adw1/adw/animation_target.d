@@ -10,7 +10,7 @@ import gobject.object;
 /**
     Represents a value `class@Animation` can animate.
 */
-class AnimationTarget : gobject.object.ObjectG
+class AnimationTarget : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class AnimationTarget : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AnimationTarget self()
   {
     return this;

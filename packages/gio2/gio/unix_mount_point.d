@@ -41,6 +41,7 @@ class UnixMountPoint : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixMountPoint self()
   {
     return this;
@@ -140,7 +141,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +167,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_symbolic_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 

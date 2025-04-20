@@ -31,6 +31,7 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DenseUnionDataType self()
   {
     return this;

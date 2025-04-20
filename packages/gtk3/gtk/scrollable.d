@@ -52,6 +52,66 @@ interface Scrollable
   }
 
   /**
+      Get `hadjustment` property.
+      Returns: Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
+      shared between the scrollable widget and its parent.
+  */
+  @property gtk.adjustment.Adjustment hadjustment();
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
+        shared between the scrollable widget and its parent.
+  */
+  @property void hadjustment(gtk.adjustment.Adjustment propval);
+
+  /**
+      Get `hscrollPolicy` property.
+      Returns: Determines whether horizontal scrolling should start once the scrollable
+      widget is allocated less than its minimum width or less than its natural width.
+  */
+  @property gtk.types.ScrollablePolicy hscrollPolicy();
+
+  /**
+      Set `hscrollPolicy` property.
+      Params:
+        propval = Determines whether horizontal scrolling should start once the scrollable
+        widget is allocated less than its minimum width or less than its natural width.
+  */
+  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval);
+
+  /**
+      Get `vadjustment` property.
+      Returns: Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
+      between the scrollable widget and its parent.
+  */
+  @property gtk.adjustment.Adjustment vadjustment();
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
+        between the scrollable widget and its parent.
+  */
+  @property void vadjustment(gtk.adjustment.Adjustment propval);
+
+  /**
+      Get `vscrollPolicy` property.
+      Returns: Determines whether vertical scrolling should start once the scrollable
+      widget is allocated less than its minimum height or less than its natural height.
+  */
+  @property gtk.types.ScrollablePolicy vscrollPolicy();
+
+  /**
+      Set `vscrollPolicy` property.
+      Params:
+        propval = Determines whether vertical scrolling should start once the scrollable
+        widget is allocated less than its minimum height or less than its natural height.
+  */
+  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval);
+
+  /**
       Returns the size of a non-scrolling border around the
       outside of the scrollable. An example for this would
       be treeview headers. GTK+ can use this information to

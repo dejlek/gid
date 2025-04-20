@@ -10,7 +10,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Tensor : gobject.object.ObjectG
+class Tensor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class Tensor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Tensor self()
   {
     return this;
@@ -76,7 +77,7 @@ class Tensor : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_tensor_get_buffer(cast(GArrowTensor*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +141,7 @@ class Tensor : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_tensor_get_value_data_type(cast(GArrowTensor*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 

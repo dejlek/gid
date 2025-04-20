@@ -33,6 +33,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DayTimeIntervalArray self()
   {
     return this;
@@ -51,7 +52,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_array_get_value(cast(GArrowDayTimeIntervalArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, Yes.Take);
     return _retval;
   }
 

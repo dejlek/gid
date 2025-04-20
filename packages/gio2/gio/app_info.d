@@ -91,7 +91,7 @@ interface AppInfo
         applicationName = the application name, or null to use commandline
         flags = flags that can specify details of the created #GAppInfo
       Returns: new #GAppInfo for given command.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo createFromCommandline(string commandline, string applicationName, gio.types.AppInfoCreateFlags flags)
   {
@@ -101,8 +101,8 @@ interface AppInfo
     GError *_err;
     _cretval = g_app_info_create_from_commandline(_commandline, _applicationName, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ interface AppInfo
     GAppInfo* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_type(_contentType, mustSupportUris);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -200,16 +200,16 @@ interface AppInfo
         result = a #GAsyncResult
       Returns: #GAppInfo for given content_type or
             null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo getDefaultForTypeFinish(gio.async_result.AsyncResult result)
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_app_info_get_default_for_type_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_app_info_get_default_for_type_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ interface AppInfo
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_uri_scheme(_uriScheme);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -270,16 +270,16 @@ interface AppInfo
         result = a #GAsyncResult
       Returns: #GAppInfo for given uri_scheme or
             null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo getDefaultForUriSchemeFinish(gio.async_result.AsyncResult result)
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_app_info_get_default_for_uri_scheme_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_app_info_get_default_for_uri_scheme_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ interface AppInfo
         uri = the uri to show
         context = an optional #GAppLaunchContext
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -347,7 +347,7 @@ interface AppInfo
     GError *_err;
     _retval = g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -391,15 +391,15 @@ interface AppInfo
       Params:
         result = a #GAsyncResult
       Returns: true if the launch was successful, false if error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool launchDefaultForUriFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ interface AppInfo
       Params:
         contentType = a string.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addSupportsType(string contentType);
 
@@ -576,7 +576,7 @@ interface AppInfo
         files = a #GList of #GFile objects
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null);
 
@@ -598,7 +598,7 @@ interface AppInfo
         uris = a #GList containing URIs to launch.
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null);
 
@@ -624,7 +624,7 @@ interface AppInfo
       Params:
         result = a #GAsyncResult
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchUrisFinish(gio.async_result.AsyncResult result);
 
@@ -634,7 +634,7 @@ interface AppInfo
       Params:
         contentType = a string.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeSupportsType(string contentType);
 
@@ -645,7 +645,7 @@ interface AppInfo
         extension = a string containing the file extension
               (without the dot).
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAsDefaultForExtension(string extension);
 
@@ -655,7 +655,7 @@ interface AppInfo
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAsDefaultForType(string contentType);
 
@@ -668,7 +668,7 @@ interface AppInfo
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAsLastUsedForType(string contentType);
 

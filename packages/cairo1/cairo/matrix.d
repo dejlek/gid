@@ -19,10 +19,25 @@ import gobject.boxed;
 class Matrix : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `matrix.Matrix` boxed type.
+      Params:
+        xx = xx component of the affine transformation
+        yx = yx component of the affine transformation
+        xy = xy component of the affine transformation
+        yy = yy component of the affine transformation
+        x0 = X translation component of the affine transformation
+        y0 = Y translation component of the affine transformation
+  */
+  this(double xx = 0.0, double yx = 0.0, double xy = 0.0, double yy = 0.0, double x0 = 0.0, double y0 = 0.0)
   {
     super(gMalloc(cairo_matrix_t.sizeof), Yes.Take);
+    this.xx = xx;
+    this.yx = yx;
+    this.xy = xy;
+    this.yy = yy;
+    this.x0 = x0;
+    this.y0 = y0;
   }
 
   /** */
@@ -50,66 +65,121 @@ class Matrix : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Matrix self()
   {
     return this;
   }
 
+  /**
+      Get `xx` field.
+      Returns: xx component of the affine transformation
+  */
   @property double xx()
   {
     return (cast(cairo_matrix_t*)cPtr).xx;
   }
 
+  /**
+      Set `xx` field.
+      Params:
+        propval = xx component of the affine transformation
+  */
   @property void xx(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).xx = propval;
   }
 
+  /**
+      Get `yx` field.
+      Returns: yx component of the affine transformation
+  */
   @property double yx()
   {
     return (cast(cairo_matrix_t*)cPtr).yx;
   }
 
+  /**
+      Set `yx` field.
+      Params:
+        propval = yx component of the affine transformation
+  */
   @property void yx(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).yx = propval;
   }
 
+  /**
+      Get `xy` field.
+      Returns: xy component of the affine transformation
+  */
   @property double xy()
   {
     return (cast(cairo_matrix_t*)cPtr).xy;
   }
 
+  /**
+      Set `xy` field.
+      Params:
+        propval = xy component of the affine transformation
+  */
   @property void xy(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).xy = propval;
   }
 
+  /**
+      Get `yy` field.
+      Returns: yy component of the affine transformation
+  */
   @property double yy()
   {
     return (cast(cairo_matrix_t*)cPtr).yy;
   }
 
+  /**
+      Set `yy` field.
+      Params:
+        propval = yy component of the affine transformation
+  */
   @property void yy(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).yy = propval;
   }
 
+  /**
+      Get `x0` field.
+      Returns: X translation component of the affine transformation
+  */
   @property double x0()
   {
     return (cast(cairo_matrix_t*)cPtr).x0;
   }
 
+  /**
+      Set `x0` field.
+      Params:
+        propval = X translation component of the affine transformation
+  */
   @property void x0(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).x0 = propval;
   }
 
+  /**
+      Get `y0` field.
+      Returns: Y translation component of the affine transformation
+  */
   @property double y0()
   {
     return (cast(cairo_matrix_t*)cPtr).y0;
   }
 
+  /**
+      Set `y0` field.
+      Params:
+        propval = Y translation component of the affine transformation
+  */
   @property void y0(double propval)
   {
     (cast(cairo_matrix_t*)cPtr).y0 = propval;

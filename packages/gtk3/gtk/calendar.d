@@ -58,9 +58,216 @@ class Calendar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Calendar self()
   {
     return this;
+  }
+
+  /**
+      Get `day` property.
+      Returns: The selected day (as a number between 1 and 31, or 0
+      to unselect the currently selected day).
+      This property gets initially set to the current day.
+  */
+  @property int day()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("day");
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31, or 0
+        to unselect the currently selected day).
+        This property gets initially set to the current day.
+  */
+  @property void day(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("day", propval);
+  }
+
+  /**
+      Get `detailHeightRows` property.
+      Returns: Height of a detail cell, in rows.
+      A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+  */
+  @property int detailHeightRows()
+  {
+    return getDetailHeightRows();
+  }
+
+  /**
+      Set `detailHeightRows` property.
+      Params:
+        propval = Height of a detail cell, in rows.
+        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+  */
+  @property void detailHeightRows(int propval)
+  {
+    return setDetailHeightRows(propval);
+  }
+
+  /**
+      Get `detailWidthChars` property.
+      Returns: Width of a detail cell, in characters.
+      A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+  */
+  @property int detailWidthChars()
+  {
+    return getDetailWidthChars();
+  }
+
+  /**
+      Set `detailWidthChars` property.
+      Params:
+        propval = Width of a detail cell, in characters.
+        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+  */
+  @property void detailWidthChars(int propval)
+  {
+    return setDetailWidthChars(propval);
+  }
+
+  /**
+      Get `month` property.
+      Returns: The selected month (as a number between 0 and 11).
+      This property gets initially set to the current month.
+  */
+  @property int month()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("month");
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+        This property gets initially set to the current month.
+  */
+  @property void month(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("month", propval);
+  }
+
+  /**
+      Get `noMonthChange` property.
+      Returns: Determines whether the selected month can be changed.
+  */
+  @property bool noMonthChange()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("no-month-change");
+  }
+
+  /**
+      Set `noMonthChange` property.
+      Params:
+        propval = Determines whether the selected month can be changed.
+  */
+  @property void noMonthChange(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("no-month-change", propval);
+  }
+
+  /**
+      Get `showDayNames` property.
+      Returns: Determines whether day names are displayed.
+  */
+  @property bool showDayNames()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-day-names");
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+  */
+  @property void showDayNames(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-day-names", propval);
+  }
+
+  /**
+      Get `showDetails` property.
+      Returns: Determines whether details are shown directly in the widget, or if they are
+      available only as tooltip. When this property is set days with details are
+      marked.
+  */
+  @property bool showDetails()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-details");
+  }
+
+  /**
+      Set `showDetails` property.
+      Params:
+        propval = Determines whether details are shown directly in the widget, or if they are
+        available only as tooltip. When this property is set days with details are
+        marked.
+  */
+  @property void showDetails(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-details", propval);
+  }
+
+  /**
+      Get `showHeading` property.
+      Returns: Determines whether a heading is displayed.
+  */
+  @property bool showHeading()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-heading");
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+  */
+  @property void showHeading(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-heading", propval);
+  }
+
+  /**
+      Get `showWeekNumbers` property.
+      Returns: Determines whether week numbers are displayed.
+  */
+  @property bool showWeekNumbers()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-week-numbers");
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+  */
+  @property void showWeekNumbers(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-week-numbers", propval);
+  }
+
+  /**
+      Get `year` property.
+      Returns: The selected year.
+      This property gets initially set to the current year.
+  */
+  @property int year()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("year");
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+        This property gets initially set to the current year.
+  */
+  @property void year(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("year", propval);
   }
 
   /**
@@ -205,7 +412,7 @@ class Calendar : gtk.widget.Widget
       string _dretval;
       auto _dlg = cast(gtk.types.CalendarDetailFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;

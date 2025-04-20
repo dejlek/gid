@@ -45,16 +45,36 @@ class TreeListRowSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeListRowSorter self()
   {
     return this;
   }
 
   /**
+      Get `sorter` property.
+      Returns: The underlying sorter
+  */
+  @property gtk.sorter.Sorter sorter()
+  {
+    return getSorter();
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = The underlying sorter
+  */
+  @property void sorter(gtk.sorter.Sorter propval)
+  {
+    return setSorter(propval);
+  }
+
+  /**
       Create a special-purpose sorter that applies the sorting
       of sorter to the levels of a [gtk.tree_list_model.TreeListModel].
       
-      Note that this sorter relies on [gtk.tree_list_model.TreeListModel.gboolean]
+      Note that this sorter relies on [gtk.tree_list_model.TreeListModel.passthrough]
       being false as it can only sort [gtk.tree_list_row.TreeListRow]s.
   
       Params:
@@ -76,14 +96,14 @@ class TreeListRowSorter : gtk.sorter.Sorter
   {
     GtkSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_get_sorter(cast(GtkTreeListRowSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
   /**
       Sets the sorter to use for items with the same parent.
       
-      This sorter will be passed the [gtk.tree_list_row.TreeListRow.GObject.Object] of
+      This sorter will be passed the [gtk.tree_list_row.TreeListRow.item] of
       the tree list rows passed to self.
   
       Params:

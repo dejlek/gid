@@ -39,46 +39,83 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoTimeCodeInterval self()
   {
     return this;
   }
 
+  /**
+      Get `hours` field.
+      Returns: the hours field of #GstVideoTimeCodeInterval
+  */
   @property uint hours()
   {
     return (cast(GstVideoTimeCodeInterval*)cPtr).hours;
   }
 
+  /**
+      Set `hours` field.
+      Params:
+        propval = the hours field of #GstVideoTimeCodeInterval
+  */
   @property void hours(uint propval)
   {
     (cast(GstVideoTimeCodeInterval*)cPtr).hours = propval;
   }
 
+  /**
+      Get `minutes` field.
+      Returns: the minutes field of #GstVideoTimeCodeInterval
+  */
   @property uint minutes()
   {
     return (cast(GstVideoTimeCodeInterval*)cPtr).minutes;
   }
 
+  /**
+      Set `minutes` field.
+      Params:
+        propval = the minutes field of #GstVideoTimeCodeInterval
+  */
   @property void minutes(uint propval)
   {
     (cast(GstVideoTimeCodeInterval*)cPtr).minutes = propval;
   }
 
+  /**
+      Get `seconds` field.
+      Returns: the seconds field of #GstVideoTimeCodeInterval
+  */
   @property uint seconds()
   {
     return (cast(GstVideoTimeCodeInterval*)cPtr).seconds;
   }
 
+  /**
+      Set `seconds` field.
+      Params:
+        propval = the seconds field of #GstVideoTimeCodeInterval
+  */
   @property void seconds(uint propval)
   {
     (cast(GstVideoTimeCodeInterval*)cPtr).seconds = propval;
   }
 
+  /**
+      Get `frames` field.
+      Returns: the frames field of #GstVideoTimeCodeInterval
+  */
   @property uint frames()
   {
     return (cast(GstVideoTimeCodeInterval*)cPtr).frames;
   }
 
+  /**
+      Set `frames` field.
+      Params:
+        propval = the frames field of #GstVideoTimeCodeInterval
+  */
   @property void frames(uint propval)
   {
     (cast(GstVideoTimeCodeInterval*)cPtr).frames = propval;

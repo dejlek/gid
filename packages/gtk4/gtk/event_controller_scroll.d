@@ -67,9 +67,29 @@ class EventControllerScroll : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventControllerScroll self()
   {
     return this;
+  }
+
+  /**
+      Get `flags` property.
+      Returns: The flags affecting event controller behavior.
+  */
+  @property gtk.types.EventControllerScrollFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = The flags affecting event controller behavior.
+  */
+  @property void flags(gtk.types.EventControllerScrollFlags propval)
+  {
+    return setFlags(propval);
   }
 
   /**

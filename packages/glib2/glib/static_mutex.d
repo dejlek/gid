@@ -63,7 +63,7 @@ class StaticMutex
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.StaticMutex");
+      throw new GidConstructException("Null instance pointer for glib.static_mutex.StaticMutex");
 
     cInstance = *cast(GStaticMutex*)ptr;
 
@@ -77,6 +77,7 @@ class StaticMutex
     return cast(void*)&cInstance;
   }
 
+  /** */
   @property glib.mutex.Mutex mutex()
   {
     return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)cPtr).mutex);

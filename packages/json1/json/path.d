@@ -140,7 +140,7 @@ import json.types;
     ["Nigel Rees","Evelyn Waugh","Herman Melville","J. R. R. Tolkien"]
     ```
 */
-class Path : gobject.object.ObjectG
+class Path : gobject.object.ObjectWrap
 {
 
   /** */
@@ -162,6 +162,7 @@ class Path : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Path self()
   {
     return this;
@@ -194,7 +195,7 @@ class Path : gobject.object.ObjectG
         root = the root of a JSON tree
       Returns: a newly-created node of type
           [json.types.NodeType.Array] containing the array of matching nodes
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static json.node.Node query(string expression, json.node.Node root)
   {
@@ -203,7 +204,7 @@ class Path : gobject.object.ObjectG
     GError *_err;
     _cretval = json_path_query(_expression, root ? cast(JsonNode*)root.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -218,7 +219,7 @@ class Path : gobject.object.ObjectG
         expression = a JSONPath expression
       Returns: `TRUE` if the compilation was successful, and `FALSE`
           otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool compile(string expression)
   {
@@ -227,7 +228,7 @@ class Path : gobject.object.ObjectG
     GError *_err;
     _retval = json_path_compile(cast(JsonPath*)cPtr, _expression, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

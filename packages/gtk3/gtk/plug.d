@@ -58,9 +58,28 @@ class Plug : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Plug self()
   {
     return this;
+  }
+
+  /**
+      Get `embedded` property.
+      Returns: true if the plug is embedded in a socket.
+  */
+  @property bool embedded()
+  {
+    return getEmbedded();
+  }
+
+  /**
+      Get `socketWindow` property.
+      Returns: The window of the socket the plug is embedded in.
+  */
+  @property gdk.window.Window socketWindow()
+  {
+    return getSocketWindow();
   }
 
   /**
@@ -91,7 +110,7 @@ class Plug : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_plug_new_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, socketId);
-    auto _retval = ObjectG.getDObject!(gtk.plug.Plug)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.plug.Plug)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +173,7 @@ class Plug : gtk.window.Window
   {
     GdkWindow* _cretval;
     _cretval = gtk_plug_get_socket_window(cast(GtkPlug*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

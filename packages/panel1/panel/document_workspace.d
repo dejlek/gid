@@ -55,9 +55,28 @@ class DocumentWorkspace : panel.workspace.Workspace
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DocumentWorkspace self()
   {
     return this;
+  }
+
+  /** */
+  @property panel.dock.Dock dock()
+  {
+    return getDock();
+  }
+
+  /** */
+  @property panel.grid.Grid grid()
+  {
+    return getGrid();
+  }
+
+  /** */
+  @property panel.statusbar.Statusbar statusbar()
+  {
+    return getStatusbar();
   }
 
   /**
@@ -78,7 +97,7 @@ class DocumentWorkspace : panel.workspace.Workspace
         widget = a #PanelWidget
         position = a #PanelPosition or null
       Returns: true if widget was added; otherwise false and widget
-          will have [gobject.object.ObjectG.refSink] called and unref'd from an idle
+          will have [gobject.object.ObjectWrap.refSink] called and unref'd from an idle
           callback.
   */
   bool addWidget(panel.widget.Widget widget, panel.position.Position position = null)
@@ -96,7 +115,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   {
     PanelDock* _cretval;
     _cretval = panel_document_workspace_get_dock(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.dock.Dock)(cast(PanelDock*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.dock.Dock)(cast(PanelDock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,7 +127,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   {
     PanelGrid* _cretval;
     _cretval = panel_document_workspace_get_grid(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.grid.Grid)(cast(PanelGrid*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.grid.Grid)(cast(PanelGrid*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +139,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   {
     PanelStatusbar* _cretval;
     _cretval = panel_document_workspace_get_statusbar(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.statusbar.Statusbar)(cast(PanelStatusbar*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.statusbar.Statusbar)(cast(PanelStatusbar*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +151,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   {
     GtkWidget* _cretval;
     _cretval = panel_document_workspace_get_titlebar(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

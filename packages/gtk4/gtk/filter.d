@@ -28,7 +28,7 @@ import gtk.types;
     However, in particular for large lists or complex search methods, it is
     also possible to subclass [gtk.filter.Filter] and provide one's own filter.
 */
-class Filter : gobject.object.ObjectG
+class Filter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,6 +50,7 @@ class Filter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Filter self()
   {
     return this;
@@ -105,7 +106,7 @@ class Filter : gobject.object.ObjectG
       Returns: true if the filter matches the item and a filter model should
           keep it, false if not.
   */
-  bool match(gobject.object.ObjectG item)
+  bool match(gobject.object.ObjectWrap item)
   {
     bool _retval;
     _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class QuantileOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,71 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override QuantileOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `interpolation` property.
+      Returns: Interpolation method to use when quantile lies between two data
+      points.
+  */
+  @property arrow.types.QuantileInterpolation interpolation()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.QuantileInterpolation)("interpolation");
+  }
+
+  /**
+      Set `interpolation` property.
+      Params:
+        propval = Interpolation method to use when quantile lies between two data
+        points.
+  */
+  @property void interpolation(arrow.types.QuantileInterpolation propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.QuantileInterpolation)("interpolation", propval);
+  }
+
+  /**
+      Get `minCount` property.
+      Returns: If less than this many non-null values are observed, emit null.
+  */
+  @property uint minCount()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("min-count");
+  }
+
+  /**
+      Set `minCount` property.
+      Params:
+        propval = If less than this many non-null values are observed, emit null.
+  */
+  @property void minCount(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("min-count", propval);
+  }
+
+  /**
+      Get `skipNulls` property.
+      Returns: If true (the default), null values are ignored. Otherwise, if any
+      value is null, emit null.
+  */
+  @property bool skipNulls()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("skip-nulls");
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = If true (the default), null values are ignored. Otherwise, if any
+        value is null, emit null.
+  */
+  @property void skipNulls(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("skip-nulls", propval);
   }
 
   /** */

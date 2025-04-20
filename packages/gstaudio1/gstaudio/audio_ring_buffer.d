@@ -21,7 +21,7 @@ import gstaudio.types;
     abstraction for DMA based ringbuffers as well as a pure software
     implementations.
 */
-class AudioRingBuffer : gst.object.ObjectGst
+class AudioRingBuffer : gst.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class AudioRingBuffer : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioRingBuffer self()
   {
     return this;
@@ -449,7 +450,7 @@ class AudioRingBuffer : gst.object.ObjectGst
       _data.length = len;
       _data[0 .. len] = data[0 .. len];
 
-      (*_dlg)(ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(void*)rbuf, No.Take), _data);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(void*)rbuf, No.Take), _data);
     }
     auto _cbCB = cb ? &_cbCallback : null;
 

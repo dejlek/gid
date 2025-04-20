@@ -30,6 +30,7 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TemporalDataType self()
   {
     return this;

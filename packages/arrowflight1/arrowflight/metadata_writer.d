@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class MetadataWriter : gobject.object.ObjectG
+class MetadataWriter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class MetadataWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MetadataWriter self()
   {
     return this;
@@ -43,7 +44,7 @@ class MetadataWriter : gobject.object.ObjectG
       Params:
         metadata = A #GArrowBuffer to be sent.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool write(arrow.buffer.Buffer metadata)
   {
@@ -51,7 +52,7 @@ class MetadataWriter : gobject.object.ObjectG
     GError *_err;
     _retval = gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

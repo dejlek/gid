@@ -44,9 +44,29 @@ class MediaControls : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MediaControls self()
   {
     return this;
+  }
+
+  /**
+      Get `mediaStream` property.
+      Returns: The media-stream managed by this object or null if none.
+  */
+  @property gtk.media_stream.MediaStream mediaStream()
+  {
+    return getMediaStream();
+  }
+
+  /**
+      Set `mediaStream` property.
+      Params:
+        propval = The media-stream managed by this object or null if none.
+  */
+  @property void mediaStream(gtk.media_stream.MediaStream propval)
+  {
+    return setMediaStream(propval);
   }
 
   /**
@@ -71,7 +91,7 @@ class MediaControls : gtk.widget.Widget
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_controls_get_media_stream(cast(GtkMediaControls*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 

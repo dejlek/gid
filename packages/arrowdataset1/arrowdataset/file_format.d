@@ -14,7 +14,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class FileFormat : gobject.object.ObjectG
+class FileFormat : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class FileFormat : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileFormat self()
   {
     return this;
@@ -54,7 +55,7 @@ class FileFormat : gobject.object.ObjectG
   {
     GADatasetFileWriteOptions* _cretval;
     _cretval = gadataset_file_format_get_default_write_options(cast(GADatasetFileFormat*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,8 +76,8 @@ class FileFormat : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)cPtr, destination ? cast(GArrowOutputStream*)destination.cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
     return _retval;
   }
 }

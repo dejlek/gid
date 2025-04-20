@@ -83,7 +83,7 @@ import pango.layout;
     }
     ```
 */
-class PrintContext : gobject.object.ObjectG
+class PrintContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -105,6 +105,7 @@ class PrintContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintContext self()
   {
     return this;
@@ -119,7 +120,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoContext* _cretval;
     _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +133,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -211,7 +212,7 @@ class PrintContext : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +225,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 

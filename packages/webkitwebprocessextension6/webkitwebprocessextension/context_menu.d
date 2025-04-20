@@ -25,7 +25,7 @@ import webkitwebprocessextension.types;
     [webkitwebprocessextension.context_menu.ContextMenu.insert], maybe after having removed the
     existing ones with [webkitwebprocessextension.context_menu.ContextMenu.removeAll].
 */
-class ContextMenu : gobject.object.ObjectG
+class ContextMenu : gobject.object.ObjectWrap
 {
 
   /** */
@@ -89,7 +89,7 @@ class ContextMenu : gobject.object.ObjectG
     auto _items = gListFromD!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(items);
     scope(exit) containerFree!(GList*, webkitwebprocessextension.context_menu_item.ContextMenuItem, GidOwnership.None)(_items);
     _cretval = webkit_context_menu_new_with_items(_items);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_first(cast(WebKitContextMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_get_item_at_position(cast(WebKitContextMenu*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,11 +191,11 @@ class ContextMenu : gobject.object.ObjectG
       from the Web Process with [webkitwebprocessextension.context_menu.ContextMenu.setUserData].
       Returns: the user data of menu, or null if menu doesn't have user data
   */
-  glib.variant.VariantG getUserData()
+  glib.variant.Variant getUserData()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = webkit_context_menu_get_user_data(cast(WebKitContextMenu*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class ContextMenu : gobject.object.ObjectG
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_last(cast(WebKitContextMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -287,8 +287,8 @@ class ContextMenu : gobject.object.ObjectG
       Params:
         userData = a #GVariant
   */
-  void setUserData(glib.variant.VariantG userData)
+  void setUserData(glib.variant.Variant userData)
   {
-    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)cPtr, userData ? cast(VariantC*)userData.cPtr(No.Dup) : null);
+    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)cPtr, userData ? cast(GVariant*)userData.cPtr(No.Dup) : null);
   }
 }

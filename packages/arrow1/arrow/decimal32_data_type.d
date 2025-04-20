@@ -31,6 +31,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Decimal32DataType self()
   {
     return this;
@@ -43,7 +44,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
     GError *_err;
     _cretval = garrow_decimal32_data_type_new(precision, scale, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

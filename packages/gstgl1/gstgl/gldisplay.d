@@ -38,7 +38,7 @@ import gstgl.types;
     > result in sudden application abortion during execution.  The most notably
     > example of such a function is X11's XInitThreads\().
 */
-class GLDisplay : gst.object.ObjectGst
+class GLDisplay : gst.object.ObjectWrap
 {
 
   /** */
@@ -60,6 +60,7 @@ class GLDisplay : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLDisplay self()
   {
     return this;
@@ -88,7 +89,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new_with_type(type);
-    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +108,7 @@ class GLDisplay : gst.object.ObjectGst
         otherContext = other #GstGLContext to share resources with.
         pContext = resulting #GstGLContext
       Returns: whether a new context could be created.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool createContext(gstgl.glcontext.GLContext otherContext, out gstgl.glcontext.GLContext pContext)
   {
@@ -116,7 +117,7 @@ class GLDisplay : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_display_create_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, &_pContext, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.Take);
     return _retval;
   }
@@ -126,7 +127,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_create_window(cast(GstGLDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -138,7 +139,7 @@ class GLDisplay : gst.object.ObjectGst
         otherContext = other #GstGLContext to share resources with.
         context = the resulting #GstGLContext
       Returns: wether context contains a valid context.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool ensureContext(gstgl.glcontext.GLContext otherContext = null, gstgl.glcontext.GLContext context = null)
   {
@@ -146,7 +147,7 @@ class GLDisplay : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_display_ensure_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, context ? cast(GstGLContext**)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -192,7 +193,7 @@ class GLDisplay : gst.object.ObjectGst
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_find_window(cast(GstGLDisplay*)cPtr, data, _compareFuncCB);
     _static_compareFunc = null;
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -222,7 +223,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)cPtr, thread ? cast(GThread*)thread.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -288,7 +289,7 @@ class GLDisplay : gst.object.ObjectGst
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_retrieve_window(cast(GstGLDisplay*)cPtr, data, _compareFuncCB);
     _static_compareFunc = null;
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 

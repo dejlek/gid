@@ -105,9 +105,79 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Paned self()
   {
     return this;
+  }
+
+  /**
+      Get `maxPosition` property.
+      Returns: The largest possible value for the position property.
+      This property is derived from the size and shrinkability
+      of the widget's children.
+  */
+  @property int maxPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-position");
+  }
+
+  /**
+      Get `minPosition` property.
+      Returns: The smallest possible value for the position property.
+      This property is derived from the size and shrinkability
+      of the widget's children.
+  */
+  @property int minPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("min-position");
+  }
+
+  /** */
+  @property int position()
+  {
+    return getPosition();
+  }
+
+  /** */
+  @property void position(int propval)
+  {
+    return setPosition(propval);
+  }
+
+  /** */
+  @property bool positionSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("position-set");
+  }
+
+  /** */
+  @property void positionSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("position-set", propval);
+  }
+
+  /**
+      Get `wideHandle` property.
+      Returns: Setting this property to true indicates that the paned needs
+      to provide stronger visual separation (e.g. because it separates
+      between two notebooks, whose tab rows would otherwise merge visually).
+  */
+  @property bool wideHandle()
+  {
+    return getWideHandle();
+  }
+
+  /**
+      Set `wideHandle` property.
+      Params:
+        propval = Setting this property to true indicates that the paned needs
+        to provide stronger visual separation (e.g. because it separates
+        between two notebooks, whose tab rows would otherwise merge visually).
+  */
+  @property void wideHandle(bool propval)
+  {
+    return setWideHandle(propval);
   }
 
   mixin OrientableT!();
@@ -160,7 +230,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child1(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +242,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child2(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,7 +257,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GdkWindow* _cretval;
     _cretval = gtk_paned_get_handle_window(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

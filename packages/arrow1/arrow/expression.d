@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Expression : gobject.object.ObjectG
+class Expression : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Expression : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Expression self()
   {
     return this;

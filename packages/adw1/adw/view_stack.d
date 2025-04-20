@@ -94,9 +94,127 @@ class ViewStack : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ViewStack self()
   {
     return this;
+  }
+
+  /**
+      Get `hhomogeneous` property.
+      Returns: Whether the stack is horizontally homogeneous.
+      
+      If the stack is horizontally homogeneous, it allocates the same width for
+      all children.
+      
+      If it's `FALSE`, the stack may change width when a different child becomes
+      visible.
+  */
+  @property bool hhomogeneous()
+  {
+    return getHhomogeneous();
+  }
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = Whether the stack is horizontally homogeneous.
+        
+        If the stack is horizontally homogeneous, it allocates the same width for
+        all children.
+        
+        If it's `FALSE`, the stack may change width when a different child becomes
+        visible.
+  */
+  @property void hhomogeneous(bool propval)
+  {
+    return setHhomogeneous(propval);
+  }
+
+  /**
+      Get `pages` property.
+      Returns: A selection model with the stack's pages.
+      
+      This can be used to keep an up-to-date view. The model also implements
+      [gtk.selection_model.SelectionModel] and can be used to track and change the visible
+      page.
+  */
+  @property gtk.selection_model.SelectionModel pages()
+  {
+    return getPages();
+  }
+
+  /**
+      Get `vhomogeneous` property.
+      Returns: Whether the stack is vertically homogeneous.
+      
+      If the stack is vertically homogeneous, it allocates the same height for
+      all children.
+      
+      If it's `FALSE`, the stack may change height when a different child becomes
+      visible.
+  */
+  @property bool vhomogeneous()
+  {
+    return getVhomogeneous();
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = Whether the stack is vertically homogeneous.
+        
+        If the stack is vertically homogeneous, it allocates the same height for
+        all children.
+        
+        If it's `FALSE`, the stack may change height when a different child becomes
+        visible.
+  */
+  @property void vhomogeneous(bool propval)
+  {
+    return setVhomogeneous(propval);
+  }
+
+  /**
+      Get `visibleChild` property.
+      Returns: The widget currently visible in the stack.
+  */
+  @property gtk.widget.Widget visibleChild()
+  {
+    return getVisibleChild();
+  }
+
+  /**
+      Set `visibleChild` property.
+      Params:
+        propval = The widget currently visible in the stack.
+  */
+  @property void visibleChild(gtk.widget.Widget propval)
+  {
+    return setVisibleChild(propval);
+  }
+
+  /**
+      Get `visibleChildName` property.
+      Returns: The name of the widget currently visible in the stack.
+      
+      See `property@ViewStack:visible-child`.
+  */
+  @property string visibleChildName()
+  {
+    return getVisibleChildName();
+  }
+
+  /**
+      Set `visibleChildName` property.
+      Params:
+        propval = The name of the widget currently visible in the stack.
+        
+        See `property@ViewStack:visible-child`.
+  */
+  @property void visibleChildName(string propval)
+  {
+    return setVisibleChildName(propval);
   }
 
   /**
@@ -121,7 +239,7 @@ class ViewStack : gtk.widget.Widget
   {
     AdwViewStackPage* _cretval;
     _cretval = adw_view_stack_add(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +258,7 @@ class ViewStack : gtk.widget.Widget
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = adw_view_stack_add_named(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +280,7 @@ class ViewStack : gtk.widget.Widget
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
     _cretval = adw_view_stack_add_titled(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
-    auto _retval = ObjectG.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +304,7 @@ class ViewStack : gtk.widget.Widget
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = adw_view_stack_add_titled_with_icon(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title, _iconName);
-    auto _retval = ObjectG.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +320,7 @@ class ViewStack : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = adw_view_stack_get_child_by_name(cast(AdwViewStack*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,7 +346,7 @@ class ViewStack : gtk.widget.Widget
   {
     AdwViewStackPage* _cretval;
     _cretval = adw_view_stack_get_page(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +362,7 @@ class ViewStack : gtk.widget.Widget
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_view_stack_get_pages(cast(AdwViewStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -267,7 +385,7 @@ class ViewStack : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_view_stack_get_visible_child(cast(AdwViewStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

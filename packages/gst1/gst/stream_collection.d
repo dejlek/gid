@@ -29,7 +29,7 @@ import gst.types;
     Applications can activate streams from a collection by using the
     #GST_EVENT_SELECT_STREAMS event on a pipeline, bin or element.
 */
-class StreamCollection : gst.object.ObjectGst
+class StreamCollection : gst.object.ObjectWrap
 {
 
   /** */
@@ -51,9 +51,29 @@ class StreamCollection : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StreamCollection self()
   {
     return this;
+  }
+
+  /**
+      Get `upstreamId` property.
+      Returns: stream-id
+  */
+  @property string upstreamId()
+  {
+    return getUpstreamId();
+  }
+
+  /**
+      Set `upstreamId` property.
+      Params:
+        propval = stream-id
+  */
+  @property void upstreamId(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("upstream-id", propval);
   }
 
   /**
@@ -109,7 +129,7 @@ class StreamCollection : gst.object.ObjectGst
   {
     GstStream* _cretval;
     _cretval = gst_stream_collection_get_stream(cast(GstStreamCollection*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.Take);
     return _retval;
   }
 

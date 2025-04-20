@@ -33,6 +33,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MnemonicAction self()
   {
     return this;
@@ -49,7 +50,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_mnemonic_action_get();
-    auto _retval = ObjectG.getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

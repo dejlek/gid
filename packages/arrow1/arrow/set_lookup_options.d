@@ -7,6 +7,7 @@ import arrow.datum;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class SetLookupOptions : arrow.function_options.FunctionOptions
@@ -31,9 +32,48 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SetLookupOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `skipNulls` property.
+      Returns: Whether NULLs are skipped or not.
+  */
+  @property bool skipNulls()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("skip-nulls");
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = Whether NULLs are skipped or not.
+  */
+  @property void skipNulls(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("skip-nulls", propval);
+  }
+
+  /**
+      Get `valueSet` property.
+      Returns: The set of values to look up input values into.
+  */
+  @property arrow.datum.Datum valueSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.datum.Datum)("value-set");
+  }
+
+  /**
+      Set `valueSet` property.
+      Params:
+        propval = The set of values to look up input values into.
+  */
+  @property void valueSet(arrow.datum.Datum propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.datum.Datum)("value-set", propval);
   }
 
   /** */

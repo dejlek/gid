@@ -121,9 +121,166 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Popover self()
   {
     return this;
+  }
+
+  /**
+      Get `autohide` property.
+      Returns: Whether to dismiss the popover on outside clicks.
+  */
+  @property bool autohide()
+  {
+    return getAutohide();
+  }
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether to dismiss the popover on outside clicks.
+  */
+  @property void autohide(bool propval)
+  {
+    return setAutohide(propval);
+  }
+
+  /**
+      Get `cascadePopdown` property.
+      Returns: Whether the popover pops down after a child popover.
+      
+      This is used to implement the expected behavior of submenus.
+  */
+  @property bool cascadePopdown()
+  {
+    return getCascadePopdown();
+  }
+
+  /**
+      Set `cascadePopdown` property.
+      Params:
+        propval = Whether the popover pops down after a child popover.
+        
+        This is used to implement the expected behavior of submenus.
+  */
+  @property void cascadePopdown(bool propval)
+  {
+    return setCascadePopdown(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `defaultWidget` property.
+      Returns: The default widget inside the popover.
+  */
+  @property gtk.widget.Widget defaultWidget()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("default-widget");
+  }
+
+  /**
+      Set `defaultWidget` property.
+      Params:
+        propval = The default widget inside the popover.
+  */
+  @property void defaultWidget(gtk.widget.Widget propval)
+  {
+    return setDefaultWidget(propval);
+  }
+
+  /**
+      Get `hasArrow` property.
+      Returns: Whether to draw an arrow.
+  */
+  @property bool hasArrow()
+  {
+    return getHasArrow();
+  }
+
+  /**
+      Set `hasArrow` property.
+      Params:
+        propval = Whether to draw an arrow.
+  */
+  @property void hasArrow(bool propval)
+  {
+    return setHasArrow(propval);
+  }
+
+  /**
+      Get `mnemonicsVisible` property.
+      Returns: Whether mnemonics are currently visible in this popover.
+  */
+  @property bool mnemonicsVisible()
+  {
+    return getMnemonicsVisible();
+  }
+
+  /**
+      Set `mnemonicsVisible` property.
+      Params:
+        propval = Whether mnemonics are currently visible in this popover.
+  */
+  @property void mnemonicsVisible(bool propval)
+  {
+    return setMnemonicsVisible(propval);
+  }
+
+  /**
+      Get `pointingTo` property.
+      Returns: Rectangle in the parent widget that the popover points to.
+  */
+  @property gdk.rectangle.Rectangle pointingTo()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("pointing-to");
+  }
+
+  /**
+      Set `pointingTo` property.
+      Params:
+        propval = Rectangle in the parent widget that the popover points to.
+  */
+  @property void pointingTo(gdk.rectangle.Rectangle propval)
+  {
+    return setPointingTo(propval);
+  }
+
+  /**
+      Get `position` property.
+      Returns: How to place the popover, relative to its parent.
+  */
+  @property gtk.types.PositionType position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = How to place the popover, relative to its parent.
+  */
+  @property void position(gtk.types.PositionType propval)
+  {
+    return setPosition(propval);
   }
 
   mixin NativeT!();
@@ -173,7 +330,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_child(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

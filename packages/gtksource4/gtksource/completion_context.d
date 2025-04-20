@@ -35,9 +35,48 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompletionContext self()
   {
     return this;
+  }
+
+  /**
+      Get `activation` property.
+      Returns: The completion activation
+  */
+  @property gtksource.types.CompletionActivation activation()
+  {
+    return getActivation();
+  }
+
+  /**
+      Set `activation` property.
+      Params:
+        propval = The completion activation
+  */
+  @property void activation(gtksource.types.CompletionActivation propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtksource.types.CompletionActivation)("activation", propval);
+  }
+
+  /**
+      Get `iter` property.
+      Returns: The #GtkTextIter at which the completion is invoked.
+  */
+  @property gtk.text_iter.TextIter iter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.text_iter.TextIter)("iter");
+  }
+
+  /**
+      Set `iter` property.
+      Params:
+        propval = The #GtkTextIter at which the completion is invoked.
+  */
+  @property void iter(gtk.text_iter.TextIter propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.text_iter.TextIter)("iter", propval);
   }
 
   /**
@@ -57,7 +96,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   {
     auto _proposals = gListFromD!(gtksource.completion_proposal.CompletionProposal)(proposals);
     scope(exit) containerFree!(GList*, gtksource.completion_proposal.CompletionProposal, GidOwnership.None)(_proposals);
-    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, _proposals, finished);
+    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, _proposals, finished);
   }
 
   /**

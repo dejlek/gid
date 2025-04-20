@@ -13,7 +13,7 @@ import gtk.widget;
 /**
     [gtk.stack_page.StackPage] is an auxiliary class used by [gtk.stack.Stack].
 */
-class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
+class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
@@ -35,9 +35,132 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StackPage self()
   {
     return this;
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name of the child page.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name of the child page.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the child page.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `needsAttention` property.
+      Returns: Whether the page requires the user attention.
+      
+      This is used by the [gtk.stack_switcher.StackSwitcher] to change the
+      appearance of the corresponding button when a page needs
+      attention and it is not the current one.
+  */
+  @property bool needsAttention()
+  {
+    return getNeedsAttention();
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page requires the user attention.
+        
+        This is used by the [gtk.stack_switcher.StackSwitcher] to change the
+        appearance of the corresponding button when a page needs
+        attention and it is not the current one.
+  */
+  @property void needsAttention(bool propval)
+  {
+    return setNeedsAttention(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the child page.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the child page.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: If set, an underline in the title indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the title indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether this page is visible.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this page is visible.
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
   }
 
   mixin AccessibleT!();
@@ -50,7 +173,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,7 +191,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Returns the name of the page.
-      Returns: The value of the [gtk.stack_page.StackPage.utf8] property
+      Returns: The value of the [gtk.stack_page.StackPage.name] property
   */
   string getName()
   {
@@ -92,7 +215,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the page title.
-      Returns: The value of the [gtk.stack_page.StackPage.utf8] property
+      Returns: The value of the [gtk.stack_page.StackPage.title] property
   */
   string getTitle()
   {
@@ -116,7 +239,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   /**
       Returns whether page is visible in its [gtk.stack.Stack].
       
-      This is independent from the [gtk.widget.Widget.gboolean]
+      This is independent from the [gtk.widget.Widget.visible]
       property of its widget.
       Returns: true if page is visible
   */

@@ -18,7 +18,7 @@ import gobject.object;
     `property@StyleManager:color-scheme` property, and to query the current
     appearance, as well as whether a system-wide color scheme preference exists.
 */
-class StyleManager : gobject.object.ObjectG
+class StyleManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -40,9 +40,127 @@ class StyleManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleManager self()
   {
     return this;
+  }
+
+  /**
+      Get `colorScheme` property.
+      Returns: The requested application color scheme.
+      
+      The effective appearance will be decided based on the application color
+      scheme and the system preferred color scheme. The
+      `property@StyleManager:dark` property can be used to query the current
+      effective appearance.
+      
+      The [adw.types.ColorScheme.PreferLight] color scheme results in the application
+      using light appearance unless the system prefers dark colors. This is the
+      default value.
+      
+      The [adw.types.ColorScheme.PreferDark] color scheme results in the application
+      using dark appearance, but can still switch to the light appearance if the
+      system can prefers it, for example, when the high contrast preference is
+      enabled.
+      
+      The [adw.types.ColorScheme.ForceLight] and [adw.types.ColorScheme.ForceDark] values
+      ignore the system preference entirely. They are useful if the application
+      wants to match its UI to its content or to provide a separate color scheme
+      switcher.
+      
+      If a per-[gdk.display.Display] style manager has its color scheme set to
+      [adw.types.ColorScheme.Default], it will inherit the color scheme from the
+      default style manager.
+      
+      For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
+      [adw.types.ColorScheme.PreferLight].
+      
+      The `property@StyleManager:system-supports-color-schemes` property can be
+      used to check if the current environment provides a color scheme
+      preference.
+  */
+  @property adw.types.ColorScheme colorScheme()
+  {
+    return getColorScheme();
+  }
+
+  /**
+      Set `colorScheme` property.
+      Params:
+        propval = The requested application color scheme.
+        
+        The effective appearance will be decided based on the application color
+        scheme and the system preferred color scheme. The
+        `property@StyleManager:dark` property can be used to query the current
+        effective appearance.
+        
+        The [adw.types.ColorScheme.PreferLight] color scheme results in the application
+        using light appearance unless the system prefers dark colors. This is the
+        default value.
+        
+        The [adw.types.ColorScheme.PreferDark] color scheme results in the application
+        using dark appearance, but can still switch to the light appearance if the
+        system can prefers it, for example, when the high contrast preference is
+        enabled.
+        
+        The [adw.types.ColorScheme.ForceLight] and [adw.types.ColorScheme.ForceDark] values
+        ignore the system preference entirely. They are useful if the application
+        wants to match its UI to its content or to provide a separate color scheme
+        switcher.
+        
+        If a per-[gdk.display.Display] style manager has its color scheme set to
+        [adw.types.ColorScheme.Default], it will inherit the color scheme from the
+        default style manager.
+        
+        For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
+        [adw.types.ColorScheme.PreferLight].
+        
+        The `property@StyleManager:system-supports-color-schemes` property can be
+        used to check if the current environment provides a color scheme
+        preference.
+  */
+  @property void colorScheme(adw.types.ColorScheme propval)
+  {
+    return setColorScheme(propval);
+  }
+
+  /**
+      Get `dark` property.
+      Returns: Whether the application is using dark appearance.
+      
+      This property can be used to query the current appearance, as requested via
+      `property@StyleManager:color-scheme`.
+  */
+  @property bool dark()
+  {
+    return getDark();
+  }
+
+  /**
+      Get `highContrast` property.
+      Returns: Whether the application is using high contrast appearance.
+      
+      This cannot be overridden by applications.
+  */
+  @property bool highContrast()
+  {
+    return getHighContrast();
+  }
+
+  /**
+      Get `systemSupportsColorSchemes` property.
+      Returns: Whether the system supports color schemes.
+      
+      This property can be used to check if the current environment provides a
+      color scheme preference. For example, applications might want to show a
+      separate appearance switcher if it's set to `FALSE`.
+      
+      See `property@StyleManager:color-scheme`.
+  */
+  @property bool systemSupportsColorSchemes()
+  {
+    return getSystemSupportsColorSchemes();
   }
 
   /**
@@ -58,7 +176,7 @@ class StyleManager : gobject.object.ObjectG
   {
     AdwStyleManager* _cretval;
     _cretval = adw_style_manager_get_default();
-    auto _retval = ObjectG.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,7 +196,7 @@ class StyleManager : gobject.object.ObjectG
   {
     AdwStyleManager* _cretval;
     _cretval = adw_style_manager_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +237,7 @@ class StyleManager : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = adw_style_manager_get_display(cast(AdwStyleManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 

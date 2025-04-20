@@ -12,13 +12,13 @@ import gobject.types;
 
 /**
     [gio.list_model.ListModel] is an interface that represents a mutable list of
-    [gobject.object.ObjectG]. Its main intention is as a model for various widgets
+    [gobject.object.ObjectWrap]. Its main intention is as a model for various widgets
     in user interfaces, such as list views, but it can also be used as a
     convenient method of returning lists of data, with support for
     updates.
     
     Each object in the list may also report changes in itself via some
-    mechanism (normally the [gobject.object.ObjectG.notify] signal).  Taken
+    mechanism (normally the [gobject.object.ObjectWrap.notify] signal).  Taken
     together with the `signal@Gio.ListModel::items-changed` signal, this provides
     for a list that can change its membership, and in which the members can
     change their individual properties.
@@ -104,8 +104,8 @@ interface ListModel
   */
   T getItem(T)(uint position)
   {
-    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return ObjectG.getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this).cPtr, position);
+    return gobject.object.ObjectWrap.getDObject!T(gobj, Yes.Take);
   }
 
 
@@ -151,7 +151,7 @@ interface ListModel
         position = the position of the item to fetch
       Returns: the object at position.
   */
-  gobject.object.ObjectG getItem(uint position);
+  gobject.object.ObjectWrap getItem(uint position);
 
   /**
       Emits the #GListModel::items-changed signal on list.

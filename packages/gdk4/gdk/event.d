@@ -29,7 +29,7 @@ class Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.Event");
+      throw new GidConstructException("Null instance pointer for gdk.event.Event");
 
     cInstancePtr = cast(GdkEvent*)ptr;
 
@@ -100,7 +100,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class Event
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Event
   {
     GdkDisplay* _cretval;
     _cretval = gdk_event_get_display(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Event
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class Event
   {
     GdkSurface* _cretval;
     _cretval = gdk_event_get_surface(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

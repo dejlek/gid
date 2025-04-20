@@ -114,7 +114,7 @@ __gshared extern(C)
   GParamSpec** function(GObjectClass* oclass, uint* nProperties) c_g_object_class_list_properties; ///
   void function(GObjectClass* oclass, uint propertyId, const(char)* name) c_g_object_class_override_property; ///
 
-  // ObjectG
+  // ObjectWrap
   GType function() c_g_object_get_type; ///
   ObjectC* function(GType objectType, const(char)* firstPropertyName,  ...) c_g_object_new; ///
   ObjectC* function(GType objectType, const(char)* firstPropertyName, void* varArgs) c_g_object_new_valist; ///
@@ -259,7 +259,7 @@ __gshared extern(C)
   ObjectC* function(const(GValue)* value) c_g_value_dup_object; ///
   GParamSpec* function(const(GValue)* value) c_g_value_dup_param; ///
   char* function(const(GValue)* value) c_g_value_dup_string; ///
-  VariantC* function(const(GValue)* value) c_g_value_dup_variant; ///
+  GVariant* function(const(GValue)* value) c_g_value_dup_variant; ///
   bool function(const(GValue)* value) c_g_value_fits_pointer; ///
   bool function(const(GValue)* value) c_g_value_get_boolean; ///
   void* function(const(GValue)* value) c_g_value_get_boxed; ///
@@ -281,7 +281,7 @@ __gshared extern(C)
   uint function(const(GValue)* value) c_g_value_get_uint; ///
   ulong function(const(GValue)* value) c_g_value_get_uint64; ///
   gulong function(const(GValue)* value) c_g_value_get_ulong; ///
-  VariantC* function(const(GValue)* value) c_g_value_get_variant; ///
+  GVariant* function(const(GValue)* value) c_g_value_get_variant; ///
   GValue* function(GValue* value, GType gType) c_g_value_init; ///
   void function(GValue* value, GTypeInstance* instance) c_g_value_init_from_instance; ///
   void* function(const(GValue)* value) c_g_value_peek_pointer; ///
@@ -314,13 +314,13 @@ __gshared extern(C)
   void function(GValue* value, uint vUint) c_g_value_set_uint; ///
   void function(GValue* value, ulong vUint64) c_g_value_set_uint64; ///
   void function(GValue* value, gulong vUlong) c_g_value_set_ulong; ///
-  void function(GValue* value, VariantC* variant) c_g_value_set_variant; ///
+  void function(GValue* value, GVariant* variant) c_g_value_set_variant; ///
   char* function(GValue* value) c_g_value_steal_string; ///
   void function(GValue* value, const(void)* vBoxed) c_g_value_take_boxed; ///
   void function(GValue* value, void* vObject) c_g_value_take_object; ///
   void function(GValue* value, GParamSpec* param) c_g_value_take_param; ///
   void function(GValue* value, char* vString) c_g_value_take_string; ///
-  void function(GValue* value, VariantC* variant) c_g_value_take_variant; ///
+  void function(GValue* value, GVariant* variant) c_g_value_take_variant; ///
   bool function(const(GValue)* srcValue, GValue* destValue) c_g_value_transform; ///
   void function(GValue* value) c_g_value_unset; ///
   void function(GType srcType, GType destType, GValueTransform transformFunc) c_g_value_register_transform_func; ///
@@ -389,7 +389,7 @@ __gshared extern(C)
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, gulong minimum, gulong maximum, gulong defaultValue, GParamFlags flags) c_g_param_spec_ulong; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, dchar defaultValue, GParamFlags flags) c_g_param_spec_unichar; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) c_g_param_spec_value_array; ///
-  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, const(GVariantType)* type, VariantC* defaultValue, GParamFlags flags) c_g_param_spec_variant; ///
+  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, const(GVariantType)* type, GVariant* defaultValue, GParamFlags flags) c_g_param_spec_variant; ///
   GType function(const(char)* name, const(GParamSpecTypeInfo)* pspecInfo) c_g_param_type_register_static; ///
   bool function(GParamSpec* pspec, const(GValue)* srcValue, GValue* destValue, bool strictValidation) c_g_param_value_convert; ///
   bool function(GParamSpec* pspec, const(GValue)* value) c_g_param_value_defaults; ///
@@ -764,7 +764,7 @@ alias g_object_class_list_properties = c_g_object_class_list_properties;
 /** */
 alias g_object_class_override_property = c_g_object_class_override_property;
 
-// ObjectG
+// ObjectWrap
 
 /** */
 alias g_object_get_type = c_g_object_get_type;
@@ -1937,7 +1937,7 @@ shared static this()
   gidLink(cast(void**)&g_object_class_list_properties, "g_object_class_list_properties", LIBS);
   gidLink(cast(void**)&g_object_class_override_property, "g_object_class_override_property", LIBS);
 
-  // ObjectG
+  // ObjectWrap
   gidLink(cast(void**)&g_object_get_type, "g_object_get_type", LIBS);
   gidLink(cast(void**)&g_object_new, "g_object_new", LIBS);
   gidLink(cast(void**)&g_object_new_valist, "g_object_new_valist", LIBS);

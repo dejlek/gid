@@ -41,6 +41,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SettingsSchemaKey self()
   {
     return this;
@@ -53,11 +54,11 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       administrator defaults and lockdown are not visible via this API.
       Returns: the default value for the key
   */
-  glib.variant.VariantG getDefaultValue()
+  glib.variant.Variant getDefaultValue()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_settings_schema_key_get_default_value(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -133,15 +134,15 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       format may change in any way in the future -- but particularly, new
       forms may be added to the possibilities described above.
       
-      You should free the returned value with [glib.variant.VariantG.unref] when it is
+      You should free the returned value with [glib.variant.Variant.unref] when it is
       no longer needed.
       Returns: a #GVariant describing the range
   */
-  glib.variant.VariantG getRange()
+  glib.variant.Variant getRange()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_settings_schema_key_get_range(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -192,10 +193,10 @@ class SettingsSchemaKey : gobject.boxed.Boxed
         value = the value to check
       Returns: true if value is valid for key
   */
-  bool rangeCheck(glib.variant.VariantG value)
+  bool rangeCheck(glib.variant.Variant value)
   {
     bool _retval;
-    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 }

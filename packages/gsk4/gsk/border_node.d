@@ -19,7 +19,7 @@ class BorderNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.BorderNode");
+      throw new GidConstructException("Null instance pointer for gsk.border_node.BorderNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

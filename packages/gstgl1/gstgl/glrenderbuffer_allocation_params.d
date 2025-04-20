@@ -41,36 +41,64 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLRenderbufferAllocationParams self()
   {
     return this;
   }
 
+  /**
+      Get `renderbufferFormat` field.
+      Returns: the #GstGLFormat
+  */
   @property gstgl.types.GLFormat renderbufferFormat()
   {
     return cast(gstgl.types.GLFormat)(cast(GstGLRenderbufferAllocationParams*)cPtr).renderbufferFormat;
   }
 
+  /**
+      Set `renderbufferFormat` field.
+      Params:
+        propval = the #GstGLFormat
+  */
   @property void renderbufferFormat(gstgl.types.GLFormat propval)
   {
     (cast(GstGLRenderbufferAllocationParams*)cPtr).renderbufferFormat = cast(GstGLFormat)propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: the width
+  */
   @property uint width()
   {
     return (cast(GstGLRenderbufferAllocationParams*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the width
+  */
   @property void width(uint propval)
   {
     (cast(GstGLRenderbufferAllocationParams*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the height
+  */
   @property uint height()
   {
     return (cast(GstGLRenderbufferAllocationParams*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the height
+  */
   @property void height(uint propval)
   {
     (cast(GstGLRenderbufferAllocationParams*)cPtr).height = propval;

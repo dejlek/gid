@@ -5,7 +5,7 @@ import gobject.object;
 import gtk.tool_shell;
 import gtk.tool_shell_mixin;
 
-/// Proxy object for [Gtk.ToolShell] interface when a GObject has no applicable D binding
+/// Proxy object for [gtk.tool_shell.ToolShell] interface when a GObject has no applicable D binding
 class ToolShellIfaceProxy : IfaceProxy, gtk.tool_shell.ToolShell
 {
   this(void* ptr, Flag!"Take" take = No.Take)

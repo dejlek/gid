@@ -26,6 +26,23 @@ interface TlsServerConnection
   }
 
   /**
+      Get `authenticationMode` property.
+      Returns: The #GTlsAuthenticationMode for the server. This can be changed
+      before calling [gio.tls_connection.TlsConnection.handshake] if you want to
+      rehandshake with a different mode from the initial handshake.
+  */
+  @property gio.types.TlsAuthenticationMode authenticationMode();
+
+  /**
+      Set `authenticationMode` property.
+      Params:
+        propval = The #GTlsAuthenticationMode for the server. This can be changed
+        before calling [gio.tls_connection.TlsConnection.handshake] if you want to
+        rehandshake with a different mode from the initial handshake.
+  */
+  @property void authenticationMode(gio.types.TlsAuthenticationMode propval);
+
+  /**
       Creates a new #GTlsServerConnection wrapping base_io_stream (which
       must have pollable input and output streams).
       
@@ -38,7 +55,7 @@ interface TlsServerConnection
         certificate = the default server certificate, or null
       Returns: the new
         #GTlsServerConnection, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate = null)
   {
@@ -46,8 +63,8 @@ interface TlsServerConnection
     GError *_err;
     _cretval = g_tls_server_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

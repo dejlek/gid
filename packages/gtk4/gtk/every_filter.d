@@ -38,6 +38,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EveryFilter self()
   {
     return this;

@@ -21,7 +21,7 @@ import webkit.web_view;
     download process, or to simply figure out what is to be downloaded,
     and handle the download process itself.
 */
-class Download : gobject.object.ObjectG
+class Download : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,61 @@ class Download : gobject.object.ObjectG
   override Download self()
   {
     return this;
+  }
+
+  /**
+      Get `allowOverwrite` property.
+      Returns: Whether or not the download is allowed to overwrite an existing file on
+      disk. If this property is false and the destination already exists,
+      the download will fail.
+  */
+  @property bool allowOverwrite()
+  {
+    return getAllowOverwrite();
+  }
+
+  /**
+      Set `allowOverwrite` property.
+      Params:
+        propval = Whether or not the download is allowed to overwrite an existing file on
+        disk. If this property is false and the destination already exists,
+        the download will fail.
+  */
+  @property void allowOverwrite(bool propval)
+  {
+    return setAllowOverwrite(propval);
+  }
+
+  /**
+      Get `destination` property.
+      Returns: The local path to where the download will be saved.
+  */
+  @property string destination()
+  {
+    return getDestination();
+  }
+
+  /**
+      Get `estimatedProgress` property.
+      Returns: An estimate of the percent completion for the download operation.
+      This value will range from 0.0 to 1.0. The value is an estimate
+      based on the total number of bytes expected to be received for
+      a download.
+      If you need a more accurate progress information you can connect to
+      #WebKitDownload::received-data signal to track the progress.
+  */
+  @property double estimatedProgress()
+  {
+    return getEstimatedProgress();
+  }
+
+  /**
+      Get `response` property.
+      Returns: The #WebKitURIResponse associated with this download.
+  */
+  @property webkit.uriresponse.URIResponse response()
+  {
+    return getResponse();
   }
 
   /**
@@ -144,7 +199,7 @@ class Download : gobject.object.ObjectG
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_download_get_request(cast(WebKitDownload*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +217,7 @@ class Download : gobject.object.ObjectG
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_download_get_response(cast(WebKitDownload*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +230,7 @@ class Download : gobject.object.ObjectG
   {
     WebKitWebView* _cretval;
     _cretval = webkit_download_get_web_view(cast(WebKitDownload*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -336,7 +391,7 @@ class Download : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorG error, webkit.download.Download download))
+          $(D void callback(glib.error.ErrorWrap error, webkit.download.Download download))
   
           `error` the #GError that was triggered (optional)
   
@@ -348,7 +403,7 @@ class Download : gobject.object.ObjectG
   ulong connectFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.download.Download)))
   && Parameters!T.length < 3)
   {

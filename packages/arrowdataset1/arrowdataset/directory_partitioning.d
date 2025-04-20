@@ -34,6 +34,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DirectoryPartitioning self()
   {
     return this;
@@ -48,7 +49,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     GError *_err;
     _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

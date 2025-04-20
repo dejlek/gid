@@ -22,7 +22,7 @@ import gobject.object;
     
     #GdkDrawingContext is available since GDK 3.22
 */
-class DrawingContext : gobject.object.ObjectG
+class DrawingContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class DrawingContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DrawingContext self()
   {
     return this;
@@ -88,7 +89,7 @@ class DrawingContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

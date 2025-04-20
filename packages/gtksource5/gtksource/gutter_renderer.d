@@ -13,10 +13,12 @@ import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.text_iter;
+import gtk.text_view;
 import gtk.widget;
 import gtksource.buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
+import gtksource.gutter_lines;
 import gtksource.types;
 import gtksource.view;
 
@@ -76,9 +78,143 @@ class GutterRenderer : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GutterRenderer self()
   {
     return this;
+  }
+
+  /**
+      Get `alignmentMode` property.
+      Returns: The alignment mode of the renderer.
+      
+      This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+      the alignment should work on either the full cell, the first line or the last line.
+  */
+  @property gtksource.types.GutterRendererAlignmentMode alignmentMode()
+  {
+    return getAlignmentMode();
+  }
+
+  /**
+      Set `alignmentMode` property.
+      Params:
+        propval = The alignment mode of the renderer.
+        
+        This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+        the alignment should work on either the full cell, the first line or the last line.
+  */
+  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  {
+    return setAlignmentMode(propval);
+  }
+
+  /**
+      Get `lines` property.
+      Returns: Contains information about the lines to be rendered.
+      
+      It should be used by #GtkSourceGutterRenderer implementations from `vfunc@Gtk.Widget.snapshot`.
+  */
+  @property gtksource.gutter_lines.GutterLines lines()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtksource.gutter_lines.GutterLines)("lines");
+  }
+
+  /**
+      Get `view` property.
+      Returns: The view on which the renderer is placed.
+  */
+  @property gtk.text_view.TextView view()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.text_view.TextView)("view");
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment of the renderer.
+      
+      Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+      A value lower than 0 doesn't modify the alignment.
+  */
+  @property float xalign()
+  {
+    return getXalign();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the renderer.
+        
+        Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
+  */
+  @property void xalign(float propval)
+  {
+    return setXalign(propval);
+  }
+
+  /**
+      Get `xpad` property.
+      Returns: The left and right padding of the renderer.
+  */
+  @property int xpad()
+  {
+    return getXpad();
+  }
+
+  /**
+      Set `xpad` property.
+      Params:
+        propval = The left and right padding of the renderer.
+  */
+  @property void xpad(int propval)
+  {
+    return setXpad(propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The vertical alignment of the renderer.
+      
+      Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+      A value lower than 0 doesn't modify the alignment.
+  */
+  @property float yalign()
+  {
+    return getYalign();
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the renderer.
+        
+        Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
+  */
+  @property void yalign(float propval)
+  {
+    return setYalign(propval);
+  }
+
+  /**
+      Get `ypad` property.
+      Returns: The top and bottom padding of the renderer.
+  */
+  @property int ypad()
+  {
+    return getYpad();
+  }
+
+  /**
+      Set `ypad` property.
+      Params:
+        propval = The top and bottom padding of the renderer.
+  */
+  @property void ypad(int propval)
+  {
+    return setYpad(propval);
   }
 
   alias activate = gtk.widget.Widget.activate;
@@ -145,7 +281,7 @@ class GutterRenderer : gtk.widget.Widget
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +293,7 @@ class GutterRenderer : gtk.widget.Widget
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -428,7 +564,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          $(D void callback(gobject.object.ObjectWrap object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
   
           `object`  (optional)
   
@@ -442,7 +578,7 @@ class GutterRenderer : gtk.widget.Widget
   ulong connectQueryData(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 4)

@@ -33,6 +33,7 @@ class CustomFilter : gtk.filter.Filter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CustomFilter self()
   {
     return this;
@@ -57,7 +58,7 @@ class CustomFilter : gtk.filter.Filter
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
@@ -89,7 +90,7 @@ class CustomFilter : gtk.filter.Filter
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;

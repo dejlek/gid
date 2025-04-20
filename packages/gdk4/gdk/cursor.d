@@ -44,7 +44,7 @@ import gobject.object;
     easier to support cursors. If none of the provided cursors can be supported,
     the default cursor will be the ultimate fallback.
 */
-class Cursor : gobject.object.ObjectG
+class Cursor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -66,6 +66,7 @@ class Cursor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Cursor self()
   {
     return this;
@@ -102,7 +103,7 @@ class Cursor : gobject.object.ObjectG
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,7 +122,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +141,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +205,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_cursor_get_texture(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

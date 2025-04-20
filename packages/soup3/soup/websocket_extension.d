@@ -14,7 +14,7 @@ import soup.types;
     
     #SoupWebsocketExtension is the base class for WebSocket extension objects.
 */
-class WebsocketExtension : gobject.object.ObjectG
+class WebsocketExtension : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class WebsocketExtension : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WebsocketExtension self()
   {
     return this;
@@ -84,7 +85,7 @@ class WebsocketExtension : gobject.object.ObjectG
         header = the message header
         payload = the payload data
       Returns: the message payload data, or null in case of error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes processIncomingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
@@ -92,7 +93,7 @@ class WebsocketExtension : gobject.object.ObjectG
     GError *_err;
     _cretval = soup_websocket_extension_process_incoming_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -110,7 +111,7 @@ class WebsocketExtension : gobject.object.ObjectG
         header = the message header
         payload = the payload data
       Returns: the message payload data, or null in case of error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes processOutgoingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
@@ -118,7 +119,7 @@ class WebsocketExtension : gobject.object.ObjectG
     GError *_err;
     _cretval = soup_websocket_extension_process_outgoing_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

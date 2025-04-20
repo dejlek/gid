@@ -32,7 +32,7 @@ class RoundedRect
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RoundedRect");
+      throw new GidConstructException("Null instance pointer for gsk.rounded_rect.RoundedRect");
 
     cInstance = *cast(GskRoundedRect*)ptr;
 
@@ -46,6 +46,10 @@ class RoundedRect
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `bounds` field.
+      Returns: the bounds of the rectangle
+  */
   @property graphene.rect.Rect bounds()
   {
     return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)cPtr).bounds);

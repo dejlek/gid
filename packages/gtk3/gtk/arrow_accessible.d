@@ -34,6 +34,7 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ArrowAccessible self()
   {
     return this;

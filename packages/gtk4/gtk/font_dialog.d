@@ -32,7 +32,7 @@ import pango.language;
     See [gtk.font_dialog_button.FontDialogButton] for a convenient control
     that uses [gtk.font_dialog.FontDialog] and presents the results.
 */
-class FontDialog : gobject.object.ObjectG
+class FontDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,9 +54,115 @@ class FontDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `filter` property.
+      Returns: Sets a filter to restrict what fonts are shown
+      in the font chooser dialog.
+  */
+  @property gtk.filter.Filter filter()
+  {
+    return getFilter();
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = Sets a filter to restrict what fonts are shown
+        in the font chooser dialog.
+  */
+  @property void filter(gtk.filter.Filter propval)
+  {
+    return setFilter(propval);
+  }
+
+  /**
+      Get `fontMap` property.
+      Returns: Sets a custom font map to select fonts from.
+      
+      A custom font map can be used to present application-specific
+      fonts instead of or in addition to the normal system fonts.
+  */
+  @property pango.font_map.FontMap fontMap()
+  {
+    return getFontMap();
+  }
+
+  /**
+      Set `fontMap` property.
+      Params:
+        propval = Sets a custom font map to select fonts from.
+        
+        A custom font map can be used to present application-specific
+        fonts instead of or in addition to the normal system fonts.
+  */
+  @property void fontMap(pango.font_map.FontMap propval)
+  {
+    return setFontMap(propval);
+  }
+
+  /**
+      Get `language` property.
+      Returns: The language for which the font features are selected.
+  */
+  @property pango.language.Language language()
+  {
+    return getLanguage();
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the font features are selected.
+  */
+  @property void language(pango.language.Language propval)
+  {
+    return setLanguage(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the font chooser dialog is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the font chooser dialog is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: A title that may be shown on the font chooser
+      dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the font chooser
+        dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -92,7 +198,7 @@ class FontDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -107,16 +213,16 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected font face
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   pango.font_face.FontFace chooseFaceFinish(gio.async_result.AsyncResult result)
   {
     PangoFontFace* _cretval;
     GError *_err;
-    _cretval = gtk_font_dialog_choose_face_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_font_dialog_choose_face_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -141,7 +247,7 @@ class FontDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -160,16 +266,16 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected family
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   pango.font_family.FontFamily chooseFamilyFinish(gio.async_result.AsyncResult result)
   {
     PangoFontFamily* _cretval;
     GError *_err;
-    _cretval = gtk_font_dialog_choose_family_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_font_dialog_choose_family_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -197,7 +303,7 @@ class FontDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -230,7 +336,7 @@ class FontDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -249,7 +355,7 @@ class FontDialog : gobject.object.ObjectG
         language = return location for the language
       Returns: `TRUE` if a font was selected. Otherwise `FALSE` is returned
           and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.Language language)
   {
@@ -258,9 +364,9 @@ class FontDialog : gobject.object.ObjectG
     char* _fontFeatures;
     PangoLanguage* _language;
     GError *_err;
-    _retval = gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
+    _retval = gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
     fontFeatures = _fontFeatures.fromCString(Yes.Free);
     language = new pango.language.Language(cast(void*)_language, Yes.Take);
@@ -274,15 +380,15 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected font
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   pango.font_description.FontDescription chooseFontFinish(gio.async_result.AsyncResult result)
   {
     PangoFontDescription* _cretval;
     GError *_err;
-    _cretval = gtk_font_dialog_choose_font_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_font_dialog_choose_font_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -296,7 +402,7 @@ class FontDialog : gobject.object.ObjectG
   {
     GtkFilter* _cretval;
     _cretval = gtk_font_dialog_get_filter(cast(GtkFontDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -309,7 +415,7 @@ class FontDialog : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_dialog_get_font_map(cast(GtkFontDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 

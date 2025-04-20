@@ -4,7 +4,6 @@ module gtk.notebook_page_accessible;
 import atk.component;
 import atk.component_mixin;
 import atk.object;
-import atk.types;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
@@ -13,7 +12,7 @@ import gtk.types;
 import gtk.widget;
 
 /** */
-class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
+class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
@@ -35,6 +34,7 @@ class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NotebookPageAccessible self()
   {
     return this;

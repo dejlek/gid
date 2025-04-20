@@ -38,6 +38,7 @@ class ParseContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ParseContext self()
   {
     return this;

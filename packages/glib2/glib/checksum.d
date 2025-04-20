@@ -53,6 +53,7 @@ class Checksum : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Checksum self()
   {
     return this;

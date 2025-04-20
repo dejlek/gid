@@ -54,7 +54,7 @@ import gtk.types;
         where applicable; otherwise, there is no replacement for querying the
         style machinery. Stylable UI elements should use widgets.
 */
-class StyleContext : gobject.object.ObjectG
+class StyleContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -76,9 +76,22 @@ class StyleContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleContext self()
   {
     return this;
+  }
+
+  /** */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /** */
+  @property void display(gdk.display.Display propval)
+  {
+    return setDisplay(propval);
   }
 
   /**
@@ -103,7 +116,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -115,7 +128,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void removeProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /**
@@ -170,7 +183,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -213,7 +226,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gtk_style_context_get_display(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -340,7 +353,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeProvider(gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /**

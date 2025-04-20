@@ -33,6 +33,7 @@ class RunEndEncodedArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RunEndEncodedArray self()
   {
     return this;
@@ -45,7 +46,7 @@ class RunEndEncodedArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_run_end_encoded_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, logicalLength, runEnds ? cast(GArrowArray*)runEnds.cPtr(No.Dup) : null, values ? cast(GArrowArray*)values.cPtr(No.Dup) : null, logicalOffset, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -56,8 +57,8 @@ class RunEndEncodedArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_run_end_encoded_array_decode(cast(GArrowRunEndEncodedArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,8 +85,8 @@ class RunEndEncodedArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_run_end_encoded_array_get_logical_run_ends(cast(GArrowRunEndEncodedArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -94,7 +95,7 @@ class RunEndEncodedArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_logical_values(cast(GArrowRunEndEncodedArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,7 +104,7 @@ class RunEndEncodedArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_run_ends(cast(GArrowRunEndEncodedArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,7 +113,7 @@ class RunEndEncodedArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_values(cast(GArrowRunEndEncodedArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

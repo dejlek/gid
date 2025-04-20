@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -62,9 +63,64 @@ class HandleBox : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HandleBox self()
   {
     return this;
+  }
+
+  /** */
+  @property bool childDetached()
+  {
+    return getChildDetached();
+  }
+
+  /** */
+  @property gtk.types.PositionType handlePosition()
+  {
+    return getHandlePosition();
+  }
+
+  /** */
+  @property void handlePosition(gtk.types.PositionType propval)
+  {
+    return setHandlePosition(propval);
+  }
+
+  /** */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return getShadowType();
+  }
+
+  /** */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    return setShadowType(propval);
+  }
+
+  /** */
+  @property gtk.types.PositionType snapEdge()
+  {
+    return getSnapEdge();
+  }
+
+  /** */
+  @property void snapEdge(gtk.types.PositionType propval)
+  {
+    return setSnapEdge(propval);
+  }
+
+  /** */
+  @property bool snapEdgeSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("snap-edge-set");
+  }
+
+  /** */
+  @property void snapEdgeSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("snap-edge-set", propval);
   }
 
   /**

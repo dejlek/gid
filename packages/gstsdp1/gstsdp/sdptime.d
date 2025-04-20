@@ -18,7 +18,7 @@ class SDPTime
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPTime");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdptime.SDPTime");
 
     cInstance = *cast(GstSDPTime*)ptr;
 
@@ -32,22 +32,44 @@ class SDPTime
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `start` field.
+      Returns: start time for the conference. The value is the decimal
+          representation of Network Time Protocol (NTP) time values in seconds
+  */
   @property string start()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
   }
 
+  /**
+      Set `start` field.
+      Params:
+        propval = start time for the conference. The value is the decimal
+            representation of Network Time Protocol (NTP) time values in seconds
+  */
   @property void start(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
     dToC(propval, cast(void*)&(cast(GstSDPTime*)cPtr).start);
   }
 
+  /**
+      Get `stop` field.
+      Returns: stop time for the conference. The value is the decimal
+          representation of Network Time Protocol (NTP) time values in seconds
+  */
   @property string stop()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);
   }
 
+  /**
+      Set `stop` field.
+      Params:
+        propval = stop time for the conference. The value is the decimal
+            representation of Network Time Protocol (NTP) time values in seconds
+  */
   @property void stop(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);

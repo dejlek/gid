@@ -24,7 +24,7 @@ import gtk.types;
     Contains information found when looking up an icon in
     an icon theme.
 */
-class IconInfo : gobject.object.ObjectG
+class IconInfo : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,6 +46,7 @@ class IconInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconInfo self()
   {
     return this;
@@ -63,7 +64,7 @@ class IconInfo : gobject.object.ObjectG
   {
     GtkIconInfo* _cretval;
     _cretval = gtk_icon_info_new_for_pixbuf(iconTheme ? cast(GtkIconTheme*)iconTheme.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +133,7 @@ class IconInfo : gobject.object.ObjectG
       to [gtk.icon_theme.IconTheme.lookupIcon].
       Returns: the built-in image pixbuf, or null.
             No extra reference is added to the returned pixbuf, so if
-            you want to keep it around, you must use [gobject.object.ObjectG.ref_].
+            you want to keep it around, you must use [gobject.object.ObjectWrap.ref_].
             The returned image must not be modified.
   
       Deprecated: This function is deprecated, use
@@ -142,7 +143,7 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gtk_icon_info_get_builtin_pixbuf(cast(GtkIconInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,9 +226,9 @@ class IconInfo : gobject.object.ObjectG
       returned by this function will be scaled to the exact size.
       Returns: the rendered icon; this may be a newly
             created icon or a new reference to an internal icon, so you must
-            not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
+            not modify the icon. Use [gobject.object.ObjectWrap.unref] to release your reference
             to the icon.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIcon()
   {
@@ -235,8 +236,8 @@ class IconInfo : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_info_load_icon(cast(GtkIconInfo*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -259,7 +260,7 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -274,18 +275,18 @@ class IconInfo : gobject.object.ObjectG
         res = a #GAsyncResult
       Returns: the rendered icon; this may be a newly
             created icon or a new reference to an internal icon, so you must
-            not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
+            not modify the icon. Use [gobject.object.ObjectWrap.unref] to release your reference
             to the icon.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIconFinish(gio.async_result.AsyncResult res)
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_icon_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_icon_info_load_icon_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -308,7 +309,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [cairo.surface.Surface.destroy] to release your
             reference to the icon.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   cairo.surface.Surface loadSurface(gdk.window.Window forWindow = null)
   {
@@ -316,7 +317,7 @@ class IconInfo : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_info_load_surface(cast(GtkIconInfo*)cPtr, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -351,7 +352,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolic(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, out bool wasSymbolic)
   {
@@ -359,8 +360,8 @@ class IconInfo : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)cPtr, fg ? cast(const(GdkRGBA)*)fg.cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor.cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor.cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor.cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -391,7 +392,7 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -409,18 +410,18 @@ class IconInfo : gobject.object.ObjectG
               applied to it.
       Returns: the rendered icon; this may be a newly
             created icon or a new reference to an internal icon, so you must
-            not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
+            not modify the icon. Use [gobject.object.ObjectWrap.unref] to release your reference
             to the icon.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -442,7 +443,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContext(gtk.style_context.StyleContext context, out bool wasSymbolic)
   {
@@ -450,8 +451,8 @@ class IconInfo : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_info_load_symbolic_for_context(cast(GtkIconInfo*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -476,7 +477,7 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -494,18 +495,18 @@ class IconInfo : gobject.object.ObjectG
               applied to it.
       Returns: the rendered icon; this may be a newly
             created icon or a new reference to an internal icon, so you must
-            not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
+            not modify the icon. Use [gobject.object.ObjectWrap.unref] to release your reference
             to the icon.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContextFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -525,7 +526,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.icon_info.IconInfo.loadSymbolicForContext] instead
   */
@@ -535,8 +536,8 @@ class IconInfo : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_info_load_symbolic_for_style(cast(GtkIconInfo*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, state, cast(bool*)&wasSymbolic, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

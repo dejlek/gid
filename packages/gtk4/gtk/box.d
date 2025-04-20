@@ -21,9 +21,9 @@ import gtk.widget;
     ![An example GtkBox](box.png)
     
     Whether it is a row or column depends on the value of its
-    [gtk.orientable.Orientable.Orientation] property. Within the other
+    [gtk.orientable.Orientable.orientation] property. Within the other
     dimension, all children are allocated the same size. Of course, the
-    [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align] properties
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign] properties
     can be used on the children to influence their allocation.
     
     Use repeated calls to [gtk.box.Box.append] to pack widgets into a
@@ -73,9 +73,86 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Box self()
   {
     return this;
+  }
+
+  /**
+      Get `baselineChild` property.
+      Returns: The child that determines the baseline, in vertical orientation.
+  */
+  @property int baselineChild()
+  {
+    return getBaselineChild();
+  }
+
+  /**
+      Set `baselineChild` property.
+      Params:
+        propval = The child that determines the baseline, in vertical orientation.
+  */
+  @property void baselineChild(int propval)
+  {
+    return setBaselineChild(propval);
+  }
+
+  /**
+      Get `baselinePosition` property.
+      Returns: The position of the baseline aligned widgets if extra space is available.
+  */
+  @property gtk.types.BaselinePosition baselinePosition()
+  {
+    return getBaselinePosition();
+  }
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the baseline aligned widgets if extra space is available.
+  */
+  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setBaselinePosition(propval);
+  }
+
+  /**
+      Get `homogeneous` property.
+      Returns: Whether the children should all be the same size.
+  */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether the children should all be the same size.
+  */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: The amount of space between children.
+  */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The amount of space between children.
+  */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
   }
 
   mixin OrientableT!();

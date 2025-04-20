@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class RunEndEncodeOptions : arrow.function_options.FunctionOptions
@@ -31,9 +32,29 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RunEndEncodeOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `runEndDataType` property.
+      Returns: The data type for run-end.
+  */
+  @property arrow.data_type.DataType runEndDataType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.data_type.DataType)("run-end-data-type");
+  }
+
+  /**
+      Set `runEndDataType` property.
+      Params:
+        propval = The data type for run-end.
+  */
+  @property void runEndDataType(arrow.data_type.DataType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.data_type.DataType)("run-end-data-type", propval);
   }
 
   /** */

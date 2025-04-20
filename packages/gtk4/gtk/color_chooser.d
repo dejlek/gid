@@ -33,6 +33,64 @@ interface ColorChooser
   }
 
   /**
+      Get `rgba` property.
+      Returns: The currently selected color, as a [gdk.rgba.RGBA] struct.
+      
+      The property can be set to change the current selection
+      programmatically.
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property gdk.rgba.RGBA rgba();
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The currently selected color, as a [gdk.rgba.RGBA] struct.
+        
+        The property can be set to change the current selection
+        programmatically.
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property void rgba(gdk.rgba.RGBA propval);
+
+  /**
+      Get `useAlpha` property.
+      Returns: Whether colors may have alpha (translucency).
+      
+      When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+      via the [gtk.color_chooser.ColorChooser.rgba] property will be
+      forced to have alpha == 1.
+      
+      Implementations are expected to show alpha by rendering the color
+      over a non-uniform background (like a checkerboard pattern).
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property bool useAlpha();
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+        
+        When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+        via the [gtk.color_chooser.ColorChooser.rgba] property will be
+        forced to have alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property void useAlpha(bool propval);
+
+  /**
       Adds a palette to the color chooser.
       
       If orientation is horizontal, the colors are grouped in rows,

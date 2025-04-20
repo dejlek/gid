@@ -13,7 +13,7 @@ import gtk.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
 */
-class LeafletPage : gobject.object.ObjectG
+class LeafletPage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,9 +35,68 @@ class LeafletPage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LeafletPage self()
   {
     return this;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the child page.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `navigatable` property.
+      Returns: Whether the child can be navigated to when folded.
+      
+      If `FALSE`, the child will be ignored by
+      [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
+      gestures.
+      
+      This can be used used to prevent switching to widgets like separators.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  @property bool navigatable()
+  {
+    return getNavigatable();
+  }
+
+  /**
+      Set `navigatable` property.
+      Params:
+        propval = Whether the child can be navigated to when folded.
+        
+        If `FALSE`, the child will be ignored by
+        [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
+        gestures.
+        
+        This can be used used to prevent switching to widgets like separators.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  @property void navigatable(bool propval)
+  {
+    return setNavigatable(propval);
   }
 
   /**
@@ -50,7 +109,7 @@ class LeafletPage : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = adw_leaflet_page_get_child(cast(AdwLeafletPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

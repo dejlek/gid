@@ -30,6 +30,7 @@ class Int64DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Int64DataType self()
   {
     return this;

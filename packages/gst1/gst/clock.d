@@ -83,7 +83,7 @@ import gst.types;
     number of samples to use when calibrating and #GstClock:window-threshold
     defines the minimum number of samples before the calibration is performed.
 */
-class Clock : gst.object.ObjectGst
+class Clock : gst.object.ObjectWrap
 {
 
   /** */
@@ -105,9 +105,46 @@ class Clock : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Clock self()
   {
     return this;
+  }
+
+  /** */
+  @property ulong timeout()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("timeout");
+  }
+
+  /** */
+  @property void timeout(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("timeout", propval);
+  }
+
+  /** */
+  @property int windowSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("window-size");
+  }
+
+  /** */
+  @property void windowSize(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("window-size", propval);
+  }
+
+  /** */
+  @property int windowThreshold()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("window-threshold");
+  }
+
+  /** */
+  @property void windowThreshold(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("window-threshold", propval);
   }
 
   /**
@@ -138,7 +175,7 @@ class Clock : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_clock_id_get_clock(id);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -267,7 +304,7 @@ class Clock : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -417,7 +454,7 @@ class Clock : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_clock_get_master(cast(GstClock*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -120,7 +120,7 @@ class Harness
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstCheck.Harness");
+      throw new GidConstructException("Null instance pointer for gstcheck.harness.Harness");
 
     cInstance = *cast(GstHarness*)ptr;
 
@@ -134,44 +134,79 @@ class Harness
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `element` field.
+      Returns: the element inside the harness
+  */
   @property gst.element.Element element()
   {
     return cToD!(gst.element.Element)(cast(void*)(cast(GstHarness*)cPtr).element);
   }
 
+  /**
+      Set `element` field.
+      Params:
+        propval = the element inside the harness
+  */
   @property void element(gst.element.Element propval)
   {
     cValueFree!(gst.element.Element)(cast(void*)(cast(GstHarness*)cPtr).element);
     dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).element);
   }
 
+  /**
+      Get `srcpad` field.
+      Returns: the internal harness source pad
+  */
   @property gst.pad.Pad srcpad()
   {
     return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).srcpad);
   }
 
+  /**
+      Set `srcpad` field.
+      Params:
+        propval = the internal harness source pad
+  */
   @property void srcpad(gst.pad.Pad propval)
   {
     cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).srcpad);
     dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).srcpad);
   }
 
+  /**
+      Get `sinkpad` field.
+      Returns: the internal harness sink pad
+  */
   @property gst.pad.Pad sinkpad()
   {
     return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).sinkpad);
   }
 
+  /**
+      Set `sinkpad` field.
+      Params:
+        propval = the internal harness sink pad
+  */
   @property void sinkpad(gst.pad.Pad propval)
   {
     cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).sinkpad);
     dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).sinkpad);
   }
 
+  /**
+      Get `srcHarness` field.
+      Returns: the source (input) harness (if any)
+  */
   @property gstcheck.harness.Harness srcHarness()
   {
     return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)cPtr).srcHarness);
   }
 
+  /**
+      Get `sinkHarness` field.
+      Returns: the sink (output) harness (if any)
+  */
   @property gstcheck.harness.Harness sinkHarness()
   {
     return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)cPtr).sinkHarness);
@@ -225,7 +260,7 @@ class Harness
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
@@ -511,7 +546,7 @@ class Harness
     GstElement* _cretval;
     const(char)* _elementName = elementName.toCString(No.Alloc);
     _cretval = gst_harness_find_element(cast(GstHarness*)cPtr, _elementName);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -562,7 +597,7 @@ class Harness
   {
     GstTestClock* _cretval;
     _cretval = gst_harness_get_testclock(cast(GstHarness*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstTestClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstcheck.test_clock.TestClock)(cast(GstTestClock*)_cretval, Yes.Take);
     return _retval;
   }
 

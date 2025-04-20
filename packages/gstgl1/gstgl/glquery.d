@@ -21,7 +21,7 @@ class GLQuery
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstGL.GLQuery");
+      throw new GidConstructException("Null instance pointer for gstgl.glquery.GLQuery");
 
     cInstance = *cast(GstGLQuery*)ptr;
 

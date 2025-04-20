@@ -31,7 +31,7 @@ import gobject.object;
     As [gio.socket_client.SocketClient] is a lightweight object, you don't need to cache it. You
     can just create a new one any time you need one.
 */
-class SocketClient : gobject.object.ObjectG
+class SocketClient : gobject.object.ObjectWrap
 {
 
   /** */
@@ -53,15 +53,221 @@ class SocketClient : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketClient self()
   {
     return this;
   }
 
   /**
+      Get `enableProxy` property.
+      Returns: Enable proxy support.
+  */
+  @property bool enableProxy()
+  {
+    return getEnableProxy();
+  }
+
+  /**
+      Set `enableProxy` property.
+      Params:
+        propval = Enable proxy support.
+  */
+  @property void enableProxy(bool propval)
+  {
+    return setEnableProxy(propval);
+  }
+
+  /**
+      Get `family` property.
+      Returns: The address family to use for socket construction.
+  */
+  @property gio.types.SocketFamily family()
+  {
+    return getFamily();
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The address family to use for socket construction.
+  */
+  @property void family(gio.types.SocketFamily propval)
+  {
+    return setFamily(propval);
+  }
+
+  /**
+      Get `localAddress` property.
+      Returns: The local address constructed sockets will be bound to.
+  */
+  @property gio.socket_address.SocketAddress localAddress()
+  {
+    return getLocalAddress();
+  }
+
+  /**
+      Set `localAddress` property.
+      Params:
+        propval = The local address constructed sockets will be bound to.
+  */
+  @property void localAddress(gio.socket_address.SocketAddress propval)
+  {
+    return setLocalAddress(propval);
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: The protocol to use for socket construction, or `0` for default.
+  */
+  @property gio.types.SocketProtocol protocol()
+  {
+    return getProtocol();
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The protocol to use for socket construction, or `0` for default.
+  */
+  @property void protocol(gio.types.SocketProtocol propval)
+  {
+    return setProtocol(propval);
+  }
+
+  /**
+      Get `proxyResolver` property.
+      Returns: The proxy resolver to use
+  */
+  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  {
+    return getProxyResolver();
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = The proxy resolver to use
+  */
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  {
+    return setProxyResolver(propval);
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: The I/O timeout for sockets, in seconds, or `0` for none.
+  */
+  @property uint timeout()
+  {
+    return getTimeout();
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The I/O timeout for sockets, in seconds, or `0` for none.
+  */
+  @property void timeout(uint propval)
+  {
+    return setTimeout(propval);
+  }
+
+  /**
+      Get `tls` property.
+      Returns: Whether to create TLS connections.
+  */
+  @property bool tls()
+  {
+    return getTls();
+  }
+
+  /**
+      Set `tls` property.
+      Params:
+        propval = Whether to create TLS connections.
+  */
+  @property void tls(bool propval)
+  {
+    return setTls(propval);
+  }
+
+  /**
+      Get `tlsValidationFlags` property.
+      Returns: The TLS validation flags used when creating TLS connections. The
+      default value is [gio.types.TlsCertificateFlags.ValidateAll].
+      
+      GLib guarantees that if certificate verification fails, at least one
+      flag will be set, but it does not guarantee that all possible flags
+      will be set. Accordingly, you may not safely decide to ignore any
+      particular type of error. For example, it would be incorrect to mask
+      [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+      because this could potentially be the only error flag set even if
+      other problems exist with the certificate. Therefore, there is no
+      safe way to use this property. This is not a horrible problem,
+      though, because you should not be attempting to ignore validation
+      errors anyway. If you really must ignore TLS certificate errors,
+      connect to the #GSocketClient::event signal, wait for it to be
+      emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
+      connect to #GTlsConnection::accept-certificate.
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  @property gio.types.TlsCertificateFlags tlsValidationFlags()
+  {
+    return getTlsValidationFlags();
+  }
+
+  /**
+      Set `tlsValidationFlags` property.
+      Params:
+        propval = The TLS validation flags used when creating TLS connections. The
+        default value is [gio.types.TlsCertificateFlags.ValidateAll].
+        
+        GLib guarantees that if certificate verification fails, at least one
+        flag will be set, but it does not guarantee that all possible flags
+        will be set. Accordingly, you may not safely decide to ignore any
+        particular type of error. For example, it would be incorrect to mask
+        [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+        because this could potentially be the only error flag set even if
+        other problems exist with the certificate. Therefore, there is no
+        safe way to use this property. This is not a horrible problem,
+        though, because you should not be attempting to ignore validation
+        errors anyway. If you really must ignore TLS certificate errors,
+        connect to the #GSocketClient::event signal, wait for it to be
+        emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
+        connect to #GTlsConnection::accept-certificate.
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  @property void tlsValidationFlags(gio.types.TlsCertificateFlags propval)
+  {
+    return setTlsValidationFlags(propval);
+  }
+
+  /**
+      Get `type` property.
+      Returns: The type to use for socket construction.
+  */
+  @property gio.types.SocketType type()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.SocketType)("type");
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The type to use for socket construction.
+  */
+  @property void type(gio.types.SocketType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.types.SocketType)("type", propval);
+  }
+
+  /**
       Creates a new #GSocketClient with the default options.
       Returns: a #GSocketClient.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   this()
   {
@@ -124,16 +330,16 @@ class SocketClient : gobject.object.ObjectG
         connectable = a #GSocketConnectable specifying the remote address.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connect(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_client_connect(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,12 +371,12 @@ class SocketClient : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -179,16 +385,16 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectFinish(gio.async_result.AsyncResult result)
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_client_connect_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -229,7 +435,7 @@ class SocketClient : gobject.object.ObjectG
         defaultPort = the default port to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
@@ -238,8 +444,8 @@ class SocketClient : gobject.object.ObjectG
     GError *_err;
     _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -263,7 +469,7 @@ class SocketClient : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -278,16 +484,16 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToHostFinish(gio.async_result.AsyncResult result)
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -312,7 +518,7 @@ class SocketClient : gobject.object.ObjectG
         service = the name of the service to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection if successful, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToService(string domain, string service, gio.cancellable.Cancellable cancellable = null)
   {
@@ -322,8 +528,8 @@ class SocketClient : gobject.object.ObjectG
     GError *_err;
     _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -344,7 +550,7 @@ class SocketClient : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -360,16 +566,16 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToServiceFinish(gio.async_result.AsyncResult result)
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -401,7 +607,7 @@ class SocketClient : gobject.object.ObjectG
         defaultPort = the default port to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
@@ -410,8 +616,8 @@ class SocketClient : gobject.object.ObjectG
     GError *_err;
     _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -435,7 +641,7 @@ class SocketClient : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -450,16 +656,16 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_connection.SocketConnection connectToUriFinish(gio.async_result.AsyncResult result)
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -498,7 +704,7 @@ class SocketClient : gobject.object.ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_client_get_local_address(cast(GSocketClient*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -527,7 +733,7 @@ class SocketClient : gobject.object.ObjectG
   {
     GProxyResolver* _cretval;
     _cretval = g_socket_client_get_proxy_resolver(cast(GSocketClient*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -671,7 +877,7 @@ class SocketClient : gobject.object.ObjectG
   */
   void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
-    g_socket_client_set_proxy_resolver(cast(GSocketClient*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
+    g_socket_client_set_proxy_resolver(cast(GSocketClient*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(gobject.object.ObjectWrap)proxyResolver).cPtr(No.Dup) : null);
   }
 
   /**

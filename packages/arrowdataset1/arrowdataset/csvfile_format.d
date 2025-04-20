@@ -30,6 +30,7 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CSVFileFormat self()
   {
     return this;

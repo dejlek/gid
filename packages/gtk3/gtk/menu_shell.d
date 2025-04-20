@@ -67,9 +67,33 @@ class MenuShell : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuShell self()
   {
     return this;
+  }
+
+  /**
+      Get `takeFocus` property.
+      Returns: A boolean that determines whether the menu and its submenus grab the
+      keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
+      [gtk.menu_shell.MenuShell.getTakeFocus].
+  */
+  @property bool takeFocus()
+  {
+    return getTakeFocus();
+  }
+
+  /**
+      Set `takeFocus` property.
+      Params:
+        propval = A boolean that determines whether the menu and its submenus grab the
+        keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
+        [gtk.menu_shell.MenuShell.getTakeFocus].
+  */
+  @property void takeFocus(bool propval)
+  {
+    return setTakeFocus(propval);
   }
 
   /**
@@ -184,7 +208,7 @@ class MenuShell : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_parent_shell(cast(GtkMenuShell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +220,7 @@ class MenuShell : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_selected_item(cast(GtkMenuShell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

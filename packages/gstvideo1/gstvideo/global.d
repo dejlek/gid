@@ -637,7 +637,7 @@ double videoColorTransferEncode(gstvideo.types.VideoTransferFunction func, doubl
       timeout = the maximum amount of time allowed for the processing.
     Returns: The converted #GstSample, or null if an error happened (in which case err
       will point to the #GError).
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout)
 {
@@ -645,7 +645,7 @@ gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toC
   GError *_err;
   _cretval = gst_video_convert_sample(sample ? cast(GstSample*)sample.cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps.cPtr(No.Dup) : null, timeout, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -677,7 +677,7 @@ void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst
   {
     auto _dlg = cast(gstvideo.types.VideoConvertSampleCallback*)userData;
 
-    (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+    (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 

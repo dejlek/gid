@@ -14,7 +14,7 @@ import gid.gid;
     
     See `class@AtkSocket`
 */
-class Plug : atk.object.ObjectAtk, atk.component.Component
+class Plug : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
@@ -36,6 +36,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Plug self()
   {
     return this;
@@ -87,7 +88,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
       Params:
         child = an #AtkObject to be set as accessible child of plug.
   */
-  void setChild(atk.object.ObjectAtk child)
+  void setChild(atk.object.ObjectWrap child)
   {
     atk_plug_set_child(cast(AtkPlug*)cPtr, child ? cast(AtkObject*)child.cPtr(No.Dup) : null);
   }

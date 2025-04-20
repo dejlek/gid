@@ -36,6 +36,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileInputStream self()
   {
     return this;
@@ -49,7 +50,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     GError *_err;
     _cretval = garrow_file_input_stream_new(_path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -60,8 +61,8 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     GError *_err;
     _cretval = garrow_file_input_stream_new_file_descriptor(fileDescriptor, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -13,6 +13,7 @@ import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
 import gtksource.view;
+import pango.font_description;
 
 /** */
 class Map : gtksource.view.View
@@ -37,9 +38,34 @@ class Map : gtksource.view.View
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Map self()
   {
     return this;
+  }
+
+  /** */
+  @property pango.font_description.FontDescription fontDesc()
+  {
+    return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
+  }
+
+  /** */
+  @property void fontDesc(pango.font_description.FontDescription propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
+  }
+
+  /** */
+  @property gtksource.view.View view()
+  {
+    return getView();
+  }
+
+  /** */
+  @property void view(gtksource.view.View propval)
+  {
+    return setView(propval);
   }
 
   /**
@@ -61,7 +87,7 @@ class Map : gtksource.view.View
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_map_get_view(cast(GtkSourceMap*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 

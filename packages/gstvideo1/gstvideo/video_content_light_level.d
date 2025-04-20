@@ -18,7 +18,7 @@ class VideoContentLightLevel
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoContentLightLevel");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_content_light_level.VideoContentLightLevel");
 
     cInstance = *cast(GstVideoContentLightLevel*)ptr;
 
@@ -32,21 +32,43 @@ class VideoContentLightLevel
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `maxContentLightLevel` field.
+      Returns: the maximum content light level
+        (abbreviated to MaxCLL) in candelas per square meter (cd/m^2 and nit)
+  */
   @property ushort maxContentLightLevel()
   {
     return (cast(GstVideoContentLightLevel*)cPtr).maxContentLightLevel;
   }
 
+  /**
+      Set `maxContentLightLevel` field.
+      Params:
+        propval = the maximum content light level
+          (abbreviated to MaxCLL) in candelas per square meter (cd/m^2 and nit)
+  */
   @property void maxContentLightLevel(ushort propval)
   {
     (cast(GstVideoContentLightLevel*)cPtr).maxContentLightLevel = propval;
   }
 
+  /**
+      Get `maxFrameAverageLightLevel` field.
+      Returns: the maximum frame average light level
+        (abbreviated to MaxFLL) in candelas per square meter (cd/m^2 and nit)
+  */
   @property ushort maxFrameAverageLightLevel()
   {
     return (cast(GstVideoContentLightLevel*)cPtr).maxFrameAverageLightLevel;
   }
 
+  /**
+      Set `maxFrameAverageLightLevel` field.
+      Params:
+        propval = the maximum frame average light level
+          (abbreviated to MaxFLL) in candelas per square meter (cd/m^2 and nit)
+  */
   @property void maxFrameAverageLightLevel(ushort propval)
   {
     (cast(GstVideoContentLightLevel*)cPtr).maxFrameAverageLightLevel = propval;

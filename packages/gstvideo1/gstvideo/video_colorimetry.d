@@ -17,7 +17,7 @@ class VideoColorimetry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoColorimetry");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_colorimetry.VideoColorimetry");
 
     cInstance = *cast(GstVideoColorimetry*)ptr;
 
@@ -31,41 +31,81 @@ class VideoColorimetry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `range` field.
+      Returns: the color range. This is the valid range for the samples.
+              It is used to convert the samples to Y'PbPr values.
+  */
   @property gstvideo.types.VideoColorRange range()
   {
     return cast(gstvideo.types.VideoColorRange)(cast(GstVideoColorimetry*)cPtr).range;
   }
 
+  /**
+      Set `range` field.
+      Params:
+        propval = the color range. This is the valid range for the samples.
+                It is used to convert the samples to Y'PbPr values.
+  */
   @property void range(gstvideo.types.VideoColorRange propval)
   {
     (cast(GstVideoColorimetry*)cPtr).range = cast(GstVideoColorRange)propval;
   }
 
+  /**
+      Get `matrix` field.
+      Returns: the color matrix. Used to convert between Y'PbPr and
+               non-linear RGB (R'G'B')
+  */
   @property gstvideo.types.VideoColorMatrix matrix()
   {
     return cast(gstvideo.types.VideoColorMatrix)(cast(GstVideoColorimetry*)cPtr).matrix;
   }
 
+  /**
+      Set `matrix` field.
+      Params:
+        propval = the color matrix. Used to convert between Y'PbPr and
+                 non-linear RGB (R'G'B')
+  */
   @property void matrix(gstvideo.types.VideoColorMatrix propval)
   {
     (cast(GstVideoColorimetry*)cPtr).matrix = cast(GstVideoColorMatrix)propval;
   }
 
+  /**
+      Get `transfer` field.
+      Returns: the transfer function. used to convert between R'G'B' and RGB
+  */
   @property gstvideo.types.VideoTransferFunction transfer()
   {
     return cast(gstvideo.types.VideoTransferFunction)(cast(GstVideoColorimetry*)cPtr).transfer;
   }
 
+  /**
+      Set `transfer` field.
+      Params:
+        propval = the transfer function. used to convert between R'G'B' and RGB
+  */
   @property void transfer(gstvideo.types.VideoTransferFunction propval)
   {
     (cast(GstVideoColorimetry*)cPtr).transfer = cast(GstVideoTransferFunction)propval;
   }
 
+  /**
+      Get `primaries` field.
+      Returns: color primaries. used to convert between R'G'B' and CIE XYZ
+  */
   @property gstvideo.types.VideoColorPrimaries primaries()
   {
     return cast(gstvideo.types.VideoColorPrimaries)(cast(GstVideoColorimetry*)cPtr).primaries;
   }
 
+  /**
+      Set `primaries` field.
+      Params:
+        propval = color primaries. used to convert between R'G'B' and CIE XYZ
+  */
   @property void primaries(gstvideo.types.VideoColorPrimaries propval)
   {
     (cast(GstVideoColorimetry*)cPtr).primaries = cast(GstVideoColorPrimaries)propval;

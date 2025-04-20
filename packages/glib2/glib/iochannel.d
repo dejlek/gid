@@ -75,6 +75,7 @@ class IOChannel : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IOChannel self()
   {
     return this;
@@ -762,7 +763,7 @@ class IOChannel : gobject.boxed.Boxed
   }
 }
 
-class IOChannelException : ErrorG
+class IOChannelException : ErrorWrap
 {
   this(GError* err)
   {

@@ -54,9 +54,134 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Range self()
   {
     return this;
+  }
+
+  /**
+      Get `adjustment` property.
+      Returns: The adjustment that is controlled by the range.
+  */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The adjustment that is controlled by the range.
+  */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
+  }
+
+  /**
+      Get `fillLevel` property.
+      Returns: The fill level (e.g. prebuffering of a network stream).
+  */
+  @property double fillLevel()
+  {
+    return getFillLevel();
+  }
+
+  /**
+      Set `fillLevel` property.
+      Params:
+        propval = The fill level (e.g. prebuffering of a network stream).
+  */
+  @property void fillLevel(double propval)
+  {
+    return setFillLevel(propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: If true, the direction in which the slider moves is inverted.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = If true, the direction in which the slider moves is inverted.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /**
+      Get `restrictToFillLevel` property.
+      Returns: Controls whether slider movement is restricted to an
+      upper boundary set by the fill level.
+  */
+  @property bool restrictToFillLevel()
+  {
+    return getRestrictToFillLevel();
+  }
+
+  /**
+      Set `restrictToFillLevel` property.
+      Params:
+        propval = Controls whether slider movement is restricted to an
+        upper boundary set by the fill level.
+  */
+  @property void restrictToFillLevel(bool propval)
+  {
+    return setRestrictToFillLevel(propval);
+  }
+
+  /**
+      Get `roundDigits` property.
+      Returns: The number of digits to round the value to when
+      it changes.
+      
+      See `signal@Gtk.Range::change-value`.
+  */
+  @property int roundDigits()
+  {
+    return getRoundDigits();
+  }
+
+  /**
+      Set `roundDigits` property.
+      Params:
+        propval = The number of digits to round the value to when
+        it changes.
+        
+        See `signal@Gtk.Range::change-value`.
+  */
+  @property void roundDigits(int propval)
+  {
+    return setRoundDigits(propval);
+  }
+
+  /**
+      Get `showFillLevel` property.
+      Returns: Controls whether fill level indicator graphics are displayed
+      on the trough.
+  */
+  @property bool showFillLevel()
+  {
+    return getShowFillLevel();
+  }
+
+  /**
+      Set `showFillLevel` property.
+      Params:
+        propval = Controls whether fill level indicator graphics are displayed
+        on the trough.
+  */
+  @property void showFillLevel(bool propval)
+  {
+    return setShowFillLevel(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -70,7 +195,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_range_get_adjustment(cast(GtkRange*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

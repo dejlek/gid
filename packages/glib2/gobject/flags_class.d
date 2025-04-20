@@ -20,7 +20,7 @@ class FlagsClass
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.FlagsClass");
+      throw new GidConstructException("Null instance pointer for gobject.flags_class.FlagsClass");
 
     cInstance = *cast(GFlagsClass*)ptr;
 
@@ -34,31 +34,58 @@ class FlagsClass
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `gTypeClass` field.
+      Returns: the parent class
+  */
   @property gobject.type_class.TypeClass gTypeClass()
   {
     return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)cPtr).gTypeClass);
   }
 
+  /**
+      Get `mask` field.
+      Returns: a mask covering all possible values.
+  */
   @property uint mask()
   {
     return (cast(GFlagsClass*)cPtr).mask;
   }
 
+  /**
+      Set `mask` field.
+      Params:
+        propval = a mask covering all possible values.
+  */
   @property void mask(uint propval)
   {
     (cast(GFlagsClass*)cPtr).mask = propval;
   }
 
+  /**
+      Get `nValues` field.
+      Returns: the number of possible values.
+  */
   @property uint nValues()
   {
     return (cast(GFlagsClass*)cPtr).nValues;
   }
 
+  /**
+      Set `nValues` field.
+      Params:
+        propval = the number of possible values.
+  */
   @property void nValues(uint propval)
   {
     (cast(GFlagsClass*)cPtr).nValues = propval;
   }
 
+  /**
+      Get `values` field.
+      Returns: an array of #GFlagsValue structs describing the
+       individual values.
+  */
   @property gobject.flags_value.FlagsValue values()
   {
     return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)cPtr).values);

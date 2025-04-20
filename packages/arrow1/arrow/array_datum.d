@@ -31,6 +31,7 @@ class ArrayDatum : arrow.datum.Datum
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ArrayDatum self()
   {
     return this;

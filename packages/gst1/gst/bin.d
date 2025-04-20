@@ -5,7 +5,6 @@ import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gobject.types;
-import gobject.value;
 import gst.c.functions;
 import gst.c.types;
 import gst.child_proxy;
@@ -38,7 +37,7 @@ import gst.types;
     [gst.bin.Bin.iterateElements]. Various other iterators exist to retrieve the
     elements in a bin.
     
-    [gst.object.ObjectGst.unref] is used to drop your reference to the bin.
+    [gst.object.ObjectWrap.unref] is used to drop your reference to the bin.
     
     The #GstBin::element-added signal is fired whenever a new element is added to
     the bin. Likewise the #GstBin::element-removed signal is fired whenever an
@@ -149,9 +148,64 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Bin self()
   {
     return this;
+  }
+
+  /**
+      Get `asyncHandling` property.
+      Returns: If set to true, the bin will handle asynchronous state changes.
+      This should be used only if the bin subclass is modifying the state
+      of its children on its own.
+  */
+  @property bool asyncHandling()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("async-handling");
+  }
+
+  /**
+      Set `asyncHandling` property.
+      Params:
+        propval = If set to true, the bin will handle asynchronous state changes.
+        This should be used only if the bin subclass is modifying the state
+        of its children on its own.
+  */
+  @property void asyncHandling(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("async-handling", propval);
+  }
+
+  /**
+      Get `messageForward` property.
+      Returns: Forward all children messages, even those that would normally be filtered by
+      the bin. This can be interesting when one wants to be notified of the EOS
+      state of individual elements, for example.
+      
+      The messages are converted to an ELEMENT message with the bin as the
+      source. The structure of the message is named `GstBinForwarded` and contains
+      a field named `message` that contains the original forwarded #GstMessage.
+  */
+  @property bool messageForward()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("message-forward");
+  }
+
+  /**
+      Set `messageForward` property.
+      Params:
+        propval = Forward all children messages, even those that would normally be filtered by
+        the bin. This can be interesting when one wants to be notified of the EOS
+        state of individual elements, for example.
+        
+        The messages are converted to an ELEMENT message with the bin as the
+        source. The structure of the message is named `GstBinForwarded` and contains
+        a field named `message` that contains the original forwarded #GstMessage.
+  */
+  @property void messageForward(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("message-forward", propval);
   }
 
   mixin ChildProxyT!();
@@ -200,7 +254,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Recursively looks for elements with an unlinked pad of the given
       direction within the specified bin and returns an unlinked pad
       if one is found, or null otherwise. If a pad is found, the caller
-      owns a reference to it and should use [gst.object.ObjectGst.unref] on the
+      owns a reference to it and should use [gst.object.ObjectWrap.unref] on the
       pad when it is not needed any longer.
   
       Params:
@@ -212,7 +266,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstPad* _cretval;
     _cretval = gst_bin_find_unlinked_pad(cast(GstBin*)cPtr, direction);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -232,7 +286,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstElement* _cretval;
     _cretval = gst_bin_get_by_interface(cast(GstBin*)cPtr, iface);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -250,7 +304,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_bin_get_by_name(cast(GstBin*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -268,7 +322,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_bin_get_by_name_recurse_up(cast(GstBin*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -411,7 +465,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       so if the bin holds the only reference to the element, the element
       will be freed in the process of removing it from the bin.  If you
       want the element to still exist after removing, you need to call
-      [gst.object.ObjectGst.ref_] before removing it from the bin.
+      [gst.object.ObjectWrap.ref_] before removing it from the bin.
       
       If the element's pads are linked to other pads, the pads will be unlinked
       before the element is removed from the bin.

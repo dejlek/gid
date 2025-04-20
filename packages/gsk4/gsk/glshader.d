@@ -128,7 +128,7 @@ import gsk.types;
     }
     ```
 */
-class GLShader : gobject.object.ObjectG
+class GLShader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -150,6 +150,7 @@ class GLShader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLShader self()
   {
     return this;
@@ -166,7 +167,7 @@ class GLShader : gobject.object.ObjectG
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -183,7 +184,7 @@ class GLShader : gobject.object.ObjectG
     GskGLShader* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -204,7 +205,7 @@ class GLShader : gobject.object.ObjectG
       Params:
         renderer = a [gsk.renderer.Renderer]
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool compile(gsk.renderer.Renderer renderer)
   {
@@ -212,7 +213,7 @@ class GLShader : gobject.object.ObjectG
     GError *_err;
     _retval = gsk_gl_shader_compile(cast(GskGLShader*)cPtr, renderer ? cast(GskRenderer*)renderer.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

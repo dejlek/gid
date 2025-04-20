@@ -38,6 +38,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureStylus self()
   {
     return this;
@@ -109,7 +110,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 

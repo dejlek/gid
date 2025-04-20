@@ -103,9 +103,103 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ImageMenuItem self()
   {
     return this;
+  }
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The Accel Group to use for stock accelerator keys
+  
+      Deprecated: Use [gtk.widget.Widget.addAccelerator] instead
+  */
+  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setAccelGroup(propval);
+  }
+
+  /**
+      Get `alwaysShowImage` property.
+      Returns: If true, the menu item will always show the image, if available.
+      
+      Use this property only if the menuitem would be useless or hard to use
+      without the image.
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+        a #GtkAccelLabel and a #GtkImage instead
+  */
+  @property bool alwaysShowImage()
+  {
+    return getAlwaysShowImage();
+  }
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the menu item will always show the image, if available.
+        
+        Use this property only if the menuitem would be useless or hard to use
+        without the image.
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+        a #GtkAccelLabel and a #GtkImage instead
+  */
+  @property void alwaysShowImage(bool propval)
+  {
+    return setAlwaysShowImage(propval);
+  }
+
+  /**
+      Get `image` property.
+      Returns: Child widget to appear next to the menu text.
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+        a #GtkAccelLabel and a #GtkImage instead
+  */
+  @property gtk.widget.Widget image()
+  {
+    return getImage();
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = Child widget to appear next to the menu text.
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+        a #GtkAccelLabel and a #GtkImage instead
+  */
+  @property void image(gtk.widget.Widget propval)
+  {
+    return setImage(propval);
+  }
+
+  /**
+      Get `useStock` property.
+      Returns: If true, the label set in the menuitem is used as a
+      stock id to select the stock item for the item.
+  
+      Deprecated: Use a named icon from the #GtkIconTheme instead
+  */
+  @property bool useStock()
+  {
+    return getUseStock();
+  }
+
+  /**
+      Set `useStock` property.
+      Params:
+        propval = If true, the label set in the menuitem is used as a
+        stock id to select the stock item for the item.
+  
+      Deprecated: Use a named icon from the #GtkIconTheme instead
+  */
+  @property void useStock(bool propval)
+  {
+    return setUseStock(propval);
   }
 
   /**
@@ -145,7 +239,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +257,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +278,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +303,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_menu_item_get_image(cast(GtkImageMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

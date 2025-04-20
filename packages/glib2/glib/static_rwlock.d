@@ -90,7 +90,7 @@ class StaticRWLock
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.StaticRWLock");
+      throw new GidConstructException("Null instance pointer for glib.static_rwlock.StaticRWLock");
 
     cInstance = *cast(GStaticRWLock*)ptr;
 

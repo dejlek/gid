@@ -36,6 +36,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontSelectionDialog self()
   {
     return this;
@@ -69,7 +70,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_cancel_button(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +106,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_font_selection(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +121,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_ok_button(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

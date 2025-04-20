@@ -59,9 +59,22 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Viewport self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return getShadowType();
+  }
+
+  /** */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    return setShadowType(propval);
   }
 
   mixin ScrollableT!();
@@ -90,7 +103,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   {
     GdkWindow* _cretval;
     _cretval = gtk_viewport_get_bin_window(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +117,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_viewport_get_hadjustment(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +144,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_viewport_get_vadjustment(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,7 +156,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   {
     GdkWindow* _cretval;
     _cretval = gtk_viewport_get_view_window(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

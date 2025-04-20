@@ -19,7 +19,7 @@ class VideoResampler
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoResampler");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_resampler.VideoResampler");
 
     cInstance = *cast(GstVideoResampler*)ptr;
 
@@ -33,41 +33,77 @@ class VideoResampler
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `inSize` field.
+      Returns: the input size
+  */
   @property int inSize()
   {
     return (cast(GstVideoResampler*)cPtr).inSize;
   }
 
+  /**
+      Set `inSize` field.
+      Params:
+        propval = the input size
+  */
   @property void inSize(int propval)
   {
     (cast(GstVideoResampler*)cPtr).inSize = propval;
   }
 
+  /**
+      Get `outSize` field.
+      Returns: the output size
+  */
   @property int outSize()
   {
     return (cast(GstVideoResampler*)cPtr).outSize;
   }
 
+  /**
+      Set `outSize` field.
+      Params:
+        propval = the output size
+  */
   @property void outSize(int propval)
   {
     (cast(GstVideoResampler*)cPtr).outSize = propval;
   }
 
+  /**
+      Get `maxTaps` field.
+      Returns: the maximum number of taps
+  */
   @property uint maxTaps()
   {
     return (cast(GstVideoResampler*)cPtr).maxTaps;
   }
 
+  /**
+      Set `maxTaps` field.
+      Params:
+        propval = the maximum number of taps
+  */
   @property void maxTaps(uint propval)
   {
     (cast(GstVideoResampler*)cPtr).maxTaps = propval;
   }
 
+  /**
+      Get `nPhases` field.
+      Returns: the number of phases
+  */
   @property uint nPhases()
   {
     return (cast(GstVideoResampler*)cPtr).nPhases;
   }
 
+  /**
+      Set `nPhases` field.
+      Params:
+        propval = the number of phases
+  */
   @property void nPhases(uint propval)
   {
     (cast(GstVideoResampler*)cPtr).nPhases = propval;

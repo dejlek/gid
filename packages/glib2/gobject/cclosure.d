@@ -19,7 +19,7 @@ class CClosure
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.CClosure");
+      throw new GidConstructException("Null instance pointer for gobject.cclosure.CClosure");
 
     cInstance = *cast(GCClosure*)ptr;
 
@@ -33,6 +33,10 @@ class CClosure
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `closure` field.
+      Returns: the #GClosure
+  */
   @property gobject.closure.Closure closure()
   {
     return cToD!(gobject.closure.Closure)(cast(void*)&(cast(GCClosure*)cPtr).closure);

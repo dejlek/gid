@@ -2,6 +2,7 @@
 module gtk.cell_renderer_spinner;
 
 import gid.gid;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -41,9 +42,68 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRendererSpinner self()
   {
     return this;
+  }
+
+  /** */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
+  }
+
+  /**
+      Get `pulse` property.
+      Returns: Pulse of the spinner. Increment this value to draw the next frame of the
+      spinner animation. Usually, you would update this value in a timeout.
+      
+      By default, the #GtkSpinner widget draws one full cycle of the animation,
+      consisting of 12 frames, in 750 milliseconds.
+  */
+  @property uint pulse()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("pulse");
+  }
+
+  /**
+      Set `pulse` property.
+      Params:
+        propval = Pulse of the spinner. Increment this value to draw the next frame of the
+        spinner animation. Usually, you would update this value in a timeout.
+        
+        By default, the #GtkSpinner widget draws one full cycle of the animation,
+        consisting of 12 frames, in 750 milliseconds.
+  */
+  @property void pulse(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("pulse", propval);
+  }
+
+  /**
+      Get `size` property.
+      Returns: The #GtkIconSize value that specifies the size of the rendered spinner.
+  */
+  @property gtk.types.IconSize size()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.IconSize)("size");
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The #GtkIconSize value that specifies the size of the rendered spinner.
+  */
+  @property void size(gtk.types.IconSize propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.IconSize)("size", propval);
   }
 
   /**

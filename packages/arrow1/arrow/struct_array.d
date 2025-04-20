@@ -34,6 +34,7 @@ class StructArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StructArray self()
   {
     return this;
@@ -56,7 +57,7 @@ class StructArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_struct_array_flatten(cast(GArrowStructArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.array.Array, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -66,7 +67,7 @@ class StructArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_struct_array_get_field(cast(GArrowStructArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 

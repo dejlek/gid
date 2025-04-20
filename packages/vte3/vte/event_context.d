@@ -18,7 +18,7 @@ class EventContext
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Vte.EventContext");
+      throw new GidConstructException("Null instance pointer for vte.event_context.EventContext");
 
     cInstancePtr = cast(VteEventContext*)ptr;
 

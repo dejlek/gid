@@ -40,9 +40,22 @@ class DirectControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DirectControlBinding self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.control_source.ControlSource controlSource()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source");
+  }
+
+  /** */
+  @property void controlSource(gst.control_source.ControlSource propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source", propval);
   }
 
   /**
@@ -56,7 +69,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
         cs = the control source
       Returns: the new #GstDirectControlBinding
   */
-  this(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource cs)
+  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs)
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -75,12 +88,12 @@ class DirectControlBinding : gst.control_binding.ControlBinding
         cs = the control source
       Returns: the new #GstDirectControlBinding
   */
-  static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource cs)
+  static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs)
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
     return _retval;
   }
 }

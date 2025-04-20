@@ -24,7 +24,7 @@ import gtk.orientable_mixin;
     `property@SwipeTracker:reversed` can be used for supporting RTL text
     direction.
 */
-class SwipeTracker : gobject.object.ObjectG, gtk.orientable.Orientable
+class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
 {
 
   /** */
@@ -46,9 +46,165 @@ class SwipeTracker : gobject.object.ObjectG, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SwipeTracker self()
   {
     return this;
+  }
+
+  /**
+      Get `allowLongSwipes` property.
+      Returns: Whether to allow swiping for more than one snap point at a time.
+      
+      If the value is `FALSE`, each swipe can only move to the adjacent snap
+      points.
+  */
+  @property bool allowLongSwipes()
+  {
+    return getAllowLongSwipes();
+  }
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one snap point at a time.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent snap
+        points.
+  */
+  @property void allowLongSwipes(bool propval)
+  {
+    return setAllowLongSwipes(propval);
+  }
+
+  /**
+      Get `allowMouseDrag` property.
+      Returns: Whether to allow dragging with mouse pointer.
+  */
+  @property bool allowMouseDrag()
+  {
+    return getAllowMouseDrag();
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Whether to allow dragging with mouse pointer.
+  */
+  @property void allowMouseDrag(bool propval)
+  {
+    return setAllowMouseDrag(propval);
+  }
+
+  /**
+      Get `allowWindowHandle` property.
+      Returns: Whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
+      
+      This will make dragging the window impossible.
+  */
+  @property bool allowWindowHandle()
+  {
+    return getAllowWindowHandle();
+  }
+
+  /**
+      Set `allowWindowHandle` property.
+      Params:
+        propval = Whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
+        
+        This will make dragging the window impossible.
+  */
+  @property void allowWindowHandle(bool propval)
+  {
+    return setAllowWindowHandle(propval);
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: Whether the swipe tracker is enabled.
+      
+      When it's not enabled, no events will be processed. Usually widgets will
+      want to expose this via a property.
+  */
+  @property bool enabled()
+  {
+    return getEnabled();
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the swipe tracker is enabled.
+        
+        When it's not enabled, no events will be processed. Usually widgets will
+        want to expose this via a property.
+  */
+  @property void enabled(bool propval)
+  {
+    return setEnabled(propval);
+  }
+
+  /**
+      Get `lowerOvershoot` property.
+      Returns: Whether to allow swiping past the first available snap point.
+  */
+  @property bool lowerOvershoot()
+  {
+    return getLowerOvershoot();
+  }
+
+  /**
+      Set `lowerOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the first available snap point.
+  */
+  @property void lowerOvershoot(bool propval)
+  {
+    return setLowerOvershoot(propval);
+  }
+
+  /**
+      Get `reversed` property.
+      Returns: Whether to reverse the swipe direction.
+      
+      If the swipe tracker is horizontal, it can be used for supporting RTL text
+      direction.
+  */
+  @property bool reversed()
+  {
+    return getReversed();
+  }
+
+  /**
+      Set `reversed` property.
+      Params:
+        propval = Whether to reverse the swipe direction.
+        
+        If the swipe tracker is horizontal, it can be used for supporting RTL text
+        direction.
+  */
+  @property void reversed(bool propval)
+  {
+    return setReversed(propval);
+  }
+
+  /**
+      Get `upperOvershoot` property.
+      Returns: Whether to allow swiping past the last available snap point.
+  */
+  @property bool upperOvershoot()
+  {
+    return getUpperOvershoot();
+  }
+
+  /**
+      Set `upperOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the last available snap point.
+  */
+  @property void upperOvershoot(bool propval)
+  {
+    return setUpperOvershoot(propval);
   }
 
   mixin OrientableT!();
@@ -63,7 +219,7 @@ class SwipeTracker : gobject.object.ObjectG, gtk.orientable.Orientable
   this(adw.swipeable.Swipeable swipeable)
   {
     AdwSwipeTracker* _cretval;
-    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(ObjectG)swipeable).cPtr(No.Dup) : null);
+    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gobject.object.ObjectWrap)swipeable).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -141,7 +297,7 @@ class SwipeTracker : gobject.object.ObjectG, gtk.orientable.Orientable
   {
     AdwSwipeable* _cretval;
     _cretval = adw_swipe_tracker_get_swipeable(cast(AdwSwipeTracker*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.swipeable.Swipeable)(cast(AdwSwipeable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.swipeable.Swipeable)(cast(AdwSwipeable*)_cretval, No.Take);
     return _retval;
   }
 

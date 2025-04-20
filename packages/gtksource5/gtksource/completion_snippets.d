@@ -16,7 +16,7 @@ import gtksource.types;
     the `iface@CompletionProvider` interface. The proposals are snippets
     registered with the `class@SnippetManager`.
 */
-class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
+class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provider.CompletionProvider
 {
 
   /** */
@@ -38,9 +38,34 @@ class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompletionSnippets self()
   {
     return this;
+  }
+
+  /** */
+  @property int priority()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("priority");
+  }
+
+  /** */
+  @property void priority(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("priority", propval);
+  }
+
+  /** */
+  @property string title()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /** */
+  @property void title(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
 
   mixin CompletionProviderT!();

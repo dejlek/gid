@@ -142,7 +142,7 @@ interface Component
       Returns: a reference to the accessible
         child, if one exists
   */
-  atk.object.ObjectAtk refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType);
+  atk.object.ObjectWrap refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType);
 
   /**
       Remove the handler specified by handler_id from the list of

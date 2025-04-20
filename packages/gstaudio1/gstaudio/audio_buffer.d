@@ -28,7 +28,7 @@ class AudioBuffer
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioBuffer");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_buffer.AudioBuffer");
 
     cInstance = *cast(GstAudioBuffer*)ptr;
 
@@ -42,36 +42,67 @@ class AudioBuffer
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `info` field.
+      Returns: a #GstAudioInfo describing the audio properties of this buffer
+  */
   @property gstaudio.audio_info.AudioInfo info()
   {
     return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioBuffer*)cPtr).info);
   }
 
+  /**
+      Get `nSamples` field.
+      Returns: the size of the buffer in samples
+  */
   @property size_t nSamples()
   {
     return (cast(GstAudioBuffer*)cPtr).nSamples;
   }
 
+  /**
+      Set `nSamples` field.
+      Params:
+        propval = the size of the buffer in samples
+  */
   @property void nSamples(size_t propval)
   {
     (cast(GstAudioBuffer*)cPtr).nSamples = propval;
   }
 
+  /**
+      Get `nPlanes` field.
+      Returns: the number of planes available
+  */
   @property int nPlanes()
   {
     return (cast(GstAudioBuffer*)cPtr).nPlanes;
   }
 
+  /**
+      Set `nPlanes` field.
+      Params:
+        propval = the number of planes available
+  */
   @property void nPlanes(int propval)
   {
     (cast(GstAudioBuffer*)cPtr).nPlanes = propval;
   }
 
+  /**
+      Get `buffer` field.
+      Returns: the mapped buffer
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = the mapped buffer
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);

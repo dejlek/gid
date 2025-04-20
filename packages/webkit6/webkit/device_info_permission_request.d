@@ -19,7 +19,7 @@ import webkit.types;
     When a WebKitDeviceInfoPermissionRequest is not handled by the user,
     it is denied by default.
 */
-class DeviceInfoPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

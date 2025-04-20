@@ -42,66 +42,121 @@ class MIKEYMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MIKEYMessage self()
   {
     return this;
   }
 
+  /**
+      Get `version_` field.
+      Returns: the version
+  */
   @property ubyte version_()
   {
     return (cast(GstMIKEYMessage*)cPtr).version_;
   }
 
+  /**
+      Set `version_` field.
+      Params:
+        propval = the version
+  */
   @property void version_(ubyte propval)
   {
     (cast(GstMIKEYMessage*)cPtr).version_ = propval;
   }
 
+  /**
+      Get `type` field.
+      Returns: the #GstMIKEYType message type
+  */
   @property gstsdp.types.MIKEYType type()
   {
     return cast(gstsdp.types.MIKEYType)(cast(GstMIKEYMessage*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the #GstMIKEYType message type
+  */
   @property void type(gstsdp.types.MIKEYType propval)
   {
     (cast(GstMIKEYMessage*)cPtr).type = cast(GstMIKEYType)propval;
   }
 
+  /**
+      Get `V` field.
+      Returns: verify flag
+  */
   @property bool V()
   {
     return (cast(GstMIKEYMessage*)cPtr).V;
   }
 
+  /**
+      Set `V` field.
+      Params:
+        propval = verify flag
+  */
   @property void V(bool propval)
   {
     (cast(GstMIKEYMessage*)cPtr).V = propval;
   }
 
+  /**
+      Get `prfFunc` field.
+      Returns: a #GstMIKEYPRFFunc
+  */
   @property gstsdp.types.MIKEYPRFFunc prfFunc()
   {
     return cast(gstsdp.types.MIKEYPRFFunc)(cast(GstMIKEYMessage*)cPtr).prfFunc;
   }
 
+  /**
+      Set `prfFunc` field.
+      Params:
+        propval = a #GstMIKEYPRFFunc
+  */
   @property void prfFunc(gstsdp.types.MIKEYPRFFunc propval)
   {
     (cast(GstMIKEYMessage*)cPtr).prfFunc = cast(GstMIKEYPRFFunc)propval;
   }
 
+  /**
+      Get `CSBId` field.
+      Returns: Identifies the Crypto Session Bundle
+  */
   @property uint CSBId()
   {
     return (cast(GstMIKEYMessage*)cPtr).CSBId;
   }
 
+  /**
+      Set `CSBId` field.
+      Params:
+        propval = Identifies the Crypto Session Bundle
+  */
   @property void CSBId(uint propval)
   {
     (cast(GstMIKEYMessage*)cPtr).CSBId = propval;
   }
 
+  /**
+      Get `mapType` field.
+      Returns: a #GstMIKEYMapType
+  */
   @property gstsdp.types.MIKEYMapType mapType()
   {
     return cast(gstsdp.types.MIKEYMapType)(cast(GstMIKEYMessage*)cPtr).mapType;
   }
 
+  /**
+      Set `mapType` field.
+      Params:
+        propval = a #GstMIKEYMapType
+  */
   @property void mapType(gstsdp.types.MIKEYMapType propval)
   {
     (cast(GstMIKEYMessage*)cPtr).mapType = cast(GstMIKEYMapType)propval;
@@ -125,7 +180,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         bytes = a #GBytes
         info = a #GstMIKEYDecryptInfo
       Returns: a new #GstMIKEYMessage
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromBytes(glib.bytes.Bytes bytes, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -133,7 +188,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, info, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -168,7 +223,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         info = #GstMIKEYDecryptInfo
       Returns: a #GstMIKEYMessage on success or null when parsing failed and
         error will be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromData(ubyte[] data, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -181,7 +236,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_new_from_data(_data, _size, info, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -477,7 +532,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         info = a #GstMIKEYEncryptInfo
       Returns: a new #GBytes for msg.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes toBytes(gstsdp.types.MIKEYEncryptInfo info)
   {
@@ -485,7 +540,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_to_bytes(cast(GstMIKEYMessage*)cPtr, info, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

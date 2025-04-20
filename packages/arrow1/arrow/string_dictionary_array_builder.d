@@ -33,6 +33,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringDictionaryArrayBuilder self()
   {
     return this;
@@ -53,7 +54,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_string_dictionary_array_builder_append_array(cast(GArrowStringDictionaryArrayBuilder*)cPtr, array ? cast(GArrowStringArray*)array.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -67,7 +68,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendIndices(long[] values, bool[] isValids = null)
   {
@@ -85,7 +86,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_string_dictionary_array_builder_append_indices(cast(GArrowStringDictionaryArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -97,7 +98,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_string_dictionary_array_builder_append_string(cast(GArrowStringDictionaryArrayBuilder*)cPtr, _value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -110,7 +111,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_string_dictionary_array_builder_finish_delta(cast(GArrowStringDictionaryArrayBuilder*)cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
     outDelta = new arrow.array.Array(cast(void*)_outDelta, Yes.Take);
     return _retval;
@@ -131,7 +132,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_string_dictionary_array_builder_insert_memo_values(cast(GArrowStringDictionaryArrayBuilder*)cPtr, values ? cast(GArrowStringArray*)values.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

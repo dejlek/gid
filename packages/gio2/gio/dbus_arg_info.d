@@ -13,10 +13,19 @@ import gobject.boxed;
 class DBusArgInfo : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `dbus_arg_info.DBusArgInfo` boxed type.
+      Params:
+        refCount = The reference count or -1 if statically allocated.
+        name = Name of the argument, e.g. @unix_user_id.
+        signature = D-Bus signature of the argument (a single complete type).
+  */
+  this(int refCount = int.init, string name = string.init, string signature = string.init)
   {
     super(gMalloc(GDBusArgInfo.sizeof), Yes.Take);
+    this.refCount = refCount;
+    this.name = name;
+    this.signature = signature;
   }
 
   /** */
@@ -44,37 +53,65 @@ class DBusArgInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusArgInfo self()
   {
     return this;
   }
 
+  /**
+      Get `refCount` field.
+      Returns: The reference count or -1 if statically allocated.
+  */
   @property int refCount()
   {
     return (cast(GDBusArgInfo*)cPtr).refCount;
   }
 
+  /**
+      Set `refCount` field.
+      Params:
+        propval = The reference count or -1 if statically allocated.
+  */
   @property void refCount(int propval)
   {
     (cast(GDBusArgInfo*)cPtr).refCount = propval;
   }
 
+  /**
+      Get `name` field.
+      Returns: Name of the argument, e.g. @unix_user_id.
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GDBusArgInfo*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = Name of the argument, e.g. @unix_user_id.
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusArgInfo*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusArgInfo*)cPtr).name);
   }
 
+  /**
+      Get `signature` field.
+      Returns: D-Bus signature of the argument (a single complete type).
+  */
   @property string signature()
   {
     return cToD!(string)(cast(void*)(cast(GDBusArgInfo*)cPtr).signature);
   }
 
+  /**
+      Set `signature` field.
+      Params:
+        propval = D-Bus signature of the argument (a single complete type).
+  */
   @property void signature(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusArgInfo*)cPtr).signature);

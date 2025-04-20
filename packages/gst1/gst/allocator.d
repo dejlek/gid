@@ -23,7 +23,7 @@ import gst.types;
     New memory can be created with [gst.memory.Memory.newWrapped] that wraps the memory
     allocated elsewhere.
 */
-class Allocator : gst.object.ObjectGst
+class Allocator : gst.object.ObjectWrap
 {
 
   /** */
@@ -45,6 +45,7 @@ class Allocator : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Allocator self()
   {
     return this;
@@ -64,7 +65,7 @@ class Allocator : gst.object.ObjectGst
     GstAllocator* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_allocator_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 

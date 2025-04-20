@@ -19,7 +19,7 @@ class RTSPRange
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtsp.RTSPRange");
+      throw new GidConstructException("Null instance pointer for gstrtsp.rtsprange.RTSPRange");
 
     cInstance = *cast(GstRTSPRange*)ptr;
 
@@ -33,21 +33,39 @@ class RTSPRange
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `min` field.
+      Returns: minimum value of the range
+  */
   @property int min()
   {
     return (cast(GstRTSPRange*)cPtr).min;
   }
 
+  /**
+      Set `min` field.
+      Params:
+        propval = minimum value of the range
+  */
   @property void min(int propval)
   {
     (cast(GstRTSPRange*)cPtr).min = propval;
   }
 
+  /**
+      Get `max` field.
+      Returns: maximum value of the range
+  */
   @property int max()
   {
     return (cast(GstRTSPRange*)cPtr).max;
   }
 
+  /**
+      Set `max` field.
+      Params:
+        propval = maximum value of the range
+  */
   @property void max(int propval)
   {
     (cast(GstRTSPRange*)cPtr).max = propval;

@@ -20,7 +20,7 @@ class ObjectConstructParam
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ObjectConstructParam");
+      throw new GidConstructException("Null instance pointer for gobject.object_construct_param.ObjectConstructParam");
 
     cInstance = *cast(GObjectConstructParam*)ptr;
 
@@ -34,22 +34,40 @@ class ObjectConstructParam
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `pspec` field.
+      Returns: the #GParamSpec of the construct parameter
+  */
   @property gobject.param_spec.ParamSpec pspec()
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)cPtr).pspec);
   }
 
+  /**
+      Set `pspec` field.
+      Params:
+        propval = the #GParamSpec of the construct parameter
+  */
   @property void pspec(gobject.param_spec.ParamSpec propval)
   {
     cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)cPtr).pspec);
     dToC(propval, cast(void*)&(cast(GObjectConstructParam*)cPtr).pspec);
   }
 
+  /**
+      Get `value` field.
+      Returns: the value to set the parameter to
+  */
   @property gobject.value.Value value()
   {
     return cToD!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the value to set the parameter to
+  */
   @property void value(gobject.value.Value propval)
   {
     cValueFree!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)cPtr).value);

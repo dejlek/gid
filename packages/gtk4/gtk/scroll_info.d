@@ -42,6 +42,7 @@ class ScrollInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScrollInfo self()
   {
     return this;

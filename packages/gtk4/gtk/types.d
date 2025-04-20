@@ -514,7 +514,7 @@ alias CustomAllocateFunc = void delegate(gtk.widget.Widget widget, int width, in
       item = The item to be matched
     Returns: true to keep the item around
 */
-alias CustomFilterFunc = bool delegate(gobject.object.ObjectG item);
+alias CustomFilterFunc = bool delegate(gobject.object.ObjectWrap item);
 
 /**
     A function to be used by [gtk.custom_layout.CustomLayout] to measure a widget.
@@ -588,7 +588,7 @@ alias ExpressionNotify = void delegate();
       item = the item from the model for which to create a widget for
     Returns: a [gtk.widget.Widget] that represents item
 */
-alias FlowBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias FlowBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectWrap item);
 
 /**
     A function that will be called whenever a child changes
@@ -661,7 +661,7 @@ alias IconViewForeachFunc = void delegate(gtk.icon_view.IconView iconView, gtk.t
       item = the item from the model for which to create a widget for
     Returns: a [gtk.widget.Widget] that represents item
 */
-alias ListBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias ListBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectWrap item);
 
 /**
     Will be called whenever the row changes or is added and lets you control
@@ -719,7 +719,7 @@ alias ListBoxUpdateHeaderFunc = void delegate(gtk.list_box_row.ListBoxRow row, g
       item = The item to map
     Returns: The item to map to
 */
-alias MapListModelMapFunc = gobject.object.ObjectG delegate(gobject.object.ObjectG item);
+alias MapListModelMapFunc = gobject.object.ObjectWrap delegate(gobject.object.ObjectWrap item);
 
 /**
     User-provided callback function to create a popup for a
@@ -754,10 +754,10 @@ alias PageSetupDoneFunc = void delegate(gtk.page_setup.PageSetup pageSetup);
 
     Params:
       printJob = the [gtk.print_job.PrintJob]
-      error = a [glib.error.ErrorG] that contains error information if the sending
+      error = a [glib.error.ErrorWrap] that contains error information if the sending
           of the print job failed, otherwise null
 */
-alias PrintJobCompleteFunc = void delegate(gtk.print_job.PrintJob printJob, glib.error.ErrorG error);
+alias PrintJobCompleteFunc = void delegate(gtk.print_job.PrintJob printJob, glib.error.ErrorWrap error);
 
 /** */
 alias PrintSettingsFunc = void delegate(string key, string value);
@@ -785,7 +785,7 @@ alias ScaleFormatValueFunc = string delegate(gtk.scale.Scale scale, double value
       args = The arguments passed to the activation
     Returns: true if the action was successful.
 */
-alias ShortcutFunc = bool delegate(gtk.widget.Widget widget, glib.variant.VariantG args);
+alias ShortcutFunc = bool delegate(gtk.widget.Widget widget, glib.variant.Variant args);
 
 /**
     The predicate function used by [gtk.text_iter.TextIter.forwardFindChar] and
@@ -873,7 +873,7 @@ alias TreeIterCompareFunc = int delegate(gtk.tree_model.TreeModel model, gtk.tre
     Returns: The model tracking the children of
         item or null if item can never have children
 */
-alias TreeListModelCreateModelFunc = gio.list_model.ListModel delegate(gobject.object.ObjectG item);
+alias TreeListModelCreateModelFunc = gio.list_model.ListModel delegate(gobject.object.ObjectWrap item);
 
 /**
     A function which calculates display values from raw values in the model.
@@ -1011,7 +1011,7 @@ alias TreeViewSearchEqualFunc = bool delegate(gtk.tree_model.TreeModel model, in
       actionName = the action name
       parameter = parameter for activation
 */
-alias WidgetActionActivateFunc = void delegate(gtk.widget.Widget widget, string actionName, glib.variant.VariantG parameter);
+alias WidgetActionActivateFunc = void delegate(gtk.widget.Widget widget, string actionName, glib.variant.Variant parameter);
 
 /**
     An attribute for the background color, expressed as an RGB value

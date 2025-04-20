@@ -3,6 +3,7 @@ module gstaudio.audio_base_sink;
 
 import gid.gid;
 import gobject.object;
+import gst.element;
 import gst.types;
 import gstaudio.audio_ring_buffer;
 import gstaudio.c.functions;
@@ -37,22 +38,141 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioBaseSink self()
   {
     return this;
   }
 
+  /** */
+  @property ulong alignmentThreshold()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("alignment-threshold");
+  }
+
+  /** */
+  @property void alignmentThreshold(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("alignment-threshold", propval);
+  }
+
+  /** */
+  @property long bufferTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("buffer-time");
+  }
+
+  /** */
+  @property void bufferTime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("buffer-time", propval);
+  }
+
+  /** */
+  @property bool canActivatePull()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("can-activate-pull");
+  }
+
+  /** */
+  @property void canActivatePull(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("can-activate-pull", propval);
+  }
+
+  /**
+      Get `discontWait` property.
+      Returns: A window of time in nanoseconds to wait before creating a discontinuity as
+      a result of breaching the drift-tolerance.
+  */
+  @property ulong discontWait()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("discont-wait");
+  }
+
+  /**
+      Set `discontWait` property.
+      Params:
+        propval = A window of time in nanoseconds to wait before creating a discontinuity as
+        a result of breaching the drift-tolerance.
+  */
+  @property void discontWait(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("discont-wait", propval);
+  }
+
+  /**
+      Get `driftTolerance` property.
+      Returns: Controls the amount of time in microseconds that clocks are allowed
+      to drift before resynchronisation happens.
+  */
+  @property long driftTolerance()
+  {
+    return getDriftTolerance();
+  }
+
+  /**
+      Set `driftTolerance` property.
+      Params:
+        propval = Controls the amount of time in microseconds that clocks are allowed
+        to drift before resynchronisation happens.
+  */
+  @property void driftTolerance(long propval)
+  {
+    return setDriftTolerance(propval);
+  }
+
+  /** */
+  @property long latencyTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("latency-time");
+  }
+
+  /** */
+  @property void latencyTime(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("latency-time", propval);
+  }
+
+  alias provideClock = gst.element.Element.provideClock;
+
+  /** */
+  @property bool provideClock()
+  {
+    return getProvideClock();
+  }
+
+  alias provideClock = gst.element.Element.provideClock;
+
+  /** */
+  @property void provideClock(bool propval)
+  {
+    return setProvideClock(propval);
+  }
+
+  /** */
+  @property gstaudio.types.AudioBaseSinkSlaveMethod slaveMethod()
+  {
+    return getSlaveMethod();
+  }
+
+  /** */
+  @property void slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval)
+  {
+    return setSlaveMethod(propval);
+  }
+
   /**
       Create and return the #GstAudioRingBuffer for sink. This function will
       call the ::create_ringbuffer vmethod and will set sink as the parent of
-      the returned buffer (see [gst.object.ObjectGst.setParent]).
+      the returned buffer (see [gst.object.ObjectWrap.setParent]).
       Returns: The new ringbuffer of sink.
   */
   gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_sink_create_ringbuffer(cast(GstAudioBaseSink*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,7 +275,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
     {
       auto _dlg = cast(gstaudio.types.AudioBaseSinkCustomSlavingCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

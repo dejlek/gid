@@ -31,6 +31,7 @@ class ChunkedArrayDatum : arrow.datum.Datum
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ChunkedArrayDatum self()
   {
     return this;

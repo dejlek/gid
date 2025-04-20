@@ -35,6 +35,119 @@ interface FontChooser
   }
 
   /**
+      Get `font` property.
+      Returns: The font description as a string, e.g. "Sans Italic 12".
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property string font();
+
+  /**
+      Set `font` property.
+      Params:
+        propval = The font description as a string, e.g. "Sans Italic 12".
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void font(string propval);
+
+  /**
+      Get `fontDesc` property.
+      Returns: The font description as a [pango.font_description.FontDescription].
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property pango.font_description.FontDescription fontDesc();
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = The font description as a [pango.font_description.FontDescription].
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void fontDesc(pango.font_description.FontDescription propval);
+
+  /**
+      Get `fontFeatures` property.
+      Returns: The selected font features.
+      
+      The format of the string is compatible with
+      CSS and with Pango attributes.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property string fontFeatures();
+
+  /**
+      Get `language` property.
+      Returns: The language for which the font features were selected.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property string language();
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the font features were selected.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void language(string propval);
+
+  /**
+      Get `level` property.
+      Returns: The level of granularity to offer for selecting fonts.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property gtk.types.FontChooserLevel level();
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of granularity to offer for selecting fonts.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void level(gtk.types.FontChooserLevel propval);
+
+  /**
+      Get `previewText` property.
+      Returns: The string with which to preview the font.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property string previewText();
+
+  /**
+      Set `previewText` property.
+      Params:
+        propval = The string with which to preview the font.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void previewText(string propval);
+
+  /**
+      Get `showPreviewEntry` property.
+      Returns: Whether to show an entry to change the preview text.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property bool showPreviewEntry();
+
+  /**
+      Set `showPreviewEntry` property.
+      Params:
+        propval = Whether to show an entry to change the preview text.
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  @property void showPreviewEntry(bool propval);
+
+  /**
       Gets the currently-selected font name.
       
       Note that this can be a different string than what you set with

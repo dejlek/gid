@@ -31,6 +31,7 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeListScalar self()
   {
     return this;

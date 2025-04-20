@@ -42,9 +42,29 @@ class DropControllerMotion : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DropControllerMotion self()
   {
     return this;
+  }
+
+  /**
+      Get `drop` property.
+      Returns: The ongoing drop operation over the controller's widget or
+      its descendant.
+      
+      If no drop operation is going on, this property returns null.
+      
+      The event controller should not modify the @drop, but it might
+      want to query its properties.
+      
+      When handling crossing events, this property is updated
+      before [gtk.drop_controller_motion.DropControllerMotion.enter], but after
+      [gtk.drop_controller_motion.DropControllerMotion.leave] is emitted.
+  */
+  @property gdk.drop.Drop drop()
+  {
+    return getDrop();
   }
 
   /**
@@ -81,7 +101,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 

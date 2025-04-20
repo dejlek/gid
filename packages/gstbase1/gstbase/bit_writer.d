@@ -20,7 +20,7 @@ class BitWriter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstBase.BitWriter");
+      throw new GidConstructException("Null instance pointer for gstbase.bit_writer.BitWriter");
 
     cInstance = *cast(GstBitWriter*)ptr;
 
@@ -34,11 +34,20 @@ class BitWriter
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `bitSize` field.
+      Returns: Size of written @data in bits
+  */
   @property uint bitSize()
   {
     return (cast(GstBitWriter*)cPtr).bitSize;
   }
 
+  /**
+      Set `bitSize` field.
+      Params:
+        propval = Size of written @data in bits
+  */
   @property void bitSize(uint propval)
   {
     (cast(GstBitWriter*)cPtr).bitSize = propval;

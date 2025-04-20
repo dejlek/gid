@@ -10,7 +10,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class StreamChunk : gobject.object.ObjectG
+class StreamChunk : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,19 +32,20 @@ class StreamChunk : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StreamChunk self()
   {
     return this;
   }
 
-  alias getData = gobject.object.ObjectG.getData;
+  alias getData = gobject.object.ObjectWrap.getData;
 
   /** */
   arrow.record_batch.RecordBatch getData()
   {
     GArrowRecordBatch* _cretval;
     _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -53,7 +54,7 @@ class StreamChunk : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -61,6 +61,7 @@ class Path : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Path self()
   {
     return this;

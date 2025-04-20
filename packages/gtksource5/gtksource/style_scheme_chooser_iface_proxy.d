@@ -5,7 +5,7 @@ import gobject.object;
 import gtksource.style_scheme_chooser;
 import gtksource.style_scheme_chooser_mixin;
 
-/// Proxy object for [GtkSource.StyleSchemeChooser] interface when a GObject has no applicable D binding
+/// Proxy object for [gtksource.style_scheme_chooser.StyleSchemeChooser] interface when a GObject has no applicable D binding
 class StyleSchemeChooserIfaceProxy : IfaceProxy, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
   this(void* ptr, Flag!"Take" take = No.Take)

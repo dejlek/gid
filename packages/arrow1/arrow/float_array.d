@@ -32,6 +32,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FloatArray self()
   {
     return this;
@@ -75,7 +76,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_float_array_sum(cast(GArrowFloatArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

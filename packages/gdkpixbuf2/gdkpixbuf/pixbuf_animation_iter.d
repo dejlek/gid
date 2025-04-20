@@ -13,7 +13,7 @@ import gobject.object;
     An opaque object representing an iterator which points to a
     certain position in an animation.
 */
-class PixbufAnimationIter : gobject.object.ObjectG
+class PixbufAnimationIter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class PixbufAnimationIter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufAnimationIter self()
   {
     return this;
@@ -115,7 +116,7 @@ class PixbufAnimationIter : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_animation_iter_get_pixbuf(cast(GdkPixbufAnimationIter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

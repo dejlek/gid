@@ -34,6 +34,7 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RangeAccessible self()
   {
     return this;

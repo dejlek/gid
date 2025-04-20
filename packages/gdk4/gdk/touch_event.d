@@ -17,7 +17,7 @@ class TouchEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.TouchEvent");
+      throw new GidConstructException("Null instance pointer for gdk.touch_event.TouchEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

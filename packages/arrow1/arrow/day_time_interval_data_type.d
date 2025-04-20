@@ -30,6 +30,7 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DayTimeIntervalDataType self()
   {
     return this;

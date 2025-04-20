@@ -33,7 +33,7 @@ class RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RenderNode");
+      throw new GidConstructException("Null instance pointer for gsk.render_node.RenderNode");
 
     cInstancePtr = cast(GskRenderNode*)ptr;
 
@@ -72,7 +72,7 @@ class RenderNode
     {
       auto _dlg = cast(gsk.types.ParseErrorFunc*)userData;
 
-      (*_dlg)(*start, *end, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(*start, *end, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
 
@@ -160,7 +160,7 @@ class RenderNode
       Params:
         filename = the file to save it to.
       Returns: true if saving was successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeToFile(string filename)
   {
@@ -169,7 +169,7 @@ class RenderNode
     GError *_err;
     _retval = gsk_render_node_write_to_file(cast(GskRenderNode*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

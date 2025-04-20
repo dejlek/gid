@@ -42,57 +42,102 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLVideoAllocationParams self()
   {
     return this;
   }
 
+  /**
+      Get `parent` field.
+      Returns: the parent #GstGLAllocationParams structure
+  */
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
     return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLVideoAllocationParams*)cPtr).parent);
   }
 
+  /**
+      Get `vInfo` field.
+      Returns: the #GstVideoInfo to allocate
+  */
   @property gstvideo.video_info.VideoInfo vInfo()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
   }
 
+  /**
+      Set `vInfo` field.
+      Params:
+        propval = the #GstVideoInfo to allocate
+  */
   @property void vInfo(gstvideo.video_info.VideoInfo propval)
   {
     cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
     dToC(propval, cast(void*)&(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
   }
 
+  /**
+      Get `plane` field.
+      Returns: the video plane index to allocate
+  */
   @property uint plane()
   {
     return (cast(GstGLVideoAllocationParams*)cPtr).plane;
   }
 
+  /**
+      Set `plane` field.
+      Params:
+        propval = the video plane index to allocate
+  */
   @property void plane(uint propval)
   {
     (cast(GstGLVideoAllocationParams*)cPtr).plane = propval;
   }
 
+  /**
+      Get `valign` field.
+      Returns: the #GstVideoAlignment to align the system representation to (may be null for the default)
+  */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
     return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)(cast(GstGLVideoAllocationParams*)cPtr).valign);
   }
 
+  /**
+      Get `target` field.
+      Returns: the #GstGLTextureTarget to allocate
+  */
   @property gstgl.types.GLTextureTarget target()
   {
     return cast(gstgl.types.GLTextureTarget)(cast(GstGLVideoAllocationParams*)cPtr).target;
   }
 
+  /**
+      Set `target` field.
+      Params:
+        propval = the #GstGLTextureTarget to allocate
+  */
   @property void target(gstgl.types.GLTextureTarget propval)
   {
     (cast(GstGLVideoAllocationParams*)cPtr).target = cast(GstGLTextureTarget)propval;
   }
 
+  /**
+      Get `texFormat` field.
+      Returns: the #GstGLFormat to allocate
+  */
   @property gstgl.types.GLFormat texFormat()
   {
     return cast(gstgl.types.GLFormat)(cast(GstGLVideoAllocationParams*)cPtr).texFormat;
   }
 
+  /**
+      Set `texFormat` field.
+      Params:
+        propval = the #GstGLFormat to allocate
+  */
   @property void texFormat(gstgl.types.GLFormat propval)
   {
     (cast(GstGLVideoAllocationParams*)cPtr).texFormat = cast(GstGLFormat)propval;

@@ -1,4 +1,4 @@
-/// Module for [ObjectG] class
+/// Module for [ObjectWrap] class
 module gobject.object;
 
 import gid.gid;
@@ -41,7 +41,7 @@ shared static this()
 
 private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 
-// String quark used to assign the D ObjectG to the C GObject keyed-data list
+// String quark used to assign the D ObjectWrap to the C GObject keyed-data list
 immutable Quark gidObjectQuark;
 
 // One time initialized on first use and considered immutable there-after
@@ -50,10 +50,10 @@ __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interf
 __gshared bool classMapsInitialized;
 
 /**
-* A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
-* Returns: A string value to use with mixin() within ObjectG derived classes.
+* A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
+* Returns: A string value to use with mixin() within ObjectWrap derived classes.
 */
-string objectGMixin()
+string objectMixin()
 {
   return
   `  this(void* cObj, Flag!"Take" take = No.Take)
@@ -66,35 +66,35 @@ string objectGMixin()
 /**
     The base object type.
     
-    [gobject.object.ObjectG] is the fundamental type providing the common attributes and
+    [gobject.object.ObjectWrap] is the fundamental type providing the common attributes and
     methods for all object types in GTK, Pango and other libraries
-    based on GObject. The [gobject.object.ObjectG] class provides methods for object
+    based on GObject. The [gobject.object.ObjectWrap] class provides methods for object
     construction and destruction, property access methods, and signal
     support. Signals are described in detail [here][gobject-Signals].
     
-    For a tutorial on implementing a new [gobject.object.ObjectG] class, see [How to define and
+    For a tutorial on implementing a new [gobject.object.ObjectWrap] class, see [How to define and
     implement a new GObject](tutorial.html#how-to-define-and-implement-a-new-gobject).
     For a list of naming conventions for GObjects and their methods, see the
     [GType conventions](concepts.html#conventions). For the high-level concepts
     behind GObject, read
     [Instantiatable classed types: Objects](concepts.html#instantiatable-classed-types-objects).
     
-    Since GLib 2.72, all [gobject.object.ObjectG]s are guaranteed to be aligned to at least the
+    Since GLib 2.72, all [gobject.object.ObjectWrap]s are guaranteed to be aligned to at least the
     alignment of the largest basic GLib type (typically this is [vte.types.TEST_FLAGS_NONE] or
-    [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectG], you
-    should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectG] to be
-    appropriately padded. This guarantee applies to the [gobject.object.ObjectG] (or derived)
+    [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectWrap], you
+    should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectWrap] to be
+    appropriately padded. This guarantee applies to the [gobject.object.ObjectWrap] (or derived)
     struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated
     by `G_ADD_PRIVATE()`.
 */
-class ObjectG
+class ObjectWrap
 {
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
   DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
-  * Create an ObjectG which is wrapping a C GObject with the given GType.
-  * Useful for creating custom D classes which are derived from ObjectG.
+  * Create an ObjectWrap which is wrapping a C GObject with the given GType.
+  * Useful for creating custom D classes which are derived from ObjectWrap.
   * Params:
   *   type = The GType value to use for creating the wrapped GObject
   */
@@ -127,7 +127,7 @@ class ObjectG
   }
 
   /**
-  * Set the GObject of a D ObjectG wrapper.
+  * Set the GObject of a D ObjectWrap wrapper.
   * Params:
   *   cObj = Pointer to the GObject
   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
@@ -166,7 +166,7 @@ class ObjectG
   {
     debug
     {
-      (cast(ObjectG)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
+      (cast(ObjectWrap)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
       : "_cObjToggleNotify isLastRef=false");
     }
 
@@ -239,7 +239,7 @@ class ObjectG
   * Convenience method to return `this` cast to a type. For use in D with statements.
   * Returns: The object instance
   */
-  ObjectG self()
+  ObjectWrap self()
   {
     return this;
   }
@@ -257,8 +257,8 @@ class ObjectG
     if (!cptr)
       return null;
 
-    // Cast return value to ObjectG or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
-    if (auto dObj = cast(ObjectG)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
+    // Cast return value to ObjectWrap or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
+    if (auto dObj = cast(ObjectWrap)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
     {
       if (take)
         g_object_unref(cast(ObjectC*)cptr);
@@ -270,7 +270,7 @@ class ObjectG
     {
       synchronized
       {
-        auto gobjClass = typeid(ObjectG);
+        auto gobjClass = typeid(ObjectWrap);
         auto ifProxyClass = typeid(IfaceProxy);
 
         foreach (m; ModuleInfo)
@@ -294,7 +294,7 @@ class ObjectG
             { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
               auto obj = _d_newclass(c);
 
-              if (auto gType = (cast(ObjectG)obj).gType)
+              if (auto gType = (cast(ObjectWrap)obj).gType)
                 gtypeClasses[gType] = c;
             }
           }
@@ -315,7 +315,7 @@ class ObjectG
 
         if (auto obj = _d_newclass(cast()*dClassType))
         {
-          (cast(ObjectG)obj).setGObject(cptr, take);
+          (cast(ObjectWrap)obj).setGObject(cptr, take);
           return cast(T)obj;
         }
 
@@ -329,7 +329,7 @@ class ObjectG
       {
         if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
         {
-          (cast(ObjectG)obj).setGObject(cptr, take); // Assign the C GObject
+          (cast(ObjectWrap)obj).setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
         }
       }
@@ -443,8 +443,8 @@ class ObjectG
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
-    T retval = getVal(&value, val);
+    g_object_get_property(cast(ObjectC*)cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
   }
@@ -478,10 +478,10 @@ class ObjectG
       
       The binding will automatically be removed when either the source or the
       target instances are finalized. To remove the binding without affecting the
-      source and the target you can just call [gobject.object.ObjectG.unref] on the returned
+      source and the target you can just call [gobject.object.ObjectWrap.unref] on the returned
       #GBinding instance.
       
-      Removing the binding by calling [gobject.object.ObjectG.unref] on it must only be done if
+      Removing the binding by calling [gobject.object.ObjectWrap.unref] on it must only be done if
       the binding, source and target are only used from a single thread and it
       is clear that both source and target outlive the binding. Especially it
       is not safe to rely on this if the binding, source or target can be
@@ -499,13 +499,13 @@ class ObjectG
             binding between the two #GObject instances. The binding is released
             whenever the #GBinding reference count reaches zero.
   */
-  gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
+  gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags)
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
     _cretval = g_object_bind_property(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
-    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class ObjectG
       the binding.
       
       This function is the language bindings friendly version of
-      [gobject.object.ObjectG.bindPropertyFull], using #GClosures instead of
+      [gobject.object.ObjectWrap.bindPropertyFull], using #GClosures instead of
       function pointers.
   
       Params:
@@ -531,13 +531,13 @@ class ObjectG
             binding between the two #GObject instances. The binding is released
             whenever the #GBinding reference count reaches zero.
   */
-  gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
+  gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
     _cretval = g_object_bind_property_with_closures(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class ObjectG
       This function is intended for #GObject implementations to re-enforce
       a [floating][floating-ref] object reference. Doing this is seldom
       required: all #GInitiallyUnowneds are created with a floating reference
-      which usually just needs to be sunken by calling [gobject.object.ObjectG.refSink].
+      which usually just needs to be sunken by calling [gobject.object.ObjectWrap.refSink].
   */
   void forceFloating()
   {
@@ -569,7 +569,7 @@ class ObjectG
   }
 
   /**
-      Gets a named field from the objects table of associations (see [gobject.object.ObjectG.setData]).
+      Gets a named field from the objects table of associations (see [gobject.object.ObjectWrap.setData]).
   
       Params:
         key = name of the key for that association
@@ -600,8 +600,8 @@ class ObjectG
       In general, a copy is made of the property contents and the caller is
       responsible for freeing the memory by calling [gobject.value.Value.unset].
       
-      Note that [gobject.object.ObjectG.getProperty] is really intended for language
-      bindings, [gobject.object.ObjectG.get] is much more convenient for C programming.
+      Note that [gobject.object.ObjectWrap.getProperty] is really intended for language
+      bindings, [gobject.object.ObjectWrap.get] is much more convenient for C programming.
   
       Params:
         propertyName = the name of the property to get
@@ -615,7 +615,7 @@ class ObjectG
 
   /**
       This function gets back user data pointers stored via
-      [gobject.object.ObjectG.setQdata].
+      [gobject.object.ObjectWrap.setQdata].
   
       Params:
         quark = A #GQuark, naming the user data pointer
@@ -673,12 +673,12 @@ class ObjectG
       Emits a "notify" signal for the property property_name on object.
       
       When possible, eg. when signaling a property change from within the class
-      that registered the property, you should use [gobject.object.ObjectG.notifyByPspec]
+      that registered the property, you should use [gobject.object.ObjectWrap.notifyByPspec]
       instead.
       
       Note that emission of the notify signal may be blocked with
-      [gobject.object.ObjectG.freezeNotify]. In this case, the signal emissions are queued
-      and will be emitted (in reverse order) when [gobject.object.ObjectG.thawNotify] is
+      [gobject.object.ObjectWrap.freezeNotify]. In this case, the signal emissions are queued
+      and will be emitted (in reverse order) when [gobject.object.ObjectWrap.thawNotify] is
       called.
   
       Params:
@@ -694,10 +694,10 @@ class ObjectG
       Emits a "notify" signal for the property specified by pspec on object.
       
       This function omits the property name lookup, hence it is faster than
-      [gobject.object.ObjectG.notify].
+      [gobject.object.ObjectWrap.notify].
       
-      One way to avoid using [gobject.object.ObjectG.notify] from within the
-      class that registered the properties, and using [gobject.object.ObjectG.notifyByPspec]
+      One way to avoid using [gobject.object.ObjectWrap.notify] from within the
+      class that registered the properties, and using [gobject.object.ObjectWrap.notifyByPspec]
       instead, is to store the GParamSpec used with
       [gobject.object_class.ObjectClass.installProperty] inside a static array, e.g.:
       
@@ -748,14 +748,14 @@ class ObjectG
       adds a new normal reference increasing the reference count by one.
       
       Since GLib 2.56, the type of object will be propagated to the return type
-      under the same conditions as for [gobject.object.ObjectG.ref_].
+      under the same conditions as for [gobject.object.ObjectWrap.ref_].
       Returns: object
   */
-  gobject.object.ObjectG refSink()
+  gobject.object.ObjectWrap refSink()
   {
     ObjectC* _cretval;
     _cretval = g_object_ref_sink(cast(ObjectC*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -823,7 +823,7 @@ class ObjectG
 
   /**
       This function gets back user data pointers stored via
-      [gobject.object.ObjectG.setQdata] and removes the data from object
+      [gobject.object.ObjectWrap.setQdata] and removes the data from object
       without invoking its destroy() function (if any was
       set).
       Usually, calling this function is only required to update
@@ -853,10 +853,10 @@ class ObjectG
         g_list_free (list);
       }
       ```
-      Using [gobject.object.ObjectG.getQdata] in the above example, instead of
-      [gobject.object.ObjectG.stealQdata] would have left the destroy function set,
+      Using [gobject.object.ObjectWrap.getQdata] in the above example, instead of
+      [gobject.object.ObjectWrap.stealQdata] would have left the destroy function set,
       and thus the partial string list would have been freed upon
-      [gobject.object.ObjectG.setQdataFull].
+      [gobject.object.ObjectWrap.setQdataFull].
   
       Params:
         quark = A #GQuark, naming the user data pointer
@@ -870,7 +870,7 @@ class ObjectG
 
   /**
       Reverts the effect of a previous call to
-      [gobject.object.ObjectG.freezeNotify]. The freeze count is decreased on object
+      [gobject.object.ObjectWrap.freezeNotify]. The freeze count is decreased on object
       and when it reaches zero, queued "notify" signals are emitted.
       
       Duplicate notifications for each property are squashed so that at most one
@@ -889,7 +889,7 @@ class ObjectG
       the life time of the object. That is, when the object is finalized,
       the closure is invalidated by calling [gobject.closure.Closure.invalidate] on
       it, in order to prevent invocations of the closure with a finalized
-      (nonexisting) object. Also, [gobject.object.ObjectG.ref_] and [gobject.object.ObjectG.unref] are
+      (nonexisting) object. Also, [gobject.object.ObjectWrap.ref_] and [gobject.object.ObjectWrap.unref] are
       added as marshal guards to the closure, to ensure that an extra
       reference count is held on object during invocation of the
       closure.  Usually, this function will be called on closures that
@@ -907,15 +907,15 @@ class ObjectG
       Connect to `Notify` signal.
   
       The notify signal is emitted on an object when one of its properties has
-      its value set through [gobject.object.ObjectG.setProperty], [gobject.object.ObjectG.set], et al.
+      its value set through [gobject.object.ObjectWrap.setProperty], [gobject.object.ObjectWrap.set], et al.
       
       Note that getting this signal doesn’t itself guarantee that the value of
       the property has actually changed. When it is emitted is determined by the
       derived GObject class. If the implementor did not create the property with
-      `G_PARAM_EXPLICIT_NOTIFY`, then any call to [gobject.object.ObjectG.setProperty] results
+      `G_PARAM_EXPLICIT_NOTIFY`, then any call to [gobject.object.ObjectWrap.setProperty] results
       in ::notify being emitted, even if the new value is the same as the old.
       If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
-      when they explicitly call [gobject.object.ObjectG.notify] or [gobject.object.ObjectG.notifyByPspec],
+      when they explicitly call [gobject.object.ObjectWrap.notify] or [gobject.object.ObjectWrap.notifyByPspec],
       and common practice is to do that only when the value has actually changed.
       
       This signal is typically used to obtain change notification for a
@@ -936,11 +936,11 @@ class ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectG objectG))
+          $(D void callback(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectWrap objectWrap))
   
           `pspec` the #GParamSpec of the property which changed. (optional)
   
-          `objectG` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -949,7 +949,7 @@ class ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -976,7 +976,7 @@ class ObjectG
 /**
 * Interface proxy class - used to wrap unknown GObjects as a known interface
 */
-abstract class IfaceProxy : ObjectG
+abstract class IfaceProxy : ObjectWrap
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {

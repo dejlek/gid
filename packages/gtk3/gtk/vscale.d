@@ -46,6 +46,7 @@ class VScale : gtk.scale.Scale
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VScale self()
   {
     return this;
@@ -89,7 +90,7 @@ class VScale : gtk.scale.Scale
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscale_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -40,6 +40,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleSchemeChooserButton self()
   {
     return this;

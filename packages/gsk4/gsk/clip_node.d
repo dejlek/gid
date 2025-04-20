@@ -18,7 +18,7 @@ class ClipNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.ClipNode");
+      throw new GidConstructException("Null instance pointer for gsk.clip_node.ClipNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

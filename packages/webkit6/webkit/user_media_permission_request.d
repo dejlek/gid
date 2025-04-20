@@ -19,7 +19,7 @@ import webkit.types;
     When a WebKitUserMediaPermissionRequest is not handled by the user,
     it is denied by default.
 */
-class UserMediaPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */
@@ -45,6 +45,24 @@ class UserMediaPermissionRequest : gobject.object.ObjectG, webkit.permission_req
   override UserMediaPermissionRequest self()
   {
     return this;
+  }
+
+  /**
+      Get `isForAudioDevice` property.
+      Returns: Whether the media device to which the permission was requested has a microphone or not.
+  */
+  @property bool isForAudioDevice()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-for-audio-device");
+  }
+
+  /**
+      Get `isForVideoDevice` property.
+      Returns: Whether the media device to which the permission was requested has a video capture capability or not.
+  */
+  @property bool isForVideoDevice()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-for-video-device");
   }
 
   mixin PermissionRequestT!();

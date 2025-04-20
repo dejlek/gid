@@ -45,7 +45,7 @@ interface Proxy
     GProxy* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
     _cretval = g_proxy_get_default_for_protocol(_protocol);
-    auto _retval = ObjectG.getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ interface Proxy
       Returns: a #GIOStream that will replace connection. This might
                       be the same as connection, in which case a reference
                       will be added.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null);
 
@@ -83,7 +83,7 @@ interface Proxy
       Params:
         result = a #GAsyncResult
       Returns: a #GIOStream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.iostream.IOStream connectFinish(gio.async_result.AsyncResult result);
 

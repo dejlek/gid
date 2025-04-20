@@ -43,41 +43,73 @@ class Item : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Item self()
   {
     return this;
   }
 
+  /**
+      Get `offset` field.
+      Returns: byte offset of the start of this item in text.
+  */
   @property int offset()
   {
     return (cast(PangoItem*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = byte offset of the start of this item in text.
+  */
   @property void offset(int propval)
   {
     (cast(PangoItem*)cPtr).offset = propval;
   }
 
+  /**
+      Get `length` field.
+      Returns: length of this item in bytes.
+  */
   @property int length()
   {
     return (cast(PangoItem*)cPtr).length;
   }
 
+  /**
+      Set `length` field.
+      Params:
+        propval = length of this item in bytes.
+  */
   @property void length(int propval)
   {
     (cast(PangoItem*)cPtr).length = propval;
   }
 
+  /**
+      Get `numChars` field.
+      Returns: number of Unicode characters in the item.
+  */
   @property int numChars()
   {
     return (cast(PangoItem*)cPtr).numChars;
   }
 
+  /**
+      Set `numChars` field.
+      Params:
+        propval = number of Unicode characters in the item.
+  */
   @property void numChars(int propval)
   {
     (cast(PangoItem*)cPtr).numChars = propval;
   }
 
+  /**
+      Get `analysis` field.
+      Returns: analysis results for the item.
+  */
   @property pango.analysis.Analysis analysis()
   {
     return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)cPtr).analysis);

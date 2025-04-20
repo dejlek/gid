@@ -55,6 +55,7 @@ class HBox : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HBox self()
   {
     return this;

@@ -27,7 +27,7 @@ import gtk.types;
     to work with shortcuts, either by providing informational strings
     for display purposes or by allowing shortcuts to be configured.
 */
-class Shortcut : gobject.object.ObjectG
+class Shortcut : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,67 @@ class Shortcut : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Shortcut self()
   {
     return this;
+  }
+
+  /**
+      Get `action` property.
+      Returns: The action that gets activated by this shortcut.
+  */
+  @property gtk.shortcut_action.ShortcutAction action()
+  {
+    return getAction();
+  }
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The action that gets activated by this shortcut.
+  */
+  @property void action(gtk.shortcut_action.ShortcutAction propval)
+  {
+    return setAction(propval);
+  }
+
+  /**
+      Get `arguments` property.
+      Returns: Arguments passed to activation.
+  */
+  @property glib.variant.Variant arguments()
+  {
+    return getArguments();
+  }
+
+  /**
+      Set `arguments` property.
+      Params:
+        propval = Arguments passed to activation.
+  */
+  @property void arguments(glib.variant.Variant propval)
+  {
+    return setArguments(propval);
+  }
+
+  /**
+      Get `trigger` property.
+      Returns: The trigger that triggers this shortcut.
+  */
+  @property gtk.shortcut_trigger.ShortcutTrigger trigger()
+  {
+    return getTrigger();
+  }
+
+  /**
+      Set `trigger` property.
+      Params:
+        propval = The trigger that triggers this shortcut.
+  */
+  @property void trigger(gtk.shortcut_trigger.ShortcutTrigger propval)
+  {
+    return setTrigger(propval);
   }
 
   /**
@@ -79,7 +137,7 @@ class Shortcut : gobject.object.ObjectG
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_shortcut_get_action(cast(GtkShortcut*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,11 +145,11 @@ class Shortcut : gobject.object.ObjectG
       Gets the arguments that are passed when activating the shortcut.
       Returns: the arguments
   */
-  glib.variant.VariantG getArguments()
+  glib.variant.Variant getArguments()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_shortcut_get_arguments(cast(GtkShortcut*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -103,7 +161,7 @@ class Shortcut : gobject.object.ObjectG
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_shortcut_get_trigger(cast(GtkShortcut*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,9 +183,9 @@ class Shortcut : gobject.object.ObjectG
       Params:
         args = arguments to pass when activating self
   */
-  void setArguments(glib.variant.VariantG args = null)
+  void setArguments(glib.variant.Variant args = null)
   {
-    gtk_shortcut_set_arguments(cast(GtkShortcut*)cPtr, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
+    gtk_shortcut_set_arguments(cast(GtkShortcut*)cPtr, args ? cast(GVariant*)args.cPtr(No.Dup) : null);
   }
 
   /**

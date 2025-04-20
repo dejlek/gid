@@ -37,6 +37,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AlternativeTrigger self()
   {
     return this;
@@ -73,7 +74,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +90,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

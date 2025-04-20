@@ -163,7 +163,7 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -181,16 +181,16 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
     Returns: true if the operation was successful. In this case,
         value is set. false if an error occurred. In this case,
         error is set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.value.Value value)
 {
   bool _retval;
   GValue _value;
   GError *_err;
-  _retval = gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_value, &_err);
+  _retval = gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_value, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   value = new gobject.value.Value(cast(void*)&_value, No.Take);
   return _retval;
 }
@@ -219,7 +219,7 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -235,15 +235,15 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
       result = the [gio.async_result.AsyncResult]
     Returns: true if the operation was successful, false if an
         error occurred. In this case, error is set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool contentSerializeFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _retval = gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -497,7 +497,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -519,7 +519,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 

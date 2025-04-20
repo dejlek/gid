@@ -13,7 +13,6 @@ import gtk.c.types;
 import gtk.container;
 import gtk.orientable;
 import gtk.orientable_mixin;
-import gtk.style;
 import gtk.tool_item;
 import gtk.tool_shell;
 import gtk.tool_shell_mixin;
@@ -67,9 +66,84 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Toolbar self()
   {
     return this;
+  }
+
+  /**
+      Get `iconSize` property.
+      Returns: The size of the icons in a toolbar is normally determined by
+      the toolbar-icon-size setting. When this property is set, it
+      overrides the setting.
+      
+      This should only be used for special-purpose toolbars, normal
+      application toolbars should respect the user preferences for the
+      size of icons.
+  */
+  @property gtk.types.IconSize iconSize()
+  {
+    return getIconSize();
+  }
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The size of the icons in a toolbar is normally determined by
+        the toolbar-icon-size setting. When this property is set, it
+        overrides the setting.
+        
+        This should only be used for special-purpose toolbars, normal
+        application toolbars should respect the user preferences for the
+        size of icons.
+  */
+  @property void iconSize(gtk.types.IconSize propval)
+  {
+    return setIconSize(propval);
+  }
+
+  /**
+      Get `iconSizeSet` property.
+      Returns: Is true if the icon-size property has been set.
+  */
+  @property bool iconSizeSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("icon-size-set");
+  }
+
+  /**
+      Set `iconSizeSet` property.
+      Params:
+        propval = Is true if the icon-size property has been set.
+  */
+  @property void iconSizeSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("icon-size-set", propval);
+  }
+
+  /** */
+  @property bool showArrow()
+  {
+    return getShowArrow();
+  }
+
+  /** */
+  @property void showArrow(bool propval)
+  {
+    return setShowArrow(propval);
+  }
+
+  /** */
+  @property gtk.types.ToolbarStyle toolbarStyle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ToolbarStyle)("toolbar-style");
+  }
+
+  /** */
+  @property void toolbarStyle(gtk.types.ToolbarStyle propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ToolbarStyle)("toolbar-style", propval);
   }
 
   mixin OrientableT!();
@@ -158,7 +232,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   {
     GtkToolItem* _cretval;
     _cretval = gtk_toolbar_get_nth_item(cast(GtkToolbar*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 

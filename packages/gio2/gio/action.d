@@ -15,7 +15,7 @@ import glib.variant_type;
     
     The main interface to an action is that it can be activated with
     [gio.action.Action.activate]. This results in the 'activate' signal being
-    emitted. An activation has a [glib.variant.VariantG] parameter (which may be
+    emitted. An activation has a [glib.variant.Variant] parameter (which may be
     `NULL`). The correct type for the parameter is determined by a static
     parameter type (which is given at construction time).
     
@@ -50,6 +50,43 @@ interface Action
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_action_get_type != &gidSymbolNotFound ? g_action_get_type() : cast(GType)0;
   }
+
+  /**
+      Get `enabled` property.
+      Returns: If @action is currently enabled.
+      
+      If the action is disabled then calls to [gio.action.Action.activate] and
+      [gio.action.Action.changeState] have no effect.
+  */
+  @property bool enabled();
+
+  /**
+      Get `name` property.
+      Returns: The name of the action.  This is mostly meaningful for identifying
+      the action once it has been added to a #GActionGroup. It is immutable.
+  */
+  @property string name();
+
+  /**
+      Get `parameterType` property.
+      Returns: The type of the parameter that must be given when activating the
+      action. This is immutable, and may be null if no parameter is needed when
+      activating the action.
+  */
+  @property glib.variant_type.VariantType parameterType();
+
+  /**
+      Get `state` property.
+      Returns: The state of the action, or null if the action is stateless.
+  */
+  @property glib.variant.Variant state();
+
+  /**
+      Get `stateType` property.
+      Returns: The #GVariantType of the state that the action has, or null if the
+      action is stateless. This is immutable.
+  */
+  @property glib.variant_type.VariantType stateType();
 
   /**
       Checks if action_name is valid.
@@ -91,7 +128,7 @@ interface Action
       The third format is used to represent an action with any type of
       target value, including strings.  The target value follows the action
       name, surrounded in parens.  For example: `app.action(42)`.  The
-      target value is parsed using [glib.variant.VariantG.parse].  If a tuple-typed
+      target value is parsed using [glib.variant.Variant.parse].  If a tuple-typed
       value is desired, it must be specified in the same way, resulting in
       two sets of parens, for example: `app.action((1,2,3))`.  A string
       target can be specified this way as well: `app.action('target')`.
@@ -110,20 +147,20 @@ interface Action
         targetValue = the target value,
             or null for no target
       Returns: true if successful, else false with error set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  static bool parseDetailedName(string detailedName, out string actionName, out glib.variant.VariantG targetValue)
+  static bool parseDetailedName(string detailedName, out string actionName, out glib.variant.Variant targetValue)
   {
     bool _retval;
     const(char)* _detailedName = detailedName.toCString(No.Alloc);
     char* _actionName;
-    VariantC* _targetValue;
+    GVariant* _targetValue;
     GError *_err;
     _retval = g_action_parse_detailed_name(_detailedName, &_actionName, &_targetValue, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     actionName = _actionName.fromCString(Yes.Free);
-    targetValue = new glib.variant.VariantG(cast(void*)_targetValue, Yes.Take);
+    targetValue = new glib.variant.Variant(cast(void*)_targetValue, Yes.Take);
     return _retval;
   }
 
@@ -144,11 +181,11 @@ interface Action
         targetValue = a #GVariant target value, or null
       Returns: a detailed format string
   */
-  static string printDetailedName(string actionName, glib.variant.VariantG targetValue = null)
+  static string printDetailedName(string actionName, glib.variant.Variant targetValue = null)
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
+    _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(GVariant*)targetValue.cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -165,7 +202,7 @@ interface Action
       Params:
         parameter = the parameter to the activation
   */
-  void activate(glib.variant.VariantG parameter = null);
+  void activate(glib.variant.Variant parameter = null);
 
   /**
       Request for the state of action to be changed to value.
@@ -182,7 +219,7 @@ interface Action
       Params:
         value = the new state
   */
-  void changeState(glib.variant.VariantG value);
+  void changeState(glib.variant.Variant value);
 
   /**
       Checks if action is currently enabled.
@@ -220,10 +257,10 @@ interface Action
       given by [gio.action.Action.getStateType].
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
       Returns: the current state of the action
   */
-  glib.variant.VariantG getState();
+  glib.variant.Variant getState();
 
   /**
       Requests a hint about the valid range of values for the state of
@@ -243,10 +280,10 @@ interface Action
       within the range may fail.
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
       Returns: the state range hint
   */
-  glib.variant.VariantG getStateHint();
+  glib.variant.Variant getStateHint();
 
   /**
       Queries the type of the state of action.

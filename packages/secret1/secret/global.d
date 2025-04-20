@@ -39,15 +39,15 @@ secret.schema.Schema getSchema(secret.types.SchemaType type)
     Params:
       result = the asynchronous result passed to the callback
     Returns: whether any passwords were removed
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool passwordClearFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = secret_password_clear_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _retval = secret_password_clear_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -66,7 +66,7 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
       attributes = the attribute keys and values
       cancellable = optional cancellation object
     Returns: whether any passwords were removed
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -76,7 +76,7 @@ bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, g
   GError *_err;
   _retval = secret_password_clearv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -87,15 +87,15 @@ bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, g
       result = the asynchronous result passed to the callback
     Returns: a new password string which should be freed with
         `funcpassword_free` or may be freed with `funcGLib.free` when done
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string passwordLookupFinish(gio.async_result.AsyncResult result)
 {
   char* _cretval;
   GError *_err;
-  _cretval = secret_password_lookup_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _cretval = secret_password_lookup_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -116,7 +116,7 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
       cancellable = optional cancellation object
     Returns: a new password string which should be freed with
         `funcpassword_free` or may be freed with `funcGLib.free` when done
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string passwordLookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -126,7 +126,7 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
   GError *_err;
   _cretval = secret_password_lookupv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -138,15 +138,15 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
       result = the asynchronous result passed to the callback
     Returns: a list of
         `ifaceRetrievable` containing attributes of the matched items
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResult result)
 {
   GList* _cretval;
   GError *_err;
-  _cretval = secret_password_search_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _cretval = secret_password_search_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   auto _retval = gListToD!(secret.retrievable.Retrievable, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -168,7 +168,7 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
       cancellable = optional cancellation object
     Returns: a list of
         `ifaceRetrievable` containing attributes of the matched items
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
 {
@@ -178,7 +178,7 @@ secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema,
   GError *_err;
   _cretval = secret_password_searchv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   auto _retval = gListToD!(secret.retrievable.Retrievable, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -189,15 +189,15 @@ secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema,
     Params:
       result = the asynchronous result passed to the callback
     Returns: whether the storage was successful or not
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool passwordStoreFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = secret_password_store_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _retval = secret_password_store_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -219,7 +219,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
       value = a `structValue`
       cancellable = optional cancellation object
     Returns: whether the storage was successful or not
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
 {
@@ -231,7 +231,7 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
   GError *_err;
   _retval = secret_password_storev_binary_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -259,7 +259,7 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
       password = the null-terminated password to store
       cancellable = optional cancellation object
     Returns: whether the storage was successful or not
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable = null)
 {
@@ -272,7 +272,7 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
   GError *_err;
   _retval = secret_password_storev_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, _password, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 

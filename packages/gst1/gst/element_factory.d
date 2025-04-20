@@ -61,6 +61,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ElementFactory self()
   {
     return this;
@@ -80,7 +81,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     GstElementFactory* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_factory_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -151,7 +152,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_factory_make(_factoryname, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,7 +188,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       _tmpvalues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
     _cretval = gst_element_factory_make_with_properties(_factoryname, _n, _names, _values);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,7 +264,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_factory_create(cast(GstElementFactory*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,7 +298,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       _tmpvalues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
     _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)cPtr, _n, _names, _values);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 

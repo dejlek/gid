@@ -9,7 +9,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Location : gobject.object.ObjectG
+class Location : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class Location : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Location self()
   {
     return this;
@@ -44,7 +45,7 @@ class Location : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_location_new(_uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

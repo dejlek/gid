@@ -53,6 +53,7 @@ class PatternSpec : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PatternSpec self()
   {
     return this;

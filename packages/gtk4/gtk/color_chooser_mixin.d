@@ -5,6 +5,7 @@ public import gtk.color_chooser_iface_proxy;
 public import gdk.rgba;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -24,6 +25,76 @@ public import gtk.types;
 */
 template ColorChooserT()
 {
+
+  /**
+      Get `rgba` property.
+      Returns: The currently selected color, as a [gdk.rgba.RGBA] struct.
+      
+      The property can be set to change the current selection
+      programmatically.
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property gdk.rgba.RGBA rgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The currently selected color, as a [gdk.rgba.RGBA] struct.
+        
+        The property can be set to change the current selection
+        programmatically.
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property void rgba(gdk.rgba.RGBA propval)
+  {
+    return setRgba(propval);
+  }
+
+  /**
+      Get `useAlpha` property.
+      Returns: Whether colors may have alpha (translucency).
+      
+      When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+      via the [gtk.color_chooser.ColorChooser.rgba] property will be
+      forced to have alpha == 1.
+      
+      Implementations are expected to show alpha by rendering the color
+      over a non-uniform background (like a checkerboard pattern).
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property bool useAlpha()
+  {
+    return getUseAlpha();
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+        
+        When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+        via the [gtk.color_chooser.ColorChooser.rgba] property will be
+        forced to have alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property void useAlpha(bool propval)
+  {
+    return setUseAlpha(propval);
+  }
 
   /**
       Adds a palette to the color chooser.

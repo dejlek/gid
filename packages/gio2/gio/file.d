@@ -150,7 +150,7 @@ interface File
     _tmpargs ~= null;
     const(char*)* _args = _tmpargs.ptr;
     _cretval = g_file_new_build_filenamev(_args);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,14 +173,14 @@ interface File
       Params:
         arg = a command line string
       Returns: a new #GFile.
-          Free the returned object with [gobject.object.ObjectG.unref].
+          Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.file.File newForCommandlineArg(string arg)
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_file_new_for_commandline_arg(_arg);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ interface File
     const(char)* _arg = arg.toCString(No.Alloc);
     const(char)* _cwd = cwd.toCString(No.Alloc);
     _cretval = g_file_new_for_commandline_arg_and_cwd(_arg, _cwd);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -221,14 +221,14 @@ interface File
         path = a string containing a relative or absolute path.
             The string must be encoded in the glib filename encoding.
       Returns: a new #GFile for the given path.
-          Free the returned object with [gobject.object.ObjectG.unref].
+          Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.file.File newForPath(string path)
   {
     GFile* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_file_new_for_path(_path);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -241,14 +241,14 @@ interface File
       Params:
         uri = a UTF-8 string containing a URI
       Returns: a new #GFile for the given uri.
-          Free the returned object with [gobject.object.ObjectG.unref].
+          Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.file.File newForUri(string uri)
   {
     GFile* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_file_new_for_uri(_uri);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -269,8 +269,8 @@ interface File
             name, as in [glib.global.fileOpenTmp], or null for a default template
         iostream = on return, a #GFileIOStream for the created file
       Returns: a new #GFile.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   static gio.file.File newTmp(string tmpl, out gio.file_iostream.FileIOStream iostream)
   {
@@ -280,8 +280,8 @@ interface File
     GError *_err;
     _cretval = g_file_new_tmp(_tmpl, &_iostream, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;
   }
@@ -308,7 +308,7 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -339,7 +339,7 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -355,17 +355,17 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: a new #GFile.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   static gio.file.File newTmpDirFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -376,18 +376,18 @@ interface File
         result = a #GAsyncResult
         iostream = on return, a #GFileIOStream for the created file
       Returns: a new #GFile.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   static gio.file.File newTmpFinish(gio.async_result.AsyncResult result, out gio.file_iostream.FileIOStream iostream)
   {
     GFile* _cretval;
     GFileIOStream* _iostream;
     GError *_err;
-    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_iostream, &_err);
+    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_iostream, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;
   }
@@ -407,7 +407,7 @@ interface File
     GFile* _cretval;
     const(char)* _parseName = parseName.toCString(No.Alloc);
     _cretval = g_file_parse_name(_parseName);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -435,8 +435,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileOutputStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -468,8 +468,8 @@ interface File
         res = #GAsyncResult
       Returns: a valid #GFileOutputStream
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream appendToFinish(gio.async_result.AsyncResult res);
 
@@ -490,7 +490,7 @@ interface File
             null to ignore
       Returns: an attribute query string for [gio.file.File.queryInfo],
           or null if an error occurs.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -544,7 +544,7 @@ interface File
         progressCallback = function to callback with
             progress information, or null if progress information is not needed
       Returns: true on success, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
@@ -590,7 +590,7 @@ interface File
             null to ignore
       Returns: true if the attributes were copied successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -600,7 +600,7 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool copyFinish(gio.async_result.AsyncResult res);
 
@@ -631,8 +631,8 @@ interface File
             null to ignore
       Returns: a #GFileOutputStream for the newly created
           file, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -664,8 +664,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileOutputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream createFinish(gio.async_result.AsyncResult res);
 
@@ -700,8 +700,8 @@ interface File
             null to ignore
       Returns: a #GFileIOStream for the newly created
           file, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -733,8 +733,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream createReadwriteFinish(gio.async_result.AsyncResult res);
 
@@ -765,7 +765,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the file was deleted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool delete_(gio.cancellable.Cancellable cancellable = null);
 
@@ -789,7 +789,7 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: true if the file was deleted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteFinish(gio.async_result.AsyncResult result);
 
@@ -800,7 +800,7 @@ interface File
       
       [gio.file.File.dup] is useful when a second handle is needed to the same underlying
       file, for use in a separate thread (#GFile is not thread-safe). For use
-      within the same thread, use [gobject.object.ObjectG.ref_] to increment the existing object’s
+      within the same thread, use [gobject.object.ObjectWrap.ref_] to increment the existing object’s
       reference count.
       
       This call does no blocking I/O.
@@ -838,7 +838,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.file.File.ejectMountableWithOperationFinish]
           instead.
@@ -874,7 +874,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool ejectMountableWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -911,8 +911,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: A #GFileEnumerator if successful,
-          null on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          null on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -947,8 +947,8 @@ interface File
         res = a #GAsyncResult
       Returns: a #GFileEnumerator or null
           if an error occurred.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_enumerator.FileEnumerator enumerateChildrenFinish(gio.async_result.AsyncResult res);
 
@@ -983,8 +983,8 @@ interface File
             null to ignore
       Returns: a #GMount where the file is located
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable = null);
 
@@ -1014,8 +1014,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: #GMount for given file or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.mount.Mount findEnclosingMountFinish(gio.async_result.AsyncResult res);
 
@@ -1051,7 +1051,7 @@ interface File
       Params:
         name = string containing the child's basename
       Returns: a #GFile to a child specified by name.
-          Free the returned object with [gobject.object.ObjectG.unref].
+          Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.file.File getChild(string name);
 
@@ -1069,8 +1069,8 @@ interface File
         displayName = string to a possible child
       Returns: a #GFile to the specified child, or
           null if the display name couldn't be converted.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file.File getChildForDisplayName(string displayName);
 
@@ -1082,7 +1082,7 @@ interface File
       This call does no blocking I/O.
       Returns: a #GFile structure to the
           parent of the given #GFile or null if there is no parent. Free
-          the returned object with [gobject.object.ObjectG.unref].
+          the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.file.File getParent();
 
@@ -1256,7 +1256,7 @@ interface File
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes loadBytes(gio.cancellable.Cancellable cancellable, out string etagOut);
 
@@ -1295,7 +1295,7 @@ interface File
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes loadBytesFinish(gio.async_result.AsyncResult result, out string etagOut);
 
@@ -1316,7 +1316,7 @@ interface File
             or null if the entity tag is not needed
       Returns: true if the file's contents were successfully loaded.
           false if there were errors.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadContents(gio.cancellable.Cancellable cancellable, out ubyte[] contents, out string etagOut);
 
@@ -1355,7 +1355,7 @@ interface File
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut);
 
@@ -1373,7 +1373,7 @@ interface File
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadPartialContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut);
 
@@ -1397,7 +1397,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool makeDirectory(gio.cancellable.Cancellable cancellable = null);
 
@@ -1420,7 +1420,7 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool makeDirectoryFinish(gio.async_result.AsyncResult result);
 
@@ -1444,7 +1444,7 @@ interface File
             null to ignore
       Returns: true if all directories have been successfully created, false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable = null);
 
@@ -1462,7 +1462,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on the creation of a new symlink, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null);
 
@@ -1488,7 +1488,7 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool makeSymbolicLinkFinish(gio.async_result.AsyncResult result);
 
@@ -1521,7 +1521,7 @@ interface File
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool measureDiskUsage(gio.types.FileMeasureFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileMeasureProgressCallback progressCallback, out ulong diskUsage, out ulong numDirs, out ulong numFiles);
 
@@ -1537,7 +1537,7 @@ interface File
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool measureDiskUsageFinish(gio.async_result.AsyncResult result, out ulong diskUsage, out ulong numDirs, out ulong numFiles);
 
@@ -1555,8 +1555,8 @@ interface File
             null to ignore
       Returns: a #GFileMonitor for the given file,
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -1579,8 +1579,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileMonitor for the given file,
-          or null on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          or null on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -1606,8 +1606,8 @@ interface File
             null to ignore
       Returns: a #GFileMonitor for the given file,
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -1642,7 +1642,7 @@ interface File
       Returns: true if successful. If an error has occurred,
           this function will return false and set error
           appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool mountEnclosingVolumeFinish(gio.async_result.AsyncResult result);
 
@@ -1679,8 +1679,8 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: a #GFile or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file.File mountMountableFinish(gio.async_result.AsyncResult result);
 
@@ -1727,7 +1727,7 @@ interface File
         progressCallback = #GFileProgressCallback
             function for updates
       Returns: true on successful move, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
@@ -1761,7 +1761,7 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: true on successful file move, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool moveFinish(gio.async_result.AsyncResult result);
 
@@ -1786,8 +1786,8 @@ interface File
       Params:
         cancellable = a #GCancellable
       Returns: #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable = null);
 
@@ -1817,14 +1817,14 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream openReadwriteFinish(gio.async_result.AsyncResult res);
 
   /**
       Exactly like [gio.file.File.getPath], but caches the result via
-      [gobject.object.ObjectG.setQdataFull].  This is useful for example in C
+      [gobject.object.ObjectWrap.setQdataFull].  This is useful for example in C
       applications which mix `g_file_*` APIs with native ones.  It
       also avoids an extra duplicated string when possible, so will be
       generally more efficient.
@@ -1863,7 +1863,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool pollMountableFinish(gio.async_result.AsyncResult result);
 
@@ -1879,8 +1879,8 @@ interface File
         cancellable = optional #GCancellable object, null to ignore
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
-          When you are done with it, release it with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          When you are done with it, release it with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable = null);
 
@@ -1901,8 +1901,8 @@ interface File
         result = a #GAsyncResult
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
-          When you are done with it, release it with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          When you are done with it, release it with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   gio.app_info.AppInfo queryDefaultHandlerFinish(gio.async_result.AsyncResult result);
 
@@ -1986,8 +1986,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileInfo or null if there was an error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null);
 
@@ -2022,8 +2022,8 @@ interface File
         res = a #GAsyncResult
       Returns: #GFileInfo for given file
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryFilesystemInfoFinish(gio.async_result.AsyncResult res);
 
@@ -2065,8 +2065,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileInfo for the given file, or null
-          on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2100,8 +2100,8 @@ interface File
         res = a #GAsyncResult
       Returns: #GFileInfo for given file
           or null on error. Free the returned object with
-          [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult res);
 
@@ -2123,7 +2123,7 @@ interface File
       Returns: a #GFileAttributeInfoList describing the settable attributes.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable = null);
 
@@ -2142,7 +2142,7 @@ interface File
       Returns: a #GFileAttributeInfoList describing the writable namespaces.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable = null);
 
@@ -2162,8 +2162,8 @@ interface File
       Params:
         cancellable = a #GCancellable
       Returns: #GFileInputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable = null);
 
@@ -2193,8 +2193,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileInputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_input_stream.FileInputStream readFinish(gio.async_result.AsyncResult res);
 
@@ -2249,8 +2249,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileOutputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2308,7 +2308,7 @@ interface File
         cancellable = optional #GCancellable object, null to ignore
       Returns: true if successful. If an error has occurred, this function
           will return false and set error appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable = null);
 
@@ -2374,7 +2374,7 @@ interface File
             for the document. This should be freed with [glib.global.gfree] when it is no
             longer needed, or null
       Returns: true on success, false on failure.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool replaceContentsFinish(gio.async_result.AsyncResult res, out string newEtag);
 
@@ -2385,8 +2385,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileOutputStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_output_stream.FileOutputStream replaceFinish(gio.async_result.AsyncResult res);
 
@@ -2410,8 +2410,8 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2447,8 +2447,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file_iostream.FileIOStream replaceReadwriteFinish(gio.async_result.AsyncResult res);
 
@@ -2485,7 +2485,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2506,7 +2506,7 @@ interface File
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2526,7 +2526,7 @@ interface File
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2545,7 +2545,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2564,7 +2564,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2584,7 +2584,7 @@ interface File
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2604,7 +2604,7 @@ interface File
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2636,7 +2636,7 @@ interface File
         result = a #GAsyncResult
         info = a #GFileInfo
       Returns: true if the attributes were set correctly, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributesFinish(gio.async_result.AsyncResult result, out gio.file_info.FileInfo info);
 
@@ -2660,7 +2660,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: false if there was any error, true otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
@@ -2687,8 +2687,8 @@ interface File
             null to ignore
       Returns: a #GFile specifying what file was renamed to,
           or null if there was an error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null);
 
@@ -2719,8 +2719,8 @@ interface File
       Params:
         res = a #GAsyncResult
       Returns: a #GFile or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   gio.file.File setDisplayNameFinish(gio.async_result.AsyncResult res);
 
@@ -2755,7 +2755,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool startMountableFinish(gio.async_result.AsyncResult result);
 
@@ -2791,7 +2791,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool stopMountableFinish(gio.async_result.AsyncResult result);
 
@@ -2820,7 +2820,7 @@ interface File
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful trash, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool trash(gio.cancellable.Cancellable cancellable = null);
 
@@ -2843,7 +2843,7 @@ interface File
       Params:
         result = a #GAsyncResult
       Returns: true on successful trash, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool trashFinish(gio.async_result.AsyncResult result);
 
@@ -2879,7 +2879,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.file.File.unmountMountableWithOperationFinish]
           instead.
@@ -2919,7 +2919,7 @@ interface File
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool unmountMountableWithOperationFinish(gio.async_result.AsyncResult result);
 }

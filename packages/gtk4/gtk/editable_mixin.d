@@ -144,6 +144,142 @@ public import gtk.types;
 template EditableT()
 {
 
+  /**
+      Get `cursorPosition` property.
+      Returns: The current position of the insertion cursor in chars.
+  */
+  @property int cursorPosition()
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `editable` property.
+      Returns: Whether the entry contents can be edited.
+  */
+  @property bool editable()
+  {
+    return getEditable();
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the entry contents can be edited.
+  */
+  @property void editable(bool propval)
+  {
+    return setEditable(propval);
+  }
+
+  /**
+      Get `enableUndo` property.
+      Returns: If undo/redo should be enabled for the editable.
+  */
+  @property bool enableUndo()
+  {
+    return getEnableUndo();
+  }
+
+  /**
+      Set `enableUndo` property.
+      Params:
+        propval = If undo/redo should be enabled for the editable.
+  */
+  @property void enableUndo(bool propval)
+  {
+    return setEnableUndo(propval);
+  }
+
+  /**
+      Get `maxWidthChars` property.
+      Returns: The desired maximum width of the entry, in characters.
+  */
+  @property int maxWidthChars()
+  {
+    return getMaxWidthChars();
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the entry, in characters.
+  */
+  @property void maxWidthChars(int propval)
+  {
+    return setMaxWidthChars(propval);
+  }
+
+  /**
+      Get `selectionBound` property.
+      Returns: The position of the opposite end of the selection from the cursor in chars.
+  */
+  @property int selectionBound()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("selection-bound");
+  }
+
+  /**
+      Get `text` property.
+      Returns: The contents of the entry.
+  */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The contents of the entry.
+  */
+  @property void text(string propval)
+  {
+    return setText(propval);
+  }
+
+  /**
+      Get `widthChars` property.
+      Returns: Number of characters to leave space for in the entry.
+  */
+  @property int widthChars()
+  {
+    return getWidthChars();
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = Number of characters to leave space for in the entry.
+  */
+  @property void widthChars(int propval)
+  {
+    return setWidthChars(propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment, from 0 (left) to 1 (right).
+      
+      Reversed for RTL layouts.
+  */
+  @property float xalign()
+  {
+    return getAlignment();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment, from 0 (left) to 1 (right).
+        
+        Reversed for RTL layouts.
+  */
+  @property void xalign(float propval)
+  {
+    return setAlignment(propval);
+  }
+
 
 
   /**
@@ -269,7 +405,7 @@ template EditableT()
   {
     GtkEditable* _cretval;
     _cretval = gtk_editable_get_delegate(cast(GtkEditable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -455,7 +591,7 @@ template EditableT()
       
       This results in an additional copy of text changes and are not
       stored in secure memory. As such, undo is forcefully disabled
-      when [gtk.text.Text.gboolean] is set to false.
+      when [gtk.text.Text.visibility] is set to false.
   
       Params:
         enableUndo = if undo/redo should be enabled

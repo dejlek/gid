@@ -46,7 +46,7 @@ import soup.types;
     Response. In libsoup, a #SoupMessage combines both the request and the
     response.
 */
-class Message : gobject.object.ObjectG
+class Message : gobject.object.ObjectWrap
 {
 
   /** */
@@ -68,9 +68,267 @@ class Message : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Message self()
   {
     return this;
+  }
+
+  /**
+      Get `firstParty` property.
+      Returns: The [glib.uri.Uri] loaded in the application when the message was
+      queued.
+  */
+  @property glib.uri.Uri firstParty()
+  {
+    return getFirstParty();
+  }
+
+  /**
+      Set `firstParty` property.
+      Params:
+        propval = The [glib.uri.Uri] loaded in the application when the message was
+        queued.
+  */
+  @property void firstParty(glib.uri.Uri propval)
+  {
+    return setFirstParty(propval);
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Various message options.
+  */
+  @property soup.types.MessageFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Various message options.
+  */
+  @property void flags(soup.types.MessageFlags propval)
+  {
+    return setFlags(propval);
+  }
+
+  /**
+      Get `httpVersion` property.
+      Returns: The HTTP protocol version to use.
+  */
+  @property soup.types.HTTPVersion httpVersion()
+  {
+    return getHttpVersion();
+  }
+
+  /**
+      Get `isOptionsPing` property.
+      Returns: Whether the message is an OPTIONS ping.
+      
+      The #SoupMessage is intended to be used to send
+      `OPTIONS *` to a server. When set to true, the
+      path of `property@Message:uri` will be ignored and
+      `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+  */
+  @property bool isOptionsPing()
+  {
+    return getIsOptionsPing();
+  }
+
+  /**
+      Set `isOptionsPing` property.
+      Params:
+        propval = Whether the message is an OPTIONS ping.
+        
+        The #SoupMessage is intended to be used to send
+        `OPTIONS *` to a server. When set to true, the
+        path of `property@Message:uri` will be ignored and
+        `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+  */
+  @property void isOptionsPing(bool propval)
+  {
+    return setIsOptionsPing(propval);
+  }
+
+  /**
+      Get `isTopLevelNavigation` property.
+      Returns: Set when the message is navigating between top level domains.
+  */
+  @property bool isTopLevelNavigation()
+  {
+    return getIsTopLevelNavigation();
+  }
+
+  /**
+      Set `isTopLevelNavigation` property.
+      Params:
+        propval = Set when the message is navigating between top level domains.
+  */
+  @property void isTopLevelNavigation(bool propval)
+  {
+    return setIsTopLevelNavigation(propval);
+  }
+
+  /**
+      Get `method` property.
+      Returns: The message's HTTP method.
+  */
+  @property string method()
+  {
+    return getMethod();
+  }
+
+  /**
+      Set `method` property.
+      Params:
+        propval = The message's HTTP method.
+  */
+  @property void method(string propval)
+  {
+    return setMethod(propval);
+  }
+
+  /**
+      Get `priority` property.
+      Returns: Sets the priority of the #SoupMessage. See
+      [soup.message.Message.setPriority] for further details.
+  */
+  @property soup.types.MessagePriority priority()
+  {
+    return getPriority();
+  }
+
+  /**
+      Set `priority` property.
+      Params:
+        propval = Sets the priority of the #SoupMessage. See
+        [soup.message.Message.setPriority] for further details.
+  */
+  @property void priority(soup.types.MessagePriority propval)
+  {
+    return setPriority(propval);
+  }
+
+  /**
+      Get `reasonPhrase` property.
+      Returns: The HTTP response reason phrase.
+  */
+  @property string reasonPhrase()
+  {
+    return getReasonPhrase();
+  }
+
+  /**
+      Get `remoteAddress` property.
+      Returns: The remote [gio.socket_address.SocketAddress] of the connection associated
+      with the message.
+  */
+  @property gio.socket_address.SocketAddress remoteAddress()
+  {
+    return getRemoteAddress();
+  }
+
+  /**
+      Get `requestHeaders` property.
+      Returns: The HTTP request headers.
+  */
+  @property soup.message_headers.MessageHeaders requestHeaders()
+  {
+    return getRequestHeaders();
+  }
+
+  /**
+      Get `responseHeaders` property.
+      Returns: The HTTP response headers.
+  */
+  @property soup.message_headers.MessageHeaders responseHeaders()
+  {
+    return getResponseHeaders();
+  }
+
+  /**
+      Get `siteForCookies` property.
+      Returns: Site used to compare cookies against. Used for SameSite cookie support.
+  */
+  @property glib.uri.Uri siteForCookies()
+  {
+    return getSiteForCookies();
+  }
+
+  /**
+      Set `siteForCookies` property.
+      Params:
+        propval = Site used to compare cookies against. Used for SameSite cookie support.
+  */
+  @property void siteForCookies(glib.uri.Uri propval)
+  {
+    return setSiteForCookies(propval);
+  }
+
+  /**
+      Get `statusCode` property.
+      Returns: The HTTP response status code.
+  */
+  @property uint statusCode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("status-code");
+  }
+
+  /**
+      Get `tlsCiphersuiteName` property.
+      Returns: The Name of TLS ciphersuite negotiated for this message connection.
+  */
+  @property string tlsCiphersuiteName()
+  {
+    return getTlsCiphersuiteName();
+  }
+
+  /**
+      Get `tlsPeerCertificate` property.
+      Returns: The peer's [gio.tls_certificate.TlsCertificate] associated with the message.
+  */
+  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate()
+  {
+    return getTlsPeerCertificate();
+  }
+
+  /**
+      Get `tlsPeerCertificateErrors` property.
+      Returns: The verification errors on `property@Message:tls-peer-certificate`.
+  */
+  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors()
+  {
+    return getTlsPeerCertificateErrors();
+  }
+
+  /**
+      Get `tlsProtocolVersion` property.
+      Returns: The TLS protocol version negotiated for the message connection.
+  */
+  @property gio.types.TlsProtocolVersion tlsProtocolVersion()
+  {
+    return getTlsProtocolVersion();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The message's Request-URI.
+  */
+  @property glib.uri.Uri uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The message's Request-URI.
+  */
+  @property void uri(glib.uri.Uri propval)
+  {
+    return setUri(propval);
   }
 
   /**
@@ -115,7 +373,7 @@ class Message : gobject.object.ObjectG
     const(char)* _uriString = uriString.toCString(No.Alloc);
     char* _encodedForm = encodedForm.toCString(Yes.Alloc);
     _cretval = soup_message_new_from_encoded_form(_method, _uriString, _encodedForm);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -134,7 +392,7 @@ class Message : gobject.object.ObjectG
     SoupMessage* _cretval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
     _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -151,7 +409,7 @@ class Message : gobject.object.ObjectG
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
     _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -167,7 +425,7 @@ class Message : gobject.object.ObjectG
   {
     SoupMessage* _cretval;
     _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -360,7 +618,7 @@ class Message : gobject.object.ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = soup_message_get_remote_address(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -437,7 +695,7 @@ class Message : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -811,7 +1069,7 @@ class Message : gobject.object.ObjectG
       fully read.
       
       You can authenticate auth asynchronously by calling
-      [gobject.object.ObjectG.ref_] on auth and returning true. The operation will
+      [gobject.object.ObjectWrap.ref_] on auth and returning true. The operation will
       complete once either [soup.auth.Auth.authenticate] or
       [soup.auth.Auth.cancel] are called.
   
@@ -1305,7 +1563,7 @@ class Message : gobject.object.ObjectG
       [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
       return true to handle the signal synchronously. It's possible to
       handle the request asynchornously by calling
-      [gobject.object.ObjectG.ref_] on password, then returning true and
+      [gobject.object.ObjectWrap.ref_] on password, then returning true and
       call
       [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
       later after setting the password on password. Note that this signal

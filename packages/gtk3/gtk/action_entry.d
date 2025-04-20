@@ -18,7 +18,7 @@ class ActionEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.ActionEntry");
+      throw new GidConstructException("Null instance pointer for gtk.action_entry.ActionEntry");
 
     cInstance = *cast(GtkActionEntry*)ptr;
 
@@ -32,65 +32,130 @@ class ActionEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `name` field.
+      Returns: The name of the action.
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = The name of the action.
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).name);
   }
 
+  /**
+      Get `stockId` field.
+      Returns: The stock id for the action, or the name of an icon from the
+       icon theme.
+  */
   @property string stockId()
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).stockId);
   }
 
+  /**
+      Set `stockId` field.
+      Params:
+        propval = The stock id for the action, or the name of an icon from the
+         icon theme.
+  */
   @property void stockId(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).stockId);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).stockId);
   }
 
+  /**
+      Get `label` field.
+      Returns: The label for the action. This field should typically be marked
+       for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
+       @label is null, the label of the stock item with id @stock_id is used.
+  */
   @property string label()
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).label);
   }
 
+  /**
+      Set `label` field.
+      Params:
+        propval = The label for the action. This field should typically be marked
+         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
+         @label is null, the label of the stock item with id @stock_id is used.
+  */
   @property void label(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).label);
   }
 
+  /**
+      Get `accelerator` field.
+      Returns: The accelerator for the action, in the format understood by
+       [gtk.global.acceleratorParse].
+  */
   @property string accelerator()
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).accelerator);
   }
 
+  /**
+      Set `accelerator` field.
+      Params:
+        propval = The accelerator for the action, in the format understood by
+         [gtk.global.acceleratorParse].
+  */
   @property void accelerator(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).accelerator);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).accelerator);
   }
 
+  /**
+      Get `tooltip` field.
+      Returns: The tooltip for the action. This field should typically be
+       marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+  */
   @property string tooltip()
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).tooltip);
   }
 
+  /**
+      Set `tooltip` field.
+      Params:
+        propval = The tooltip for the action. This field should typically be
+         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+  */
   @property void tooltip(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).tooltip);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).tooltip);
   }
 
+  /**
+      Get `callback` field.
+      Returns: The function to call when the action is activated.
+  */
   @property GCallback callback()
   {
     return (cast(GtkActionEntry*)cPtr).callback;
   }
+
+  /**
+      Set `callback` field.
+      Params:
+        propval = The function to call when the action is activated.
+  */
 
   @property void callback(GCallback propval)
   {

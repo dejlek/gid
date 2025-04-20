@@ -38,9 +38,34 @@ class EventBox : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventBox self()
   {
     return this;
+  }
+
+  /** */
+  @property bool aboveChild()
+  {
+    return getAboveChild();
+  }
+
+  /** */
+  @property void aboveChild(bool propval)
+  {
+    return setAboveChild(propval);
+  }
+
+  /** */
+  @property bool visibleWindow()
+  {
+    return getVisibleWindow();
+  }
+
+  /** */
+  @property void visibleWindow(bool propval)
+  {
+    return setVisibleWindow(propval);
   }
 
   /**

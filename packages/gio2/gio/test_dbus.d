@@ -88,7 +88,7 @@ import gobject.object;
         CLEANFILES += gschemas.compiled
     ```
 */
-class TestDBus : gobject.object.ObjectG
+class TestDBus : gobject.object.ObjectWrap
 {
 
   /** */
@@ -110,6 +110,7 @@ class TestDBus : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TestDBus self()
   {
     return this;

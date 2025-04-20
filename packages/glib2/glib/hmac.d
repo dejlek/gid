@@ -52,6 +52,7 @@ class Hmac : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Hmac self()
   {
     return this;

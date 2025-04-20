@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.section_model;
@@ -42,7 +43,7 @@ import gtk.types;
     
     [gtk.map_list_model.MapListModel] passes through sections from the underlying model.
 */
-class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
+class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   /** */
@@ -64,9 +65,28 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MapListModel self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -84,10 +104,10 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
-      gobject.object.ObjectG _dretval;
+      gobject.object.ObjectWrap _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
       ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -97,7 +117,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
     GtkMapListModel* _cretval;
     auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
     GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
-    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
+    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
     this(_cretval, Yes.Take);
   }
 
@@ -109,7 +129,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   {
     GListModel* _cretval;
     _cretval = gtk_map_list_model_get_model(cast(GtkMapListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,10 +164,10 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
-      gobject.object.ObjectG _dretval;
+      gobject.object.ObjectWrap _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
       ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -171,6 +191,6 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 }

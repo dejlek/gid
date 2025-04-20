@@ -30,6 +30,7 @@ class LargeBinaryDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeBinaryDataType self()
   {
     return this;

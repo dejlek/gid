@@ -15,7 +15,7 @@ class TestLogMsg
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.TestLogMsg");
+      throw new GidConstructException("Null instance pointer for glib.test_log_msg.TestLogMsg");
 
     cInstance = *cast(GTestLogMsg*)ptr;
 

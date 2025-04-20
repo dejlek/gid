@@ -82,7 +82,7 @@ class Cond
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Cond");
+      throw new GidConstructException("Null instance pointer for glib.cond.Cond");
 
     cInstance = *cast(GCond*)ptr;
 

@@ -21,7 +21,7 @@ import soup.types;
     content sniffing to a session with [soup.session.Session.addFeature] or
     [soup.session.Session.addFeatureByType].
 */
-class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -43,6 +43,7 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ContentSniffer self()
   {
     return this;

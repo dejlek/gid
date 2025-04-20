@@ -109,9 +109,76 @@ class HeaderBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HeaderBar self()
   {
     return this;
+  }
+
+  /**
+      Get `decorationLayout` property.
+      Returns: The decoration layout for buttons.
+      
+      If this property is not set, the
+      `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+  */
+  @property string decorationLayout()
+  {
+    return getDecorationLayout();
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons.
+        
+        If this property is not set, the
+        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+  */
+  @property void decorationLayout(string propval)
+  {
+    return setDecorationLayout(propval);
+  }
+
+  /**
+      Get `showTitleButtons` property.
+      Returns: Whether to show title buttons like close, minimize, maximize.
+      
+      Which buttons are actually shown and where is determined
+      by the `property@Gtk.HeaderBar:decoration-layout` property,
+      and by the state of the window (e.g. a close button will not
+      be shown if the window can't be closed).
+  */
+  @property bool showTitleButtons()
+  {
+    return getShowTitleButtons();
+  }
+
+  /**
+      Set `showTitleButtons` property.
+      Params:
+        propval = Whether to show title buttons like close, minimize, maximize.
+        
+        Which buttons are actually shown and where is determined
+        by the `property@Gtk.HeaderBar:decoration-layout` property,
+        and by the state of the window (e.g. a close button will not
+        be shown if the window can't be closed).
+  */
+  @property void showTitleButtons(bool propval)
+  {
+    return setShowTitleButtons(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget titleWidget()
+  {
+    return getTitleWidget();
+  }
+
+  /** */
+  @property void titleWidget(gtk.widget.Widget propval)
+  {
+    return setTitleWidget(propval);
   }
 
   /**
@@ -159,7 +226,7 @@ class HeaderBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

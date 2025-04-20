@@ -445,7 +445,7 @@ __gshared extern(C)
   GType function() c_gdk_memory_texture_get_type; ///
   GdkTexture* function(int width, int height, GdkMemoryFormat format, GBytes* bytes, size_t stride) c_gdk_memory_texture_new; ///
 
-  // MonitorG
+  // MonitorWrap
   GType function() c_gdk_monitor_get_type; ///
   const(char)* function(GdkMonitor* monitor) c_gdk_monitor_get_connector; ///
   const(char)* function(GdkMonitor* monitor) c_gdk_monitor_get_description; ///
@@ -1830,7 +1830,7 @@ alias gdk_memory_texture_get_type = c_gdk_memory_texture_get_type;
 /** */
 alias gdk_memory_texture_new = c_gdk_memory_texture_new;
 
-// MonitorG
+// MonitorWrap
 
 /** */
 alias gdk_monitor_get_type = c_gdk_monitor_get_type;
@@ -2944,7 +2944,7 @@ shared static this()
   gidLink(cast(void**)&gdk_memory_texture_get_type, "gdk_memory_texture_get_type", LIBS);
   gidLink(cast(void**)&gdk_memory_texture_new, "gdk_memory_texture_new", LIBS);
 
-  // MonitorG
+  // MonitorWrap
   gidLink(cast(void**)&gdk_monitor_get_type, "gdk_monitor_get_type", LIBS);
   gidLink(cast(void**)&gdk_monitor_get_connector, "gdk_monitor_get_connector", LIBS);
   gidLink(cast(void**)&gdk_monitor_get_description, "gdk_monitor_get_description", LIBS);

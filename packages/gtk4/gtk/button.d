@@ -71,9 +71,138 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Button self()
   {
     return this;
+  }
+
+  /**
+      Get `canShrink` property.
+      Returns: Whether the size of the button can be made smaller than the natural
+      size of its contents.
+      
+      For text buttons, setting this property will allow ellipsizing the label.
+      
+      If the contents of a button are an icon or a custom widget, setting this
+      property has no effect.
+  */
+  @property bool canShrink()
+  {
+    return getCanShrink();
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the size of the button can be made smaller than the natural
+        size of its contents.
+        
+        For text buttons, setting this property will allow ellipsizing the label.
+        
+        If the contents of a button are an icon or a custom widget, setting this
+        property has no effect.
+  */
+  @property void canShrink(bool propval)
+  {
+    return setCanShrink(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: Whether the button has a frame.
+  */
+  @property bool hasFrame()
+  {
+    return getHasFrame();
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the button has a frame.
+  */
+  @property void hasFrame(bool propval)
+  {
+    return setHasFrame(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon used to automatically populate the button.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: Text of the label inside the button, if the button contains a label widget.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the label inside the button, if the button contains a label widget.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: If set, an underline in the text indicates that the following character is
+      to be used as mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the text indicates that the following character is
+        to be used as mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -107,7 +236,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +252,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +275,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +299,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_child(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

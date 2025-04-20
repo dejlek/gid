@@ -45,9 +45,86 @@ class StringFilter : gtk.filter.Filter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringFilter self()
   {
     return this;
+  }
+
+  /**
+      Get `expression` property.
+      Returns: The expression to evaluate on item to get a string to compare with.
+  */
+  @property gtk.expression.Expression expression()
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on item to get a string to compare with.
+  */
+  @property void expression(gtk.expression.Expression propval)
+  {
+    return setExpression(propval);
+  }
+
+  /**
+      Get `ignoreCase` property.
+      Returns: If matching is case sensitive.
+  */
+  @property bool ignoreCase()
+  {
+    return getIgnoreCase();
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If matching is case sensitive.
+  */
+  @property void ignoreCase(bool propval)
+  {
+    return setIgnoreCase(propval);
+  }
+
+  /**
+      Get `matchMode` property.
+      Returns: If exact matches are necessary or if substrings are allowed.
+  */
+  @property gtk.types.StringFilterMatchMode matchMode()
+  {
+    return getMatchMode();
+  }
+
+  /**
+      Set `matchMode` property.
+      Params:
+        propval = If exact matches are necessary or if substrings are allowed.
+  */
+  @property void matchMode(gtk.types.StringFilterMatchMode propval)
+  {
+    return setMatchMode(propval);
+  }
+
+  /**
+      Get `search` property.
+      Returns: The search term.
+  */
+  @property string search()
+  {
+    return getSearch();
+  }
+
+  /**
+      Set `search` property.
+      Params:
+        propval = The search term.
+  */
+  @property void search(string propval)
+  {
+    return setSearch(propval);
   }
 
   /**

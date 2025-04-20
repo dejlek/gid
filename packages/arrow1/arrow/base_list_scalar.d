@@ -32,6 +32,7 @@ class BaseListScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseListScalar self()
   {
     return this;
@@ -42,7 +43,7 @@ class BaseListScalar : arrow.scalar.Scalar
   {
     GArrowArray* _cretval;
     _cretval = garrow_base_list_scalar_get_value(cast(GArrowBaseListScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -81,7 +81,7 @@ import gst.types;
     [gst.pad.Pad.startTask], [gst.pad.Pad.pauseTask] and [gst.pad.Pad.stopTask]
     respectively.
 */
-class Pad : gst.object.ObjectGst
+class Pad : gst.object.ObjectWrap
 {
 
   /** */
@@ -103,9 +103,47 @@ class Pad : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Pad self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.caps.Caps caps()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.caps.Caps)("caps");
+  }
+
+  /**
+      Get `offset` property.
+      Returns: The offset that will be applied to the running time of the pad.
+  */
+  @property long offset()
+  {
+    return getOffset();
+  }
+
+  /**
+      Set `offset` property.
+      Params:
+        propval = The offset that will be applied to the running time of the pad.
+  */
+  @property void offset(long propval)
+  {
+    return setOffset(propval);
+  }
+
+  /** */
+  @property gst.pad_template.PadTemplate template_()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.pad_template.PadTemplate)("template");
+  }
+
+  /** */
+  @property void template_(gst.pad_template.PadTemplate propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.pad_template.PadTemplate)("template", propval);
   }
 
   /**
@@ -145,7 +183,7 @@ class Pad : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ.cPtr : null, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +203,7 @@ class Pad : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_pad_new_from_template(templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +271,7 @@ class Pad : gst.object.ObjectGst
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
@@ -384,7 +422,7 @@ class Pad : gst.object.ObjectGst
         event = the #GstEvent to handle.
       Returns: true if the event was sent successfully.
   */
-  bool eventDefault(gst.object.ObjectGst parent, gst.event.Event event)
+  bool eventDefault(gst.object.ObjectWrap parent, gst.event.Event event)
   {
     bool _retval;
     _retval = gst_pad_event_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
@@ -408,7 +446,7 @@ class Pad : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PadForwardFunction*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _forwardCB = forward ? &_forwardCallback : null;
@@ -515,7 +553,7 @@ class Pad : gst.object.ObjectGst
   {
     GstPadTemplate* _cretval;
     _cretval = gst_pad_get_pad_template(cast(GstPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -545,7 +583,7 @@ class Pad : gst.object.ObjectGst
   {
     GstElement* _cretval;
     _cretval = gst_pad_get_parent_element(cast(GstPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -560,7 +598,7 @@ class Pad : gst.object.ObjectGst
   {
     GstPad* _cretval;
     _cretval = gst_pad_get_peer(cast(GstPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -616,13 +654,13 @@ class Pad : gst.object.ObjectGst
       return it. Otherwise, it will return NULL.
       Returns: a #GstPad, or null if pad has none
         or more than one internal links. Unref returned pad with
-        [gst.object.ObjectGst.unref].
+        [gst.object.ObjectWrap.unref].
   */
   gst.pad.Pad getSingleInternalLink()
   {
     GstPad* _cretval;
     _cretval = gst_pad_get_single_internal_link(cast(GstPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -658,7 +696,7 @@ class Pad : gst.object.ObjectGst
   {
     GstStream* _cretval;
     _cretval = gst_pad_get_stream(cast(GstPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -793,9 +831,9 @@ class Pad : gst.object.ObjectGst
       Params:
         parent = the parent of pad or null
       Returns: a #GstIterator of #GstPad, or null if pad
-        has no parent. Unref each returned pad with [gst.object.ObjectGst.unref].
+        has no parent. Unref each returned pad with [gst.object.ObjectWrap.unref].
   */
-  gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectGst parent = null)
+  gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectWrap parent = null)
   {
     GstIterator* _cretval;
     _cretval = gst_pad_iterate_internal_links_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
@@ -1291,7 +1329,7 @@ class Pad : gst.object.ObjectGst
         query = the #GstQuery to handle.
       Returns: true if the query was performed successfully.
   */
-  bool queryDefault(gst.object.ObjectGst parent, gst.query.Query query)
+  bool queryDefault(gst.object.ObjectWrap parent, gst.query.Query query)
   {
     bool _retval;
     _retval = gst_pad_query_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
@@ -1464,7 +1502,7 @@ class Pad : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;

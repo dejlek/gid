@@ -5,7 +5,7 @@ import gobject.object;
 import arrow.file;
 import arrow.file_mixin;
 
-/// Proxy object for [Arrow.File] interface when a GObject has no applicable D binding
+/// Proxy object for [arrow.file.File] interface when a GObject has no applicable D binding
 class FileIfaceProxy : IfaceProxy, arrow.file.File
 {
   this(void* ptr, Flag!"Take" take = No.Take)

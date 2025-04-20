@@ -26,11 +26,11 @@ template TableCellT()
       Returns: a GPtrArray of AtkObjects
         representing the column header cells.
   */
-  override atk.object.ObjectAtk[] getColumnHeaderCells()
+  override atk.object.ObjectWrap[] getColumnHeaderCells()
   {
     GPtrArray* _cretval;
     _cretval = atk_table_cell_get_column_header_cells(cast(AtkTableCell*)cPtr);
-    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.Full)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 
@@ -87,11 +87,11 @@ template TableCellT()
       Returns: a GPtrArray of AtkObjects
         representing the row header cells.
   */
-  override atk.object.ObjectAtk[] getRowHeaderCells()
+  override atk.object.ObjectWrap[] getRowHeaderCells()
   {
     GPtrArray* _cretval;
     _cretval = atk_table_cell_get_row_header_cells(cast(AtkTableCell*)cPtr);
-    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.Full)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 
@@ -111,11 +111,11 @@ template TableCellT()
       Returns a reference to the accessible of the containing table.
       Returns: the atk object for the containing table.
   */
-  override atk.object.ObjectAtk getTable()
+  override atk.object.ObjectWrap getTable()
   {
     AtkObject* _cretval;
     _cretval = atk_table_cell_get_table(cast(AtkTableCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 }

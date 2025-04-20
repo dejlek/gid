@@ -219,9 +219,427 @@ class Label : gtk.misc.Misc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Label self()
   {
     return this;
+  }
+
+  /**
+      Get `angle` property.
+      Returns: The angle that the baseline of the label makes with the horizontal,
+      in degrees, measured counterclockwise. An angle of 90 reads from
+      from bottom to top, an angle of 270, from top to bottom. Ignored
+      if the label is selectable.
+  */
+  @property double angle()
+  {
+    return getAngle();
+  }
+
+  /**
+      Set `angle` property.
+      Params:
+        propval = The angle that the baseline of the label makes with the horizontal,
+        in degrees, measured counterclockwise. An angle of 90 reads from
+        from bottom to top, an angle of 270, from top to bottom. Ignored
+        if the label is selectable.
+  */
+  @property void angle(double propval)
+  {
+    return setAngle(propval);
+  }
+
+  /** */
+  @property pango.attr_list.AttrList attributes()
+  {
+    return getAttributes();
+  }
+
+  /** */
+  @property void attributes(pango.attr_list.AttrList propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /** */
+  @property int cursorPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
+  }
+
+  /**
+      Get `ellipsize` property.
+      Returns: The preferred place to ellipsize the string, if the label does
+      not have enough room to display the entire string, specified as a
+      #PangoEllipsizeMode.
+      
+      Note that setting this property to a value other than
+      [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+      only enough space to display the ellipsis "...". In particular, this
+      means that ellipsizing labels do not work well in notebook tabs, unless
+      the #GtkNotebook tab-expand child property is set to true. Other ways
+      to set a label's width are [gtk.widget.Widget.setSizeRequest] and
+      [gtk.label.Label.setWidthChars].
+  */
+  @property pango.types.EllipsizeMode ellipsize()
+  {
+    return getEllipsize();
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the label does
+        not have enough room to display the entire string, specified as a
+        #PangoEllipsizeMode.
+        
+        Note that setting this property to a value other than
+        [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+        only enough space to display the ellipsis "...". In particular, this
+        means that ellipsizing labels do not work well in notebook tabs, unless
+        the #GtkNotebook tab-expand child property is set to true. Other ways
+        to set a label's width are [gtk.widget.Widget.setSizeRequest] and
+        [gtk.label.Label.setWidthChars].
+  */
+  @property void ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setEllipsize(propval);
+  }
+
+  /** */
+  @property gtk.types.Justification justify()
+  {
+    return getJustify();
+  }
+
+  /** */
+  @property void justify(gtk.types.Justification propval)
+  {
+    return setJustify(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The contents of the label.
+      
+      If the string contains [Pango XML markup][PangoMarkupFormat], you will
+      have to set the #GtkLabel:use-markup property to true in order for the
+      label to display the markup attributes. See also [gtk.label.Label.setMarkup]
+      for a convenience function that sets both this property and the
+      #GtkLabel:use-markup property at the same time.
+      
+      If the string contains underlines acting as mnemonics, you will have to
+      set the #GtkLabel:use-underline property to true in order for the label
+      to display them.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The contents of the label.
+        
+        If the string contains [Pango XML markup][PangoMarkupFormat], you will
+        have to set the #GtkLabel:use-markup property to true in order for the
+        label to display the markup attributes. See also [gtk.label.Label.setMarkup]
+        for a convenience function that sets both this property and the
+        #GtkLabel:use-markup property at the same time.
+        
+        If the string contains underlines acting as mnemonics, you will have to
+        set the #GtkLabel:use-underline property to true in order for the label
+        to display them.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `lines` property.
+      Returns: The number of lines to which an ellipsized, wrapping label
+      should be limited. This property has no effect if the
+      label is not wrapping or ellipsized. Set this property to
+      -1 if you don't want to limit the number of lines.
+  */
+  @property int lines()
+  {
+    return getLines();
+  }
+
+  /**
+      Set `lines` property.
+      Params:
+        propval = The number of lines to which an ellipsized, wrapping label
+        should be limited. This property has no effect if the
+        label is not wrapping or ellipsized. Set this property to
+        -1 if you don't want to limit the number of lines.
+  */
+  @property void lines(int propval)
+  {
+    return setLines(propval);
+  }
+
+  /**
+      Get `maxWidthChars` property.
+      Returns: The desired maximum width of the label, in characters. If this property
+      is set to -1, the width will be calculated automatically.
+      
+      See the section on [text layout][label-text-layout]
+      for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+      determine the width of ellipsized and wrapped labels.
+  */
+  @property int maxWidthChars()
+  {
+    return getMaxWidthChars();
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the label, in characters. If this property
+        is set to -1, the width will be calculated automatically.
+        
+        See the section on [text layout][label-text-layout]
+        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+        determine the width of ellipsized and wrapped labels.
+  */
+  @property void maxWidthChars(int propval)
+  {
+    return setMaxWidthChars(propval);
+  }
+
+  /** */
+  @property uint mnemonicKeyval()
+  {
+    return getMnemonicKeyval();
+  }
+
+  /** */
+  @property gtk.widget.Widget mnemonicWidget()
+  {
+    return getMnemonicWidget();
+  }
+
+  /** */
+  @property void mnemonicWidget(gtk.widget.Widget propval)
+  {
+    return setMnemonicWidget(propval);
+  }
+
+  /** */
+  @property void pattern(string propval)
+  {
+    return setPattern(propval);
+  }
+
+  /** */
+  @property bool selectable()
+  {
+    return getSelectable();
+  }
+
+  /** */
+  @property void selectable(bool propval)
+  {
+    return setSelectable(propval);
+  }
+
+  /** */
+  @property int selectionBound()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("selection-bound");
+  }
+
+  /**
+      Get `singleLineMode` property.
+      Returns: Whether the label is in single line mode. In single line mode,
+      the height of the label does not depend on the actual text, it
+      is always set to ascent + descent of the font. This can be an
+      advantage in situations where resizing the label because of text
+      changes would be distracting, e.g. in a statusbar.
+  */
+  @property bool singleLineMode()
+  {
+    return getSingleLineMode();
+  }
+
+  /**
+      Set `singleLineMode` property.
+      Params:
+        propval = Whether the label is in single line mode. In single line mode,
+        the height of the label does not depend on the actual text, it
+        is always set to ascent + descent of the font. This can be an
+        advantage in situations where resizing the label because of text
+        changes would be distracting, e.g. in a statusbar.
+  */
+  @property void singleLineMode(bool propval)
+  {
+    return setSingleLineMode(propval);
+  }
+
+  /**
+      Get `trackVisitedLinks` property.
+      Returns: Set this property to true to make the label track which links
+      have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+      when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+  */
+  @property bool trackVisitedLinks()
+  {
+    return getTrackVisitedLinks();
+  }
+
+  /**
+      Set `trackVisitedLinks` property.
+      Params:
+        propval = Set this property to true to make the label track which links
+        have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+        when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+  */
+  @property void trackVisitedLinks(bool propval)
+  {
+    return setTrackVisitedLinks(propval);
+  }
+
+  /** */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /** */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
+  }
+
+  /** */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /** */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
+  }
+
+  /**
+      Get `widthChars` property.
+      Returns: The desired width of the label, in characters. If this property is set to
+      -1, the width will be calculated automatically.
+      
+      See the section on [text layout][label-text-layout]
+      for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+      determine the width of ellipsized and wrapped labels.
+  */
+  @property int widthChars()
+  {
+    return getWidthChars();
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The desired width of the label, in characters. If this property is set to
+        -1, the width will be calculated automatically.
+        
+        See the section on [text layout][label-text-layout]
+        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+        determine the width of ellipsized and wrapped labels.
+  */
+  @property void widthChars(int propval)
+  {
+    return setWidthChars(propval);
+  }
+
+  /** */
+  @property bool wrap()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("wrap");
+  }
+
+  /** */
+  @property void wrap(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("wrap", propval);
+  }
+
+  /**
+      Get `wrapMode` property.
+      Returns: If line wrapping is on (see the #GtkLabel:wrap property) this controls
+      how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
+      means wrap on word boundaries.
+  */
+  @property pango.types.WrapMode wrapMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(pango.types.WrapMode)("wrap-mode");
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = If line wrapping is on (see the #GtkLabel:wrap property) this controls
+        how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
+        means wrap on word boundaries.
+  */
+  @property void wrapMode(pango.types.WrapMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(pango.types.WrapMode)("wrap-mode", propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The xalign property determines the horizontal aligment of the label text
+      inside the labels size allocation. Compare this to #GtkWidget:halign,
+      which determines how the labels size allocation is positioned in the
+      space available for the label.
+  */
+  override @property float xalign()
+  {
+    return getXalign();
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The xalign property determines the horizontal aligment of the label text
+        inside the labels size allocation. Compare this to #GtkWidget:halign,
+        which determines how the labels size allocation is positioned in the
+        space available for the label.
+  */
+  override @property void xalign(float propval)
+  {
+    return setXalign(propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The yalign property determines the vertical aligment of the label text
+      inside the labels size allocation. Compare this to #GtkWidget:valign,
+      which determines how the labels size allocation is positioned in the
+      space available for the label.
+  */
+  override @property float yalign()
+  {
+    return getYalign();
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The yalign property determines the vertical aligment of the label text
+        inside the labels size allocation. Compare this to #GtkWidget:valign,
+        which determines how the labels size allocation is positioned in the
+        space available for the label.
+  */
+  override @property void yalign(float propval)
+  {
+    return setYalign(propval);
   }
 
   /**
@@ -266,7 +684,7 @@ class Label : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new_with_mnemonic(_str);
-    auto _retval = ObjectG.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -371,7 +789,7 @@ class Label : gtk.misc.Misc
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -466,7 +884,7 @@ class Label : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

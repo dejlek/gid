@@ -14,10 +14,17 @@ import graphene.vec2;
 class Point : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `point.Point` boxed type.
+      Params:
+        x = the X coordinate of the point
+        y = the Y coordinate of the point
+  */
+  this(float x = 0.0, float y = 0.0)
   {
     super(gMalloc(graphene_point_t.sizeof), Yes.Take);
+    this.x = x;
+    this.y = y;
   }
 
   /** */
@@ -45,26 +52,45 @@ class Point : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Point self()
   {
     return this;
   }
 
+  /**
+      Get `x` field.
+      Returns: the X coordinate of the point
+  */
   @property float x()
   {
     return (cast(graphene_point_t*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = the X coordinate of the point
+  */
   @property void x(float propval)
   {
     (cast(graphene_point_t*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: the Y coordinate of the point
+  */
   @property float y()
   {
     return (cast(graphene_point_t*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = the Y coordinate of the point
+  */
   @property void y(float propval)
   {
     (cast(graphene_point_t*)cPtr).y = propval;

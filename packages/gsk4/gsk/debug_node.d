@@ -18,7 +18,7 @@ class DebugNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.DebugNode");
+      throw new GidConstructException("Null instance pointer for gsk.debug_node.DebugNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

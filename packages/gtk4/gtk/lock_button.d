@@ -80,9 +80,148 @@ class LockButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LockButton self()
   {
     return this;
+  }
+
+  /**
+      Get `permission` property.
+      Returns: The `GPermission object controlling this button.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property gio.permission.Permission permission()
+  {
+    return getPermission();
+  }
+
+  /**
+      Set `permission` property.
+      Params:
+        propval = The `GPermission object controlling this button.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void permission(gio.permission.Permission propval)
+  {
+    return setPermission(propval);
+  }
+
+  /**
+      Get `textLock` property.
+      Returns: The text to display when prompting the user to lock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property string textLock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text-lock");
+  }
+
+  /**
+      Set `textLock` property.
+      Params:
+        propval = The text to display when prompting the user to lock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void textLock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text-lock", propval);
+  }
+
+  /**
+      Get `textUnlock` property.
+      Returns: The text to display when prompting the user to unlock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property string textUnlock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text-unlock");
+  }
+
+  /**
+      Set `textUnlock` property.
+      Params:
+        propval = The text to display when prompting the user to unlock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void textUnlock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text-unlock", propval);
+  }
+
+  /**
+      Get `tooltipLock` property.
+      Returns: The tooltip to display when prompting the user to lock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property string tooltipLock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-lock");
+  }
+
+  /**
+      Set `tooltipLock` property.
+      Params:
+        propval = The tooltip to display when prompting the user to lock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void tooltipLock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-lock", propval);
+  }
+
+  /**
+      Get `tooltipNotAuthorized` property.
+      Returns: The tooltip to display when the user cannot obtain authorization.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property string tooltipNotAuthorized()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-not-authorized");
+  }
+
+  /**
+      Set `tooltipNotAuthorized` property.
+      Params:
+        propval = The tooltip to display when the user cannot obtain authorization.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void tooltipNotAuthorized(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-not-authorized", propval);
+  }
+
+  /**
+      Get `tooltipUnlock` property.
+      Returns: The tooltip to display when prompting the user to unlock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property string tooltipUnlock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("tooltip-unlock");
+  }
+
+  /**
+      Set `tooltipUnlock` property.
+      Params:
+        propval = The tooltip to display when prompting the user to unlock.
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  @property void tooltipUnlock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("tooltip-unlock", propval);
   }
 
   /**
@@ -111,7 +250,7 @@ class LockButton : gtk.button.Button
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 

@@ -18,7 +18,7 @@ import gobject.object;
     throughout GIO to allow for cancellation of synchronous and
     asynchronous operations.
 */
-class Cancellable : gobject.object.ObjectG
+class Cancellable : gobject.object.ObjectWrap
 {
 
   /** */
@@ -40,6 +40,7 @@ class Cancellable : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Cancellable self()
   {
     return this;
@@ -72,7 +73,7 @@ class Cancellable : gobject.object.ObjectG
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_get_current();
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,7 +254,7 @@ class Cancellable : gobject.object.ObjectG
       If the cancellable is cancelled, sets the error to notify
       that the operation was cancelled.
       Returns: true if cancellable was cancelled, false if it was not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setErrorIfCancelled()
   {
@@ -261,7 +262,7 @@ class Cancellable : gobject.object.ObjectG
     GError *_err;
     _retval = g_cancellable_set_error_if_cancelled(cast(GCancellable*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

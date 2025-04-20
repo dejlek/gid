@@ -74,7 +74,7 @@ import pango.font_description;
     still take precedence over your changes, as it uses the
     `GTK_STYLE_PROVIDER_PRIORITY_USER` priority.
 */
-class StyleContext : gobject.object.ObjectG
+class StyleContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -96,9 +96,67 @@ class StyleContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleContext self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.types.TextDirection direction()
+  {
+    return getDirection();
+  }
+
+  /** */
+  @property void direction(gtk.types.TextDirection propval)
+  {
+    return setDirection(propval);
+  }
+
+  /** */
+  @property gdk.frame_clock.FrameClock paintClock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.frame_clock.FrameClock)("paint-clock");
+  }
+
+  /** */
+  @property void paintClock(gdk.frame_clock.FrameClock propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.frame_clock.FrameClock)("paint-clock", propval);
+  }
+
+  /**
+      Get `parent` property.
+      Returns: Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
+      for details.
+  */
+  @property gtk.style_context.StyleContext parent()
+  {
+    return getParent();
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
+        for details.
+  */
+  @property void parent(gtk.style_context.StyleContext propval)
+  {
+    return setParent(propval);
+  }
+
+  /** */
+  @property gdk.screen.Screen screen()
+  {
+    return getScreen();
+  }
+
+  /** */
+  @property void screen(gdk.screen.Screen propval)
+  {
+    return setScreen(propval);
   }
 
   /**
@@ -141,7 +199,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void addProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -153,7 +211,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void removeProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,7 +278,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -401,7 +459,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_style_context_get_frame_clock(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -458,7 +516,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_style_context_get_parent(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -474,7 +532,7 @@ class StyleContext : gobject.object.ObjectG
     return _retval;
   }
 
-  alias getProperty = gobject.object.ObjectG.getProperty;
+  alias getProperty = gobject.object.ObjectWrap.getProperty;
 
   /**
       Gets a style property from context for the given state.
@@ -523,7 +581,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_style_context_get_screen(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -811,7 +869,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeProvider(gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /**

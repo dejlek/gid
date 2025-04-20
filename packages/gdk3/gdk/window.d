@@ -29,7 +29,7 @@ import gobject.dclosure;
 import gobject.object;
 
 /** */
-class Window : gobject.object.ObjectG
+class Window : gobject.object.ObjectWrap
 {
 
   /** */
@@ -51,9 +51,31 @@ class Window : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Window self()
   {
     return this;
+  }
+
+  /**
+      Get `cursor` property.
+      Returns: The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
+      [gdk.window.Window.getCursor] for details.
+  */
+  @property gdk.cursor.Cursor cursor()
+  {
+    return getCursor();
+  }
+
+  /**
+      Set `cursor` property.
+      Params:
+        propval = The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
+        [gdk.window.Window.getCursor] for details.
+  */
+  @property void cursor(gdk.cursor.Cursor propval)
+  {
+    return setCursor(propval);
   }
 
   /**
@@ -98,7 +120,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_at_pointer(cast(int*)&winX, cast(int*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +228,7 @@ class Window : gobject.object.ObjectG
   {
     GdkDrawingContext* _cretval;
     _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -433,7 +455,7 @@ class Window : gobject.object.ObjectG
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created #GdkGLContext, or
         null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.glcontext.GLContext createGlContext()
   {
@@ -441,8 +463,8 @@ class Window : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_window_create_gl_context(cast(GdkWindow*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -828,7 +850,7 @@ class Window : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_window_get_cursor(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -864,7 +886,7 @@ class Window : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -903,7 +925,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_device_position(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -925,7 +947,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -937,7 +959,7 @@ class Window : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_window_get_display(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -972,7 +994,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_parent(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -989,7 +1011,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1040,7 +1062,7 @@ class Window : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_window_get_frame_clock(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1113,7 +1135,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_group(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1180,7 +1202,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_parent(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1220,7 +1242,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_pointer(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1302,7 +1324,7 @@ class Window : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_window_get_screen(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1364,7 +1386,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1433,7 +1455,7 @@ class Window : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_window_get_visual(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1556,7 +1578,7 @@ class Window : gobject.object.ObjectG
     {
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
       return _retval;
     }
     auto _childFuncCB = childFunc ? &_childFuncCallback : null;
@@ -2722,7 +2744,7 @@ class Window : gobject.object.ObjectG
 
   /**
       For most purposes this function is deprecated in favor of
-      [gobject.object.ObjectG.setData]. However, for historical reasons GTK+ stores
+      [gobject.object.ObjectWrap.setData]. However, for historical reasons GTK+ stores
       the #GtkWidget that owns a #GdkWindow as user data on the
       #GdkWindow. So, custom widget implementations should use
       this function for that. If GTK+ receives an event for a #GdkWindow,
@@ -2732,7 +2754,7 @@ class Window : gobject.object.ObjectG
       Params:
         userData = user data
   */
-  void setUserData(gobject.object.ObjectG userData = null)
+  void setUserData(gobject.object.ObjectWrap userData = null)
   {
     gdk_window_set_user_data(cast(GdkWindow*)cPtr, userData ? cast(ObjectC*)userData.cPtr(No.Dup) : null);
   }

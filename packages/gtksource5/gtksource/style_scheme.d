@@ -23,7 +23,7 @@ import gtksource.types;
     The two style schemes with IDs "classic" and "tango" follow more closely the
     GTK theme (for example for the background color).
 */
-class StyleScheme : gobject.object.ObjectG
+class StyleScheme : gobject.object.ObjectWrap
 {
 
   /** */
@@ -45,9 +45,37 @@ class StyleScheme : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleScheme self()
   {
     return this;
+  }
+
+  /**
+      Get `description` property.
+      Returns: Style scheme description, a translatable string to present to the user.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Get `filename` property.
+      Returns: Style scheme filename or null.
+  */
+  @property string filename()
+  {
+    return getFilename();
+  }
+
+  /**
+      Get `name` property.
+      Returns: Style scheme name, a translatable string to present to the user.
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   /** */
@@ -129,7 +157,7 @@ class StyleScheme : gobject.object.ObjectG
     GtkSourceStyle* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
     _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)cPtr, _styleId);
-    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;
   }
 }

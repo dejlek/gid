@@ -18,7 +18,7 @@ class FormatDefinition
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.FormatDefinition");
+      throw new GidConstructException("Null instance pointer for gst.format_definition.FormatDefinition");
 
     cInstance = *cast(GstFormatDefinition*)ptr;
 
@@ -32,43 +32,79 @@ class FormatDefinition
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `value` field.
+      Returns: The unique id of this format
+  */
   @property gst.types.Format value()
   {
     return cast(gst.types.Format)(cast(GstFormatDefinition*)cPtr).value;
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = The unique id of this format
+  */
   @property void value(gst.types.Format propval)
   {
     (cast(GstFormatDefinition*)cPtr).value = cast(GstFormat)propval;
   }
 
+  /**
+      Get `nick` field.
+      Returns: A short nick of the format
+  */
   @property string nick()
   {
     return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
   }
 
+  /**
+      Set `nick` field.
+      Params:
+        propval = A short nick of the format
+  */
   @property void nick(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
     dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).nick);
   }
 
+  /**
+      Get `description` field.
+      Returns: A longer description of the format
+  */
   @property string description()
   {
     return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
   }
 
+  /**
+      Set `description` field.
+      Params:
+        propval = A longer description of the format
+  */
   @property void description(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
     dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).description);
   }
 
+  /**
+      Get `quark` field.
+      Returns: A quark for the nick
+  */
   @property glib.types.Quark quark()
   {
     return (cast(GstFormatDefinition*)cPtr).quark;
   }
 
+  /**
+      Set `quark` field.
+      Params:
+        propval = A quark for the nick
+  */
   @property void quark(glib.types.Quark propval)
   {
     (cast(GstFormatDefinition*)cPtr).quark = propval;

@@ -69,9 +69,48 @@ class DropTargetAsync : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DropTargetAsync self()
   {
     return this;
+  }
+
+  /**
+      Get `actions` property.
+      Returns: The `GdkDragActions` that this drop target supports.
+  */
+  @property gdk.types.DragAction actions()
+  {
+    return getActions();
+  }
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The `GdkDragActions` that this drop target supports.
+  */
+  @property void actions(gdk.types.DragAction propval)
+  {
+    return setActions(propval);
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The [gdk.content_formats.ContentFormats] that determines the supported data formats.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return getFormats();
+  }
+
+  /**
+      Set `formats` property.
+      Params:
+        propval = The [gdk.content_formats.ContentFormats] that determines the supported data formats.
+  */
+  @property void formats(gdk.content_formats.ContentFormats propval)
+  {
+    return setFormats(propval);
   }
 
   /**

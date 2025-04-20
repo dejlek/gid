@@ -52,10 +52,25 @@ import gst.types;
 class Memory : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `memory.Memory` boxed type.
+      Params:
+        allocator = pointer to the #GstAllocator
+        parent = parent memory block
+        maxsize = the maximum size allocated
+        align_ = the alignment of the memory
+        offset = the offset where valid data starts
+        size = the size of valid data
+  */
+  this(gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init)
   {
     super(gMalloc(GstMemory.sizeof), Yes.Take);
+    this.allocator = allocator;
+    this.parent = parent;
+    this.maxsize = maxsize;
+    this.align_ = align_;
+    this.offset = offset;
+    this.size = size;
   }
 
   /** */
@@ -83,73 +98,132 @@ class Memory : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Memory self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: parent structure
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)cPtr).miniObject);
   }
 
+  /**
+      Get `allocator` field.
+      Returns: pointer to the #GstAllocator
+  */
   @property gst.allocator.Allocator allocator()
   {
     return cToD!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
   }
 
+  /**
+      Set `allocator` field.
+      Params:
+        propval = pointer to the #GstAllocator
+  */
   @property void allocator(gst.allocator.Allocator propval)
   {
     cValueFree!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
     dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).allocator);
   }
 
+  /**
+      Get `parent` field.
+      Returns: parent memory block
+  */
   @property gst.memory.Memory parent()
   {
     return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
   }
 
+  /**
+      Set `parent` field.
+      Params:
+        propval = parent memory block
+  */
   @property void parent(gst.memory.Memory propval)
   {
     cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
     dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).parent);
   }
 
+  /**
+      Get `maxsize` field.
+      Returns: the maximum size allocated
+  */
   @property size_t maxsize()
   {
     return (cast(GstMemory*)cPtr).maxsize;
   }
 
+  /**
+      Set `maxsize` field.
+      Params:
+        propval = the maximum size allocated
+  */
   @property void maxsize(size_t propval)
   {
     (cast(GstMemory*)cPtr).maxsize = propval;
   }
 
+  /**
+      Get `align_` field.
+      Returns: the alignment of the memory
+  */
   @property size_t align_()
   {
     return (cast(GstMemory*)cPtr).align_;
   }
 
+  /**
+      Set `align_` field.
+      Params:
+        propval = the alignment of the memory
+  */
   @property void align_(size_t propval)
   {
     (cast(GstMemory*)cPtr).align_ = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: the offset where valid data starts
+  */
   @property size_t offset()
   {
     return (cast(GstMemory*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = the offset where valid data starts
+  */
   @property void offset(size_t propval)
   {
     (cast(GstMemory*)cPtr).offset = propval;
   }
 
+  /**
+      Get `size` field.
+      Returns: the size of valid data
+  */
   @property size_t size()
   {
     return (cast(GstMemory*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = the size of valid data
+  */
   @property void size(size_t propval)
   {
     (cast(GstMemory*)cPtr).size = propval;

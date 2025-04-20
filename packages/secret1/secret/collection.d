@@ -57,9 +57,91 @@ class Collection : gio.dbus_proxy.DBusProxy
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Collection self()
   {
     return this;
+  }
+
+  /**
+      Get `created` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      collection was created.
+  */
+  @property ulong created()
+  {
+    return getCreated();
+  }
+
+  /**
+      Set `created` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        collection was created.
+  */
+  @property void created(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("created", propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The human readable label for the collection.
+      
+      Setting this property will result in the label of the collection being
+      set asynchronously. To properly track the changing of the label use the
+      [secret.collection.Collection.setLabel] function.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The human readable label for the collection.
+        
+        Setting this property will result in the label of the collection being
+        set asynchronously. To properly track the changing of the label use the
+        [secret.collection.Collection.setLabel] function.
+  */
+  @property void label(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("label", propval);
+  }
+
+  /**
+      Get `locked` property.
+      Returns: Whether the collection is locked or not.
+      
+      To lock or unlock a collection use the [secret.service.Service.lock] or
+      [secret.service.Service.unlock] functions.
+  */
+  @property bool locked()
+  {
+    return getLocked();
+  }
+
+  /**
+      Get `modified` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      collection was last modified.
+  */
+  @property ulong modified()
+  {
+    return getModified();
+  }
+
+  /**
+      Set `modified` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        collection was last modified.
+  */
+  @property void modified(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("modified", propval);
   }
 
   /**
@@ -93,7 +175,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -109,17 +191,17 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = the asynchronous result passed to the callback
       Returns: the new collection, which should be unreferenced
-          with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   static secret.collection.Collection createFinish(gio.async_result.AsyncResult result)
   {
     SecretCollection* _cretval;
     GError *_err;
-    _cretval = secret_collection_create_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_collection_create_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,8 +228,8 @@ class Collection : gio.dbus_proxy.DBusProxy
         flags = currently unused
         cancellable = optional cancellation object
       Returns: the new collection, which should be unreferenced
-          with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   static secret.collection.Collection createSync(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -157,8 +239,8 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_collection_create_sync(service ? cast(SecretService*)service.cPtr(No.Dup) : null, _label, _alias_, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -185,7 +267,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -201,16 +283,16 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: the collection, or null if none assigned to the alias
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static secret.collection.Collection forAliasFinish(gio.async_result.AsyncResult result)
   {
     SecretCollection* _cretval;
     GError *_err;
-    _cretval = secret_collection_for_alias_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_collection_for_alias_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -229,7 +311,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         flags = options for the collection initialization
         cancellable = optional cancellation object
       Returns: the collection, or null if none assigned to the alias
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static secret.collection.Collection forAliasSync(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -238,8 +320,8 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_collection_for_alias_sync(service ? cast(SecretService*)service.cPtr(No.Dup) : null, _alias_, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.collection.Collection)(cast(SecretCollection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -261,7 +343,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -275,15 +357,15 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the collection was successfully deleted or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_delete_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_collection_delete_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -297,7 +379,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         cancellable = optional cancellation object
       Returns: whether the collection was successfully deleted or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -305,7 +387,7 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _retval = secret_collection_delete_sync(cast(SecretCollection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -345,7 +427,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Get the list of items in this collection.
       Returns: a list of items, when
           done, the list should be freed with [glib.list.List.free], and each item
-          should be released with [gobject.object.ObjectG.unref]
+          should be released with [gobject.object.ObjectWrap.unref]
   */
   secret.item.Item[] getItems()
   {
@@ -404,7 +486,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     SecretService* _cretval;
     _cretval = secret_collection_get_service(cast(SecretCollection*)cPtr);
-    auto _retval = ObjectG.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, No.Take);
     return _retval;
   }
 
@@ -430,7 +512,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -445,15 +527,15 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether the load was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadItemsFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_load_items_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_collection_load_items_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -471,7 +553,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         cancellable = optional cancellation object
       Returns: whether the load was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadItemsSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -479,7 +561,7 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _retval = secret_collection_load_items_sync(cast(SecretCollection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -526,7 +608,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -542,15 +624,15 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: a list of items that matched the search
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   secret.item.Item[] searchFinish(gio.async_result.AsyncResult result)
   {
     GList* _cretval;
     GError *_err;
-    _cretval = secret_collection_search_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_collection_search_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(secret.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -579,7 +661,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         flags = search option flags
         cancellable = optional cancellation object
       Returns: a list of items that matched the search
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -589,7 +671,7 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_collection_search_sync(cast(SecretCollection*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(secret.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -611,7 +693,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -626,15 +708,15 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setLabelFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_set_label_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_collection_set_label_finish(cast(SecretCollection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -648,7 +730,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         label = a new label
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
@@ -657,7 +739,7 @@ class Collection : gio.dbus_proxy.DBusProxy
     GError *_err;
     _retval = secret_collection_set_label_sync(cast(SecretCollection*)cPtr, _label, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

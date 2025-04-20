@@ -18,7 +18,7 @@ class EventWindowState
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.EventWindowState");
+      throw new GidConstructException("Null instance pointer for gdk.event_window_state.EventWindowState");
 
     cInstance = *cast(GdkEventWindowState*)ptr;
 
@@ -32,52 +32,99 @@ class EventWindowState
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gdk.types.EventType.WindowState]).
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEventWindowState*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gdk.types.EventType.WindowState]).
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEventWindowState*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
   @property gdk.window.Window window()
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)cPtr).window);
   }
 
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
   @property void window(gdk.window.Window propval)
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventWindowState*)cPtr).window);
   }
 
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
   @property byte sendEvent()
   {
     return (cast(GdkEventWindowState*)cPtr).sendEvent;
   }
 
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
   @property void sendEvent(byte propval)
   {
     (cast(GdkEventWindowState*)cPtr).sendEvent = propval;
   }
 
+  /**
+      Get `changedMask` field.
+      Returns: mask specifying what flags have changed.
+  */
   @property gdk.types.WindowState changedMask()
   {
     return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)cPtr).changedMask;
   }
 
+  /**
+      Set `changedMask` field.
+      Params:
+        propval = mask specifying what flags have changed.
+  */
   @property void changedMask(gdk.types.WindowState propval)
   {
     (cast(GdkEventWindowState*)cPtr).changedMask = cast(GdkWindowState)propval;
   }
 
+  /**
+      Get `newWindowState` field.
+      Returns: the new window state, a combination of
+        #GdkWindowState bits.
+  */
   @property gdk.types.WindowState newWindowState()
   {
     return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)cPtr).newWindowState;
   }
 
+  /**
+      Set `newWindowState` field.
+      Params:
+        propval = the new window state, a combination of
+          #GdkWindowState bits.
+  */
   @property void newWindowState(gdk.types.WindowState propval)
   {
     (cast(GdkEventWindowState*)cPtr).newWindowState = cast(GdkWindowState)propval;

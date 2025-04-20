@@ -42,9 +42,22 @@ class Invisible : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Invisible self()
   {
     return this;
+  }
+
+  /** */
+  @property gdk.screen.Screen screen()
+  {
+    return getScreen();
+  }
+
+  /** */
+  @property void screen(gdk.screen.Screen propval)
+  {
+    return setScreen(propval);
   }
 
   /**
@@ -70,7 +83,7 @@ class Invisible : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -82,7 +95,7 @@ class Invisible : gtk.widget.Widget
   {
     GdkScreen* _cretval;
     _cretval = gtk_invisible_get_screen(cast(GtkInvisible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 

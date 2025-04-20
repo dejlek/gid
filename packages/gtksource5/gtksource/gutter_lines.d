@@ -22,7 +22,7 @@ import gtksource.types;
     passes through the text btree allowing GtkSourceView to reach more
     frames-per-second while performing kinetic scrolling.
 */
-class GutterLines : gobject.object.ObjectG
+class GutterLines : gobject.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class GutterLines : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GutterLines self()
   {
     return this;
@@ -93,7 +94,7 @@ class GutterLines : gobject.object.ObjectG
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_gutter_lines_get_buffer(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,7 +160,7 @@ class GutterLines : gobject.object.ObjectG
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_lines_get_view(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 

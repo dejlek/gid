@@ -18,7 +18,7 @@ import gtksource.types;
 import gtksource.view;
 
 /** */
-class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
+class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -40,9 +40,194 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Completion self()
   {
     return this;
+  }
+
+  /**
+      Get `accelerators` property.
+      Returns: Number of keyboard accelerators to show for the first proposals. For
+      example, to activate the first proposal, the user can press
+      <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
+  */
+  @property uint accelerators()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("accelerators");
+  }
+
+  /**
+      Set `accelerators` property.
+      Params:
+        propval = Number of keyboard accelerators to show for the first proposals. For
+        example, to activate the first proposal, the user can press
+        <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
+  */
+  @property void accelerators(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("accelerators", propval);
+  }
+
+  /**
+      Get `autoCompleteDelay` property.
+      Returns: Determines the popup delay (in milliseconds) at which the completion
+      will be shown for interactive completion.
+  */
+  @property uint autoCompleteDelay()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("auto-complete-delay");
+  }
+
+  /**
+      Set `autoCompleteDelay` property.
+      Params:
+        propval = Determines the popup delay (in milliseconds) at which the completion
+        will be shown for interactive completion.
+  */
+  @property void autoCompleteDelay(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("auto-complete-delay", propval);
+  }
+
+  /**
+      Get `proposalPageSize` property.
+      Returns: The scroll page size of the proposals in the completion window. In
+      other words, when <keycap>PageDown</keycap> or
+      <keycap>PageUp</keycap> is pressed, the selected
+      proposal becomes the one which is located one page size backward or
+      forward.
+      
+      See also the #GtkSourceCompletion::move-cursor signal.
+  */
+  @property uint proposalPageSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("proposal-page-size");
+  }
+
+  /**
+      Set `proposalPageSize` property.
+      Params:
+        propval = The scroll page size of the proposals in the completion window. In
+        other words, when <keycap>PageDown</keycap> or
+        <keycap>PageUp</keycap> is pressed, the selected
+        proposal becomes the one which is located one page size backward or
+        forward.
+        
+        See also the #GtkSourceCompletion::move-cursor signal.
+  */
+  @property void proposalPageSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("proposal-page-size", propval);
+  }
+
+  /**
+      Get `providerPageSize` property.
+      Returns: The scroll page size of the provider pages in the completion window.
+      
+      See the #GtkSourceCompletion::move-page signal.
+  */
+  @property uint providerPageSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("provider-page-size");
+  }
+
+  /**
+      Set `providerPageSize` property.
+      Params:
+        propval = The scroll page size of the provider pages in the completion window.
+        
+        See the #GtkSourceCompletion::move-page signal.
+  */
+  @property void providerPageSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("provider-page-size", propval);
+  }
+
+  /**
+      Get `rememberInfoVisibility` property.
+      Returns: Determines whether the visibility of the info window should be
+      saved when the completion is hidden, and restored when the completion
+      is shown again.
+  */
+  @property bool rememberInfoVisibility()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("remember-info-visibility");
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be
+        saved when the completion is hidden, and restored when the completion
+        is shown again.
+  */
+  @property void rememberInfoVisibility(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("remember-info-visibility", propval);
+  }
+
+  /**
+      Get `selectOnShow` property.
+      Returns: Determines whether the first proposal should be selected when the
+      completion is first shown.
+  */
+  @property bool selectOnShow()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("select-on-show");
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the
+        completion is first shown.
+  */
+  @property void selectOnShow(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("select-on-show", propval);
+  }
+
+  /**
+      Get `showHeaders` property.
+      Returns: Determines whether provider headers should be shown in the proposal
+      list. It can be useful to disable when there is only one provider.
+  */
+  @property bool showHeaders()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-headers");
+  }
+
+  /**
+      Set `showHeaders` property.
+      Params:
+        propval = Determines whether provider headers should be shown in the proposal
+        list. It can be useful to disable when there is only one provider.
+  */
+  @property void showHeaders(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-headers", propval);
+  }
+
+  /**
+      Get `showIcons` property.
+      Returns: Determines whether provider and proposal icons should be shown in
+      the completion popup.
+  */
+  @property bool showIcons()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-icons");
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Determines whether provider and proposal icons should be shown in
+        the completion popup.
+  */
+  @property void showIcons(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
   }
 
   mixin BuildableT!();
@@ -56,15 +241,15 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
         provider = a #GtkSourceCompletionProvider.
       Returns: true if provider was successfully added, otherwise if error
                  is provided, it will be set with the error and false is returned.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -99,7 +284,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSourceCompletionContext* _cretval;
     _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)cPtr, position ? cast(GtkTextIter*)position.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +298,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSourceCompletionInfo* _cretval;
     _cretval = gtk_source_completion_get_info_window(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +325,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,15 +344,15 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
         provider = a #GtkSourceCompletionProvider.
       Returns: true if provider was successfully removed, otherwise if error
                  is provided, it will be set with the error and false is returned.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

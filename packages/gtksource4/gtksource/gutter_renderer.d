@@ -40,9 +40,193 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GutterRenderer self()
   {
     return this;
+  }
+
+  /**
+      Get `alignmentMode` property.
+      Returns: The alignment mode of the renderer. This can be used to indicate
+      that in the case a cell spans multiple lines (due to text wrapping)
+      the alignment should work on either the full cell, the first line
+      or the last line.
+  */
+  @property gtksource.types.GutterRendererAlignmentMode alignmentMode()
+  {
+    return getAlignmentMode();
+  }
+
+  /**
+      Set `alignmentMode` property.
+      Params:
+        propval = The alignment mode of the renderer. This can be used to indicate
+        that in the case a cell spans multiple lines (due to text wrapping)
+        the alignment should work on either the full cell, the first line
+        or the last line.
+  */
+  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  {
+    return setAlignmentMode(propval);
+  }
+
+  /** */
+  @property gdk.rgba.RGBA backgroundRgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background-rgba");
+  }
+
+  /** */
+  @property void backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("background-rgba", propval);
+  }
+
+  /** */
+  @property bool backgroundSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
+  }
+
+  /** */
+  @property void backgroundSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
+  }
+
+  /** */
+  @property int size()
+  {
+    return getSize();
+  }
+
+  /** */
+  @property void size(int propval)
+  {
+    return setSize(propval);
+  }
+
+  /**
+      Get `view` property.
+      Returns: The view on which the renderer is placed.
+  */
+  @property gtk.text_view.TextView view()
+  {
+    return getView();
+  }
+
+  /**
+      Get `visible` property.
+      Returns: The visibility of the renderer.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = The visibility of the renderer.
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
+  }
+
+  /**
+      Get `windowType` property.
+      Returns: The window type of the view on which the renderer is placed (left,
+      or right).
+  */
+  @property gtk.types.TextWindowType windowType()
+  {
+    return getWindowType();
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment of the renderer. Set to 0 for a left
+      alignment. 1 for a right alignment. And 0.5 for centering the cells.
+      A value lower than 0 doesn't modify the alignment.
+  */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the renderer. Set to 0 for a left
+        alignment. 1 for a right alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
+  */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
+  }
+
+  /**
+      Get `xpad` property.
+      Returns: The left and right padding of the renderer.
+  */
+  @property int xpad()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("xpad");
+  }
+
+  /**
+      Set `xpad` property.
+      Params:
+        propval = The left and right padding of the renderer.
+  */
+  @property void xpad(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("xpad", propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: The vertical alignment of the renderer. Set to 0 for a top
+      alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+      A value lower than 0 doesn't modify the alignment.
+  */
+  @property float yalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yalign");
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the renderer. Set to 0 for a top
+        alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
+  */
+  @property void yalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
+  }
+
+  /**
+      Get `ypad` property.
+      Returns: The top and bottom padding of the renderer.
+  */
+  @property int ypad()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("ypad");
+  }
+
+  /**
+      Set `ypad` property.
+      Params:
+        propval = The top and bottom padding of the renderer.
+  */
+  @property void ypad(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("ypad", propval);
   }
 
   /**
@@ -188,7 +372,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 

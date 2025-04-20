@@ -18,7 +18,7 @@ class TreeNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.TreeNode");
+      throw new GidConstructException("Null instance pointer for glib.tree_node.TreeNode");
 
     cInstancePtr = cast(GTreeNode*)ptr;
 

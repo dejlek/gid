@@ -50,6 +50,7 @@ class TextureDownloader : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextureDownloader self()
   {
     return this;
@@ -124,7 +125,7 @@ class TextureDownloader : gobject.boxed.Boxed
   {
     GdkTexture* _cretval;
     _cretval = gdk_texture_downloader_get_texture(cast(const(GdkTextureDownloader)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 

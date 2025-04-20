@@ -20,7 +20,7 @@ class RegionIter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GtkSource.RegionIter");
+      throw new GidConstructException("Null instance pointer for gtksource.region_iter.RegionIter");
 
     cInstance = *cast(GtkSourceRegionIter*)ptr;
 

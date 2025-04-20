@@ -22,7 +22,7 @@ class RTPBuffer
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtp.RTPBuffer");
+      throw new GidConstructException("Null instance pointer for gstrtp.rtpbuffer.RTPBuffer");
 
     cInstance = *cast(GstRTPBuffer*)ptr;
 
@@ -36,22 +36,40 @@ class RTPBuffer
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `buffer` field.
+      Returns: pointer to RTP buffer
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = pointer to RTP buffer
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstRTPBuffer*)cPtr).buffer);
   }
 
+  /**
+      Get `state` field.
+      Returns: internal state
+  */
   @property uint state()
   {
     return (cast(GstRTPBuffer*)cPtr).state;
   }
 
+  /**
+      Set `state` field.
+      Params:
+        propval = internal state
+  */
   @property void state(uint propval)
   {
     (cast(GstRTPBuffer*)cPtr).state = propval;

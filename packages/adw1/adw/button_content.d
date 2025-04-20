@@ -84,9 +84,106 @@ class ButtonContent : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ButtonContent self()
   {
     return this;
+  }
+
+  /**
+      Get `canShrink` property.
+      Returns: Whether the button can be smaller than the natural size of its contents.
+      
+      If set to `TRUE`, the label will ellipsize.
+      
+      See `property@Gtk.Button:can-shrink`.
+  */
+  @property bool canShrink()
+  {
+    return getCanShrink();
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the button can be smaller than the natural size of its contents.
+        
+        If set to `TRUE`, the label will ellipsize.
+        
+        See `property@Gtk.Button:can-shrink`.
+  */
+  @property void canShrink(bool propval)
+  {
+    return setCanShrink(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the displayed icon.
+      
+      If empty, the icon is not shown.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the displayed icon.
+        
+        If empty, the icon is not shown.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The displayed label.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The displayed label.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an underline in the text indicates a mnemonic.
+      
+      The mnemonic can be used to activate the parent button.
+      
+      See `property@ButtonContent:label`.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an underline in the text indicates a mnemonic.
+        
+        The mnemonic can be used to activate the parent button.
+        
+        See `property@ButtonContent:label`.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**

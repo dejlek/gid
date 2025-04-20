@@ -18,7 +18,7 @@ import pango.types;
     state; the second phase is to look up the keycode/group/level triplet
     in the keymap and see what keyval it corresponds to.
 */
-class Keymap : gobject.object.ObjectG
+class Keymap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -40,6 +40,7 @@ class Keymap : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Keymap self()
   {
     return this;
@@ -55,7 +56,7 @@ class Keymap : gobject.object.ObjectG
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,7 +71,7 @@ class Keymap : gobject.object.ObjectG
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 

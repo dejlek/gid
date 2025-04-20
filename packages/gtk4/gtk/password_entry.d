@@ -74,9 +74,90 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PasswordEntry self()
   {
     return this;
+  }
+
+  /**
+      Get `activatesDefault` property.
+      Returns: Whether to activate the default widget when Enter is pressed.
+  */
+  @property bool activatesDefault()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("activates-default");
+  }
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+  */
+  @property void activatesDefault(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("activates-default", propval);
+  }
+
+  /**
+      Get `extraMenu` property.
+      Returns: A menu model whose contents will be appended to
+      the context menu.
+  */
+  @property gio.menu_model.MenuModel extraMenu()
+  {
+    return getExtraMenu();
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to
+        the context menu.
+  */
+  @property void extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setExtraMenu(propval);
+  }
+
+  /**
+      Get `placeholderText` property.
+      Returns: The text that will be displayed in the [gtk.password_entry.PasswordEntry]
+      when it is empty and unfocused.
+  */
+  @property string placeholderText()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("placeholder-text");
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.password_entry.PasswordEntry]
+        when it is empty and unfocused.
+  */
+  @property void placeholderText(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("placeholder-text", propval);
+  }
+
+  /**
+      Get `showPeekIcon` property.
+      Returns: Whether to show an icon for revealing the content.
+  */
+  @property bool showPeekIcon()
+  {
+    return getShowPeekIcon();
+  }
+
+  /**
+      Set `showPeekIcon` property.
+      Params:
+        propval = Whether to show an icon for revealing the content.
+  */
+  @property void showPeekIcon(bool propval)
+  {
+    return setShowPeekIcon(propval);
   }
 
   mixin EditableT!();
@@ -100,7 +181,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 

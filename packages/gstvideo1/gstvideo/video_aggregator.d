@@ -42,6 +42,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoAggregator self()
   {
     return this;
@@ -60,7 +61,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   {
     GstTaskPool* _cretval;
     _cretval = gst_video_aggregator_get_execution_task_pool(cast(GstVideoAggregator*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 }

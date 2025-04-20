@@ -20,7 +20,7 @@ class EnumClass
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.EnumClass");
+      throw new GidConstructException("Null instance pointer for gobject.enum_class.EnumClass");
 
     cInstance = *cast(GEnumClass*)ptr;
 
@@ -34,41 +34,77 @@ class EnumClass
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `gTypeClass` field.
+      Returns: the parent class
+  */
   @property gobject.type_class.TypeClass gTypeClass()
   {
     return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)cPtr).gTypeClass);
   }
 
+  /**
+      Get `minimum` field.
+      Returns: the smallest possible value.
+  */
   @property int minimum()
   {
     return (cast(GEnumClass*)cPtr).minimum;
   }
 
+  /**
+      Set `minimum` field.
+      Params:
+        propval = the smallest possible value.
+  */
   @property void minimum(int propval)
   {
     (cast(GEnumClass*)cPtr).minimum = propval;
   }
 
+  /**
+      Get `maximum` field.
+      Returns: the largest possible value.
+  */
   @property int maximum()
   {
     return (cast(GEnumClass*)cPtr).maximum;
   }
 
+  /**
+      Set `maximum` field.
+      Params:
+        propval = the largest possible value.
+  */
   @property void maximum(int propval)
   {
     (cast(GEnumClass*)cPtr).maximum = propval;
   }
 
+  /**
+      Get `nValues` field.
+      Returns: the number of possible values.
+  */
   @property uint nValues()
   {
     return (cast(GEnumClass*)cPtr).nValues;
   }
 
+  /**
+      Set `nValues` field.
+      Params:
+        propval = the number of possible values.
+  */
   @property void nValues(uint propval)
   {
     (cast(GEnumClass*)cPtr).nValues = propval;
   }
 
+  /**
+      Get `values` field.
+      Returns: an array of #GEnumValue structs describing the
+       individual values.
+  */
   @property gobject.enum_value.EnumValue values()
   {
     return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)cPtr).values);

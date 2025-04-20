@@ -33,6 +33,7 @@ class LargeListArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeListArray self()
   {
     return this;
@@ -51,7 +52,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_value(cast(GArrowLargeListArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,7 +94,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowDataType* _cretval;
     _cretval = garrow_large_list_array_get_value_type(cast(GArrowLargeListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +103,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_values(cast(GArrowLargeListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

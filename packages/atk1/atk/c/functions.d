@@ -124,7 +124,13 @@ __gshared extern(C)
   GType function() c_atk_no_op_object_factory_get_type; ///
   AtkObjectFactory* function() c_atk_no_op_object_factory_new; ///
 
-  // ObjectAtk
+  // ObjectFactory
+  GType function() c_atk_object_factory_get_type; ///
+  AtkObject* function(AtkObjectFactory* factory, ObjectC* obj) c_atk_object_factory_create_accessible; ///
+  GType function(AtkObjectFactory* factory) c_atk_object_factory_get_accessible_type; ///
+  void function(AtkObjectFactory* factory) c_atk_object_factory_invalidate; ///
+
+  // ObjectWrap
   GType function() c_atk_object_get_type; ///
   bool function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_add_relationship; ///
   uint function(AtkObject* accessible, AtkPropertyChangeHandler* handler) c_atk_object_connect_property_change_handler; ///
@@ -154,12 +160,6 @@ __gshared extern(C)
   void function(AtkObject* accessible, const(char)* name) c_atk_object_set_name; ///
   void function(AtkObject* accessible, AtkObject* parent) c_atk_object_set_parent; ///
   void function(AtkObject* accessible, AtkRole role) c_atk_object_set_role; ///
-
-  // ObjectFactory
-  GType function() c_atk_object_factory_get_type; ///
-  AtkObject* function(AtkObjectFactory* factory, ObjectC* obj) c_atk_object_factory_create_accessible; ///
-  GType function(AtkObjectFactory* factory) c_atk_object_factory_get_accessible_type; ///
-  void function(AtkObjectFactory* factory) c_atk_object_factory_invalidate; ///
 
   // Plug
   GType function() c_atk_plug_get_type; ///
@@ -621,7 +621,21 @@ alias atk_no_op_object_factory_get_type = c_atk_no_op_object_factory_get_type;
 /** */
 alias atk_no_op_object_factory_new = c_atk_no_op_object_factory_new;
 
-// ObjectAtk
+// ObjectFactory
+
+/** */
+alias atk_object_factory_get_type = c_atk_object_factory_get_type;
+
+/** */
+alias atk_object_factory_create_accessible = c_atk_object_factory_create_accessible;
+
+/** */
+alias atk_object_factory_get_accessible_type = c_atk_object_factory_get_accessible_type;
+
+/** */
+alias atk_object_factory_invalidate = c_atk_object_factory_invalidate;
+
+// ObjectWrap
 
 /** */
 alias atk_object_get_type = c_atk_object_get_type;
@@ -709,20 +723,6 @@ alias atk_object_set_parent = c_atk_object_set_parent;
 
 /** */
 alias atk_object_set_role = c_atk_object_set_role;
-
-// ObjectFactory
-
-/** */
-alias atk_object_factory_get_type = c_atk_object_factory_get_type;
-
-/** */
-alias atk_object_factory_create_accessible = c_atk_object_factory_create_accessible;
-
-/** */
-alias atk_object_factory_get_accessible_type = c_atk_object_factory_get_accessible_type;
-
-/** */
-alias atk_object_factory_invalidate = c_atk_object_factory_invalidate;
 
 // Plug
 
@@ -1339,7 +1339,13 @@ shared static this()
   gidLink(cast(void**)&atk_no_op_object_factory_get_type, "atk_no_op_object_factory_get_type", LIBS);
   gidLink(cast(void**)&atk_no_op_object_factory_new, "atk_no_op_object_factory_new", LIBS);
 
-  // ObjectAtk
+  // ObjectFactory
+  gidLink(cast(void**)&atk_object_factory_get_type, "atk_object_factory_get_type", LIBS);
+  gidLink(cast(void**)&atk_object_factory_create_accessible, "atk_object_factory_create_accessible", LIBS);
+  gidLink(cast(void**)&atk_object_factory_get_accessible_type, "atk_object_factory_get_accessible_type", LIBS);
+  gidLink(cast(void**)&atk_object_factory_invalidate, "atk_object_factory_invalidate", LIBS);
+
+  // ObjectWrap
   gidLink(cast(void**)&atk_object_get_type, "atk_object_get_type", LIBS);
   gidLink(cast(void**)&atk_object_add_relationship, "atk_object_add_relationship", LIBS);
   gidLink(cast(void**)&atk_object_connect_property_change_handler, "atk_object_connect_property_change_handler", LIBS);
@@ -1369,12 +1375,6 @@ shared static this()
   gidLink(cast(void**)&atk_object_set_name, "atk_object_set_name", LIBS);
   gidLink(cast(void**)&atk_object_set_parent, "atk_object_set_parent", LIBS);
   gidLink(cast(void**)&atk_object_set_role, "atk_object_set_role", LIBS);
-
-  // ObjectFactory
-  gidLink(cast(void**)&atk_object_factory_get_type, "atk_object_factory_get_type", LIBS);
-  gidLink(cast(void**)&atk_object_factory_create_accessible, "atk_object_factory_create_accessible", LIBS);
-  gidLink(cast(void**)&atk_object_factory_get_accessible_type, "atk_object_factory_get_accessible_type", LIBS);
-  gidLink(cast(void**)&atk_object_factory_invalidate, "atk_object_factory_invalidate", LIBS);
 
   // Plug
   gidLink(cast(void**)&atk_plug_get_type, "atk_plug_get_type", LIBS);

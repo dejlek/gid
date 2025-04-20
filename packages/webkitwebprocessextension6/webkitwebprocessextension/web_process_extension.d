@@ -87,7 +87,7 @@ import webkitwebprocessextension.web_page;
     }
     ```
 */
-class WebProcessExtension : gobject.object.ObjectG
+class WebProcessExtension : gobject.object.ObjectWrap
 {
 
   /** */
@@ -127,7 +127,7 @@ class WebProcessExtension : gobject.object.ObjectG
   {
     WebKitWebPage* _cretval;
     _cretval = webkit_web_process_extension_get_page(cast(WebKitWebProcessExtension*)cPtr, pageId);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class WebProcessExtension : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -164,16 +164,16 @@ class WebProcessExtension : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserMessage with the reply or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkitwebprocessextension.user_message.UserMessage sendMessageToContextFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_process_extension_send_message_to_context_finish(cast(WebKitWebProcessExtension*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_process_extension_send_message_to_context_finish(cast(WebKitWebProcessExtension*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

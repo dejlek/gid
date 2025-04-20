@@ -69,9 +69,77 @@ class PreferencesGroup : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PreferencesGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `description` property.
+      Returns: The description for this group of preferences.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description for this group of preferences.
+  */
+  @property void description(string propval)
+  {
+    return setDescription(propval);
+  }
+
+  /**
+      Get `headerSuffix` property.
+      Returns: The header suffix widget.
+      
+      Displayed above the list, next to the title and description.
+      
+      Suffixes are commonly used to show a button or a spinner for the whole
+      group.
+  */
+  @property gtk.widget.Widget headerSuffix()
+  {
+    return getHeaderSuffix();
+  }
+
+  /**
+      Set `headerSuffix` property.
+      Params:
+        propval = The header suffix widget.
+        
+        Displayed above the list, next to the title and description.
+        
+        Suffixes are commonly used to show a button or a spinner for the whole
+        group.
+  */
+  @property void headerSuffix(gtk.widget.Widget propval)
+  {
+    return setHeaderSuffix(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title for this group of preferences.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this group of preferences.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -116,7 +184,7 @@ class PreferencesGroup : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_group_get_header_suffix(cast(AdwPreferencesGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

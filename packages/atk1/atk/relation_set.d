@@ -22,7 +22,7 @@ import gobject.object;
     content which "flows" between them, among other types of possible
     relationships.
 */
-class RelationSet : gobject.object.ObjectG
+class RelationSet : gobject.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class RelationSet : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RelationSet self()
   {
     return this;
@@ -85,7 +86,7 @@ class RelationSet : gobject.object.ObjectG
         relationship = an #AtkRelationType
         target = an #AtkObject
   */
-  void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectAtk target)
+  void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     atk_relation_set_add_relation_by_type(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
   }
@@ -117,7 +118,7 @@ class RelationSet : gobject.object.ObjectG
       Returns: true if set contains a relation with the relationship
         type relationship with an object target, false otherwise
   */
-  bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectAtk target)
+  bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
     _retval = atk_relation_set_contains_target(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -147,7 +148,7 @@ class RelationSet : gobject.object.ObjectG
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation(cast(AtkRelationSet*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +164,7 @@ class RelationSet : gobject.object.ObjectG
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation_by_type(cast(AtkRelationSet*)cPtr, relationship);
-    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
     return _retval;
   }
 

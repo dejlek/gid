@@ -35,6 +35,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLDisplayEGL self()
   {
     return this;
@@ -60,7 +61,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_surfaceless();
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_with_egl_display(display);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,7 +88,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
     return _retval;
   }
 

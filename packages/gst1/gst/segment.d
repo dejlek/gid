@@ -85,116 +85,310 @@ class Segment : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Segment self()
   {
     return this;
   }
 
+  /**
+      Get `flags` field.
+      Returns: flags for this segment
+  */
   @property gst.types.SegmentFlags flags()
   {
     return cast(gst.types.SegmentFlags)(cast(GstSegment*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = flags for this segment
+  */
   @property void flags(gst.types.SegmentFlags propval)
   {
     (cast(GstSegment*)cPtr).flags = cast(GstSegmentFlags)propval;
   }
 
+  /**
+      Get `rate` field.
+      Returns: the playback rate of the segment is set in response to a seek
+                     event and, without any seek, the value should be `1.0`. This
+                     value is used by elements that synchronize buffer [running
+                     times](additional/design/synchronisation.md#running-time) on
+                     the clock (usually the sink elements), leading to consuming
+                     buffers faster (for a value `> 1.0`) or slower (for `0.0 <
+                     value < 1.0`) than normal playback speed. The rate also
+                     defines the playback direction, meaning that when the value is
+                     lower than `0.0`, the playback happens in reverse, and the
+                     [stream-time](additional/design/synchronisation.md#stream-time)
+                     is going backward. The `rate` value should never be `0.0`.
+  */
   @property double rate()
   {
     return (cast(GstSegment*)cPtr).rate;
   }
 
+  /**
+      Set `rate` field.
+      Params:
+        propval = the playback rate of the segment is set in response to a seek
+                       event and, without any seek, the value should be `1.0`. This
+                       value is used by elements that synchronize buffer [running
+                       times](additional/design/synchronisation.md#running-time) on
+                       the clock (usually the sink elements), leading to consuming
+                       buffers faster (for a value `> 1.0`) or slower (for `0.0 <
+                       value < 1.0`) than normal playback speed. The rate also
+                       defines the playback direction, meaning that when the value is
+                       lower than `0.0`, the playback happens in reverse, and the
+                       [stream-time](additional/design/synchronisation.md#stream-time)
+                       is going backward. The `rate` value should never be `0.0`.
+  */
   @property void rate(double propval)
   {
     (cast(GstSegment*)cPtr).rate = propval;
   }
 
+  /**
+      Get `appliedRate` field.
+      Returns: The applied rate is the rate that has been applied to the stream.
+                     The effective/resulting playback rate of a stream is
+                     `rate * applied_rate`.
+                     The applied rate can be set by source elements when a server is
+                     sending the stream with an already modified playback speed
+                     rate. Filter elements that modify the stream in a way that
+                     modifies the playback speed should also modify the applied
+                     rate. For example the #videorate element when its
+                     #videorate:rate property is set will set the applied rate of
+                     the segment it pushed downstream. Also #scaletempo applies the
+                     input segment rate to the stream and outputs a segment with
+                     rate=1.0 and applied_rate=<inputsegment.rate>.
+  */
   @property double appliedRate()
   {
     return (cast(GstSegment*)cPtr).appliedRate;
   }
 
+  /**
+      Set `appliedRate` field.
+      Params:
+        propval = The applied rate is the rate that has been applied to the stream.
+                       The effective/resulting playback rate of a stream is
+                       `rate * applied_rate`.
+                       The applied rate can be set by source elements when a server is
+                       sending the stream with an already modified playback speed
+                       rate. Filter elements that modify the stream in a way that
+                       modifies the playback speed should also modify the applied
+                       rate. For example the #videorate element when its
+                       #videorate:rate property is set will set the applied rate of
+                       the segment it pushed downstream. Also #scaletempo applies the
+                       input segment rate to the stream and outputs a segment with
+                       rate=1.0 and applied_rate=<inputsegment.rate>.
+  */
   @property void appliedRate(double propval)
   {
     (cast(GstSegment*)cPtr).appliedRate = propval;
   }
 
+  /**
+      Get `format` field.
+      Returns: the unit used for all of the segment's values.
+  */
   @property gst.types.Format format()
   {
     return cast(gst.types.Format)(cast(GstSegment*)cPtr).format;
   }
 
+  /**
+      Set `format` field.
+      Params:
+        propval = the unit used for all of the segment's values.
+  */
   @property void format(gst.types.Format propval)
   {
     (cast(GstSegment*)cPtr).format = cast(GstFormat)propval;
   }
 
+  /**
+      Get `base` field.
+      Returns: the running time (plus elapsed time, see offset) of the
+                     segment [start](GstSegment.start) ([stop](GstSegment.stop) if
+                     rate < 0.0).
+  */
   @property ulong base()
   {
     return (cast(GstSegment*)cPtr).base;
   }
 
+  /**
+      Set `base` field.
+      Params:
+        propval = the running time (plus elapsed time, see offset) of the
+                       segment [start](GstSegment.start) ([stop](GstSegment.stop) if
+                       rate < 0.0).
+  */
   @property void base(ulong propval)
   {
     (cast(GstSegment*)cPtr).base = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: the offset expresses the elapsed time (in buffer timestamps)
+                     before a seek with its start (stop if rate < 0.0) seek type
+                     set to #GST_SEEK_TYPE_NONE, the value is set to the position
+                     of the segment at the time of the seek.
+  */
   @property ulong offset()
   {
     return (cast(GstSegment*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = the offset expresses the elapsed time (in buffer timestamps)
+                       before a seek with its start (stop if rate < 0.0) seek type
+                       set to #GST_SEEK_TYPE_NONE, the value is set to the position
+                       of the segment at the time of the seek.
+  */
   @property void offset(ulong propval)
   {
     (cast(GstSegment*)cPtr).offset = propval;
   }
 
+  /**
+      Get `start` field.
+      Returns: the start time of the segment (in buffer timestamps)
+                     [(PTS)](GstBuffer.pts), that is the timestamp of the first
+                     buffer to output inside the segment (last one during
+                     reverse playback). For example decoders will
+                     [clip](gst_segment_clip) out the buffers before the start
+                     time.
+  */
   @property ulong start()
   {
     return (cast(GstSegment*)cPtr).start;
   }
 
+  /**
+      Set `start` field.
+      Params:
+        propval = the start time of the segment (in buffer timestamps)
+                       [(PTS)](GstBuffer.pts), that is the timestamp of the first
+                       buffer to output inside the segment (last one during
+                       reverse playback). For example decoders will
+                       [clip](gst_segment_clip) out the buffers before the start
+                       time.
+  */
   @property void start(ulong propval)
   {
     (cast(GstSegment*)cPtr).start = propval;
   }
 
+  /**
+      Get `stop` field.
+      Returns: the stop time of the segment (in buffer timestamps)
+                     [(PTS)](GstBuffer.pts), that is the timestamp of the last
+                     buffer to output inside the segment (first one during
+                     reverse playback). For example decoders will
+                     [clip](gst_segment_clip) out buffers after the stop time.
+  */
   @property ulong stop()
   {
     return (cast(GstSegment*)cPtr).stop;
   }
 
+  /**
+      Set `stop` field.
+      Params:
+        propval = the stop time of the segment (in buffer timestamps)
+                       [(PTS)](GstBuffer.pts), that is the timestamp of the last
+                       buffer to output inside the segment (first one during
+                       reverse playback). For example decoders will
+                       [clip](gst_segment_clip) out buffers after the stop time.
+  */
   @property void stop(ulong propval)
   {
     (cast(GstSegment*)cPtr).stop = propval;
   }
 
+  /**
+      Get `time` field.
+      Returns: the stream time of the segment [start](GstSegment.start)
+                     ([stop](GstSegment.stop) if rate < 0.0).
+  */
   @property ulong time()
   {
     return (cast(GstSegment*)cPtr).time;
   }
 
+  /**
+      Set `time` field.
+      Params:
+        propval = the stream time of the segment [start](GstSegment.start)
+                       ([stop](GstSegment.stop) if rate < 0.0).
+  */
   @property void time(ulong propval)
   {
     (cast(GstSegment*)cPtr).time = propval;
   }
 
+  /**
+      Get `position` field.
+      Returns: the buffer timestamp position in the segment is supposed to be
+                     updated by elements such as sources, demuxers or parsers to
+                     track progress by setting it to the last pushed buffer' end time
+                     ([timestamp](GstBuffer.pts) + #GstBuffer.duration) for that
+                     specific segment. The position is used when reconfiguring the
+                     segment with #gst_segment_do_seek when the seek is only
+                     updating the segment (see [offset](GstSegment.offset)).
+  */
   @property ulong position()
   {
     return (cast(GstSegment*)cPtr).position;
   }
 
+  /**
+      Set `position` field.
+      Params:
+        propval = the buffer timestamp position in the segment is supposed to be
+                       updated by elements such as sources, demuxers or parsers to
+                       track progress by setting it to the last pushed buffer' end time
+                       ([timestamp](GstBuffer.pts) + #GstBuffer.duration) for that
+                       specific segment. The position is used when reconfiguring the
+                       segment with #gst_segment_do_seek when the seek is only
+                       updating the segment (see [offset](GstSegment.offset)).
+  */
   @property void position(ulong propval)
   {
     (cast(GstSegment*)cPtr).position = propval;
   }
 
+  /**
+      Get `duration` field.
+      Returns: the duration of the segment is the maximum absolute difference
+                     between #GstSegment.start and #GstSegment.stop if stop is not
+                     set, otherwise it should be the difference between those
+                     two values. This should be set by elements that know the
+                     overall stream duration (like demuxers) and will be used when
+                     seeking with #GST_SEEK_TYPE_END.
+  */
   @property ulong duration()
   {
     return (cast(GstSegment*)cPtr).duration;
   }
 
+  /**
+      Set `duration` field.
+      Params:
+        propval = the duration of the segment is the maximum absolute difference
+                       between #GstSegment.start and #GstSegment.stop if stop is not
+                       set, otherwise it should be the difference between those
+                       two values. This should be set by elements that know the
+                       overall stream duration (like demuxers) and will be used when
+                       seeking with #GST_SEEK_TYPE_END.
+  */
   @property void duration(ulong propval)
   {
     (cast(GstSegment*)cPtr).duration = propval;

@@ -51,9 +51,46 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Frame self()
   {
     return this;
+  }
+
+  /** */
+  @property bool closeable()
+  {
+    return getCloseable();
+  }
+
+  /** */
+  @property bool empty()
+  {
+    return getEmpty();
+  }
+
+  /** */
+  @property gtk.widget.Widget placeholder()
+  {
+    return getPlaceholder();
+  }
+
+  /** */
+  @property void placeholder(gtk.widget.Widget propval)
+  {
+    return setPlaceholder(propval);
+  }
+
+  /** */
+  @property panel.widget.Widget visibleChild()
+  {
+    return getVisibleChild();
+  }
+
+  /** */
+  @property void visibleChild(panel.widget.Widget propval)
+  {
+    return setVisibleChild(propval);
   }
 
   mixin OrientableT!();
@@ -122,7 +159,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     PanelFrameHeader* _cretval;
     _cretval = panel_frame_get_header(cast(PanelFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.frame_header.FrameHeader)(cast(PanelFrameHeader*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame_header.FrameHeader)(cast(PanelFrameHeader*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +185,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     PanelWidget* _cretval;
     _cretval = panel_frame_get_page(cast(PanelFrame*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +197,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkSelectionModel* _cretval;
     _cretval = panel_frame_get_pages(cast(PanelFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -172,7 +209,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_get_placeholder(cast(PanelFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +221,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     PanelPosition* _cretval;
     _cretval = panel_frame_get_position(cast(PanelFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -207,7 +244,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   {
     PanelWidget* _cretval;
     _cretval = panel_frame_get_visible_child(cast(PanelFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +279,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setHeader(panel.frame_header.FrameHeader header = null)
   {
-    panel_frame_set_header(cast(PanelFrame*)cPtr, header ? cast(PanelFrameHeader*)(cast(ObjectG)header).cPtr(No.Dup) : null);
+    panel_frame_set_header(cast(PanelFrame*)cPtr, header ? cast(PanelFrameHeader*)(cast(gobject.object.ObjectWrap)header).cPtr(No.Dup) : null);
   }
 
   /**

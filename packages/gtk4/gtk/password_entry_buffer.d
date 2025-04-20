@@ -35,6 +35,7 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PasswordEntryBuffer self()
   {
     return this;

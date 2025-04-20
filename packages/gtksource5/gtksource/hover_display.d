@@ -45,6 +45,7 @@ class HoverDisplay : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HoverDisplay self()
   {
     return this;

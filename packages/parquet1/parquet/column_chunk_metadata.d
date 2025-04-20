@@ -9,7 +9,7 @@ import parquet.statistics;
 import parquet.types;
 
 /** */
-class ColumnChunkMetadata : gobject.object.ObjectG
+class ColumnChunkMetadata : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnChunkMetadata self()
   {
     return this;
@@ -65,7 +66,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
   {
     GParquetStatistics* _cretval;
     _cretval = gparquet_column_chunk_metadata_get_statistics(cast(GParquetColumnChunkMetadata*)cPtr);
-    auto _retval = ObjectG.getDObject!(parquet.statistics.Statistics)(cast(GParquetStatistics*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.statistics.Statistics)(cast(GParquetStatistics*)_cretval, Yes.Take);
     return _retval;
   }
 

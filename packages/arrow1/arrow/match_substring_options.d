@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class MatchSubstringOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,50 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MatchSubstringOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `ignoreCase` property.
+      Returns: Whether to perform a case-insensitive match.
+  */
+  @property bool ignoreCase()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("ignore-case");
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = Whether to perform a case-insensitive match.
+  */
+  @property void ignoreCase(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("ignore-case", propval);
+  }
+
+  /**
+      Get `pattern` property.
+      Returns: The exact substring (or regex, depending on kernel) to look for
+      inside input values.
+  */
+  @property string pattern()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("pattern");
+  }
+
+  /**
+      Set `pattern` property.
+      Params:
+        propval = The exact substring (or regex, depending on kernel) to look for
+        inside input values.
+  */
+  @property void pattern(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("pattern", propval);
   }
 
   /** */

@@ -75,6 +75,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileFilter self()
   {
     return this;
@@ -110,11 +111,11 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
         variant = an a{sv} #GVariant
       Returns: a new #GtkFileFilter object
   */
-  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.VariantG variant)
+  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant)
   {
     GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
+    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -252,11 +253,11 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Serialize a file filter to an a{sv} variant.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.VariantG toGvariant()
+  glib.variant.Variant toGvariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -39,7 +39,7 @@ import gtk.types;
     
     Marks are typically created using the [gtk.text_buffer.TextBuffer.createMark] function.
 */
-class TextMark : gobject.object.ObjectG
+class TextMark : gobject.object.ObjectWrap
 {
 
   /** */
@@ -61,6 +61,7 @@ class TextMark : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextMark self()
   {
     return this;
@@ -99,7 +100,7 @@ class TextMark : gobject.object.ObjectG
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 

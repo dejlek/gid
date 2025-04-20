@@ -19,7 +19,7 @@ import webkit.types;
     When a WebKitClipboardPermissionRequest is not handled by the user,
     it is denied by default.
 */
-class ClipboardPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

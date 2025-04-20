@@ -42,6 +42,7 @@ class MainContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MainContext self()
   {
     return this;

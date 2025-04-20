@@ -46,7 +46,7 @@ class PathBuf
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.PathBuf");
+      throw new GidConstructException("Null instance pointer for glib.path_buf.PathBuf");
 
     cInstance = *cast(GPathBuf*)ptr;
 

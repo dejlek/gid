@@ -37,6 +37,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLFilter self()
   {
     return this;
@@ -83,7 +84,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     {
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

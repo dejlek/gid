@@ -904,7 +904,7 @@ pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.
       text = address of return location for text with tags stripped
       accelChar = address of return location for accelerator char
     Returns: false if error is set, otherwise true
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, out pango.attr_list.AttrList attrList, out string text, out dchar accelChar)
 {
@@ -914,7 +914,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   GError *_err;
   _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
   text = _text.fromCString(Yes.Free);
   return _retval;
@@ -1014,7 +1014,7 @@ bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, o
       text = address of return location for text with tags stripped
       accelChar = address of return location for accelerator char
     Returns: false if error is set, otherwise true
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrList attrList, out string text, out dchar accelChar)
 {
@@ -1029,7 +1029,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   GError *_err;
   _retval = pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
   text = _text.fromCString(Yes.Free);
   return _retval;

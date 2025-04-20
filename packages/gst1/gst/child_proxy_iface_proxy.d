@@ -5,7 +5,7 @@ import gobject.object;
 import gst.child_proxy;
 import gst.child_proxy_mixin;
 
-/// Proxy object for [Gst.ChildProxy] interface when a GObject has no applicable D binding
+/// Proxy object for [gst.child_proxy.ChildProxy] interface when a GObject has no applicable D binding
 class ChildProxyIfaceProxy : IfaceProxy, gst.child_proxy.ChildProxy
 {
   this(void* ptr, Flag!"Take" take = No.Take)

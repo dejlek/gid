@@ -49,8 +49,8 @@ import gtk.widget;
     
     The column view also supports interactive resizing and reordering of
     columns, via Drag-and-Drop of the column headers. This can be enabled or
-    disabled with the [gtk.column_view.ColumnView.gboolean] and
-    [gtk.column_view_column.ColumnViewColumn.gboolean] properties.
+    disabled with the [gtk.column_view.ColumnView.reorderable] and
+    [gtk.column_view_column.ColumnViewColumn.resizable] properties.
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
@@ -112,9 +112,199 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnView self()
   {
     return this;
+  }
+
+  /**
+      Get `columns` property.
+      Returns: The list of columns.
+  */
+  @property gio.list_model.ListModel columns()
+  {
+    return getColumns();
+  }
+
+  /**
+      Get `enableRubberband` property.
+      Returns: Allow rubberband selection.
+  */
+  @property bool enableRubberband()
+  {
+    return getEnableRubberband();
+  }
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+  */
+  @property void enableRubberband(bool propval)
+  {
+    return setEnableRubberband(propval);
+  }
+
+  /**
+      Get `headerFactory` property.
+      Returns: Factory for creating header widgets.
+  */
+  @property gtk.list_item_factory.ListItemFactory headerFactory()
+  {
+    return getHeaderFactory();
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = Factory for creating header widgets.
+  */
+  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setHeaderFactory(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: Model for the items displayed.
+  */
+  @property gtk.selection_model.SelectionModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+  */
+  @property void model(gtk.selection_model.SelectionModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `reorderable` property.
+      Returns: Whether columns are reorderable.
+  */
+  @property bool reorderable()
+  {
+    return getReorderable();
+  }
+
+  /**
+      Set `reorderable` property.
+      Params:
+        propval = Whether columns are reorderable.
+  */
+  @property void reorderable(bool propval)
+  {
+    return setReorderable(propval);
+  }
+
+  /**
+      Get `rowFactory` property.
+      Returns: The factory used for configuring rows.
+  */
+  @property gtk.list_item_factory.ListItemFactory rowFactory()
+  {
+    return getRowFactory();
+  }
+
+  /**
+      Set `rowFactory` property.
+      Params:
+        propval = The factory used for configuring rows.
+  */
+  @property void rowFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setRowFactory(propval);
+  }
+
+  /**
+      Get `showColumnSeparators` property.
+      Returns: Show separators between columns.
+  */
+  @property bool showColumnSeparators()
+  {
+    return getShowColumnSeparators();
+  }
+
+  /**
+      Set `showColumnSeparators` property.
+      Params:
+        propval = Show separators between columns.
+  */
+  @property void showColumnSeparators(bool propval)
+  {
+    return setShowColumnSeparators(propval);
+  }
+
+  /**
+      Get `showRowSeparators` property.
+      Returns: Show separators between rows.
+  */
+  @property bool showRowSeparators()
+  {
+    return getShowRowSeparators();
+  }
+
+  /**
+      Set `showRowSeparators` property.
+      Params:
+        propval = Show separators between rows.
+  */
+  @property void showRowSeparators(bool propval)
+  {
+    return setShowRowSeparators(propval);
+  }
+
+  /**
+      Get `singleClickActivate` property.
+      Returns: Activate rows on single click and select them on hover.
+  */
+  @property bool singleClickActivate()
+  {
+    return getSingleClickActivate();
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+  */
+  @property void singleClickActivate(bool propval)
+  {
+    return setSingleClickActivate(propval);
+  }
+
+  /**
+      Get `sorter` property.
+      Returns: Sorter with the sorting choices of the user.
+  */
+  @property gtk.sorter.Sorter sorter()
+  {
+    return getSorter();
+  }
+
+  /**
+      Get `tabBehavior` property.
+      Returns: Behavior of the <kbd>Tab</kbd> key
+  */
+  @property gtk.types.ListTabBehavior tabBehavior()
+  {
+    return getTabBehavior();
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+  */
+  @property void tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setTabBehavior(propval);
   }
 
   mixin ScrollableT!();
@@ -132,7 +322,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -160,7 +350,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GListModel* _cretval;
     _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +373,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,7 +385,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_column_view_get_model(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +408,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -284,7 +474,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -381,7 +571,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

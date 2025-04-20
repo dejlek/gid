@@ -68,9 +68,163 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExpanderRow self()
   {
     return this;
+  }
+
+  /**
+      Get `enableExpansion` property.
+      Returns: Whether expansion is enabled.
+  */
+  @property bool enableExpansion()
+  {
+    return getEnableExpansion();
+  }
+
+  /**
+      Set `enableExpansion` property.
+      Params:
+        propval = Whether expansion is enabled.
+  */
+  @property void enableExpansion(bool propval)
+  {
+    return setEnableExpansion(propval);
+  }
+
+  /**
+      Get `expanded` property.
+      Returns: Whether the row is expanded.
+  */
+  @property bool expanded()
+  {
+    return getExpanded();
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the row is expanded.
+  */
+  @property void expanded(bool propval)
+  {
+    return setExpanded(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for this row.
+  
+      Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+  
+      Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `showEnableSwitch` property.
+      Returns: Whether the switch enabling the expansion is visible.
+  */
+  @property bool showEnableSwitch()
+  {
+    return getShowEnableSwitch();
+  }
+
+  /**
+      Set `showEnableSwitch` property.
+      Params:
+        propval = Whether the switch enabling the expansion is visible.
+  */
+  @property void showEnableSwitch(bool propval)
+  {
+    return setShowEnableSwitch(propval);
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle for this row.
+      
+      The subtitle is interpreted as Pango markup unless
+      `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property string subtitle()
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+        
+        The subtitle is interpreted as Pango markup unless
+        `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property void subtitle(string propval)
+  {
+    return setSubtitle(propval);
+  }
+
+  /**
+      Get `subtitleLines` property.
+      Returns: The number of lines at the end of which the subtitle label will be
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  */
+  @property int subtitleLines()
+  {
+    return getSubtitleLines();
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+        ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property void subtitleLines(int propval)
+  {
+    return setSubtitleLines(propval);
+  }
+
+  /**
+      Get `titleLines` property.
+      Returns: The number of lines at the end of which the title label will be ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  */
+  @property int titleLines()
+  {
+    return getTitleLines();
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property void titleLines(int propval)
+  {
+    return setTitleLines(propval);
   }
 
   /**

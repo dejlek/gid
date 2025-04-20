@@ -27,7 +27,7 @@ import gtk.window;
     [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
     and the results can be obtained by calling the corresponding finish methods.
 */
-class PrintDialog : gobject.object.ObjectG
+class PrintDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,109 @@ class PrintDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptLabel` property.
+      Returns: A label that may be shown on the accept button of a print dialog
+      that is presented by [gtk.print_dialog.PrintDialog.setup].
+  */
+  @property string acceptLabel()
+  {
+    return getAcceptLabel();
+  }
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = A label that may be shown on the accept button of a print dialog
+        that is presented by [gtk.print_dialog.PrintDialog.setup].
+  */
+  @property void acceptLabel(string propval)
+  {
+    return setAcceptLabel(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the print dialog is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the print dialog is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `pageSetup` property.
+      Returns: The page setup to use.
+  */
+  @property gtk.page_setup.PageSetup pageSetup()
+  {
+    return getPageSetup();
+  }
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The page setup to use.
+  */
+  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setPageSetup(propval);
+  }
+
+  /**
+      Get `printSettings` property.
+      Returns: The print settings to use.
+  */
+  @property gtk.print_settings.PrintSettings printSettings()
+  {
+    return getPrintSettings();
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The print settings to use.
+  */
+  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setPrintSettings(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: A title that may be shown on the print dialog that is
+      presented by [gtk.print_dialog.PrintDialog.setup].
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the print dialog that is
+        presented by [gtk.print_dialog.PrintDialog.setup].
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -99,7 +199,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_dialog_get_page_setup(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +211,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_dialog_get_print_settings(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +250,7 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -181,12 +281,12 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_print_dialog_print_file(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.Dup) : null, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_print_dialog_print_file(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.Dup) : null, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -196,15 +296,15 @@ class PrintDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: Whether the call was successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool printFileFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -225,16 +325,16 @@ class PrintDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a [gio.output_stream.OutputStream]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.output_stream.OutputStream printFinish(gio.async_result.AsyncResult result)
   {
     GOutputStream* _cretval;
     GError *_err;
-    _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -326,7 +426,7 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -345,15 +445,15 @@ class PrintDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: The [gtk.print_setup.PrintSetup] object that resulted from the call,
           or `NULL` if the call was not successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gtk.print_setup.PrintSetup setupFinish(gio.async_result.AsyncResult result)
   {
     GtkPrintSetup* _cretval;
     GError *_err;
-    _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

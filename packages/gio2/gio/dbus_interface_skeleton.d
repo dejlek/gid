@@ -18,7 +18,7 @@ import gobject.object;
 /**
     Abstract base class for D-Bus interfaces on the service side.
 */
-class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInterface
+class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBusInterface
 {
 
   /** */
@@ -40,9 +40,29 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusInterfaceSkeleton self()
   {
     return this;
+  }
+
+  /**
+      Get `gFlags` property.
+      Returns: Flags from the #GDBusInterfaceSkeletonFlags enumeration.
+  */
+  @property gio.types.DBusInterfaceSkeletonFlags gFlags()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.DBusInterfaceSkeletonFlags)("g-flags");
+  }
+
+  /**
+      Set `gFlags` property.
+      Params:
+        propval = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
+  */
+  @property void gFlags(gio.types.DBusInterfaceSkeletonFlags propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.types.DBusInterfaceSkeletonFlags)("g-flags", propval);
   }
 
   mixin DBusInterfaceT!();
@@ -61,7 +81,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
         objectPath = The path to export the interface at.
       Returns: true if the interface was exported on connection, otherwise false with
         error set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool export_(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
@@ -70,7 +90,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
     GError *_err;
     _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _objectPath, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -98,7 +118,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +127,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
       Returns: A list of
           all the connections that interface_ is exported on. The returned
           list should be freed with [glib.list.List.free] after each element has
-          been freed with [gobject.object.ObjectG.unref].
+          been freed with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_connection.DBusConnection[] getConnections()
   {
@@ -160,13 +180,13 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
       Gets all D-Bus properties for interface_.
       Returns: A #GVariant of type
         ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
-        Free with [glib.variant.VariantG.unref].
+        Free with [glib.variant.Variant.unref].
   */
-  glib.variant.VariantG getProperties()
+  glib.variant.Variant getProperties()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

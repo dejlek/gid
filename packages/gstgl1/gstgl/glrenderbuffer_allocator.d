@@ -32,6 +32,7 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLRenderbufferAllocator self()
   {
     return this;

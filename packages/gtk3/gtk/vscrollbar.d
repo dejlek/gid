@@ -46,6 +46,7 @@ class VScrollbar : gtk.scrollbar.Scrollbar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VScrollbar self()
   {
     return this;

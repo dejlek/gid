@@ -38,6 +38,7 @@ class BreakpointCondition : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BreakpointCondition self()
   {
     return this;

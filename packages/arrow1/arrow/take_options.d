@@ -30,6 +30,7 @@ class TakeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TakeOptions self()
   {
     return this;

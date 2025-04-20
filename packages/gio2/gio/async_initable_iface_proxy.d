@@ -5,7 +5,7 @@ import gobject.object;
 import gio.async_initable;
 import gio.async_initable_mixin;
 
-/// Proxy object for [Gio.AsyncInitable] interface when a GObject has no applicable D binding
+/// Proxy object for [gio.async_initable.AsyncInitable] interface when a GObject has no applicable D binding
 class AsyncInitableIfaceProxy : IfaceProxy, gio.async_initable.AsyncInitable
 {
   this(void* ptr, Flag!"Take" take = No.Take)

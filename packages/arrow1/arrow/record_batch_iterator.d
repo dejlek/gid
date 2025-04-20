@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class RecordBatchIterator : gobject.object.ObjectG
+class RecordBatchIterator : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchIterator self()
   {
     return this;
@@ -62,8 +63,8 @@ class RecordBatchIterator : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_record_batch_iterator_next(cast(GArrowRecordBatchIterator*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -74,7 +75,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_record_batch_iterator_to_list(cast(GArrowRecordBatchIterator*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.record_batch.RecordBatch, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

@@ -38,6 +38,7 @@ class AudioClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioClock self()
   {
     return this;
@@ -59,7 +60,7 @@ class AudioClock : gst.system_clock.SystemClock
     {
       auto _dlg = cast(gstaudio.types.AudioClockGetTimeFunc*)userData;
 
-      GstClockTime _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      GstClockTime _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

@@ -90,27 +90,46 @@ class Schema : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Schema self()
   {
     return this;
   }
 
+  /**
+      Get `name` field.
+      Returns: the dotted name of the schema
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = the dotted name of the schema
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
     dToC(propval, cast(void*)&(cast(SecretSchema*)cPtr).name);
   }
 
+  /**
+      Get `flags` field.
+      Returns: flags for the schema
+  */
   @property secret.types.SchemaFlags flags()
   {
     return cast(secret.types.SchemaFlags)(cast(SecretSchema*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = flags for the schema
+  */
   @property void flags(secret.types.SchemaFlags propval)
   {
     (cast(SecretSchema*)cPtr).flags = cast(SecretSchemaFlags)propval;

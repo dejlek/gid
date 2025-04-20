@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class LocalFileSystemOptions : gobject.object.ObjectG
+class LocalFileSystemOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,31 @@ class LocalFileSystemOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LocalFileSystemOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `useMmap` property.
+      Returns: Whether open_input_stream and open_input_file return a mmap'ed file,
+      or a regular one.
+  */
+  @property bool useMmap()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-mmap");
+  }
+
+  /**
+      Set `useMmap` property.
+      Params:
+        propval = Whether open_input_stream and open_input_file return a mmap'ed file,
+        or a regular one.
+  */
+  @property void useMmap(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-mmap", propval);
   }
 
   /** */

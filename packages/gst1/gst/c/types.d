@@ -4021,7 +4021,7 @@ struct GstAtomicQueue;
     [gst.bin.Bin.iterateElements]. Various other iterators exist to retrieve the
     elements in a bin.
     
-    [gst.object.ObjectGst.unref] is used to drop your reference to the bin.
+    [gst.object.ObjectWrap.unref] is used to drop your reference to the bin.
     
     The #GstBin::element-added signal is fired whenever a new element is added to
     the bin. Likewise the #GstBin::element-removed signal is fired whenever an
@@ -6347,7 +6347,7 @@ struct GstObjectClass
   GInitiallyUnownedClass parentClass;
 
   /**
-      separator used by [gst.object.ObjectGst.getPathString]
+      separator used by [gst.object.ObjectWrap.getPathString]
   */
   const(char)* pathStringSeparator;
 
@@ -6368,14 +6368,14 @@ struct GstObjectClass
     #GstObject gives us basic refcounting, parenting functionality and locking.
     Most of the functions are just extended for special GStreamer needs and can be
     found under the same name in the base class of #GstObject which is #GObject
-    (e.g. [gobject.object.ObjectG.ref_] becomes [gst.object.ObjectGst.ref_]).
+    (e.g. [gobject.object.ObjectWrap.ref_] becomes [gst.object.ObjectWrap.ref_]).
     
     Since #GstObject derives from #GInitiallyUnowned, it also inherits the
     floating reference. Be aware that functions such as [gst.bin.Bin.add] and
     [gst.element.Element.addPad] take ownership of the floating reference.
     
     In contrast to #GObject instances, #GstObject adds a name property. The functions
-    [gst.object.ObjectGst.setName] and [gst.object.ObjectGst.getName] are used to set/get the name
+    [gst.object.ObjectWrap.setName] and [gst.object.ObjectWrap.getName] are used to set/get the name
     of the object.
     
     ## controlled properties
@@ -6973,7 +6973,7 @@ struct GstParseContext;
     application.
     
     [gst.pipeline.Pipeline.new_] is used to create a pipeline. when you are done with
-    the pipeline, use [gst.object.ObjectGst.unref] to free its resources including all
+    the pipeline, use [gst.object.ObjectWrap.unref] to free its resources including all
     added #GstElement objects (if not otherwise referenced).
     
     Elements are added and removed from the pipeline using the #GstBin
@@ -8160,7 +8160,7 @@ struct GstTagSetterInterface
     not running anymore. Use [gst.task.Task.join] to make sure the task is completely
     stopped and the thread is stopped.
     
-    After creating a #GstTask, use [gst.object.ObjectGst.unref] to free its resources. This can
+    After creating a #GstTask, use [gst.object.ObjectWrap.unref] to free its resources. This can
     only be done when the task is not running anymore.
     
     Task functions can send a #GstMessage to send out-of-band data to the

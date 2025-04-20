@@ -33,6 +33,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FixedSizeBinaryArrayBuilder self()
   {
     return this;
@@ -58,7 +59,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_fixed_size_binary_array_builder_append_value(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, _value, _length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_fixed_size_binary_array_builder_append_value_bytes(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -84,7 +85,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValues(glib.bytes.Bytes[] values, bool[] isValids = null)
   {
@@ -106,7 +107,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_fixed_size_binary_array_builder_append_values(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -124,7 +125,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids = null)
   {
@@ -137,7 +138,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_fixed_size_binary_array_builder_append_values_packed(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, values ? cast(GBytes*)values.cPtr(No.Dup) : null, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

@@ -33,9 +33,29 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufSimpleAnim self()
   {
     return this;
+  }
+
+  /**
+      Get `loop` property.
+      Returns: Whether the animation should loop when it reaches the end.
+  */
+  @property bool loop()
+  {
+    return getLoop();
+  }
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = Whether the animation should loop when it reaches the end.
+  */
+  @property void loop(bool propval)
+  {
+    return setLoop(propval);
   }
 
   /**

@@ -25,7 +25,7 @@ import gtk.types;
     The source and target, as well as their attributes, of a [gtk.constraint.Constraint]
     instance are immutable after creation.
 */
-class Constraint : gobject.object.ObjectG
+class Constraint : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,7 @@ class Constraint : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Constraint self()
   {
     return this;
@@ -70,7 +71,7 @@ class Constraint : gobject.object.ObjectG
   this(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, gtk.constraint_target.ConstraintTarget source, gtk.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(ObjectG)source).cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
+    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target).cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)source).cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
     this(_cretval, Yes.Take);
   }
 
@@ -89,8 +90,8 @@ class Constraint : gobject.object.ObjectG
   static gtk.constraint.Constraint newConstant(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
-    auto _retval = ObjectG.getDObject!(gtk.constraint.Constraint)(cast(GtkConstraint*)_cretval, Yes.Take);
+    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target).cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint.Constraint)(cast(GtkConstraint*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -141,7 +142,7 @@ class Constraint : gobject.object.ObjectG
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_source(cast(GtkConstraint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -180,7 +181,7 @@ class Constraint : gobject.object.ObjectG
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_target(cast(GtkConstraint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,7 +211,7 @@ class Constraint : gobject.object.ObjectG
 
   /**
       Checks whether the constraint describes a relation between an attribute
-      on the [gtk.constraint.Constraint.ConstraintTarget] and a constant value.
+      on the [gtk.constraint.Constraint.target] and a constant value.
       Returns: `TRUE` if the constraint is a constant relation
   */
   bool isConstant()

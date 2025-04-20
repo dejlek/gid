@@ -13,10 +13,17 @@ import graphene.types;
 class Size : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `size.Size` boxed type.
+      Params:
+        width = the width
+        height = the height
+  */
+  this(float width = 0.0, float height = 0.0)
   {
     super(gMalloc(graphene_size_t.sizeof), Yes.Take);
+    this.width = width;
+    this.height = height;
   }
 
   /** */
@@ -44,26 +51,45 @@ class Size : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Size self()
   {
     return this;
   }
 
+  /**
+      Get `width` field.
+      Returns: the width
+  */
   @property float width()
   {
     return (cast(graphene_size_t*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the width
+  */
   @property void width(float propval)
   {
     (cast(graphene_size_t*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the height
+  */
   @property float height()
   {
     return (cast(graphene_size_t*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the height
+  */
   @property void height(float propval)
   {
     (cast(graphene_size_t*)cPtr).height = propval;

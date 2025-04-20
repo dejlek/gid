@@ -35,6 +35,7 @@ class FlowBoxChild : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FlowBoxChild self()
   {
     return this;

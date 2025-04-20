@@ -61,7 +61,7 @@ template ProxyResolverT()
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null)
   {
@@ -70,7 +70,7 @@ template ProxyResolverT()
     GError *_err;
     _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string[] _retval;
 
     if (_cretval)
@@ -101,7 +101,7 @@ template ProxyResolverT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -120,15 +120,15 @@ template ProxyResolverT()
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override string[] lookupFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string[] _retval;
 
     if (_cretval)

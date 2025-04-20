@@ -30,6 +30,7 @@ class UInt8Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UInt8Scalar self()
   {
     return this;

@@ -30,6 +30,7 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseMixerPad self()
   {
     return this;

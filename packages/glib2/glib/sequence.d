@@ -20,7 +20,7 @@ class Sequence
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Sequence");
+      throw new GidConstructException("Null instance pointer for glib.sequence.Sequence");
 
     cInstancePtr = cast(GSequence*)ptr;
 

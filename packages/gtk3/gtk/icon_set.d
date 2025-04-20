@@ -44,6 +44,7 @@ class IconSet : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconSet self()
   {
     return this;
@@ -191,7 +192,7 @@ class IconSet : gobject.boxed.Boxed
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_icon_set_render_icon(cast(GtkIconSet*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -215,7 +216,7 @@ class IconSet : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     _cretval = gtk_icon_set_render_icon_pixbuf(cast(GtkIconSet*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

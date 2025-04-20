@@ -84,9 +84,86 @@ class Frame : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Frame self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: Text of the frame's label.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the frame's label.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `labelWidget` property.
+      Returns: Widget to display in place of the usual frame label.
+  */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /**
+      Set `labelWidget` property.
+      Params:
+        propval = Widget to display in place of the usual frame label.
+  */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
+  }
+
+  /**
+      Get `labelXalign` property.
+      Returns: The horizontal alignment of the label.
+  */
+  @property float labelXalign()
+  {
+    return getLabelAlign();
+  }
+
+  /**
+      Set `labelXalign` property.
+      Params:
+        propval = The horizontal alignment of the label.
+  */
+  @property void labelXalign(float propval)
+  {
+    return setLabelAlign(propval);
   }
 
   /**
@@ -114,7 +191,7 @@ class Frame : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_child(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +231,7 @@ class Frame : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

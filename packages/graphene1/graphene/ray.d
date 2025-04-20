@@ -22,7 +22,9 @@ import graphene.vec3;
 class Ray : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `ray.Ray` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_ray_t.sizeof), Yes.Take);
@@ -53,6 +55,7 @@ class Ray : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Ray self()
   {
     return this;

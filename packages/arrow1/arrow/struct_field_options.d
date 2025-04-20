@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.object;
 
 /** */
 class StructFieldOptions : arrow.function_options.FunctionOptions
@@ -31,9 +32,16 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StructFieldOptions self()
   {
     return this;
+  }
+
+  /** */
+  @property string fieldRef()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("field-ref");
   }
 
   /** */
@@ -51,6 +59,6 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     GError *_err;
     garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)cPtr, _fieldRef, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
   }
 }

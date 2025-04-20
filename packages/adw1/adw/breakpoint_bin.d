@@ -67,8 +67,8 @@ import gtk.widget;
     changes. Make sure to leave enough space for text labels, and enable
     ellipsizing or wrapping if they might not fit.
     
-    For [gtk.label.Label] this can be done via [gtk.label.Label.Pango.EllipsizeMode], or
-    via [gtk.label.Label.gboolean] together with [gtk.label.Label.gboolean].
+    For [gtk.label.Label] this can be done via [gtk.label.Label.ellipsize], or
+    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrap].
     
     For buttons, use `property@Gtk.Button:can-shrink`,
     `property@Gtk.MenuButton:can-shrink`, `property@Adw.SplitButton:can-shrink`,
@@ -150,9 +150,38 @@ class BreakpointBin : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BreakpointBin self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `currentBreakpoint` property.
+      Returns: The current breakpoint.
+  */
+  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  {
+    return getCurrentBreakpoint();
   }
 
   /**
@@ -185,7 +214,7 @@ class BreakpointBin : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_breakpoint_bin_get_child(cast(AdwBreakpointBin*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +226,7 @@ class BreakpointBin : gtk.widget.Widget
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_breakpoint_bin_get_current_breakpoint(cast(AdwBreakpointBin*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 

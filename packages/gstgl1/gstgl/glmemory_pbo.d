@@ -16,7 +16,9 @@ import gstgl.types;
 class GLMemoryPBO : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `glmemory_pbo.GLMemoryPBO` boxed type.
+  */
   this()
   {
     super(gMalloc(GstGLMemoryPBO.sizeof), Yes.Take);
@@ -47,6 +49,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemoryPBO self()
   {
     return this;

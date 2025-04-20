@@ -58,7 +58,7 @@ class Relation
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Relation");
+      throw new GidConstructException("Null instance pointer for glib.relation.Relation");
 
     cInstancePtr = cast(GRelation*)ptr;
 

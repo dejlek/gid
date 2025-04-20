@@ -16,7 +16,7 @@ public import gobject.object;
     The [gdk.popup.Popup] is positioned relative to its parent surface.
     
     [gdk.popup.Popup]s are typically used to implement menus and similar popups.
-    They can be modal, which is indicated by the [gdk.popup.Popup.gboolean]
+    They can be modal, which is indicated by the [gdk.popup.Popup.autohide]
     property.
 */
 template PopupT()
@@ -41,7 +41,7 @@ template PopupT()
   {
     GdkSurface* _cretval;
     _cretval = gdk_popup_get_parent(cast(GdkPopup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

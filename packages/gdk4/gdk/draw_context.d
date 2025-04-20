@@ -21,7 +21,7 @@ import gobject.object;
     
     A [gdk.draw_context.DrawContext] is always associated with a single toplevel surface.
 */
-class DrawContext : gobject.object.ObjectG
+class DrawContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class DrawContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DrawContext self()
   {
     return this;
@@ -105,7 +106,7 @@ class DrawContext : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +137,7 @@ class DrawContext : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

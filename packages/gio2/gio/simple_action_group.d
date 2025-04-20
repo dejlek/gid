@@ -17,7 +17,7 @@ import gobject.object;
     implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
     interfaces.
 */
-class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
+class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
   /** */
@@ -39,6 +39,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SimpleActionGroup self()
   {
     return this;
@@ -73,7 +74,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   */
   void insert(gio.action.Action action)
   {
-    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
+    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action).cPtr(No.Dup) : null);
   }
 
   /**
@@ -92,7 +93,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 

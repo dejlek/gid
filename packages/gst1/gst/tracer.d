@@ -2,6 +2,7 @@
 module gst.tracer;
 
 import gid.gid;
+import gobject.object;
 import gobject.types;
 import gst.c.functions;
 import gst.c.types;
@@ -15,7 +16,7 @@ import gst.types;
     [gst.global.tracingRegisterHook]. When invoked they receive hook specific
     contextual data, which they must not modify.
 */
-class Tracer : gst.object.ObjectGst
+class Tracer : gst.object.ObjectWrap
 {
 
   /** */
@@ -37,9 +38,22 @@ class Tracer : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Tracer self()
   {
     return this;
+  }
+
+  /** */
+  @property string params()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("params");
+  }
+
+  /** */
+  @property void params(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("params", propval);
   }
 
   /**

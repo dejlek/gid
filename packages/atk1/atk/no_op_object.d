@@ -40,7 +40,7 @@ import gobject.object;
     accessible object is requested for an object type for which no
     factory type is specified.
 */
-class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
+class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
 {
 
   /** */
@@ -62,6 +62,7 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NoOpObject self()
   {
     return this;
@@ -79,9 +80,9 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
   mixin TextT!();
   mixin ValueT!();
   mixin WindowT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 
   /**
       Provides a default (non-functioning stub) #AtkObject.
@@ -91,7 +92,7 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
         obj = a #GObject
       Returns: a default (non-functioning stub) #AtkObject
   */
-  this(gobject.object.ObjectG obj)
+  this(gobject.object.ObjectWrap obj)
   {
     AtkObject* _cretval;
     _cretval = atk_no_op_object_new(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);

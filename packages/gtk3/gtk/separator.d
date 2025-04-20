@@ -46,6 +46,7 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Separator self()
   {
     return this;

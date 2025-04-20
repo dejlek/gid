@@ -51,7 +51,7 @@ __gshared extern(C)
   void function(JSCContext* context, const(char)* errorName, const(char)* errorMessage) c_jsc_context_throw_with_name; ///
   void function(JSCContext* context, const(char)* errorName, const(char)* format,  ...) c_jsc_context_throw_with_name_printf; ///
 
-  // Exception
+  // ExceptionWrap
   GType function() c_jsc_exception_get_type; ///
   JSCException* function(JSCContext* context, const(char)* message) c_jsc_exception_new; ///
   JSCException* function(JSCContext* context, const(char)* format,  ...) c_jsc_exception_new_printf; ///
@@ -262,7 +262,7 @@ alias jsc_context_throw_with_name = c_jsc_context_throw_with_name;
 /** */
 alias jsc_context_throw_with_name_printf = c_jsc_context_throw_with_name_printf;
 
-// Exception
+// ExceptionWrap
 
 /** */
 alias jsc_exception_get_type = c_jsc_exception_get_type;
@@ -610,7 +610,7 @@ shared static this()
   gidLink(cast(void**)&jsc_context_throw_with_name, "jsc_context_throw_with_name", LIBS);
   gidLink(cast(void**)&jsc_context_throw_with_name_printf, "jsc_context_throw_with_name_printf", LIBS);
 
-  // Exception
+  // ExceptionWrap
   gidLink(cast(void**)&jsc_exception_get_type, "jsc_exception_get_type", LIBS);
   gidLink(cast(void**)&jsc_exception_new, "jsc_exception_new", LIBS);
   gidLink(cast(void**)&jsc_exception_new_printf, "jsc_exception_new_printf", LIBS);

@@ -17,7 +17,7 @@ class ButtonEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.ButtonEvent");
+      throw new GidConstructException("Null instance pointer for gdk.button_event.ButtonEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

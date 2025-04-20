@@ -22,7 +22,7 @@ class TextNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.TextNode");
+      throw new GidConstructException("Null instance pointer for gsk.text_node.TextNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }
@@ -67,7 +67,7 @@ class TextNode : gsk.render_node.RenderNode
   {
     PangoFont* _cretval;
     _cretval = gsk_text_node_get_font(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.Take);
     return _retval;
   }
 

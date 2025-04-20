@@ -17,7 +17,7 @@ import gobject.types;
     bidirectionally and are connected when the source object is set
     with [gobject.binding_group.BindingGroup.setSource].
 */
-class BindingGroup : gobject.object.ObjectG
+class BindingGroup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -39,9 +39,29 @@ class BindingGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BindingGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `source` property.
+      Returns: The source object used for binding properties.
+  */
+  @property gobject.object.ObjectWrap source()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("source");
+  }
+
+  /**
+      Set `source` property.
+      Params:
+        propval = The source object used for binding properties.
+  */
+  @property void source(gobject.object.ObjectWrap propval)
+  {
+    return setSource(propval);
   }
 
   /**
@@ -61,7 +81,7 @@ class BindingGroup : gobject.object.ObjectG
       is changed the target_property is updated using the same value.
       The binding flag [gobject.types.BindingFlags.SyncCreate] is automatically specified.
       
-      See [gobject.object.ObjectG.bindProperty] for more information.
+      See [gobject.object.ObjectWrap.bindProperty] for more information.
   
       Params:
         sourceProperty = the property on the source to bind
@@ -69,7 +89,7 @@ class BindingGroup : gobject.object.ObjectG
         targetProperty = the property on target to bind
         flags = the flags used to create the #GBinding
   */
-  void bind(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
+  void bind(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags)
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -86,7 +106,7 @@ class BindingGroup : gobject.object.ObjectG
       g_binding_group_bind_property_full(), using #GClosures
       instead of function pointers.
       
-      See [gobject.object.ObjectG.bindPropertyWithClosures] for more information.
+      See [gobject.object.ObjectWrap.bindPropertyWithClosures] for more information.
   
       Params:
         sourceProperty = the property on the source to bind
@@ -100,7 +120,7 @@ class BindingGroup : gobject.object.ObjectG
               transformation function from the target to the source object,
               or null to use the default
   */
-  void bindFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null)
+  void bindFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null)
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -111,11 +131,11 @@ class BindingGroup : gobject.object.ObjectG
       Gets the source object used for binding properties.
       Returns: a #GObject or null.
   */
-  gobject.object.ObjectG dupSource()
+  gobject.object.ObjectWrap dupSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_group_dup_source(cast(GBindingGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +150,7 @@ class BindingGroup : gobject.object.ObjectG
         source = the source #GObject,
             or null to clear it
   */
-  void setSource(gobject.object.ObjectG source = null)
+  void setSource(gobject.object.ObjectWrap source = null)
   {
     g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
   }

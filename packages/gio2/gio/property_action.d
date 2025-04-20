@@ -7,11 +7,13 @@ import gio.action_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import glib.variant;
+import glib.variant_type;
 import gobject.object;
 
 /**
     A [gio.property_action.PropertyAction] is a way to get a [gio.action.Action] with a state value
-    reflecting and controlling the value of a [gobject.object.ObjectG] property.
+    reflecting and controlling the value of a [gobject.object.ObjectWrap] property.
     
     The state of the action will correspond to the value of the property.
     Changing it will change the property (assuming the requested value
@@ -30,7 +32,7 @@ import gobject.object;
     Properties of object types, boxed types and pointer types are not
     supported and probably never will be.
     
-    Properties of [glib.variant.VariantG] types are not currently supported.
+    Properties of [glib.variant.Variant] types are not currently supported.
     
     If the property is boolean-valued then the action will have a `NULL`
     parameter type, and activating the action (with no parameter) will
@@ -63,7 +65,7 @@ import gobject.object;
     see [gio.settings.Settings.createAction] instead, and possibly combine its
     use with [gio.settings.Settings.bind].
 */
-class PropertyAction : gobject.object.ObjectG, gio.action.Action
+class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
 {
 
   /** */
@@ -85,9 +87,51 @@ class PropertyAction : gobject.object.ObjectG, gio.action.Action
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PropertyAction self()
   {
     return this;
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: If @action is currently enabled.
+      
+      If the action is disabled then calls to [gio.action.Action.activate] and
+      [gio.action.Action.changeState] have no effect.
+  */
+  @property bool enabled()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enabled");
+  }
+
+  /**
+      Get `parameterType` property.
+      Returns: The type of the parameter that must be given when activating the
+      action.
+  */
+  @property glib.variant_type.VariantType parameterType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("parameter-type");
+  }
+
+  /**
+      Get `state` property.
+      Returns: The state of the action, or null if the action is stateless.
+  */
+  @property glib.variant.Variant state()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("state");
+  }
+
+  /**
+      Get `stateType` property.
+      Returns: The #GVariantType of the state that the action has, or null if the
+      action is stateless.
+  */
+  @property glib.variant_type.VariantType stateType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("state-type");
   }
 
   mixin ActionT!();
@@ -109,7 +153,7 @@ class PropertyAction : gobject.object.ObjectG, gio.action.Action
         propertyName = the name of the property
       Returns: a new #GPropertyAction
   */
-  this(string name, gobject.object.ObjectG object, string propertyName)
+  this(string name, gobject.object.ObjectWrap object, string propertyName)
   {
     GPropertyAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

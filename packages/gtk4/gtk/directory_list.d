@@ -7,6 +7,7 @@ import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -18,14 +19,14 @@ import gtk.types;
     returned from that function.
     
     Enumeration will start automatically when the
-    [gtk.directory_list.DirectoryList.Gio.File] property is set.
+    [gtk.directory_list.DirectoryList.file] property is set.
     
     While the [gtk.directory_list.DirectoryList] is being filled, the
-    [gtk.directory_list.DirectoryList.gboolean] property will be set to true. You can
+    [gtk.directory_list.DirectoryList.loading] property will be set to true. You can
     listen to that property if you want to show information like a [gtk.spinner.Spinner]
     or a "Loading..." text.
     
-    If loading fails at any point, the [gtk.directory_list.DirectoryList.GLib.Error]
+    If loading fails at any point, the [gtk.directory_list.DirectoryList.error]
     property will be set to give more indication about the failure.
     
     The [gio.file_info.FileInfo]s returned from a [gtk.directory_list.DirectoryList] have the "standard::file"
@@ -35,7 +36,7 @@ import gtk.types;
     the [gio.file.File] directly from the [gio.file_info.FileInfo] when operating with a [gtk.list_view.ListView]
     or similar.
 */
-class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
+class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -57,9 +58,122 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DirectoryList self()
   {
     return this;
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: The attributes to query.
+  */
+  @property string attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+  */
+  @property void attributes(string propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /**
+      Get `error` property.
+      Returns: Error encountered while loading files.
+  */
+  @property glib.error.ErrorWrap error()
+  {
+    return getError();
+  }
+
+  /**
+      Get `file` property.
+      Returns: File to query.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = File to query.
+  */
+  @property void file(gio.file.File propval)
+  {
+    return setFile(propval);
+  }
+
+  /**
+      Get `ioPriority` property.
+      Returns: Priority used when loading.
+  */
+  @property int ioPriority()
+  {
+    return getIoPriority();
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+  */
+  @property void ioPriority(int propval)
+  {
+    return setIoPriority(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `loading` property.
+      Returns: true if files are being loaded.
+  */
+  @property bool loading()
+  {
+    return isLoading();
+  }
+
+  /**
+      Get `monitored` property.
+      Returns: true if the directory is monitored for changed.
+  */
+  @property bool monitored()
+  {
+    return getMonitored();
+  }
+
+  /**
+      Set `monitored` property.
+      Params:
+        propval = true if the directory is monitored for changed.
+  */
+  @property void monitored(bool propval)
+  {
+    return setMonitored(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -79,7 +193,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GtkDirectoryList* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
-    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -107,11 +221,11 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
       Returns: The loading error or null if
           loading finished successfully
   */
-  glib.error.ErrorG getError()
+  glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
     _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -123,7 +237,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GFile* _cretval;
     _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +305,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**

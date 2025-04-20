@@ -30,6 +30,7 @@ class BroadwayRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BroadwayRenderer self()
   {
     return this;

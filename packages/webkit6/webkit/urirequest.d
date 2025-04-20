@@ -12,10 +12,10 @@ import webkit.types;
     Represents a URI request.
     
     A #WebKitURIRequest can be created with a URI using the
-    [webkit.urirequest.URIRequest.new_] method, and you can get the URI of an
-    existing request with the [webkit.urirequest.URIRequest.getUri] one.
+    [webkitwebprocessextension.urirequest.URIRequest.new_] method, and you can get the URI of an
+    existing request with the [webkitwebprocessextension.urirequest.URIRequest.getUri] one.
 */
-class URIRequest : gobject.object.ObjectG
+class URIRequest : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,25 @@ class URIRequest : gobject.object.ObjectG
   override URIRequest self()
   {
     return this;
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The URI to which the request will be made.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI to which the request will be made.
+  */
+  @property void uri(string propval)
+  {
+    return setUri(propval);
   }
 
   /**

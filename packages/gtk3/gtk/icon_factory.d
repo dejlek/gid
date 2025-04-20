@@ -84,7 +84,7 @@ import gtk.types;
     </object>
     ```
 */
-class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
+class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -106,6 +106,7 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconFactory self()
   {
     return this;

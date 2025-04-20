@@ -5,7 +5,7 @@ import gobject.object;
 import gdk.popup;
 import gdk.popup_mixin;
 
-/// Proxy object for [Gdk.Popup] interface when a GObject has no applicable D binding
+/// Proxy object for [gdk.popup.Popup] interface when a GObject has no applicable D binding
 class PopupIfaceProxy : IfaceProxy, gdk.popup.Popup
 {
   this(void* ptr, Flag!"Take" take = No.Take)

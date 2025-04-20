@@ -14,6 +14,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
 import gtk.c.types;
+import gtk.container;
 import gtk.menu;
 import gtk.popover;
 import gtk.toggle_button;
@@ -135,9 +136,138 @@ class MenuButton : gtk.toggle_button.ToggleButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuButton self()
   {
     return this;
+  }
+
+  /**
+      Get `alignWidget` property.
+      Returns: The #GtkWidget to use to align the menu with.
+  */
+  @property gtk.container.Container alignWidget()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.container.Container)("align-widget");
+  }
+
+  /**
+      Set `alignWidget` property.
+      Params:
+        propval = The #GtkWidget to use to align the menu with.
+  */
+  @property void alignWidget(gtk.container.Container propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.container.Container)("align-widget", propval);
+  }
+
+  /**
+      Get `direction` property.
+      Returns: The #GtkArrowType representing the direction in which the
+      menu or popover will be popped out.
+  */
+  @property gtk.types.ArrowType direction()
+  {
+    return getDirection();
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The #GtkArrowType representing the direction in which the
+        menu or popover will be popped out.
+  */
+  @property void direction(gtk.types.ArrowType propval)
+  {
+    return setDirection(propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The #GMenuModel from which the popup will be created.
+      Depending on the #GtkMenuButton:use-popover property, that may
+      be a menu or a popover.
+      
+      See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
+      #GtkMenuButton:popup property.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The #GMenuModel from which the popup will be created.
+        Depending on the #GtkMenuButton:use-popover property, that may
+        be a menu or a popover.
+        
+        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
+        #GtkMenuButton:popup property.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
+  }
+
+  /**
+      Get `popover` property.
+      Returns: The #GtkPopover that will be popped up when the button is clicked.
+  */
+  @property gtk.popover.Popover popover()
+  {
+    return getPopover();
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The #GtkPopover that will be popped up when the button is clicked.
+  */
+  @property void popover(gtk.popover.Popover propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.popover.Popover)("popover", propval);
+  }
+
+  /**
+      Get `popup` property.
+      Returns: The #GtkMenu that will be popped up when the button is clicked.
+  */
+  @property gtk.menu.Menu popup()
+  {
+    return getPopup();
+  }
+
+  /**
+      Set `popup` property.
+      Params:
+        propval = The #GtkMenu that will be popped up when the button is clicked.
+  */
+  @property void popup(gtk.menu.Menu propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("popup", propval);
+  }
+
+  /**
+      Get `usePopover` property.
+      Returns: Whether to construct a #GtkPopover from the menu model,
+      or a #GtkMenu.
+  */
+  @property bool usePopover()
+  {
+    return getUsePopover();
+  }
+
+  /**
+      Set `usePopover` property.
+      Params:
+        propval = Whether to construct a #GtkPopover from the menu model,
+        or a #GtkMenu.
+  */
+  @property void usePopover(bool propval)
+  {
+    return setUsePopover(propval);
   }
 
   /**
@@ -161,7 +291,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_align_widget(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,7 +317,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +331,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +345,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkMenu* _cretval;
     _cretval = gtk_menu_button_get_popup(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu.Menu)(cast(GtkMenu*)_cretval, No.Take);
     return _retval;
   }
 

@@ -30,6 +30,19 @@ interface CellEditable
   }
 
   /**
+      Get `editingCanceled` property.
+      Returns: Indicates whether editing on the cell has been canceled.
+  */
+  @property bool editingCanceled();
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+  */
+  @property void editingCanceled(bool propval);
+
+  /**
       Emits the `GtkCellEditable::editing-done` signal.
   */
   void editingDone();

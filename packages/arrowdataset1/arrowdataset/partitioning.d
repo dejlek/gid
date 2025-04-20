@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Partitioning : gobject.object.ObjectG
+class Partitioning : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Partitioning : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Partitioning self()
   {
     return this;
@@ -40,7 +41,7 @@ class Partitioning : gobject.object.ObjectG
   {
     GADatasetPartitioning* _cretval;
     _cretval = gadataset_partitioning_create_default();
-    auto _retval = ObjectG.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
     return _retval;
   }
 

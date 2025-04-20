@@ -29,7 +29,7 @@ import gtk.widget;
     [gtk.popover_menu.PopoverMenu] treats its children like menus and allows switching
     between them. It can open submenus as traditional, nested submenus,
     or in a more touch-friendly sliding fashion.
-    The property [gtk.popover_menu.PopoverMenu.PopoverMenuFlags] controls this appearance.
+    The property [gtk.popover_menu.PopoverMenu.flags] controls this appearance.
     
     [gtk.popover_menu.PopoverMenu] is meant to be used primarily with menu models,
     using [gtk.popover_menu.PopoverMenu.newFromModel]. If you need to put
@@ -160,9 +160,73 @@ class PopoverMenu : gtk.popover.Popover
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PopoverMenu self()
   {
     return this;
+  }
+
+  /**
+      Get `flags` property.
+      Returns: The flags that @popover uses to create/display a menu from its model.
+      
+      If a model is set and the flags change, contents are rebuilt, so if setting
+      properties individually, set flags before model to avoid a redundant rebuild.
+  */
+  @property gtk.types.PopoverMenuFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = The flags that @popover uses to create/display a menu from its model.
+        
+        If a model is set and the flags change, contents are rebuilt, so if setting
+        properties individually, set flags before model to avoid a redundant rebuild.
+  */
+  @property void flags(gtk.types.PopoverMenuFlags propval)
+  {
+    return setFlags(propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The model from which the menu is made.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The model from which the menu is made.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
+  }
+
+  /**
+      Get `visibleSubmenu` property.
+      Returns: The name of the visible submenu.
+  */
+  @property string visibleSubmenu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("visible-submenu");
+  }
+
+  /**
+      Set `visibleSubmenu` property.
+      Params:
+        propval = The name of the visible submenu.
+  */
+  @property void visibleSubmenu(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("visible-submenu", propval);
   }
 
   /**
@@ -188,7 +252,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,7 +274,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,7 +317,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 

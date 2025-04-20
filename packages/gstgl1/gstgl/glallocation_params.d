@@ -2,6 +2,7 @@
 module gstgl.glallocation_params;
 
 import gid.gid;
+import glib.types;
 import gobject.boxed;
 import gst.allocation_params;
 import gstgl.c.functions;
@@ -13,10 +14,27 @@ import gstgl.types;
 class GLAllocationParams : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glallocation_params.GLAllocationParams` boxed type.
+      Params:
+        structSize = the size of the struct (including and subclass data)
+        free = a #GstGLAllocationParamsFreeFunc
+        allocFlags = allocation flags
+        allocSize = the allocation size
+        allocParams = the #GstAllocationParams
+        context = a #GstGLContext
+        notify = a #GDestroyNotify
+  */
+  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gst.allocation_params.AllocationParams allocParams = gst.allocation_params.AllocationParams.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init)
   {
     super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
+    this.structSize = structSize;
+    this.free = free;
+    this.allocFlags = allocFlags;
+    this.allocSize = allocSize;
+    this.allocParams = allocParams;
+    this.context = context;
+    this.notify = notify;
   }
 
   /** */
@@ -44,77 +62,143 @@ class GLAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLAllocationParams self()
   {
     return this;
   }
 
+  /**
+      Get `structSize` field.
+      Returns: the size of the struct (including and subclass data)
+  */
   @property size_t structSize()
   {
     return (cast(GstGLAllocationParams*)cPtr).structSize;
   }
 
+  /**
+      Set `structSize` field.
+      Params:
+        propval = the size of the struct (including and subclass data)
+  */
   @property void structSize(size_t propval)
   {
     (cast(GstGLAllocationParams*)cPtr).structSize = propval;
   }
 
+  /**
+      Get `free` field.
+      Returns: a #GstGLAllocationParamsFreeFunc
+  */
   @property GstGLAllocationParamsFreeFunc free()
   {
     return (cast(GstGLAllocationParams*)cPtr).free;
   }
+
+  /**
+      Set `free` field.
+      Params:
+        propval = a #GstGLAllocationParamsFreeFunc
+  */
 
   @property void free(GstGLAllocationParamsFreeFunc propval)
   {
     (cast(GstGLAllocationParams*)cPtr).free = propval;
   }
 
+  /**
+      Get `allocFlags` field.
+      Returns: allocation flags
+  */
   @property uint allocFlags()
   {
     return (cast(GstGLAllocationParams*)cPtr).allocFlags;
   }
 
+  /**
+      Set `allocFlags` field.
+      Params:
+        propval = allocation flags
+  */
   @property void allocFlags(uint propval)
   {
     (cast(GstGLAllocationParams*)cPtr).allocFlags = propval;
   }
 
+  /**
+      Get `allocSize` field.
+      Returns: the allocation size
+  */
   @property size_t allocSize()
   {
     return (cast(GstGLAllocationParams*)cPtr).allocSize;
   }
 
+  /**
+      Set `allocSize` field.
+      Params:
+        propval = the allocation size
+  */
   @property void allocSize(size_t propval)
   {
     (cast(GstGLAllocationParams*)cPtr).allocSize = propval;
   }
 
+  /**
+      Get `allocParams` field.
+      Returns: the #GstAllocationParams
+  */
   @property gst.allocation_params.AllocationParams allocParams()
   {
     return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
   }
 
+  /**
+      Set `allocParams` field.
+      Params:
+        propval = the #GstAllocationParams
+  */
   @property void allocParams(gst.allocation_params.AllocationParams propval)
   {
     cValueFree!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
     dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).allocParams);
   }
 
+  /**
+      Get `context` field.
+      Returns: a #GstGLContext
+  */
   @property gstgl.glcontext.GLContext context()
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
   }
 
+  /**
+      Set `context` field.
+      Params:
+        propval = a #GstGLContext
+  */
   @property void context(gstgl.glcontext.GLContext propval)
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).context);
   }
 
+  /**
+      Get `notify` field.
+      Returns: a #GDestroyNotify
+  */
   @property GDestroyNotify notify()
   {
     return (cast(GstGLAllocationParams*)cPtr).notify;
   }
+
+  /**
+      Set `notify` field.
+      Params:
+        propval = a #GDestroyNotify
+  */
 
   @property void notify(GDestroyNotify propval)
   {

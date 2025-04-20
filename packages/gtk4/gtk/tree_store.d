@@ -55,7 +55,7 @@ import gtk.types;
 
     Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
 */
-class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
+class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_drag_dest.TreeDragDest, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
 {
 
   /** */
@@ -77,6 +77,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeStore self()
   {
     return this;
@@ -108,7 +109,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
     auto _types = cast(GType*)types.ptr;
     _cretval = gtk_tree_store_newv(_nColumns, _types);
-    auto _retval = ObjectG.getDObject!(gtk.tree_store.TreeStore)(cast(GtkTreeStore*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_store.TreeStore)(cast(GtkTreeStore*)_cretval, Yes.Take);
     return _retval;
   }
 

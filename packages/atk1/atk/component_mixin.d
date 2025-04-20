@@ -170,11 +170,11 @@ template ComponentT()
       Returns: a reference to the accessible
         child, if one exists
   */
-  override atk.object.ObjectAtk refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType)
+  override atk.object.ObjectWrap refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType)
   {
     AtkObject* _cretval;
     _cretval = atk_component_ref_accessible_at_point(cast(AtkComponent*)cPtr, x, y, coordType);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 

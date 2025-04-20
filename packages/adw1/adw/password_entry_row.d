@@ -60,6 +60,7 @@ class PasswordEntryRow : adw.entry_row.EntryRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PasswordEntryRow self()
   {
     return this;

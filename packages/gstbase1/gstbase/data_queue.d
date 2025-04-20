@@ -12,7 +12,7 @@ import gstbase.types;
     also provides size-related functionality. This object should be used for
     any #GstElement that wishes to provide some sort of queueing functionality.
 */
-class DataQueue : gobject.object.ObjectG
+class DataQueue : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,8 +34,27 @@ class DataQueue : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DataQueue self()
   {
     return this;
+  }
+
+  /** */
+  @property uint currentLevelBytes()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("current-level-bytes");
+  }
+
+  /** */
+  @property ulong currentLevelTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
+  }
+
+  /** */
+  @property uint currentLevelVisible()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("current-level-visible");
   }
 }

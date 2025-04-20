@@ -17,7 +17,7 @@ class MountOperationHandlerProxy
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.MountOperationHandlerProxy");
+      throw new GidConstructException("Null instance pointer for gtk.__mount_operation_handler_proxy.MountOperationHandlerProxy");
 
     cInstance = *cast(_GtkMountOperationHandlerProxy*)ptr;
 

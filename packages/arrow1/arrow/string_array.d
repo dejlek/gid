@@ -31,6 +31,7 @@ class StringArray : arrow.binary_array.BinaryArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringArray self()
   {
     return this;

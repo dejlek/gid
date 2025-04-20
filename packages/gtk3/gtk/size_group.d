@@ -31,7 +31,7 @@ import gtk.widget;
     
     #GtkSizeGroup objects are referenced by each widget in the size group,
     so once you have added all widgets to a #GtkSizeGroup, you can drop
-    the initial reference to the size group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the size group with [gobject.object.ObjectWrap.unref]. If the
     widgets in the size group are subsequently destroyed, then they will
     be removed from the size group and drop their references on the size
     group; when all widgets have been removed, the size group will be
@@ -78,7 +78,7 @@ import gtk.widget;
     </object>
     ```
 */
-class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
+class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -100,9 +100,57 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SizeGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `ignoreHidden` property.
+      Returns: If true, unmapped widgets are ignored when determining
+      the size of the group.
+  
+      Deprecated: Measuring the size of hidden widgets has not worked
+          reliably for a long time. In most cases, they will report a size
+          of 0 nowadays, and thus, their size will not affect the other
+          size group members. In effect, size groups will always operate
+          as if this property was true. Use a #GtkStack instead to hide
+          widgets while still having their size taken into account.
+  */
+  @property bool ignoreHidden()
+  {
+    return getIgnoreHidden();
+  }
+
+  /**
+      Set `ignoreHidden` property.
+      Params:
+        propval = If true, unmapped widgets are ignored when determining
+        the size of the group.
+  
+      Deprecated: Measuring the size of hidden widgets has not worked
+          reliably for a long time. In most cases, they will report a size
+          of 0 nowadays, and thus, their size will not affect the other
+          size group members. In effect, size groups will always operate
+          as if this property was true. Use a #GtkStack instead to hide
+          widgets while still having their size taken into account.
+  */
+  @property void ignoreHidden(bool propval)
+  {
+    return setIgnoreHidden(propval);
+  }
+
+  /** */
+  @property gtk.types.SizeGroupMode mode()
+  {
+    return getMode();
+  }
+
+  /** */
+  @property void mode(gtk.types.SizeGroupMode propval)
+  {
+    return setMode(propval);
   }
 
   mixin BuildableT!();

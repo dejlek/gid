@@ -51,7 +51,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_get_default();
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,13 +75,13 @@ interface FontMap
       this is only useful for testing, when at least two backends
       are compiled in.
       Returns: the newly allocated [pango.font_map.FontMap],
-          which should be freed with [gobject.object.ObjectG.unref].
+          which should be freed with [gobject.object.ObjectWrap.unref].
   */
   static pango.font_map.FontMap new_()
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new();
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,14 +96,14 @@ interface FontMap
         fonttype = desired #cairo_font_type_t
       Returns: the newly allocated
           [pango.font_map.FontMap] of suitable type which should be freed with
-          [gobject.object.ObjectG.unref], or null if the requested cairo font backend
+          [gobject.object.ObjectWrap.unref], or null if the requested cairo font backend
           is not supported / compiled in.
   */
   static pango.font_map.FontMap newForFontType(cairo.types.FontType fonttype)
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new_for_font_type(fonttype);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -30,7 +30,7 @@ class AudioClippingMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioClippingMeta");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_clipping_meta.AudioClippingMeta");
 
     cInstance = *cast(GstAudioClippingMeta*)ptr;
 
@@ -44,36 +44,67 @@ class AudioClippingMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioClippingMeta*)cPtr).meta);
   }
 
+  /**
+      Get `format` field.
+      Returns: GstFormat of @start and @stop, GST_FORMAT_DEFAULT is samples
+  */
   @property gst.types.Format format()
   {
     return cast(gst.types.Format)(cast(GstAudioClippingMeta*)cPtr).format;
   }
 
+  /**
+      Set `format` field.
+      Params:
+        propval = GstFormat of @start and @stop, GST_FORMAT_DEFAULT is samples
+  */
   @property void format(gst.types.Format propval)
   {
     (cast(GstAudioClippingMeta*)cPtr).format = cast(GstFormat)propval;
   }
 
+  /**
+      Get `start` field.
+      Returns: Amount of audio to clip from start of buffer
+  */
   @property ulong start()
   {
     return (cast(GstAudioClippingMeta*)cPtr).start;
   }
 
+  /**
+      Set `start` field.
+      Params:
+        propval = Amount of audio to clip from start of buffer
+  */
   @property void start(ulong propval)
   {
     (cast(GstAudioClippingMeta*)cPtr).start = propval;
   }
 
+  /**
+      Get `end` field.
+      Returns: Amount of  to clip from end of buffer
+  */
   @property ulong end()
   {
     return (cast(GstAudioClippingMeta*)cPtr).end;
   }
 
+  /**
+      Set `end` field.
+      Params:
+        propval = Amount of  to clip from end of buffer
+  */
   @property void end(ulong propval)
   {
     (cast(GstAudioClippingMeta*)cPtr).end = propval;

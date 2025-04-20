@@ -45,7 +45,7 @@ import gtk.types;
     builder (in which case you should not have to worry about their lifecycle),
     or without a parent, in which case they have to be added to some container
     to make use of them. Non-widget objects need to be reffed with
-    [gobject.object.ObjectG.ref_] to keep them beyond the lifespan of the builder.
+    [gobject.object.ObjectWrap.ref_] to keep them beyond the lifespan of the builder.
     
     ## GtkBuilder UI Definitions
     
@@ -153,8 +153,8 @@ import gtk.types;
         value, and optionally combined with “|” for bitwise OR, e.g.
         “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
       * colors (in a format understood by [gdk.rgba.RGBA.parse])
-      * [glib.variant.VariantG] (can be specified in the format understood by
-         [glib.variant.VariantG.parse])
+      * [glib.variant.Variant] (can be specified in the format understood by
+         [glib.variant.Variant.parse])
       * pixbufs (can be specified as a filename of an image file to load)
     )
       
@@ -169,7 +169,7 @@ import gtk.types;
     ### Child objects
     
     Many widgets have properties for child widgets, such as
-    [gtk.expander.Expander.Widget]. In this case, the preferred way to
+    [gtk.expander.Expander.child]. In this case, the preferred way to
     specify the child widget in a ui file is to simply set the property:
     
     ```xml
@@ -246,7 +246,7 @@ import gtk.types;
     ```
     
     For more information, see the documentation of the
-    [gobject.object.ObjectG.bindProperty] method.
+    [gobject.object.ObjectWrap.bindProperty] method.
     
     Please note that another way to set up bindings between objects in .ui files
     is to use the [gtk.expression.Expression] methodology. See the
@@ -358,7 +358,7 @@ import gtk.types;
     For more information, see the [[gtk.widget.Widget] documentation](class.Widget.html#building-composite-widgets-from-template-xml)
     for details.
 */
-class Builder : gobject.object.ObjectG
+class Builder : gobject.object.ObjectWrap
 {
 
   /** */
@@ -380,9 +380,75 @@ class Builder : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Builder self()
   {
     return this;
+  }
+
+  /**
+      Get `currentObject` property.
+      Returns: The object the builder is evaluating for.
+  */
+  @property gobject.object.ObjectWrap currentObject()
+  {
+    return getCurrentObject();
+  }
+
+  /**
+      Set `currentObject` property.
+      Params:
+        propval = The object the builder is evaluating for.
+  */
+  @property void currentObject(gobject.object.ObjectWrap propval)
+  {
+    return setCurrentObject(propval);
+  }
+
+  /**
+      Get `scope_` property.
+      Returns: The scope the builder is operating in
+  */
+  @property gtk.builder_scope.BuilderScope scope_()
+  {
+    return getScope();
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = The scope the builder is operating in
+  */
+  @property void scope_(gtk.builder_scope.BuilderScope propval)
+  {
+    return setScope(propval);
+  }
+
+  /**
+      Get `translationDomain` property.
+      Returns: The translation domain used when translating property values that
+      have been marked as translatable.
+      
+      If the translation domain is null, [gtk.builder.Builder] uses gettext(),
+      otherwise [glib.global.dgettext].
+  */
+  @property string translationDomain()
+  {
+    return getTranslationDomain();
+  }
+
+  /**
+      Set `translationDomain` property.
+      Params:
+        propval = The translation domain used when translating property values that
+        have been marked as translatable.
+        
+        If the translation domain is null, [gtk.builder.Builder] uses gettext(),
+        otherwise [glib.global.dgettext].
+  */
+  @property void translationDomain(string propval)
+  {
+    return setTranslationDomain(propval);
   }
 
   /**
@@ -417,7 +483,7 @@ class Builder : gobject.object.ObjectG
     GtkBuilder* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_builder_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -436,7 +502,7 @@ class Builder : gobject.object.ObjectG
     GtkBuilder* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_builder_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -463,7 +529,7 @@ class Builder : gobject.object.ObjectG
 
     auto _string_ = cast(char*)string_.ptr;
     _cretval = gtk_builder_new_from_string(_string_, _length);
-    auto _retval = ObjectG.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -477,7 +543,7 @@ class Builder : gobject.object.ObjectG
       want [gtk.builder.Builder.newFromFile] instead.
       
       If an error occurs, 0 will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
       domains.
       
       It’s not really reasonable to attempt to handle failures of this
@@ -490,7 +556,7 @@ class Builder : gobject.object.ObjectG
       Params:
         filename = the name of the file to parse
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addFromFile(string filename)
   {
@@ -499,7 +565,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_from_file(cast(GtkBuilder*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -513,7 +579,7 @@ class Builder : gobject.object.ObjectG
       want [gtk.builder.Builder.newFromResource] instead.
       
       If an error occurs, 0 will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
       domain.
       
       It’s not really reasonable to attempt to handle failures of this
@@ -523,7 +589,7 @@ class Builder : gobject.object.ObjectG
       Params:
         resourcePath = the path of the resource file to parse
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addFromResource(string resourcePath)
   {
@@ -532,7 +598,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_from_resource(cast(GtkBuilder*)cPtr, _resourcePath, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -546,7 +612,7 @@ class Builder : gobject.object.ObjectG
       want [gtk.builder.Builder.newFromString] instead.
       
       Upon errors false will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or
       `G_VARIANT_PARSE_ERROR` domain.
       
       It’s not really reasonable to attempt to handle failures of this
@@ -557,7 +623,7 @@ class Builder : gobject.object.ObjectG
         buffer = the string to parse
         length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addFromString(string buffer, ptrdiff_t length)
   {
@@ -566,7 +632,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_from_string(cast(GtkBuilder*)cPtr, _buffer, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -576,7 +642,7 @@ class Builder : gobject.object.ObjectG
       of builder.
       
       Upon errors, 0 will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
       domain.
       
       If you are adding an object that depends on an object that is not
@@ -587,7 +653,7 @@ class Builder : gobject.object.ObjectG
         filename = the name of the file to parse
         objectIds = nul-terminated array of objects to build
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addObjectsFromFile(string filename, string[] objectIds)
   {
@@ -602,7 +668,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_objects_from_file(cast(GtkBuilder*)cPtr, _filename, _objectIds, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -612,7 +678,7 @@ class Builder : gobject.object.ObjectG
       contents of builder.
       
       Upon errors, 0 will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
       domain.
       
       If you are adding an object that depends on an object that is not
@@ -623,7 +689,7 @@ class Builder : gobject.object.ObjectG
         resourcePath = the path of the resource file to parse
         objectIds = nul-terminated array of objects to build
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addObjectsFromResource(string resourcePath, string[] objectIds)
   {
@@ -638,7 +704,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_objects_from_resource(cast(GtkBuilder*)cPtr, _resourcePath, _objectIds, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -648,7 +714,7 @@ class Builder : gobject.object.ObjectG
       builder.
       
       Upon errors false will be returned and error will be assigned a
-      [glib.error.ErrorG] from the `GTK_BUILDER_ERROR` or `G_MARKUP_ERROR` domain.
+      [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR` or `G_MARKUP_ERROR` domain.
       
       If you are adding an object that depends on an object that is not
       its child (for instance a [gtk.tree_view.TreeView] that depends on its
@@ -659,7 +725,7 @@ class Builder : gobject.object.ObjectG
         length = the length of buffer (may be -1 if buffer is nul-terminated)
         objectIds = nul-terminated array of objects to build
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addObjectsFromString(string buffer, ptrdiff_t length, string[] objectIds)
   {
@@ -674,7 +740,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)cPtr, _buffer, length, _objectIds, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -692,16 +758,16 @@ class Builder : gobject.object.ObjectG
         flags = closure creation flags
         object = Object to create the closure with
       Returns: A new closure for invoking function_name
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  gobject.closure.Closure createClosure(string functionName, gtk.types.BuilderClosureFlags flags, gobject.object.ObjectG object = null)
+  gobject.closure.Closure createClosure(string functionName, gtk.types.BuilderClosureFlags flags, gobject.object.ObjectWrap object = null)
   {
     GClosure* _cretval;
     const(char)* _functionName = functionName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_builder_create_closure(cast(GtkBuilder*)cPtr, _functionName, flags, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -719,7 +785,7 @@ class Builder : gobject.object.ObjectG
         name = the name of the object exposed to the builder
         object = the object to expose
   */
-  void exposeObject(string name, gobject.object.ObjectG object)
+  void exposeObject(string name, gobject.object.ObjectWrap object)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_builder_expose_object(cast(GtkBuilder*)cPtr, _name, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
@@ -738,16 +804,16 @@ class Builder : gobject.object.ObjectG
         buffer = the string to parse
         length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  bool extendWithTemplate(gobject.object.ObjectG object, gobject.types.GType templateType, string buffer, ptrdiff_t length)
+  bool extendWithTemplate(gobject.object.ObjectWrap object, gobject.types.GType templateType, string buffer, ptrdiff_t length)
   {
     bool _retval;
     const(char)* _buffer = buffer.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, templateType, _buffer, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -755,11 +821,11 @@ class Builder : gobject.object.ObjectG
       Gets the current object set via [gtk.builder.Builder.setCurrentObject].
       Returns: the current object
   */
-  gobject.object.ObjectG getCurrentObject()
+  gobject.object.ObjectWrap getCurrentObject()
   {
     ObjectC* _cretval;
     _cretval = gtk_builder_get_current_object(cast(GtkBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -773,12 +839,12 @@ class Builder : gobject.object.ObjectG
         name = name of object to get
       Returns: the object named name
   */
-  gobject.object.ObjectG getObject(string name)
+  gobject.object.ObjectWrap getObject(string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_builder_get_object(cast(GtkBuilder*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -792,11 +858,11 @@ class Builder : gobject.object.ObjectG
           constructed by the `GtkBuilder instance`. It should be
           freed by [glib.slist.SList.free]
   */
-  gobject.object.ObjectG[] getObjects()
+  gobject.object.ObjectWrap[] getObjects()
   {
     GSList* _cretval;
     _cretval = gtk_builder_get_objects(cast(GtkBuilder*)cPtr);
-    auto _retval = gSListToD!(gobject.object.ObjectG, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gobject.object.ObjectWrap, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -808,7 +874,7 @@ class Builder : gobject.object.ObjectG
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_get_scope(cast(GtkBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
     return _retval;
   }
 
@@ -858,7 +924,7 @@ class Builder : gobject.object.ObjectG
       Params:
         currentObject = the new current object
   */
-  void setCurrentObject(gobject.object.ObjectG currentObject = null)
+  void setCurrentObject(gobject.object.ObjectWrap currentObject = null)
   {
     gtk_builder_set_current_object(cast(GtkBuilder*)cPtr, currentObject ? cast(ObjectC*)currentObject.cPtr(No.Dup) : null);
   }
@@ -873,7 +939,7 @@ class Builder : gobject.object.ObjectG
   */
   void setScope(gtk.builder_scope.BuilderScope scope_ = null)
   {
-    gtk_builder_set_scope(cast(GtkBuilder*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null);
+    gtk_builder_set_scope(cast(GtkBuilder*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_).cPtr(No.Dup) : null);
   }
 
   /**
@@ -899,14 +965,14 @@ class Builder : gobject.object.ObjectG
       [gtk.adjustment.Adjustment] type values.
       
       Upon errors false will be returned and error will be
-      assigned a [glib.error.ErrorG] from the `GTK_BUILDER_ERROR` domain.
+      assigned a [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR` domain.
   
       Params:
         pspec = the [gobject.param_spec.ParamSpec] for the property
         string_ = the string representation of the value
         value = the [gobject.value.Value] to store the result in
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool valueFromString(gobject.param_spec.ParamSpec pspec, string string_, out gobject.value.Value value)
   {
@@ -916,7 +982,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_value_from_string(cast(GtkBuilder*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, _string_, &_value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
@@ -931,14 +997,14 @@ class Builder : gobject.object.ObjectG
       need not be initialised beforehand.
       
       Upon errors false will be returned and error will be
-      assigned a [glib.error.ErrorG] from the `GTK_BUILDER_ERROR` domain.
+      assigned a [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR` domain.
   
       Params:
         type = the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the value
         string_ = the string representation of the value
         value = the [gobject.value.Value] to store the result in
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool valueFromStringType(gobject.types.GType type, string string_, out gobject.value.Value value)
   {
@@ -948,7 +1014,7 @@ class Builder : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_builder_value_from_string_type(cast(GtkBuilder*)cPtr, type, _string_, &_value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

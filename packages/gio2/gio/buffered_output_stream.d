@@ -48,9 +48,48 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferedOutputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `autoGrow` property.
+      Returns: Whether the buffer should automatically grow.
+  */
+  @property bool autoGrow()
+  {
+    return getAutoGrow();
+  }
+
+  /**
+      Set `autoGrow` property.
+      Params:
+        propval = Whether the buffer should automatically grow.
+  */
+  @property void autoGrow(bool propval)
+  {
+    return setAutoGrow(propval);
+  }
+
+  /**
+      Get `bufferSize` property.
+      Returns: The size of the backend buffer, in bytes.
+  */
+  @property uint bufferSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("buffer-size");
+  }
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+  */
+  @property void bufferSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("buffer-size", propval);
   }
 
   mixin SeekableT!();
@@ -81,7 +120,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   {
     GOutputStream* _cretval;
     _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

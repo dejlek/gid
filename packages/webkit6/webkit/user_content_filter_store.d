@@ -30,7 +30,7 @@ import webkit.user_content_filter;
     [webkit.user_content_filter_store.UserContentFilterStore.load] can be used to retrieve a previously saved
     filter, and removed from the store with [webkit.user_content_filter_store.UserContentFilterStore.remove].
 */
-class UserContentFilterStore : gobject.object.ObjectG
+class UserContentFilterStore : gobject.object.ObjectWrap
 {
 
   /** */
@@ -93,7 +93,7 @@ class UserContentFilterStore : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -114,7 +114,7 @@ class UserContentFilterStore : gobject.object.ObjectG
   string[] fetchIdentifiersFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;
-    _cretval = webkit_user_content_filter_store_fetch_identifiers_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null);
+    _cretval = webkit_user_content_filter_store_fetch_identifiers_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
     string[] _retval;
 
     if (_cretval)
@@ -162,7 +162,7 @@ class UserContentFilterStore : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -178,15 +178,15 @@ class UserContentFilterStore : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserContentFilter, or null if the load failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.user_content_filter.UserContentFilter loadFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_load_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_load_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -210,7 +210,7 @@ class UserContentFilterStore : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -226,15 +226,15 @@ class UserContentFilterStore : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: whether the removal was successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class UserContentFilterStore : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -281,15 +281,15 @@ class UserContentFilterStore : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserContentFilter, or null if saving failed
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.user_content_filter.UserContentFilter saveFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_save_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_save_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -317,13 +317,13 @@ class UserContentFilterStore : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _identifier = identifier.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_save_from_file(cast(WebKitUserContentFilterStore*)cPtr, _identifier, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_save_from_file(cast(WebKitUserContentFilterStore*)cPtr, _identifier, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -333,15 +333,15 @@ class UserContentFilterStore : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: a #WebKitUserContentFilter, or null if saving failed.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.user_content_filter.UserContentFilter saveFromFileFinish(gio.async_result.AsyncResult result)
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_save_from_file_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_save_from_file_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

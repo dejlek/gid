@@ -74,9 +74,29 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StackSwitcher self()
   {
     return this;
+  }
+
+  /**
+      Get `stack` property.
+      Returns: The stack.
+  */
+  @property gtk.stack.Stack stack()
+  {
+    return getStack();
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack.
+  */
+  @property void stack(gtk.stack.Stack propval)
+  {
+    return setStack(propval);
   }
 
   mixin OrientableT!();
@@ -100,7 +120,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 

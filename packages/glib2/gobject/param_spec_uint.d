@@ -17,7 +17,7 @@ class ParamSpecUInt : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecUInt");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_uint.ParamSpecUInt");
 
     super(cast(GParamSpec*)ptr, take);
   }

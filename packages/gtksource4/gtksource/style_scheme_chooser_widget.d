@@ -36,6 +36,7 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleSchemeChooserWidget self()
   {
     return this;

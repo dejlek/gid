@@ -13,6 +13,7 @@ public import gdk.toplevel_size;
 public import gdk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.object;
 
 /**
     A [gdk.toplevel.Toplevel] is a freestanding toplevel surface.
@@ -23,6 +24,182 @@ public import gobject.dclosure;
 */
 template ToplevelT()
 {
+
+  /**
+      Get `decorated` property.
+      Returns: Whether the window manager should add decorations.
+  */
+  @property bool decorated()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("decorated");
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+  */
+  @property void decorated(bool propval)
+  {
+    return setDecorated(propval);
+  }
+
+  /**
+      Get `deletable` property.
+      Returns: Whether the window manager should allow to close the surface.
+  */
+  @property bool deletable()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("deletable");
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+  */
+  @property void deletable(bool propval)
+  {
+    return setDeletable(propval);
+  }
+
+  /**
+      Get `fullscreenMode` property.
+      Returns: The fullscreen mode of the surface.
+  */
+  @property gdk.types.FullscreenMode fullscreenMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.FullscreenMode)("fullscreen-mode");
+  }
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+  */
+  @property void fullscreenMode(gdk.types.FullscreenMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.FullscreenMode)("fullscreen-mode", propval);
+  }
+
+  /**
+      Get `iconList` property.
+      Returns: A list of textures to use as icon.
+  */
+  @property void* iconList()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("icon-list");
+  }
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+  */
+  @property void iconList(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("icon-list", propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the surface is modal.
+  */
+  @property bool modal()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("modal");
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `shortcutsInhibited` property.
+      Returns: Whether the surface should inhibit keyboard shortcuts.
+  */
+  @property bool shortcutsInhibited()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("shortcuts-inhibited");
+  }
+
+  /**
+      Get `startupId` property.
+      Returns: The startup ID of the surface.
+      
+      See [gdk.app_launch_context.AppLaunchContext] for more information about
+      startup feedback.
+  */
+  @property string startupId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("startup-id");
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+        
+        See [gdk.app_launch_context.AppLaunchContext] for more information about
+        startup feedback.
+  */
+  @property void startupId(string propval)
+  {
+    return setStartupId(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The state of the toplevel.
+  */
+  @property gdk.types.ToplevelState state()
+  {
+    return getState();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the surface.
+  */
+  @property string title()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the surface.
+  */
+  @property gdk.surface.Surface transientFor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.surface.Surface)("transient-for");
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+  */
+  @property void transientFor(gdk.surface.Surface propval)
+  {
+    return setTransientFor(propval);
+  }
 
   /**
       Begins an interactive move operation.

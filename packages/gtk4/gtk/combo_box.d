@@ -108,9 +108,215 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ComboBox self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: The item which is currently active.
+      
+      If the model is a non-flat treemodel, and the active item is not an
+      immediate child of the root of the tree, this property has the value
+      `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+      [gtk.tree_path.TreePath] of the active item.
+  */
+  @property int active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The item which is currently active.
+        
+        If the model is a non-flat treemodel, and the active item is not an
+        immediate child of the root of the tree, this property has the value
+        `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+        [gtk.tree_path.TreePath] of the active item.
+  */
+  @property void active(int propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `activeId` property.
+      Returns: The value of the ID column of the active row.
+  */
+  @property string activeId()
+  {
+    return getActiveId();
+  }
+
+  /**
+      Set `activeId` property.
+      Params:
+        propval = The value of the ID column of the active row.
+  */
+  @property void activeId(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("active-id", propval);
+  }
+
+  /**
+      Get `buttonSensitivity` property.
+      Returns: Whether the dropdown button is sensitive when
+      the model is empty.
+  */
+  @property gtk.types.SensitivityType buttonSensitivity()
+  {
+    return getButtonSensitivity();
+  }
+
+  /**
+      Set `buttonSensitivity` property.
+      Params:
+        propval = Whether the dropdown button is sensitive when
+        the model is empty.
+  */
+  @property void buttonSensitivity(gtk.types.SensitivityType propval)
+  {
+    return setButtonSensitivity(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `entryTextColumn` property.
+      Returns: The model column to associate with strings from the entry.
+      
+      This is property only relevant if the combo was created with
+      `property@Gtk.ComboBox:has-entry` is true.
+  */
+  @property int entryTextColumn()
+  {
+    return getEntryTextColumn();
+  }
+
+  /**
+      Set `entryTextColumn` property.
+      Params:
+        propval = The model column to associate with strings from the entry.
+        
+        This is property only relevant if the combo was created with
+        `property@Gtk.ComboBox:has-entry` is true.
+  */
+  @property void entryTextColumn(int propval)
+  {
+    return setEntryTextColumn(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: The `has-frame` property controls whether a frame is drawn around the entry.
+  */
+  @property bool hasFrame()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("has-frame");
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = The `has-frame` property controls whether a frame is drawn around the entry.
+  */
+  @property void hasFrame(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("has-frame", propval);
+  }
+
+  /**
+      Get `idColumn` property.
+      Returns: The model column that provides string IDs for the values
+      in the model, if != -1.
+  */
+  @property int idColumn()
+  {
+    return getIdColumn();
+  }
+
+  /**
+      Set `idColumn` property.
+      Params:
+        propval = The model column that provides string IDs for the values
+        in the model, if != -1.
+  */
+  @property void idColumn(int propval)
+  {
+    return setIdColumn(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model from which the combo box takes its values.
+  */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model from which the combo box takes its values.
+  */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `popupFixedWidth` property.
+      Returns: Whether the popup's width should be a fixed width matching the
+      allocated width of the combo box.
+  */
+  @property bool popupFixedWidth()
+  {
+    return getPopupFixedWidth();
+  }
+
+  /**
+      Set `popupFixedWidth` property.
+      Params:
+        propval = Whether the popup's width should be a fixed width matching the
+        allocated width of the combo box.
+  */
+  @property void popupFixedWidth(bool propval)
+  {
+    return setPopupFixedWidth(propval);
+  }
+
+  /**
+      Get `popupShown` property.
+      Returns: Whether the combo boxes dropdown is popped up.
+      
+      Note that this property is mainly useful, because
+      it allows you to connect to notify::popup-shown.
+  */
+  @property bool popupShown()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("popup-shown");
   }
 
   mixin CellEditableT!();
@@ -143,7 +349,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,8 +365,8 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,8 +384,8 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -277,7 +483,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_get_child(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -333,7 +539,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -537,7 +743,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -574,7 +780,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
     {
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

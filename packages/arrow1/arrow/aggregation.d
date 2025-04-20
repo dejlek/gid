@@ -9,7 +9,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Aggregation : gobject.object.ObjectG
+class Aggregation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class Aggregation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Aggregation self()
   {
     return this;

@@ -16,7 +16,7 @@ class SettingsValue
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.SettingsValue");
+      throw new GidConstructException("Null instance pointer for gtk.settings_value.SettingsValue");
 
     cInstance = *cast(GtkSettingsValue*)ptr;
 
@@ -30,17 +30,33 @@ class SettingsValue
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `origin` field.
+      Returns: Origin should be something like “filename:linenumber” for
+         rc files, or e.g. “XProperty” for other sources.
+  */
   @property string origin()
   {
     return cToD!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
   }
 
+  /**
+      Set `origin` field.
+      Params:
+        propval = Origin should be something like “filename:linenumber” for
+           rc files, or e.g. “XProperty” for other sources.
+  */
   @property void origin(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
     dToC(propval, cast(void*)&(cast(GtkSettingsValue*)cPtr).origin);
   }
 
+  /**
+      Get `value` field.
+      Returns: Valid types are LONG, DOUBLE and STRING corresponding to
+         the token parsed, or a GSTRING holding an unparsed statement
+  */
   @property gobject.value.Value value()
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkSettingsValue*)cPtr).value);

@@ -30,6 +30,7 @@ class HalfFloatScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HalfFloatScalar self()
   {
     return this;

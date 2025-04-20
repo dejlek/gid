@@ -70,7 +70,7 @@ import soup.types;
     response will still be logged on the event of the `signal@Message::finished`
     signal.
 */
-class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -92,9 +92,52 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Logger self()
   {
     return this;
+  }
+
+  /**
+      Get `level` property.
+      Returns: The level of logging output.
+  */
+  @property soup.types.LoggerLogLevel level()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.LoggerLogLevel)("level");
+  }
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of logging output.
+  */
+  @property void level(soup.types.LoggerLogLevel propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(soup.types.LoggerLogLevel)("level", propval);
+  }
+
+  /**
+      Get `maxBodySize` property.
+      Returns: If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+      the maximum number of bytes of the body that will be logged.
+      (-1 means "no limit".)
+  */
+  @property int maxBodySize()
+  {
+    return getMaxBodySize();
+  }
+
+  /**
+      Set `maxBodySize` property.
+      Params:
+        propval = If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+        the maximum number of bytes of the body that will be logged.
+        (-1 means "no limit".)
+  */
+  @property void maxBodySize(int propval)
+  {
+    return setMaxBodySize(propval);
   }
 
   mixin SessionFeatureT!();
@@ -153,7 +196,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
       auto _dlg = cast(soup.types.LoggerPrinter*)userData;
       string _data = data.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
     }
     auto _printerCB = printer ? &_printerCallback : null;
 
@@ -180,7 +223,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -210,7 +253,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;

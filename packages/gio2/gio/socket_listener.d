@@ -31,7 +31,7 @@ import gobject.object;
     [gio.socket_service.SocketService] and [gio.threaded_socket_service.ThreadedSocketService] which are
     subclasses of [gio.socket_listener.SocketListener] that make this even easier.
 */
-class SocketListener : gobject.object.ObjectG
+class SocketListener : gobject.object.ObjectWrap
 {
 
   /** */
@@ -53,9 +53,29 @@ class SocketListener : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketListener self()
   {
     return this;
+  }
+
+  /**
+      Get `listenBacklog` property.
+      Returns: The number of outstanding connections in the listen queue.
+  */
+  @property int listenBacklog()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("listen-backlog");
+  }
+
+  /**
+      Set `listenBacklog` property.
+      Params:
+        propval = The number of outstanding connections in the listen queue.
+  */
+  @property void listenBacklog(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("listen-backlog", propval);
   }
 
   /**
@@ -88,18 +108,18 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = location where #GObject pointer will be stored, or null
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  gio.socket_connection.SocketConnection accept(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
+  gio.socket_connection.SocketConnection accept(out gobject.object.ObjectWrap sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
     _cretval = g_socket_listener_accept(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -121,7 +141,7 @@ class SocketListener : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -136,18 +156,18 @@ class SocketListener : gobject.object.ObjectG
         result = a #GAsyncResult.
         sourceObject = Optional #GObject identifying this source
       Returns: a #GSocketConnection on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  gio.socket_connection.SocketConnection acceptFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectG sourceObject)
+  gio.socket_connection.SocketConnection acceptFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectWrap sourceObject)
   {
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -171,18 +191,18 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = location where #GObject pointer will be stored, or null.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocket on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  gio.socket.Socket acceptSocket(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
+  gio.socket.Socket acceptSocket(out gobject.object.ObjectWrap sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
     _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
+    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -204,7 +224,7 @@ class SocketListener : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -219,18 +239,18 @@ class SocketListener : gobject.object.ObjectG
         result = a #GAsyncResult.
         sourceObject = Optional #GObject identifying this source
       Returns: a #GSocket on success, null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  gio.socket.Socket acceptSocketFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectG sourceObject)
+  gio.socket.Socket acceptSocketFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectWrap sourceObject)
   {
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
+    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -266,16 +286,16 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = Optional #GObject identifying this source
         effectiveAddress = location to store the address that was bound to, or null.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  bool addAddress(gio.socket_address.SocketAddress address, gio.types.SocketType type, gio.types.SocketProtocol protocol, gobject.object.ObjectG sourceObject, out gio.socket_address.SocketAddress effectiveAddress)
+  bool addAddress(gio.socket_address.SocketAddress address, gio.types.SocketType type, gio.types.SocketProtocol protocol, gobject.object.ObjectWrap sourceObject, out gio.socket_address.SocketAddress effectiveAddress)
   {
     bool _retval;
     GSocketAddress* _effectiveAddress;
     GError *_err;
     _retval = g_socket_listener_add_address(cast(GSocketListener*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_effectiveAddress, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
     return _retval;
   }
@@ -295,15 +315,15 @@ class SocketListener : gobject.object.ObjectG
       Params:
         sourceObject = Optional #GObject identifying this source
       Returns: the port number, or 0 in case of failure.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  ushort addAnyInetPort(gobject.object.ObjectG sourceObject = null)
+  ushort addAnyInetPort(gobject.object.ObjectWrap sourceObject = null)
   {
     ushort _retval;
     GError *_err;
     _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)cPtr, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -325,15 +345,15 @@ class SocketListener : gobject.object.ObjectG
         port = an IP port number (non-zero)
         sourceObject = Optional #GObject identifying this source
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  bool addInetPort(ushort port, gobject.object.ObjectG sourceObject = null)
+  bool addInetPort(ushort port, gobject.object.ObjectWrap sourceObject = null)
   {
     bool _retval;
     GError *_err;
     _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)cPtr, port, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -356,15 +376,15 @@ class SocketListener : gobject.object.ObjectG
         socket = a listening #GSocket
         sourceObject = Optional #GObject identifying this source
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  bool addSocket(gio.socket.Socket socket, gobject.object.ObjectG sourceObject = null)
+  bool addSocket(gio.socket.Socket socket, gobject.object.ObjectWrap sourceObject = null)
   {
     bool _retval;
     GError *_err;
     _retval = g_socket_listener_add_socket(cast(GSocketListener*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

@@ -19,7 +19,7 @@ class StaticResource
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gio.StaticResource");
+      throw new GidConstructException("Null instance pointer for gio.static_resource.StaticResource");
 
     cInstance = *cast(GStaticResource*)ptr;
 

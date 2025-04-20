@@ -40,9 +40,79 @@ class StringSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringSorter self()
   {
     return this;
+  }
+
+  /**
+      Get `collation` property.
+      Returns: The collation method to use for sorting.
+      
+      The [gtk.types.Collation.None] value is useful when the expression already
+      returns collation keys, or strings that need to be compared byte-by-byte.
+      
+      The default value, [gtk.types.Collation.Unicode], compares strings according
+      to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
+  */
+  @property gtk.types.Collation collation()
+  {
+    return getCollation();
+  }
+
+  /**
+      Set `collation` property.
+      Params:
+        propval = The collation method to use for sorting.
+        
+        The [gtk.types.Collation.None] value is useful when the expression already
+        returns collation keys, or strings that need to be compared byte-by-byte.
+        
+        The default value, [gtk.types.Collation.Unicode], compares strings according
+        to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
+  */
+  @property void collation(gtk.types.Collation propval)
+  {
+    return setCollation(propval);
+  }
+
+  /**
+      Get `expression` property.
+      Returns: The expression to evaluate on item to get a string to compare with.
+  */
+  @property gtk.expression.Expression expression()
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on item to get a string to compare with.
+  */
+  @property void expression(gtk.expression.Expression propval)
+  {
+    return setExpression(propval);
+  }
+
+  /**
+      Get `ignoreCase` property.
+      Returns: If sorting is case sensitive.
+  */
+  @property bool ignoreCase()
+  {
+    return getIgnoreCase();
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If sorting is case sensitive.
+  */
+  @property void ignoreCase(bool propval)
+  {
+    return setIgnoreCase(propval);
   }
 
   /**

@@ -51,9 +51,120 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ClampScrollable self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget of the [adw.clamp_scrollable.ClampScrollable].
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget of the [adw.clamp_scrollable.ClampScrollable].
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `maximumSize` property.
+      Returns: The maximum size allocated to the child.
+      
+      It is the width if the clamp is horizontal, or the height if it is vertical.
+  */
+  @property int maximumSize()
+  {
+    return getMaximumSize();
+  }
+
+  /**
+      Set `maximumSize` property.
+      Params:
+        propval = The maximum size allocated to the child.
+        
+        It is the width if the clamp is horizontal, or the height if it is vertical.
+  */
+  @property void maximumSize(int propval)
+  {
+    return setMaximumSize(propval);
+  }
+
+  /**
+      Get `tighteningThreshold` property.
+      Returns: The size above which the child is clamped.
+      
+      Starting from this size, the clamp will tighten its grip on the child,
+      slowly allocating less and less of the available size up to the maximum
+      allocated size. Below that threshold and below the maximum width, the child
+      will be allocated all the available size.
+      
+      If the threshold is greater than the maximum size to allocate to the child,
+      the child will be allocated all the width up to the maximum.
+      If the threshold is lower than the minimum size to allocate to the child,
+      that size will be used as the tightening threshold.
+      
+      Effectively, tightening the grip on the child before it reaches its maximum
+      size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property int tighteningThreshold()
+  {
+    return getTighteningThreshold();
+  }
+
+  /**
+      Set `tighteningThreshold` property.
+      Params:
+        propval = The size above which the child is clamped.
+        
+        Starting from this size, the clamp will tighten its grip on the child,
+        slowly allocating less and less of the available size up to the maximum
+        allocated size. Below that threshold and below the maximum width, the child
+        will be allocated all the available size.
+        
+        If the threshold is greater than the maximum size to allocate to the child,
+        the child will be allocated all the width up to the maximum.
+        If the threshold is lower than the minimum size to allocate to the child,
+        that size will be used as the tightening threshold.
+        
+        Effectively, tightening the grip on the child before it reaches its maximum
+        size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property void tighteningThreshold(int propval)
+  {
+    return setTighteningThreshold(propval);
+  }
+
+  /**
+      Get `unit` property.
+      Returns: The length unit for maximum size and tightening threshold.
+      
+      Allows the sizes to vary depending on the text scale factor.
+  */
+  @property adw.types.LengthUnit unit()
+  {
+    return getUnit();
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The length unit for maximum size and tightening threshold.
+        
+        Allows the sizes to vary depending on the text scale factor.
+  */
+  @property void unit(adw.types.LengthUnit propval)
+  {
+    return setUnit(propval);
   }
 
   mixin OrientableT!();
@@ -78,7 +189,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   {
     GtkWidget* _cretval;
     _cretval = adw_clamp_scrollable_get_child(cast(AdwClampScrollable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

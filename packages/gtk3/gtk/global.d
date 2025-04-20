@@ -60,7 +60,7 @@ import pango.types;
     Returns: true if an accelerator was activated and handled
           this keypress
 */
-bool accelGroupsActivate(gobject.object.ObjectG object, uint accelKey, gdk.types.ModifierType accelMods)
+bool accelGroupsActivate(gobject.object.ObjectWrap object, uint accelKey, gdk.types.ModifierType accelMods)
 {
   bool _retval;
   _retval = gtk_accel_groups_activate(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, accelKey, accelMods);
@@ -75,7 +75,7 @@ bool accelGroupsActivate(gobject.object.ObjectG object, uint accelKey, gdk.types
     Returns: a list of
           all accel groups which are attached to object
 */
-gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectG object)
+gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectWrap object)
 {
   GSList* _cretval;
   _cretval = gtk_accel_groups_from_object(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
@@ -324,7 +324,7 @@ bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
       modifiers = key modifier of the binding
     Returns: true if a binding was found and activated
 */
-bool bindingsActivate(gobject.object.ObjectG object, uint keyval, gdk.types.ModifierType modifiers)
+bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
   _retval = gtk_bindings_activate(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, keyval, modifiers);
@@ -340,7 +340,7 @@ bool bindingsActivate(gobject.object.ObjectG object, uint keyval, gdk.types.Modi
       event = a #GdkEventKey
     Returns: true if a matching key binding was found
 */
-bool bindingsActivateEvent(gobject.object.ObjectG object, gdk.event_key.EventKey event)
+bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.EventKey event)
 {
   bool _retval;
   _retval = gtk_bindings_activate_event(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event.cPtr : null);
@@ -554,7 +554,7 @@ gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context)
 {
   GtkWidget* _cretval;
   _cretval = gtk_drag_get_source_widget(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -585,7 +585,7 @@ void dragSetIconDefault(gdk.drag_context.DragContext context)
 */
 void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, int hotX, int hotY)
 {
-  gtk_drag_set_icon_gicon(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, hotX, hotY);
+  gtk_drag_set_icon_gicon(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, hotX, hotY);
 }
 
 /**
@@ -778,7 +778,7 @@ gdk.device.Device getCurrentEventDevice()
 {
   GdkDevice* _cretval;
   _cretval = gtk_get_current_event_device();
-  auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
   return _retval;
 }
 
@@ -860,7 +860,7 @@ gtk.widget.Widget getEventWidget(gdk.event.Event event)
 {
   GtkWidget* _cretval;
   _cretval = gtk_get_event_widget(event ? cast(GdkEvent*)event.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -992,7 +992,7 @@ gtk.widget.Widget grabGetCurrent()
 {
   GtkWidget* _cretval;
   _cretval = gtk_grab_get_current();
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1633,7 +1633,7 @@ gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.p
 {
   GtkPageSetup* _cretval;
   _cretval = gtk_print_run_page_setup_dialog(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1658,7 +1658,7 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
     ptrThawGC(data);
     auto _dlg = cast(gtk.types.PageSetupDoneFunc*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
+    (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
 
@@ -1853,7 +1853,7 @@ gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
 {
   GtkStyle* _cretval;
   _cretval = gtk_rc_get_style(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1885,7 +1885,7 @@ gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
           with the supplied paths, or null if nothing matching was
           specified and the default style should be used. The returned
           value is owned by GTK+ as part of an internal cache, so you
-          must call [gobject.object.ObjectG.ref_] on the returned value if you want to
+          must call [gobject.object.ObjectWrap.ref_] on the returned value if you want to
           keep a reference to it.
 
     Deprecated: Use #GtkStyleContext instead
@@ -1896,7 +1896,7 @@ gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetP
   const(char)* _widgetPath = widgetPath.toCString(No.Alloc);
   const(char)* _classPath = classPath.toCString(No.Alloc);
   _cretval = gtk_rc_get_style_by_paths(settings ? cast(GtkSettings*)settings.cPtr(No.Dup) : null, _widgetPath, _classPath, type);
-  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2390,7 +2390,7 @@ gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context,
 {
   PixbufC* _cretval;
   _cretval = gtk_render_icon_pixbuf(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null, size);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -2667,7 +2667,7 @@ void setDebugFlags(uint flags)
       uri = the uri to show
       timestamp = a timestamp to prevent focus stealing
     Returns: true on success, false on error
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [gtk.global.showUriOnWindow] instead.
 */
@@ -2678,7 +2678,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
   GError *_err;
   _retval = gtk_show_uri(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -2706,7 +2706,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
       uri = the uri to show
       timestamp = a timestamp to prevent focus stealing
     Returns: true on success, false on error
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
 {
@@ -2715,7 +2715,7 @@ bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
   GError *_err;
   _retval = gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -2878,7 +2878,7 @@ gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText)
   const(char)* _windowTitle = windowTitle.toCString(No.Alloc);
   const(char)* _dialogText = dialogText.toCString(No.Alloc);
   _cretval = gtk_test_create_simple_window(_windowTitle, _dialogText);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2901,7 +2901,7 @@ gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern)
   GtkWidget* _cretval;
   const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
   _cretval = gtk_test_find_label(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _labelPattern);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2923,7 +2923,7 @@ gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GT
 {
   GtkWidget* _cretval;
   _cretval = gtk_test_find_sibling(baseWidget ? cast(GtkWidget*)baseWidget.cPtr(No.Dup) : null, widgetType);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2947,7 +2947,7 @@ gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, 
   GtkWidget* _cretval;
   const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
   _cretval = gtk_test_find_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _labelPattern, widgetType);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -3162,7 +3162,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
   GtkTreeModel* _treeModel;
   GtkTreePath* _path;
   _retval = gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.Dup) : null, &_treeModel, &_path);
-  treeModel = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
+  treeModel = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
   path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;
 }
@@ -3180,7 +3180,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
 bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path)
 {
   bool _retval;
-  _retval = gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+  _retval = gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   return _retval;
 }
 

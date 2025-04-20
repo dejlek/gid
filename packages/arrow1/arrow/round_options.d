@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class RoundOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,48 @@ class RoundOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RoundOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `mode` property.
+      Returns: The rounding and tie-breaking mode.
+  */
+  @property arrow.types.RoundMode mode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.RoundMode)("mode");
+  }
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = The rounding and tie-breaking mode.
+  */
+  @property void mode(arrow.types.RoundMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.RoundMode)("mode", propval);
+  }
+
+  /**
+      Get `nDigits` property.
+      Returns: The rounding precision (number of digits to round to).
+  */
+  @property long nDigits()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("n-digits");
+  }
+
+  /**
+      Set `nDigits` property.
+      Params:
+        propval = The rounding precision (number of digits to round to).
+  */
+  @property void nDigits(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("n-digits", propval);
   }
 
   /** */

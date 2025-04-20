@@ -21,7 +21,7 @@ import gobject.types;
     atk_registry_set_factory_type call, passing the appropriate GType
     for application custom widget classes.
 */
-class Registry : gobject.object.ObjectG
+class Registry : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class Registry : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Registry self()
   {
     return this;
@@ -61,7 +62,7 @@ class Registry : gobject.object.ObjectG
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_registry_get_factory(cast(AtkRegistry*)cPtr, type);
-    auto _retval = ObjectG.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
     return _retval;
   }
 

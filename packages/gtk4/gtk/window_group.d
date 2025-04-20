@@ -20,13 +20,13 @@ import gtk.window;
     
     [gtk.window_group.WindowGroup] objects are referenced by each window in the group,
     so once you have added all windows to a [gtk.window_group.WindowGroup], you can drop
-    the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the window group with [gobject.object.ObjectWrap.unref]. If the
     windows in the window group are subsequently destroyed, then they will
     be removed from the window group and drop their references on the window
     group; when all window have been removed, the window group will be
     freed.
 */
-class WindowGroup : gobject.object.ObjectG
+class WindowGroup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -48,6 +48,7 @@ class WindowGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WindowGroup self()
   {
     return this;

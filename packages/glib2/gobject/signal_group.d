@@ -10,9 +10,9 @@ import gobject.object;
 import gobject.types;
 
 /**
-    [gobject.signal_group.SignalGroup] manages a collection of signals on a [gobject.object.ObjectG].
+    [gobject.signal_group.SignalGroup] manages a collection of signals on a [gobject.object.ObjectWrap].
     
-    [gobject.signal_group.SignalGroup] simplifies the process of connecting  many signals to a [gobject.object.ObjectG]
+    [gobject.signal_group.SignalGroup] simplifies the process of connecting  many signals to a [gobject.object.ObjectWrap]
     as a group. As such there is no API to disconnect a signal from the group.
     
     In particular, this allows you to:
@@ -32,7 +32,7 @@ import gobject.types;
     all the signals you need. When the `GtkTextView:buffer` property changes
     all of the signals will be transitioned correctly.
 */
-class SignalGroup : gobject.object.ObjectG
+class SignalGroup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,9 +54,29 @@ class SignalGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SignalGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `target` property.
+      Returns: The target instance used when connecting signals.
+  */
+  @property gobject.object.ObjectWrap target()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("target");
+  }
+
+  /**
+      Set `target` property.
+      Params:
+        propval = The target instance used when connecting signals.
+  */
+  @property void target(gobject.object.ObjectWrap propval)
+  {
+    return setTarget(propval);
   }
 
   /**
@@ -106,11 +126,11 @@ class SignalGroup : gobject.object.ObjectG
       Gets the target instance used when connecting signals.
       Returns: The target instance
   */
-  gobject.object.ObjectG dupTarget()
+  gobject.object.ObjectWrap dupTarget()
   {
     ObjectC* _cretval;
     _cretval = g_signal_group_dup_target(cast(GSignalGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +146,7 @@ class SignalGroup : gobject.object.ObjectG
         target = The target instance used
               when connecting signals.
   */
-  void setTarget(gobject.object.ObjectG target = null)
+  void setTarget(gobject.object.ObjectWrap target = null)
   {
     g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
   }
@@ -153,7 +173,7 @@ class SignalGroup : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectG instance, gobject.signal_group.SignalGroup signalGroup))
+          $(D void callback(gobject.object.ObjectWrap instance, gobject.signal_group.SignalGroup signalGroup))
   
           `instance` a #GObject containing the new value for #GSignalGroup:target (optional)
   
@@ -165,7 +185,7 @@ class SignalGroup : gobject.object.ObjectG
   ulong connectBind(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.signal_group.SignalGroup)))
   && Parameters!T.length < 3)
   {

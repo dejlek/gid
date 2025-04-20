@@ -29,7 +29,7 @@ import gtk.widget;
     
     [gtk.size_group.SizeGroup] objects are referenced by each widget in the size group,
     so once you have added all widgets to a [gtk.size_group.SizeGroup], you can drop
-    the initial reference to the size group with [gobject.object.ObjectG.unref]. If the
+    the initial reference to the size group with [gobject.object.ObjectWrap.unref]. If the
     widgets in the size group are subsequently destroyed, then they will
     be removed from the size group and drop their references on the size
     group; when all widgets have been removed, the size group will be
@@ -76,7 +76,7 @@ import gtk.widget;
     </object>
     ```
 */
-class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
+class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -98,9 +98,29 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SizeGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `mode` property.
+      Returns: The direction in which the size group affects requested sizes.
+  */
+  @property gtk.types.SizeGroupMode mode()
+  {
+    return getMode();
+  }
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = The direction in which the size group affects requested sizes.
+  */
+  @property void mode(gtk.types.SizeGroupMode propval)
+  {
+    return setMode(propval);
   }
 
   mixin BuildableT!();

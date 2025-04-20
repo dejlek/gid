@@ -66,6 +66,7 @@ class Snapshot : gdk.snapshot.Snapshot
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Snapshot self()
   {
     return this;
@@ -708,7 +709,7 @@ class Snapshot : gdk.snapshot.Snapshot
       
       After calling this function, it is no longer possible to
       add more nodes to snapshot. The only function that should
-      be called after this is [gobject.object.ObjectG.unref].
+      be called after this is [gobject.object.ObjectWrap.unref].
       Returns: the constructed [gsk.render_node.RenderNode] or
           null if there are no nodes to render.
   */
@@ -726,7 +727,7 @@ class Snapshot : gdk.snapshot.Snapshot
       
       After calling this function, it is no longer possible to
       add more nodes to snapshot. The only function that should
-      be called after this is [gobject.object.ObjectG.unref].
+      be called after this is [gobject.object.ObjectWrap.unref].
   
       Params:
         size = The size of the resulting paintable
@@ -737,7 +738,7 @@ class Snapshot : gdk.snapshot.Snapshot
   {
     GdkPaintable* _cretval;
     _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)cPtr, size ? cast(const(graphene_size_t)*)size.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 

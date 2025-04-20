@@ -24,7 +24,9 @@ import pango.language;
 class TextIter : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `text_iter.TextIter` boxed type.
+  */
   this()
   {
     super(gMalloc(GtkTextIter.sizeof), Yes.Take);
@@ -55,6 +57,7 @@ class TextIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextIter self()
   {
     return this;
@@ -972,7 +975,7 @@ class TextIter : gobject.boxed.Boxed
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_iter_get_buffer(cast(const(GtkTextIter)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1027,7 +1030,7 @@ class TextIter : gobject.boxed.Boxed
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_iter_get_child_anchor(cast(const(GtkTextIter)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1128,7 +1131,7 @@ class TextIter : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     _cretval = gtk_text_iter_get_pixbuf(cast(const(GtkTextIter)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

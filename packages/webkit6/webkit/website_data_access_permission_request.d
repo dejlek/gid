@@ -18,7 +18,7 @@ import webkit.types;
     When a WebKitWebsiteDataAccessPermissionRequest is not handled by the user,
     it is denied by default.
 */
-class WebsiteDataAccessPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

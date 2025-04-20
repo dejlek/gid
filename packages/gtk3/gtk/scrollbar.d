@@ -77,6 +77,7 @@ class Scrollbar : gtk.range.Range
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scrollbar self()
   {
     return this;

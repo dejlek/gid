@@ -110,9 +110,221 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Paned self()
   {
     return this;
+  }
+
+  /**
+      Get `endChild` property.
+      Returns: The second child.
+  */
+  @property gtk.widget.Widget endChild()
+  {
+    return getEndChild();
+  }
+
+  /**
+      Set `endChild` property.
+      Params:
+        propval = The second child.
+  */
+  @property void endChild(gtk.widget.Widget propval)
+  {
+    return setEndChild(propval);
+  }
+
+  /**
+      Get `maxPosition` property.
+      Returns: The largest possible value for the [gtk.paned.Paned.position]
+      property.
+      
+      This property is derived from the size and shrinkability
+      of the widget's children.
+  */
+  @property int maxPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-position");
+  }
+
+  /**
+      Get `minPosition` property.
+      Returns: The smallest possible value for the [gtk.paned.Paned.position]
+      property.
+      
+      This property is derived from the size and shrinkability
+      of the widget's children.
+  */
+  @property int minPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("min-position");
+  }
+
+  /**
+      Get `position` property.
+      Returns: Position of the separator in pixels, from the left/top.
+  */
+  @property int position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = Position of the separator in pixels, from the left/top.
+  */
+  @property void position(int propval)
+  {
+    return setPosition(propval);
+  }
+
+  /**
+      Get `positionSet` property.
+      Returns: Whether the [gtk.paned.Paned.position] property has been set.
+  */
+  @property bool positionSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("position-set");
+  }
+
+  /**
+      Set `positionSet` property.
+      Params:
+        propval = Whether the [gtk.paned.Paned.position] property has been set.
+  */
+  @property void positionSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("position-set", propval);
+  }
+
+  /**
+      Get `resizeEndChild` property.
+      Returns: Determines whether the second child expands and shrinks
+      along with the paned widget.
+  */
+  @property bool resizeEndChild()
+  {
+    return getResizeEndChild();
+  }
+
+  /**
+      Set `resizeEndChild` property.
+      Params:
+        propval = Determines whether the second child expands and shrinks
+        along with the paned widget.
+  */
+  @property void resizeEndChild(bool propval)
+  {
+    return setResizeEndChild(propval);
+  }
+
+  /**
+      Get `resizeStartChild` property.
+      Returns: Determines whether the first child expands and shrinks
+      along with the paned widget.
+  */
+  @property bool resizeStartChild()
+  {
+    return getResizeStartChild();
+  }
+
+  /**
+      Set `resizeStartChild` property.
+      Params:
+        propval = Determines whether the first child expands and shrinks
+        along with the paned widget.
+  */
+  @property void resizeStartChild(bool propval)
+  {
+    return setResizeStartChild(propval);
+  }
+
+  /**
+      Get `shrinkEndChild` property.
+      Returns: Determines whether the second child can be made smaller
+      than its requisition.
+  */
+  @property bool shrinkEndChild()
+  {
+    return getShrinkEndChild();
+  }
+
+  /**
+      Set `shrinkEndChild` property.
+      Params:
+        propval = Determines whether the second child can be made smaller
+        than its requisition.
+  */
+  @property void shrinkEndChild(bool propval)
+  {
+    return setShrinkEndChild(propval);
+  }
+
+  /**
+      Get `shrinkStartChild` property.
+      Returns: Determines whether the first child can be made smaller
+      than its requisition.
+  */
+  @property bool shrinkStartChild()
+  {
+    return getShrinkStartChild();
+  }
+
+  /**
+      Set `shrinkStartChild` property.
+      Params:
+        propval = Determines whether the first child can be made smaller
+        than its requisition.
+  */
+  @property void shrinkStartChild(bool propval)
+  {
+    return setShrinkStartChild(propval);
+  }
+
+  /**
+      Get `startChild` property.
+      Returns: The first child.
+  */
+  @property gtk.widget.Widget startChild()
+  {
+    return getStartChild();
+  }
+
+  /**
+      Set `startChild` property.
+      Params:
+        propval = The first child.
+  */
+  @property void startChild(gtk.widget.Widget propval)
+  {
+    return setStartChild(propval);
+  }
+
+  /**
+      Get `wideHandle` property.
+      Returns: Whether the [gtk.paned.Paned] should provide a stronger visual separation.
+      
+      For example, this could be set when a paned contains two
+      [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
+  */
+  @property bool wideHandle()
+  {
+    return getWideHandle();
+  }
+
+  /**
+      Set `wideHandle` property.
+      Params:
+        propval = Whether the [gtk.paned.Paned] should provide a stronger visual separation.
+        
+        For example, this could be set when a paned contains two
+        [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
+  */
+  @property void wideHandle(bool propval)
+  {
+    return setWideHandle(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -140,7 +352,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_end_child(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +419,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_start_child(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

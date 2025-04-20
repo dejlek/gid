@@ -30,6 +30,7 @@ class BooleanStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BooleanStatistics self()
   {
     return this;

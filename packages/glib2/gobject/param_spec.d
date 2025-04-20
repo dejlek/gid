@@ -9,7 +9,7 @@ import gobject.types;
 import gobject.value;
 
 /**
-    [gobject.param_spec.ParamSpec] encapsulates the metadata required to specify parameters, such as [gobject.object.ObjectG] properties.
+    [gobject.param_spec.ParamSpec] encapsulates the metadata required to specify parameters, such as [gobject.object.ObjectWrap] properties.
     
     ## Parameter names
     
@@ -30,7 +30,7 @@ class ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpec");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec.ParamSpec");
 
     cInstancePtr = cast(GParamSpec*)ptr;
 

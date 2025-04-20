@@ -6,6 +6,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -78,9 +79,66 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutController self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `mnemonicModifiers` property.
+      Returns: The modifiers that need to be pressed to allow mnemonics activation.
+  */
+  @property gdk.types.ModifierType mnemonicModifiers()
+  {
+    return getMnemonicsModifiers();
+  }
+
+  /**
+      Set `mnemonicModifiers` property.
+      Params:
+        propval = The modifiers that need to be pressed to allow mnemonics activation.
+  */
+  @property void mnemonicModifiers(gdk.types.ModifierType propval)
+  {
+    return setMnemonicsModifiers(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `scope_` property.
+      Returns: What scope the shortcuts will be handled in.
+  */
+  @property gtk.types.ShortcutScope scope_()
+  {
+    return getScope();
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = What scope the shortcuts will be handled in.
+  */
+  @property void scope_(gtk.types.ShortcutScope propval)
+  {
+    return setScope(propval);
   }
 
   mixin ListModelT!();
@@ -112,8 +170,8 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model)
   {
     GtkEventController* _cretval;
-    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
+    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
     return _retval;
   }
 

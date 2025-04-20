@@ -126,7 +126,7 @@ import gobject.object;
     supersedes #GdkDeviceManager and should be preferred in newly
     written code.
 */
-class DeviceManager : gobject.object.ObjectG
+class DeviceManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -148,6 +148,7 @@ class DeviceManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DeviceManager self()
   {
     return this;
@@ -169,7 +170,7 @@ class DeviceManager : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_manager_get_client_pointer(cast(GdkDeviceManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +184,7 @@ class DeviceManager : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_manager_get_display(cast(GdkDeviceManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 

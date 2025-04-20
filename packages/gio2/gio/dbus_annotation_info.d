@@ -13,10 +13,19 @@ import gobject.boxed;
 class DBusAnnotationInfo : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `dbus_annotation_info.DBusAnnotationInfo` boxed type.
+      Params:
+        refCount = The reference count or -1 if statically allocated.
+        key = The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
+        value = The value of the annotation.
+  */
+  this(int refCount = int.init, string key = string.init, string value = string.init)
   {
     super(gMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
+    this.refCount = refCount;
+    this.key = key;
+    this.value = value;
   }
 
   /** */
@@ -44,37 +53,65 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusAnnotationInfo self()
   {
     return this;
   }
 
+  /**
+      Get `refCount` field.
+      Returns: The reference count or -1 if statically allocated.
+  */
   @property int refCount()
   {
     return (cast(GDBusAnnotationInfo*)cPtr).refCount;
   }
 
+  /**
+      Set `refCount` field.
+      Params:
+        propval = The reference count or -1 if statically allocated.
+  */
   @property void refCount(int propval)
   {
     (cast(GDBusAnnotationInfo*)cPtr).refCount = propval;
   }
 
+  /**
+      Get `key` field.
+      Returns: The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
+  */
   @property string key()
   {
     return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
   }
 
+  /**
+      Set `key` field.
+      Params:
+        propval = The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
+  */
   @property void key(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
     dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)cPtr).key);
   }
 
+  /**
+      Get `value` field.
+      Returns: The value of the annotation.
+  */
   @property string value()
   {
     return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = The value of the annotation.
+  */
   @property void value(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);

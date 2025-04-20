@@ -1,4 +1,4 @@
-/// Module for [ObjectGst] class
+/// Module for [ObjectWrap] class
 module gst.object;
 
 import gid.gid;
@@ -21,14 +21,14 @@ import gst.types;
     #GstObject gives us basic refcounting, parenting functionality and locking.
     Most of the functions are just extended for special GStreamer needs and can be
     found under the same name in the base class of #GstObject which is #GObject
-    (e.g. [gobject.object.ObjectG.ref_] becomes [gst.object.ObjectGst.ref_]).
+    (e.g. [gobject.object.ObjectWrap.ref_] becomes [gst.object.ObjectWrap.ref_]).
     
     Since #GstObject derives from #GInitiallyUnowned, it also inherits the
     floating reference. Be aware that functions such as [gst.bin.Bin.add] and
     [gst.element.Element.addPad] take ownership of the floating reference.
     
     In contrast to #GObject instances, #GstObject adds a name property. The functions
-    [gst.object.ObjectGst.setName] and [gst.object.ObjectGst.getName] are used to set/get the name
+    [gst.object.ObjectWrap.setName] and [gst.object.ObjectWrap.getName] are used to set/get the name
     of the object.
     
     ## controlled properties
@@ -68,7 +68,7 @@ import gst.types;
           * start your pipeline
       )
 */
-class ObjectGst : gobject.initially_unowned.InitiallyUnowned
+class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
@@ -90,9 +90,49 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
-  override ObjectGst self()
+  /** Returns `this`, for use in `with` statements. */
+  override ObjectWrap self()
   {
     return this;
+  }
+
+  /** */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /** */
+  @property void name(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("name", propval);
+  }
+
+  /**
+      Get `parent` property.
+      Returns: The parent of the object. Please note, that when changing the 'parent'
+      property, we don't emit #GObject::notify and #GstObject::deep-notify
+      signals due to locking issues. In some cases one can use
+      #GstBin::element-added or #GstBin::element-removed signals on the parent to
+      achieve a similar effect.
+  */
+  @property gst.object.ObjectWrap parent()
+  {
+    return getParent();
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent of the object. Please note, that when changing the 'parent'
+        property, we don't emit #GObject::notify and #GstObject::deep-notify
+        signals due to locking issues. In some cases one can use
+        #GstBin::element-added or #GstBin::element-removed signals on the parent to
+        achieve a similar effect.
+  */
+  @property void parent(gst.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.object.ObjectWrap)("parent", propval);
   }
 
   /**
@@ -111,11 +151,11 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases the LOCK of each object in the list.
   */
-  static bool checkUniqueness(gst.object.ObjectGst[] list, string name)
+  static bool checkUniqueness(gst.object.ObjectWrap[] list, string name)
   {
     bool _retval;
-    auto _list = gListFromD!(gst.object.ObjectGst)(list);
-    scope(exit) containerFree!(GList*, gst.object.ObjectGst, GidOwnership.None)(_list);
+    auto _list = gListFromD!(gst.object.ObjectWrap)(list);
+    scope(exit) containerFree!(GList*, gst.object.ObjectWrap, GidOwnership.None)(_list);
     const(char)* _name = name.toCString(No.Alloc);
     _retval = gst_object_check_uniqueness(_list, _name);
     return _retval;
@@ -137,7 +177,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         excludedProps = a set of user-specified properties to exclude or null to show
               all changes.
   */
-  static void defaultDeepNotify(gobject.object.ObjectG object, gst.object.ObjectGst orig, gobject.param_spec.ParamSpec pspec, string[] excludedProps = null)
+  static void defaultDeepNotify(gobject.object.ObjectWrap object, gst.object.ObjectWrap orig, gobject.param_spec.ParamSpec pspec, string[] excludedProps = null)
   {
     char*[] _tmpexcludedProps;
     foreach (s; excludedProps)
@@ -160,7 +200,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         newobj = a new #GstObject
       Returns: true if newobj was different from oldobj
   */
-  static bool replace(gst.object.ObjectGst oldobj = null, gst.object.ObjectGst newobj = null)
+  static bool replace(gst.object.ObjectWrap oldobj = null, gst.object.ObjectWrap newobj = null)
   {
     bool _retval;
     _retval = gst_object_replace(oldobj ? cast(GstObject**)oldobj.cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj.cPtr(No.Dup) : null);
@@ -172,7 +212,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
       #GstControlBinding for this property it will be replaced.
       
       The object's reference count will be incremented, and any floating
-      reference will be removed (see [gst.object.ObjectGst.refSink])
+      reference will be removed (see [gst.object.ObjectWrap.refSink])
   
       Params:
         binding = the #GstControlBinding that should be used
@@ -196,7 +236,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         error = the GError.
         debug_ = an additional debug information string, or null
   */
-  void defaultError(glib.error.ErrorG error, string debug_ = null)
+  void defaultError(glib.error.ErrorWrap error, string debug_ = null)
   {
     const(char)* _debug_ = debug_.toCString(No.Alloc);
     gst_object_default_error(cast(GstObject*)cPtr, error ? cast(const(GError)*)error.cPtr : null, _debug_);
@@ -216,14 +256,14 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = gst_object_get_control_binding(cast(GstObject*)cPtr, _propertyName);
-    auto _retval = ObjectG.getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Obtain the control-rate for this object. Audio processing #GstElement
       objects will use this rate to sub-divide their processing loop and call
-      [gst.object.ObjectGst.syncValues] in between. The length of the processing segment
+      [gst.object.ObjectWrap.syncValues] in between. The length of the processing segment
       should be up to control-rate nanoseconds.
       
       If the object is not under property control, this will return
@@ -293,17 +333,17 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Returns the parent of object. This function increases the refcount
-      of the parent object so you should [gst.object.ObjectGst.unref] it after usage.
+      of the parent object so you should [gst.object.ObjectWrap.unref] it after usage.
       Returns: parent of object, this can be
           null if object has no parent. unref after usage.
         
         MT safe. Grabs and releases object's LOCK.
   */
-  gst.object.ObjectGst getParent()
+  gst.object.ObjectWrap getParent()
   {
     GstObject* _cretval;
     _cretval = gst_object_get_parent(cast(GstObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.object.ObjectGst)(cast(GstObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(GstObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -363,11 +403,11 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         ancestor = a #GstObject to check as ancestor
       Returns: true if ancestor is an ancestor of object.
   
-      Deprecated: Use [gst.object.ObjectGst.hasAsAncestor] instead.
+      Deprecated: Use [gst.object.ObjectWrap.hasAsAncestor] instead.
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAncestor(gst.object.ObjectGst ancestor)
+  bool hasAncestor(gst.object.ObjectWrap ancestor)
   {
     bool _retval;
     _retval = gst_object_has_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
@@ -384,7 +424,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAsAncestor(gst.object.ObjectGst ancestor)
+  bool hasAsAncestor(gst.object.ObjectWrap ancestor)
   {
     bool _retval;
     _retval = gst_object_has_as_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
@@ -402,7 +442,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAsParent(gst.object.ObjectGst parent)
+  bool hasAsParent(gst.object.ObjectWrap parent)
   {
     bool _retval;
     _retval = gst_object_has_as_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
@@ -426,7 +466,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
 
   /**
       This function is used to disable the control bindings on a property for
-      some time, i.e. [gst.object.ObjectGst.syncValues] will do nothing for the
+      some time, i.e. [gst.object.ObjectWrap.syncValues] will do nothing for the
       property.
   
       Params:
@@ -442,7 +482,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
 
   /**
       This function is used to disable all controlled properties of the object for
-      some time, i.e. [gst.object.ObjectGst.syncValues] will do nothing.
+      some time, i.e. [gst.object.ObjectWrap.syncValues] will do nothing.
   
       Params:
         disabled = boolean that specifies whether to disable the controller
@@ -456,7 +496,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   /**
       Change the control-rate for this object. Audio processing #GstElement
       objects will use this rate to sub-divide their processing loop and call
-      [gst.object.ObjectGst.syncValues] in between. The length of the processing segment
+      [gst.object.ObjectWrap.syncValues] in between. The length of the processing segment
       should be up to control-rate nanoseconds.
       
       The control-rate should not change if the element is in [gst.types.State.Paused] or
@@ -494,7 +534,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Sets the parent of object to parent. The object's reference count will
-      be incremented, and any floating reference will be removed (see [gst.object.ObjectGst.refSink]).
+      be incremented, and any floating reference will be removed (see [gst.object.ObjectWrap.refSink]).
   
       Params:
         parent = new parent of object
@@ -503,7 +543,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's LOCK.
   */
-  bool setParent(gst.object.ObjectGst parent)
+  bool setParent(gst.object.ObjectWrap parent)
   {
     bool _retval;
     _retval = gst_object_set_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
@@ -564,13 +604,13 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.object.ObjectGst propObject, gobject.param_spec.ParamSpec prop, gst.object.ObjectGst objectGst))
+          $(D void callback(gst.object.ObjectWrap propObject, gobject.param_spec.ParamSpec prop, gst.object.ObjectWrap objectWrap))
   
           `propObject` the object that originated the signal (optional)
   
           `prop` the property that changed (optional)
   
-          `objectGst` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -578,9 +618,9 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   ulong connectDeepNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.object.ObjectGst)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.param_spec.ParamSpec)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.object.ObjectGst)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

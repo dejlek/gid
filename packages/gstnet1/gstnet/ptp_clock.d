@@ -2,6 +2,8 @@
 module gstnet.ptp_clock;
 
 import gid.gid;
+import gobject.object;
+import gst.clock;
 import gst.system_clock;
 import gstnet.c.functions;
 import gstnet.c.types;
@@ -52,9 +54,28 @@ class PtpClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PtpClock self()
   {
     return this;
+  }
+
+  /** */
+  @property ulong grandmasterClockId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("grandmaster-clock-id");
+  }
+
+  /** */
+  @property gst.clock.Clock internalClock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("internal-clock");
+  }
+
+  /** */
+  @property ulong masterClockId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("master-clock-id");
   }
 
   /**

@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class DataStream : gobject.object.ObjectG
+class DataStream : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class DataStream : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DataStream self()
   {
     return this;

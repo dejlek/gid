@@ -42,6 +42,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShmAllocator self()
   {
     return this;
@@ -57,7 +58,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   {
     GstAllocator* _cretval;
     _cretval = gst_shm_allocator_get();
-    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -43,6 +43,7 @@ class HPaned : gtk.paned.Paned
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HPaned self()
   {
     return this;

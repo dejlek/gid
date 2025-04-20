@@ -75,7 +75,7 @@ import gobject.object;
       * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
     )
 */
-class DmabufTextureBuilder : gobject.object.ObjectG
+class DmabufTextureBuilder : gobject.object.ObjectWrap
 {
 
   /** */
@@ -97,9 +97,191 @@ class DmabufTextureBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DmabufTextureBuilder self()
   {
     return this;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display that this texture will be used on.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that this texture will be used on.
+  */
+  @property void display(gdk.display.Display propval)
+  {
+    return setDisplay(propval);
+  }
+
+  /**
+      Get `fourcc` property.
+      Returns: The format of the texture, as a fourcc value.
+  */
+  @property uint fourcc()
+  {
+    return getFourcc();
+  }
+
+  /**
+      Set `fourcc` property.
+      Params:
+        propval = The format of the texture, as a fourcc value.
+  */
+  @property void fourcc(uint propval)
+  {
+    return setFourcc(propval);
+  }
+
+  /**
+      Get `height` property.
+      Returns: The height of the texture.
+  */
+  @property uint height()
+  {
+    return getHeight();
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+  */
+  @property void height(uint propval)
+  {
+    return setHeight(propval);
+  }
+
+  /**
+      Get `modifier` property.
+      Returns: The modifier.
+  */
+  @property ulong modifier()
+  {
+    return getModifier();
+  }
+
+  /**
+      Set `modifier` property.
+      Params:
+        propval = The modifier.
+  */
+  @property void modifier(ulong propval)
+  {
+    return setModifier(propval);
+  }
+
+  /**
+      Get `nPlanes` property.
+      Returns: The number of planes of the texture.
+      
+      Note that you can set properties for other planes,
+      but they will be ignored when constructing the texture.
+  */
+  @property uint nPlanes()
+  {
+    return getNPlanes();
+  }
+
+  /**
+      Set `nPlanes` property.
+      Params:
+        propval = The number of planes of the texture.
+        
+        Note that you can set properties for other planes,
+        but they will be ignored when constructing the texture.
+  */
+  @property void nPlanes(uint propval)
+  {
+    return setNPlanes(propval);
+  }
+
+  /**
+      Get `premultiplied` property.
+      Returns: Whether the alpha channel is premultiplied into the others.
+      
+      Only relevant if the format has alpha.
+  */
+  @property bool premultiplied()
+  {
+    return getPremultiplied();
+  }
+
+  /**
+      Set `premultiplied` property.
+      Params:
+        propval = Whether the alpha channel is premultiplied into the others.
+        
+        Only relevant if the format has alpha.
+  */
+  @property void premultiplied(bool propval)
+  {
+    return setPremultiplied(propval);
+  }
+
+  /**
+      Get `updateRegion` property.
+      Returns: The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+  */
+  @property cairo.region.Region updateRegion()
+  {
+    return getUpdateRegion();
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+  */
+  @property void updateRegion(cairo.region.Region propval)
+  {
+    return setUpdateRegion(propval);
+  }
+
+  /**
+      Get `updateTexture` property.
+      Returns: The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+  */
+  @property gdk.texture.Texture updateTexture()
+  {
+    return getUpdateTexture();
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+  */
+  @property void updateTexture(gdk.texture.Texture propval)
+  {
+    return setUpdateTexture(propval);
+  }
+
+  /**
+      Get `width` property.
+      Returns: The width of the texture.
+  */
+  @property uint width()
+  {
+    return getWidth();
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+  */
+  @property void width(uint propval)
+  {
+    return setWidth(propval);
   }
 
   /**
@@ -139,7 +321,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
         data = user data to pass to the destroy function
       Returns: a newly built [gdk.texture.Texture] or `NULL`
           if the format is not supported
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
   {
@@ -156,8 +338,8 @@ class DmabufTextureBuilder : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)cPtr, _destroyCB, data, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -170,7 +352,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_display(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,7 +479,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_texture(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 

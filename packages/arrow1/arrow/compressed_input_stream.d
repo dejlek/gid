@@ -36,6 +36,7 @@ class CompressedInputStream : arrow.input_stream.InputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompressedInputStream self()
   {
     return this;
@@ -48,7 +49,7 @@ class CompressedInputStream : arrow.input_stream.InputStream
     GError *_err;
     _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec.cPtr(No.Dup) : null, raw ? cast(GArrowInputStream*)raw.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

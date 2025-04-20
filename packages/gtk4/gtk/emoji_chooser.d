@@ -70,6 +70,7 @@ class EmojiChooser : gtk.popover.Popover
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EmojiChooser self()
   {
     return this;

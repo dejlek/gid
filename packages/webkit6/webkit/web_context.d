@@ -43,7 +43,7 @@ import webkit.user_message;
     to set the policy [webkit.types.TLSErrorsPolicy.Ignore]; however, this is
     not appropriate for Internet applications.
 */
-class WebContext : gobject.object.ObjectG
+class WebContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -90,7 +90,7 @@ class WebContext : gobject.object.ObjectG
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_context_get_default();
-    auto _retval = ObjectG.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class WebContext : gobject.object.ObjectG
   {
     WebKitGeolocationManager* _cretval;
     _cretval = webkit_web_context_get_geolocation_manager(cast(WebKitWebContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.geolocation_manager.GeolocationManager)(cast(WebKitGeolocationManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.geolocation_manager.GeolocationManager)(cast(WebKitGeolocationManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class WebContext : gobject.object.ObjectG
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_web_context_get_network_session_for_automation(cast(WebKitWebContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class WebContext : gobject.object.ObjectG
   {
     WebKitSecurityManager* _cretval;
     _cretval = webkit_web_context_get_security_manager(cast(WebKitWebContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.security_manager.SecurityManager)(cast(WebKitSecurityManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.security_manager.SecurityManager)(cast(WebKitSecurityManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class WebContext : gobject.object.ObjectG
       Register scheme in context, so that when an URI request with scheme is made in the
       #WebKitWebContext, the #WebKitURISchemeRequestCallback registered will be called with a
       #WebKitURISchemeRequest.
-      It is possible to handle URI scheme requests asynchronously, by calling [gobject.object.ObjectG.ref_] on the
+      It is possible to handle URI scheme requests asynchronously, by calling [gobject.object.ObjectWrap.ref_] on the
       #WebKitURISchemeRequest and calling [webkit.urischeme_request.URISchemeRequest.finish] later
       when the data of the request is available or
       [webkit.urischeme_request.URISchemeRequest.finishError] in case of error.
@@ -313,7 +313,7 @@ class WebContext : gobject.object.ObjectG
     {
       auto _dlg = cast(webkit.types.URISchemeRequestCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -483,9 +483,9 @@ class WebContext : gobject.object.ObjectG
       Params:
         userData = a #GVariant
   */
-  void setWebProcessExtensionsInitializationUserData(glib.variant.VariantG userData)
+  void setWebProcessExtensionsInitializationUserData(glib.variant.Variant userData)
   {
-    webkit_web_context_set_web_process_extensions_initialization_user_data(cast(WebKitWebContext*)cPtr, userData ? cast(VariantC*)userData.cPtr(No.Dup) : null);
+    webkit_web_context_set_web_process_extensions_initialization_user_data(cast(WebKitWebContext*)cPtr, userData ? cast(GVariant*)userData.cPtr(No.Dup) : null);
   }
 
   /**
@@ -623,9 +623,9 @@ class WebContext : gobject.object.ObjectG
   
       This signal is emitted when a #WebKitUserMessage is received from a
       web process extension. You can reply to the message using
-      [webkit.user_message.UserMessage.sendReply].
+      [webkitwebprocessextension.user_message.UserMessage.sendReply].
       
-      You can handle the user message asynchronously by calling [gobject.object.ObjectG.ref_] on
+      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
       message and returning true.
   
       Params:

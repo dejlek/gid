@@ -30,7 +30,7 @@ import soup.types;
     always existed in the background, and you can use `g_type_from_name
     ("SoupAuthManager")` to get its `alias@GLib.Type` in earlier releases.)
 */
-class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -52,6 +52,7 @@ class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthManager self()
   {
     return this;

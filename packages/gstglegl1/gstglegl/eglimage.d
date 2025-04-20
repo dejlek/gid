@@ -19,7 +19,9 @@ import gstvideo.video_info;
 class EGLImage : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `eglimage.EGLImage` boxed type.
+  */
   this()
   {
     super(gMalloc(GstEGLImage.sizeof), Yes.Take);
@@ -50,6 +52,7 @@ class EGLImage : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EGLImage self()
   {
     return this;

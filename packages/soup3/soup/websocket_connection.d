@@ -36,7 +36,7 @@ import soup.websocket_extension;
     `signal@WebsocketConnection::message` signal to receive data.
     (#SoupWebsocketConnection currently only supports asynchronous I/O.)
 */
-class WebsocketConnection : gobject.object.ObjectG
+class WebsocketConnection : gobject.object.ObjectWrap
 {
 
   /** */
@@ -58,9 +58,67 @@ class WebsocketConnection : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WebsocketConnection self()
   {
     return this;
+  }
+
+  /**
+      Get `keepaliveInterval` property.
+      Returns: Interval in seconds on when to send a ping message which will
+      serve as a keepalive message.
+      
+      If set to 0 the keepalive message is disabled.
+  */
+  @property uint keepaliveInterval()
+  {
+    return getKeepaliveInterval();
+  }
+
+  /**
+      Set `keepaliveInterval` property.
+      Params:
+        propval = Interval in seconds on when to send a ping message which will
+        serve as a keepalive message.
+        
+        If set to 0 the keepalive message is disabled.
+  */
+  @property void keepaliveInterval(uint propval)
+  {
+    return setKeepaliveInterval(propval);
+  }
+
+  /**
+      Get `maxIncomingPayloadSize` property.
+      Returns: The maximum payload size for incoming packets.
+      
+      The protocol expects or 0 to not limit it.
+  */
+  @property ulong maxIncomingPayloadSize()
+  {
+    return getMaxIncomingPayloadSize();
+  }
+
+  /**
+      Set `maxIncomingPayloadSize` property.
+      Params:
+        propval = The maximum payload size for incoming packets.
+        
+        The protocol expects or 0 to not limit it.
+  */
+  @property void maxIncomingPayloadSize(ulong propval)
+  {
+    return setMaxIncomingPayloadSize(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The current state of the WebSocket.
+  */
+  @property soup.types.WebsocketState state()
+  {
+    return getState();
   }
 
   /**
@@ -149,7 +207,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     GIOStream* _cretval;
     _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -399,7 +457,7 @@ class WebsocketConnection : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorG error, soup.websocket_connection.WebsocketConnection websocketConnection))
+          $(D void callback(glib.error.ErrorWrap error, soup.websocket_connection.WebsocketConnection websocketConnection))
   
           `error` the error that occured (optional)
   
@@ -411,7 +469,7 @@ class WebsocketConnection : gobject.object.ObjectG
   ulong connectError(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 3)
   {

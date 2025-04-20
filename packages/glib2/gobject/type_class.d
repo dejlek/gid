@@ -17,7 +17,7 @@ class TypeClass
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.TypeClass");
+      throw new GidConstructException("Null instance pointer for gobject.type_class.TypeClass");
 
     cInstance = *cast(GTypeClass*)ptr;
 

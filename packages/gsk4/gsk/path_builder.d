@@ -83,6 +83,7 @@ class PathBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PathBuilder self()
   {
     return this;

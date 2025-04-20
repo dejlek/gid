@@ -15,10 +15,23 @@ import harfbuzz.types;
 class OtMathGlyphPart : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `ot_math_glyph_part.OtMathGlyphPart` boxed type.
+      Params:
+        glyph = The glyph index of the variant part
+        startConnectorLength = The length of the connector on the starting side of the variant part
+        endConnectorLength = The length of the connector on the ending side of the variant part
+        fullAdvance = The total advance of the part
+        flags = #hb_ot_math_glyph_part_flags_t flags for the part
+  */
+  this(harfbuzz.types.Codepoint glyph = harfbuzz.types.Codepoint.init, harfbuzz.types.Position startConnectorLength = harfbuzz.types.Position.init, harfbuzz.types.Position endConnectorLength = harfbuzz.types.Position.init, harfbuzz.types.Position fullAdvance = harfbuzz.types.Position.init, harfbuzz.types.OtMathGlyphPartFlags flags = harfbuzz.types.OtMathGlyphPartFlags.init)
   {
     super(gMalloc(hb_ot_math_glyph_part_t.sizeof), Yes.Take);
+    this.glyph = glyph;
+    this.startConnectorLength = startConnectorLength;
+    this.endConnectorLength = endConnectorLength;
+    this.fullAdvance = fullAdvance;
+    this.flags = flags;
   }
 
   /** */
@@ -46,56 +59,102 @@ class OtMathGlyphPart : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OtMathGlyphPart self()
   {
     return this;
   }
 
+  /**
+      Get `glyph` field.
+      Returns: The glyph index of the variant part
+  */
   @property harfbuzz.types.Codepoint glyph()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).glyph;
   }
 
+  /**
+      Set `glyph` field.
+      Params:
+        propval = The glyph index of the variant part
+  */
   @property void glyph(harfbuzz.types.Codepoint propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).glyph = propval;
   }
 
+  /**
+      Get `startConnectorLength` field.
+      Returns: The length of the connector on the starting side of the variant part
+  */
   @property harfbuzz.types.Position startConnectorLength()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength;
   }
 
+  /**
+      Set `startConnectorLength` field.
+      Params:
+        propval = The length of the connector on the starting side of the variant part
+  */
   @property void startConnectorLength(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength = propval;
   }
 
+  /**
+      Get `endConnectorLength` field.
+      Returns: The length of the connector on the ending side of the variant part
+  */
   @property harfbuzz.types.Position endConnectorLength()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength;
   }
 
+  /**
+      Set `endConnectorLength` field.
+      Params:
+        propval = The length of the connector on the ending side of the variant part
+  */
   @property void endConnectorLength(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength = propval;
   }
 
+  /**
+      Get `fullAdvance` field.
+      Returns: The total advance of the part
+  */
   @property harfbuzz.types.Position fullAdvance()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance;
   }
 
+  /**
+      Set `fullAdvance` field.
+      Params:
+        propval = The total advance of the part
+  */
   @property void fullAdvance(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance = propval;
   }
 
+  /**
+      Get `flags` field.
+      Returns: #hb_ot_math_glyph_part_flags_t flags for the part
+  */
   @property harfbuzz.types.OtMathGlyphPartFlags flags()
   {
     return cast(harfbuzz.types.OtMathGlyphPartFlags)(cast(hb_ot_math_glyph_part_t*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = #hb_ot_math_glyph_part_flags_t flags for the part
+  */
   @property void flags(harfbuzz.types.OtMathGlyphPartFlags propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).flags = cast(hb_ot_math_glyph_part_flags_t)propval;

@@ -13,7 +13,7 @@ import gstvideo.types;
     for modifying the color balance implemented by an element providing the
     #GstColorBalance interface. For example, Hue or Saturation.
 */
-class ColorBalanceChannel : gobject.object.ObjectG
+class ColorBalanceChannel : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class ColorBalanceChannel : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorBalanceChannel self()
   {
     return this;

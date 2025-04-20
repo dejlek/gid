@@ -73,6 +73,7 @@ class Statusbar : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Statusbar self()
   {
     return this;
@@ -115,7 +116,7 @@ class Statusbar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_get_message_area(cast(GtkStatusbar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

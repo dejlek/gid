@@ -17,7 +17,7 @@ import gtk.types;
     
     [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable].
 */
-class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
+class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
 {
 
   /** */
@@ -39,6 +39,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconPaintable self()
   {
     return this;
@@ -57,13 +58,13 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
         size = desired icon size
         scale = the desired scale
       Returns: a [gtk.icon_paintable.IconPaintable] containing
-          for the icon. Unref with [gobject.object.ObjectG.unref]
+          for the icon. Unref with [gobject.object.ObjectWrap.unref]
   */
   static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, size, scale);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, size, scale);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,7 +78,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
   {
     GFile* _cretval;
     _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -31,6 +31,7 @@ class FieldExpression : arrow.expression.Expression
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FieldExpression self()
   {
     return this;
@@ -44,7 +45,7 @@ class FieldExpression : arrow.expression.Expression
     GError *_err;
     _cretval = garrow_field_expression_new(_reference, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

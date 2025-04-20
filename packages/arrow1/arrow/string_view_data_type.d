@@ -30,6 +30,7 @@ class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringViewDataType self()
   {
     return this;

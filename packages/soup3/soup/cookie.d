@@ -63,6 +63,7 @@ class Cookie : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Cookie self()
   {
     return this;

@@ -32,6 +32,7 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SparseUnionScalar self()
   {
     return this;

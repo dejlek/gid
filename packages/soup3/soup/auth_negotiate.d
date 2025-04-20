@@ -41,6 +41,7 @@ class AuthNegotiate : soup.auth.Auth
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthNegotiate self()
   {
     return this;

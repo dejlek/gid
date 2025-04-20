@@ -34,6 +34,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HivePartitioning self()
   {
     return this;
@@ -48,7 +49,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     GError *_err;
     _cretval = gadataset_hive_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetHivePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

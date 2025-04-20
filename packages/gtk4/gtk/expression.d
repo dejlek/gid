@@ -17,7 +17,7 @@ import gtk.types;
     from a source that is several steps away. For example, an expression
     may describe ‘the value of property A of `object1`, which is itself the
     value of a property of `object2`’. And `object1` may not even exist yet
-    at the time that the expression is created. This is contrast to [gobject.object.ObjectG]
+    at the time that the expression is created. This is contrast to [gobject.object.ObjectWrap]
     property bindings, which can only create direct connections between
     the properties of two objects that must both exist for the duration
     of the binding.
@@ -29,7 +29,7 @@ import gtk.types;
     [gtk.expression.Expression.evaluate] for evaluating an expression.
     
     Various methods for defining expressions exist, from simple constants via
-    [gtk.constant_expression.ConstantExpression.new_] to looking up properties in a [gobject.object.ObjectG]
+    [gtk.constant_expression.ConstantExpression.new_] to looking up properties in a [gobject.object.ObjectWrap]
     (even recursively) via [gtk.property_expression.PropertyExpression.new_] or providing
     custom functions to transform and combine expressions via
     [gtk.closure_expression.ClosureExpression.new_].
@@ -71,9 +71,9 @@ import gtk.types;
     
     ## GtkExpression in GObject properties
     
-    In order to use a [gtk.expression.Expression] as a [gobject.object.ObjectG] property, you must use the
+    In order to use a [gtk.expression.Expression] as a [gobject.object.ObjectWrap] property, you must use the
     `func@Gtk.param_spec_expression` when creating a [gobject.param_spec.ParamSpec] to install in the
-    [gobject.object.ObjectG] class being defined; for instance:
+    [gobject.object.ObjectWrap] class being defined; for instance:
     
     ```c
     obj_props[PROP_EXPRESSION] =
@@ -169,7 +169,7 @@ class Expression
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.Expression");
+      throw new GidConstructException("Null instance pointer for gtk.expression.Expression");
 
     cInstancePtr = cast(GtkExpression*)ptr;
 
@@ -195,7 +195,7 @@ class Expression
   /**
       Bind `target`'s property named `property` to `self`.
       
-      The value that `self` evaluates to is set via `[gobject.object.ObjectG.set]` on
+      The value that `self` evaluates to is set via `[gobject.object.ObjectWrap.set]` on
       `target`. This is repeated whenever `self` changes to ensure that
       the object's property stays synchronized with `self`.
       
@@ -213,7 +213,7 @@ class Expression
             the evaluation of `self`
       Returns: a [gtk.expression_watch.ExpressionWatch]
   */
-  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectG target, string property, gobject.object.ObjectG this_ = null)
+  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectWrap target, string property, gobject.object.ObjectWrap this_ = null)
   {
     GtkExpressionWatch* _cretval;
     const(char)* _property = property.toCString(No.Alloc);
@@ -239,7 +239,7 @@ class Expression
         value = an empty [gobject.value.Value]
       Returns: `TRUE` if the expression could be evaluated
   */
-  bool evaluate(gobject.object.ObjectG this_, gobject.value.Value value)
+  bool evaluate(gobject.object.ObjectWrap this_, gobject.value.Value value)
   {
     bool _retval;
     _retval = gtk_expression_evaluate(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
@@ -297,7 +297,7 @@ class Expression
           [gtk.expression_watch.ExpressionWatch.unwatch]. You should call [gtk.expression_watch.ExpressionWatch.ref_]
           if you want to keep the watch around.
   */
-  gtk.expression_watch.ExpressionWatch watch(gobject.object.ObjectG this_, gtk.types.ExpressionNotify notify)
+  gtk.expression_watch.ExpressionWatch watch(gobject.object.ObjectWrap this_, gtk.types.ExpressionNotify notify)
   {
     extern(C) void _notifyCallback(void* userData)
     {

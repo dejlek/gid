@@ -64,6 +64,7 @@ class TagDemux : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TagDemux self()
   {
     return this;

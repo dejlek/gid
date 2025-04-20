@@ -19,7 +19,7 @@ class AttrInt
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrInt");
+      throw new GidConstructException("Null instance pointer for pango.attr_int.AttrInt");
 
     cInstance = *cast(PangoAttrInt*)ptr;
 
@@ -33,16 +33,29 @@ class AttrInt
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrInt*)cPtr).attr);
   }
 
+  /**
+      Get `value` field.
+      Returns: the value of the attribute
+  */
   @property int value()
   {
     return (cast(PangoAttrInt*)cPtr).value;
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the value of the attribute
+  */
   @property void value(int propval)
   {
     (cast(PangoAttrInt*)cPtr).value = propval;

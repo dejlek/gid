@@ -157,8 +157,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileOutputStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -166,8 +166,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_append_to(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -212,17 +212,17 @@ template FileT()
         res = #GAsyncResult
       Returns: a valid #GFileOutputStream
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream appendToFinish(gio.async_result.AsyncResult res)
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ template FileT()
             null to ignore
       Returns: an attribute query string for [gio.file.File.queryInfo],
           or null if an error occurs.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -251,7 +251,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -306,7 +306,7 @@ template FileT()
         progressCallback = function to callback with
             progress information, or null if progress information is not needed
       Returns: true on success, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
@@ -321,9 +321,9 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -365,13 +365,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_copy_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
+    g_file_copy_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
   }
 
   /**
@@ -391,15 +391,15 @@ template FileT()
             null to ignore
       Returns: true if the attributes were copied successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -409,15 +409,15 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool copyFinish(gio.async_result.AsyncResult res)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -448,8 +448,8 @@ template FileT()
             null to ignore
       Returns: a #GFileOutputStream for the newly created
           file, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -457,8 +457,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_create(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -503,17 +503,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileOutputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream createFinish(gio.async_result.AsyncResult res)
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -548,8 +548,8 @@ template FileT()
             null to ignore
       Returns: a #GFileIOStream for the newly created
           file, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -557,8 +557,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_create_readwrite(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -588,7 +588,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -603,17 +603,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream createReadwriteFinish(gio.async_result.AsyncResult res)
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the file was deleted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool delete_(gio.cancellable.Cancellable cancellable = null)
   {
@@ -652,7 +652,7 @@ template FileT()
     GError *_err;
     _retval = g_file_delete(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -675,7 +675,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -689,15 +689,15 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true if the file was deleted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool deleteFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -708,7 +708,7 @@ template FileT()
       
       [gio.file.File.dup] is useful when a second handle is needed to the same underlying
       file, for use in a separate thread (#GFile is not thread-safe). For use
-      within the same thread, use [gobject.object.ObjectG.ref_] to increment the existing object’s
+      within the same thread, use [gobject.object.ObjectWrap.ref_] to increment the existing object’s
       reference count.
       
       This call does no blocking I/O.
@@ -719,7 +719,7 @@ template FileT()
   {
     GFile* _cretval;
     _cretval = g_file_dup(cast(GFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -749,7 +749,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -765,7 +765,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.file.File.ejectMountableWithOperationFinish]
           instead.
@@ -774,9 +774,9 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -806,7 +806,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -822,15 +822,15 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool ejectMountableWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -867,8 +867,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: A #GFileEnumerator if successful,
-          null on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          null on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -877,8 +877,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_enumerate_children(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -927,17 +927,17 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileEnumerator or null
           if an error occurred.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_enumerator.FileEnumerator enumerateChildrenFinish(gio.async_result.AsyncResult res)
   {
     GFileEnumerator* _cretval;
     GError *_err;
-    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -957,7 +957,7 @@ template FileT()
   override bool equal(gio.file.File file2)
   {
     bool _retval;
-    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(ObjectG)file2).cPtr(No.Dup) : null);
+    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(gobject.object.ObjectWrap)file2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -977,8 +977,8 @@ template FileT()
             null to ignore
       Returns: a #GMount where the file is located
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable = null)
   {
@@ -986,8 +986,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_find_enclosing_mount(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1015,7 +1015,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1030,17 +1030,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: #GMount for given file or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.mount.Mount findEnclosingMountFinish(gio.async_result.AsyncResult res)
   {
     GMount* _cretval;
     GError *_err;
-    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1082,14 +1082,14 @@ template FileT()
       Params:
         name = string containing the child's basename
       Returns: a #GFile to a child specified by name.
-          Free the returned object with [gobject.object.ObjectG.unref].
+          Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   override gio.file.File getChild(string name)
   {
     GFile* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_file_get_child(cast(GFile*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1107,8 +1107,8 @@ template FileT()
         displayName = string to a possible child
       Returns: a #GFile to the specified child, or
           null if the display name couldn't be converted.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file.File getChildForDisplayName(string displayName)
   {
@@ -1117,8 +1117,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_get_child_for_display_name(cast(GFile*)cPtr, _displayName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1130,13 +1130,13 @@ template FileT()
       This call does no blocking I/O.
       Returns: a #GFile structure to the
           parent of the given #GFile or null if there is no parent. Free
-          the returned object with [gobject.object.ObjectG.unref].
+          the returned object with [gobject.object.ObjectWrap.unref].
   */
   override gio.file.File getParent()
   {
     GFile* _cretval;
     _cretval = g_file_get_parent(cast(GFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1199,7 +1199,7 @@ template FileT()
   override string getRelativePath(gio.file.File descendant)
   {
     char* _cretval;
-    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(ObjectG)descendant).cPtr(No.Dup) : null);
+    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(gobject.object.ObjectWrap)descendant).cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1260,7 +1260,7 @@ template FileT()
   override bool hasParent(gio.file.File parent = null)
   {
     bool _retval;
-    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(No.Dup) : null);
+    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(gobject.object.ObjectWrap)parent).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1288,7 +1288,7 @@ template FileT()
   override bool hasPrefix(gio.file.File prefix)
   {
     bool _retval;
-    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(ObjectG)prefix).cPtr(No.Dup) : null);
+    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(gobject.object.ObjectWrap)prefix).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1366,7 +1366,7 @@ template FileT()
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override glib.bytes.Bytes loadBytes(gio.cancellable.Cancellable cancellable, out string etagOut)
   {
@@ -1375,7 +1375,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_load_bytes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
@@ -1405,7 +1405,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1429,16 +1429,16 @@ template FileT()
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override glib.bytes.Bytes loadBytesFinish(gio.async_result.AsyncResult result, out string etagOut)
   {
     GBytes* _cretval;
     char* _etagOut;
     GError *_err;
-    _cretval = g_file_load_bytes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_etagOut, &_err);
+    _cretval = g_file_load_bytes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
@@ -1461,7 +1461,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the file's contents were successfully loaded.
           false if there were errors.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool loadContents(gio.cancellable.Cancellable cancellable, out ubyte[] contents, out string etagOut)
   {
@@ -1472,7 +1472,7 @@ template FileT()
     GError *_err;
     _retval = g_file_load_contents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1506,7 +1506,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1528,7 +1528,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool loadContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut)
   {
@@ -1537,9 +1537,9 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1561,7 +1561,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool loadPartialContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut)
   {
@@ -1570,9 +1570,9 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1600,7 +1600,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool makeDirectory(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1608,7 +1608,7 @@ template FileT()
     GError *_err;
     _retval = g_file_make_directory(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1629,7 +1629,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1644,15 +1644,15 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool makeDirectoryFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1676,7 +1676,7 @@ template FileT()
             null to ignore
       Returns: true if all directories have been successfully created, false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1684,7 +1684,7 @@ template FileT()
     GError *_err;
     _retval = g_file_make_directory_with_parents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1702,7 +1702,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on the creation of a new symlink, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1711,7 +1711,7 @@ template FileT()
     GError *_err;
     _retval = g_file_make_symbolic_link(cast(GFile*)cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1735,7 +1735,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1751,15 +1751,15 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool makeSymbolicLinkFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1792,7 +1792,7 @@ template FileT()
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool measureDiskUsage(gio.types.FileMeasureFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileMeasureProgressCallback progressCallback, out ulong diskUsage, out ulong numDirs, out ulong numFiles)
   {
@@ -1809,7 +1809,7 @@ template FileT()
     GError *_err;
     _retval = g_file_measure_disk_usage(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1825,15 +1825,15 @@ template FileT()
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool measureDiskUsageFinish(gio.async_result.AsyncResult result, out ulong diskUsage, out ulong numDirs, out ulong numFiles)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1851,8 +1851,8 @@ template FileT()
             null to ignore
       Returns: a #GFileMonitor for the given file,
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1860,8 +1860,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1884,8 +1884,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileMonitor for the given file,
-          or null on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          or null on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1893,8 +1893,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor_directory(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1920,8 +1920,8 @@ template FileT()
             null to ignore
       Returns: a #GFileMonitor for the given file,
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1929,8 +1929,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor_file(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1962,7 +1962,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1978,15 +1978,15 @@ template FileT()
       Returns: true if successful. If an error has occurred,
           this function will return false and set error
           appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool mountEnclosingVolumeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -2019,7 +2019,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2036,17 +2036,17 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: a #GFile or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file.File mountMountableFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2093,7 +2093,7 @@ template FileT()
         progressCallback = #GFileProgressCallback
             function for updates
       Returns: true on successful move, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
@@ -2108,9 +2108,9 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -2150,13 +2150,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_move_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
+    g_file_move_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
   }
 
   /**
@@ -2166,15 +2166,15 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful file move, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool moveFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -2199,8 +2199,8 @@ template FileT()
       Params:
         cancellable = a #GCancellable
       Returns: #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2208,8 +2208,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_open_readwrite(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2237,7 +2237,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2252,23 +2252,23 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream openReadwriteFinish(gio.async_result.AsyncResult res)
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Exactly like [gio.file.File.getPath], but caches the result via
-      [gobject.object.ObjectG.setQdataFull].  This is useful for example in C
+      [gobject.object.ObjectWrap.setQdataFull].  This is useful for example in C
       applications which mix `g_file_*` APIs with native ones.  It
       also avoids an extra duplicated string when possible, so will be
       generally more efficient.
@@ -2308,7 +2308,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2326,15 +2326,15 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool pollMountableFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -2350,8 +2350,8 @@ template FileT()
         cancellable = optional #GCancellable object, null to ignore
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
-          When you are done with it, release it with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          When you are done with it, release it with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   override gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2359,8 +2359,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_default_handler(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2379,7 +2379,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2394,17 +2394,17 @@ template FileT()
         result = a #GAsyncResult
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
-          When you are done with it, release it with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          When you are done with it, release it with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   override gio.app_info.AppInfo queryDefaultHandlerFinish(gio.async_result.AsyncResult result)
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2499,8 +2499,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileInfo or null if there was an error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2509,8 +2509,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_filesystem_info(cast(GFile*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2542,7 +2542,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2559,17 +2559,17 @@ template FileT()
         res = a #GAsyncResult
       Returns: #GFileInfo for given file
           or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_info.FileInfo queryFilesystemInfoFinish(gio.async_result.AsyncResult res)
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2611,8 +2611,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileInfo for the given file, or null
-          on error. Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2621,8 +2621,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_info(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2653,7 +2653,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2670,17 +2670,17 @@ template FileT()
         res = a #GAsyncResult
       Returns: #GFileInfo for given file
           or null on error. Free the returned object with
-          [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult res)
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2702,7 +2702,7 @@ template FileT()
       Returns: a #GFileAttributeInfoList describing the settable attributes.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2710,7 +2710,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_settable_attributes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -2730,7 +2730,7 @@ template FileT()
       Returns: a #GFileAttributeInfoList describing the writable namespaces.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2738,7 +2738,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_writable_namespaces(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -2759,8 +2759,8 @@ template FileT()
       Params:
         cancellable = a #GCancellable
       Returns: #GFileInputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2768,8 +2768,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_read(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2797,7 +2797,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2812,17 +2812,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileInputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_input_stream.FileInputStream readFinish(gio.async_result.AsyncResult res)
   {
     GFileInputStream* _cretval;
     GError *_err;
-    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2877,8 +2877,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileOutputStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2887,8 +2887,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2921,7 +2921,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2960,7 +2960,7 @@ template FileT()
         cancellable = optional #GCancellable object, null to ignore
       Returns: true if successful. If an error has occurred, this function
           will return false and set error appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2975,7 +2975,7 @@ template FileT()
     GError *_err;
     _retval = g_file_replace_contents(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
@@ -3016,7 +3016,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3055,7 +3055,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3075,16 +3075,16 @@ template FileT()
             for the document. This should be freed with [glib.global.gfree] when it is no
             longer needed, or null
       Returns: true on success, false on failure.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool replaceContentsFinish(gio.async_result.AsyncResult res, out string newEtag)
   {
     bool _retval;
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_newEtag, &_err);
+    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
@@ -3096,17 +3096,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileOutputStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_output_stream.FileOutputStream replaceFinish(gio.async_result.AsyncResult res)
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3130,8 +3130,8 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: a #GFileIOStream or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3140,8 +3140,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace_readwrite(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3175,7 +3175,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3191,17 +3191,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFileIOStream, or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file_iostream.FileIOStream replaceReadwriteFinish(gio.async_result.AsyncResult res)
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3222,7 +3222,7 @@ template FileT()
     GFile* _cretval;
     const(char)* _relativePath = relativePath.toCString(No.Alloc);
     _cretval = g_file_resolve_relative_path(cast(GFile*)cPtr, _relativePath);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3245,7 +3245,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3254,7 +3254,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute(cast(GFile*)cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3275,7 +3275,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3285,7 +3285,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_byte_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3305,7 +3305,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3314,7 +3314,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_int32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3333,7 +3333,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3342,7 +3342,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_int64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3361,7 +3361,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3371,7 +3371,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3391,7 +3391,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3400,7 +3400,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_uint32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3420,7 +3420,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3429,7 +3429,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attribute_uint64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3459,7 +3459,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3474,16 +3474,16 @@ template FileT()
         result = a #GAsyncResult
         info = a #GFileInfo
       Returns: true if the attributes were set correctly, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributesFinish(gio.async_result.AsyncResult result, out gio.file_info.FileInfo info)
   {
     bool _retval;
     GFileInfo* _info;
     GError *_err;
-    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_info, &_err);
+    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     info = new gio.file_info.FileInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
@@ -3508,7 +3508,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: false if there was any error, true otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3516,7 +3516,7 @@ template FileT()
     GError *_err;
     _retval = g_file_set_attributes_from_info(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3543,8 +3543,8 @@ template FileT()
             null to ignore
       Returns: a #GFile specifying what file was renamed to,
           or null if there was an error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3553,8 +3553,8 @@ template FileT()
     GError *_err;
     _cretval = g_file_set_display_name(cast(GFile*)cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3583,7 +3583,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3599,17 +3599,17 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a #GFile or null on error.
-          Free the returned object with [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+          Free the returned object with [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   override gio.file.File setDisplayNameFinish(gio.async_result.AsyncResult res)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3639,7 +3639,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3657,15 +3657,15 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool startMountableFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3696,7 +3696,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3714,15 +3714,15 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool stopMountableFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3756,7 +3756,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful trash, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool trash(gio.cancellable.Cancellable cancellable = null)
   {
@@ -3764,7 +3764,7 @@ template FileT()
     GError *_err;
     _retval = g_file_trash(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3785,7 +3785,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3800,15 +3800,15 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful trash, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool trashFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3839,7 +3839,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3857,7 +3857,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.file.File.unmountMountableWithOperationFinish]
           instead.
@@ -3866,9 +3866,9 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -3899,7 +3899,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -3918,15 +3918,15 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool unmountMountableWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

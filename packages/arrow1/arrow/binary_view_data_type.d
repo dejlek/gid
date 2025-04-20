@@ -30,6 +30,7 @@ class BinaryViewDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BinaryViewDataType self()
   {
     return this;

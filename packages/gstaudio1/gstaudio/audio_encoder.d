@@ -2,6 +2,7 @@
 module gstaudio.audio_encoder;
 
 import gid.gid;
+import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
 import gst.buffer;
@@ -140,9 +141,52 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioEncoder self()
   {
     return this;
+  }
+
+  /** */
+  @property bool hardResync()
+  {
+    return getHardResync();
+  }
+
+  /** */
+  @property void hardResync(bool propval)
+  {
+    return setHardResync(propval);
+  }
+
+  /** */
+  @property bool markGranule()
+  {
+    return getMarkGranule();
+  }
+
+  /** */
+  @property bool perfectTimestamp()
+  {
+    return getPerfectTimestamp();
+  }
+
+  /** */
+  @property void perfectTimestamp(bool propval)
+  {
+    return setPerfectTimestamp(propval);
+  }
+
+  /** */
+  @property long tolerance()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
+  }
+
+  /** */
+  @property void tolerance(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
 
   mixin PresetT!();

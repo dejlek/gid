@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class ServerAuthSender : gobject.object.ObjectG
+class ServerAuthSender : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class ServerAuthSender : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerAuthSender self()
   {
     return this;
@@ -43,7 +44,7 @@ class ServerAuthSender : gobject.object.ObjectG
       Params:
         message = A #GBytes to be sent.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool write(glib.bytes.Bytes message)
   {
@@ -51,7 +52,7 @@ class ServerAuthSender : gobject.object.ObjectG
     GError *_err;
     _retval = gaflight_server_auth_sender_write(cast(GAFlightServerAuthSender*)cPtr, message ? cast(GBytes*)message.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

@@ -32,6 +32,7 @@ class LargeListDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeListDataType self()
   {
     return this;
@@ -50,7 +51,7 @@ class LargeListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 }

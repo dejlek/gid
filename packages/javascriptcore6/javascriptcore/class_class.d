@@ -15,7 +15,7 @@ class ClassClass
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for JavaScriptCore.ClassClass");
+      throw new GidConstructException("Null instance pointer for javascriptcore.class_class.ClassClass");
 
     cInstance = *cast(JSCClassClass*)ptr;
 

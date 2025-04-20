@@ -43,6 +43,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MarkupParseContext self()
   {
     return this;
@@ -65,7 +66,7 @@ class MarkupParseContext : gobject.boxed.Boxed
       This function reports an error if the document isn't complete,
       for example if elements are still open.
       Returns: true on success, false if an error was set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool endParse()
   {
@@ -73,7 +74,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     GError *_err;
     _retval = g_markup_parse_context_end_parse(cast(GMarkupParseContext*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -162,7 +163,7 @@ class MarkupParseContext : gobject.boxed.Boxed
         text = chunk of text to parse
         textLen = length of text in bytes
       Returns: false if an error occurred, true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool parse(string text, ptrdiff_t textLen)
   {
@@ -171,7 +172,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     GError *_err;
     _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)cPtr, _text, textLen, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

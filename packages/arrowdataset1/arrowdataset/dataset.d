@@ -12,7 +12,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Dataset : gobject.object.ObjectG
+class Dataset : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class Dataset : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Dataset self()
   {
     return this;
@@ -46,8 +47,8 @@ class Dataset : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,8 +68,8 @@ class Dataset : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,8 +80,8 @@ class Dataset : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -37,6 +37,7 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RendererCellAccessible self()
   {
     return this;

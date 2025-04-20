@@ -19,7 +19,7 @@ import webkit.types;
     When a WebKitNotificationPermissionRequest is not handled by the user,
     it is denied by default.
 */
-class NotificationPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

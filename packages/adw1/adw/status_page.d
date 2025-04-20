@@ -56,9 +56,117 @@ class StatusPage : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StatusPage self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `description` property.
+      Returns: The description markup to be displayed below the title.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description markup to be displayed below the title.
+  */
+  @property void description(string propval)
+  {
+    return setDescription(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon to be used.
+      
+      Changing this will set `property@StatusPage:paintable` to `NULL`.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon to be used.
+        
+        Changing this will set `property@StatusPage:paintable` to `NULL`.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `paintable` property.
+      Returns: The paintable to be used.
+      
+      Changing this will set `property@StatusPage:icon-name` to `NULL`.
+  */
+  @property gdk.paintable.Paintable paintable()
+  {
+    return getPaintable();
+  }
+
+  /**
+      Set `paintable` property.
+      Params:
+        propval = The paintable to be used.
+        
+        Changing this will set `property@StatusPage:icon-name` to `NULL`.
+  */
+  @property void paintable(gdk.paintable.Paintable propval)
+  {
+    return setPaintable(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title to be displayed below the icon.
+      
+      It is not parsed as Pango markup.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to be displayed below the icon.
+        
+        It is not parsed as Pango markup.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -80,7 +188,7 @@ class StatusPage : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_status_page_get_child(cast(AdwStatusPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +224,7 @@ class StatusPage : gtk.widget.Widget
   {
     GdkPaintable* _cretval;
     _cretval = adw_status_page_get_paintable(cast(AdwStatusPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +289,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
-    adw_status_page_set_paintable(cast(AdwStatusPage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    adw_status_page_set_paintable(cast(AdwStatusPage*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
   }
 
   /**

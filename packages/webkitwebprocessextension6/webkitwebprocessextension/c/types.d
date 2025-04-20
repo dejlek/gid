@@ -657,5 +657,5 @@ struct WebKitWebProcessExtensionClass
 
 alias extern(C) void function(WebKitWebProcessExtension* extension) WebKitWebProcessExtensionInitializeFunction;
 
-alias extern(C) void function(WebKitWebProcessExtension* extension, const(VariantC)* userData) WebKitWebProcessExtensionInitializeWithUserDataFunction;
+alias extern(C) void function(WebKitWebProcessExtension* extension, const(GVariant)* userData) WebKitWebProcessExtensionInitializeWithUserDataFunction;
 

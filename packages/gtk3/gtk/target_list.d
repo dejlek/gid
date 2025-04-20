@@ -43,6 +43,7 @@ class TargetList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TargetList self()
   {
     return this;

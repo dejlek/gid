@@ -17,7 +17,7 @@ class ParamSpecBoolean : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecBoolean");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_boolean.ParamSpecBoolean");
 
     super(cast(GParamSpec*)ptr, take);
   }

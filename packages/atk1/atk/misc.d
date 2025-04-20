@@ -13,7 +13,7 @@ import gobject.object;
     A set of utility functions for thread locking. This interface and
     all his related methods are deprecated since 2.12.
 */
-class Misc : gobject.object.ObjectG
+class Misc : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class Misc : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Misc self()
   {
     return this;
@@ -50,7 +51,7 @@ class Misc : gobject.object.ObjectG
   {
     const(AtkMisc)* _cretval;
     _cretval = atk_misc_get_instance();
-    auto _retval = ObjectG.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
     return _retval;
   }
 

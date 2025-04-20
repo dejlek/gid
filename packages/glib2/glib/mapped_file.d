@@ -42,6 +42,7 @@ class MappedFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MappedFile self()
   {
     return this;
@@ -71,7 +72,7 @@ class MappedFile : gobject.boxed.Boxed
         writable = whether the mapping should be writable
       Returns: a newly allocated #GMappedFile which must be unref'd
            with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   this(string filename, bool writable)
   {
@@ -80,7 +81,7 @@ class MappedFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_mapped_file_new(_filename, writable, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -102,7 +103,7 @@ class MappedFile : gobject.boxed.Boxed
         writable = whether the mapping should be writable
       Returns: a newly allocated #GMappedFile which must be unref'd
            with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static glib.mapped_file.MappedFile newFromFd(int fd, bool writable)
   {
@@ -110,7 +111,7 @@ class MappedFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_mapped_file_new_from_fd(fd, writable, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.mapped_file.MappedFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

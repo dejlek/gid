@@ -33,10 +33,27 @@ import gstvideo.video_info;
 class GLMemory : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glmemory.GLMemory` boxed type.
+      Params:
+        texId = the GL texture id for this memory
+        texTarget = the GL texture target for this memory
+        texFormat = the texture type
+        plane = data plane in @info
+        textureWrapped = 
+        unpackLength = 
+        texWidth = 
+  */
+  this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, uint plane = uint.init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init)
   {
     super(gMalloc(GstGLMemory.sizeof), Yes.Take);
+    this.texId = texId;
+    this.texTarget = texTarget;
+    this.texFormat = texFormat;
+    this.plane = plane;
+    this.textureWrapped = textureWrapped;
+    this.unpackLength = unpackLength;
+    this.texWidth = texWidth;
   }
 
   /** */
@@ -64,91 +81,146 @@ class GLMemory : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemory self()
   {
     return this;
   }
 
+  /**
+      Get `mem` field.
+      Returns: the parent #GstGLBaseMemory object
+  */
   @property gstgl.glbase_memory.GLBaseMemory mem()
   {
     return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLMemory*)cPtr).mem);
   }
 
+  /**
+      Get `texId` field.
+      Returns: the GL texture id for this memory
+  */
   @property uint texId()
   {
     return (cast(GstGLMemory*)cPtr).texId;
   }
 
+  /**
+      Set `texId` field.
+      Params:
+        propval = the GL texture id for this memory
+  */
   @property void texId(uint propval)
   {
     (cast(GstGLMemory*)cPtr).texId = propval;
   }
 
+  /**
+      Get `texTarget` field.
+      Returns: the GL texture target for this memory
+  */
   @property gstgl.types.GLTextureTarget texTarget()
   {
     return cast(gstgl.types.GLTextureTarget)(cast(GstGLMemory*)cPtr).texTarget;
   }
 
+  /**
+      Set `texTarget` field.
+      Params:
+        propval = the GL texture target for this memory
+  */
   @property void texTarget(gstgl.types.GLTextureTarget propval)
   {
     (cast(GstGLMemory*)cPtr).texTarget = cast(GstGLTextureTarget)propval;
   }
 
+  /**
+      Get `texFormat` field.
+      Returns: the texture type
+  */
   @property gstgl.types.GLFormat texFormat()
   {
     return cast(gstgl.types.GLFormat)(cast(GstGLMemory*)cPtr).texFormat;
   }
 
+  /**
+      Set `texFormat` field.
+      Params:
+        propval = the texture type
+  */
   @property void texFormat(gstgl.types.GLFormat propval)
   {
     (cast(GstGLMemory*)cPtr).texFormat = cast(GstGLFormat)propval;
   }
 
+  /**
+      Get `info` field.
+      Returns: the texture's #GstVideoInfo
+  */
   @property gstvideo.video_info.VideoInfo info()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstGLMemory*)cPtr).info);
   }
 
+  /**
+      Get `valign` field.
+      Returns: data alignment for system memory mapping
+  */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
     return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)cPtr).valign);
   }
 
+  /**
+      Get `plane` field.
+      Returns: data plane in @info
+  */
   @property uint plane()
   {
     return (cast(GstGLMemory*)cPtr).plane;
   }
 
+  /**
+      Set `plane` field.
+      Params:
+        propval = data plane in @info
+  */
   @property void plane(uint propval)
   {
     (cast(GstGLMemory*)cPtr).plane = propval;
   }
 
+  /** */
   @property bool textureWrapped()
   {
     return (cast(GstGLMemory*)cPtr).textureWrapped;
   }
 
+  /** */
   @property void textureWrapped(bool propval)
   {
     (cast(GstGLMemory*)cPtr).textureWrapped = propval;
   }
 
+  /** */
   @property uint unpackLength()
   {
     return (cast(GstGLMemory*)cPtr).unpackLength;
   }
 
+  /** */
   @property void unpackLength(uint propval)
   {
     (cast(GstGLMemory*)cPtr).unpackLength = propval;
   }
 
+  /** */
   @property uint texWidth()
   {
     return (cast(GstGLMemory*)cPtr).texWidth;
   }
 
+  /** */
   @property void texWidth(uint propval)
   {
     (cast(GstGLMemory*)cPtr).texWidth = propval;

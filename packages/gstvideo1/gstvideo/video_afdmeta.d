@@ -32,7 +32,7 @@ class VideoAFDMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoAFDMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_afdmeta.VideoAFDMeta");
 
     cInstance = *cast(GstVideoAFDMeta*)ptr;
 
@@ -46,36 +46,67 @@ class VideoAFDMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)cPtr).meta);
   }
 
+  /**
+      Get `field` field.
+      Returns: 0 for progressive or field 1 and 1 for field 2
+  */
   @property ubyte field()
   {
     return (cast(GstVideoAFDMeta*)cPtr).field;
   }
 
+  /**
+      Set `field` field.
+      Params:
+        propval = 0 for progressive or field 1 and 1 for field 2
+  */
   @property void field(ubyte propval)
   {
     (cast(GstVideoAFDMeta*)cPtr).field = propval;
   }
 
+  /**
+      Get `spec` field.
+      Returns: #GstVideoAFDSpec that applies to @afd
+  */
   @property gstvideo.types.VideoAFDSpec spec()
   {
     return cast(gstvideo.types.VideoAFDSpec)(cast(GstVideoAFDMeta*)cPtr).spec;
   }
 
+  /**
+      Set `spec` field.
+      Params:
+        propval = #GstVideoAFDSpec that applies to @afd
+  */
   @property void spec(gstvideo.types.VideoAFDSpec propval)
   {
     (cast(GstVideoAFDMeta*)cPtr).spec = cast(GstVideoAFDSpec)propval;
   }
 
+  /**
+      Get `afd` field.
+      Returns: #GstVideoAFDValue AFD value
+  */
   @property gstvideo.types.VideoAFDValue afd()
   {
     return cast(gstvideo.types.VideoAFDValue)(cast(GstVideoAFDMeta*)cPtr).afd;
   }
 
+  /**
+      Set `afd` field.
+      Params:
+        propval = #GstVideoAFDValue AFD value
+  */
   @property void afd(gstvideo.types.VideoAFDValue propval)
   {
     (cast(GstVideoAFDMeta*)cPtr).afd = cast(GstVideoAFDValue)propval;

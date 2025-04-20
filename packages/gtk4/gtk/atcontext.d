@@ -18,7 +18,7 @@ import gtk.types;
     is responsible for updating the accessible state in response to state
     changes in [gtk.accessible.Accessible].
 */
-class ATContext : gobject.object.ObjectG
+class ATContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -40,9 +40,54 @@ class ATContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ATContext self()
   {
     return this;
+  }
+
+  /**
+      Get `accessibleRole` property.
+      Returns: The accessible role used by the AT context.
+      
+      Depending on the given role, different states and properties can be
+      set or retrieved.
+  */
+  @property gtk.types.AccessibleRole accessibleRole()
+  {
+    return getAccessibleRole();
+  }
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role used by the AT context.
+        
+        Depending on the given role, different states and properties can be
+        set or retrieved.
+  */
+  @property void accessibleRole(gtk.types.AccessibleRole propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.AccessibleRole)("accessible-role", propval);
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] for the [gtk.atcontext.ATContext].
+  */
+  @property gdk.display.Display display()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] for the [gtk.atcontext.ATContext].
+  */
+  @property void display(gdk.display.Display propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.display.Display)("display", propval);
   }
 
   /**
@@ -61,8 +106,8 @@ class ATContext : gobject.object.ObjectG
   static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
   {
     GtkATContext* _cretval;
-    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
+    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -74,7 +119,7 @@ class ATContext : gobject.object.ObjectG
   {
     GtkAccessible* _cretval;
     _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, No.Take);
     return _retval;
   }
 

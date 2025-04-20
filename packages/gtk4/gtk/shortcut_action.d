@@ -41,7 +41,7 @@ import gtk.widget;
         * [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
      )
 */
-class ShortcutAction : gobject.object.ObjectG
+class ShortcutAction : gobject.object.ObjectWrap
 {
 
   /** */
@@ -63,6 +63,7 @@ class ShortcutAction : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutAction self()
   {
     return this;
@@ -93,7 +94,7 @@ class ShortcutAction : gobject.object.ObjectG
     GtkShortcutAction* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_action_parse_string(_string_);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,10 +113,10 @@ class ShortcutAction : gobject.object.ObjectG
         args = arguments to pass
       Returns: true if this action was activated successfully
   */
-  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.VariantG args = null)
+  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.Variant args = null)
   {
     bool _retval;
-    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
+    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(GVariant*)args.cPtr(No.Dup) : null);
     return _retval;
   }
 

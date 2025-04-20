@@ -361,7 +361,7 @@ void enumeratePrinters(gtk.types.PrinterFunc func, bool wait)
   {
     auto _dlg = cast(gtk.types.PrinterFunc*)data;
 
-    bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
+    bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -645,7 +645,7 @@ gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.p
 {
   GtkPageSetup* _cretval;
   _cretval = gtk_print_run_page_setup_dialog(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -670,7 +670,7 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
     ptrThawGC(data);
     auto _dlg = cast(gtk.types.PageSetupDoneFunc*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
+    (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
 
@@ -992,7 +992,7 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1010,7 +1010,7 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
       result = [gio.async_result.AsyncResult] that was passed to callback
     Returns: true if the URI was shown successfully.
         Otherwise, false is returned and error is set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [gtk.file_launcher.FileLauncher.launchFinish] or
         [gtk.uri_launcher.UriLauncher.launchFinish] instead
@@ -1019,9 +1019,9 @@ bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult re
 {
   bool _retval;
   GError *_err;
-  _retval = gtk_show_uri_full_finish(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+  _retval = gtk_show_uri_full_finish(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -1032,7 +1032,7 @@ void testAccessibleAssertionMessageRole(string domain, string file, int line, st
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _func = func.toCString(No.Alloc);
   const(char)* _expr = expr.toCString(No.Alloc);
-  gtk_test_accessible_assertion_message_role(_domain, _file, line, _func, _expr, accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, expectedRole, actualRole);
+  gtk_test_accessible_assertion_message_role(_domain, _file, line, _func, _expr, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, expectedRole, actualRole);
 }
 
 /**
@@ -1046,7 +1046,7 @@ void testAccessibleAssertionMessageRole(string domain, string file, int line, st
 bool testAccessibleHasProperty(gtk.accessible.Accessible accessible, gtk.types.AccessibleProperty property)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_property(accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, property);
+  _retval = gtk_test_accessible_has_property(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, property);
   return _retval;
 }
 
@@ -1061,7 +1061,7 @@ bool testAccessibleHasProperty(gtk.accessible.Accessible accessible, gtk.types.A
 bool testAccessibleHasRelation(gtk.accessible.Accessible accessible, gtk.types.AccessibleRelation relation)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_relation(accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, relation);
+  _retval = gtk_test_accessible_has_relation(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, relation);
   return _retval;
 }
 
@@ -1077,7 +1077,7 @@ bool testAccessibleHasRelation(gtk.accessible.Accessible accessible, gtk.types.A
 bool testAccessibleHasRole(gtk.accessible.Accessible accessible, gtk.types.AccessibleRole role)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_role(accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, role);
+  _retval = gtk_test_accessible_has_role(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, role);
   return _retval;
 }
 
@@ -1092,7 +1092,7 @@ bool testAccessibleHasRole(gtk.accessible.Accessible accessible, gtk.types.Acces
 bool testAccessibleHasState(gtk.accessible.Accessible accessible, gtk.types.AccessibleState state)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_state(accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, state);
+  _retval = gtk_test_accessible_has_state(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, state);
   return _retval;
 }
 
@@ -1157,8 +1157,8 @@ void testWidgetWaitForDraw(gtk.widget.Widget widget)
 gdk.content_provider.ContentProvider treeCreateRowDragContent(gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path)
 {
   GdkContentProvider* _cretval;
-  _cretval = gtk_tree_create_row_drag_content(treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+  _cretval = gtk_tree_create_row_drag_content(treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1183,7 +1183,7 @@ bool treeGetRowDragData(gobject.value.Value value, out gtk.tree_model.TreeModel 
   GtkTreeModel* _treeModel;
   GtkTreePath* _path;
   _retval = gtk_tree_get_row_drag_data(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, &_treeModel, &_path);
-  treeModel = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
+  treeModel = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
   path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;
 }

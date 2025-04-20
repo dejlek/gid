@@ -31,7 +31,7 @@ template DBusObjectManagerT()
         objectPath = Object path to look up.
         interfaceName = D-Bus interface name to look up.
       Returns: A #GDBusInterface instance or null. Free
-          with [gobject.object.ObjectG.unref].
+          with [gobject.object.ObjectWrap.unref].
   */
   override gio.dbus_interface.DBusInterface getInterface(string objectPath, string interfaceName)
   {
@@ -39,7 +39,7 @@ template DBusObjectManagerT()
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)cPtr, _objectPath, _interfaceName);
-    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -49,14 +49,14 @@ template DBusObjectManagerT()
       Params:
         objectPath = Object path to look up.
       Returns: A #GDBusObject or null. Free with
-          [gobject.object.ObjectG.unref].
+          [gobject.object.ObjectWrap.unref].
   */
   override gio.dbus_object.DBusObject getObject(string objectPath)
   {
     GDBusObject* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)cPtr, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ template DBusObjectManagerT()
       Returns: A list of
           #GDBusObject objects. The returned list should be freed with
           [glib.list.List.free] after each element has been freed with
-          [gobject.object.ObjectG.unref].
+          [gobject.object.ObjectWrap.unref].
   */
   override gio.dbus_object.DBusObject[] getObjects()
   {

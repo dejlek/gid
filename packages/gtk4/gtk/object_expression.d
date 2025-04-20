@@ -9,7 +9,7 @@ import gtk.expression;
 import gtk.types;
 
 /**
-    A [gobject.object.ObjectG] value in a [gtk.expression.Expression].
+    A [gobject.object.ObjectWrap] value in a [gtk.expression.Expression].
 */
 class ObjectExpression : gtk.expression.Expression
 {
@@ -18,7 +18,7 @@ class ObjectExpression : gtk.expression.Expression
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.ObjectExpression");
+      throw new GidConstructException("Null instance pointer for gtk.object_expression.ObjectExpression");
 
     super(cast(GtkExpression*)ptr, take);
   }
@@ -36,7 +36,7 @@ class ObjectExpression : gtk.expression.Expression
         object = object to watch
       Returns: a new [gtk.expression.Expression]
   */
-  this(gobject.object.ObjectG object)
+  this(gobject.object.ObjectWrap object)
   {
     GtkExpression* _cretval;
     _cretval = gtk_object_expression_new(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
@@ -47,11 +47,11 @@ class ObjectExpression : gtk.expression.Expression
       Gets the object that the expression evaluates to.
       Returns: the object, or `NULL`
   */
-  gobject.object.ObjectG getObject()
+  gobject.object.ObjectWrap getObject()
   {
     ObjectC* _cretval;
     _cretval = gtk_object_expression_get_object(cast(GtkExpression*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 }

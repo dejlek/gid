@@ -18,7 +18,6 @@ import gtk.c.types;
 import gtk.font_chooser;
 import gtk.font_chooser_mixin;
 import gtk.types;
-import pango.font_map;
 
 /**
     The #GtkFontButton is a button which displays the currently selected
@@ -51,9 +50,140 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontButton self()
   {
     return this;
+  }
+
+  /**
+      Get `fontName` property.
+      Returns: The name of the currently selected font.
+  
+      Deprecated: Use the #GtkFontChooser::font property instead
+  */
+  @property string fontName()
+  {
+    return getFontName();
+  }
+
+  /**
+      Set `fontName` property.
+      Params:
+        propval = The name of the currently selected font.
+  
+      Deprecated: Use the #GtkFontChooser::font property instead
+  */
+  @property void fontName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("font-name", propval);
+  }
+
+  /**
+      Get `showSize` property.
+      Returns: If this property is set to true, the selected font size will be shown
+      in the label. For a more WYSIWYG way to show the selected size, see the
+      ::use-size property.
+  */
+  @property bool showSize()
+  {
+    return getShowSize();
+  }
+
+  /**
+      Set `showSize` property.
+      Params:
+        propval = If this property is set to true, the selected font size will be shown
+        in the label. For a more WYSIWYG way to show the selected size, see the
+        ::use-size property.
+  */
+  @property void showSize(bool propval)
+  {
+    return setShowSize(propval);
+  }
+
+  /**
+      Get `showStyle` property.
+      Returns: If this property is set to true, the name of the selected font style
+      will be shown in the label. For a more WYSIWYG way to show the selected
+      style, see the ::use-font property.
+  */
+  @property bool showStyle()
+  {
+    return getShowStyle();
+  }
+
+  /**
+      Set `showStyle` property.
+      Params:
+        propval = If this property is set to true, the name of the selected font style
+        will be shown in the label. For a more WYSIWYG way to show the selected
+        style, see the ::use-font property.
+  */
+  @property void showStyle(bool propval)
+  {
+    return setShowStyle(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the font chooser dialog.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the font chooser dialog.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useFont` property.
+      Returns: If this property is set to true, the label will be drawn
+      in the selected font.
+  */
+  @property bool useFont()
+  {
+    return getUseFont();
+  }
+
+  /**
+      Set `useFont` property.
+      Params:
+        propval = If this property is set to true, the label will be drawn
+        in the selected font.
+  */
+  @property void useFont(bool propval)
+  {
+    return setUseFont(propval);
+  }
+
+  /**
+      Get `useSize` property.
+      Returns: If this property is set to true, the label will be drawn
+      with the selected font size.
+  */
+  @property bool useSize()
+  {
+    return getUseSize();
+  }
+
+  /**
+      Set `useSize` property.
+      Params:
+        propval = If this property is set to true, the label will be drawn
+        with the selected font size.
+  */
+  @property void useSize(bool propval)
+  {
+    return setUseSize(propval);
   }
 
   mixin FontChooserT!();
@@ -81,7 +211,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
     GtkWidget* _cretval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
     _cretval = gtk_font_button_new_with_font(_fontname);
-    auto _retval = ObjectG.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

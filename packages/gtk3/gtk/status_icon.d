@@ -51,7 +51,7 @@ import gtk.types;
     the users of transient status updates. See this [HowDoI](https://wiki.gnome.org/HowDoI/GNotification)
     for code examples.
 */
-class StatusIcon : gobject.object.ObjectG
+class StatusIcon : gobject.object.ObjectWrap
 {
 
   /** */
@@ -73,9 +73,276 @@ class StatusIcon : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StatusIcon self()
   {
     return this;
+  }
+
+  /**
+      Get `embedded` property.
+      Returns: true if the statusicon is embedded in a notification area.
+  */
+  @property bool embedded()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("embedded");
+  }
+
+  /** */
+  @property void file(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("file", propval);
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: The #GIcon displayed in the #GtkStatusIcon. For themed icons,
+      the image will be updated automatically if the theme changes.
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return getGicon();
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon displayed in the #GtkStatusIcon. For themed icons,
+        the image will be updated automatically if the theme changes.
+  */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("gicon", propval);
+  }
+
+  /**
+      Get `hasTooltip` property.
+      Returns: Enables or disables the emission of #GtkStatusIcon::query-tooltip on
+      @status_icon.  A value of true indicates that @status_icon can have a
+      tooltip, in this case the status icon will be queried using
+      #GtkStatusIcon::query-tooltip to determine whether it will provide a
+      tooltip or not.
+      
+      Note that setting this property to true for the first time will change
+      the event masks of the windows of this status icon to include leave-notify
+      and motion-notify events. This will not be undone when the property is set
+      to false again.
+      
+      Whether this property is respected is platform dependent.
+      For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+  */
+  @property bool hasTooltip()
+  {
+    return getHasTooltip();
+  }
+
+  /**
+      Set `hasTooltip` property.
+      Params:
+        propval = Enables or disables the emission of #GtkStatusIcon::query-tooltip on
+        @status_icon.  A value of true indicates that @status_icon can have a
+        tooltip, in this case the status icon will be queried using
+        #GtkStatusIcon::query-tooltip to determine whether it will provide a
+        tooltip or not.
+        
+        Note that setting this property to true for the first time will change
+        the event masks of the windows of this status icon to include leave-notify
+        and motion-notify events. This will not be undone when the property is set
+        to false again.
+        
+        Whether this property is respected is platform dependent.
+        For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+  */
+  @property void hasTooltip(bool propval)
+  {
+    return setHasTooltip(propval);
+  }
+
+  /** */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /** */
+  @property void iconName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
+  }
+
+  /**
+      Get `orientation` property.
+      Returns: The orientation of the tray in which the statusicon
+      is embedded.
+  */
+  @property gtk.types.Orientation orientation()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.Orientation)("orientation");
+  }
+
+  /** */
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  {
+    return getPixbuf();
+  }
+
+  /** */
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf", propval);
+  }
+
+  /** */
+  @property gdk.screen.Screen screen()
+  {
+    return getScreen();
+  }
+
+  /** */
+  @property void screen(gdk.screen.Screen propval)
+  {
+    return setScreen(propval);
+  }
+
+  /** */
+  @property int size()
+  {
+    return getSize();
+  }
+
+  /** */
+  @property string stock()
+  {
+    return getStock();
+  }
+
+  /** */
+  @property void stock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("stock", propval);
+  }
+
+  /** */
+  @property gtk.types.ImageType storageType()
+  {
+    return getStorageType();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of this tray icon. This should be a short, human-readable,
+      localized string describing the tray icon. It may be used by tools
+      like screen readers to render the tray icon.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of this tray icon. This should be a short, human-readable,
+        localized string describing the tray icon. It may be used by tools
+        like screen readers to render the tray icon.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `tooltipMarkup` property.
+      Returns: Sets the text of tooltip to be the given string, which is marked up
+      with the [Pango text markup language][PangoMarkupFormat].
+      Also see [gtk.tooltip.Tooltip.setMarkup].
+      
+      This is a convenience property which will take care of getting the
+      tooltip shown if the given string is not null.
+      #GtkStatusIcon:has-tooltip will automatically be set to true and
+      the default handler for the #GtkStatusIcon::query-tooltip signal
+      will take care of displaying the tooltip.
+      
+      On some platforms, embedded markup will be ignored.
+  */
+  @property string tooltipMarkup()
+  {
+    return getTooltipMarkup();
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+        with the [Pango text markup language][PangoMarkupFormat].
+        Also see [gtk.tooltip.Tooltip.setMarkup].
+        
+        This is a convenience property which will take care of getting the
+        tooltip shown if the given string is not null.
+        #GtkStatusIcon:has-tooltip will automatically be set to true and
+        the default handler for the #GtkStatusIcon::query-tooltip signal
+        will take care of displaying the tooltip.
+        
+        On some platforms, embedded markup will be ignored.
+  */
+  @property void tooltipMarkup(string propval)
+  {
+    return setTooltipMarkup(propval);
+  }
+
+  /**
+      Get `tooltipText` property.
+      Returns: Sets the text of tooltip to be the given string.
+      
+      Also see [gtk.tooltip.Tooltip.setText].
+      
+      This is a convenience property which will take care of getting the
+      tooltip shown if the given string is not null.
+      #GtkStatusIcon:has-tooltip will automatically be set to true and
+      the default handler for the #GtkStatusIcon::query-tooltip signal
+      will take care of displaying the tooltip.
+      
+      Note that some platforms have limitations on the length of tooltips
+      that they allow on status icons, e.g. Windows only shows the first
+      64 characters.
+  */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+        
+        Also see [gtk.tooltip.Tooltip.setText].
+        
+        This is a convenience property which will take care of getting the
+        tooltip shown if the given string is not null.
+        #GtkStatusIcon:has-tooltip will automatically be set to true and
+        the default handler for the #GtkStatusIcon::query-tooltip signal
+        will take care of displaying the tooltip.
+        
+        Note that some platforms have limitations on the length of tooltips
+        that they allow on status icons, e.g. Windows only shows the first
+        64 characters.
+  */
+  @property void tooltipText(string propval)
+  {
+    return setTooltipText(propval);
+  }
+
+  /** */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /** */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
   }
 
   /**
@@ -110,7 +377,7 @@ class StatusIcon : gobject.object.ObjectG
     GtkStatusIcon* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,8 +395,8 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -150,7 +417,7 @@ class StatusIcon : gobject.object.ObjectG
     GtkStatusIcon* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -171,7 +438,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GtkStatusIcon* _cretval;
     _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -193,7 +460,7 @@ class StatusIcon : gobject.object.ObjectG
     GtkStatusIcon* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -279,7 +546,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = gtk_status_icon_get_gicon(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -336,7 +603,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -352,7 +619,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_status_icon_get_screen(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -558,7 +825,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromGicon(gio.icon.Icon icon)
   {
-    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

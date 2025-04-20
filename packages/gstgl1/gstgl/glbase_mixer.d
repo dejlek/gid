@@ -36,9 +36,19 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseMixer self()
   {
     return this;
+  }
+
+  /**
+      Get `context` property.
+      Returns: The #GstGLContext in use by this #GstGLBaseMixer
+  */
+  @property gstgl.glcontext.GLContext context()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstgl.glcontext.GLContext)("context");
   }
 
   /** */
@@ -46,7 +56,7 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 }

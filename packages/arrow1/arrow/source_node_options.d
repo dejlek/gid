@@ -34,6 +34,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SourceNodeOptions self()
   {
     return this;
@@ -44,7 +45,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_record_batch(recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -53,7 +54,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_table(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 }

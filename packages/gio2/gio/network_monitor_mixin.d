@@ -24,6 +24,71 @@ public import gobject.object;
 template NetworkMonitorT()
 {
 
+  /**
+      Get `connectivity` property.
+      Returns: More detailed information about the host's network connectivity.
+      See [gio.network_monitor.NetworkMonitor.getConnectivity] and
+      #GNetworkConnectivity for more details.
+  */
+  @property gio.types.NetworkConnectivity connectivity()
+  {
+    return getConnectivity();
+  }
+
+  /**
+      Get `networkAvailable` property.
+      Returns: Whether the network is considered available. That is, whether the
+      system has a default route for at least one of IPv4 or IPv6.
+      
+      Real-world networks are of course much more complicated than
+      this; the machine may be connected to a wifi hotspot that
+      requires payment before allowing traffic through, or may be
+      connected to a functioning router that has lost its own upstream
+      connectivity. Some hosts might only be accessible when a VPN is
+      active. Other hosts might only be accessible when the VPN is
+      not active. Thus, it is best to use [gio.network_monitor.NetworkMonitor.canReach]
+      or [gio.network_monitor.NetworkMonitor.canReachAsync] to test for reachability
+      on a host-by-host basis. (On the other hand, when the property is
+      false, the application can reasonably expect that no remote
+      hosts at all are reachable, and should indicate this to the user
+      in its UI.)
+      
+      See also #GNetworkMonitor::network-changed.
+  */
+  @property bool networkAvailable()
+  {
+    return getNetworkAvailable();
+  }
+
+  /**
+      Get `networkMetered` property.
+      Returns: Whether the network is considered metered.
+      
+      That is, whether the
+      system has traffic flowing through the default connection that is
+      subject to limitations set by service providers. For example, traffic
+      might be billed by the amount of data transmitted, or there might be a
+      quota on the amount of traffic per month. This is typical with tethered
+      connections (3G and 4G) and in such situations, bandwidth intensive
+      applications may wish to avoid network activity where possible if it will
+      cost the user money or use up their limited quota. Anything more than a
+      few hundreds of kilobytes of data usage per hour should be avoided without
+      asking permission from the user.
+      
+      If more information is required about specific devices then the
+      system network management API should be used instead (for example,
+      NetworkManager or ConnMan).
+      
+      If this information is not available then no networks will be
+      marked as metered.
+      
+      See also #GNetworkMonitor:network-available.
+  */
+  @property bool networkMetered()
+  {
+    return getNetworkMetered();
+  }
+
 
   /**
       Attempts to determine whether or not the host pointed to by
@@ -48,15 +113,15 @@ template NetworkMonitorT()
         connectable = a #GSocketConnectable
         cancellable = a #GCancellable, or null
       Returns: true if connectable is reachable, false if not.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -84,12 +149,12 @@ template NetworkMonitorT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -99,15 +164,15 @@ template NetworkMonitorT()
       Params:
         result = a #GAsyncResult
       Returns: true if network is reachable, false if not.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool canReachFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

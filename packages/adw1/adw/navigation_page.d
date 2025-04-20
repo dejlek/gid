@@ -65,9 +65,128 @@ class NavigationPage : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NavigationPage self()
   {
     return this;
+  }
+
+  /**
+      Get `canPop` property.
+      Returns: Whether the page can be popped from navigation stack.
+      
+      Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+      back button from `class@HeaderBar`.
+      
+      Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+      action will still work.
+      
+      See `property@HeaderBar:show-back-button` for removing only the back
+      button, but not shortcuts.
+  */
+  @property bool canPop()
+  {
+    return getCanPop();
+  }
+
+  /**
+      Set `canPop` property.
+      Params:
+        propval = Whether the page can be popped from navigation stack.
+        
+        Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+        back button from `class@HeaderBar`.
+        
+        Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+        action will still work.
+        
+        See `property@HeaderBar:show-back-button` for removing only the back
+        button, but not shortcuts.
+  */
+  @property void canPop(bool propval)
+  {
+    return setCanPop(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `tag` property.
+      Returns: The page tag.
+      
+      The tag can be used to retrieve the page with
+      [adw.navigation_view.NavigationView.findPage], as well as with
+      [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
+      [adw.navigation_view.NavigationView.replaceWithTags].
+      
+      Tags must be unique within each `class@NavigationView`.
+      
+      The tag also must be set to use the `navigation.push` action.
+  */
+  @property string tag()
+  {
+    return getTag();
+  }
+
+  /**
+      Set `tag` property.
+      Params:
+        propval = The page tag.
+        
+        The tag can be used to retrieve the page with
+        [adw.navigation_view.NavigationView.findPage], as well as with
+        [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
+        [adw.navigation_view.NavigationView.replaceWithTags].
+        
+        Tags must be unique within each `class@NavigationView`.
+        
+        The tag also must be set to use the `navigation.push` action.
+  */
+  @property void tag(string propval)
+  {
+    return setTag(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The page title.
+      
+      It's displayed in `class@HeaderBar` instead of the window title, and used
+      as the tooltip on the next page's back button, as well as by screen reader.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The page title.
+        
+        It's displayed in `class@HeaderBar` instead of the window title, and used
+        as the tooltip on the next page's back button, as well as by screen reader.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -101,7 +220,7 @@ class NavigationPage : gtk.widget.Widget
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _tag = tag.toCString(No.Alloc);
     _cretval = adw_navigation_page_new_with_tag(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _title, _tag);
-    auto _retval = ObjectG.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +243,7 @@ class NavigationPage : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_navigation_page_get_child(cast(AdwNavigationPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -22,7 +22,7 @@ class TouchpadEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.TouchpadEvent");
+      throw new GidConstructException("Null instance pointer for gdk.touchpad_event.TouchpadEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

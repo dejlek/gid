@@ -109,7 +109,7 @@ alias ClassSetPropertyFunction = bool delegate(javascriptcore.class_.Class jscCl
       context = a #JSCContext
       exception = a #JSCException
 */
-alias ExceptionHandler = void delegate(javascriptcore.context.Context context, javascriptcore.exception.Exception exception);
+alias ExceptionHandler = void delegate(javascriptcore.context.Context context, javascriptcore.exception.ExceptionWrap exception);
 
 /**
     A function passed to jsc_value_new_promise called during initialization

@@ -17,7 +17,7 @@ class ContainerNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.ContainerNode");
+      throw new GidConstructException("Null instance pointer for gsk.container_node.ContainerNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

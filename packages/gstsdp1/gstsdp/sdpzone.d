@@ -19,7 +19,7 @@ class SDPZone
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPZone");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpzone.SDPZone");
 
     cInstance = *cast(GstSDPZone*)ptr;
 
@@ -33,22 +33,40 @@ class SDPZone
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `time` field.
+      Returns: the NTP time that a time zone adjustment happens
+  */
   @property string time()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
   }
 
+  /**
+      Set `time` field.
+      Params:
+        propval = the NTP time that a time zone adjustment happens
+  */
   @property void time(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
     dToC(propval, cast(void*)&(cast(GstSDPZone*)cPtr).time);
   }
 
+  /**
+      Get `typedTime` field.
+      Returns: the offset from the time when the session was first scheduled
+  */
   @property string typedTime()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
   }
 
+  /**
+      Set `typedTime` field.
+      Params:
+        propval = the offset from the time when the session was first scheduled
+  */
   @property void typedTime(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);

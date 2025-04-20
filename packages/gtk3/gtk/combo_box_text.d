@@ -16,7 +16,6 @@ import gtk.cell_layout_mixin;
 import gtk.combo_box;
 import gtk.container;
 import gtk.types;
-import gtk.widget;
 
 /**
     A GtkComboBoxText is a simple variant of #GtkComboBox that hides
@@ -94,6 +93,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ComboBoxText self()
   {
     return this;
@@ -120,7 +120,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_text_new_with_entry();
-    auto _retval = ObjectG.getDObject!(gtk.combo_box_text.ComboBoxText)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box_text.ComboBoxText)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

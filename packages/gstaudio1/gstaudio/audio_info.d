@@ -44,61 +44,113 @@ class AudioInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioInfo self()
   {
     return this;
   }
 
+  /**
+      Get `finfo` field.
+      Returns: the format info of the audio
+  */
   @property gstaudio.audio_format_info.AudioFormatInfo finfo()
   {
     return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)cPtr).finfo);
   }
 
+  /**
+      Get `flags` field.
+      Returns: additional audio flags
+  */
   @property gstaudio.types.AudioFlags flags()
   {
     return cast(gstaudio.types.AudioFlags)(cast(GstAudioInfo*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = additional audio flags
+  */
   @property void flags(gstaudio.types.AudioFlags propval)
   {
     (cast(GstAudioInfo*)cPtr).flags = cast(GstAudioFlags)propval;
   }
 
+  /**
+      Get `layout` field.
+      Returns: audio layout
+  */
   @property gstaudio.types.AudioLayout layout()
   {
     return cast(gstaudio.types.AudioLayout)(cast(GstAudioInfo*)cPtr).layout;
   }
 
+  /**
+      Set `layout` field.
+      Params:
+        propval = audio layout
+  */
   @property void layout(gstaudio.types.AudioLayout propval)
   {
     (cast(GstAudioInfo*)cPtr).layout = cast(GstAudioLayout)propval;
   }
 
+  /**
+      Get `rate` field.
+      Returns: the audio sample rate
+  */
   @property int rate()
   {
     return (cast(GstAudioInfo*)cPtr).rate;
   }
 
+  /**
+      Set `rate` field.
+      Params:
+        propval = the audio sample rate
+  */
   @property void rate(int propval)
   {
     (cast(GstAudioInfo*)cPtr).rate = propval;
   }
 
+  /**
+      Get `channels` field.
+      Returns: the number of channels
+  */
   @property int channels()
   {
     return (cast(GstAudioInfo*)cPtr).channels;
   }
 
+  /**
+      Set `channels` field.
+      Params:
+        propval = the number of channels
+  */
   @property void channels(int propval)
   {
     (cast(GstAudioInfo*)cPtr).channels = propval;
   }
 
+  /**
+      Get `bpf` field.
+      Returns: the number of bytes for one frame, this is the size of one
+              sample * @channels
+  */
   @property int bpf()
   {
     return (cast(GstAudioInfo*)cPtr).bpf;
   }
 
+  /**
+      Set `bpf` field.
+      Params:
+        propval = the number of bytes for one frame, this is the size of one
+                sample * @channels
+  */
   @property void bpf(int propval)
   {
     (cast(GstAudioInfo*)cPtr).bpf = propval;

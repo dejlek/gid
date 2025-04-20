@@ -61,9 +61,50 @@ class LinkButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LinkButton self()
   {
     return this;
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The URI bound to this button.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI bound to this button.
+  */
+  @property void uri(string propval)
+  {
+    return setUri(propval);
+  }
+
+  /**
+      Get `visited` property.
+      Returns: The 'visited' state of this button. A visited link is drawn in a
+      different color.
+  */
+  @property bool visited()
+  {
+    return getVisited();
+  }
+
+  /**
+      Set `visited` property.
+      Params:
+        propval = The 'visited' state of this button. A visited link is drawn in a
+        different color.
+  */
+  @property void visited(bool propval)
+  {
+    return setVisited(propval);
   }
 
   /**
@@ -95,7 +136,7 @@ class LinkButton : gtk.button.Button
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_link_button_new_with_label(_uri, _label);
-    auto _retval = ObjectG.getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

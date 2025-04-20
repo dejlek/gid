@@ -32,6 +32,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DiscovererAudioInfo self()
   {
     return this;

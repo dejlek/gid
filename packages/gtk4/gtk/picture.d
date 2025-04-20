@@ -53,8 +53,8 @@ import gtk.widget;
     that paintables are never made smaller than their ideal size - but
     be careful if you do not know the size of the paintable in use (like
     when displaying user-loaded images). This can easily cause the picture to
-    grow larger than the screen. And [gtk.widget.Widget.Align] and
-    [gtk.widget.Widget.Align] can be used to make sure the paintable doesn't
+    grow larger than the screen. And [gtk.widget.Widget.halign] and
+    [gtk.widget.Widget.valign] can be used to make sure the paintable doesn't
     fill all available space but is instead displayed at its original size.
     
     ## CSS nodes
@@ -87,9 +87,130 @@ class Picture : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Picture self()
   {
     return this;
+  }
+
+  /**
+      Get `alternativeText` property.
+      Returns: The alternative textual description for the picture.
+  */
+  @property string alternativeText()
+  {
+    return getAlternativeText();
+  }
+
+  /**
+      Set `alternativeText` property.
+      Params:
+        propval = The alternative textual description for the picture.
+  */
+  @property void alternativeText(string propval)
+  {
+    return setAlternativeText(propval);
+  }
+
+  /**
+      Get `canShrink` property.
+      Returns: If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
+  */
+  @property bool canShrink()
+  {
+    return getCanShrink();
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
+  */
+  @property void canShrink(bool propval)
+  {
+    return setCanShrink(propval);
+  }
+
+  /**
+      Get `contentFit` property.
+      Returns: How the content should be resized to fit inside the [gtk.picture.Picture].
+  */
+  @property gtk.types.ContentFit contentFit()
+  {
+    return getContentFit();
+  }
+
+  /**
+      Set `contentFit` property.
+      Params:
+        propval = How the content should be resized to fit inside the [gtk.picture.Picture].
+  */
+  @property void contentFit(gtk.types.ContentFit propval)
+  {
+    return setContentFit(propval);
+  }
+
+  /**
+      Get `file` property.
+      Returns: The [gio.file.File] that is displayed or null if none.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The [gio.file.File] that is displayed or null if none.
+  */
+  @property void file(gio.file.File propval)
+  {
+    return setFile(propval);
+  }
+
+  /**
+      Get `keepAspectRatio` property.
+      Returns: Whether the GtkPicture will render its contents trying to preserve the aspect
+      ratio.
+  
+      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+  */
+  @property bool keepAspectRatio()
+  {
+    return getKeepAspectRatio();
+  }
+
+  /**
+      Set `keepAspectRatio` property.
+      Params:
+        propval = Whether the GtkPicture will render its contents trying to preserve the aspect
+        ratio.
+  
+      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+  */
+  @property void keepAspectRatio(bool propval)
+  {
+    return setKeepAspectRatio(propval);
+  }
+
+  /**
+      Get `paintable` property.
+      Returns: The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
+  */
+  @property gdk.paintable.Paintable paintable()
+  {
+    return getPaintable();
+  }
+
+  /**
+      Set `paintable` property.
+      Params:
+        propval = The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
+  */
+  @property void paintable(gdk.paintable.Paintable propval)
+  {
+    return setPaintable(propval);
   }
 
   /**
@@ -120,8 +241,8 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +261,7 @@ class Picture : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_filename(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,8 +278,8 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +302,7 @@ class Picture : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +321,7 @@ class Picture : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,7 +375,7 @@ class Picture : gtk.widget.Widget
   {
     GFile* _cretval;
     _cretval = gtk_picture_get_file(cast(GtkPicture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -281,7 +402,7 @@ class Picture : gtk.widget.Widget
   {
     GdkPaintable* _cretval;
     _cretval = gtk_picture_get_paintable(cast(GtkPicture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -346,7 +467,7 @@ class Picture : gtk.widget.Widget
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_picture_set_file(cast(GtkPicture*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_picture_set_file(cast(GtkPicture*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**
@@ -398,7 +519,7 @@ class Picture : gtk.widget.Widget
   */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
-    gtk_picture_set_paintable(cast(GtkPicture*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    gtk_picture_set_paintable(cast(GtkPicture*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
   }
 
   /**

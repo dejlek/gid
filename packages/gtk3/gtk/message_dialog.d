@@ -89,9 +89,145 @@ class MessageDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MessageDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `image` property.
+      Returns: The image for this dialog.
+  
+      Deprecated: Use #GtkDialog to create dialogs with images
+  */
+  @property gtk.widget.Widget image()
+  {
+    return getImage();
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = The image for this dialog.
+  
+      Deprecated: Use #GtkDialog to create dialogs with images
+  */
+  @property void image(gtk.widget.Widget propval)
+  {
+    return setImage(propval);
+  }
+
+  /**
+      Get `messageArea` property.
+      Returns: The #GtkBox that corresponds to the message area of this dialog.  See
+      [gtk.message_dialog.MessageDialog.getMessageArea] for a detailed description of this
+      area.
+  */
+  @property gtk.widget.Widget messageArea()
+  {
+    return getMessageArea();
+  }
+
+  /**
+      Get `messageType` property.
+      Returns: The type of the message.
+  */
+  @property gtk.types.MessageType messageType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.MessageType)("message-type");
+  }
+
+  /**
+      Set `messageType` property.
+      Params:
+        propval = The type of the message.
+  */
+  @property void messageType(gtk.types.MessageType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.MessageType)("message-type", propval);
+  }
+
+  /**
+      Get `secondaryText` property.
+      Returns: The secondary text of the message dialog.
+  */
+  @property string secondaryText()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("secondary-text");
+  }
+
+  /**
+      Set `secondaryText` property.
+      Params:
+        propval = The secondary text of the message dialog.
+  */
+  @property void secondaryText(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("secondary-text", propval);
+  }
+
+  /**
+      Get `secondaryUseMarkup` property.
+      Returns: true if the secondary text of the dialog includes Pango markup.
+      See [pango.global.parseMarkup].
+  */
+  @property bool secondaryUseMarkup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("secondary-use-markup");
+  }
+
+  /**
+      Set `secondaryUseMarkup` property.
+      Params:
+        propval = true if the secondary text of the dialog includes Pango markup.
+        See [pango.global.parseMarkup].
+  */
+  @property void secondaryUseMarkup(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("secondary-use-markup", propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: The primary text of the message dialog. If the dialog has
+      a secondary text, this will appear as the title.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The primary text of the message dialog. If the dialog has
+        a secondary text, this will appear as the title.
+  */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: true if the primary text of the dialog includes Pango markup.
+      See [pango.global.parseMarkup].
+  */
+  @property bool useMarkup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-markup");
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = true if the primary text of the dialog includes Pango markup.
+        See [pango.global.parseMarkup].
+  */
+  @property void useMarkup(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-markup", propval);
   }
 
   /**
@@ -104,7 +240,7 @@ class MessageDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_image(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +257,7 @@ class MessageDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -313,7 +313,7 @@ alias OutputVector = GOutputVector;
       sourceObject = the object the asynchronous operation was started with.
       res = a #GAsyncResult.
 */
-alias AsyncReadyCallback = void delegate(gobject.object.ObjectG sourceObject, gio.async_result.AsyncResult res);
+alias AsyncReadyCallback = void delegate(gobject.object.ObjectWrap sourceObject, gio.async_result.AsyncResult res);
 
 /**
     Invoked when a connection to a message bus has been obtained.
@@ -391,7 +391,7 @@ alias CancellableSourceFunc = bool delegate(gio.cancellable.Cancellable cancella
           error is set. If the returned #GVariant is floating, it is
           consumed - otherwise its reference count is decreased by one.
 */
-alias DBusInterfaceGetPropertyFunc = glib.variant.VariantG delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, glib.error.ErrorG error);
+alias DBusInterfaceGetPropertyFunc = glib.variant.Variant delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, glib.error.ErrorWrap error);
 
 /**
     The type of the method_call function in #GDBusInterfaceVTable.
@@ -405,7 +405,7 @@ alias DBusInterfaceGetPropertyFunc = glib.variant.VariantG delegate(gio.dbus_con
       parameters = A #GVariant tuple with parameters.
       invocation = A #GDBusMethodInvocation object that must be used to return a value or error.
 */
-alias DBusInterfaceMethodCallFunc = void delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, gio.dbus_method_invocation.DBusMethodInvocation invocation);
+alias DBusInterfaceMethodCallFunc = void delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, gio.dbus_method_invocation.DBusMethodInvocation invocation);
 
 /**
     The type of the set_property function in #GDBusInterfaceVTable.
@@ -420,7 +420,7 @@ alias DBusInterfaceMethodCallFunc = void delegate(gio.dbus_connection.DBusConnec
       error = Return location for error.
     Returns: true if the property was set to value, false if error is set.
 */
-alias DBusInterfaceSetPropertyFunc = bool delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, glib.variant.VariantG value, glib.error.ErrorG error);
+alias DBusInterfaceSetPropertyFunc = bool delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, glib.variant.Variant value, glib.error.ErrorWrap error);
 
 /**
     Signature for function used in [gio.dbus_connection.DBusConnection.addFilter].
@@ -489,7 +489,7 @@ alias DBusInterfaceSetPropertyFunc = bool delegate(gio.dbus_connection.DBusConne
       incoming = true if it is a message received from the other peer, false if it is
         a message to be sent to the other peer.
     Returns: A #GDBusMessage that will be freed with
-      [gobject.object.ObjectG.unref] or null to drop the message. Passive filter
+      [gobject.object.ObjectWrap.unref] or null to drop the message. Passive filter
       functions can simply return the passed message object.
 */
 alias DBusMessageFilterFunction = gio.dbus_message.DBusMessage delegate(gio.dbus_connection.DBusConnection connection, gio.dbus_message.DBusMessage message, bool incoming);
@@ -525,7 +525,7 @@ alias DBusProxyTypeFunc = gobject.types.GType delegate(gio.dbus_object_manager_c
       signalName = The name of the signal.
       parameters = A #GVariant tuple with parameters for the signal.
 */
-alias DBusSignalCallback = void delegate(gio.dbus_connection.DBusConnection connection, string senderName, string objectPath, string interfaceName, string signalName, glib.variant.VariantG parameters);
+alias DBusSignalCallback = void delegate(gio.dbus_connection.DBusConnection connection, string senderName, string objectPath, string interfaceName, string signalName, glib.variant.Variant parameters);
 
 /**
     The type of the dispatch function in #GDBusSubtreeVTable.
@@ -704,7 +704,7 @@ alias IOSchedulerJobFunc = bool delegate(gio.ioscheduler_job.IOSchedulerJob job,
       pollableStream = the #GPollableInputStream or #GPollableOutputStream
     Returns: it should return false if the source should be removed.
 */
-alias PollableSourceFunc = bool delegate(gobject.object.ObjectG pollableStream);
+alias PollableSourceFunc = bool delegate(gobject.object.ObjectWrap pollableStream);
 
 /**
     Changes the size of the memory block pointed to by data to
@@ -728,7 +728,7 @@ alias ReallocFunc = void* delegate(size_t size);
       variant = the #GVariant
     Returns: true if the conversion succeeded, false in case of an error
 */
-alias SettingsBindGetMapping = bool delegate(gobject.value.Value value, glib.variant.VariantG variant);
+alias SettingsBindGetMapping = bool delegate(gobject.value.Value value, glib.variant.Variant variant);
 
 /**
     The type for the function that is used to convert an object property
@@ -740,7 +740,7 @@ alias SettingsBindGetMapping = bool delegate(gobject.value.Value value, glib.var
     Returns: a new #GVariant holding the data from value,
           or null in case of an error
 */
-alias SettingsBindSetMapping = glib.variant.VariantG delegate(gobject.value.Value value, glib.variant_type.VariantType expectedType);
+alias SettingsBindSetMapping = glib.variant.Variant delegate(gobject.value.Value value, glib.variant_type.VariantType expectedType);
 
 /**
     The type of the function that is used to convert from a value stored
@@ -759,7 +759,7 @@ alias SettingsBindSetMapping = glib.variant.VariantG delegate(gobject.value.Valu
       result = the result of the mapping
     Returns: true if the conversion succeeded, false in case of an error
 */
-alias SettingsGetMapping = bool delegate(glib.variant.VariantG value, out void* result);
+alias SettingsGetMapping = bool delegate(glib.variant.Variant value, out void* result);
 
 /**
     Simple thread function that runs an asynchronous operation and
@@ -770,7 +770,7 @@ alias SettingsGetMapping = bool delegate(glib.variant.VariantG value, out void* 
       object = a #GObject.
       cancellable = optional #GCancellable object, null to ignore.
 */
-alias SimpleAsyncThreadFunc = void delegate(gio.simple_async_result.SimpleAsyncResult res, gobject.object.ObjectG object, gio.cancellable.Cancellable cancellable);
+alias SimpleAsyncThreadFunc = void delegate(gio.simple_async_result.SimpleAsyncResult res, gobject.object.ObjectWrap object, gio.cancellable.Cancellable cancellable);
 
 /**
     This is the function type of the callback used for the #GSource
@@ -805,7 +805,7 @@ alias SocketSourceFunc = bool delegate(gio.socket.Socket socket, glib.types.IOCo
       sourceObject = task's source object
       cancellable = task's #GCancellable, or null
 */
-alias TaskThreadFunc = void delegate(gio.task.Task task, gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable);
+alias TaskThreadFunc = void delegate(gio.task.Task task, gobject.object.ObjectWrap sourceObject, gio.cancellable.Cancellable cancellable);
 
 /**
     This function type is used by [gio.vfs.Vfs.registerUriScheme] to make it

@@ -17,7 +17,7 @@ class SDPConnection
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPConnection");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpconnection.SDPConnection");
 
     cInstance = *cast(GstSDPConnection*)ptr;
 
@@ -31,54 +31,101 @@ class SDPConnection
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `nettype` field.
+      Returns: the type of network. "IN" is defined to have the meaning
+         "Internet".
+  */
   @property string nettype()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
   }
 
+  /**
+      Set `nettype` field.
+      Params:
+        propval = the type of network. "IN" is defined to have the meaning
+           "Internet".
+  */
   @property void nettype(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).nettype);
   }
 
+  /**
+      Get `addrtype` field.
+      Returns: the type of @address.
+  */
   @property string addrtype()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
   }
 
+  /**
+      Set `addrtype` field.
+      Params:
+        propval = the type of @address.
+  */
   @property void addrtype(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).addrtype);
   }
 
+  /**
+      Get `address` field.
+      Returns: the address
+  */
   @property string address()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
   }
 
+  /**
+      Set `address` field.
+      Params:
+        propval = the address
+  */
   @property void address(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).address);
   }
 
+  /**
+      Get `ttl` field.
+      Returns: the time to live of the address
+  */
   @property uint ttl()
   {
     return (cast(GstSDPConnection*)cPtr).ttl;
   }
 
+  /**
+      Set `ttl` field.
+      Params:
+        propval = the time to live of the address
+  */
   @property void ttl(uint propval)
   {
     (cast(GstSDPConnection*)cPtr).ttl = propval;
   }
 
+  /**
+      Get `addrNumber` field.
+      Returns: the number of layers
+  */
   @property uint addrNumber()
   {
     return (cast(GstSDPConnection*)cPtr).addrNumber;
   }
 
+  /**
+      Set `addrNumber` field.
+      Params:
+        propval = the number of layers
+  */
   @property void addrNumber(uint propval)
   {
     (cast(GstSDPConnection*)cPtr).addrNumber = propval;

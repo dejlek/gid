@@ -2,6 +2,7 @@
 module gstcontroller.argbcontrol_binding;
 
 import gid.gid;
+import gobject.object;
 import gst.control_binding;
 import gst.control_source;
 import gst.object;
@@ -36,9 +37,58 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ARGBControlBinding self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.control_source.ControlSource controlSourceA()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-a");
+  }
+
+  /** */
+  @property void controlSourceA(gst.control_source.ControlSource propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-a", propval);
+  }
+
+  /** */
+  @property gst.control_source.ControlSource controlSourceB()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-b");
+  }
+
+  /** */
+  @property void controlSourceB(gst.control_source.ControlSource propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-b", propval);
+  }
+
+  /** */
+  @property gst.control_source.ControlSource controlSourceG()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-g");
+  }
+
+  /** */
+  @property void controlSourceG(gst.control_source.ControlSource propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-g", propval);
+  }
+
+  /** */
+  @property gst.control_source.ControlSource controlSourceR()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-r");
+  }
+
+  /** */
+  @property void controlSourceR(gst.control_source.ControlSource propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-r", propval);
   }
 
   /**
@@ -54,7 +104,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
         csB = the control source for the blue channel
       Returns: the new #GstARGBControlBinding
   */
-  this(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB)
+  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB)
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);

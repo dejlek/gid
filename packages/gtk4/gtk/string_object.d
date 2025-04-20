@@ -11,10 +11,10 @@ import gtk.types;
     [gtk.string_object.StringObject] is the type of items in a [gtk.string_list.StringList].
     
     A [gtk.string_object.StringObject] is a wrapper around a `const char*`; it has
-    a [gtk.string_object.StringObject.utf8] property that can be used
+    a [gtk.string_object.StringObject.string_] property that can be used
     for property bindings and expressions.
 */
-class StringObject : gobject.object.ObjectG
+class StringObject : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,19 @@ class StringObject : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringObject self()
   {
     return this;
+  }
+
+  /**
+      Get `string_` property.
+      Returns: The string.
+  */
+  @property string string_()
+  {
+    return getString();
   }
 
   /**

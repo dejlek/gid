@@ -125,9 +125,20 @@ class RadioButton : gtk.check_button.CheckButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RadioButton self()
   {
     return this;
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio button.
+  */
+  @property void group(gtk.radio_button.RadioButton propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.radio_button.RadioButton)("group", propval);
   }
 
   /**
@@ -161,7 +172,7 @@ class RadioButton : gtk.check_button.CheckButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_button_new_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +192,7 @@ class RadioButton : gtk.check_button.CheckButton
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_button_new_with_label(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +210,7 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_button_new_with_label_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -223,7 +234,7 @@ class RadioButton : gtk.check_button.CheckButton
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_button_new_with_mnemonic(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +254,7 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_radio_button_new_with_mnemonic_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

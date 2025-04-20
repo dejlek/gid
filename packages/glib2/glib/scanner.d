@@ -32,7 +32,7 @@ class Scanner
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Scanner");
+      throw new GidConstructException("Null instance pointer for glib.scanner.Scanner");
 
     cInstance = *cast(GScanner*)ptr;
 
@@ -51,126 +51,238 @@ class Scanner
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `maxParseErrors` field.
+      Returns: unused
+  */
   @property uint maxParseErrors()
   {
     return (cast(GScanner*)cPtr).maxParseErrors;
   }
 
+  /**
+      Set `maxParseErrors` field.
+      Params:
+        propval = unused
+  */
   @property void maxParseErrors(uint propval)
   {
     (cast(GScanner*)cPtr).maxParseErrors = propval;
   }
 
+  /**
+      Get `parseErrors` field.
+      Returns: [glib.scanner.Scanner.error] increments this field
+  */
   @property uint parseErrors()
   {
     return (cast(GScanner*)cPtr).parseErrors;
   }
 
+  /**
+      Set `parseErrors` field.
+      Params:
+        propval = [glib.scanner.Scanner.error] increments this field
+  */
   @property void parseErrors(uint propval)
   {
     (cast(GScanner*)cPtr).parseErrors = propval;
   }
 
+  /**
+      Get `inputName` field.
+      Returns: name of input stream, featured by the default message handler
+  */
   @property string inputName()
   {
     return cToD!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
   }
 
+  /**
+      Set `inputName` field.
+      Params:
+        propval = name of input stream, featured by the default message handler
+  */
   @property void inputName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
     dToC(propval, cast(void*)&(cast(GScanner*)cPtr).inputName);
   }
 
+  /**
+      Get `qdata` field.
+      Returns: quarked data
+  */
   @property glib.types.Data qdata()
   {
     return (cast(GScanner*)cPtr).qdata;
   }
 
+  /**
+      Set `qdata` field.
+      Params:
+        propval = quarked data
+  */
   @property void qdata(glib.types.Data propval)
   {
     (cast(GScanner*)cPtr).qdata = propval;
   }
 
+  /**
+      Get `config` field.
+      Returns: link into the scanner configuration
+  */
   @property glib.scanner_config.ScannerConfig config()
   {
     return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)cPtr).config);
   }
 
+  /**
+      Get `token` field.
+      Returns: token parsed by the last [glib.scanner.Scanner.getNextToken]
+  */
   @property glib.types.TokenType token()
   {
     return cast(glib.types.TokenType)(cast(GScanner*)cPtr).token;
   }
 
+  /**
+      Set `token` field.
+      Params:
+        propval = token parsed by the last [glib.scanner.Scanner.getNextToken]
+  */
   @property void token(glib.types.TokenType propval)
   {
     (cast(GScanner*)cPtr).token = cast(GTokenType)propval;
   }
 
+  /**
+      Get `value` field.
+      Returns: value of the last token from [glib.scanner.Scanner.getNextToken]
+  */
   @property glib.token_value.TokenValue value()
   {
     return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).value);
   }
 
+  /**
+      Get `line` field.
+      Returns: line number of the last token from [glib.scanner.Scanner.getNextToken]
+  */
   @property uint line()
   {
     return (cast(GScanner*)cPtr).line;
   }
 
+  /**
+      Set `line` field.
+      Params:
+        propval = line number of the last token from [glib.scanner.Scanner.getNextToken]
+  */
   @property void line(uint propval)
   {
     (cast(GScanner*)cPtr).line = propval;
   }
 
+  /**
+      Get `position` field.
+      Returns: char number of the last token from [glib.scanner.Scanner.getNextToken]
+  */
   @property uint position()
   {
     return (cast(GScanner*)cPtr).position;
   }
 
+  /**
+      Set `position` field.
+      Params:
+        propval = char number of the last token from [glib.scanner.Scanner.getNextToken]
+  */
   @property void position(uint propval)
   {
     (cast(GScanner*)cPtr).position = propval;
   }
 
+  /**
+      Get `nextToken` field.
+      Returns: token parsed by the last [glib.scanner.Scanner.peekNextToken]
+  */
   @property glib.types.TokenType nextToken()
   {
     return cast(glib.types.TokenType)(cast(GScanner*)cPtr).nextToken;
   }
 
+  /**
+      Set `nextToken` field.
+      Params:
+        propval = token parsed by the last [glib.scanner.Scanner.peekNextToken]
+  */
   @property void nextToken(glib.types.TokenType propval)
   {
     (cast(GScanner*)cPtr).nextToken = cast(GTokenType)propval;
   }
 
+  /**
+      Get `nextValue` field.
+      Returns: value of the last token from [glib.scanner.Scanner.peekNextToken]
+  */
   @property glib.token_value.TokenValue nextValue()
   {
     return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).nextValue);
   }
 
+  /**
+      Get `nextLine` field.
+      Returns: line number of the last token from [glib.scanner.Scanner.peekNextToken]
+  */
   @property uint nextLine()
   {
     return (cast(GScanner*)cPtr).nextLine;
   }
 
+  /**
+      Set `nextLine` field.
+      Params:
+        propval = line number of the last token from [glib.scanner.Scanner.peekNextToken]
+  */
   @property void nextLine(uint propval)
   {
     (cast(GScanner*)cPtr).nextLine = propval;
   }
 
+  /**
+      Get `nextPosition` field.
+      Returns: char number of the last token from [glib.scanner.Scanner.peekNextToken]
+  */
   @property uint nextPosition()
   {
     return (cast(GScanner*)cPtr).nextPosition;
   }
 
+  /**
+      Set `nextPosition` field.
+      Params:
+        propval = char number of the last token from [glib.scanner.Scanner.peekNextToken]
+  */
   @property void nextPosition(uint propval)
   {
     (cast(GScanner*)cPtr).nextPosition = propval;
   }
 
+  /**
+      Get `msgHandler` field.
+      Returns: handler function for _warn and _error
+  */
   @property GScannerMsgFunc msgHandler()
   {
     return (cast(GScanner*)cPtr).msgHandler;
   }
+
+  /**
+      Set `msgHandler` field.
+      Params:
+        propval = handler function for _warn and _error
+  */
 
   @property void msgHandler(GScannerMsgFunc propval)
   {

@@ -113,9 +113,54 @@ class DragSource : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DragSource self()
   {
     return this;
+  }
+
+  /**
+      Get `actions` property.
+      Returns: The actions that are supported by drag operations from the source.
+      
+      Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+      if the actions include [gdk.types.DragAction.Move].
+  */
+  @property gdk.types.DragAction actions()
+  {
+    return getActions();
+  }
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The actions that are supported by drag operations from the source.
+        
+        Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+        if the actions include [gdk.types.DragAction.Move].
+  */
+  @property void actions(gdk.types.DragAction propval)
+  {
+    return setActions(propval);
+  }
+
+  /**
+      Get `content` property.
+      Returns: The data that is offered by drag operations from this source.
+  */
+  @property gdk.content_provider.ContentProvider content()
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The data that is offered by drag operations from this source.
+  */
+  @property void content(gdk.content_provider.ContentProvider propval)
+  {
+    return setContent(propval);
   }
 
   /**
@@ -157,7 +202,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +215,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   {
     GdkDrag* _cretval;
     _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +277,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
+    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**
@@ -402,7 +447,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       
       It returns the [gdk.content_provider.ContentProvider] to use for the drag that is about
       to start. The default handler for this signal returns the value of
-      the [gtk.drag_source.DragSource.Gdk.ContentProvider] property, so if you set up that
+      the [gtk.drag_source.DragSource.content] property, so if you set up that
       property ahead of time, you don't need to connect to this signal.
   
       Params:

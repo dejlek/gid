@@ -54,9 +54,105 @@ class Video : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Video self()
   {
     return this;
+  }
+
+  /**
+      Get `autoplay` property.
+      Returns: If the video should automatically begin playing.
+  */
+  @property bool autoplay()
+  {
+    return getAutoplay();
+  }
+
+  /**
+      Set `autoplay` property.
+      Params:
+        propval = If the video should automatically begin playing.
+  */
+  @property void autoplay(bool propval)
+  {
+    return setAutoplay(propval);
+  }
+
+  /**
+      Get `file` property.
+      Returns: The file played by this video if the video is playing a file.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file played by this video if the video is playing a file.
+  */
+  @property void file(gio.file.File propval)
+  {
+    return setFile(propval);
+  }
+
+  /**
+      Get `graphicsOffload` property.
+      Returns: Whether to enable graphics offload.
+  */
+  @property gtk.types.GraphicsOffloadEnabled graphicsOffload()
+  {
+    return getGraphicsOffload();
+  }
+
+  /**
+      Set `graphicsOffload` property.
+      Params:
+        propval = Whether to enable graphics offload.
+  */
+  @property void graphicsOffload(gtk.types.GraphicsOffloadEnabled propval)
+  {
+    return setGraphicsOffload(propval);
+  }
+
+  /**
+      Get `loop` property.
+      Returns: If new media files should be set to loop.
+  */
+  @property bool loop()
+  {
+    return getLoop();
+  }
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = If new media files should be set to loop.
+  */
+  @property void loop(bool propval)
+  {
+    return setLoop(propval);
+  }
+
+  /**
+      Get `mediaStream` property.
+      Returns: The media-stream played
+  */
+  @property gtk.media_stream.MediaStream mediaStream()
+  {
+    return getMediaStream();
+  }
+
+  /**
+      Set `mediaStream` property.
+      Params:
+        propval = The media-stream played
+  */
+  @property void mediaStream(gtk.media_stream.MediaStream propval)
+  {
+    return setMediaStream(propval);
   }
 
   /**
@@ -80,8 +176,8 @@ class Video : gtk.widget.Widget
   static gtk.video.Video newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +196,7 @@ class Video : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_video_new_for_filename(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +211,7 @@ class Video : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +230,7 @@ class Video : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_video_new_for_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +254,7 @@ class Video : gtk.widget.Widget
   {
     GFile* _cretval;
     _cretval = gtk_video_get_file(cast(GtkVideo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,7 +291,7 @@ class Video : gtk.widget.Widget
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_video_get_media_stream(cast(GtkVideo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -219,7 +315,7 @@ class Video : gtk.widget.Widget
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_video_set_file(cast(GtkVideo*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_video_set_file(cast(GtkVideo*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**

@@ -42,6 +42,7 @@ class CssSection : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CssSection self()
   {
     return this;
@@ -95,7 +96,7 @@ class CssSection : gobject.boxed.Boxed
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 

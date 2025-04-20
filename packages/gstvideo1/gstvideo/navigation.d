@@ -517,7 +517,7 @@ interface Navigation
         nAngles = The number of viewing angles now available.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewAnglesChanged(gst.object.ObjectGst src, uint curAngle, uint nAngles)
+  static gst.message.Message messageNewAnglesChanged(gst.object.ObjectWrap src, uint curAngle, uint nAngles)
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_angles_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null, curAngle, nAngles);
@@ -533,7 +533,7 @@ interface Navigation
         src = A #GstObject to set as source of the new message.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewCommandsChanged(gst.object.ObjectGst src)
+  static gst.message.Message messageNewCommandsChanged(gst.object.ObjectWrap src)
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_commands_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
@@ -550,7 +550,7 @@ interface Navigation
         event = A navigation #GstEvent
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewEvent(gst.object.ObjectGst src, gst.event.Event event)
+  static gst.message.Message messageNewEvent(gst.object.ObjectWrap src, gst.event.Event event)
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_event(src ? cast(GstObject*)src.cPtr(No.Dup) : null, event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
@@ -568,7 +568,7 @@ interface Navigation
           false if it over a non-clickable area.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewMouseOver(gst.object.ObjectGst src, bool active)
+  static gst.message.Message messageNewMouseOver(gst.object.ObjectWrap src, bool active)
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_mouse_over(src ? cast(GstObject*)src.cPtr(No.Dup) : null, active);

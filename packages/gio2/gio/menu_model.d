@@ -132,7 +132,7 @@ import gobject.object;
     be rendered as ‘selected’ when the state of the action is equal to the
     target value of the menu item.
 */
-class MenuModel : gobject.object.ObjectG
+class MenuModel : gobject.object.ObjectWrap
 {
 
   /** */
@@ -154,6 +154,7 @@ class MenuModel : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuModel self()
   {
     return this;
@@ -179,12 +180,12 @@ class MenuModel : gobject.object.ObjectG
               null
       Returns: the value of the attribute
   */
-  glib.variant.VariantG getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -205,7 +206,7 @@ class MenuModel : gobject.object.ObjectG
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_model_get_item_link(cast(GMenuModel*)cPtr, itemIndex, _link);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -266,7 +267,7 @@ class MenuModel : gobject.object.ObjectG
       Creates a #GMenuAttributeIter to iterate over the attributes of
       the item at position item_index in model.
       
-      You must free the iterator with [gobject.object.ObjectG.unref] when you are done.
+      You must free the iterator with [gobject.object.ObjectWrap.unref] when you are done.
   
       Params:
         itemIndex = the index of the item
@@ -276,7 +277,7 @@ class MenuModel : gobject.object.ObjectG
   {
     GMenuAttributeIter* _cretval;
     _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -284,7 +285,7 @@ class MenuModel : gobject.object.ObjectG
       Creates a #GMenuLinkIter to iterate over the links of the item at
       position item_index in model.
       
-      You must free the iterator with [gobject.object.ObjectG.unref] when you are done.
+      You must free the iterator with [gobject.object.ObjectWrap.unref] when you are done.
   
       Params:
         itemIndex = the index of the item
@@ -294,7 +295,7 @@ class MenuModel : gobject.object.ObjectG
   {
     GMenuLinkIter* _cretval;
     _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -15,7 +15,7 @@ import webkit.types;
     Use [webkit.web_view.WebView.getEditorState] to get the WebKitEditorState
     of a #WebKitWebView.
 */
-class EditorState : gobject.object.ObjectG
+class EditorState : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,16 @@ class EditorState : gobject.object.ObjectG
   override EditorState self()
   {
     return this;
+  }
+
+  /**
+      Get `typingAttributes` property.
+      Returns: Bitmask of #WebKitEditorTypingAttributes flags.
+      See [webkit.editor_state.EditorState.getTypingAttributes] for more information.
+  */
+  @property uint typingAttributes()
+  {
+    return getTypingAttributes();
   }
 
   /**

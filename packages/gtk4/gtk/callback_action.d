@@ -35,6 +35,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CallbackAction self()
   {
     return this;
@@ -50,11 +51,11 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   */
   this(gtk.types.ShortcutFunc callback = null)
   {
-    extern(C) bool _callbackCallback(GtkWidget* widget, VariantC* args, void* userData)
+    extern(C) bool _callbackCallback(GtkWidget* widget, GVariant* args, void* userData)
     {
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.VariantG(cast(void*)args, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

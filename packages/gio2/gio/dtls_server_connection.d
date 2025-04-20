@@ -26,6 +26,23 @@ interface DtlsServerConnection
   }
 
   /**
+      Get `authenticationMode` property.
+      Returns: The #GTlsAuthenticationMode for the server. This can be changed
+      before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+      rehandshake with a different mode from the initial handshake.
+  */
+  @property gio.types.TlsAuthenticationMode authenticationMode();
+
+  /**
+      Set `authenticationMode` property.
+      Params:
+        propval = The #GTlsAuthenticationMode for the server. This can be changed
+        before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+        rehandshake with a different mode from the initial handshake.
+  */
+  @property void authenticationMode(gio.types.TlsAuthenticationMode propval);
+
+  /**
       Creates a new #GDtlsServerConnection wrapping base_socket.
   
       Params:
@@ -33,16 +50,16 @@ interface DtlsServerConnection
         certificate = the default server certificate, or null
       Returns: the new
           #GDtlsServerConnection, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate = null)
   {
     GDatagramBased* _cretval;
     GError *_err;
-    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)baseSocket).cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 }

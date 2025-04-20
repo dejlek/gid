@@ -17,7 +17,7 @@ class ParamSpecFloat : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecFloat");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_float.ParamSpecFloat");
 
     super(cast(GParamSpec*)ptr, take);
   }

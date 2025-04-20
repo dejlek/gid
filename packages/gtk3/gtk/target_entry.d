@@ -40,37 +40,71 @@ class TargetEntry : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TargetEntry self()
   {
     return this;
   }
 
+  /**
+      Get `target` field.
+      Returns: a string representation of the target type
+  */
   @property string target()
   {
     return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
   }
 
+  /**
+      Set `target` field.
+      Params:
+        propval = a string representation of the target type
+  */
   @property void target(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
     dToC(propval, cast(void*)&(cast(GtkTargetEntry*)cPtr).target);
   }
 
+  /**
+      Get `flags` field.
+      Returns: #GtkTargetFlags for DND
+  */
   @property uint flags()
   {
     return (cast(GtkTargetEntry*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = #GtkTargetFlags for DND
+  */
   @property void flags(uint propval)
   {
     (cast(GtkTargetEntry*)cPtr).flags = propval;
   }
 
+  /**
+      Get `info` field.
+      Returns: an application-assigned integer ID which will
+          get passed as a parameter to e.g the #GtkWidget::selection-get
+          signal. It allows the application to identify the target
+          type without extensive string compares.
+  */
   @property uint info()
   {
     return (cast(GtkTargetEntry*)cPtr).info;
   }
 
+  /**
+      Set `info` field.
+      Params:
+        propval = an application-assigned integer ID which will
+            get passed as a parameter to e.g the #GtkWidget::selection-get
+            signal. It allows the application to identify the target
+            type without extensive string compares.
+  */
   @property void info(uint propval)
   {
     (cast(GtkTargetEntry*)cPtr).info = propval;

@@ -3,6 +3,7 @@ module gtk.shortcuts_section;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.box;
@@ -23,7 +24,7 @@ import gtk.types;
     
     If your application needs multiple sections, you should give each
     section a unique `property@Gtk.ShortcutsSection:section-name` and
-    a [gtk.shortcuts_section.ShortcutsSection.utf8] that can be shown in the
+    a [gtk.shortcuts_section.ShortcutsSection.title] that can be shown in the
     section selector of the [gtk.shortcuts_window.ShortcutsWindow].
     
     The `property@Gtk.ShortcutsSection:max-height` property can be used
@@ -63,9 +64,122 @@ class ShortcutsSection : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutsSection self()
   {
     return this;
+  }
+
+  /**
+      Get `maxHeight` property.
+      Returns: The maximum number of lines to allow per column.
+      
+      This property can be used to influence how the groups in this
+      section are distributed across pages and columns. The default
+      value of 15 should work in most cases.
+  */
+  @property uint maxHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("max-height");
+  }
+
+  /**
+      Set `maxHeight` property.
+      Params:
+        propval = The maximum number of lines to allow per column.
+        
+        This property can be used to influence how the groups in this
+        section are distributed across pages and columns. The default
+        value of 15 should work in most cases.
+  */
+  @property void maxHeight(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("max-height", propval);
+  }
+
+  /**
+      Get `sectionName` property.
+      Returns: A unique name to identify this section among the sections
+      added to the [gtk.shortcuts_window.ShortcutsWindow].
+      
+      Setting the `property@Gtk.ShortcutsWindow:section-name` property
+      to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+  */
+  @property string sectionName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("section-name");
+  }
+
+  /**
+      Set `sectionName` property.
+      Params:
+        propval = A unique name to identify this section among the sections
+        added to the [gtk.shortcuts_window.ShortcutsWindow].
+        
+        Setting the `property@Gtk.ShortcutsWindow:section-name` property
+        to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+  */
+  @property void sectionName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("section-name", propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The string to show in the section selector of the [gtk.shortcuts_window.ShortcutsWindow]
+      for this section.
+      
+      If there is only one section, you don't need to set a title,
+      since the section selector will not be shown in this case.
+  */
+  @property string title()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The string to show in the section selector of the [gtk.shortcuts_window.ShortcutsWindow]
+        for this section.
+        
+        If there is only one section, you don't need to set a title,
+        since the section selector will not be shown in this case.
+  */
+  @property void title(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("title", propval);
+  }
+
+  /**
+      Get `viewName` property.
+      Returns: A view name to filter the groups in this section by.
+      
+      See [gtk.shortcuts_group.ShortcutsGroup.view].
+      
+      Applications are expected to use the
+      `property@Gtk.ShortcutsWindow:view-name` property
+      for this purpose.
+  */
+  @property string viewName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("view-name");
+  }
+
+  /**
+      Set `viewName` property.
+      Params:
+        propval = A view name to filter the groups in this section by.
+        
+        See [gtk.shortcuts_group.ShortcutsGroup.view].
+        
+        Applications are expected to use the
+        `property@Gtk.ShortcutsWindow:view-name` property
+        for this purpose.
+  */
+  @property void viewName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
 
   /**

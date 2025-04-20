@@ -14,7 +14,7 @@ import javascriptcore.types;
     It's possible to add constructors, properties and methods for a JSSClass by providing
     #GCallback<!-- -->s to implement them.
 */
-class Class : gobject.object.ObjectG
+class Class : gobject.object.ObjectWrap
 {
 
   /** */
@@ -62,7 +62,7 @@ class Class : gobject.object.ObjectG
   {
     JSCClass* _cretval;
     _cretval = jsc_class_get_parent(cast(JSCClass*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
   }
 }

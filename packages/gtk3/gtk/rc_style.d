@@ -13,7 +13,7 @@ import gtk.types;
     This can later be composited together with other
     #GtkRcStyle-struct<!-- -->s to form a #GtkStyle.
 */
-class RcStyle : gobject.object.ObjectG
+class RcStyle : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class RcStyle : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RcStyle self()
   {
     return this;
@@ -66,7 +67,7 @@ class RcStyle : gobject.object.ObjectG
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
     return _retval;
   }
 }

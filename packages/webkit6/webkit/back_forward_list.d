@@ -26,7 +26,7 @@ import webkit.types;
     do not change the value of the current item, they just return the requested
     item or items.
 */
-class BackForwardList : gobject.object.ObjectG
+class BackForwardList : gobject.object.ObjectWrap
 {
 
   /** */
@@ -63,7 +63,7 @@ class BackForwardList : gobject.object.ObjectG
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_back_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class BackForwardList : gobject.object.ObjectG
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_current_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class BackForwardList : gobject.object.ObjectG
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_forward_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class BackForwardList : gobject.object.ObjectG
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_nth_item(cast(WebKitBackForwardList*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 

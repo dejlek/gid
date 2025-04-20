@@ -22,7 +22,7 @@ import gtk.widget;
     ![An example GtkWindowControls](windowcontrols.png)
     
     [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
-    [gtk.window_controls.WindowControls.PackType]), so it's intended to be always used
+    [gtk.window_controls.WindowControls.side]), so it's intended to be always used
     in pair with another [gtk.window_controls.WindowControls] for the opposite side, for example:
     
     ```xml
@@ -58,7 +58,7 @@ import gtk.widget;
     exist and where they are placed exactly depends on the desktop environment
     and `property@Gtk.WindowControls:decoration-layout` value.
     
-    When [gtk.window_controls.WindowControls.gboolean] is true, it gets the .empty
+    When [gtk.window_controls.WindowControls.empty] is true, it gets the .empty
     style class.
     
     # Accessibility
@@ -87,9 +87,67 @@ class WindowControls : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WindowControls self()
   {
     return this;
+  }
+
+  /**
+      Get `decorationLayout` property.
+      Returns: The decoration layout for window buttons.
+      
+      If this property is not set, the
+      `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+  */
+  @property string decorationLayout()
+  {
+    return getDecorationLayout();
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for window buttons.
+        
+        If this property is not set, the
+        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+  */
+  @property void decorationLayout(string propval)
+  {
+    return setDecorationLayout(propval);
+  }
+
+  /**
+      Get `empty` property.
+      Returns: Whether the widget has any window buttons.
+  */
+  @property bool empty()
+  {
+    return getEmpty();
+  }
+
+  /**
+      Get `side` property.
+      Returns: Whether the widget shows start or end side of the decoration layout.
+      
+      See `property@Gtk.WindowControls:decoration_layout`.
+  */
+  @property gtk.types.PackType side()
+  {
+    return getSide();
+  }
+
+  /**
+      Set `side` property.
+      Params:
+        propval = Whether the widget shows start or end side of the decoration layout.
+        
+        See `property@Gtk.WindowControls:decoration_layout`.
+  */
+  @property void side(gtk.types.PackType propval)
+  {
+    return setSide(propval);
   }
 
   /**
@@ -155,7 +213,7 @@ class WindowControls : gtk.widget.Widget
       For example, “icon:minimize,maximize,close” specifies a icon
       on the left, and minimize, maximize and close buttons on the right.
       
-      If [gtk.window_controls.WindowControls.PackType] value is GTK_PACK_START, self
+      If [gtk.window_controls.WindowControls.side] value is GTK_PACK_START, self
       will display the part before the colon, otherwise after that.
   
       Params:

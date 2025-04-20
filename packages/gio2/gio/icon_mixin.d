@@ -57,7 +57,7 @@ template IconT()
   override bool equal(gio.icon.Icon icon2 = null)
   {
     bool _retval;
-    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.Dup) : null);
+    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -81,11 +81,11 @@ template IconT()
       (as opposed to over the network), and within the same file system namespace.
       Returns: a #GVariant, or null when serialization fails. The #GVariant will not be floating.
   */
-  override glib.variant.VariantG serialize()
+  override glib.variant.Variant serialize()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_icon_serialize(cast(GIcon*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

@@ -100,9 +100,48 @@ class ViewSwitcherBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ViewSwitcherBar self()
   {
     return this;
+  }
+
+  /**
+      Get `reveal` property.
+      Returns: Whether the bar should be revealed or hidden.
+  */
+  @property bool reveal()
+  {
+    return getReveal();
+  }
+
+  /**
+      Set `reveal` property.
+      Params:
+        propval = Whether the bar should be revealed or hidden.
+  */
+  @property void reveal(bool propval)
+  {
+    return setReveal(propval);
+  }
+
+  /**
+      Get `stack` property.
+      Returns: The stack the view switcher controls.
+  */
+  @property adw.view_stack.ViewStack stack()
+  {
+    return getStack();
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+  */
+  @property void stack(adw.view_stack.ViewStack propval)
+  {
+    return setStack(propval);
   }
 
   /**
@@ -135,7 +174,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   {
     AdwViewStack* _cretval;
     _cretval = adw_view_switcher_bar_get_stack(cast(AdwViewSwitcherBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
     return _retval;
   }
 

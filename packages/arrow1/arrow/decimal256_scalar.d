@@ -33,6 +33,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Decimal256Scalar self()
   {
     return this;
@@ -51,7 +52,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -32,7 +32,7 @@ import gtk.widget;
     `property@Gtk.Picture:can-shrink` property is set to true or you might
     end up with an infinitely growing widget.
 */
-class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
+class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
@@ -54,9 +54,29 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WidgetPaintable self()
   {
     return this;
+  }
+
+  /**
+      Get `widget` property.
+      Returns: The observed widget or null if none.
+  */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
+  }
+
+  /**
+      Set `widget` property.
+      Params:
+        propval = The observed widget or null if none.
+  */
+  @property void widget(gtk.widget.Widget propval)
+  {
+    return setWidget(propval);
   }
 
   mixin PaintableT!();
@@ -83,7 +103,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

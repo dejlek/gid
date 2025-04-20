@@ -21,7 +21,7 @@ class RcProperty
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.RcProperty");
+      throw new GidConstructException("Null instance pointer for gtk.rc_property.RcProperty");
 
     cInstance = *cast(GtkRcProperty*)ptr;
 
@@ -35,37 +35,70 @@ class RcProperty
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `typeName` field.
+      Returns: quark-ified type identifier
+  */
   @property glib.types.Quark typeName()
   {
     return (cast(GtkRcProperty*)cPtr).typeName;
   }
 
+  /**
+      Set `typeName` field.
+      Params:
+        propval = quark-ified type identifier
+  */
   @property void typeName(glib.types.Quark propval)
   {
     (cast(GtkRcProperty*)cPtr).typeName = propval;
   }
 
+  /**
+      Get `propertyName` field.
+      Returns: quark-ified property identifier like
+        “GtkScrollbar::spacing”
+  */
   @property glib.types.Quark propertyName()
   {
     return (cast(GtkRcProperty*)cPtr).propertyName;
   }
 
+  /**
+      Set `propertyName` field.
+      Params:
+        propval = quark-ified property identifier like
+          “GtkScrollbar::spacing”
+  */
   @property void propertyName(glib.types.Quark propval)
   {
     (cast(GtkRcProperty*)cPtr).propertyName = propval;
   }
 
+  /**
+      Get `origin` field.
+      Returns: field similar to one found in #GtkSettingsValue
+  */
   @property string origin()
   {
     return cToD!(string)(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
   }
 
+  /**
+      Set `origin` field.
+      Params:
+        propval = field similar to one found in #GtkSettingsValue
+  */
   @property void origin(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
     dToC(propval, cast(void*)&(cast(GtkRcProperty*)cPtr).origin);
   }
 
+  /**
+      Get `value` field.
+      Returns: field similar to one found in #GtkSettingsValue
+  */
   @property gobject.value.Value value()
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkRcProperty*)cPtr).value);

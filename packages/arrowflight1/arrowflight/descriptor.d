@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Descriptor : gobject.object.ObjectG
+class Descriptor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Descriptor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Descriptor self()
   {
     return this;

@@ -118,9 +118,72 @@ class Application : gio.application.Application
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Application self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.window.Window activeWindow()
+  {
+    return getActiveWindow();
+  }
+
+  /** */
+  @property gio.menu_model.MenuModel appMenu()
+  {
+    return getAppMenu();
+  }
+
+  /** */
+  @property void appMenu(gio.menu_model.MenuModel propval)
+  {
+    return setAppMenu(propval);
+  }
+
+  /** */
+  @property gio.menu_model.MenuModel menubar()
+  {
+    return getMenubar();
+  }
+
+  /** */
+  @property void menubar(gio.menu_model.MenuModel propval)
+  {
+    return setMenubar(propval);
+  }
+
+  /**
+      Get `registerSession` property.
+      Returns: Set this property to true to register with the session manager.
+  */
+  @property bool registerSession()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("register-session");
+  }
+
+  /**
+      Set `registerSession` property.
+      Params:
+        propval = Set this property to true to register with the session manager.
+  */
+  @property void registerSession(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("register-session", propval);
+  }
+
+  /**
+      Get `screensaverActive` property.
+      Returns: This property is true if GTK+ believes that the screensaver is
+      currently active. GTK+ only tracks session state (including this)
+      when #GtkApplication::register-session is set to true.
+      
+      Tracking the screensaver state is supported on Linux.
+  */
+  @property bool screensaverActive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("screensaver-active");
   }
 
   /**
@@ -188,11 +251,11 @@ class Application : gio.application.Application
   
       Deprecated: Use [gtk.application.Application.setAccelsForAction] instead
   */
-  void addAccelerator(string accelerator, string actionName, glib.variant.VariantG parameter = null)
+  void addAccelerator(string accelerator, string actionName, glib.variant.Variant parameter = null)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    gtk_application_add_accelerator(cast(GtkApplication*)cPtr, _accelerator, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
+    gtk_application_add_accelerator(cast(GtkApplication*)cPtr, _accelerator, _actionName, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,7 +366,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -317,7 +380,7 @@ class Application : gio.application.Application
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_app_menu(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -336,7 +399,7 @@ class Application : gio.application.Application
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,7 +412,7 @@ class Application : gio.application.Application
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -368,7 +431,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -530,10 +593,10 @@ class Application : gio.application.Application
   
       Deprecated: Use [gtk.application.Application.setAccelsForAction] instead
   */
-  void removeAccelerator(string actionName, glib.variant.VariantG parameter = null)
+  void removeAccelerator(string actionName, glib.variant.Variant parameter = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    gtk_application_remove_accelerator(cast(GtkApplication*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
+    gtk_application_remove_accelerator(cast(GtkApplication*)cPtr, _actionName, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null);
   }
 
   /**

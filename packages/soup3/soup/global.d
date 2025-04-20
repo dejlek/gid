@@ -694,7 +694,7 @@ bool tldDomainIsPublicSuffix(string domain)
       hostname = a hostname
     Returns: a pointer to the start of the base domain in hostname. If
         an error occurs, null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string tldGetBaseDomain(string hostname)
 {
@@ -703,7 +703,7 @@ string tldGetBaseDomain(string hostname)
   GError *_err;
   _cretval = soup_tld_get_base_domain(_hostname, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }

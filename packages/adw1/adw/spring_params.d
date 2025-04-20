@@ -69,6 +69,7 @@ class SpringParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpringParams self()
   {
     return this;

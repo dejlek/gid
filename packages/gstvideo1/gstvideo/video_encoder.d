@@ -2,6 +2,7 @@
 module gstvideo.video_encoder;
 
 import gid.gid;
+import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
 import gst.buffer;
@@ -107,9 +108,43 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoEncoder self()
   {
     return this;
+  }
+
+  /**
+      Get `minForceKeyUnitInterval` property.
+      Returns: Minimum interval between force-keyunit requests in nanoseconds. See
+      [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
+  */
+  @property ulong minForceKeyUnitInterval()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("min-force-key-unit-interval");
+  }
+
+  /**
+      Set `minForceKeyUnitInterval` property.
+      Params:
+        propval = Minimum interval between force-keyunit requests in nanoseconds. See
+        [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
+  */
+  @property void minForceKeyUnitInterval(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("min-force-key-unit-interval", propval);
+  }
+
+  /** */
+  @property bool qos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("qos");
+  }
+
+  /** */
+  @property void qos(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
 
   mixin PresetT!();

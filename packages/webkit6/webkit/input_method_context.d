@@ -22,7 +22,7 @@ import webkit.types;
     may provide feedback about this process by displaying the intermediate
     composition states as preedit text.
 */
-class InputMethodContext : gobject.object.ObjectG
+class InputMethodContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -48,6 +48,44 @@ class InputMethodContext : gobject.object.ObjectG
   override InputMethodContext self()
   {
     return this;
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: The #WebKitInputHints of the input associated with this context.
+  */
+  @property webkit.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = The #WebKitInputHints of the input associated with this context.
+  */
+  @property void inputHints(webkit.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The #WebKitInputPurpose of the input associated with this context.
+  */
+  @property webkit.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The #WebKitInputPurpose of the input associated with this context.
+  */
+  @property void inputPurpose(webkit.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
   }
 
   /**

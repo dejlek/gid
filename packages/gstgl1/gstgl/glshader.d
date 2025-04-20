@@ -12,7 +12,7 @@ import gstgl.glslstage;
 import gstgl.types;
 
 /** */
-class GLShader : gst.object.ObjectGst
+class GLShader : gst.object.ObjectWrap
 {
 
   /** */
@@ -34,9 +34,16 @@ class GLShader : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLShader self()
   {
     return this;
+  }
+
+  /** */
+  @property bool linked()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("linked");
   }
 
   /**
@@ -59,7 +66,7 @@ class GLShader : gst.object.ObjectGst
       Params:
         context = a #GstGLContext
       Returns: a default shader or null on failure
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstgl.glshader.GLShader newDefault(gstgl.glcontext.GLContext context)
   {
@@ -67,8 +74,8 @@ class GLShader : gst.object.ObjectGst
     GError *_err;
     _cretval = gst_gl_shader_new_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstgl.glshader.GLShader)(cast(GstGLShader*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glshader.GLShader)(cast(GstGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -184,7 +191,7 @@ class GLShader : gst.object.ObjectGst
       Params:
         stage = a #GstGLSLStage to attach
       Returns: whether stage could be compiled and attached to shader
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool compileAttachStage(gstgl.glslstage.GLSLStage stage)
   {
@@ -192,7 +199,7 @@ class GLShader : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_shader_compile_attach_stage(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -257,7 +264,7 @@ class GLShader : gst.object.ObjectGst
       
       Note: must be called in the GL thread
       Returns: whether shader could be linked together.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool link()
   {
@@ -265,7 +272,7 @@ class GLShader : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_shader_link(cast(GstGLShader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

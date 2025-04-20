@@ -41,9 +41,67 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FrameTabBar self()
   {
     return this;
+  }
+
+  /**
+      Get `autohide` property.
+      Returns: Whether the tabs automatically hide.
+  */
+  @property bool autohide()
+  {
+    return getAutohide();
+  }
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether the tabs automatically hide.
+  */
+  @property void autohide(bool propval)
+  {
+    return setAutohide(propval);
+  }
+
+  /**
+      Get `expandTabs` property.
+      Returns: Whether tabs expand to full width.
+  */
+  @property bool expandTabs()
+  {
+    return getExpandTabs();
+  }
+
+  /**
+      Set `expandTabs` property.
+      Params:
+        propval = Whether tabs expand to full width.
+  */
+  @property void expandTabs(bool propval)
+  {
+    return setExpandTabs(propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Whether tabs use inverted layout.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether tabs use inverted layout.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
   }
 
   mixin FrameHeaderT!();

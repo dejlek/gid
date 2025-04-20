@@ -246,7 +246,7 @@ import gtk.widget;
     </object>
     ```
 */
-class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
+class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -268,9 +268,49 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UIManager self()
   {
     return this;
+  }
+
+  /**
+      Get `addTearoffs` property.
+      Returns: The "add-tearoffs" property controls whether generated menus
+      have tearoff menu items.
+      
+      Note that this only affects regular menus. Generated popup
+      menus never have tearoff menu items.
+  
+      Deprecated: Tearoff menus are deprecated and should not
+          be used in newly written code.
+  */
+  @property bool addTearoffs()
+  {
+    return getAddTearoffs();
+  }
+
+  /**
+      Set `addTearoffs` property.
+      Params:
+        propval = The "add-tearoffs" property controls whether generated menus
+        have tearoff menu items.
+        
+        Note that this only affects regular menus. Generated popup
+        menus never have tearoff menu items.
+  
+      Deprecated: Tearoff menus are deprecated and should not
+          be used in newly written code.
+  */
+  @property void addTearoffs(bool propval)
+  {
+    return setAddTearoffs(propval);
+  }
+
+  /** */
+  @property string ui()
+  {
+    return getUi();
   }
 
   mixin BuildableT!();
@@ -323,7 +363,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   uint addUiFromFile(string filename)
   {
@@ -332,7 +372,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -345,7 +385,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   uint addUiFromResource(string resourcePath)
   {
@@ -354,7 +394,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)cPtr, _resourcePath, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -369,7 +409,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   uint addUiFromString(string buffer, ptrdiff_t length)
   {
@@ -378,7 +418,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)cPtr, _buffer, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -412,7 +452,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_ui_manager_get_accel_group(cast(GtkUIManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -430,7 +470,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     GtkAction* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_ui_manager_get_action(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -520,7 +560,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     GtkWidget* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_ui_manager_get_widget(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

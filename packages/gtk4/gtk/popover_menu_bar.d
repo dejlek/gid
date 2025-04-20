@@ -68,9 +68,33 @@ class PopoverMenuBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PopoverMenuBar self()
   {
     return this;
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The [gio.menu_model.MenuModel] from which the menu bar is created.
+      
+      The model should only contain submenus as toplevel elements.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] from which the menu bar is created.
+        
+        The model should only contain submenus as toplevel elements.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
   }
 
   /**
@@ -84,7 +108,7 @@ class PopoverMenuBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_bar_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu_bar.PopoverMenuBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu_bar.PopoverMenuBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +139,7 @@ class PopoverMenuBar : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_bar_get_menu_model(cast(GtkPopoverMenuBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 

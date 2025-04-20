@@ -53,9 +53,130 @@ class Dock : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Dock self()
   {
     return this;
+  }
+
+  /** */
+  @property int bottomHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("bottom-height");
+  }
+
+  /** */
+  @property void bottomHeight(int propval)
+  {
+    return setBottomHeight(propval);
+  }
+
+  /** */
+  @property bool canRevealBottom()
+  {
+    return getCanRevealBottom();
+  }
+
+  /** */
+  @property bool canRevealEnd()
+  {
+    return getCanRevealEnd();
+  }
+
+  /** */
+  @property bool canRevealStart()
+  {
+    return getCanRevealStart();
+  }
+
+  /** */
+  @property bool canRevealTop()
+  {
+    return getCanRevealTop();
+  }
+
+  /** */
+  @property int endWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("end-width");
+  }
+
+  /** */
+  @property void endWidth(int propval)
+  {
+    return setEndWidth(propval);
+  }
+
+  /** */
+  @property bool revealBottom()
+  {
+    return getRevealBottom();
+  }
+
+  /** */
+  @property void revealBottom(bool propval)
+  {
+    return setRevealBottom(propval);
+  }
+
+  /** */
+  @property bool revealEnd()
+  {
+    return getRevealEnd();
+  }
+
+  /** */
+  @property void revealEnd(bool propval)
+  {
+    return setRevealEnd(propval);
+  }
+
+  /** */
+  @property bool revealStart()
+  {
+    return getRevealStart();
+  }
+
+  /** */
+  @property void revealStart(bool propval)
+  {
+    return setRevealStart(propval);
+  }
+
+  /** */
+  @property bool revealTop()
+  {
+    return getRevealTop();
+  }
+
+  /** */
+  @property void revealTop(bool propval)
+  {
+    return setRevealTop(propval);
+  }
+
+  /** */
+  @property int startWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("start-width");
+  }
+
+  /** */
+  @property void startWidth(int propval)
+  {
+    return setStartWidth(propval);
+  }
+
+  /** */
+  @property int topHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("top-height");
+  }
+
+  /** */
+  @property void topHeight(int propval)
+  {
+    return setTopHeight(propval);
   }
 
   /**
@@ -81,7 +202,7 @@ class Dock : gtk.widget.Widget
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

@@ -18,7 +18,7 @@ import gobject.object;
     Note that [gio.emblemed_icon.EmblemedIcon] allows no control over the position
     of the emblems. See also [gio.emblem.Emblem] for more information.
 */
-class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
+class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
@@ -40,6 +40,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EmblemedIcon self()
   {
     return this;
@@ -58,7 +59,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
     GIcon* _cretval;
-    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
+    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -102,7 +103,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   {
     GIcon* _cretval;
     _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 }

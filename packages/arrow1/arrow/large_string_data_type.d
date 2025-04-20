@@ -30,6 +30,7 @@ class LargeStringDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeStringDataType self()
   {
     return this;

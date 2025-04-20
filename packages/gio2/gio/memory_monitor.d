@@ -79,7 +79,7 @@ interface MemoryMonitor
   {
     GMemoryMonitor* _cretval;
     _cretval = g_memory_monitor_dup_default();
-    auto _retval = ObjectG.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

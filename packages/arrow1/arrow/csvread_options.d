@@ -11,7 +11,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class CSVReadOptions : gobject.object.ObjectG
+class CSVReadOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,9 +33,283 @@ class CSVReadOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CSVReadOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `allowNewlinesInValues` property.
+      Returns: Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
+  */
+  @property bool allowNewlinesInValues()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("allow-newlines-in-values");
+  }
+
+  /**
+      Set `allowNewlinesInValues` property.
+      Params:
+        propval = Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
+  */
+  @property void allowNewlinesInValues(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("allow-newlines-in-values", propval);
+  }
+
+  /**
+      Get `allowNullStrings` property.
+      Returns: Whether string / binary columns can have null values.
+      If true, then strings in "null_values" are considered null for string columns.
+      If false, then all strings are valid string values.
+  */
+  @property bool allowNullStrings()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("allow-null-strings");
+  }
+
+  /**
+      Set `allowNullStrings` property.
+      Params:
+        propval = Whether string / binary columns can have null values.
+        If true, then strings in "null_values" are considered null for string columns.
+        If false, then all strings are valid string values.
+  */
+  @property void allowNullStrings(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("allow-null-strings", propval);
+  }
+
+  /**
+      Get `blockSize` property.
+      Returns: Block size we request from the IO layer; also determines the size
+      of chunks when #GArrowCSVReadOptions:use-threads is true.
+  */
+  @property int blockSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("block-size");
+  }
+
+  /**
+      Set `blockSize` property.
+      Params:
+        propval = Block size we request from the IO layer; also determines the size
+        of chunks when #GArrowCSVReadOptions:use-threads is true.
+  */
+  @property void blockSize(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("block-size", propval);
+  }
+
+  /**
+      Get `checkUtf8` property.
+      Returns: Whether to check UTF8 validity of string columns.
+  */
+  @property bool checkUtf8()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("check-utf8");
+  }
+
+  /**
+      Set `checkUtf8` property.
+      Params:
+        propval = Whether to check UTF8 validity of string columns.
+  */
+  @property void checkUtf8(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("check-utf8", propval);
+  }
+
+  /**
+      Get `delimiter` property.
+      Returns: Field delimiter character.
+  */
+  @property char delimiter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(char)("delimiter");
+  }
+
+  /**
+      Set `delimiter` property.
+      Params:
+        propval = Field delimiter character.
+  */
+  @property void delimiter(char propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(char)("delimiter", propval);
+  }
+
+  /**
+      Get `escapeCharacter` property.
+      Returns: Escaping character. This is used only when
+      #GArrowCSVReadOptions:is-escaped is true.
+  */
+  @property char escapeCharacter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(char)("escape-character");
+  }
+
+  /**
+      Set `escapeCharacter` property.
+      Params:
+        propval = Escaping character. This is used only when
+        #GArrowCSVReadOptions:is-escaped is true.
+  */
+  @property void escapeCharacter(char propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(char)("escape-character", propval);
+  }
+
+  /** */
+  @property bool generateColumnNames()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("generate-column-names");
+  }
+
+  /** */
+  @property void generateColumnNames(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("generate-column-names", propval);
+  }
+
+  /**
+      Get `ignoreEmptyLines` property.
+      Returns: Whether empty lines are ignored. If false, an empty line
+      represents a simple empty value (assuming a one-column CSV file).
+  */
+  @property bool ignoreEmptyLines()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("ignore-empty-lines");
+  }
+
+  /**
+      Set `ignoreEmptyLines` property.
+      Params:
+        propval = Whether empty lines are ignored. If false, an empty line
+        represents a simple empty value (assuming a one-column CSV file).
+  */
+  @property void ignoreEmptyLines(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("ignore-empty-lines", propval);
+  }
+
+  /**
+      Get `isDoubleQuoted` property.
+      Returns: Whether a quote inside a value is double quoted.
+  */
+  @property bool isDoubleQuoted()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-double-quoted");
+  }
+
+  /**
+      Set `isDoubleQuoted` property.
+      Params:
+        propval = Whether a quote inside a value is double quoted.
+  */
+  @property void isDoubleQuoted(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-double-quoted", propval);
+  }
+
+  /**
+      Get `isEscaped` property.
+      Returns: Whether escaping is used.
+  */
+  @property bool isEscaped()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-escaped");
+  }
+
+  /**
+      Set `isEscaped` property.
+      Params:
+        propval = Whether escaping is used.
+  */
+  @property void isEscaped(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-escaped", propval);
+  }
+
+  /**
+      Get `isQuoted` property.
+      Returns: Whether quoting is used.
+  */
+  @property bool isQuoted()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-quoted");
+  }
+
+  /**
+      Set `isQuoted` property.
+      Params:
+        propval = Whether quoting is used.
+  */
+  @property void isQuoted(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-quoted", propval);
+  }
+
+  /**
+      Get `nSkipRows` property.
+      Returns: The number of header rows to skip (not including
+      the row of column names, if any)
+  */
+  @property uint nSkipRows()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-skip-rows");
+  }
+
+  /**
+      Set `nSkipRows` property.
+      Params:
+        propval = The number of header rows to skip (not including
+        the row of column names, if any)
+  */
+  @property void nSkipRows(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("n-skip-rows", propval);
+  }
+
+  /**
+      Get `quoteCharacter` property.
+      Returns: Quoting character. This is used only when
+      #GArrowCSVReadOptions:is-quoted is true.
+  */
+  @property char quoteCharacter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(char)("quote-character");
+  }
+
+  /**
+      Set `quoteCharacter` property.
+      Params:
+        propval = Quoting character. This is used only when
+        #GArrowCSVReadOptions:is-quoted is true.
+  */
+  @property void quoteCharacter(char propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(char)("quote-character", propval);
+  }
+
+  /**
+      Get `useThreads` property.
+      Returns: Whether to use the global CPU thread pool.
+  */
+  @property bool useThreads()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-threads");
+  }
+
+  /**
+      Set `useThreads` property.
+      Params:
+        propval = Whether to use the global CPU thread pool.
+  */
+  @property void useThreads(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-threads", propval);
   }
 
   /** */

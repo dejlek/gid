@@ -43,6 +43,7 @@ class SimpleIOStream : gio.iostream.IOStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SimpleIOStream self()
   {
     return this;

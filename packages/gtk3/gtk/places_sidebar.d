@@ -77,9 +77,151 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PlacesSidebar self()
   {
     return this;
+  }
+
+  /** */
+  @property bool localOnly()
+  {
+    return getLocalOnly();
+  }
+
+  /** */
+  @property void localOnly(bool propval)
+  {
+    return setLocalOnly(propval);
+  }
+
+  /** */
+  @property gio.file.File location()
+  {
+    return getLocation();
+  }
+
+  /** */
+  @property void location(gio.file.File propval)
+  {
+    return setLocation(propval);
+  }
+
+  /** */
+  @property gtk.types.PlacesOpenFlags openFlags()
+  {
+    return getOpenFlags();
+  }
+
+  /** */
+  @property void openFlags(gtk.types.PlacesOpenFlags propval)
+  {
+    return setOpenFlags(propval);
+  }
+
+  /**
+      Get `populateAll` property.
+      Returns: If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
+      is also emitted for popovers.
+  */
+  @property bool populateAll()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("populate-all");
+  }
+
+  /**
+      Set `populateAll` property.
+      Params:
+        propval = If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
+        is also emitted for popovers.
+  */
+  @property void populateAll(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("populate-all", propval);
+  }
+
+  /** */
+  @property bool showConnectToServer()
+  {
+    return getShowConnectToServer();
+  }
+
+  /** */
+  @property void showConnectToServer(bool propval)
+  {
+    return setShowConnectToServer(propval);
+  }
+
+  /** */
+  @property bool showDesktop()
+  {
+    return getShowDesktop();
+  }
+
+  /** */
+  @property void showDesktop(bool propval)
+  {
+    return setShowDesktop(propval);
+  }
+
+  /** */
+  @property bool showEnterLocation()
+  {
+    return getShowEnterLocation();
+  }
+
+  /** */
+  @property void showEnterLocation(bool propval)
+  {
+    return setShowEnterLocation(propval);
+  }
+
+  /** */
+  @property bool showOtherLocations()
+  {
+    return getShowOtherLocations();
+  }
+
+  /** */
+  @property void showOtherLocations(bool propval)
+  {
+    return setShowOtherLocations(propval);
+  }
+
+  /** */
+  @property bool showRecent()
+  {
+    return getShowRecent();
+  }
+
+  /** */
+  @property void showRecent(bool propval)
+  {
+    return setShowRecent(propval);
+  }
+
+  /** */
+  @property bool showStarredLocation()
+  {
+    return getShowStarredLocation();
+  }
+
+  /** */
+  @property void showStarredLocation(bool propval)
+  {
+    return setShowStarredLocation(propval);
+  }
+
+  /** */
+  @property bool showTrash()
+  {
+    return getShowTrash();
+  }
+
+  /** */
+  @property void showTrash(bool propval)
+  {
+    return setShowTrash(propval);
   }
 
   /**
@@ -114,7 +256,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void addShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
   }
 
   /**
@@ -145,7 +287,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_location(cast(GtkPlacesSidebar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -164,7 +306,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_nth_bookmark(cast(GtkPlacesSidebar*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -287,7 +429,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void removeShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
   }
 
   /**
@@ -334,7 +476,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
   }
 
   /**
@@ -759,7 +901,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       
       The selected_item argument may be null in case the selection refers to
       a volume. In this case, selected_volume will be non-null. In this case,
-      the calling application will have to [gobject.object.ObjectG.ref_] the selected_volume and
+      the calling application will have to [gobject.object.ObjectWrap.ref_] the selected_volume and
       keep it around to use it in the callback.
       
       The container and all its contents are destroyed after the user

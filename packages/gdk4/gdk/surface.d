@@ -32,7 +32,7 @@ import gobject.object;
     API to interact with these surfaces. Other, more specialized surface
     types exist, but you will rarely interact with them directly.
 */
-class Surface : gobject.object.ObjectG
+class Surface : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,9 +54,77 @@ class Surface : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Surface self()
   {
     return this;
+  }
+
+  /**
+      Get `cursor` property.
+      Returns: The mouse pointer for the [gdk.surface.Surface].
+  */
+  @property gdk.cursor.Cursor cursor()
+  {
+    return getCursor();
+  }
+
+  /**
+      Set `cursor` property.
+      Params:
+        propval = The mouse pointer for the [gdk.surface.Surface].
+  */
+  @property void cursor(gdk.cursor.Cursor propval)
+  {
+    return setCursor(propval);
+  }
+
+  /**
+      Get `height` property.
+      Returns: The height of the surface, in pixels.
+  */
+  @property int height()
+  {
+    return getHeight();
+  }
+
+  /**
+      Get `mapped` property.
+      Returns: Whether the surface is mapped.
+  */
+  @property bool mapped()
+  {
+    return getMapped();
+  }
+
+  /**
+      Get `scale` property.
+      Returns: The scale of the surface.
+  */
+  @property double scale()
+  {
+    return getScale();
+  }
+
+  /**
+      Get `scaleFactor` property.
+      Returns: The scale factor of the surface.
+      
+      The scale factor is the next larger integer,
+      compared to [gdk.surface.Surface.scale].
+  */
+  @property int scaleFactor()
+  {
+    return getScaleFactor();
+  }
+
+  /**
+      Get `width` property.
+      Returns: The width of the surface in pixels.
+  */
+  @property int width()
+  {
+    return getWidth();
   }
 
   /**
@@ -74,7 +142,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null, autohide);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -89,7 +157,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,7 +180,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkCairoContext* _cretval;
     _cretval = gdk_surface_create_cairo_context(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cairo_context.CairoContext)(cast(GdkCairoContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cairo_context.CairoContext)(cast(GdkCairoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -124,7 +192,7 @@ class Surface : gobject.object.ObjectG
       Before using the returned [gdk.glcontext.GLContext], you will need to
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created [gdk.glcontext.GLContext]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.glcontext.GLContext createGlContext()
   {
@@ -132,8 +200,8 @@ class Surface : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_surface_create_gl_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -175,7 +243,7 @@ class Surface : gobject.object.ObjectG
   /**
       Sets an error and returns null.
       Returns: null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: GTK does not expose any Vulkan internals. This
           function is a leftover that was accidentally exposed.
@@ -186,8 +254,8 @@ class Surface : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_surface_create_vulkan_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -221,7 +289,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_cursor(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +310,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +342,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_surface_get_display(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -289,7 +357,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_surface_get_frame_clock(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -536,7 +604,7 @@ class Surface : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface))
+          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface))
   
           `monitor` the monitor (optional)
   
@@ -548,7 +616,7 @@ class Surface : gobject.object.ObjectG
   ulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {
@@ -681,7 +749,7 @@ class Surface : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface))
+          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface))
   
           `monitor` the monitor (optional)
   
@@ -693,7 +761,7 @@ class Surface : gobject.object.ObjectG
   ulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {

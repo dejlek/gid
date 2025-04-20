@@ -32,6 +32,7 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DenseUnionScalar self()
   {
     return this;

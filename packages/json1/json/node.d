@@ -23,7 +23,7 @@ import json.types;
     type you can retrieve a copy of the [gobject.value.Value] holding it with the
     [json.node.Node.getValue] function, and then use the [gobject.value.Value] API to extract
     the data; if the node contains a complex type you can retrieve the
-    [json.object.ObjectJson] or the [json.array.Array] using [json.node.Node.getObject]
+    [json.object.ObjectWrap] or the [json.array.Array] using [json.node.Node.getObject]
     or [json.node.Node.getArray] respectively, and then retrieve the nodes
     they contain.
     
@@ -74,6 +74,7 @@ class Node : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Node self()
   {
     return this;
@@ -160,11 +161,11 @@ class Node : gobject.boxed.Boxed
       object value. Use `JSON_NODE_HOLDS_OBJECT` first.
       Returns: the JSON object
   */
-  json.object.ObjectJson dupObject()
+  json.object.ObjectWrap dupObject()
   {
     JsonObject* _cretval;
     _cretval = json_node_dup_object(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectWrap(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -290,11 +291,11 @@ class Node : gobject.boxed.Boxed
       object value. Use `JSON_NODE_HOLDS_OBJECT` first.
       Returns: the JSON object
   */
-  json.object.ObjectJson getObject()
+  json.object.ObjectWrap getObject()
   {
     JsonObject* _cretval;
     _cretval = json_node_get_object(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectWrap(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -492,7 +493,7 @@ class Node : gobject.boxed.Boxed
         object = the JSON object to initialize node with, or `NULL`
       Returns: the initialized node
   */
-  json.node.Node initObject(json.object.ObjectJson object = null)
+  json.node.Node initObject(json.object.ObjectWrap object = null)
   {
     JsonNode* _cretval;
     _cretval = json_node_init_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
@@ -633,7 +634,7 @@ class Node : gobject.boxed.Boxed
       Params:
         object = a JSON object
   */
-  void setObject(json.object.ObjectJson object = null)
+  void setObject(json.object.ObjectWrap object = null)
   {
     json_node_set_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
   }
@@ -728,7 +729,7 @@ class Node : gobject.boxed.Boxed
       Params:
         object = a JSON object
   */
-  void takeObject(json.object.ObjectJson object)
+  void takeObject(json.object.ObjectWrap object)
   {
     json_node_take_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(Yes.Dup) : null);
   }

@@ -18,4 +18,27 @@ public import gobject.object;
 template DtlsServerConnectionT()
 {
 
+  /**
+      Get `authenticationMode` property.
+      Returns: The #GTlsAuthenticationMode for the server. This can be changed
+      before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+      rehandshake with a different mode from the initial handshake.
+  */
+  @property gio.types.TlsAuthenticationMode authenticationMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.TlsAuthenticationMode)("authentication-mode");
+  }
+
+  /**
+      Set `authenticationMode` property.
+      Params:
+        propval = The #GTlsAuthenticationMode for the server. This can be changed
+        before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+        rehandshake with a different mode from the initial handshake.
+  */
+  @property void authenticationMode(gio.types.TlsAuthenticationMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.types.TlsAuthenticationMode)("authentication-mode", propval);
+  }
+
 }

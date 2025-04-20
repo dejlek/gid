@@ -40,26 +40,45 @@ class Requisition : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Requisition self()
   {
     return this;
   }
 
+  /**
+      Get `width` field.
+      Returns: the widget’s desired width
+  */
   @property int width()
   {
     return (cast(GtkRequisition*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the widget’s desired width
+  */
   @property void width(int propval)
   {
     (cast(GtkRequisition*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the widget’s desired height
+  */
   @property int height()
   {
     return (cast(GtkRequisition*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the widget’s desired height
+  */
   @property void height(int propval)
   {
     (cast(GtkRequisition*)cPtr).height = propval;

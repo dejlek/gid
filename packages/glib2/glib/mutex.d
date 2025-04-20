@@ -60,7 +60,7 @@ class Mutex
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Mutex");
+      throw new GidConstructException("Null instance pointer for glib.mutex.Mutex");
 
     cInstance = *cast(GMutex*)ptr;
 

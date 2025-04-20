@@ -19,7 +19,7 @@ class Variation
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for HarfBuzz.Variation");
+      throw new GidConstructException("Null instance pointer for harfbuzz.variation.Variation");
 
     cInstance = *cast(hb_variation_t*)ptr;
 
@@ -33,21 +33,39 @@ class Variation
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `tag` field.
+      Returns: The #hb_tag_t tag of the variation-axis name
+  */
   @property harfbuzz.types.Tag tag()
   {
     return (cast(hb_variation_t*)cPtr).tag;
   }
 
+  /**
+      Set `tag` field.
+      Params:
+        propval = The #hb_tag_t tag of the variation-axis name
+  */
   @property void tag(harfbuzz.types.Tag propval)
   {
     (cast(hb_variation_t*)cPtr).tag = propval;
   }
 
+  /**
+      Get `value` field.
+      Returns: The value of the variation axis
+  */
   @property float value()
   {
     return (cast(hb_variation_t*)cPtr).value;
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = The value of the variation axis
+  */
   @property void value(float propval)
   {
     (cast(hb_variation_t*)cPtr).value = propval;

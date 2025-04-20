@@ -16,10 +16,17 @@ import gobject.boxed;
 class DBusNodeInfo : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `dbus_node_info.DBusNodeInfo` boxed type.
+      Params:
+        refCount = The reference count or -1 if statically allocated.
+        path = The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
+  */
+  this(int refCount = int.init, string path = string.init)
   {
     super(gMalloc(GDBusNodeInfo.sizeof), Yes.Take);
+    this.refCount = refCount;
+    this.path = path;
   }
 
   /** */
@@ -47,26 +54,45 @@ class DBusNodeInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusNodeInfo self()
   {
     return this;
   }
 
+  /**
+      Get `refCount` field.
+      Returns: The reference count or -1 if statically allocated.
+  */
   @property int refCount()
   {
     return (cast(GDBusNodeInfo*)cPtr).refCount;
   }
 
+  /**
+      Set `refCount` field.
+      Params:
+        propval = The reference count or -1 if statically allocated.
+  */
   @property void refCount(int propval)
   {
     (cast(GDBusNodeInfo*)cPtr).refCount = propval;
   }
 
+  /**
+      Get `path` field.
+      Returns: The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
+  */
   @property string path()
   {
     return cToD!(string)(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
   }
 
+  /**
+      Set `path` field.
+      Params:
+        propval = The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
+  */
   @property void path(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
@@ -87,7 +113,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
         xmlData = Valid D-Bus introspection XML.
       Returns: A #GDBusNodeInfo structure or null if error is set. Free
         with [gio.dbus_node_info.DBusNodeInfo.unref].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {
@@ -96,7 +122,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.dbus_node_info.DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

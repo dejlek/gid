@@ -31,6 +31,7 @@ class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringScalar self()
   {
     return this;

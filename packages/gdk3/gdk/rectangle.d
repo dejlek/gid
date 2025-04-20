@@ -14,10 +14,21 @@ import gobject.boxed;
 class Rectangle : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rectangle.Rectangle` boxed type.
+      Params:
+        x = 
+        y = 
+        width = 
+        height = 
+  */
+  this(int x = int.init, int y = int.init, int width = int.init, int height = int.init)
   {
     super(gMalloc(GdkRectangle.sizeof), Yes.Take);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   /** */
@@ -45,46 +56,55 @@ class Rectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Rectangle self()
   {
     return this;
   }
 
+  /** */
   @property int x()
   {
     return (cast(GdkRectangle*)cPtr).x;
   }
 
+  /** */
   @property void x(int propval)
   {
     (cast(GdkRectangle*)cPtr).x = propval;
   }
 
+  /** */
   @property int y()
   {
     return (cast(GdkRectangle*)cPtr).y;
   }
 
+  /** */
   @property void y(int propval)
   {
     (cast(GdkRectangle*)cPtr).y = propval;
   }
 
+  /** */
   @property int width()
   {
     return (cast(GdkRectangle*)cPtr).width;
   }
 
+  /** */
   @property void width(int propval)
   {
     (cast(GdkRectangle*)cPtr).width = propval;
   }
 
+  /** */
   @property int height()
   {
     return (cast(GdkRectangle*)cPtr).height;
   }
 
+  /** */
   @property void height(int propval)
   {
     (cast(GdkRectangle*)cPtr).height = propval;

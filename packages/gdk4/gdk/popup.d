@@ -16,7 +16,7 @@ import gobject.object;
     The [gdk.popup.Popup] is positioned relative to its parent surface.
     
     [gdk.popup.Popup]s are typically used to implement menus and similar popups.
-    They can be modal, which is indicated by the [gdk.popup.Popup.gboolean]
+    They can be modal, which is indicated by the [gdk.popup.Popup.autohide]
     property.
 */
 interface Popup

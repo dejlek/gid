@@ -31,13 +31,13 @@ import gid.gid;
     could call the method [atk.socket.Socket.embed] in order to embed it.
     
     For the same reasons, an implementor doesn't need to implement
-    [atk.object.ObjectAtk.getNAccessibleChildren] and
-    [atk.object.ObjectAtk.refAccessibleChild]. All the logic related to those
+    [atk.object.ObjectWrap.getNAccessibleChildren] and
+    [atk.object.ObjectWrap.refAccessibleChild]. All the logic related to those
     functions will be implemented by the IPC layer.
     
     See `class@AtkPlug`
 */
-class Socket : atk.object.ObjectAtk, atk.component.Component
+class Socket : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
@@ -59,6 +59,7 @@ class Socket : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Socket self()
   {
     return this;

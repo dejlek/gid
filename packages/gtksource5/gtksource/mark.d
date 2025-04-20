@@ -45,6 +45,7 @@ class Mark : gtk.text_mark.TextMark
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Mark self()
   {
     return this;
@@ -105,7 +106,7 @@ class Mark : gtk.text_mark.TextMark
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_mark_next(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +127,7 @@ class Mark : gtk.text_mark.TextMark
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 }

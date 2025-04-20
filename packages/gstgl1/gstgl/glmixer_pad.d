@@ -30,6 +30,7 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMixerPad self()
   {
     return this;

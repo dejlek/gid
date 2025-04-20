@@ -18,7 +18,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RoundedClipNode");
+      throw new GidConstructException("Null instance pointer for gsk.rounded_clip_node.RoundedClipNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

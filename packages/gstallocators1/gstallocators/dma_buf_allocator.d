@@ -34,6 +34,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DmaBufAllocator self()
   {
     return this;
@@ -41,7 +42,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
 
   /**
       Return a new dmabuf allocator.
-      Returns: a new dmabuf allocator. Use [gst.object.ObjectGst.unref] to
+      Returns: a new dmabuf allocator. Use [gst.object.ObjectWrap.unref] to
         release the allocator after usage
   */
   this()

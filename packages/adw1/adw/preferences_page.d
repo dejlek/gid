@@ -55,9 +55,105 @@ class PreferencesPage : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PreferencesPage self()
   {
     return this;
+  }
+
+  /**
+      Get `description` property.
+      Returns: The description to be displayed at the top of the page.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description to be displayed at the top of the page.
+  */
+  @property void description(string propval)
+  {
+    return setDescription(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for this page.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this page.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of this page.
+  */
+  override @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of this page.
+  */
+  override @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title for this page.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this page.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**

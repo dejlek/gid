@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class FunctionOptions : gobject.object.ObjectG
+class FunctionOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class FunctionOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FunctionOptions self()
   {
     return this;

@@ -34,6 +34,49 @@ interface Retrievable
   }
 
   /**
+      Get `created` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      item was created.
+  */
+  @property ulong created();
+
+  /**
+      Set `created` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        item was created.
+  */
+  @property void created(ulong propval);
+
+  /**
+      Get `label` property.
+      Returns: The human readable label for the item.
+  */
+  @property string label();
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The human readable label for the item.
+  */
+  @property void label(string propval);
+
+  /**
+      Get `modified` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      item was last modified.
+  */
+  @property ulong modified();
+
+  /**
+      Set `modified` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        item was last modified.
+  */
+  @property void modified(ulong propval);
+
+  /**
       Get the attributes of this object.
       
       The attributes are a mapping of string keys to string values.
@@ -92,7 +135,7 @@ interface Retrievable
         result = asynchronous result passed to callback
       Returns: the secret value which should be
           released with [secret.value.Value.unref], or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   secret.value.Value retrieveSecretFinish(gio.async_result.AsyncResult result);
 
@@ -109,7 +152,7 @@ interface Retrievable
         cancellable = optional cancellation object
       Returns: the secret value which should be
           released with [secret.value.Value.unref], or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable = null);
 }

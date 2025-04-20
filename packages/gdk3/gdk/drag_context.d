@@ -11,7 +11,7 @@ import gobject.dclosure;
 import gobject.object;
 
 /** */
-class DragContext : gobject.object.ObjectG
+class DragContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class DragContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DragContext self()
   {
     return this;
@@ -59,7 +60,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +72,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -88,7 +89,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +125,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

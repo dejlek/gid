@@ -76,6 +76,7 @@ class BookmarkFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BookmarkFile self()
   {
     return this;
@@ -1254,7 +1255,7 @@ class BookmarkFile : gobject.boxed.Boxed
   }
 }
 
-class BookmarkFileException : ErrorG
+class BookmarkFileException : ErrorWrap
 {
   this(GError* err)
   {

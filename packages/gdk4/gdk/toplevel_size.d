@@ -19,7 +19,7 @@ class ToplevelSize
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.ToplevelSize");
+      throw new GidConstructException("Null instance pointer for gdk.toplevel_size.ToplevelSize");
 
     cInstancePtr = cast(GdkToplevelSize*)ptr;
 

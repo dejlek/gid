@@ -33,6 +33,18 @@ interface Actionable
     return cast(void function())gtk_actionable_get_type != &gidSymbolNotFound ? gtk_actionable_get_type() : cast(GType)0;
   }
 
+  /** */
+  @property string actionName();
+
+  /** */
+  @property void actionName(string propval);
+
+  /** */
+  @property glib.variant.Variant actionTarget();
+
+  /** */
+  @property void actionTarget(glib.variant.Variant propval);
+
   /**
       Gets the action name for actionable.
       Returns: the action name
@@ -43,7 +55,7 @@ interface Actionable
       Gets the current target value of actionable.
       Returns: the current target value
   */
-  glib.variant.VariantG getActionTargetValue();
+  glib.variant.Variant getActionTargetValue();
 
   /**
       Specifies the name of the action with which this widget should be
@@ -86,9 +98,9 @@ interface Actionable
       rendered inactive).
   
       Params:
-        targetValue = a [glib.variant.VariantG] to set as the target value
+        targetValue = a [glib.variant.Variant] to set as the target value
   */
-  void setActionTargetValue(glib.variant.VariantG targetValue = null);
+  void setActionTargetValue(glib.variant.Variant targetValue = null);
 
   /**
       Sets the action-name and associated string target value of an

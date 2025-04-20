@@ -30,7 +30,7 @@ import gobject.object;
     representation, however; you just ask [gdkpixbuf.pixbuf.Pixbuf] what should
     be displayed at a given point in time.
 */
-class PixbufAnimation : gobject.object.ObjectG
+class PixbufAnimation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -52,6 +52,7 @@ class PixbufAnimation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufAnimation self()
   {
     return this;
@@ -71,7 +72,7 @@ class PixbufAnimation : gobject.object.ObjectG
         filename = Name of file to load, in the GLib file
             name encoding
       Returns: A newly-created animation
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
@@ -80,8 +81,8 @@ class PixbufAnimation : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -94,7 +95,7 @@ class PixbufAnimation : gobject.object.ObjectG
       Params:
         resourcePath = the path of the resource file
       Returns: A newly-created animation
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
@@ -103,8 +104,8 @@ class PixbufAnimation : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +127,7 @@ class PixbufAnimation : gobject.object.ObjectG
         stream = a [gio.input_stream.InputStream] to load the pixbuf from
         cancellable = optional [gio.cancellable.Cancellable] object
       Returns: A newly-created animation
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -134,8 +135,8 @@ class PixbufAnimation : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,16 +147,16 @@ class PixbufAnimation : gobject.object.ObjectG
       Params:
         asyncResult = a #GAsyncResult
       Returns: the newly created animation
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
-    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -181,7 +182,7 @@ class PixbufAnimation : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -244,7 +245,7 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     GdkPixbufAnimationIter* _cretval;
     _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(const(GTimeVal)*)startTime.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -266,7 +267,7 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

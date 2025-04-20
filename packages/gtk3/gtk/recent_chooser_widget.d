@@ -50,6 +50,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentChooserWidget self()
   {
     return this;
@@ -83,7 +84,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

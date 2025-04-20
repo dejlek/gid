@@ -31,6 +31,7 @@ class Date32Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Date32Array self()
   {
     return this;

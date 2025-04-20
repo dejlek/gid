@@ -5,7 +5,7 @@ import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 
-/// Proxy object for [Gtk.Buildable] interface when a GObject has no applicable D binding
+/// Proxy object for [gtk.buildable.Buildable] interface when a GObject has no applicable D binding
 class BuildableIfaceProxy : IfaceProxy, gtk.buildable.Buildable
 {
   this(void* ptr, Flag!"Take" take = No.Take)

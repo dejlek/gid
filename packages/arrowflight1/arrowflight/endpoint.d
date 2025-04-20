@@ -10,7 +10,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Endpoint : gobject.object.ObjectG
+class Endpoint : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,9 +32,19 @@ class Endpoint : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Endpoint self()
   {
     return this;
+  }
+
+  /**
+      Get `ticket` property.
+      Returns: Opaque ticket identify; use with DoGet RPC.
+  */
+  @property arrowflight.ticket.Ticket ticket()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.ticket.Ticket)("ticket");
   }
 
   /** */

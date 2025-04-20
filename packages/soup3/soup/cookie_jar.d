@@ -23,7 +23,7 @@ import soup.types;
     Note that the base #SoupCookieJar class does not support any form
     of long-term cookie persistence.
 */
-class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -45,9 +45,29 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CookieJar self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptPolicy` property.
+      Returns: The policy the jar should follow to accept or reject cookies.
+  */
+  @property soup.types.CookieJarAcceptPolicy acceptPolicy()
+  {
+    return getAcceptPolicy();
+  }
+
+  /**
+      Set `acceptPolicy` property.
+      Params:
+        propval = The policy the jar should follow to accept or reject cookies.
+  */
+  @property void acceptPolicy(soup.types.CookieJarAcceptPolicy propval)
+  {
+    return setAcceptPolicy(propval);
   }
 
   mixin SessionFeatureT!();

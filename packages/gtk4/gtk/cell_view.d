@@ -69,9 +69,89 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellView self()
   {
     return this;
+  }
+
+  /**
+      Get `drawSensitive` property.
+      Returns: Whether all cells should be draw as sensitive for this view regardless
+      of the actual cell properties (used to make menus with submenus appear
+      sensitive when the items in submenus might be insensitive).
+      
+      since 3.0
+  */
+  @property bool drawSensitive()
+  {
+    return getDrawSensitive();
+  }
+
+  /**
+      Set `drawSensitive` property.
+      Params:
+        propval = Whether all cells should be draw as sensitive for this view regardless
+        of the actual cell properties (used to make menus with submenus appear
+        sensitive when the items in submenus might be insensitive).
+        
+        since 3.0
+  */
+  @property void drawSensitive(bool propval)
+  {
+    return setDrawSensitive(propval);
+  }
+
+  /**
+      Get `fitModel` property.
+      Returns: Whether the view should request enough space to always fit
+      the size of every row in the model (used by the combo box to
+      ensure the combo box size doesn't change when different items
+      are selected).
+      
+      since 3.0
+  */
+  @property bool fitModel()
+  {
+    return getFitModel();
+  }
+
+  /**
+      Set `fitModel` property.
+      Params:
+        propval = Whether the view should request enough space to always fit
+        the size of every row in the model (used by the combo box to
+        ensure the combo box size doesn't change when different items
+        are selected).
+        
+        since 3.0
+  */
+  @property void fitModel(bool propval)
+  {
+    return setFitModel(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model for cell view
+      
+      since 2.10
+  */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model for cell view
+        
+        since 2.10
+  */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    return setModel(propval);
   }
 
   mixin CellLayoutT!();
@@ -106,7 +186,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new_with_context(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +204,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     GtkWidget* _cretval;
     const(char)* _markup = markup.toCString(No.Alloc);
     _cretval = gtk_cell_view_new_with_markup(_markup);
-    auto _retval = ObjectG.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +221,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     GtkWidget* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_cell_view_new_with_text(_text);
-    auto _retval = ObjectG.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +237,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new_with_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,7 +290,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_cell_view_get_model(cast(GtkCellView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -269,6 +349,6 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_cell_view_set_model(cast(GtkCellView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_cell_view_set_model(cast(GtkCellView*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 }

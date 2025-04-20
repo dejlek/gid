@@ -1,4 +1,4 @@
-/// Module for [Exception] class
+/// Module for [ExceptionWrap] class
 module javascriptcore.exception;
 
 import gid.gid;
@@ -11,7 +11,7 @@ import javascriptcore.types;
 /**
     JSCException represents a JavaScript exception.
 */
-class Exception : gobject.object.ObjectG
+class ExceptionWrap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,7 +34,7 @@ class Exception : gobject.object.ObjectG
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Exception self()
+  override ExceptionWrap self()
   {
     return this;
   }
@@ -64,13 +64,13 @@ class Exception : gobject.object.ObjectG
         message = the error message
       Returns: a new #JSCException.
   */
-  static javascriptcore.exception.Exception newWithName(javascriptcore.context.Context context, string name, string message)
+  static javascriptcore.exception.ExceptionWrap newWithName(javascriptcore.context.Context context, string name, string message)
   {
     JSCException* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _message = message.toCString(No.Alloc);
     _cretval = jsc_exception_new_with_name(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _name, _message);
-    auto _retval = ObjectG.getDObject!(javascriptcore.exception.Exception)(cast(JSCException*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, Yes.Take);
     return _retval;
   }
 

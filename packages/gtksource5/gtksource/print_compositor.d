@@ -28,7 +28,7 @@ import gtksource.view;
     ones are used as a fallback by the [gtksource.print_compositor.PrintCompositor] object, so that
     the printed area is not clipped.
 */
-class PrintCompositor : gobject.object.ObjectG
+class PrintCompositor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,9 +50,332 @@ class PrintCompositor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintCompositor self()
   {
     return this;
+  }
+
+  /**
+      Get `bodyFontName` property.
+      Returns: Name of the font used for the text body.
+      
+      Accepted values are strings representing a font description Pango can understand.
+      (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+      for a description of the format of the string representation.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property string bodyFontName()
+  {
+    return getBodyFontName();
+  }
+
+  /**
+      Set `bodyFontName` property.
+      Params:
+        propval = Name of the font used for the text body.
+        
+        Accepted values are strings representing a font description Pango can understand.
+        (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+        for a description of the format of the string representation.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void bodyFontName(string propval)
+  {
+    return setBodyFontName(propval);
+  }
+
+  /**
+      Get `footerFontName` property.
+      Returns: Name of the font used to print page footer.
+      If this property is unspecified, the text body font is used.
+      
+      Accepted values are strings representing a font description Pango can understand.
+      (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+      for a description of the format of the string representation.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property string footerFontName()
+  {
+    return getFooterFontName();
+  }
+
+  /**
+      Set `footerFontName` property.
+      Params:
+        propval = Name of the font used to print page footer.
+        If this property is unspecified, the text body font is used.
+        
+        Accepted values are strings representing a font description Pango can understand.
+        (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+        for a description of the format of the string representation.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void footerFontName(string propval)
+  {
+    return setFooterFontName(propval);
+  }
+
+  /**
+      Get `headerFontName` property.
+      Returns: Name of the font used to print page header.
+      If this property is unspecified, the text body font is used.
+      
+      Accepted values are strings representing a font description Pango can understand.
+      (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+      for a description of the format of the string representation.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property string headerFontName()
+  {
+    return getHeaderFontName();
+  }
+
+  /**
+      Set `headerFontName` property.
+      Params:
+        propval = Name of the font used to print page header.
+        If this property is unspecified, the text body font is used.
+        
+        Accepted values are strings representing a font description Pango can understand.
+        (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+        for a description of the format of the string representation.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void headerFontName(string propval)
+  {
+    return setHeaderFontName(propval);
+  }
+
+  /**
+      Get `highlightSyntax` property.
+      Returns: Whether to print the document with highlighted syntax.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property bool highlightSyntax()
+  {
+    return getHighlightSyntax();
+  }
+
+  /**
+      Set `highlightSyntax` property.
+      Params:
+        propval = Whether to print the document with highlighted syntax.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void highlightSyntax(bool propval)
+  {
+    return setHighlightSyntax(propval);
+  }
+
+  /**
+      Get `lineNumbersFontName` property.
+      Returns: Name of the font used to print line numbers on the left margin.
+      If this property is unspecified, the text body font is used.
+      
+      Accepted values are strings representing a font description Pango can understand.
+      (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+      for a description of the format of the string representation.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property string lineNumbersFontName()
+  {
+    return getLineNumbersFontName();
+  }
+
+  /**
+      Set `lineNumbersFontName` property.
+      Params:
+        propval = Name of the font used to print line numbers on the left margin.
+        If this property is unspecified, the text body font is used.
+        
+        Accepted values are strings representing a font description Pango can understand.
+        (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+        for a description of the format of the string representation.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void lineNumbersFontName(string propval)
+  {
+    return setLineNumbersFontName(propval);
+  }
+
+  /**
+      Get `nPages` property.
+      Returns: The number of pages in the document or <code>-1</code> if the
+      document has not been completely paginated.
+  */
+  @property int nPages()
+  {
+    return getNPages();
+  }
+
+  /**
+      Get `printFooter` property.
+      Returns: Whether to print a footer in each page.
+      
+      Note that by default the footer format is unspecified, and if it is
+      unspecified the footer will not be printed, regardless of the value of
+      this property.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property bool printFooter()
+  {
+    return getPrintFooter();
+  }
+
+  /**
+      Set `printFooter` property.
+      Params:
+        propval = Whether to print a footer in each page.
+        
+        Note that by default the footer format is unspecified, and if it is
+        unspecified the footer will not be printed, regardless of the value of
+        this property.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void printFooter(bool propval)
+  {
+    return setPrintFooter(propval);
+  }
+
+  /**
+      Get `printHeader` property.
+      Returns: Whether to print a header in each page.
+      
+      Note that by default the header format is unspecified, and if it is
+      unspecified the header will not be printed, regardless of the value of
+      this property.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property bool printHeader()
+  {
+    return getPrintHeader();
+  }
+
+  /**
+      Set `printHeader` property.
+      Params:
+        propval = Whether to print a header in each page.
+        
+        Note that by default the header format is unspecified, and if it is
+        unspecified the header will not be printed, regardless of the value of
+        this property.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void printHeader(bool propval)
+  {
+    return setPrintHeader(propval);
+  }
+
+  /**
+      Get `printLineNumbers` property.
+      Returns: Interval of printed line numbers.
+      
+      If this property is set to 0 no numbers will be printed.
+      If greater than 0, a number will be printed every "print-line-numbers"
+      lines (i.e. 1 will print all line numbers).
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property uint printLineNumbers()
+  {
+    return getPrintLineNumbers();
+  }
+
+  /**
+      Set `printLineNumbers` property.
+      Params:
+        propval = Interval of printed line numbers.
+        
+        If this property is set to 0 no numbers will be printed.
+        If greater than 0, a number will be printed every "print-line-numbers"
+        lines (i.e. 1 will print all line numbers).
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void printLineNumbers(uint propval)
+  {
+    return setPrintLineNumbers(propval);
+  }
+
+  /**
+      Get `tabWidth` property.
+      Returns: Width of a tab character expressed in spaces.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property uint tabWidth()
+  {
+    return getTabWidth();
+  }
+
+  /**
+      Set `tabWidth` property.
+      Params:
+        propval = Width of a tab character expressed in spaces.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void tabWidth(uint propval)
+  {
+    return setTabWidth(propval);
+  }
+
+  /**
+      Get `wrapMode` property.
+      Returns: Whether to wrap lines never, at word boundaries, or at character boundaries.
+      
+      The value of this property cannot be changed anymore after the first
+      call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property gtk.types.WrapMode wrapMode()
+  {
+    return getWrapMode();
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or at character boundaries.
+        
+        The value of this property cannot be changed anymore after the first
+        call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+  */
+  @property void wrapMode(gtk.types.WrapMode propval)
+  {
+    return setWrapMode(propval);
   }
 
   /**
@@ -87,7 +410,7 @@ class PrintCompositor : gobject.object.ObjectG
   {
     GtkSourcePrintCompositor* _cretval;
     _cretval = gtk_source_print_compositor_new_from_view(view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.print_compositor.PrintCompositor)(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.print_compositor.PrintCompositor)(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +489,7 @@ class PrintCompositor : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_print_compositor_get_buffer(cast(GtkSourcePrintCompositor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 

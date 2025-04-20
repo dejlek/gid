@@ -27,7 +27,7 @@ import gtk.types;
     GtkTextBuffer can support undoing changes to the buffer
     content, see [gtk.text_buffer.TextBuffer.setEnableUndo].
 */
-class TextBuffer : gobject.object.ObjectG
+class TextBuffer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,93 @@ class TextBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextBuffer self()
   {
     return this;
+  }
+
+  /**
+      Get `canRedo` property.
+      Returns: Denotes that the buffer can reapply the last undone action.
+  */
+  @property bool canRedo()
+  {
+    return getCanRedo();
+  }
+
+  /**
+      Get `canUndo` property.
+      Returns: Denotes that the buffer can undo the last applied action.
+  */
+  @property bool canUndo()
+  {
+    return getCanUndo();
+  }
+
+  /**
+      Get `cursorPosition` property.
+      Returns: The position of the insert mark.
+      
+      This is an offset from the beginning of the buffer.
+      It is useful for getting notified when the cursor moves.
+  */
+  @property int cursorPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
+  }
+
+  /**
+      Get `enableUndo` property.
+      Returns: Denotes if support for undoing and redoing changes to the buffer is allowed.
+  */
+  @property bool enableUndo()
+  {
+    return getEnableUndo();
+  }
+
+  /**
+      Set `enableUndo` property.
+      Params:
+        propval = Denotes if support for undoing and redoing changes to the buffer is allowed.
+  */
+  @property void enableUndo(bool propval)
+  {
+    return setEnableUndo(propval);
+  }
+
+  /**
+      Get `hasSelection` property.
+      Returns: Whether the buffer has some text currently selected.
+  */
+  @property bool hasSelection()
+  {
+    return getHasSelection();
+  }
+
+  /**
+      Get `text` property.
+      Returns: The text content of the buffer.
+      
+      Without child widgets and images,
+      see [gtk.text_buffer.TextBuffer.getText] for more information.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The text content of the buffer.
+        
+        Without child widgets and images,
+        see [gtk.text_buffer.TextBuffer.getText] for more information.
+  */
+  @property void text(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
 
   /**
@@ -235,7 +319,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -271,7 +355,7 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextMark* _cretval;
     const(char)* _markName = markName.toCString(No.Alloc);
     _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null, leftGravity);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -335,7 +419,7 @@ class TextBuffer : gobject.object.ObjectG
       buffer.
       
       Removes the reference the buffer holds to the mark, so if
-      you haven’t called [gobject.object.ObjectG.ref_] on the mark, it will be freed.
+      you haven’t called [gobject.object.ObjectWrap.ref_] on the mark, it will be freed.
       Even if the mark isn’t freed, most operations on mark become
       invalid, until it gets added to a buffer again with
       [gtk.text_buffer.TextBuffer.addMark]. Use [gtk.text_mark.TextMark.getDeleted]
@@ -530,7 +614,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -677,7 +761,7 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -730,7 +814,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -770,7 +854,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_text_buffer_get_selection_content(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -824,7 +908,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1015,7 +1099,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertPaintable(gtk.text_iter.TextIter iter, gdk.paintable.Paintable paintable)
   {
-    gtk_text_buffer_insert_paintable(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    gtk_text_buffer_insert_paintable(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
   }
 
   /**

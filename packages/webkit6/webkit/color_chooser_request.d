@@ -27,7 +27,7 @@ import webkit.types;
     WebKit will provide a default handler which will asynchronously run
     a regular #GtkColorChooserDialog for the user to interact with.
 */
-class ColorChooserRequest : gobject.object.ObjectG
+class ColorChooserRequest : gobject.object.ObjectWrap
 {
 
   /** */
@@ -53,6 +53,25 @@ class ColorChooserRequest : gobject.object.ObjectG
   override ColorChooserRequest self()
   {
     return this;
+  }
+
+  /**
+      Get `rgba` property.
+      Returns: The #GdkRGBA color of the request
+  */
+  @property gdk.rgba.RGBA rgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The #GdkRGBA color of the request
+  */
+  @property void rgba(gdk.rgba.RGBA propval)
+  {
+    return setRgba(propval);
   }
 
   /**

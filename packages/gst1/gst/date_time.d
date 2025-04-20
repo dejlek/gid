@@ -46,6 +46,7 @@ class DateTime : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DateTime self()
   {
     return this;

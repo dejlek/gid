@@ -4,6 +4,7 @@ module gtk.actionable_mixin;
 public import gtk.actionable_iface_proxy;
 public import gid.gid;
 public import glib.variant;
+public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -25,6 +26,30 @@ public import gtk.types;
 template ActionableT()
 {
 
+  /** */
+  @property string actionName()
+  {
+    return getActionName();
+  }
+
+  /** */
+  @property void actionName(string propval)
+  {
+    return setActionName(propval);
+  }
+
+  /** */
+  @property glib.variant.Variant actionTarget()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("action-target");
+  }
+
+  /** */
+  @property void actionTarget(glib.variant.Variant propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(glib.variant.Variant)("action-target", propval);
+  }
+
   /**
       Gets the action name for actionable.
       
@@ -45,11 +70,11 @@ template ActionableT()
       See [gtk.actionable.Actionable.setActionTargetValue] for more information.
       Returns: the current target value
   */
-  override glib.variant.VariantG getActionTargetValue()
+  override glib.variant.Variant getActionTargetValue()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_actionable_get_action_target_value(cast(GtkActionable*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -99,9 +124,9 @@ template ActionableT()
       Params:
         targetValue = a #GVariant to set as the target value, or null
   */
-  override void setActionTargetValue(glib.variant.VariantG targetValue = null)
+  override void setActionTargetValue(glib.variant.Variant targetValue = null)
   {
-    gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
+    gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(GVariant*)targetValue.cPtr(No.Dup) : null);
   }
 
   /**

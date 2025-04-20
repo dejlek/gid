@@ -40,6 +40,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TcpWrapperConnection self()
   {
     return this;
@@ -68,7 +69,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   {
     GIOStream* _cretval;
     _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 }

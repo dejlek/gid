@@ -12,7 +12,7 @@ import gobject.object;
     #GMenuLinkIter is an opaque structure type.  You must access it using
     the functions below.
 */
-class MenuLinkIter : gobject.object.ObjectG
+class MenuLinkIter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class MenuLinkIter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuLinkIter self()
   {
     return this;
@@ -67,7 +68,7 @@ class MenuLinkIter : gobject.object.ObjectG
       
       The value returned in out_link remains valid for as long as the iterator
       remains at the current position.  The value returned in value must
-      be unreffed using [gobject.object.ObjectG.unref] when it is no longer in use.
+      be unreffed using [gobject.object.ObjectWrap.unref] when it is no longer in use.
   
       Params:
         outLink = the name of the link
@@ -95,7 +96,7 @@ class MenuLinkIter : gobject.object.ObjectG
   {
     GMenuModel* _cretval;
     _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 

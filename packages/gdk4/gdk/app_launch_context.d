@@ -53,6 +53,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppLaunchContext self()
   {
     return this;
@@ -68,7 +69,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   {
     GdkDisplay* _cretval;
     _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +110,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

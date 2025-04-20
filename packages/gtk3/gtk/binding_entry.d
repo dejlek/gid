@@ -22,7 +22,7 @@ class BindingEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.BindingEntry");
+      throw new GidConstructException("Null instance pointer for gtk.binding_entry.BindingEntry");
 
     cInstance = *cast(GtkBindingEntry*)ptr;
 
@@ -36,71 +36,132 @@ class BindingEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `keyval` field.
+      Returns: key value to match
+  */
   @property uint keyval()
   {
     return (cast(GtkBindingEntry*)cPtr).keyval;
   }
 
+  /**
+      Set `keyval` field.
+      Params:
+        propval = key value to match
+  */
   @property void keyval(uint propval)
   {
     (cast(GtkBindingEntry*)cPtr).keyval = propval;
   }
 
+  /**
+      Get `modifiers` field.
+      Returns: key modifiers to match
+  */
   @property gdk.types.ModifierType modifiers()
   {
     return cast(gdk.types.ModifierType)(cast(GtkBindingEntry*)cPtr).modifiers;
   }
 
+  /**
+      Set `modifiers` field.
+      Params:
+        propval = key modifiers to match
+  */
   @property void modifiers(gdk.types.ModifierType propval)
   {
     (cast(GtkBindingEntry*)cPtr).modifiers = cast(GdkModifierType)propval;
   }
 
+  /**
+      Get `bindingSet` field.
+      Returns: binding set this entry belongs to
+  */
   @property gtk.binding_set.BindingSet bindingSet()
   {
     return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)cPtr).bindingSet);
   }
 
+  /**
+      Get `destroyed` field.
+      Returns: implementation detail
+  */
   @property uint destroyed()
   {
     return (cast(GtkBindingEntry*)cPtr).destroyed;
   }
 
+  /**
+      Set `destroyed` field.
+      Params:
+        propval = implementation detail
+  */
   @property void destroyed(uint propval)
   {
     (cast(GtkBindingEntry*)cPtr).destroyed = propval;
   }
 
+  /**
+      Get `inEmission` field.
+      Returns: implementation detail
+  */
   @property uint inEmission()
   {
     return (cast(GtkBindingEntry*)cPtr).inEmission;
   }
 
+  /**
+      Set `inEmission` field.
+      Params:
+        propval = implementation detail
+  */
   @property void inEmission(uint propval)
   {
     (cast(GtkBindingEntry*)cPtr).inEmission = propval;
   }
 
+  /**
+      Get `marksUnbound` field.
+      Returns: implementation detail
+  */
   @property uint marksUnbound()
   {
     return (cast(GtkBindingEntry*)cPtr).marksUnbound;
   }
 
+  /**
+      Set `marksUnbound` field.
+      Params:
+        propval = implementation detail
+  */
   @property void marksUnbound(uint propval)
   {
     (cast(GtkBindingEntry*)cPtr).marksUnbound = propval;
   }
 
+  /**
+      Get `setNext` field.
+      Returns: linked list of entries maintained by binding set
+  */
   @property gtk.binding_entry.BindingEntry setNext()
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)cPtr).setNext);
   }
 
+  /**
+      Get `hashNext` field.
+      Returns: implementation detail
+  */
   @property gtk.binding_entry.BindingEntry hashNext()
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)cPtr).hashNext);
   }
 
+  /**
+      Get `signals` field.
+      Returns: action signals of this entry
+  */
   @property gtk.binding_signal.BindingSignal signals()
   {
     return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)cPtr).signals);

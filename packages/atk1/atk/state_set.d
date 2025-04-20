@@ -12,9 +12,9 @@ import gobject.object;
     
     An AtkStateSet is a read-only representation of the full set of #AtkStates
     that apply to an object at a given time. This set is not meant to be
-    modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
+    modified, but rather created when #[atk.object.ObjectWrap.refStateSet] is called.
 */
-class StateSet : gobject.object.ObjectG
+class StateSet : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class StateSet : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StateSet self()
   {
     return this;
@@ -106,7 +107,7 @@ class StateSet : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_and_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -175,7 +176,7 @@ class StateSet : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_or_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -212,7 +213,7 @@ class StateSet : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 }

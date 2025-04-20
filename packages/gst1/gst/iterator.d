@@ -78,6 +78,7 @@ class Iterator : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Iterator self()
   {
     return this;

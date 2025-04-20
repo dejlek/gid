@@ -42,6 +42,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MemoryInputStream self()
   {
     return this;
@@ -72,7 +73,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

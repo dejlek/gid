@@ -17,7 +17,7 @@ import gtksource.types;
     the `iface@CompletionProvider` interface. The proposals are words
     appearing in the registered [gtk.text_buffer.TextBuffer]s.
 */
-class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
+class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider.CompletionProvider
 {
 
   /** */
@@ -39,9 +39,70 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompletionWords self()
   {
     return this;
+  }
+
+  /** */
+  @property uint minimumWordSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("minimum-word-size");
+  }
+
+  /** */
+  @property void minimumWordSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("minimum-word-size", propval);
+  }
+
+  /** */
+  @property int priority()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("priority");
+  }
+
+  /** */
+  @property void priority(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("priority", propval);
+  }
+
+  /** */
+  @property uint proposalsBatchSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("proposals-batch-size");
+  }
+
+  /** */
+  @property void proposalsBatchSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("proposals-batch-size", propval);
+  }
+
+  /** */
+  @property uint scanBatchSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("scan-batch-size");
+  }
+
+  /** */
+  @property void scanBatchSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("scan-batch-size", propval);
+  }
+
+  /** */
+  @property string title()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /** */
+  @property void title(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
 
   mixin CompletionProviderT!();

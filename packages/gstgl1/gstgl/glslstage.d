@@ -13,7 +13,7 @@ import gstgl.types;
 /**
     #GstGLSLStage holds and represents a single OpenGL shader stage.
 */
-class GLSLStage : gst.object.ObjectGst
+class GLSLStage : gst.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class GLSLStage : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLSLStage self()
   {
     return this;
@@ -53,7 +54,7 @@ class GLSLStage : gst.object.ObjectGst
   {
     GstGLSLStage* _cretval;
     _cretval = gst_glsl_stage_new_default_fragment(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class GLSLStage : gst.object.ObjectGst
   {
     GstGLSLStage* _cretval;
     _cretval = gst_glsl_stage_new_default_vertex(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -72,7 +73,7 @@ class GLSLStage : gst.object.ObjectGst
     GstGLSLStage* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
     _cretval = gst_glsl_stage_new_with_string(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, type, version_, profile, _str);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +90,7 @@ class GLSLStage : gst.object.ObjectGst
       _tmpstr ~= s.toCString(No.Alloc);
     const(char*)* _str = _tmpstr.ptr;
     _cretval = gst_glsl_stage_new_with_strings(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, type, version_, profile, _nStrings, _str);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +101,7 @@ class GLSLStage : gst.object.ObjectGst
     GError *_err;
     _retval = gst_glsl_stage_compile(cast(GstGLSLStage*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

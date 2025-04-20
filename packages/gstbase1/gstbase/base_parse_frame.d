@@ -45,58 +45,116 @@ class BaseParseFrame : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseParseFrame self()
   {
     return this;
   }
 
+  /**
+      Get `buffer` field.
+      Returns: input data to be parsed for frames.
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = input data to be parsed for frames.
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).buffer);
   }
 
+  /**
+      Get `outBuffer` field.
+      Returns: output data.
+  */
   @property gst.buffer.Buffer outBuffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
   }
 
+  /**
+      Set `outBuffer` field.
+      Params:
+        propval = output data.
+  */
   @property void outBuffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
     dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).outBuffer);
   }
 
+  /**
+      Get `flags` field.
+      Returns: a combination of input and output #GstBaseParseFrameFlags that
+       convey additional context to subclass or allow subclass to tune
+       subsequent #GstBaseParse actions.
+  */
   @property uint flags()
   {
     return (cast(GstBaseParseFrame*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = a combination of input and output #GstBaseParseFrameFlags that
+         convey additional context to subclass or allow subclass to tune
+         subsequent #GstBaseParse actions.
+  */
   @property void flags(uint propval)
   {
     (cast(GstBaseParseFrame*)cPtr).flags = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: media specific offset of input frame
+        Note that a converter may have a different one on the frame's buffer.
+  */
   @property ulong offset()
   {
     return (cast(GstBaseParseFrame*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = media specific offset of input frame
+          Note that a converter may have a different one on the frame's buffer.
+  */
   @property void offset(ulong propval)
   {
     (cast(GstBaseParseFrame*)cPtr).offset = propval;
   }
 
+  /**
+      Get `overhead` field.
+      Returns: subclass can set this to indicates the metadata overhead
+        for the given frame, which is then used to enable more accurate bitrate
+        computations. If this is -1, it is assumed that this frame should be
+        skipped in bitrate calculation.
+  */
   @property int overhead()
   {
     return (cast(GstBaseParseFrame*)cPtr).overhead;
   }
 
+  /**
+      Set `overhead` field.
+      Params:
+        propval = subclass can set this to indicates the metadata overhead
+          for the given frame, which is then used to enable more accurate bitrate
+          computations. If this is -1, it is assumed that this frame should be
+          skipped in bitrate calculation.
+  */
   @property void overhead(int propval)
   {
     (cast(GstBaseParseFrame*)cPtr).overhead = propval;

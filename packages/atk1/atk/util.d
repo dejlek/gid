@@ -15,7 +15,7 @@ import gobject.object;
     of a process and information about the current ATK implementation
     and toolkit version.
 */
-class Util : gobject.object.ObjectG
+class Util : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class Util : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Util self()
   {
     return this;

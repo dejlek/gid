@@ -34,6 +34,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DRMDumbAllocator self()
   {
     return this;
@@ -46,7 +47,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   
       Params:
         drmDevicePath = path to the DRM device to open
-      Returns: a new DRM Dumb allocator. Use [gst.object.ObjectGst.unref]
+      Returns: a new DRM Dumb allocator. Use [gst.object.ObjectWrap.unref]
           to release the allocator after usage.
   */
   static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithDevicePath(string drmDevicePath)
@@ -54,7 +55,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
     GstAllocator* _cretval;
     const(char)* _drmDevicePath = drmDevicePath.toCString(No.Alloc);
     _cretval = gst_drm_dumb_allocator_new_with_device_path(_drmDevicePath);
-    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -65,14 +66,14 @@ class DRMDumbAllocator : gst.allocator.Allocator
   
       Params:
         drmFd = file descriptor of the DRM device
-      Returns: a new DRM Dumb allocator. Use [gst.object.ObjectGst.unref]
+      Returns: a new DRM Dumb allocator. Use [gst.object.ObjectWrap.unref]
           to release the allocator after usage.
   */
   static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithFd(int drmFd)
   {
     GstAllocator* _cretval;
     _cretval = gst_drm_dumb_allocator_new_with_fd(drmFd);
-    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 

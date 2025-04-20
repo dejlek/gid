@@ -19,7 +19,7 @@ template FileT()
     GError *_err;
     _retval = garrow_file_close(cast(GArrowFile*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ template FileT()
     GError *_err;
     _retval = garrow_file_tell(cast(GArrowFile*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

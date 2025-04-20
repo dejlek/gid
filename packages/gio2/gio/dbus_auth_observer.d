@@ -75,7 +75,7 @@ import gobject.object;
     }
     ```
 */
-class DBusAuthObserver : gobject.object.ObjectG
+class DBusAuthObserver : gobject.object.ObjectWrap
 {
 
   /** */
@@ -97,6 +97,7 @@ class DBusAuthObserver : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusAuthObserver self()
   {
     return this;
@@ -104,7 +105,7 @@ class DBusAuthObserver : gobject.object.ObjectG
 
   /**
       Creates a new #GDBusAuthObserver object.
-      Returns: A #GDBusAuthObserver. Free with [gobject.object.ObjectG.unref].
+      Returns: A #GDBusAuthObserver. Free with [gobject.object.ObjectWrap.unref].
   */
   this()
   {

@@ -40,7 +40,7 @@ class StringChunk
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.StringChunk");
+      throw new GidConstructException("Null instance pointer for glib.string_chunk.StringChunk");
 
     cInstancePtr = cast(GStringChunk*)ptr;
 

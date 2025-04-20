@@ -40,9 +40,34 @@ class FontSelection : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontSelection self()
   {
     return this;
+  }
+
+  /** */
+  @property string fontName()
+  {
+    return getFontName();
+  }
+
+  /** */
+  @property void fontName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("font-name", propval);
+  }
+
+  /** */
+  @property string previewText()
+  {
+    return getPreviewText();
+  }
+
+  /** */
+  @property void previewText(string propval)
+  {
+    return setPreviewText(propval);
   }
 
   /**
@@ -71,7 +96,7 @@ class FontSelection : gtk.box.Box
   {
     PangoFontFace* _cretval;
     _cretval = gtk_font_selection_get_face(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +111,7 @@ class FontSelection : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_face_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,7 +128,7 @@ class FontSelection : gtk.box.Box
   {
     PangoFontFamily* _cretval;
     _cretval = gtk_font_selection_get_family(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +143,7 @@ class FontSelection : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_family_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +179,7 @@ class FontSelection : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_preview_entry(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +224,7 @@ class FontSelection : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_size_entry(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +238,7 @@ class FontSelection : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_size_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

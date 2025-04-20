@@ -2,6 +2,7 @@
 module gstbase.base_sink;
 
 import gid.gid;
+import gobject.object;
 import gst.element;
 import gst.mini_object;
 import gst.sample;
@@ -148,9 +149,257 @@ class BaseSink : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseSink self()
   {
     return this;
+  }
+
+  /**
+      Get `async` property.
+      Returns: If set to true, the basesink will perform asynchronous state changes.
+      When set to false, the sink will not signal the parent when it prerolls.
+      Use this option when dealing with sparse streams or when synchronisation is
+      not required.
+  */
+  @property bool async()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("async");
+  }
+
+  /**
+      Set `async` property.
+      Params:
+        propval = If set to true, the basesink will perform asynchronous state changes.
+        When set to false, the sink will not signal the parent when it prerolls.
+        Use this option when dealing with sparse streams or when synchronisation is
+        not required.
+  */
+  @property void async(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("async", propval);
+  }
+
+  /**
+      Get `blocksize` property.
+      Returns: The amount of bytes to pull when operating in pull mode.
+  */
+  @property uint blocksize()
+  {
+    return getBlocksize();
+  }
+
+  /**
+      Set `blocksize` property.
+      Params:
+        propval = The amount of bytes to pull when operating in pull mode.
+  */
+  @property void blocksize(uint propval)
+  {
+    return setBlocksize(propval);
+  }
+
+  /**
+      Get `enableLastSample` property.
+      Returns: Enable the last-sample property. If false, basesink doesn't keep a
+      reference to the last buffer arrived and the last-sample property is always
+      set to null. This can be useful if you need buffers to be released as soon
+      as possible, eg. if you're using a buffer pool.
+  */
+  @property bool enableLastSample()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enable-last-sample");
+  }
+
+  /**
+      Set `enableLastSample` property.
+      Params:
+        propval = Enable the last-sample property. If false, basesink doesn't keep a
+        reference to the last buffer arrived and the last-sample property is always
+        set to null. This can be useful if you need buffers to be released as soon
+        as possible, eg. if you're using a buffer pool.
+  */
+  @property void enableLastSample(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("enable-last-sample", propval);
+  }
+
+  /**
+      Get `lastSample` property.
+      Returns: The last buffer that arrived in the sink and was used for preroll or for
+      rendering. This property can be used to generate thumbnails. This property
+      can be null when the sink has not yet received a buffer.
+  */
+  @property gst.sample.Sample lastSample()
+  {
+    return getLastSample();
+  }
+
+  /**
+      Get `maxBitrate` property.
+      Returns: Control the maximum amount of bits that will be rendered per second.
+      Setting this property to a value bigger than 0 will make the sink delay
+      rendering of the buffers when it would exceed to max-bitrate.
+  */
+  @property ulong maxBitrate()
+  {
+    return getMaxBitrate();
+  }
+
+  /**
+      Set `maxBitrate` property.
+      Params:
+        propval = Control the maximum amount of bits that will be rendered per second.
+        Setting this property to a value bigger than 0 will make the sink delay
+        rendering of the buffers when it would exceed to max-bitrate.
+  */
+  @property void maxBitrate(ulong propval)
+  {
+    return setMaxBitrate(propval);
+  }
+
+  /** */
+  @property long maxLateness()
+  {
+    return getMaxLateness();
+  }
+
+  /** */
+  @property void maxLateness(long propval)
+  {
+    return setMaxLateness(propval);
+  }
+
+  /**
+      Get `processingDeadline` property.
+      Returns: Maximum amount of time (in nanoseconds) that the pipeline can take
+      for processing the buffer. This is added to the latency of live
+      pipelines.
+  */
+  @property ulong processingDeadline()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("processing-deadline");
+  }
+
+  /**
+      Set `processingDeadline` property.
+      Params:
+        propval = Maximum amount of time (in nanoseconds) that the pipeline can take
+        for processing the buffer. This is added to the latency of live
+        pipelines.
+  */
+  @property void processingDeadline(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("processing-deadline", propval);
+  }
+
+  /** */
+  @property bool qos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("qos");
+  }
+
+  /** */
+  @property void qos(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
+  }
+
+  /**
+      Get `renderDelay` property.
+      Returns: The additional delay between synchronisation and actual rendering of the
+      media. This property will add additional latency to the device in order to
+      make other sinks compensate for the delay.
+  */
+  @property ulong renderDelay()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("render-delay");
+  }
+
+  /**
+      Set `renderDelay` property.
+      Params:
+        propval = The additional delay between synchronisation and actual rendering of the
+        media. This property will add additional latency to the device in order to
+        make other sinks compensate for the delay.
+  */
+  @property void renderDelay(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("render-delay", propval);
+  }
+
+  /**
+      Get `stats` property.
+      Returns: Various #GstBaseSink statistics. This property returns a #GstStructure
+      with name `application/x-gst-base-sink-stats` with the following fields:
+      
+      $(LIST
+        * "average-rate"  G_TYPE_DOUBLE   average frame rate
+        * "dropped" G_TYPE_UINT64   Number of dropped frames
+        * "rendered" G_TYPE_UINT64   Number of rendered frames
+      )
+  */
+  @property gst.structure.Structure stats()
+  {
+    return getStats();
+  }
+
+  /** */
+  @property bool sync()
+  {
+    return getSync();
+  }
+
+  /** */
+  @property void sync(bool propval)
+  {
+    return setSync(propval);
+  }
+
+  /**
+      Get `throttleTime` property.
+      Returns: The time to insert between buffers. This property can be used to control
+      the maximum amount of buffers per second to render. Setting this property
+      to a value bigger than 0 will make the sink create THROTTLE QoS events.
+  */
+  @property ulong throttleTime()
+  {
+    return getThrottleTime();
+  }
+
+  /**
+      Set `throttleTime` property.
+      Params:
+        propval = The time to insert between buffers. This property can be used to control
+        the maximum amount of buffers per second to render. Setting this property
+        to a value bigger than 0 will make the sink create THROTTLE QoS events.
+  */
+  @property void throttleTime(ulong propval)
+  {
+    return setThrottleTime(propval);
+  }
+
+  /**
+      Get `tsOffset` property.
+      Returns: Controls the final synchronisation, a negative value will render the buffer
+      earlier while a positive value delays playback. This property can be
+      used to fix synchronisation in bad files.
+  */
+  @property long tsOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("ts-offset");
+  }
+
+  /**
+      Set `tsOffset` property.
+      Params:
+        propval = Controls the final synchronisation, a negative value will render the buffer
+        earlier while a positive value delays playback. This property can be
+        used to fix synchronisation in bad files.
+  */
+  @property void tsOffset(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("ts-offset", propval);
   }
 
   /**

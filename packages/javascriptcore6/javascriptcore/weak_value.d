@@ -14,7 +14,7 @@ import javascriptcore.value;
     to keep a reference to a JavaScript value without protecting it from being garbage
     collected and without referencing the #JSCContext either.
 */
-class WeakValue : gobject.object.ObjectG
+class WeakValue : gobject.object.ObjectWrap
 {
 
   /** */
@@ -64,7 +64,7 @@ class WeakValue : gobject.object.ObjectG
   {
     JSCValue* _cretval;
     _cretval = jsc_weak_value_get_value(cast(JSCWeakValue*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 

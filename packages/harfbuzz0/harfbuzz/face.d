@@ -38,6 +38,7 @@ class Face : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Face self()
   {
     return this;

@@ -68,9 +68,25 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Item self()
   {
     return this;
+  }
+
+  /**
+      Get `locked` property.
+      Returns: Whether the item is locked or not.
+      
+      An item may not be independently lockable separate from other items in
+      its collection.
+      
+      To lock or unlock a item use the [secret.service.Service.lock] or
+      [secret.service.Service.unlock] functions.
+  */
+  @property bool locked()
+  {
+    return getLocked();
   }
 
   mixin RetrievableT!();
@@ -103,7 +119,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -120,17 +136,17 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = the asynchronous result passed to the callback
       Returns: the new item, which should be unreferenced
-          with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   static secret.item.Item createFinish(gio.async_result.AsyncResult result)
   {
     SecretItem* _cretval;
     GError *_err;
-    _cretval = secret_item_create_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_item_create_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -154,8 +170,8 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         flags = flags for the creation of the new item
         cancellable = optional cancellation object
       Returns: the new item, which should be unreferenced
-          with [gobject.object.ObjectG.unref]
-      Throws: [ErrorG]
+          with [gobject.object.ObjectWrap.unref]
+      Throws: [ErrorWrap]
   */
   static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -166,8 +182,8 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _cretval = secret_item_create_sync(collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -190,7 +206,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -209,15 +225,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the operation succeeded or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool loadSecretsFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_load_secrets_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_load_secrets_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -235,7 +251,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         items = the items to retrieve secrets for
         cancellable = optional cancellation object
       Returns: whether the operation succeeded or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool loadSecretsSync(secret.item.Item[] items, gio.cancellable.Cancellable cancellable = null)
   {
@@ -245,7 +261,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_load_secrets_sync(_items, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -267,7 +283,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -281,15 +297,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the item was successfully deleted or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_delete_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_delete_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -303,7 +319,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         cancellable = optional cancellation object
       Returns: whether the item was successfully deleted or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -311,7 +327,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_delete_sync(cast(SecretItem*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -447,7 +463,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   {
     SecretService* _cretval;
     _cretval = secret_item_get_service(cast(SecretItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, No.Take);
     return _retval;
   }
 
@@ -472,7 +488,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -489,15 +505,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the secret item successfully loaded or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadSecretFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_load_secret_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_load_secret_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -513,7 +529,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         cancellable = optional cancellation object
       Returns: whether the secret item successfully loaded or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadSecretSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -521,7 +537,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_load_secret_sync(cast(SecretItem*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -561,7 +577,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -577,15 +593,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributesFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_set_attributes_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_set_attributes_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -604,7 +620,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         attributes = a new set of attributes
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setAttributesSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -614,7 +630,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_set_attributes_sync(cast(SecretItem*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -635,7 +651,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -650,15 +666,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setLabelFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_set_label_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_set_label_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -672,7 +688,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         label = a new label
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
@@ -681,7 +697,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_set_label_sync(cast(SecretItem*)cPtr, _label, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -705,7 +721,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -719,15 +735,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setSecretFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = secret_item_set_secret_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_set_secret_finish(cast(SecretItem*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -744,7 +760,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         value = a new secret value
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setSecretSync(secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {
@@ -752,7 +768,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = secret_item_set_secret_sync(cast(SecretItem*)cPtr, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

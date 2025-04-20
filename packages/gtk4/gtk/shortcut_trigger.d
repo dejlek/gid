@@ -24,7 +24,7 @@ import gtk.types;
     properties during construction. If you want to change a trigger, you
     have to replace it with a new one.
 */
-class ShortcutTrigger : gobject.object.ObjectG
+class ShortcutTrigger : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,6 +46,7 @@ class ShortcutTrigger : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutTrigger self()
   {
     return this;
@@ -80,7 +81,7 @@ class ShortcutTrigger : gobject.object.ObjectG
     GtkShortcutTrigger* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_trigger_parse_string(_string_);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
     return _retval;
   }
 

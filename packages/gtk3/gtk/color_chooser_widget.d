@@ -4,6 +4,7 @@ module gtk.color_chooser_widget;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -59,9 +60,33 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorChooserWidget self()
   {
     return this;
+  }
+
+  /**
+      Get `showEditor` property.
+      Returns: The ::show-editor property is true when the color chooser
+      is showing the single-color editor. It can be set to switch
+      the color chooser into single-color editing mode.
+  */
+  @property bool showEditor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
+  }
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = The ::show-editor property is true when the color chooser
+        is showing the single-color editor. It can be set to switch
+        the color chooser into single-color editing mode.
+  */
+  @property void showEditor(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
 
   mixin ColorChooserT!();

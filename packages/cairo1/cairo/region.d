@@ -45,6 +45,7 @@ class Region : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Region self()
   {
     return this;

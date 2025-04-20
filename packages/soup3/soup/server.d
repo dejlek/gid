@@ -106,7 +106,7 @@ import soup.websocket_connection;
     to (or start) the main loop for the current thread-default
     [glib.main_context.MainContext].
 */
-class Server : gobject.object.ObjectG
+class Server : gobject.object.ObjectWrap
 {
 
   /** */
@@ -128,9 +128,144 @@ class Server : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Server self()
   {
     return this;
+  }
+
+  /**
+      Get `serverHeader` property.
+      Returns: Server header.
+      
+      If non-null, the value to use for the "Server" header on
+      `class@ServerMessage`s processed by this server.
+      
+      The Server header is the server equivalent of the
+      User-Agent header, and provides information about the
+      server and its components. It contains a list of one or
+      more product tokens, separated by whitespace, with the most
+      significant product token coming first. The tokens must be
+      brief, ASCII, and mostly alphanumeric (although "-", "_",
+      and "." are also allowed), and may optionally include a "/"
+      followed by a version string. You may also put comments,
+      enclosed in parentheses, between or after the tokens.
+      
+      Some HTTP server implementations intentionally do not use
+      version numbers in their Server header, so that
+      installations running older versions of the server don't
+      end up advertising their vulnerability to specific security
+      holes.
+      
+      As with `property@Session:user_agent`, if you set a
+      `property@Server:server-header` property that has trailing
+      whitespace, #SoupServer will append its own product token (eg,
+      `libsoup/2.3.2`) to the end of the header for you.
+  */
+  @property string serverHeader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("server-header");
+  }
+
+  /**
+      Set `serverHeader` property.
+      Params:
+        propval = Server header.
+        
+        If non-null, the value to use for the "Server" header on
+        `class@ServerMessage`s processed by this server.
+        
+        The Server header is the server equivalent of the
+        User-Agent header, and provides information about the
+        server and its components. It contains a list of one or
+        more product tokens, separated by whitespace, with the most
+        significant product token coming first. The tokens must be
+        brief, ASCII, and mostly alphanumeric (although "-", "_",
+        and "." are also allowed), and may optionally include a "/"
+        followed by a version string. You may also put comments,
+        enclosed in parentheses, between or after the tokens.
+        
+        Some HTTP server implementations intentionally do not use
+        version numbers in their Server header, so that
+        installations running older versions of the server don't
+        end up advertising their vulnerability to specific security
+        holes.
+        
+        As with `property@Session:user_agent`, if you set a
+        `property@Server:server-header` property that has trailing
+        whitespace, #SoupServer will append its own product token (eg,
+        `libsoup/2.3.2`) to the end of the header for you.
+  */
+  @property void serverHeader(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("server-header", propval);
+  }
+
+  /**
+      Get `tlsAuthMode` property.
+      Returns: A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+  */
+  @property gio.types.TlsAuthenticationMode tlsAuthMode()
+  {
+    return getTlsAuthMode();
+  }
+
+  /**
+      Set `tlsAuthMode` property.
+      Params:
+        propval = A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+  */
+  @property void tlsAuthMode(gio.types.TlsAuthenticationMode propval)
+  {
+    return setTlsAuthMode(propval);
+  }
+
+  /**
+      Get `tlsCertificate` property.
+      Returns: A [gio.tls_certificate.TlsCertificate] that has a
+      `property@Gio.TlsCertificate:private-key` set.
+      
+      If this is set, then the server will be able to speak
+      https in addition to (or instead of) plain http.
+  */
+  @property gio.tls_certificate.TlsCertificate tlsCertificate()
+  {
+    return getTlsCertificate();
+  }
+
+  /**
+      Set `tlsCertificate` property.
+      Params:
+        propval = A [gio.tls_certificate.TlsCertificate] that has a
+        `property@Gio.TlsCertificate:private-key` set.
+        
+        If this is set, then the server will be able to speak
+        https in addition to (or instead of) plain http.
+  */
+  @property void tlsCertificate(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setTlsCertificate(propval);
+  }
+
+  /**
+      Get `tlsDatabase` property.
+      Returns: A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
+      certificates.
+  */
+  @property gio.tls_database.TlsDatabase tlsDatabase()
+  {
+    return getTlsDatabase();
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
+        certificates.
+  */
+  @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
+  {
+    return setTlsDatabase(propval);
   }
 
   /**
@@ -145,7 +280,7 @@ class Server : gobject.object.ObjectG
       Returns: true on success, false if the stream could not be
           accepted or any other error occurred (in which case error will be
           set).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool acceptIostream(gio.iostream.IOStream stream, gio.socket_address.SocketAddress localAddr = null, gio.socket_address.SocketAddress remoteAddr = null)
   {
@@ -153,7 +288,7 @@ class Server : gobject.object.ObjectG
     GError *_err;
     _retval = soup_server_accept_iostream(cast(SoupServer*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr.cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -219,7 +354,7 @@ class Server : gobject.object.ObjectG
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -277,7 +412,7 @@ class Server : gobject.object.ObjectG
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -340,7 +475,7 @@ class Server : gobject.object.ObjectG
       auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
       string _path = path.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -408,7 +543,7 @@ class Server : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_get_tls_certificate(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -420,7 +555,7 @@ class Server : gobject.object.ObjectG
   {
     GTlsDatabase* _cretval;
     _cretval = soup_server_get_tls_database(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -492,7 +627,7 @@ class Server : gobject.object.ObjectG
       Returns: true on success, false if address could not be
           bound or any other error occurred (in which case error will be
           set).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool listen(gio.socket_address.SocketAddress address, soup.types.ServerListenOptions options)
   {
@@ -500,7 +635,7 @@ class Server : gobject.object.ObjectG
     GError *_err;
     _retval = soup_server_listen(cast(SoupServer*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, options, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -522,7 +657,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if port could not be bound
           or any other error occurred (in which case error will be set).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool listenAll(uint port, soup.types.ServerListenOptions options)
   {
@@ -530,7 +665,7 @@ class Server : gobject.object.ObjectG
     GError *_err;
     _retval = soup_server_listen_all(cast(SoupServer*)cPtr, port, options, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -550,7 +685,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if port could not be bound
           or any other error occurred (in which case error will be set).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool listenLocal(uint port, soup.types.ServerListenOptions options)
   {
@@ -558,7 +693,7 @@ class Server : gobject.object.ObjectG
     GError *_err;
     _retval = soup_server_listen_local(cast(SoupServer*)cPtr, port, options, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -572,7 +707,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if an error occurred (in
           which case error will be set).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool listenSocket(gio.socket.Socket socket, soup.types.ServerListenOptions options)
   {
@@ -580,7 +715,7 @@ class Server : gobject.object.ObjectG
     GError *_err;
     _retval = soup_server_listen_socket(cast(SoupServer*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, options, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

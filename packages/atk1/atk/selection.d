@@ -91,7 +91,7 @@ interface Selection
         selected accessible, or null if selection does not implement this
         interface.
   */
-  atk.object.ObjectAtk refSelection(int i);
+  atk.object.ObjectWrap refSelection(int i);
 
   /**
       Removes the specified child of the object from the object's selection.

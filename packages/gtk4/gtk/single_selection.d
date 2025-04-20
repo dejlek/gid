@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.section_model;
@@ -22,7 +23,7 @@ import gtk.types;
     stays selected. In particular, this means that changing the sort order of an
     underlying sort model will preserve the selection.
 */
-class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
+class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   /** */
@@ -44,9 +45,113 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SingleSelection self()
   {
     return this;
+  }
+
+  /**
+      Get `autoselect` property.
+      Returns: If the selection will always select an item.
+  */
+  @property bool autoselect()
+  {
+    return getAutoselect();
+  }
+
+  /**
+      Set `autoselect` property.
+      Params:
+        propval = If the selection will always select an item.
+  */
+  @property void autoselect(bool propval)
+  {
+    return setAutoselect(propval);
+  }
+
+  /**
+      Get `canUnselect` property.
+      Returns: If unselecting the selected item is allowed.
+  */
+  @property bool canUnselect()
+  {
+    return getCanUnselect();
+  }
+
+  /**
+      Set `canUnselect` property.
+      Params:
+        propval = If unselecting the selected item is allowed.
+  */
+  @property void canUnselect(bool propval)
+  {
+    return setCanUnselect(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being managed.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being managed.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `selected` property.
+      Returns: Position of the selected item.
+  */
+  @property uint selected()
+  {
+    return getSelected();
+  }
+
+  /**
+      Set `selected` property.
+      Params:
+        propval = Position of the selected item.
+  */
+  @property void selected(uint propval)
+  {
+    return setSelected(propval);
+  }
+
+  /**
+      Get `selectedItem` property.
+      Returns: The selected item.
+  */
+  @property gobject.object.ObjectWrap selectedItem()
+  {
+    return getSelectedItem();
   }
 
   mixin ListModelT!();
@@ -63,7 +168,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   this(gio.list_model.ListModel model = null)
   {
     GtkSingleSelection* _cretval;
-    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -99,7 +204,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GListModel* _cretval;
     _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,11 +227,11 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
       If no item is selected, null is returned.
       Returns: The selected item
   */
-  gobject.object.ObjectG getSelectedItem()
+  gobject.object.ObjectWrap getSelectedItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -149,7 +254,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
       If true, unselecting the current item via
       [gtk.selection_model.SelectionModel.unselectItem] is supported.
       
-      Note that setting [gtk.single_selection.SingleSelection.gboolean] will
+      Note that setting [gtk.single_selection.SingleSelection.autoselect] will
       cause unselecting to not work, so it practically makes no sense
       to set both at the same time the same time.
   
@@ -171,7 +276,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,7 +284,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
       
       If the list does not have an item at position or
       `GTK_INVALID_LIST_POSITION` is given, the behavior depends on the
-      value of the [gtk.single_selection.SingleSelection.gboolean] property:
+      value of the [gtk.single_selection.SingleSelection.autoselect] property:
       If it is set, no change will occur and the old item will stay
       selected. If it is unset, the selection will be unset and no item
       will be selected.

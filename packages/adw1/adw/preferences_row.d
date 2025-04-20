@@ -48,9 +48,104 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PreferencesRow self()
   {
     return this;
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the preference represented by this row.
+      
+      The title is interpreted as Pango markup unless
+      `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the preference represented by this row.
+        
+        The title is interpreted as Pango markup unless
+        `property@PreferencesRow:use-markup` is set to `FALSE`.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `titleSelectable` property.
+      Returns: Whether the user can copy the title from the label.
+      
+      See also [gtk.label.Label.selectable].
+  */
+  @property bool titleSelectable()
+  {
+    return getTitleSelectable();
+  }
+
+  /**
+      Set `titleSelectable` property.
+      Params:
+        propval = Whether the user can copy the title from the label.
+        
+        See also [gtk.label.Label.selectable].
+  */
+  @property void titleSelectable(bool propval)
+  {
+    return setTitleSelectable(propval);
+  }
+
+  /**
+      Get `useMarkup` property.
+      Returns: Whether to use Pango markup for the title label.
+      
+      Subclasses may also use it for other labels, such as subtitle.
+      
+      See also `func@Pango.parse_markup`.
+  */
+  @property bool useMarkup()
+  {
+    return getUseMarkup();
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the title label.
+        
+        Subclasses may also use it for other labels, such as subtitle.
+        
+        See also `func@Pango.parse_markup`.
+  */
+  @property void useMarkup(bool propval)
+  {
+    return setUseMarkup(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**
@@ -127,7 +222,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   /**
       Sets whether the user can copy the title from the label
       
-      See also [gtk.label.Label.gboolean].
+      See also [gtk.label.Label.selectable].
   
       Params:
         titleSelectable = `TRUE` if the user can copy the title from the label

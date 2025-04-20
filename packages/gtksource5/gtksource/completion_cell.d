@@ -56,9 +56,58 @@ class CompletionCell : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CompletionCell self()
   {
     return this;
+  }
+
+  /** */
+  @property string markup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("markup");
+  }
+
+  /** */
+  @property void markup(string propval)
+  {
+    return setMarkup(propval);
+  }
+
+  /** */
+  @property gdk.paintable.Paintable paintable()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.paintable.Paintable)("paintable");
+  }
+
+  /** */
+  @property void paintable(gdk.paintable.Paintable propval)
+  {
+    return setPaintable(propval);
+  }
+
+  /** */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /** */
+  @property void text(string propval)
+  {
+    return setText(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
+  }
+
+  /** */
+  @property void widget(gtk.widget.Widget propval)
+  {
+    return setWidget(propval);
   }
 
   /** */
@@ -78,14 +127,14 @@ class CompletionCell : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_completion_cell_get_widget(cast(GtkSourceCompletionCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
   }
 
   /** */
@@ -105,7 +154,7 @@ class CompletionCell : gtk.widget.Widget
   /** */
   void setPaintable(gdk.paintable.Paintable paintable)
   {
-    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
   }
 
   /**

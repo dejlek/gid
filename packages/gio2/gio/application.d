@@ -115,7 +115,7 @@ import gobject.object;
     Regardless of which of these entry points is used to start the
     application, [gio.application.Application] passes some ‘platform data’ from the
     launching instance to the primary instance, in the form of a
-    [glib.variant.VariantG] dictionary mapping strings to variants. To use platform
+    [glib.variant.Variant] dictionary mapping strings to variants. To use platform
     data, override the `vfunc@Gio.Application.before_emit` or
     `vfunc@Gio.Application.after_emit` virtual functions
     in your [gio.application.Application] subclass. When dealing with
@@ -148,7 +148,7 @@ import gobject.object;
     For an example of using extra D-Bus hooks with [gio.application.Application], see
     [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
 */
-class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
+class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
   /** */
@@ -170,9 +170,143 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Application self()
   {
     return this;
+  }
+
+  /**
+      Set `actionGroup` property.
+      Params:
+        propval = The group of actions that the application exports.
+  */
+  @property void actionGroup(gio.action_group.ActionGroup propval)
+  {
+    return setActionGroup(propval);
+  }
+
+  /**
+      Get `applicationId` property.
+      Returns: The unique identifier for the application.
+  */
+  @property string applicationId()
+  {
+    return getApplicationId();
+  }
+
+  /**
+      Set `applicationId` property.
+      Params:
+        propval = The unique identifier for the application.
+  */
+  @property void applicationId(string propval)
+  {
+    return setApplicationId(propval);
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags specifying the behaviour of the application.
+  */
+  @property gio.types.ApplicationFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags specifying the behaviour of the application.
+  */
+  @property void flags(gio.types.ApplicationFlags propval)
+  {
+    return setFlags(propval);
+  }
+
+  /**
+      Get `inactivityTimeout` property.
+      Returns: Time (in milliseconds) to stay alive after becoming idle.
+  */
+  @property uint inactivityTimeout()
+  {
+    return getInactivityTimeout();
+  }
+
+  /**
+      Set `inactivityTimeout` property.
+      Params:
+        propval = Time (in milliseconds) to stay alive after becoming idle.
+  */
+  @property void inactivityTimeout(uint propval)
+  {
+    return setInactivityTimeout(propval);
+  }
+
+  /**
+      Get `isBusy` property.
+      Returns: Whether the application is currently marked as busy through
+      [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
+  */
+  @property bool isBusy()
+  {
+    return getIsBusy();
+  }
+
+  /**
+      Get `isRegistered` property.
+      Returns: Whether [gio.application.Application.register] has been called.
+  */
+  @property bool isRegistered()
+  {
+    return getIsRegistered();
+  }
+
+  /**
+      Get `isRemote` property.
+      Returns: Whether this application instance is remote.
+  */
+  @property bool isRemote()
+  {
+    return getIsRemote();
+  }
+
+  /**
+      Get `resourceBasePath` property.
+      Returns: The base resource path for the application.
+  */
+  @property string resourceBasePath()
+  {
+    return getResourceBasePath();
+  }
+
+  /**
+      Set `resourceBasePath` property.
+      Params:
+        propval = The base resource path for the application.
+  */
+  @property void resourceBasePath(string propval)
+  {
+    return setResourceBasePath(propval);
+  }
+
+  /**
+      Get `version_` property.
+      Returns: The human-readable version number of the application.
+  */
+  @property string version_()
+  {
+    return getVersion();
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The human-readable version number of the application.
+  */
+  @property void version_(string propval)
+  {
+    return setVersion(propval);
   }
 
   mixin ActionGroupT!();
@@ -214,7 +348,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = ObjectG.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -441,7 +575,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
         object = a #GObject
         property = the name of a boolean property of object
   */
-  void bindBusyProperty(gobject.object.ObjectG object, string property)
+  void bindBusyProperty(gobject.object.ObjectWrap object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -479,7 +613,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     GDBusConnection* _cretval;
     _cretval = g_application_get_dbus_connection(cast(GApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -669,7 +803,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
 
     GFile*[] _tmpfiles;
     foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
+      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
 
     const(char)* _hint = hint.toCString(No.Alloc);
@@ -731,7 +865,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if registration succeeded
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool register(gio.cancellable.Cancellable cancellable = null)
   {
@@ -739,7 +873,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     GError *_err;
     _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -908,7 +1042,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setActionGroup(gio.action_group.ActionGroup actionGroup = null)
   {
-    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.Dup) : null);
+    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1093,7 +1227,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
         object = a #GObject
         property = the name of a boolean property of object
   */
-  void unbindBusyProperty(gobject.object.ObjectG object, string property)
+  void unbindBusyProperty(gobject.object.ObjectWrap object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -1405,7 +1539,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
         auto _cArray = getVal!(GFile**)(&_paramVals[1]);
         gio.file.File[] _dArray;
         foreach (i; 0 .. nFiles)
-          _dArray ~= ObjectG.getDObject!(gio.file.File)(_cArray[i], No.Take);
+          _dArray ~= gobject.object.ObjectWrap.getDObject!(gio.file.File)(_cArray[i], No.Take);
         _paramTuple[0] = _dArray;
       }
       _dClosure.cb(_paramTuple[]);

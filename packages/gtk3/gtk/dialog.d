@@ -158,6 +158,7 @@ class Dialog : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Dialog self()
   {
     return this;
@@ -211,7 +212,7 @@ class Dialog : gtk.window.Window
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_dialog_add_button(cast(GtkDialog*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +227,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_action_area(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +239,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -252,7 +253,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +286,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)cPtr, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

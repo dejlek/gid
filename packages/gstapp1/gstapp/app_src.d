@@ -3,6 +3,7 @@ module gstapp.app_src;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
 import gst.caps;
@@ -104,9 +105,392 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppSrc self()
   {
     return this;
+  }
+
+  /**
+      Get `block` property.
+      Returns: When max-bytes are queued and after the enough-data signal has been emitted,
+      block any further push-buffer calls until the amount of queued bytes drops
+      below the max-bytes limit.
+  */
+  @property bool block()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("block");
+  }
+
+  /**
+      Set `block` property.
+      Params:
+        propval = When max-bytes are queued and after the enough-data signal has been emitted,
+        block any further push-buffer calls until the amount of queued bytes drops
+        below the max-bytes limit.
+  */
+  @property void block(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("block", propval);
+  }
+
+  /**
+      Get `caps` property.
+      Returns: The GstCaps that will negotiated downstream and will be put
+      on outgoing buffers.
+  */
+  @property gst.caps.Caps caps()
+  {
+    return getCaps();
+  }
+
+  /**
+      Set `caps` property.
+      Params:
+        propval = The GstCaps that will negotiated downstream and will be put
+        on outgoing buffers.
+  */
+  @property void caps(gst.caps.Caps propval)
+  {
+    return setCaps(propval);
+  }
+
+  /**
+      Get `currentLevelBuffers` property.
+      Returns: The number of currently queued buffers inside appsrc.
+  */
+  @property ulong currentLevelBuffers()
+  {
+    return getCurrentLevelBuffers();
+  }
+
+  /**
+      Get `currentLevelBytes` property.
+      Returns: The number of currently queued bytes inside appsrc.
+  */
+  @property ulong currentLevelBytes()
+  {
+    return getCurrentLevelBytes();
+  }
+
+  /**
+      Get `currentLevelTime` property.
+      Returns: The amount of currently queued time inside appsrc.
+  */
+  @property ulong currentLevelTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
+  }
+
+  /**
+      Get `duration` property.
+      Returns: The total duration in nanoseconds of the data stream. If the total duration is known, it
+      is recommended to configure it with this property.
+  */
+  @property ulong duration()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("duration");
+  }
+
+  /**
+      Set `duration` property.
+      Params:
+        propval = The total duration in nanoseconds of the data stream. If the total duration is known, it
+        is recommended to configure it with this property.
+  */
+  @property void duration(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("duration", propval);
+  }
+
+  /**
+      Get `emitSignals` property.
+      Returns: Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
+      This option is by default enabled for backwards compatibility reasons but
+      can disabled when needed because signal emission is expensive.
+  */
+  @property bool emitSignals()
+  {
+    return getEmitSignals();
+  }
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
+        This option is by default enabled for backwards compatibility reasons but
+        can disabled when needed because signal emission is expensive.
+  */
+  @property void emitSignals(bool propval)
+  {
+    return setEmitSignals(propval);
+  }
+
+  /**
+      Get `format` property.
+      Returns: The format to use for segment events. When the source is producing
+      timestamped buffers this property should be set to GST_FORMAT_TIME.
+  */
+  @property gst.types.Format format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.Format)("format");
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format to use for segment events. When the source is producing
+        timestamped buffers this property should be set to GST_FORMAT_TIME.
+  */
+  @property void format(gst.types.Format propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.types.Format)("format", propval);
+  }
+
+  /**
+      Get `handleSegmentChange` property.
+      Returns: When enabled, appsrc will check GstSegment in GstSample which was
+      pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
+      If a GstSegment is changed, corresponding segment event will be followed
+      by next data flow.
+      
+      FIXME: currently only GST_FORMAT_TIME format is supported and therefore
+      GstAppSrc::format should be time. However, possibly #GstAppSrc can support
+      other formats.
+  */
+  @property bool handleSegmentChange()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("handle-segment-change");
+  }
+
+  /**
+      Set `handleSegmentChange` property.
+      Params:
+        propval = When enabled, appsrc will check GstSegment in GstSample which was
+        pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
+        If a GstSegment is changed, corresponding segment event will be followed
+        by next data flow.
+        
+        FIXME: currently only GST_FORMAT_TIME format is supported and therefore
+        GstAppSrc::format should be time. However, possibly #GstAppSrc can support
+        other formats.
+  */
+  @property void handleSegmentChange(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("handle-segment-change", propval);
+  }
+
+  /**
+      Get `isLive` property.
+      Returns: Instruct the source to behave like a live source. This includes that it
+      will only push out buffers in the PLAYING state.
+  */
+  override @property bool isLive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("is-live");
+  }
+
+  alias isLive = gstbase.base_src.BaseSrc.isLive;
+
+  /**
+      Set `isLive` property.
+      Params:
+        propval = Instruct the source to behave like a live source. This includes that it
+        will only push out buffers in the PLAYING state.
+  */
+  @property void isLive(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("is-live", propval);
+  }
+
+  /**
+      Get `leakyType` property.
+      Returns: When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
+      will drop any buffers that are pushed into it once its internal queue is
+      full. The selected type defines whether to drop the oldest or new
+      buffers.
+  */
+  @property gstapp.types.AppLeakyType leakyType()
+  {
+    return getLeakyType();
+  }
+
+  /**
+      Set `leakyType` property.
+      Params:
+        propval = When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
+        will drop any buffers that are pushed into it once its internal queue is
+        full. The selected type defines whether to drop the oldest or new
+        buffers.
+  */
+  @property void leakyType(gstapp.types.AppLeakyType propval)
+  {
+    return setLeakyType(propval);
+  }
+
+  /**
+      Get `maxBuffers` property.
+      Returns: The maximum amount of buffers that can be queued internally.
+      After the maximum amount of buffers are queued, appsrc will emit the
+      "enough-data" signal.
+  */
+  @property ulong maxBuffers()
+  {
+    return getMaxBuffers();
+  }
+
+  /**
+      Set `maxBuffers` property.
+      Params:
+        propval = The maximum amount of buffers that can be queued internally.
+        After the maximum amount of buffers are queued, appsrc will emit the
+        "enough-data" signal.
+  */
+  @property void maxBuffers(ulong propval)
+  {
+    return setMaxBuffers(propval);
+  }
+
+  /**
+      Get `maxBytes` property.
+      Returns: The maximum amount of bytes that can be queued internally.
+      After the maximum amount of bytes are queued, appsrc will emit the
+      "enough-data" signal.
+  */
+  @property ulong maxBytes()
+  {
+    return getMaxBytes();
+  }
+
+  /**
+      Set `maxBytes` property.
+      Params:
+        propval = The maximum amount of bytes that can be queued internally.
+        After the maximum amount of bytes are queued, appsrc will emit the
+        "enough-data" signal.
+  */
+  @property void maxBytes(ulong propval)
+  {
+    return setMaxBytes(propval);
+  }
+
+  /** */
+  @property long maxLatency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("max-latency");
+  }
+
+  /** */
+  @property void maxLatency(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("max-latency", propval);
+  }
+
+  /**
+      Get `maxTime` property.
+      Returns: The maximum amount of time that can be queued internally.
+      After the maximum amount of time are queued, appsrc will emit the
+      "enough-data" signal.
+  */
+  @property ulong maxTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("max-time");
+  }
+
+  /**
+      Set `maxTime` property.
+      Params:
+        propval = The maximum amount of time that can be queued internally.
+        After the maximum amount of time are queued, appsrc will emit the
+        "enough-data" signal.
+  */
+  @property void maxTime(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("max-time", propval);
+  }
+
+  /**
+      Get `minLatency` property.
+      Returns: The minimum latency of the source. A value of -1 will use the default
+      latency calculations of #GstBaseSrc.
+  */
+  @property long minLatency()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("min-latency");
+  }
+
+  /**
+      Set `minLatency` property.
+      Params:
+        propval = The minimum latency of the source. A value of -1 will use the default
+        latency calculations of #GstBaseSrc.
+  */
+  @property void minLatency(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("min-latency", propval);
+  }
+
+  /**
+      Get `minPercent` property.
+      Returns: Make appsrc emit the "need-data" signal when the amount of bytes in the
+      queue drops below this percentage of max-bytes.
+  */
+  @property uint minPercent()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("min-percent");
+  }
+
+  /**
+      Set `minPercent` property.
+      Params:
+        propval = Make appsrc emit the "need-data" signal when the amount of bytes in the
+        queue drops below this percentage of max-bytes.
+  */
+  @property void minPercent(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("min-percent", propval);
+  }
+
+  /**
+      Get `size` property.
+      Returns: The total size in bytes of the data stream. If the total size is known, it
+      is recommended to configure it with this property.
+  */
+  @property long size()
+  {
+    return getSize();
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The total size in bytes of the data stream. If the total size is known, it
+        is recommended to configure it with this property.
+  */
+  @property void size(long propval)
+  {
+    return setSize(propval);
+  }
+
+  /**
+      Get `streamType` property.
+      Returns: The type of stream that this source is producing.  For seekable streams the
+      application should connect to the seek-data signal.
+  */
+  @property gstapp.types.AppStreamType streamType()
+  {
+    return getStreamType();
+  }
+
+  /**
+      Set `streamType` property.
+      Params:
+        propval = The type of stream that this source is producing.  For seekable streams the
+        application should connect to the seek-data signal.
+  */
+  @property void streamType(gstapp.types.AppStreamType propval)
+  {
+    return setStreamType(propval);
   }
 
   mixin URIHandlerT!();

@@ -14,7 +14,7 @@ import gobject.object;
     [gio.zlib_compressor.ZlibCompressor] is an implementation of [gio.converter.Converter] that
     compresses data using zlib.
 */
-class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
+class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
 {
 
   /** */
@@ -36,9 +36,33 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ZlibCompressor self()
   {
     return this;
+  }
+
+  /**
+      Get `fileInfo` property.
+      Returns: If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
+      [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
+      and modification time from the file info to the GZIP header.
+  */
+  @property gio.file_info.FileInfo fileInfo()
+  {
+    return getFileInfo();
+  }
+
+  /**
+      Set `fileInfo` property.
+      Params:
+        propval = If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
+        [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
+        and modification time from the file info to the GZIP header.
+  */
+  @property void fileInfo(gio.file_info.FileInfo propval)
+  {
+    return setFileInfo(propval);
   }
 
   mixin ConverterT!();
@@ -66,7 +90,7 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 

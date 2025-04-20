@@ -9,7 +9,7 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /** */
-class StyleSchemeManager : gobject.object.ObjectG
+class StyleSchemeManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class StyleSchemeManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleSchemeManager self()
   {
     return this;
@@ -57,7 +58,7 @@ class StyleSchemeManager : gobject.object.ObjectG
   {
     GtkSourceStyleSchemeManager* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +99,7 @@ class StyleSchemeManager : gobject.object.ObjectG
     GtkSourceStyleScheme* _cretval;
     const(char)* _schemeId = schemeId.toCString(No.Alloc);
     _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)cPtr, _schemeId);
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 

@@ -13,7 +13,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Info : gobject.object.ObjectG
+class Info : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class Info : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Info self()
   {
     return this;
@@ -49,7 +50,7 @@ class Info : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -66,7 +67,7 @@ class Info : gobject.object.ObjectG
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,8 +87,8 @@ class Info : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)cPtr, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -14,7 +14,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class FileSystem : gobject.object.ObjectG
+class FileSystem : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class FileSystem : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileSystem self()
   {
     return this;
@@ -50,7 +51,7 @@ class FileSystem : gobject.object.ObjectG
             absolute path, [glib.global.filenameToUri] will help you.
       Returns: The newly created file system
           that is an object of a subclass of #GArrowFileSystem.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static arrow.file_system.FileSystem create(string uri)
   {
@@ -59,8 +60,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_create(_uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.file_system.FileSystem)(cast(GArrowFileSystem*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_system.FileSystem)(cast(GArrowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +74,7 @@ class FileSystem : gobject.object.ObjectG
         src = The path of the source file.
         dest = The path of the destination.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool copyFile(string src, string dest)
   {
@@ -83,7 +84,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_copy_file(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -95,7 +96,7 @@ class FileSystem : gobject.object.ObjectG
         path = The paths of the directory.
         recursive = Whether creating directory recursively or not.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool createDir(string path, bool recursive)
   {
@@ -104,7 +105,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_create_dir(cast(GArrowFileSystem*)cPtr, _path, recursive, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -114,7 +115,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the directory.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteDir(string path)
   {
@@ -123,7 +124,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_delete_dir(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -136,7 +137,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the directory.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteDirContents(string path)
   {
@@ -145,7 +146,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -155,7 +156,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the file to be delete.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteFile(string path)
   {
@@ -164,7 +165,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_delete_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -174,7 +175,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         paths = The paths of the files to be delete.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool deleteFiles(string[] paths)
   {
@@ -191,7 +192,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_delete_files(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -207,7 +208,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The path of the target.
       Returns: A #GArrowFileInfo.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.file_info.FileInfo getFileInfo(string path)
   {
@@ -216,8 +217,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.file_info.FileInfo)(cast(GArrowFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_info.FileInfo)(cast(GArrowFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -228,7 +229,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         paths = The paths of the targets.
       Returns: A list of #GArrowFileInfo.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.file_info.FileInfo[] getFileInfosPaths(string[] paths)
   {
@@ -245,7 +246,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -260,7 +261,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         fileSelector = A #GArrowFileSelector.
       Returns: A list of #GArrowFileInfo.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.file_info.FileInfo[] getFileInfosSelector(arrow.file_selector.FileSelector fileSelector)
   {
@@ -268,7 +269,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_get_file_infos_selector(cast(GArrowFileSystem*)cPtr, fileSelector ? cast(GArrowFileSelector*)fileSelector.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -295,7 +296,7 @@ class FileSystem : gobject.object.ObjectG
         src = The path of the source file.
         dest = The path of the destination.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool move(string src, string dest)
   {
@@ -305,7 +306,7 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_file_system_move(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -317,7 +318,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the output stream.
       Returns: A newly created #GArrowOutputStream
           for appending.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.output_stream.OutputStream openAppendStream(string path)
   {
@@ -326,8 +327,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +339,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the input file.
       Returns: A newly created
           #GArrowSeekableInputStream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
@@ -347,8 +348,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.seekable_input_stream.SeekableInputStream)(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.seekable_input_stream.SeekableInputStream)(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -359,7 +360,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the input stream.
       Returns: A newly created
           #GArrowInputStream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.input_stream.InputStream openInputStream(string path)
   {
@@ -368,8 +369,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.input_stream.InputStream)(cast(GArrowInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.input_stream.InputStream)(cast(GArrowInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -381,7 +382,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the output stream.
       Returns: A newly created
           #GArrowOutputStream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   arrow.output_stream.OutputStream openOutputStream(string path)
   {
@@ -390,8 +391,8 @@ class FileSystem : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

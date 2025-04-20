@@ -108,7 +108,7 @@ import gtk.types;
     [gtk.list_view.ListView] uses a single CSS node named `listview`. It may carry the
     `.separators` style class, when `property@Gtk.ListView:show-separators`
     property is set. Each child widget uses a single CSS node named `row`.
-    If the [gtk.list_item.ListItem.gboolean] property is set, the
+    If the [gtk.list_item.ListItem.activatable] property is set, the
     corresponding row will have the `.activatable` style class. For
     rubberband selection, a node with name `rubberband` is used.
     
@@ -143,9 +143,143 @@ class ListView : gtk.list_base.ListBase
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListView self()
   {
     return this;
+  }
+
+  /**
+      Get `enableRubberband` property.
+      Returns: Allow rubberband selection.
+  */
+  @property bool enableRubberband()
+  {
+    return getEnableRubberband();
+  }
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+  */
+  @property void enableRubberband(bool propval)
+  {
+    return setEnableRubberband(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+  */
+  @property gtk.list_item_factory.ListItemFactory factory()
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+  */
+  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setFactory(propval);
+  }
+
+  /**
+      Get `headerFactory` property.
+      Returns: Factory for creating header widgets.
+  */
+  @property gtk.list_item_factory.ListItemFactory headerFactory()
+  {
+    return getHeaderFactory();
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = Factory for creating header widgets.
+  */
+  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setHeaderFactory(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: Model for the items displayed.
+  */
+  @property gtk.selection_model.SelectionModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+  */
+  @property void model(gtk.selection_model.SelectionModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `showSeparators` property.
+      Returns: Show separators between rows.
+  */
+  @property bool showSeparators()
+  {
+    return getShowSeparators();
+  }
+
+  /**
+      Set `showSeparators` property.
+      Params:
+        propval = Show separators between rows.
+  */
+  @property void showSeparators(bool propval)
+  {
+    return setShowSeparators(propval);
+  }
+
+  /**
+      Get `singleClickActivate` property.
+      Returns: Activate rows on single click and select them on hover.
+  */
+  @property bool singleClickActivate()
+  {
+    return getSingleClickActivate();
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+  */
+  @property void singleClickActivate(bool propval)
+  {
+    return setSingleClickActivate(propval);
+  }
+
+  /**
+      Get `tabBehavior` property.
+      Returns: Behavior of the <kbd>Tab</kbd> key
+  */
+  @property gtk.types.ListTabBehavior tabBehavior()
+  {
+    return getTabBehavior();
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+  */
+  @property void tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setTabBehavior(propval);
   }
 
   /**
@@ -167,7 +301,7 @@ class ListView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -190,7 +324,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +336,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_header_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,7 +348,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_list_view_get_model(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -318,7 +452,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

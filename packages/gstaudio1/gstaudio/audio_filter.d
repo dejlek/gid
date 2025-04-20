@@ -44,6 +44,7 @@ class AudioFilter : gstbase.base_transform.BaseTransform
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioFilter self()
   {
     return this;

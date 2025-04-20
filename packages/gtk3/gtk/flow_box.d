@@ -86,9 +86,159 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FlowBox self()
   {
     return this;
+  }
+
+  /**
+      Get `activateOnSingleClick` property.
+      Returns: Determines whether children can be activated with a single
+      click, or require a double-click.
+  */
+  @property bool activateOnSingleClick()
+  {
+    return getActivateOnSingleClick();
+  }
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = Determines whether children can be activated with a single
+        click, or require a double-click.
+  */
+  @property void activateOnSingleClick(bool propval)
+  {
+    return setActivateOnSingleClick(propval);
+  }
+
+  /**
+      Get `columnSpacing` property.
+      Returns: The amount of horizontal space between two children.
+  */
+  @property uint columnSpacing()
+  {
+    return getColumnSpacing();
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The amount of horizontal space between two children.
+  */
+  @property void columnSpacing(uint propval)
+  {
+    return setColumnSpacing(propval);
+  }
+
+  /**
+      Get `homogeneous` property.
+      Returns: Determines whether all children should be allocated the
+      same size.
+  */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Determines whether all children should be allocated the
+        same size.
+  */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /**
+      Get `maxChildrenPerLine` property.
+      Returns: The maximum amount of children to request space for consecutively
+      in the given orientation.
+  */
+  @property uint maxChildrenPerLine()
+  {
+    return getMaxChildrenPerLine();
+  }
+
+  /**
+      Set `maxChildrenPerLine` property.
+      Params:
+        propval = The maximum amount of children to request space for consecutively
+        in the given orientation.
+  */
+  @property void maxChildrenPerLine(uint propval)
+  {
+    return setMaxChildrenPerLine(propval);
+  }
+
+  /**
+      Get `minChildrenPerLine` property.
+      Returns: The minimum number of children to allocate consecutively
+      in the given orientation.
+      
+      Setting the minimum children per line ensures
+      that a reasonably small height will be requested
+      for the overall minimum width of the box.
+  */
+  @property uint minChildrenPerLine()
+  {
+    return getMinChildrenPerLine();
+  }
+
+  /**
+      Set `minChildrenPerLine` property.
+      Params:
+        propval = The minimum number of children to allocate consecutively
+        in the given orientation.
+        
+        Setting the minimum children per line ensures
+        that a reasonably small height will be requested
+        for the overall minimum width of the box.
+  */
+  @property void minChildrenPerLine(uint propval)
+  {
+    return setMinChildrenPerLine(propval);
+  }
+
+  /**
+      Get `rowSpacing` property.
+      Returns: The amount of vertical space between two children.
+  */
+  @property uint rowSpacing()
+  {
+    return getRowSpacing();
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The amount of vertical space between two children.
+  */
+  @property void rowSpacing(uint propval)
+  {
+    return setRowSpacing(propval);
+  }
+
+  /**
+      Get `selectionMode` property.
+      Returns: The selection mode used by the flow  box.
+  */
+  @property gtk.types.SelectionMode selectionMode()
+  {
+    return getSelectionMode();
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The selection mode used by the flow  box.
+  */
+  @property void selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setSelectionMode(propval);
   }
 
   mixin OrientableT!();
@@ -133,7 +283,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -142,7 +292,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
 
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
-    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
+    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -170,7 +320,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)cPtr, idx);
-    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +338,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -353,7 +503,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -408,7 +558,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -527,7 +677,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;

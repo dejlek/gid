@@ -53,7 +53,7 @@ import gst.types;
     Note that a #GstPipeline will set its bus into flushing state when changing
     from READY to NULL state.
 */
-class Bus : gst.object.ObjectGst
+class Bus : gst.object.ObjectWrap
 {
 
   /** */
@@ -75,6 +75,7 @@ class Bus : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Bus self()
   {
     return this;
@@ -156,7 +157,7 @@ class Bus : gst.object.ObjectGst
       possible to remove the watch using [glib.source.Source.remove].
       
       The bus watch will take its own reference to the bus, so it is safe to unref
-      bus using [gst.object.ObjectGst.unref] after setting the bus watch.
+      bus using [gst.object.ObjectWrap.unref] after setting the bus watch.
   
       Params:
         priority = The priority of the watch.
@@ -169,7 +170,7 @@ class Bus : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -222,7 +223,7 @@ class Bus : gst.object.ObjectGst
       [gst.bus.Bus.enableSyncMessageEmission], the sync-message emissions will only
       be stopped after all calls to [gst.bus.Bus.enableSyncMessageEmission] were
       "cancelled" by calling this function. In this way the semantics are exactly
-      the same as [gst.object.ObjectGst.ref_] that which calls enable should also call
+      the same as [gst.object.ObjectWrap.ref_] that which calls enable should also call
       disable.
   */
   void disableSyncMessageEmission()
@@ -450,7 +451,7 @@ class Bus : gst.object.ObjectGst
       gst.types.BusSyncReply _dretval;
       auto _dlg = cast(gst.types.BusSyncHandler*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
       auto _retval = cast(GstBusSyncReply)_dretval;
 
       return _retval;

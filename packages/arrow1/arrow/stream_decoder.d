@@ -14,7 +14,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class StreamDecoder : gobject.object.ObjectG
+class StreamDecoder : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class StreamDecoder : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StreamDecoder self()
   {
     return this;
@@ -59,7 +60,7 @@ class StreamDecoder : gobject.object.ObjectG
       Params:
         buffer = A #GArrowBuffer to be decoded.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool consumeBuffer(arrow.buffer.Buffer buffer)
   {
@@ -67,7 +68,7 @@ class StreamDecoder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)cPtr, buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -81,7 +82,7 @@ class StreamDecoder : gobject.object.ObjectG
       Params:
         bytes = A #GBytes to be decoded.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool consumeBytes(glib.bytes.Bytes bytes)
   {
@@ -89,7 +90,7 @@ class StreamDecoder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -164,7 +165,7 @@ class StreamDecoder : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,7 +174,7 @@ class StreamDecoder : gobject.object.ObjectG
       
       You can reuse this decoder for new stream after calling this.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool reset()
   {
@@ -181,7 +182,7 @@ class StreamDecoder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_stream_decoder_reset(cast(GArrowStreamDecoder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

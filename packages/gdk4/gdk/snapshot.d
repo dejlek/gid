@@ -12,7 +12,7 @@ import gobject.object;
     
     The subclass of [gdk.snapshot.Snapshot] used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
 */
-class Snapshot : gobject.object.ObjectG
+class Snapshot : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class Snapshot : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Snapshot self()
   {
     return this;

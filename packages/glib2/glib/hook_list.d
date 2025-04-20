@@ -18,7 +18,7 @@ class HookList
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.HookList");
+      throw new GidConstructException("Null instance pointer for glib.hook_list.HookList");
 
     cInstance = *cast(GHookList*)ptr;
 
@@ -32,45 +32,88 @@ class HookList
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `seqId` field.
+      Returns: the next free #GHook id
+  */
   @property gulong seqId()
   {
     return (cast(GHookList*)cPtr).seqId;
   }
 
+  /**
+      Set `seqId` field.
+      Params:
+        propval = the next free #GHook id
+  */
   @property void seqId(gulong propval)
   {
     (cast(GHookList*)cPtr).seqId = propval;
   }
 
+  /**
+      Get `hookSize` field.
+      Returns: the size of the #GHookList elements, in bytes
+  */
   @property uint hookSize()
   {
     return (cast(GHookList*)cPtr).hookSize;
   }
 
+  /**
+      Set `hookSize` field.
+      Params:
+        propval = the size of the #GHookList elements, in bytes
+  */
   @property void hookSize(uint propval)
   {
     (cast(GHookList*)cPtr).hookSize = propval;
   }
 
+  /**
+      Get `isSetup` field.
+      Returns: 1 if the #GHookList has been initialized
+  */
   @property uint isSetup()
   {
     return (cast(GHookList*)cPtr).isSetup;
   }
 
+  /**
+      Set `isSetup` field.
+      Params:
+        propval = 1 if the #GHookList has been initialized
+  */
   @property void isSetup(uint propval)
   {
     (cast(GHookList*)cPtr).isSetup = propval;
   }
 
+  /**
+      Get `hooks` field.
+      Returns: the first #GHook element in the list
+  */
   @property glib.hook.Hook hooks()
   {
     return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)cPtr).hooks);
   }
 
+  /**
+      Get `finalizeHook` field.
+      Returns: the function to call to finalize a #GHook element.
+          The default behaviour is to call the hooks @destroy function
+  */
   @property GHookFinalizeFunc finalizeHook()
   {
     return (cast(GHookList*)cPtr).finalizeHook;
   }
+
+  /**
+      Set `finalizeHook` field.
+      Params:
+        propval = the function to call to finalize a #GHook element.
+            The default behaviour is to call the hooks @destroy function
+  */
 
   @property void finalizeHook(GHookFinalizeFunc propval)
   {

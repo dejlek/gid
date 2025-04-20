@@ -702,13 +702,13 @@ struct SecretServiceClass
   GType itemGtype;
 
   /** */
-  extern(C) VariantC* function(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) promptSync;
+  extern(C) GVariant* function(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) promptSync;
 
   /** */
   extern(C) void function(SecretService* self, SecretPrompt* prompt, const(GVariantType)* returnType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) promptAsync;
 
   /** */
-  extern(C) VariantC* function(SecretService* self, GAsyncResult* result, GError** _err) promptFinish;
+  extern(C) GVariant* function(SecretService* self, GAsyncResult* result, GError** _err) promptFinish;
 
   /** */
   extern(C) GType function(SecretService* self) getCollectionGtype;

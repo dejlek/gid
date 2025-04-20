@@ -46,11 +46,16 @@ class TagList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TagList self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: the parent type
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)cPtr).miniObject);

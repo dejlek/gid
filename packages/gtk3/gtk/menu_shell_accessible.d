@@ -34,6 +34,7 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuShellAccessible self()
   {
     return this;

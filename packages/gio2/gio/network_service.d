@@ -20,7 +20,7 @@ import gobject.object;
     [gio.socket_connectable.SocketConnectable] for an example of using the connectable
     interface.
 */
-class NetworkService : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
+class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketConnectable
 {
 
   /** */
@@ -42,9 +42,29 @@ class NetworkService : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NetworkService self()
   {
     return this;
+  }
+
+  /**
+      Get `scheme` property.
+      Returns: Network scheme (default is to use service).
+  */
+  @property string scheme()
+  {
+    return getScheme();
+  }
+
+  /**
+      Set `scheme` property.
+      Params:
+        propval = Network scheme (default is to use service).
+  */
+  @property void scheme(string propval)
+  {
+    return setScheme(propval);
   }
 
   mixin SocketConnectableT!();

@@ -17,10 +17,23 @@ import gstgl.types;
 class GLRenderbuffer : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glrenderbuffer.GLRenderbuffer` boxed type.
+      Params:
+        renderbufferId = the GL texture id for this memory
+        renderbufferFormat = the texture type
+        width = the width
+        height = the height
+        renderbufferWrapped = 
+  */
+  this(uint renderbufferId = uint.init, gstgl.types.GLFormat renderbufferFormat = gstgl.types.GLFormat.init, uint width = uint.init, uint height = uint.init, bool renderbufferWrapped = bool.init)
   {
     super(gMalloc(GstGLRenderbuffer.sizeof), Yes.Take);
+    this.renderbufferId = renderbufferId;
+    this.renderbufferFormat = renderbufferFormat;
+    this.width = width;
+    this.height = height;
+    this.renderbufferWrapped = renderbufferWrapped;
   }
 
   /** */
@@ -48,56 +61,95 @@ class GLRenderbuffer : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLRenderbuffer self()
   {
     return this;
   }
 
+  /**
+      Get `renderbufferId` field.
+      Returns: the GL texture id for this memory
+  */
   @property uint renderbufferId()
   {
     return (cast(GstGLRenderbuffer*)cPtr).renderbufferId;
   }
 
+  /**
+      Set `renderbufferId` field.
+      Params:
+        propval = the GL texture id for this memory
+  */
   @property void renderbufferId(uint propval)
   {
     (cast(GstGLRenderbuffer*)cPtr).renderbufferId = propval;
   }
 
+  /**
+      Get `renderbufferFormat` field.
+      Returns: the texture type
+  */
   @property gstgl.types.GLFormat renderbufferFormat()
   {
     return cast(gstgl.types.GLFormat)(cast(GstGLRenderbuffer*)cPtr).renderbufferFormat;
   }
 
+  /**
+      Set `renderbufferFormat` field.
+      Params:
+        propval = the texture type
+  */
   @property void renderbufferFormat(gstgl.types.GLFormat propval)
   {
     (cast(GstGLRenderbuffer*)cPtr).renderbufferFormat = cast(GstGLFormat)propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: the width
+  */
   @property uint width()
   {
     return (cast(GstGLRenderbuffer*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the width
+  */
   @property void width(uint propval)
   {
     (cast(GstGLRenderbuffer*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the height
+  */
   @property uint height()
   {
     return (cast(GstGLRenderbuffer*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the height
+  */
   @property void height(uint propval)
   {
     (cast(GstGLRenderbuffer*)cPtr).height = propval;
   }
 
+  /** */
   @property bool renderbufferWrapped()
   {
     return (cast(GstGLRenderbuffer*)cPtr).renderbufferWrapped;
   }
 
+  /** */
   @property void renderbufferWrapped(bool propval)
   {
     (cast(GstGLRenderbuffer*)cPtr).renderbufferWrapped = propval;

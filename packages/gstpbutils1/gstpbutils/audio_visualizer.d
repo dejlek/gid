@@ -2,6 +2,7 @@
 module gstpbutils.audio_visualizer;
 
 import gid.gid;
+import gobject.object;
 import gst.element;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -38,8 +39,33 @@ class AudioVisualizer : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioVisualizer self()
   {
     return this;
+  }
+
+  /** */
+  @property uint shadeAmount()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("shade-amount");
+  }
+
+  /** */
+  @property void shadeAmount(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("shade-amount", propval);
+  }
+
+  /** */
+  @property gstpbutils.types.AudioVisualizerShader shader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstpbutils.types.AudioVisualizerShader)("shader");
+  }
+
+  /** */
+  @property void shader(gstpbutils.types.AudioVisualizerShader propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstpbutils.types.AudioVisualizerShader)("shader", propval);
   }
 }

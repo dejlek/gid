@@ -14,7 +14,7 @@ import gst.types;
     
     Subclasses can be made to create custom threads.
 */
-class TaskPool : gst.object.ObjectGst
+class TaskPool : gst.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class TaskPool : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TaskPool self()
   {
     return this;
@@ -44,7 +45,7 @@ class TaskPool : gst.object.ObjectGst
   /**
       Create a new default task pool. The default task pool will use a regular
       GThreadPool for threads.
-      Returns: a new #GstTaskPool. [gst.object.ObjectGst.unref] after usage.
+      Returns: a new #GstTaskPool. [gst.object.ObjectWrap.unref] after usage.
   */
   this()
   {
@@ -103,14 +104,14 @@ class TaskPool : gst.object.ObjectGst
       Prepare the taskpool for accepting [gst.task_pool.TaskPool.push] operations.
       
       MT safe.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   void prepare()
   {
     GError *_err;
     gst_task_pool_prepare(cast(GstTaskPool*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
   }
 
   /**
@@ -123,7 +124,7 @@ class TaskPool : gst.object.ObjectGst
         must check error to detect errors. If the pointer is not null and
         [gst.task_pool.TaskPool.join] is not used, call [gst.task_pool.TaskPool.disposeHandle]
         instead.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   void* push(gst.types.TaskPoolFunction func)
   {
@@ -140,7 +141,7 @@ class TaskPool : gst.object.ObjectGst
     GError *_err;
     auto _retval = gst_task_pool_push(cast(GstTaskPool*)cPtr, _funcCB, _func, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

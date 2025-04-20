@@ -41,6 +41,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ConverterOutputStream self()
   {
     return this;
@@ -59,7 +60,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
   {
     GOutputStream* _cretval;
-    _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(No.Dup) : null);
+    _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gobject.object.ObjectWrap)converter).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,7 +72,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   {
     GConverter* _cretval;
     _cretval = g_converter_output_stream_get_converter(cast(GConverterOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
     return _retval;
   }
 }

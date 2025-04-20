@@ -19,7 +19,7 @@ import gobject.object;
     options.  It can also be used to launch multiple subprocesses with
     a similar configuration.
 */
-class SubprocessLauncher : gobject.object.ObjectG
+class SubprocessLauncher : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SubprocessLauncher self()
   {
     return this;
@@ -269,7 +270,7 @@ class SubprocessLauncher : gobject.object.ObjectG
       Params:
         argv = Command line arguments
       Returns: A new #GSubprocess, or null on error (and error will be set)
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.subprocess.Subprocess spawnv(string[] argv)
   {
@@ -283,8 +284,8 @@ class SubprocessLauncher : gobject.object.ObjectG
     GError *_err;
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)cPtr, _argv, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 

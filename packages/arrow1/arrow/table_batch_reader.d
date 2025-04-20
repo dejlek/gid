@@ -31,6 +31,7 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TableBatchReader self()
   {
     return this;

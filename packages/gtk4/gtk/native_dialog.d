@@ -28,7 +28,7 @@ import gtk.window;
     responsibility to keep a reference until you are done with the
     object.
 */
-class NativeDialog : gobject.object.ObjectG
+class NativeDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,9 +50,86 @@ class NativeDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NativeDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the window should be modal with respect to its transient parent.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the window should be modal with respect to its transient parent.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the dialog window
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the dialog window
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the dialog, or null for none.
+  */
+  @property gtk.window.Window transientFor()
+  {
+    return getTransientFor();
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the dialog, or null for none.
+  */
+  @property void transientFor(gtk.window.Window propval)
+  {
+    return setTransientFor(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether the window is currently visible.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the window is currently visible.
+  */
+  @property void visible(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("visible", propval);
   }
 
   /**
@@ -107,7 +184,7 @@ class NativeDialog : gobject.object.ObjectG
   {
     GtkWindow* _cretval;
     _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 

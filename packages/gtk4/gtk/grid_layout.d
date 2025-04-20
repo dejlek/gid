@@ -2,6 +2,7 @@
 module gtk.grid_layout;
 
 import gid.gid;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -45,9 +46,107 @@ class GridLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GridLayout self()
   {
     return this;
+  }
+
+  /**
+      Get `baselineRow` property.
+      Returns: The row to align to the baseline, when `GtkWidget:valign` is set
+      to [gtk.types.Align.Baseline].
+  */
+  @property int baselineRow()
+  {
+    return getBaselineRow();
+  }
+
+  /**
+      Set `baselineRow` property.
+      Params:
+        propval = The row to align to the baseline, when `GtkWidget:valign` is set
+        to [gtk.types.Align.Baseline].
+  */
+  @property void baselineRow(int propval)
+  {
+    return setBaselineRow(propval);
+  }
+
+  /**
+      Get `columnHomogeneous` property.
+      Returns: Whether all the columns in the grid have the same width.
+  */
+  @property bool columnHomogeneous()
+  {
+    return getColumnHomogeneous();
+  }
+
+  /**
+      Set `columnHomogeneous` property.
+      Params:
+        propval = Whether all the columns in the grid have the same width.
+  */
+  @property void columnHomogeneous(bool propval)
+  {
+    return setColumnHomogeneous(propval);
+  }
+
+  /**
+      Get `columnSpacing` property.
+      Returns: The amount of space between to consecutive columns.
+  */
+  @property int columnSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("column-spacing");
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The amount of space between to consecutive columns.
+  */
+  @property void columnSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("column-spacing", propval);
+  }
+
+  /**
+      Get `rowHomogeneous` property.
+      Returns: Whether all the rows in the grid have the same height.
+  */
+  @property bool rowHomogeneous()
+  {
+    return getRowHomogeneous();
+  }
+
+  /**
+      Set `rowHomogeneous` property.
+      Params:
+        propval = Whether all the rows in the grid have the same height.
+  */
+  @property void rowHomogeneous(bool propval)
+  {
+    return setRowHomogeneous(propval);
+  }
+
+  /**
+      Get `rowSpacing` property.
+      Returns: The amount of space between to consecutive rows.
+  */
+  @property int rowSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("row-spacing");
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The amount of space between to consecutive rows.
+  */
+  @property void rowSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("row-spacing", propval);
   }
 
   /**

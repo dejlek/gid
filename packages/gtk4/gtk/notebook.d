@@ -135,9 +135,152 @@ class Notebook : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Notebook self()
   {
     return this;
+  }
+
+  /**
+      Get `enablePopup` property.
+      Returns: If true, pressing the right mouse button on the notebook shows a page switching menu.
+  */
+  @property bool enablePopup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enable-popup");
+  }
+
+  /**
+      Set `enablePopup` property.
+      Params:
+        propval = If true, pressing the right mouse button on the notebook shows a page switching menu.
+  */
+  @property void enablePopup(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("enable-popup", propval);
+  }
+
+  /**
+      Get `groupName` property.
+      Returns: Group name for tab drag and drop.
+  */
+  @property string groupName()
+  {
+    return getGroupName();
+  }
+
+  /**
+      Set `groupName` property.
+      Params:
+        propval = Group name for tab drag and drop.
+  */
+  @property void groupName(string propval)
+  {
+    return setGroupName(propval);
+  }
+
+  /**
+      Get `page` property.
+      Returns: The index of the current page.
+  */
+  @property int page()
+  {
+    return getCurrentPage();
+  }
+
+  /**
+      Set `page` property.
+      Params:
+        propval = The index of the current page.
+  */
+  @property void page(int propval)
+  {
+    return setCurrentPage(propval);
+  }
+
+  /**
+      Get `pages` property.
+      Returns: A selection model with the pages.
+  */
+  @property gio.list_model.ListModel pages()
+  {
+    return getPages();
+  }
+
+  /**
+      Get `scrollable` property.
+      Returns: If true, scroll arrows are added if there are too many pages to fit.
+  */
+  @property bool scrollable()
+  {
+    return getScrollable();
+  }
+
+  /**
+      Set `scrollable` property.
+      Params:
+        propval = If true, scroll arrows are added if there are too many pages to fit.
+  */
+  @property void scrollable(bool propval)
+  {
+    return setScrollable(propval);
+  }
+
+  /**
+      Get `showBorder` property.
+      Returns: Whether the border should be shown.
+  */
+  @property bool showBorder()
+  {
+    return getShowBorder();
+  }
+
+  /**
+      Set `showBorder` property.
+      Params:
+        propval = Whether the border should be shown.
+  */
+  @property void showBorder(bool propval)
+  {
+    return setShowBorder(propval);
+  }
+
+  /**
+      Get `showTabs` property.
+      Returns: Whether tabs should be shown.
+  */
+  @property bool showTabs()
+  {
+    return getShowTabs();
+  }
+
+  /**
+      Set `showTabs` property.
+      Params:
+        propval = Whether tabs should be shown.
+  */
+  @property void showTabs(bool propval)
+  {
+    return setShowTabs(propval);
+  }
+
+  /**
+      Get `tabPos` property.
+      Returns: Which side of the notebook holds the tabs.
+  */
+  @property gtk.types.PositionType tabPos()
+  {
+    return getTabPos();
+  }
+
+  /**
+      Set `tabPos` property.
+      Params:
+        propval = Which side of the notebook holds the tabs.
+  */
+  @property void tabPos(gtk.types.PositionType propval)
+  {
+    return setTabPos(propval);
   }
 
   /**
@@ -223,7 +366,7 @@ class Notebook : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)cPtr, packType);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,7 +409,7 @@ class Notebook : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -313,7 +456,7 @@ class Notebook : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -328,7 +471,7 @@ class Notebook : gtk.widget.Widget
   {
     GtkNotebookPage* _cretval;
     _cretval = gtk_notebook_get_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.notebook_page.NotebookPage)(cast(GtkNotebookPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.notebook_page.NotebookPage)(cast(GtkNotebookPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -345,7 +488,7 @@ class Notebook : gtk.widget.Widget
   {
     GListModel* _cretval;
     _cretval = gtk_notebook_get_pages(cast(GtkNotebook*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -410,7 +553,7 @@ class Notebook : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

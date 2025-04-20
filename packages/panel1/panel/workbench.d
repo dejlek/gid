@@ -35,9 +35,35 @@ class Workbench : gtk.window_group.WindowGroup
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Workbench self()
   {
     return this;
+  }
+
+  /**
+      Get `id` property.
+      Returns: The "id" of the workbench.
+      
+      This is generally used by applications to help destinguish between
+      projects, so that the project-id matches the workbench-id.
+  */
+  @property string id()
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The "id" of the workbench.
+        
+        This is generally used by applications to help destinguish between
+        projects, so that the project-id matches the workbench-id.
+  */
+  @property void id(string propval)
+  {
+    return setId(propval);
   }
 
   /** */
@@ -59,7 +85,7 @@ class Workbench : gtk.window_group.WindowGroup
   {
     PanelWorkbench* _cretval;
     _cretval = panel_workbench_find_from_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,7 +119,7 @@ class Workbench : gtk.window_group.WindowGroup
   {
     PanelWorkspace* _cretval;
     _cretval = panel_workbench_find_workspace_typed(cast(PanelWorkbench*)cPtr, workspaceType);
-    auto _retval = ObjectG.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +141,7 @@ class Workbench : gtk.window_group.WindowGroup
     {
       auto _dlg = cast(panel.types.WorkspaceForeach*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
 

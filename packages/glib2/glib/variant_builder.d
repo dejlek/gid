@@ -46,6 +46,7 @@ class VariantBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VariantBuilder self()
   {
     return this;
@@ -82,15 +83,15 @@ class VariantBuilder : gobject.boxed.Boxed
       types or number of items in a tuple, putting more than one value into
       a variant, etc.
       
-      If value is a floating reference (see [glib.variant.VariantG.refSink]),
+      If value is a floating reference (see [glib.variant.Variant.refSink]),
       the builder instance takes ownership of value.
   
       Params:
         value = a #GVariant
   */
-  void addValue(glib.variant.VariantG value)
+  void addValue(glib.variant.Variant value)
   {
-    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -126,11 +127,11 @@ class VariantBuilder : gobject.boxed.Boxed
       the empty array.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.VariantG end()
+  glib.variant.Variant end()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_variant_builder_end(cast(GVariantBuilder*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 

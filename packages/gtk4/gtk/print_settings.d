@@ -25,7 +25,7 @@ import gtk.types;
     document. The predefined keys try to use shared values as much as possible
     so that moving such a document between systems still works.
 */
-class PrintSettings : gobject.object.ObjectG
+class PrintSettings : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,7 @@ class PrintSettings : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintSettings self()
   {
     return this;
@@ -75,7 +76,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the filename to read the settings from
       Returns: the restored [gtk.print_settings.PrintSettings]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtk.print_settings.PrintSettings newFromFile(string fileName)
   {
@@ -84,8 +85,8 @@ class PrintSettings : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,14 +97,14 @@ class PrintSettings : gobject.object.ObjectG
       [gtk.print_settings.PrintSettings.toGvariant].
   
       Params:
-        variant = an a{sv} [glib.variant.VariantG]
+        variant = an a{sv} [glib.variant.Variant]
       Returns: a new [gtk.print_settings.PrintSettings] object
   */
-  static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.VariantG variant)
+  static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.Variant variant)
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +120,7 @@ class PrintSettings : gobject.object.ObjectG
         groupName = the name of the group to use, or null to use
             the default “Print Settings”
       Returns: the restored [gtk.print_settings.PrintSettings]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -128,8 +129,8 @@ class PrintSettings : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -141,7 +142,7 @@ class PrintSettings : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -637,7 +638,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the filename to read the settings from
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFile(string fileName)
   {
@@ -646,7 +647,7 @@ class PrintSettings : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_print_settings_load_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -661,7 +662,7 @@ class PrintSettings : gobject.object.ObjectG
         groupName = the name of the group to use, or null
             to use the default “Print Settings”
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -670,7 +671,7 @@ class PrintSettings : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -1048,7 +1049,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the file to save to
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool toFile(string fileName)
   {
@@ -1057,19 +1058,19 @@ class PrintSettings : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_print_settings_to_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
   /**
       Serialize print settings to an a{sv} variant.
-      Returns: a new, floating, [glib.variant.VariantG]
+      Returns: a new, floating, [glib.variant.Variant]
   */
-  glib.variant.VariantG toGvariant()
+  glib.variant.Variant toGvariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 

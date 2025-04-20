@@ -2,6 +2,8 @@
 module gstaudio.audio_aggregator_convert_pad;
 
 import gid.gid;
+import gobject.object;
+import gst.structure;
 import gstaudio.audio_aggregator_pad;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -34,8 +36,21 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioAggregatorConvertPad self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.structure.Structure converterConfig()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("converter-config");
+  }
+
+  /** */
+  @property void converterConfig(gst.structure.Structure propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.structure.Structure)("converter-config", propval);
   }
 }

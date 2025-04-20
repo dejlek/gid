@@ -59,9 +59,31 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentChooserMenu self()
   {
     return this;
+  }
+
+  /**
+      Get `showNumbers` property.
+      Returns: Whether the first ten items in the menu should be prepended by
+      a number acting as a unique mnemonic.
+  */
+  @property bool showNumbers()
+  {
+    return getShowNumbers();
+  }
+
+  /**
+      Set `showNumbers` property.
+      Params:
+        propval = Whether the first ten items in the menu should be prepended by
+        a number acting as a unique mnemonic.
+  */
+  @property void showNumbers(bool propval)
+  {
+    return setShowNumbers(propval);
   }
 
   mixin ActivatableT!();
@@ -106,7 +128,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_menu_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.recent_chooser_menu.RecentChooserMenu)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_chooser_menu.RecentChooserMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

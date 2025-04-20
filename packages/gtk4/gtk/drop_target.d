@@ -72,8 +72,8 @@ import gtk.types;
           [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
           [gtk.drop_target.DropTarget.leave] signals
         * configuring how to receive data by setting the
-          [gtk.drop_target.DropTarget.gboolean] property and listening for its
-          availability via the [gtk.drop_target.DropTarget.GObject.Value] property
+          [gtk.drop_target.DropTarget.preload] property and listening for its
+          availability via the [gtk.drop_target.DropTarget.value] property
      )
        
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
@@ -111,9 +111,108 @@ class DropTarget : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DropTarget self()
   {
     return this;
+  }
+
+  /**
+      Get `actions` property.
+      Returns: The `GdkDragActions` that this drop target supports.
+  */
+  @property gdk.types.DragAction actions()
+  {
+    return getActions();
+  }
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The `GdkDragActions` that this drop target supports.
+  */
+  @property void actions(gdk.types.DragAction propval)
+  {
+    return setActions(propval);
+  }
+
+  /**
+      Get `currentDrop` property.
+      Returns: The [gdk.drop.Drop] that is currently being performed.
+  */
+  @property gdk.drop.Drop currentDrop()
+  {
+    return getCurrentDrop();
+  }
+
+  /**
+      Get `preload` property.
+      Returns: Whether the drop data should be preloaded when the pointer is only
+      hovering over the widget but has not been released.
+      
+      Setting this property allows finer grained reaction to an ongoing
+      drop at the cost of loading more data.
+      
+      The default value for this property is false to avoid downloading
+      huge amounts of data by accident.
+      
+      For example, if somebody drags a full document of gigabytes of text
+      from a text editor across a widget with a preloading drop target,
+      this data will be downloaded, even if the data is ultimately dropped
+      elsewhere.
+      
+      For a lot of data formats, the amount of data is very small (like
+      `GDK_TYPE_RGBA`), so enabling this property does not hurt at all.
+      And for local-only Drag-and-Drop operations, no data transfer is done,
+      so enabling it there is free.
+  */
+  @property bool preload()
+  {
+    return getPreload();
+  }
+
+  /**
+      Set `preload` property.
+      Params:
+        propval = Whether the drop data should be preloaded when the pointer is only
+        hovering over the widget but has not been released.
+        
+        Setting this property allows finer grained reaction to an ongoing
+        drop at the cost of loading more data.
+        
+        The default value for this property is false to avoid downloading
+        huge amounts of data by accident.
+        
+        For example, if somebody drags a full document of gigabytes of text
+        from a text editor across a widget with a preloading drop target,
+        this data will be downloaded, even if the data is ultimately dropped
+        elsewhere.
+        
+        For a lot of data formats, the amount of data is very small (like
+        `GDK_TYPE_RGBA`), so enabling this property does not hurt at all.
+        And for local-only Drag-and-Drop operations, no data transfer is done,
+        so enabling it there is free.
+  */
+  @property void preload(bool propval)
+  {
+    return setPreload(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The value for this drop operation.
+      
+      This is null if the data has not been loaded yet or no drop
+      operation is going on.
+      
+      Data may be available before the [gtk.drop_target.DropTarget.drop]
+      signal gets emitted - for example when the [gtk.drop_target.DropTarget.preload]
+      property is set. You can use the ::notify signal to be notified
+      of available data.
+  */
+  @property gobject.value.Value value()
+  {
+    return getValue();
   }
 
   /**
@@ -157,7 +256,7 @@ class DropTarget : gtk.event_controller.EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +272,7 @@ class DropTarget : gtk.event_controller.EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -305,7 +404,7 @@ class DropTarget : gtk.event_controller.EventController
       
       If the decision whether the drop will be accepted or rejected depends
       on the data, this function should return true, the
-      [gtk.drop_target.DropTarget.gboolean] property should be set and the value
+      [gtk.drop_target.DropTarget.preload] property should be set and the value
       should be inspected via the ::notify:value signal, calling
       [gtk.drop_target.DropTarget.reject] if required.
   

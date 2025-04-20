@@ -21,7 +21,7 @@ class PadProbeInfo
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.PadProbeInfo");
+      throw new GidConstructException("Null instance pointer for gst.pad_probe_info.PadProbeInfo");
 
     cInstance = *cast(GstPadProbeInfo*)ptr;
 
@@ -35,41 +35,81 @@ class PadProbeInfo
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the current probe type
+  */
   @property gst.types.PadProbeType type()
   {
     return cast(gst.types.PadProbeType)(cast(GstPadProbeInfo*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the current probe type
+  */
   @property void type(gst.types.PadProbeType propval)
   {
     (cast(GstPadProbeInfo*)cPtr).type = cast(GstPadProbeType)propval;
   }
 
+  /**
+      Get `id` field.
+      Returns: the id of the probe
+  */
   @property gulong id()
   {
     return (cast(GstPadProbeInfo*)cPtr).id;
   }
 
+  /**
+      Set `id` field.
+      Params:
+        propval = the id of the probe
+  */
   @property void id(gulong propval)
   {
     (cast(GstPadProbeInfo*)cPtr).id = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: offset of pull probe, this field is valid when @type contains
+         #GST_PAD_PROBE_TYPE_PULL
+  */
   @property ulong offset()
   {
     return (cast(GstPadProbeInfo*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = offset of pull probe, this field is valid when @type contains
+           #GST_PAD_PROBE_TYPE_PULL
+  */
   @property void offset(ulong propval)
   {
     (cast(GstPadProbeInfo*)cPtr).offset = propval;
   }
 
+  /**
+      Get `size` field.
+      Returns: size of pull probe, this field is valid when @type contains
+         #GST_PAD_PROBE_TYPE_PULL
+  */
   @property uint size()
   {
     return (cast(GstPadProbeInfo*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = size of pull probe, this field is valid when @type contains
+           #GST_PAD_PROBE_TYPE_PULL
+  */
   @property void size(uint propval)
   {
     (cast(GstPadProbeInfo*)cPtr).size = propval;

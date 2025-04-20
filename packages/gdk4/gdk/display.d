@@ -35,10 +35,10 @@ import gobject.value;
     can be accessed with [gdk.display.Display.getDefaultSeat] and
     [gdk.display.Display.listSeats].
     
-    Output devices are represented by [gdk.monitor.MonitorG] objects, which can
+    Output devices are represented by [gdk.monitor.MonitorWrap] objects, which can
     be accessed with [gdk.display.Display.getMonitorAtSurface] and similar APIs.
 */
-class Display : gobject.object.ObjectG
+class Display : gobject.object.ObjectWrap
 {
 
   /** */
@@ -60,9 +60,55 @@ class Display : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Display self()
   {
     return this;
+  }
+
+  /**
+      Get `composited` property.
+      Returns: true if the display properly composites the alpha channel.
+  */
+  @property bool composited()
+  {
+    return isComposited();
+  }
+
+  /**
+      Get `dmabufFormats` property.
+      Returns: The dma-buf formats that are supported on this display
+  */
+  @property gdk.dmabuf_formats.DmabufFormats dmabufFormats()
+  {
+    return getDmabufFormats();
+  }
+
+  /**
+      Get `inputShapes` property.
+      Returns: true if the display supports input shapes.
+  */
+  @property bool inputShapes()
+  {
+    return supportsInputShapes();
+  }
+
+  /**
+      Get `rgba` property.
+      Returns: true if the display supports an alpha channel.
+  */
+  @property bool rgba()
+  {
+    return isRgba();
+  }
+
+  /**
+      Get `shadowWidth` property.
+      Returns: true if the display supports extensible frames.
+  */
+  @property bool shadowWidth()
+  {
+    return supportsShadowWidth();
   }
 
   /**
@@ -78,7 +124,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +142,7 @@ class Display : gobject.object.ObjectG
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,7 +175,7 @@ class Display : gobject.object.ObjectG
       Before using the returned [gdk.glcontext.GLContext], you will need to
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created [gdk.glcontext.GLContext]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.glcontext.GLContext createGlContext()
   {
@@ -137,8 +183,8 @@ class Display : gobject.object.ObjectG
     GError *_err;
     _cretval = gdk_display_create_gl_context(cast(GdkDisplay*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,7 +228,7 @@ class Display : gobject.object.ObjectG
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,7 +240,7 @@ class Display : gobject.object.ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +255,7 @@ class Display : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,11 +288,11 @@ class Display : gobject.object.ObjectG
       Returns: the monitor with the largest
           overlap with surface
   */
-  gdk.monitor.MonitorG getMonitorAtSurface(gdk.surface.Surface surface)
+  gdk.monitor.MonitorWrap getMonitorAtSurface(gdk.surface.Surface surface)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -258,13 +304,13 @@ class Display : gobject.object.ObjectG
       
       You can listen to the GListModel::items-changed signal on
       this list to monitor changes to the monitor of this display.
-      Returns: a [gio.list_model.ListModel] of [gdk.monitor.MonitorG]
+      Returns: a [gio.list_model.ListModel] of [gdk.monitor.MonitorWrap]
   */
   gio.list_model.ListModel getMonitors()
   {
     GListModel* _cretval;
     _cretval = gdk_display_get_monitors(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -292,7 +338,7 @@ class Display : gobject.object.ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_primary_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -502,7 +548,7 @@ class Display : gobject.object.ObjectG
       as needed. But you can use it as a check when setting up code that
       might make use of OpenGL.
       Returns: true if the display supports OpenGL
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool prepareGl()
   {
@@ -510,7 +556,7 @@ class Display : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_display_prepare_gl(cast(GdkDisplay*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

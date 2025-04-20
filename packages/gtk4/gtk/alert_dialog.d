@@ -23,7 +23,7 @@ import gtk.window;
     If you don't need to wait for a button to be clicked, you can use
     [gtk.alert_dialog.AlertDialog.show].
 */
-class AlertDialog : gobject.object.ObjectG
+class AlertDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -45,9 +45,137 @@ class AlertDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AlertDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `cancelButton` property.
+      Returns: This property determines what happens when the Escape key is
+      pressed while the alert is shown.
+      
+      If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+      then pressing Escape is treated as if that button was pressed. If it is -1
+      or not a valid index for the `buttons` array, then an error is returned.
+      
+      If `buttons` is `NULL`, then the automatically created 'Close' button
+      is treated as both cancel and default button, so 0 is returned.
+  */
+  @property int cancelButton()
+  {
+    return getCancelButton();
+  }
+
+  /**
+      Set `cancelButton` property.
+      Params:
+        propval = This property determines what happens when the Escape key is
+        pressed while the alert is shown.
+        
+        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+        then pressing Escape is treated as if that button was pressed. If it is -1
+        or not a valid index for the `buttons` array, then an error is returned.
+        
+        If `buttons` is `NULL`, then the automatically created 'Close' button
+        is treated as both cancel and default button, so 0 is returned.
+  */
+  @property void cancelButton(int propval)
+  {
+    return setCancelButton(propval);
+  }
+
+  /**
+      Get `defaultButton` property.
+      Returns: This property determines what happens when the Return key is
+      pressed while the alert is shown.
+      
+      If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+      then pressing Return is treated as if that button was pressed. If it is -1
+      or not a valid index for the `buttons` array, then nothing happens.
+      
+      If `buttons` is `NULL`, then the automatically created 'Close' button
+      is treated as both cancel and default button, so 0 is returned.
+  */
+  @property int defaultButton()
+  {
+    return getDefaultButton();
+  }
+
+  /**
+      Set `defaultButton` property.
+      Params:
+        propval = This property determines what happens when the Return key is
+        pressed while the alert is shown.
+        
+        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+        then pressing Return is treated as if that button was pressed. If it is -1
+        or not a valid index for the `buttons` array, then nothing happens.
+        
+        If `buttons` is `NULL`, then the automatically created 'Close' button
+        is treated as both cancel and default button, so 0 is returned.
+  */
+  @property void defaultButton(int propval)
+  {
+    return setDefaultButton(propval);
+  }
+
+  /**
+      Get `detail` property.
+      Returns: The detail text for the alert.
+  */
+  @property string detail()
+  {
+    return getDetail();
+  }
+
+  /**
+      Set `detail` property.
+      Params:
+        propval = The detail text for the alert.
+  */
+  @property void detail(string propval)
+  {
+    return setDetail(propval);
+  }
+
+  /**
+      Get `message` property.
+      Returns: The message for the alert.
+  */
+  @property string message()
+  {
+    return getMessage();
+  }
+
+  /**
+      Set `message` property.
+      Params:
+        propval = The message for the alert.
+  */
+  @property void message(string propval)
+  {
+    return setMessage(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the alert is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the alert is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
   }
 
   /**
@@ -73,7 +201,7 @@ class AlertDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -90,15 +218,15 @@ class AlertDialog : gobject.object.ObjectG
       Returns: the index of the button that was clicked, or -1 if
           the dialog was cancelled and `propertyGtk.AlertDialog:cancel-button`
           is not set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int chooseFinish(gio.async_result.AsyncResult result)
   {
     int _retval;
     GError *_err;
-    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

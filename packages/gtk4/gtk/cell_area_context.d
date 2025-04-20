@@ -24,7 +24,7 @@ import gtk.types;
 
     Deprecated: This object will be removed in GTK 5
 */
-class CellAreaContext : gobject.object.ObjectG
+class CellAreaContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,9 +46,62 @@ class CellAreaContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellAreaContext self()
   {
     return this;
+  }
+
+  /**
+      Get `minimumHeight` property.
+      Returns: The minimum height for the [gtk.cell_area.CellArea] in this context
+      for all [gtk.tree_model.TreeModel] rows that this context was requested
+      for using [gtk.cell_area.CellArea.getPreferredHeight].
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property int minimumHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("minimum-height");
+  }
+
+  /**
+      Get `minimumWidth` property.
+      Returns: The minimum width for the [gtk.cell_area.CellArea] in this context
+      for all [gtk.tree_model.TreeModel] rows that this context was requested
+      for using [gtk.cell_area.CellArea.getPreferredWidth].
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property int minimumWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("minimum-width");
+  }
+
+  /**
+      Get `naturalHeight` property.
+      Returns: The natural height for the [gtk.cell_area.CellArea] in this context
+      for all [gtk.tree_model.TreeModel] rows that this context was requested
+      for using [gtk.cell_area.CellArea.getPreferredHeight].
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property int naturalHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("natural-height");
+  }
+
+  /**
+      Get `naturalWidth` property.
+      Returns: The natural width for the [gtk.cell_area.CellArea] in this context
+      for all [gtk.tree_model.TreeModel] rows that this context was requested
+      for using [gtk.cell_area.CellArea.getPreferredWidth].
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property int naturalWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("natural-width");
   }
 
   /**
@@ -113,7 +166,7 @@ class CellAreaContext : gobject.object.ObjectG
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 

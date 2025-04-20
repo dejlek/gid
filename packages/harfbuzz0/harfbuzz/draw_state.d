@@ -13,10 +13,23 @@ import harfbuzz.types;
 class DrawState : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `draw_state.DrawState` boxed type.
+      Params:
+        pathOpen = Whether there is an open path
+        pathStartX = X component of the start of current path
+        pathStartY = Y component of the start of current path
+        currentX = X component of current point
+        currentY = Y component of current point
+  */
+  this(harfbuzz.types.Bool pathOpen = harfbuzz.types.Bool.init, float pathStartX = 0.0, float pathStartY = 0.0, float currentX = 0.0, float currentY = 0.0)
   {
     super(gMalloc(hb_draw_state_t.sizeof), Yes.Take);
+    this.pathOpen = pathOpen;
+    this.pathStartX = pathStartX;
+    this.pathStartY = pathStartY;
+    this.currentX = currentX;
+    this.currentY = currentY;
   }
 
   /** */
@@ -44,56 +57,102 @@ class DrawState : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DrawState self()
   {
     return this;
   }
 
+  /**
+      Get `pathOpen` field.
+      Returns: Whether there is an open path
+  */
   @property harfbuzz.types.Bool pathOpen()
   {
     return (cast(hb_draw_state_t*)cPtr).pathOpen;
   }
 
+  /**
+      Set `pathOpen` field.
+      Params:
+        propval = Whether there is an open path
+  */
   @property void pathOpen(harfbuzz.types.Bool propval)
   {
     (cast(hb_draw_state_t*)cPtr).pathOpen = propval;
   }
 
+  /**
+      Get `pathStartX` field.
+      Returns: X component of the start of current path
+  */
   @property float pathStartX()
   {
     return (cast(hb_draw_state_t*)cPtr).pathStartX;
   }
 
+  /**
+      Set `pathStartX` field.
+      Params:
+        propval = X component of the start of current path
+  */
   @property void pathStartX(float propval)
   {
     (cast(hb_draw_state_t*)cPtr).pathStartX = propval;
   }
 
+  /**
+      Get `pathStartY` field.
+      Returns: Y component of the start of current path
+  */
   @property float pathStartY()
   {
     return (cast(hb_draw_state_t*)cPtr).pathStartY;
   }
 
+  /**
+      Set `pathStartY` field.
+      Params:
+        propval = Y component of the start of current path
+  */
   @property void pathStartY(float propval)
   {
     (cast(hb_draw_state_t*)cPtr).pathStartY = propval;
   }
 
+  /**
+      Get `currentX` field.
+      Returns: X component of current point
+  */
   @property float currentX()
   {
     return (cast(hb_draw_state_t*)cPtr).currentX;
   }
 
+  /**
+      Set `currentX` field.
+      Params:
+        propval = X component of current point
+  */
   @property void currentX(float propval)
   {
     (cast(hb_draw_state_t*)cPtr).currentX = propval;
   }
 
+  /**
+      Get `currentY` field.
+      Returns: Y component of current point
+  */
   @property float currentY()
   {
     return (cast(hb_draw_state_t*)cPtr).currentY;
   }
 
+  /**
+      Set `currentY` field.
+      Params:
+        propval = Y component of current point
+  */
   @property void currentY(float propval)
   {
     (cast(hb_draw_state_t*)cPtr).currentY = propval;

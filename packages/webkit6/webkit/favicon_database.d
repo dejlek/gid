@@ -26,7 +26,7 @@ import webkit.types;
     be deleted from it. Nevertheless, WebKit will still store them in
     the in-memory cache during the current execution.
 */
-class FaviconDatabase : gobject.object.ObjectG
+class FaviconDatabase : gobject.object.ObjectWrap
 {
 
   /** */
@@ -86,7 +86,7 @@ class FaviconDatabase : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -101,16 +101,16 @@ class FaviconDatabase : gobject.object.ObjectG
       Params:
         result = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [webkit.favicon_database.FaviconDatabase.getFavicon]
       Returns: a new favicon image, or null in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.texture.Texture getFaviconFinish(gio.async_result.AsyncResult result)
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = webkit_favicon_database_get_favicon_finish(cast(WebKitFaviconDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_favicon_database_get_favicon_finish(cast(WebKitFaviconDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 

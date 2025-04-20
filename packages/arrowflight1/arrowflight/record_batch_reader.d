@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class RecordBatchReader : gobject.object.ObjectG
+class RecordBatchReader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchReader self()
   {
     return this;
@@ -45,8 +46,8 @@ class RecordBatchReader : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_all(cast(GAFlightRecordBatchReader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,8 +58,8 @@ class RecordBatchReader : gobject.object.ObjectG
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_next(cast(GAFlightRecordBatchReader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
     return _retval;
   }
 }

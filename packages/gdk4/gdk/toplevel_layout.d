@@ -48,6 +48,7 @@ class ToplevelLayout : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToplevelLayout self()
   {
     return this;
@@ -118,11 +119,11 @@ class ToplevelLayout : gobject.boxed.Boxed
       the surface on.
       Returns: the monitor on which layout fullscreens
   */
-  gdk.monitor.MonitorG getFullscreenMonitor()
+  gdk.monitor.MonitorWrap getFullscreenMonitor()
   {
     GdkMonitor* _cretval;
     _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +163,7 @@ class ToplevelLayout : gobject.boxed.Boxed
         fullscreen = true to fullscreen the surface
         monitor = the monitor to fullscreen on
   */
-  void setFullscreen(bool fullscreen, gdk.monitor.MonitorG monitor = null)
+  void setFullscreen(bool fullscreen, gdk.monitor.MonitorWrap monitor = null)
   {
     gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }

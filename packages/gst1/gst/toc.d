@@ -84,6 +84,7 @@ class Toc : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Toc self()
   {
     return this;

@@ -14,7 +14,7 @@ import gtksource.mark;
 import gtksource.types;
 
 /** */
-class MarkAttributes : gobject.object.ObjectG
+class MarkAttributes : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,86 @@ class MarkAttributes : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MarkAttributes self()
   {
     return this;
+  }
+
+  /**
+      Get `background` property.
+      Returns: A color used for background of a line.
+  */
+  @property gdk.rgba.RGBA background()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background");
+  }
+
+  /**
+      Set `background` property.
+      Params:
+        propval = A color used for background of a line.
+  */
+  @property void background(gdk.rgba.RGBA propval)
+  {
+    return setBackground(propval);
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: A #GIcon that may be a base of a rendered icon.
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return getGicon();
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = A #GIcon that may be a base of a rendered icon.
+  */
+  @property void gicon(gio.icon.Icon propval)
+  {
+    return setGicon(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: An icon name that may be a base of a rendered icon.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = An icon name that may be a base of a rendered icon.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `pixbuf` property.
+      Returns: A #GdkPixbuf that may be a base of a rendered icon.
+  */
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  {
+    return getPixbuf();
+  }
+
+  /**
+      Set `pixbuf` property.
+      Params:
+        propval = A #GdkPixbuf that may be a base of a rendered icon.
+  */
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setPixbuf(propval);
   }
 
   /**
@@ -78,7 +155,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +183,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     const(PixbufC)* _cretval;
     _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +239,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     const(PixbufC)* _cretval;
     _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +262,7 @@ class MarkAttributes : gobject.object.ObjectG
   */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
   }
 
   /**

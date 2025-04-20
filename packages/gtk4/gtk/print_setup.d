@@ -50,6 +50,7 @@ class PrintSetup : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintSetup self()
   {
     return this;
@@ -66,7 +67,7 @@ class PrintSetup : gobject.boxed.Boxed
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,7 +82,7 @@ class PrintSetup : gobject.boxed.Boxed
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 }

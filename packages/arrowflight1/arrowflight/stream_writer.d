@@ -31,6 +31,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StreamWriter self()
   {
     return this;
@@ -43,7 +44,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     GError *_err;
     _retval = gaflight_stream_writer_done_writing(cast(GAFlightStreamWriter*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

@@ -20,7 +20,7 @@ import gst.types;
     #GstDevice are created by #GstDeviceProvider objects which can be
     aggregated by #GstDeviceMonitor objects.
 */
-class Device : gst.object.ObjectGst
+class Device : gst.object.ObjectWrap
 {
 
   /** */
@@ -42,6 +42,7 @@ class Device : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Device self()
   {
     return this;
@@ -62,7 +63,7 @@ class Device : gst.object.ObjectGst
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_device_create_element(cast(GstDevice*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 

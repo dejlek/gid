@@ -5,7 +5,7 @@ import gobject.object;
 import gio.memory_monitor;
 import gio.memory_monitor_mixin;
 
-/// Proxy object for [Gio.MemoryMonitor] interface when a GObject has no applicable D binding
+/// Proxy object for [gio.memory_monitor.MemoryMonitor] interface when a GObject has no applicable D binding
 class MemoryMonitorIfaceProxy : IfaceProxy, gio.memory_monitor.MemoryMonitor
 {
   this(void* ptr, Flag!"Take" take = No.Take)

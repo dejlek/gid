@@ -65,9 +65,181 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Button self()
   {
     return this;
+  }
+
+  /**
+      Get `alwaysShowImage` property.
+      Returns: If true, the button will ignore the #GtkSettings:gtk-button-images
+      setting and always show the image, if available.
+      
+      Use this property if the button would be useless or hard to use
+      without the image.
+  */
+  @property bool alwaysShowImage()
+  {
+    return getAlwaysShowImage();
+  }
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the button will ignore the #GtkSettings:gtk-button-images
+        setting and always show the image, if available.
+        
+        Use this property if the button would be useless or hard to use
+        without the image.
+  */
+  @property void alwaysShowImage(bool propval)
+  {
+    return setAlwaysShowImage(propval);
+  }
+
+  /**
+      Get `image` property.
+      Returns: The child widget to appear next to the button text.
+  */
+  @property gtk.widget.Widget image()
+  {
+    return getImage();
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = The child widget to appear next to the button text.
+  */
+  @property void image(gtk.widget.Widget propval)
+  {
+    return setImage(propval);
+  }
+
+  /**
+      Get `imagePosition` property.
+      Returns: The position of the image relative to the text inside the button.
+  */
+  @property gtk.types.PositionType imagePosition()
+  {
+    return getImagePosition();
+  }
+
+  /**
+      Set `imagePosition` property.
+      Params:
+        propval = The position of the image relative to the text inside the button.
+  */
+  @property void imagePosition(gtk.types.PositionType propval)
+  {
+    return setImagePosition(propval);
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /** */
+  @property gtk.types.ReliefStyle relief()
+  {
+    return getRelief();
+  }
+
+  /** */
+  @property void relief(gtk.types.ReliefStyle propval)
+  {
+    return setRelief(propval);
+  }
+
+  /** */
+  @property bool useStock()
+  {
+    return getUseStock();
+  }
+
+  /** */
+  @property void useStock(bool propval)
+  {
+    return setUseStock(propval);
+  }
+
+  /** */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /** */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: If the child of the button is a #GtkMisc or #GtkAlignment, this property
+      can be used to control its horizontal alignment. 0.0 is left aligned,
+      1.0 is right aligned.
+  
+      Deprecated: Access the child widget directly if you need to control
+      its alignment.
+  */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
+        can be used to control its horizontal alignment. 0.0 is left aligned,
+        1.0 is right aligned.
+  
+      Deprecated: Access the child widget directly if you need to control
+      its alignment.
+  */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
+  }
+
+  /**
+      Get `yalign` property.
+      Returns: If the child of the button is a #GtkMisc or #GtkAlignment, this property
+      can be used to control its vertical alignment. 0.0 is top aligned,
+      1.0 is bottom aligned.
+  
+      Deprecated: Access the child widget directly if you need to control
+      its alignment.
+  */
+  @property float yalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("yalign");
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
+        can be used to control its vertical alignment. 0.0 is top aligned,
+        1.0 is bottom aligned.
+  
+      Deprecated: Access the child widget directly if you need to control
+      its alignment.
+  */
+  @property void yalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
 
   mixin ActionableT!();
@@ -105,7 +277,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName, size);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +302,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,7 +319,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,7 +341,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +399,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     GdkWindow* _cretval;
     _cretval = gtk_button_get_event_window(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,7 +429,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_image(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

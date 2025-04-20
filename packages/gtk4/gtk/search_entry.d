@@ -85,9 +85,113 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SearchEntry self()
   {
     return this;
+  }
+
+  /**
+      Get `activatesDefault` property.
+      Returns: Whether to activate the default widget when Enter is pressed.
+  */
+  @property bool activatesDefault()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("activates-default");
+  }
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+  */
+  @property void activatesDefault(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("activates-default", propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
+      behaviour of input methods.
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
+        behaviour of input methods.
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
+      behaviour of input methods.
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
+        behaviour of input methods.
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
+  }
+
+  /**
+      Get `placeholderText` property.
+      Returns: The text that will be displayed in the [gtk.search_entry.SearchEntry]
+      when it is empty and unfocused.
+  */
+  @property string placeholderText()
+  {
+    return getPlaceholderText();
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.search_entry.SearchEntry]
+        when it is empty and unfocused.
+  */
+  @property void placeholderText(string propval)
+  {
+    return setPlaceholderText(propval);
+  }
+
+  /**
+      Get `searchDelay` property.
+      Returns: The delay in milliseconds from last keypress to the search
+      changed signal.
+  */
+  @property uint searchDelay()
+  {
+    return getSearchDelay();
+  }
+
+  /**
+      Set `searchDelay` property.
+      Params:
+        propval = The delay in milliseconds from last keypress to the search
+        changed signal.
+  */
+  @property void searchDelay(uint propval)
+  {
+    return setSearchDelay(propval);
   }
 
   mixin EditableT!();
@@ -135,7 +239,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

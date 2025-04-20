@@ -61,9 +61,76 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScaleButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: If the scale button should be pressed in.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Get `adjustment` property.
+      Returns: The [gtk.adjustment.Adjustment] that is used as the model.
+  */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] that is used as the model.
+  */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: If the scale button has a frame.
+  */
+  @property bool hasFrame()
+  {
+    return getHasFrame();
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = If the scale button has a frame.
+  */
+  @property void hasFrame(bool propval)
+  {
+    return setHasFrame(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The value of the scale.
+  */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scale.
+  */
+  @property void value(double propval)
+  {
+    return setValue(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -121,7 +188,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +212,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +225,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +237,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

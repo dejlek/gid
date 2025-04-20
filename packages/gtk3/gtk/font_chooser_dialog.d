@@ -13,7 +13,6 @@ import gtk.font_chooser;
 import gtk.font_chooser_mixin;
 import gtk.types;
 import gtk.window;
-import pango.font_map;
 
 /**
     The #GtkFontChooserDialog widget is a dialog for selecting a font.
@@ -47,6 +46,7 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontChooserDialog self()
   {
     return this;

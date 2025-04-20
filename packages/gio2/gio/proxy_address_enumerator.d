@@ -4,8 +4,10 @@ module gio.proxy_address_enumerator;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.proxy_resolver;
 import gio.socket_address_enumerator;
 import gio.types;
+import gobject.object;
 
 /**
     [gio.proxy_address_enumerator.ProxyAddressEnumerator] is a wrapper around
@@ -41,8 +43,28 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProxyAddressEnumerator self()
   {
     return this;
+  }
+
+  /**
+      Get `proxyResolver` property.
+      Returns: The proxy resolver to use.
+  */
+  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.proxy_resolver.ProxyResolver)("proxy-resolver");
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = The proxy resolver to use.
+  */
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.proxy_resolver.ProxyResolver)("proxy-resolver", propval);
   }
 }

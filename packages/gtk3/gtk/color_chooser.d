@@ -28,6 +28,48 @@ interface ColorChooser
   }
 
   /**
+      Get `rgba` property.
+      Returns: The ::rgba property contains the currently selected color,
+      as a #GdkRGBA struct. The property can be set to change
+      the current selection programmatically.
+  */
+  @property gdk.rgba.RGBA rgba();
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The ::rgba property contains the currently selected color,
+        as a #GdkRGBA struct. The property can be set to change
+        the current selection programmatically.
+  */
+  @property void rgba(gdk.rgba.RGBA propval);
+
+  /**
+      Get `useAlpha` property.
+      Returns: When ::use-alpha is true, colors may have alpha (translucency)
+      information. When it is false, the #GdkRGBA struct obtained
+      via the #GtkColorChooser:rgba property will be forced to have
+      alpha == 1.
+      
+      Implementations are expected to show alpha by rendering the color
+      over a non-uniform background (like a checkerboard pattern).
+  */
+  @property bool useAlpha();
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = When ::use-alpha is true, colors may have alpha (translucency)
+        information. When it is false, the #GdkRGBA struct obtained
+        via the #GtkColorChooser:rgba property will be forced to have
+        alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
+  */
+  @property void useAlpha(bool propval);
+
+  /**
       Adds a palette to the color chooser. If orientation is horizontal,
       the colors are grouped in rows, with colors_per_line colors
       in each row. If horizontal is false, the colors are grouped

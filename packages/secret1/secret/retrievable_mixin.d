@@ -27,6 +27,67 @@ template RetrievableT()
 {
 
   /**
+      Get `created` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      item was created.
+  */
+  @property ulong created()
+  {
+    return getCreated();
+  }
+
+  /**
+      Set `created` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        item was created.
+  */
+  @property void created(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("created", propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The human readable label for the item.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The human readable label for the item.
+  */
+  @property void label(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("label", propval);
+  }
+
+  /**
+      Get `modified` property.
+      Returns: The date and time (in seconds since the UNIX epoch) that this
+      item was last modified.
+  */
+  @property ulong modified()
+  {
+    return getModified();
+  }
+
+  /**
+      Set `modified` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+        item was last modified.
+  */
+  @property void modified(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("modified", propval);
+  }
+
+  /**
       Get the attributes of this object.
       
       The attributes are a mapping of string keys to string values.
@@ -105,7 +166,7 @@ template RetrievableT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -120,15 +181,15 @@ template RetrievableT()
         result = asynchronous result passed to callback
       Returns: the secret value which should be
           released with [secret.value.Value.unref], or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override secret.value.Value retrieveSecretFinish(gio.async_result.AsyncResult result)
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -146,7 +207,7 @@ template RetrievableT()
         cancellable = optional cancellation object
       Returns: the secret value which should be
           released with [secret.value.Value.unref], or null
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -154,7 +215,7 @@ template RetrievableT()
     GError *_err;
     _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

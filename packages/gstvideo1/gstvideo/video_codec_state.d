@@ -26,10 +26,21 @@ import gstvideo.video_mastering_display_info;
 class VideoCodecState : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `video_codec_state.VideoCodecState` boxed type.
+      Params:
+        caps = The #GstCaps used in the caps negotiation of the pad.
+        codecData = a #GstBuffer corresponding to the
+              'codec_data' field of a stream, or NULL.
+        allocationCaps = The #GstCaps for allocation query and pool
+              negotiation. Since: 1.10
+  */
+  this(gst.caps.Caps caps = gst.caps.Caps.init, gst.buffer.Buffer codecData = gst.buffer.Buffer.init, gst.caps.Caps allocationCaps = gst.caps.Caps.init)
   {
     super(gMalloc(GstVideoCodecState.sizeof), Yes.Take);
+    this.caps = caps;
+    this.codecData = codecData;
+    this.allocationCaps = allocationCaps;
   }
 
   /** */
@@ -57,54 +68,98 @@ class VideoCodecState : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoCodecState self()
   {
     return this;
   }
 
+  /**
+      Get `info` field.
+      Returns: The #GstVideoInfo describing the stream
+  */
   @property gstvideo.video_info.VideoInfo info()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)cPtr).info);
   }
 
+  /**
+      Get `caps` field.
+      Returns: The #GstCaps used in the caps negotiation of the pad.
+  */
   @property gst.caps.Caps caps()
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
   }
 
+  /**
+      Set `caps` field.
+      Params:
+        propval = The #GstCaps used in the caps negotiation of the pad.
+  */
   @property void caps(gst.caps.Caps propval)
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).caps);
   }
 
+  /**
+      Get `codecData` field.
+      Returns: a #GstBuffer corresponding to the
+          'codec_data' field of a stream, or NULL.
+  */
   @property gst.buffer.Buffer codecData()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
   }
 
+  /**
+      Set `codecData` field.
+      Params:
+        propval = a #GstBuffer corresponding to the
+            'codec_data' field of a stream, or NULL.
+  */
   @property void codecData(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).codecData);
   }
 
+  /**
+      Get `allocationCaps` field.
+      Returns: The #GstCaps for allocation query and pool
+          negotiation. Since: 1.10
+  */
   @property gst.caps.Caps allocationCaps()
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
   }
 
+  /**
+      Set `allocationCaps` field.
+      Params:
+        propval = The #GstCaps for allocation query and pool
+            negotiation. Since: 1.10
+  */
   @property void allocationCaps(gst.caps.Caps propval)
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).allocationCaps);
   }
 
+  /**
+      Get `masteringDisplayInfo` field.
+      Returns: Mastering display color volume information (HDR metadata) for the stream.
+  */
   @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo()
   {
     return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)cPtr).masteringDisplayInfo);
   }
 
+  /**
+      Get `contentLightLevel` field.
+      Returns: Content light level information for the stream.
+  */
   @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel()
   {
     return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)cPtr).contentLightLevel);

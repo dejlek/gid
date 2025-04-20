@@ -14,7 +14,7 @@ import gobject.object;
 import gobject.types;
 
 /** */
-class Function : gobject.object.ObjectG
+class Function : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class Function : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Function self()
   {
     return this;
@@ -56,7 +57,7 @@ class Function : gobject.object.ObjectG
     GArrowFunction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_function_find(_name);
-    auto _retval = ObjectG.getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,8 +78,8 @@ class Function : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_function_execute(cast(GArrowFunction*)cPtr, _args, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null, context ? cast(GArrowExecuteContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +88,7 @@ class Function : gobject.object.ObjectG
   {
     GArrowFunctionOptions* _cretval;
     _cretval = garrow_function_get_default_options(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,7 +97,7 @@ class Function : gobject.object.ObjectG
   {
     GArrowFunctionDoc* _cretval;
     _cretval = garrow_function_get_doc(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
     return _retval;
   }
 

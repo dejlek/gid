@@ -1839,7 +1839,7 @@ struct GdkDeviceTool;
     can be accessed with [gdk.display.Display.getDefaultSeat] and
     [gdk.display.Display.listSeats].
     
-    Output devices are represented by [gdk.monitor.MonitorG] objects, which can
+    Output devices are represented by [gdk.monitor.MonitorWrap] objects, which can
     be accessed with [gdk.display.Display.getMonitorAtSurface] and similar APIs.
 */
 struct GdkDisplay;
@@ -2200,9 +2200,9 @@ struct GdkGLTexture;
     GL textures.
     
     The operation is quite simple: Create a texture builder, set all the necessary
-    properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.GLContext],
-    [gdk.gltexture_builder.GLTextureBuilder.guint], [gdk.gltexture_builder.GLTextureBuilder.gint], and
-    [gdk.gltexture_builder.GLTextureBuilder.gint] are mandatory - and then call
+    properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.context],
+    [gdk.gltexture_builder.GLTextureBuilder.id], [gdk.gltexture_builder.GLTextureBuilder.width], and
+    [gdk.gltexture_builder.GLTextureBuilder.height] are mandatory - and then call
     [gdk.gltexture_builder.GLTextureBuilder.build] to create the new texture.
     
     [gdk.gltexture_builder.GLTextureBuilder] can be used for quick one-shot construction of
@@ -2268,7 +2268,7 @@ struct GdkMemoryTextureClass;
 struct GdkMonitorClass;
 
 /**
-    [gdk.monitor.MonitorG] objects represent the individual outputs that are
+    [gdk.monitor.MonitorWrap] objects represent the individual outputs that are
     associated with a [gdk.display.Display].
     
     [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
@@ -2403,7 +2403,7 @@ struct GdkPaintableInterface
     The [gdk.popup.Popup] is positioned relative to its parent surface.
     
     [gdk.popup.Popup]s are typically used to implement menus and similar popups.
-    They can be modal, which is indicated by the [gdk.popup.Popup.gboolean]
+    They can be modal, which is indicated by the [gdk.popup.Popup.autohide]
     property.
 */
 struct GdkPopup;
@@ -2584,7 +2584,7 @@ struct GdkSurfaceClass;
     
     [gdk.texture.Texture] is an immutable object: That means you cannot change
     anything about it other than increasing the reference count via
-    [gobject.object.ObjectG.ref_], and consequently, it is a thread-safe object.
+    [gobject.object.ObjectWrap.ref_], and consequently, it is a thread-safe object.
 */
 struct GdkTexture;
 

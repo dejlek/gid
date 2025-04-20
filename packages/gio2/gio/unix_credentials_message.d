@@ -52,6 +52,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixCredentialsMessage self()
   {
     return this;
@@ -79,7 +80,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +103,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   {
     GCredentials* _cretval;
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
     return _retval;
   }
 }

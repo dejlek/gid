@@ -19,7 +19,7 @@ import soup.types;
     session with [soup.session.Session.removeFeatureByType] or disable it on
     individual requests with [soup.message.Message.disableFeature].
 */
-class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -41,6 +41,7 @@ class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.S
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WebsocketExtensionManager self()
   {
     return this;

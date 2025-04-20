@@ -17,7 +17,7 @@ class SDPAttribute
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPAttribute");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpattribute.SDPAttribute");
 
     cInstance = *cast(GstSDPAttribute*)ptr;
 
@@ -31,22 +31,40 @@ class SDPAttribute
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `key` field.
+      Returns: the attribute key
+  */
   @property string key()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
   }
 
+  /**
+      Set `key` field.
+      Params:
+        propval = the attribute key
+  */
   @property void key(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
     dToC(propval, cast(void*)&(cast(GstSDPAttribute*)cPtr).key);
   }
 
+  /**
+      Get `value` field.
+      Returns: the attribute value or NULL when it was a property attribute
+  */
   @property string value()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the attribute value or NULL when it was a property attribute
+  */
   @property void value(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);

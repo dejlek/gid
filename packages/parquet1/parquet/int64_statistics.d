@@ -30,6 +30,7 @@ class Int64Statistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Int64Statistics self()
   {
     return this;

@@ -27,15 +27,15 @@ import gtk.widget;
     
     The [gtk.menu_button.MenuButton] widget can show either an icon (set with the
     `property@Gtk.MenuButton:icon-name` property) or a label (set with the
-    [gtk.menu_button.MenuButton.utf8] property). If neither is explicitly set,
+    [gtk.menu_button.MenuButton.label] property). If neither is explicitly set,
     a [gtk.image.Image] is automatically created, using an arrow image oriented
-    according to [gtk.menu_button.MenuButton.ArrowType] or the generic
+    according to [gtk.menu_button.MenuButton.direction] or the generic
     “open-menu-symbolic” icon if the direction is not set.
     
     The positioning of the popup is determined by the
-    [gtk.menu_button.MenuButton.ArrowType] property of the menu button.
+    [gtk.menu_button.MenuButton.direction] property of the menu button.
     
-    For menus, the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    For menus, the [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties of the menu are also taken into account. For example, when the
     direction is [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start],
     the menu will be positioned below the button, with the starting edge
@@ -103,9 +103,252 @@ class MenuButton : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the menu button is active.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the menu button is active.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `alwaysShowArrow` property.
+      Returns: Whether to show a dropdown arrow even when using an icon or a custom child.
+  */
+  @property bool alwaysShowArrow()
+  {
+    return getAlwaysShowArrow();
+  }
+
+  /**
+      Set `alwaysShowArrow` property.
+      Params:
+        propval = Whether to show a dropdown arrow even when using an icon or a custom child.
+  */
+  @property void alwaysShowArrow(bool propval)
+  {
+    return setAlwaysShowArrow(propval);
+  }
+
+  /**
+      Get `canShrink` property.
+      Returns: Whether the size of the button can be made smaller than the natural
+      size of its contents.
+  */
+  @property bool canShrink()
+  {
+    return getCanShrink();
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the size of the button can be made smaller than the natural
+        size of its contents.
+  */
+  @property void canShrink(bool propval)
+  {
+    return setCanShrink(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `direction` property.
+      Returns: The [gtk.types.ArrowType] representing the direction in which the
+      menu or popover will be popped out.
+  */
+  @property gtk.types.ArrowType direction()
+  {
+    return getDirection();
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The [gtk.types.ArrowType] representing the direction in which the
+        menu or popover will be popped out.
+  */
+  @property void direction(gtk.types.ArrowType propval)
+  {
+    return setDirection(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: Whether the button has a frame.
+  */
+  @property bool hasFrame()
+  {
+    return getHasFrame();
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the button has a frame.
+  */
+  @property void hasFrame(bool propval)
+  {
+    return setHasFrame(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon used to automatically populate the button.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The label for the button.
+  */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label for the button.
+  */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The [gio.menu_model.MenuModel] from which the popup will be created.
+      
+      See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
+      with the [gtk.menu_button.MenuButton.popover] property.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] from which the popup will be created.
+        
+        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
+        with the [gtk.menu_button.MenuButton.popover] property.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
+  }
+
+  /**
+      Get `popover` property.
+      Returns: The [gtk.popover.Popover] that will be popped up when the button is clicked.
+  */
+  @property gtk.popover.Popover popover()
+  {
+    return getPopover();
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The [gtk.popover.Popover] that will be popped up when the button is clicked.
+  */
+  @property void popover(gtk.popover.Popover propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.popover.Popover)("popover", propval);
+  }
+
+  /**
+      Get `primary` property.
+      Returns: Whether the menu button acts as a primary menu.
+      
+      Primary menus can be opened using the <kbd>F10</kbd> key
+  */
+  @property bool primary()
+  {
+    return getPrimary();
+  }
+
+  /**
+      Set `primary` property.
+      Params:
+        propval = Whether the menu button acts as a primary menu.
+        
+        Primary menus can be opened using the <kbd>F10</kbd> key
+  */
+  @property void primary(bool propval)
+  {
+    return setPrimary(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: If set an underscore in the text indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set an underscore in the text indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
   }
 
   /**
@@ -167,7 +410,7 @@ class MenuButton : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,7 +471,7 @@ class MenuButton : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +486,7 @@ class MenuButton : gtk.widget.Widget
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -330,11 +573,11 @@ class MenuButton : gtk.widget.Widget
   /**
       Sets the child widget of menu_button.
       
-      Setting a child resets [gtk.menu_button.MenuButton.utf8] and
+      Setting a child resets [gtk.menu_button.MenuButton.label] and
       `propertyGtk.MenuButton:icon-name`.
       
       If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
-      [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown arrow
+      [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown arrow
       will be shown next to the child.
   
       Params:
@@ -372,7 +615,7 @@ class MenuButton : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.MenuButtonCreatePopupFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -417,11 +660,11 @@ class MenuButton : gtk.widget.Widget
   /**
       Sets the name of an icon to show inside the menu button.
       
-      Setting icon name resets [gtk.menu_button.MenuButton.utf8] and
-      [gtk.menu_button.MenuButton.Widget].
+      Setting icon name resets [gtk.menu_button.MenuButton.label] and
+      [gtk.menu_button.MenuButton.child].
       
       If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
-      [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown arrow
+      [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown arrow
       will be shown next to the icon.
   
       Params:
@@ -437,9 +680,9 @@ class MenuButton : gtk.widget.Widget
       Sets the label to show inside the menu button.
       
       Setting a label resets `propertyGtk.MenuButton:icon-name` and
-      [gtk.menu_button.MenuButton.Widget].
+      [gtk.menu_button.MenuButton.child].
       
-      If [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown
+      If [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown
       arrow will be shown next to the label.
   
       Params:
@@ -460,7 +703,7 @@ class MenuButton : gtk.widget.Widget
       [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected
       as documented for this function.
       
-      If [gtk.menu_button.MenuButton.Popover] is already set, it will be
+      If [gtk.menu_button.MenuButton.popover] is already set, it will be
       dissociated from the menu_button, and the property is set to null.
   
       Params:

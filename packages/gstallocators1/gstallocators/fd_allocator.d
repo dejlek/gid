@@ -33,6 +33,7 @@ class FdAllocator : gst.allocator.Allocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FdAllocator self()
   {
     return this;
@@ -40,7 +41,7 @@ class FdAllocator : gst.allocator.Allocator
 
   /**
       Return a new fd allocator.
-      Returns: a new fd allocator. Use [gst.object.ObjectGst.unref] to
+      Returns: a new fd allocator. Use [gst.object.ObjectWrap.unref] to
         release the allocator after usage
   */
   this()

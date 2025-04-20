@@ -35,6 +35,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MemoryMappedInputStream self()
   {
     return this;
@@ -48,7 +49,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     GError *_err;
     _cretval = garrow_memory_mapped_input_stream_new(_path, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

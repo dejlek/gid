@@ -59,9 +59,46 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CheckMenuItem self()
   {
     return this;
+  }
+
+  /** */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /** */
+  @property bool drawAsRadio()
+  {
+    return getDrawAsRadio();
+  }
+
+  /** */
+  @property void drawAsRadio(bool propval)
+  {
+    return setDrawAsRadio(propval);
+  }
+
+  /** */
+  @property bool inconsistent()
+  {
+    return getInconsistent();
+  }
+
+  /** */
+  @property void inconsistent(bool propval)
+  {
+    return setInconsistent(propval);
   }
 
   /**
@@ -87,7 +124,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_menu_item_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +143,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_menu_item_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

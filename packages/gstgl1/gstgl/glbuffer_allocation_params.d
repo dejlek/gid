@@ -39,31 +39,54 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBufferAllocationParams self()
   {
     return this;
   }
 
+  /**
+      Get `parent` field.
+      Returns: parent object
+  */
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
     return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLBufferAllocationParams*)cPtr).parent);
   }
 
+  /**
+      Get `glTarget` field.
+      Returns: the OpenGL target to bind the buffer to
+  */
   @property uint glTarget()
   {
     return (cast(GstGLBufferAllocationParams*)cPtr).glTarget;
   }
 
+  /**
+      Set `glTarget` field.
+      Params:
+        propval = the OpenGL target to bind the buffer to
+  */
   @property void glTarget(uint propval)
   {
     (cast(GstGLBufferAllocationParams*)cPtr).glTarget = propval;
   }
 
+  /**
+      Get `glUsage` field.
+      Returns: the OpenGL usage hint to create the buffer with
+  */
   @property uint glUsage()
   {
     return (cast(GstGLBufferAllocationParams*)cPtr).glUsage;
   }
 
+  /**
+      Set `glUsage` field.
+      Params:
+        propval = the OpenGL usage hint to create the buffer with
+  */
   @property void glUsage(uint propval)
   {
     (cast(GstGLBufferAllocationParams*)cPtr).glUsage = propval;

@@ -22,7 +22,7 @@ import gobject.object;
     See [gio.socket_connectable.SocketConnectable] for an example of using the connectable
     interface.
 */
-class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
+class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketConnectable
 {
 
   /** */
@@ -44,6 +44,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NetworkAddress self()
   {
     return this;
@@ -96,7 +97,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   {
     GSocketConnectable* _cretval;
     _cretval = g_network_address_new_loopback(port);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +129,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
         defaultPort = the default port if not in host_and_port
       Returns: the new
           #GNetworkAddress, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.network_address.NetworkAddress parse(string hostAndPort, ushort defaultPort)
   {
@@ -137,8 +138,8 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     GError *_err;
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,7 +156,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
         defaultPort = The default port if none is found in the URI
       Returns: the new
           #GNetworkAddress, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.network_address.NetworkAddress parseUri(string uri, ushort defaultPort)
   {
@@ -164,8 +165,8 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     GError *_err;
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 

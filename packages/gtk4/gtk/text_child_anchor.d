@@ -14,7 +14,7 @@ import gtk.widget;
     
     The anchor can have multiple widgets anchored, to allow for multiple views.
 */
-class TextChildAnchor : gobject.object.ObjectG
+class TextChildAnchor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,6 +36,7 @@ class TextChildAnchor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextChildAnchor self()
   {
     return this;
@@ -72,7 +73,7 @@ class TextChildAnchor : gobject.object.ObjectG
     GtkTextChildAnchor* _cretval;
     const(char)* _character = character.toCString(No.Alloc);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,7 +83,7 @@ class TextChildAnchor : gobject.object.ObjectG
       
       Keep in mind that the child anchor will be unreferenced
       when removed from the buffer, so you need to hold your own
-      reference (with [gobject.object.ObjectG.ref_]) if you plan to use this
+      reference (with [gobject.object.ObjectWrap.ref_]) if you plan to use this
       function — otherwise all deleted child anchors will also
       be finalized.
       Returns: true if the child anchor has been deleted from its buffer
@@ -112,7 +113,7 @@ class TextChildAnchor : gobject.object.ObjectG
     {
       _retval = new gtk.widget.Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = ObjectG.getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
+        _retval[i] = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
     }
     return _retval;
   }

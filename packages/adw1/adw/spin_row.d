@@ -80,9 +80,166 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpinRow self()
   {
     return this;
+  }
+
+  /**
+      Get `adjustment` property.
+      Returns: The adjustment that holds the value of the spin row.
+  */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The adjustment that holds the value of the spin row.
+  */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
+  }
+
+  /**
+      Get `climbRate` property.
+      Returns: The acceleration rate when you hold down a button or key.
+  */
+  @property double climbRate()
+  {
+    return getClimbRate();
+  }
+
+  /**
+      Set `climbRate` property.
+      Params:
+        propval = The acceleration rate when you hold down a button or key.
+  */
+  @property void climbRate(double propval)
+  {
+    return setClimbRate(propval);
+  }
+
+  /**
+      Get `digits` property.
+      Returns: The number of decimal places to display.
+  */
+  @property uint digits()
+  {
+    return getDigits();
+  }
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places to display.
+  */
+  @property void digits(uint propval)
+  {
+    return setDigits(propval);
+  }
+
+  /**
+      Get `numeric` property.
+      Returns: Whether non-numeric characters should be ignored.
+  */
+  @property bool numeric()
+  {
+    return getNumeric();
+  }
+
+  /**
+      Set `numeric` property.
+      Params:
+        propval = Whether non-numeric characters should be ignored.
+  */
+  @property void numeric(bool propval)
+  {
+    return setNumeric(propval);
+  }
+
+  /**
+      Get `snapToTicks` property.
+      Returns: Whether invalid values are snapped to the nearest step increment.
+  */
+  @property bool snapToTicks()
+  {
+    return getSnapToTicks();
+  }
+
+  /**
+      Set `snapToTicks` property.
+      Params:
+        propval = Whether invalid values are snapped to the nearest step increment.
+  */
+  @property void snapToTicks(bool propval)
+  {
+    return setSnapToTicks(propval);
+  }
+
+  /**
+      Get `updatePolicy` property.
+      Returns: The policy for updating the spin row.
+      
+      The options are always, or only when the value is invalid.
+  */
+  @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
+  {
+    return getUpdatePolicy();
+  }
+
+  /**
+      Set `updatePolicy` property.
+      Params:
+        propval = The policy for updating the spin row.
+        
+        The options are always, or only when the value is invalid.
+  */
+  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  {
+    return setUpdatePolicy(propval);
+  }
+
+  /**
+      Get `value` property.
+      Returns: The current value.
+  */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The current value.
+  */
+  @property void value(double propval)
+  {
+    return setValue(propval);
+  }
+
+  /**
+      Get `wrap` property.
+      Returns: Whether the spin row should wrap upon reaching its limits.
+  */
+  @property bool wrap()
+  {
+    return getWrap();
+  }
+
+  /**
+      Set `wrap` property.
+      Params:
+        propval = Whether the spin row should wrap upon reaching its limits.
+  */
+  @property void wrap(bool propval)
+  {
+    return setWrap(propval);
   }
 
   mixin EditableT!();
@@ -126,7 +283,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = adw_spin_row_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(adw.spin_row.SpinRow)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.spin_row.SpinRow)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +311,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   {
     GtkAdjustment* _cretval;
     _cretval = adw_spin_row_get_adjustment(cast(AdwSpinRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

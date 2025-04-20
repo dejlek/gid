@@ -17,7 +17,7 @@ class ParamSpecInt64 : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.ParamSpecInt64");
+      throw new GidConstructException("Null instance pointer for gobject.param_spec_int64.ParamSpecInt64");
 
     super(cast(GParamSpec*)ptr, take);
   }

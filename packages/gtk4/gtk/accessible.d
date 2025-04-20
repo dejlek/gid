@@ -28,7 +28,7 @@ import gtk.types;
     The attributes are updated every time a UI element's state changes in
     a way that should be reflected by assistive technologies. For instance,
     if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.Hidden]
-    state will also change to reflect the [gtk.widget.Widget.gboolean] property.
+    state will also change to reflect the [gtk.widget.Widget.visible] property.
     
     Every accessible implementation is part of a tree of accessible objects.
     Normally, this tree corresponds to the widget tree, but can be customized
@@ -52,6 +52,23 @@ interface Accessible
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_get_type != &gidSymbolNotFound ? gtk_accessible_get_type() : cast(GType)0;
   }
+
+  /**
+      Get `accessibleRole` property.
+      Returns: The accessible role of the given [gtk.accessible.Accessible] implementation.
+      
+      The accessible role cannot be changed once set.
+  */
+  @property gtk.types.AccessibleRole accessibleRole();
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
+        
+        The accessible role cannot be changed once set.
+  */
+  @property void accessibleRole(gtk.types.AccessibleRole propval);
 
   /**
       Requests the user's screen reader to announce the given message.

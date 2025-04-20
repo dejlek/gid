@@ -62,7 +62,7 @@ import gobject.object;
     operations may not be well-defined due to the state the wrapper stream leaves
     the base stream in (though they are guaranteed not to crash).
 */
-class IOStream : gobject.object.ObjectG
+class IOStream : gobject.object.ObjectWrap
 {
 
   /** */
@@ -84,9 +84,37 @@ class IOStream : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IOStream self()
   {
     return this;
+  }
+
+  /**
+      Get `closed` property.
+      Returns: Whether the stream is closed.
+  */
+  @property bool closed()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("closed");
+  }
+
+  /**
+      Get `inputStream` property.
+      Returns: The [gio.input_stream.InputStream] to read from.
+  */
+  @property gio.input_stream.InputStream inputStream()
+  {
+    return getInputStream();
+  }
+
+  /**
+      Get `outputStream` property.
+      Returns: The [gio.output_stream.OutputStream] to write to.
+  */
+  @property gio.output_stream.OutputStream outputStream()
+  {
+    return getOutputStream();
   }
 
   /**
@@ -95,15 +123,15 @@ class IOStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true on success, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool spliceFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -153,7 +181,7 @@ class IOStream : gobject.object.ObjectG
       Params:
         cancellable = optional #GCancellable object, null to ignore
       Returns: true on success, false on failure
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -161,7 +189,7 @@ class IOStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -190,7 +218,7 @@ class IOStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -204,15 +232,15 @@ class IOStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: true if stream was successfully closed, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -226,7 +254,7 @@ class IOStream : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_io_stream_get_input_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -240,7 +268,7 @@ class IOStream : gobject.object.ObjectG
   {
     GOutputStream* _cretval;
     _cretval = g_io_stream_get_output_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -271,7 +299,7 @@ class IOStream : gobject.object.ObjectG
       already set or stream is closed, it will return false and set
       error.
       Returns: true if pending was previously unset and is now set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setPending()
   {
@@ -279,7 +307,7 @@ class IOStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_io_stream_set_pending(cast(GIOStream*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -307,7 +335,7 @@ class IOStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

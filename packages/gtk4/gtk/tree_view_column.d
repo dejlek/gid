@@ -55,9 +55,223 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeViewColumn self()
   {
     return this;
+  }
+
+  /** */
+  @property float alignment()
+  {
+    return getAlignment();
+  }
+
+  /** */
+  @property void alignment(float propval)
+  {
+    return setAlignment(propval);
+  }
+
+  /** */
+  @property bool clickable()
+  {
+    return getClickable();
+  }
+
+  /** */
+  @property void clickable(bool propval)
+  {
+    return setClickable(propval);
+  }
+
+  /** */
+  @property bool expand()
+  {
+    return getExpand();
+  }
+
+  /** */
+  @property void expand(bool propval)
+  {
+    return setExpand(propval);
+  }
+
+  /** */
+  @property int fixedWidth()
+  {
+    return getFixedWidth();
+  }
+
+  /** */
+  @property void fixedWidth(int propval)
+  {
+    return setFixedWidth(propval);
+  }
+
+  /** */
+  @property int maxWidth()
+  {
+    return getMaxWidth();
+  }
+
+  /** */
+  @property void maxWidth(int propval)
+  {
+    return setMaxWidth(propval);
+  }
+
+  /** */
+  @property int minWidth()
+  {
+    return getMinWidth();
+  }
+
+  /** */
+  @property void minWidth(int propval)
+  {
+    return setMinWidth(propval);
+  }
+
+  /** */
+  @property bool reorderable()
+  {
+    return getReorderable();
+  }
+
+  /** */
+  @property void reorderable(bool propval)
+  {
+    return setReorderable(propval);
+  }
+
+  /** */
+  @property bool resizable()
+  {
+    return getResizable();
+  }
+
+  /** */
+  @property void resizable(bool propval)
+  {
+    return setResizable(propval);
+  }
+
+  /** */
+  @property gtk.types.TreeViewColumnSizing sizing()
+  {
+    return getSizing();
+  }
+
+  /** */
+  @property void sizing(gtk.types.TreeViewColumnSizing propval)
+  {
+    return setSizing(propval);
+  }
+
+  /**
+      Get `sortColumnId` property.
+      Returns: Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+      clickable. Set to -1 to make the column unsortable.
+  */
+  @property int sortColumnId()
+  {
+    return getSortColumnId();
+  }
+
+  /**
+      Set `sortColumnId` property.
+      Params:
+        propval = Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+        clickable. Set to -1 to make the column unsortable.
+  */
+  @property void sortColumnId(int propval)
+  {
+    return setSortColumnId(propval);
+  }
+
+  /** */
+  @property bool sortIndicator()
+  {
+    return getSortIndicator();
+  }
+
+  /** */
+  @property void sortIndicator(bool propval)
+  {
+    return setSortIndicator(propval);
+  }
+
+  /** */
+  @property gtk.types.SortType sortOrder()
+  {
+    return getSortOrder();
+  }
+
+  /** */
+  @property void sortOrder(gtk.types.SortType propval)
+  {
+    return setSortOrder(propval);
+  }
+
+  /** */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /** */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
+  }
+
+  /** */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /** */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /** */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /** */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
+  }
+
+  /** */
+  @property void widget(gtk.widget.Widget propval)
+  {
+    return setWidget(propval);
+  }
+
+  /** */
+  @property int width()
+  {
+    return getWidth();
+  }
+
+  /** */
+  @property int xOffset()
+  {
+    return getXOffset();
   }
 
   mixin BuildableT!();
@@ -89,7 +303,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_column_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +400,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   */
   void cellSetCellData(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_tree_view_column_cell_set_cell_data(cast(GtkTreeViewColumn*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, isExpander, isExpanded);
+    gtk_tree_view_column_cell_set_cell_data(cast(GtkTreeViewColumn*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel).cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, isExpander, isExpanded);
   }
 
   /**
@@ -262,7 +476,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_column_get_button(cast(GtkTreeViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -459,7 +673,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_column_get_tree_view(cast(GtkTreeViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -489,7 +703,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_column_get_widget(cast(GtkTreeViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -598,7 +812,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 

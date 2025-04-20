@@ -34,6 +34,7 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpinnerAccessible self()
   {
     return this;

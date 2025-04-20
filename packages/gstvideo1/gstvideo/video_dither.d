@@ -19,7 +19,7 @@ class VideoDither
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoDither");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_dither.VideoDither");
 
     cInstancePtr = cast(GstVideoDither*)ptr;
 

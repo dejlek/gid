@@ -5,7 +5,7 @@ import gobject.object;
 import gio.file;
 import gio.file_mixin;
 
-/// Proxy object for [Gio.File] interface when a GObject has no applicable D binding
+/// Proxy object for [gio.file.File] interface when a GObject has no applicable D binding
 class FileIfaceProxy : IfaceProxy, gio.file.File
 {
   this(void* ptr, Flag!"Take" take = No.Take)

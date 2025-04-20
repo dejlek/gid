@@ -5,6 +5,7 @@ public import gtk.cell_editable_iface_proxy;
 public import gdk.event;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -21,6 +22,25 @@ public import gtk.types;
 */
 template CellEditableT()
 {
+
+  /**
+      Get `editingCanceled` property.
+      Returns: Indicates whether editing on the cell has been canceled.
+  */
+  @property bool editingCanceled()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("editing-canceled");
+  }
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+  */
+  @property void editingCanceled(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("editing-canceled", propval);
+  }
 
   /**
       Emits the `GtkCellEditable::editing-done` signal.

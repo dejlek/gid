@@ -32,9 +32,9 @@ import gobject.object;
     
     [gdk.texture.Texture] is an immutable object: That means you cannot change
     anything about it other than increasing the reference count via
-    [gobject.object.ObjectG.ref_], and consequently, it is a thread-safe object.
+    [gobject.object.ObjectWrap.ref_], and consequently, it is a thread-safe object.
 */
-class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, gio.loadable_icon.LoadableIcon
+class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   /** */
@@ -56,6 +56,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Texture self()
   {
     return this;
@@ -80,7 +81,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   {
     GdkTexture* _cretval;
     _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -99,7 +100,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         bytes = a [glib.bytes.Bytes] containing the data to load
       Returns: A newly-created [gdk.texture.Texture]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdk.texture.Texture newFromBytes(glib.bytes.Bytes bytes)
   {
@@ -107,8 +108,8 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     GError *_err;
     _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,16 +128,16 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         file = [gio.file.File] to load
       Returns: A newly-created [gdk.texture.Texture]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdk.texture.Texture newFromFile(gio.file.File file)
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,7 +156,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         path = the filename to load
       Returns: A newly-created [gdk.texture.Texture]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gdk.texture.Texture newFromFilename(string path)
   {
@@ -164,8 +165,8 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     GError *_err;
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -193,7 +194,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     GdkTexture* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 

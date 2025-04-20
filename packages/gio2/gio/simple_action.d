@@ -17,7 +17,7 @@ import gobject.object;
     [gio.action.Action] interface. This is the easiest way to create an action for
     purposes of adding it to a [gio.simple_action_group.SimpleActionGroup].
 */
-class SimpleAction : gobject.object.ObjectG, gio.action.Action
+class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
 {
 
   /** */
@@ -39,9 +39,64 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SimpleAction self()
   {
     return this;
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: If @action is currently enabled.
+      
+      If the action is disabled then calls to [gio.action.Action.activate] and
+      [gio.action.Action.changeState] have no effect.
+  */
+  @property bool enabled()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enabled");
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = If @action is currently enabled.
+        
+        If the action is disabled then calls to [gio.action.Action.activate] and
+        [gio.action.Action.changeState] have no effect.
+  */
+  @property void enabled(bool propval)
+  {
+    return setEnabled(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The state of the action, or null if the action is stateless.
+  */
+  @property glib.variant.Variant state()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("state");
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The state of the action, or null if the action is stateless.
+  */
+  @property void state(glib.variant.Variant propval)
+  {
+    return setState(propval);
+  }
+
+  /**
+      Get `stateType` property.
+      Returns: The #GVariantType of the state that the action has, or null if the
+      action is stateless.
+  */
+  @property glib.variant_type.VariantType stateType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("state-type");
   }
 
   mixin ActionT!();
@@ -81,12 +136,12 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
         state = the initial state of the action
       Returns: a new #GSimpleAction
   */
-  static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.VariantG state)
+  static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.Variant state)
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
+    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null, state ? cast(GVariant*)state.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -122,9 +177,9 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
       Params:
         value = the new #GVariant for the state
   */
-  void setState(glib.variant.VariantG value)
+  void setState(glib.variant.Variant value)
   {
-    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,9 +191,9 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
       Params:
         stateHint = a #GVariant representing the state hint
   */
-  void setStateHint(glib.variant.VariantG stateHint = null)
+  void setStateHint(glib.variant.Variant stateHint = null)
   {
-    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(No.Dup) : null);
+    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(GVariant*)stateHint.cPtr(No.Dup) : null);
   }
 
   /**
@@ -161,7 +216,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.variant.VariantG parameter, gio.simple_action.SimpleAction simpleAction))
+          $(D void callback(glib.variant.Variant parameter, gio.simple_action.SimpleAction simpleAction))
   
           `parameter` the parameter to the activation, or null if it has
             no parameter (optional)
@@ -174,7 +229,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.VariantG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)
   {
@@ -238,7 +293,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.variant.VariantG value, gio.simple_action.SimpleAction simpleAction))
+          $(D void callback(glib.variant.Variant value, gio.simple_action.SimpleAction simpleAction))
   
           `value` the requested value for the state (optional)
   
@@ -250,7 +305,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   ulong connectChangeState(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.VariantG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)
   {

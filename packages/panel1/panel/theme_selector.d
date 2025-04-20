@@ -47,9 +47,29 @@ class ThemeSelector : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ThemeSelector self()
   {
     return this;
+  }
+
+  /**
+      Get `actionName` property.
+      Returns: The name of the action activated on activation.
+  */
+  @property string actionName()
+  {
+    return getActionName();
+  }
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action activated on activation.
+  */
+  @property void actionName(string propval)
+  {
+    return setActionName(propval);
   }
 
   /**

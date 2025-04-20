@@ -27,7 +27,7 @@ import soup.types;
     and then use a filter ([soup.auth_domain.AuthDomain.setFilter] to bypass
     authentication for those requests that don't need it.
 */
-class AuthDomain : gobject.object.ObjectG
+class AuthDomain : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,86 @@ class AuthDomain : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthDomain self()
   {
     return this;
+  }
+
+  /**
+      Get `filter` property.
+      Returns: The `callback@AuthDomainFilter` for the domain.
+  */
+  @property soup.types.AuthDomainFilter filter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainFilter)("filter");
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The `callback@AuthDomainFilter` for the domain.
+  */
+  @property void filter(soup.types.AuthDomainFilter propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainFilter)("filter", propval);
+  }
+
+  /**
+      Get `filterData` property.
+      Returns: Data to pass to the `callback@AuthDomainFilter`.
+  */
+  @property void* filterData()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("filter-data");
+  }
+
+  /**
+      Set `filterData` property.
+      Params:
+        propval = Data to pass to the `callback@AuthDomainFilter`.
+  */
+  @property void filterData(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("filter-data", propval);
+  }
+
+  /**
+      Get `genericAuthCallback` property.
+      Returns: The `callback@AuthDomainGenericAuthCallback`.
+  */
+  @property soup.types.AuthDomainGenericAuthCallback genericAuthCallback()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback");
+  }
+
+  /**
+      Set `genericAuthCallback` property.
+      Params:
+        propval = The `callback@AuthDomainGenericAuthCallback`.
+  */
+  @property void genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback", propval);
+  }
+
+  /**
+      Get `genericAuthData` property.
+      Returns: The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+  */
+  @property void* genericAuthData()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("generic-auth-data");
+  }
+
+  /**
+      Set `genericAuthData` property.
+      Params:
+        propval = The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+  */
+  @property void genericAuthData(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("generic-auth-data", propval);
   }
 
   /**
@@ -223,7 +300,7 @@ class AuthDomain : gobject.object.ObjectG
     {
       auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -252,7 +329,7 @@ class AuthDomain : gobject.object.ObjectG
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       return _retval;
     }
     auto _authCallbackCB = authCallback ? &_authCallbackCallback : null;

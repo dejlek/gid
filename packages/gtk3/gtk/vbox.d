@@ -62,6 +62,7 @@ class VBox : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VBox self()
   {
     return this;

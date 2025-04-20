@@ -30,6 +30,7 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TimeDataType self()
   {
     return this;

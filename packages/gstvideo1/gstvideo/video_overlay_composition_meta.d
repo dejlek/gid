@@ -20,7 +20,7 @@ class VideoOverlayCompositionMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoOverlayCompositionMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta");
 
     cInstance = *cast(GstVideoOverlayCompositionMeta*)ptr;
 
@@ -34,16 +34,29 @@ class VideoOverlayCompositionMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)cPtr).meta);
   }
 
+  /**
+      Get `overlay` field.
+      Returns: the attached #GstVideoOverlayComposition
+  */
   @property gstvideo.video_overlay_composition.VideoOverlayComposition overlay()
   {
     return cToD!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
   }
 
+  /**
+      Set `overlay` field.
+      Params:
+        propval = the attached #GstVideoOverlayComposition
+  */
   @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval)
   {
     cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);

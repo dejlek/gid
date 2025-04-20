@@ -38,6 +38,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SeekableInputStream self()
   {
     return this;
@@ -50,7 +51,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     GError *_err;
     _retval = garrow_seekable_input_stream_get_size(cast(GArrowSeekableInputStream*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     GError *_err;
     _cretval = garrow_seekable_input_stream_peek(cast(GArrowSeekableInputStream*)cPtr, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -81,8 +82,8 @@ class SeekableInputStream : arrow.input_stream.InputStream
     GError *_err;
     _cretval = garrow_seekable_input_stream_read_at(cast(GArrowSeekableInputStream*)cPtr, position, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,7 +94,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     GError *_err;
     _cretval = garrow_seekable_input_stream_read_at_bytes(cast(GArrowSeekableInputStream*)cPtr, position, nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -31,6 +31,7 @@ class RecordBatchDatum : arrow.datum.Datum
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchDatum self()
   {
     return this;

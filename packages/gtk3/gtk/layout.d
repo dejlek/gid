@@ -53,9 +53,34 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Layout self()
   {
     return this;
+  }
+
+  /** */
+  @property uint height()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("height");
+  }
+
+  /** */
+  @property void height(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("height", propval);
+  }
+
+  /** */
+  @property uint width()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("width");
+  }
+
+  /** */
+  @property void width(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("width", propval);
   }
 
   mixin ScrollableT!();
@@ -85,7 +110,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GdkWindow* _cretval;
     _cretval = gtk_layout_get_bin_window(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +129,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_hadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +164,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_vadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

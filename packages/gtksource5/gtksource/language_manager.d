@@ -20,7 +20,7 @@ import gtksource.types;
     [gtksource.language_manager.LanguageManager.guessLanguage] to get a `class@Language` for
     given file name and content type.
 */
-class LanguageManager : gobject.object.ObjectG
+class LanguageManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -42,6 +42,7 @@ class LanguageManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LanguageManager self()
   {
     return this;
@@ -70,7 +71,7 @@ class LanguageManager : gobject.object.ObjectG
   {
     GtkSourceLanguageManager* _cretval;
     _cretval = gtk_source_language_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtksource.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +105,7 @@ class LanguageManager : gobject.object.ObjectG
     GtkSourceLanguage* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +210,7 @@ class LanguageManager : gobject.object.ObjectG
     const(char)* _filename = filename.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)cPtr, _filename, _contentType);
-    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 

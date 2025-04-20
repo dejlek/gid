@@ -95,9 +95,88 @@ class ListBox : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListBox self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptUnpairedRelease` property.
+      Returns: Whether to accept unpaired release events.
+  */
+  @property bool acceptUnpairedRelease()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("accept-unpaired-release");
+  }
+
+  /**
+      Set `acceptUnpairedRelease` property.
+      Params:
+        propval = Whether to accept unpaired release events.
+  */
+  @property void acceptUnpairedRelease(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("accept-unpaired-release", propval);
+  }
+
+  /**
+      Get `activateOnSingleClick` property.
+      Returns: Determines whether children can be activated with a single
+      click, or require a double-click.
+  */
+  @property bool activateOnSingleClick()
+  {
+    return getActivateOnSingleClick();
+  }
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = Determines whether children can be activated with a single
+        click, or require a double-click.
+  */
+  @property void activateOnSingleClick(bool propval)
+  {
+    return setActivateOnSingleClick(propval);
+  }
+
+  /**
+      Get `selectionMode` property.
+      Returns: The selection mode used by the list box.
+  */
+  @property gtk.types.SelectionMode selectionMode()
+  {
+    return getSelectionMode();
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The selection mode used by the list box.
+  */
+  @property void selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setSelectionMode(propval);
+  }
+
+  /**
+      Get `showSeparators` property.
+      Returns: Whether to show separators between rows.
+  */
+  @property bool showSeparators()
+  {
+    return getShowSeparators();
+  }
+
+  /**
+      Set `showSeparators` property.
+      Params:
+        propval = Whether to show separators between rows.
+  */
+  @property void showSeparators(bool propval)
+  {
+    return setShowSeparators(propval);
   }
 
   /**
@@ -154,7 +233,7 @@ class ListBox : gtk.widget.Widget
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -163,7 +242,7 @@ class ListBox : gtk.widget.Widget
 
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
-    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
+    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -214,7 +293,7 @@ class ListBox : gtk.widget.Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_list_box_get_adjustment(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +311,7 @@ class ListBox : gtk.widget.Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_index(cast(GtkListBox*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,7 +326,7 @@ class ListBox : gtk.widget.Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_y(cast(GtkListBox*)cPtr, y);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,7 +342,7 @@ class ListBox : gtk.widget.Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_selected_row(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -428,7 +507,7 @@ class ListBox : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.ListBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -492,7 +571,7 @@ class ListBox : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -538,7 +617,7 @@ class ListBox : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.ListBoxUpdateHeaderFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
     }
     auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
 
@@ -605,7 +684,7 @@ class ListBox : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.ListBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;

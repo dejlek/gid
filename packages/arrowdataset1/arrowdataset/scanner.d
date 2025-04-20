@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Scanner : gobject.object.ObjectG
+class Scanner : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class Scanner : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scanner self()
   {
     return this;
@@ -45,8 +46,8 @@ class Scanner : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_scanner_to_record_batch_reader(cast(GADatasetScanner*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,8 +58,8 @@ class Scanner : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_scanner_to_table(cast(GADatasetScanner*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -33,6 +33,7 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecordBatchFileWriter self()
   {
     return this;
@@ -45,7 +46,7 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
     GError *_err;
     _cretval = garrow_record_batch_file_writer_new(sink ? cast(GArrowOutputStream*)sink.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 }

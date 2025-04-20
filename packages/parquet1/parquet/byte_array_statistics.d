@@ -31,6 +31,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ByteArrayStatistics self()
   {
     return this;

@@ -69,9 +69,29 @@ class SwitchRow : adw.action_row.ActionRow
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SwitchRow self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the switch row is in the "on" or "off" position.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the switch row is in the "on" or "off" position.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
   }
 
   /**

@@ -2,6 +2,7 @@
 module gstgl.glbase_src;
 
 import gid.gid;
+import gobject.object;
 import gstbase.push_src;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -35,8 +36,21 @@ class GLBaseSrc : gstbase.push_src.PushSrc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseSrc self()
   {
     return this;
+  }
+
+  /** */
+  @property long timestampOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("timestamp-offset");
+  }
+
+  /** */
+  @property void timestampOffset(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("timestamp-offset", propval);
   }
 }

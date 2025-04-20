@@ -18,7 +18,7 @@ public import glib.variant;
     methods on [gio.action_group.ActionGroup] used to activate actions:
     [gio.action_group.ActionGroup.activateAction] and
     [gio.action_group.ActionGroup.changeActionState]. These variants allow a
-    ‘platform data’ [glib.variant.VariantG] to be specified: a dictionary providing
+    ‘platform data’ [glib.variant.Variant] to be specified: a dictionary providing
     context for the action invocation (for example: timestamps, startup
     notification IDs, etc).
     
@@ -50,10 +50,10 @@ template RemoteActionGroupT()
         parameter = the optional parameter to the activation
         platformData = the platform data to send
   */
-  override void activateActionFull(string actionName, glib.variant.VariantG parameter, glib.variant.VariantG platformData)
+  override void activateActionFull(string actionName, glib.variant.Variant parameter, glib.variant.Variant platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);
+    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData.cPtr(No.Dup) : null);
   }
 
   /**
@@ -72,9 +72,9 @@ template RemoteActionGroupT()
         value = the new requested value for the state
         platformData = the platform data to send
   */
-  override void changeActionStateFull(string actionName, glib.variant.VariantG value, glib.variant.VariantG platformData)
+  override void changeActionStateFull(string actionName, glib.variant.Variant value, glib.variant.Variant platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);
+    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(GVariant*)value.cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData.cPtr(No.Dup) : null);
   }
 }

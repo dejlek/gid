@@ -4,6 +4,7 @@ module gtk.table;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -60,9 +61,70 @@ class Table : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Table self()
   {
     return this;
+  }
+
+  /** */
+  @property uint columnSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("column-spacing");
+  }
+
+  /** */
+  @property void columnSpacing(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("column-spacing", propval);
+  }
+
+  /** */
+  @property bool homogeneous()
+  {
+    return getHomogeneous();
+  }
+
+  /** */
+  @property void homogeneous(bool propval)
+  {
+    return setHomogeneous(propval);
+  }
+
+  /** */
+  @property uint nColumns()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-columns");
+  }
+
+  /** */
+  @property void nColumns(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("n-columns", propval);
+  }
+
+  /** */
+  @property uint nRows()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-rows");
+  }
+
+  /** */
+  @property void nRows(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("n-rows", propval);
+  }
+
+  /** */
+  @property uint rowSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("row-spacing");
+  }
+
+  /** */
+  @property void rowSpacing(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("row-spacing", propval);
   }
 
   /**

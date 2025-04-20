@@ -59,9 +59,64 @@ class ColorDialogButton : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorDialogButton self()
   {
     return this;
+  }
+
+  /**
+      Get `dialog` property.
+      Returns: The [gtk.color_dialog.ColorDialog] that contains parameters for
+      the color chooser dialog.
+  */
+  @property gtk.color_dialog.ColorDialog dialog()
+  {
+    return getDialog();
+  }
+
+  /**
+      Set `dialog` property.
+      Params:
+        propval = The [gtk.color_dialog.ColorDialog] that contains parameters for
+        the color chooser dialog.
+  */
+  @property void dialog(gtk.color_dialog.ColorDialog propval)
+  {
+    return setDialog(propval);
+  }
+
+  /**
+      Get `rgba` property.
+      Returns: The selected color.
+      
+      This property can be set to give the button its initial
+      color, and it will be updated to reflect the users choice
+      in the color chooser dialog.
+      
+      Listen to `notify::rgba` to get informed about changes
+      to the buttons color.
+  */
+  @property gdk.rgba.RGBA rgba()
+  {
+    return getRgba();
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The selected color.
+        
+        This property can be set to give the button its initial
+        color, and it will be updated to reflect the users choice
+        in the color chooser dialog.
+        
+        Listen to `notify::rgba` to get informed about changes
+        to the buttons color.
+  */
+  @property void rgba(gdk.rgba.RGBA propval)
+  {
+    return setRgba(propval);
   }
 
   /**
@@ -90,7 +145,7 @@ class ColorDialogButton : gtk.widget.Widget
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_button_get_dialog(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.color_dialog.ColorDialog)(cast(GtkColorDialog*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_dialog.ColorDialog)(cast(GtkColorDialog*)_cretval, No.Take);
     return _retval;
   }
 

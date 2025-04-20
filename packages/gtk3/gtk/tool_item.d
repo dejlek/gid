@@ -52,9 +52,46 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToolItem self()
   {
     return this;
+  }
+
+  /** */
+  @property bool isImportant()
+  {
+    return getIsImportant();
+  }
+
+  /** */
+  @property void isImportant(bool propval)
+  {
+    return setIsImportant(propval);
+  }
+
+  /** */
+  @property bool visibleHorizontal()
+  {
+    return getVisibleHorizontal();
+  }
+
+  /** */
+  @property void visibleHorizontal(bool propval)
+  {
+    return setVisibleHorizontal(propval);
+  }
+
+  /** */
+  @property bool visibleVertical()
+  {
+    return getVisibleVertical();
+  }
+
+  /** */
+  @property void visibleVertical(bool propval)
+  {
+    return setVisibleVertical(propval);
   }
 
   mixin ActivatableT!();
@@ -172,7 +209,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     GtkWidget* _cretval;
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
     _cretval = gtk_tool_item_get_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +268,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_tool_item_get_text_size_group(cast(GtkToolItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -323,7 +360,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_retrieve_proxy_menu_item(cast(GtkToolItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

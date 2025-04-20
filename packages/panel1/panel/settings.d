@@ -15,7 +15,7 @@ import panel.c.types;
 import panel.types;
 
 /** */
-class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
+class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 {
 
   /** */
@@ -37,6 +37,7 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Settings self()
   {
     return this;
@@ -64,7 +65,7 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
     const(char)* _pathPrefix = pathPrefix.toCString(No.Alloc);
     const(char)* _pathSuffix = pathSuffix.toCString(No.Alloc);
     _cretval = panel_settings_new_relocatable(_identifier, _schemaId, _schemaIdPrefix, _pathPrefix, _pathSuffix);
-    auto _retval = ObjectG.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +77,7 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = panel_settings_new_with_path(_identifier, _schemaId, _path);
-    auto _retval = ObjectG.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,22 +119,22 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
   */
   void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null)
   {
-    extern(C) bool _getMappingCallback(GValue* value, VariantC* variant, void* userData)
+    extern(C) bool _getMappingCallback(GValue* value, GVariant* variant, void* userData)
     {
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.VariantG(cast(void*)variant, No.Take) : null);
+      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
 
-    extern(C) VariantC* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
+    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
     {
-      glib.variant.VariantG _dretval;
+      glib.variant.Variant _dretval;
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
       _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      VariantC* _retval = cast(VariantC*)_dretval.cPtr(Yes.Dup);
+      GVariant* _retval = cast(GVariant*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -156,12 +157,12 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
   }
 
   /** */
-  glib.variant.VariantG getDefaultValue(string key)
+  glib.variant.Variant getDefaultValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_settings_get_default_value(cast(PanelSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -212,22 +213,22 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
   }
 
   /** */
-  glib.variant.VariantG getUserValue(string key)
+  glib.variant.Variant getUserValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_settings_get_user_value(cast(PanelSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
   /** */
-  glib.variant.VariantG getValue(string key)
+  glib.variant.Variant getValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_settings_get_value(cast(PanelSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -268,10 +269,10 @@ class Settings : gobject.object.ObjectG, gio.action_group.ActionGroup
   }
 
   /** */
-  void setValue(string key, glib.variant.VariantG value)
+  void setValue(string key, glib.variant.Variant value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_value(cast(PanelSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    panel_settings_set_value(cast(PanelSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /** */

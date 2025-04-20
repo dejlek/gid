@@ -31,6 +31,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HashJoinNodeOptions self()
   {
     return this;
@@ -61,7 +62,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _cretval = garrow_hash_join_node_options_new(type, _leftKeys, _nLeftKeys, _rightKeys, _nRightKeys, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -81,7 +82,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _retval = garrow_hash_join_node_options_set_left_outputs(cast(GArrowHashJoinNodeOptions*)cPtr, _outputs, _nOutputs, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -101,7 +102,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _retval = garrow_hash_join_node_options_set_right_outputs(cast(GArrowHashJoinNodeOptions*)cPtr, _outputs, _nOutputs, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

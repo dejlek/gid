@@ -27,7 +27,9 @@ import graphene.vec2;
 class Rect : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `rect.Rect` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_rect_t.sizeof), Yes.Take);
@@ -58,16 +60,25 @@ class Rect : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Rect self()
   {
     return this;
   }
 
+  /**
+      Get `origin` field.
+      Returns: the coordinates of the origin of the rectangle
+  */
   @property graphene.point.Point origin()
   {
     return cToD!(graphene.point.Point)(cast(void*)&(cast(graphene_rect_t*)cPtr).origin);
   }
 
+  /**
+      Get `size` field.
+      Returns: the size of the rectangle
+  */
   @property graphene.size.Size size()
   {
     return cToD!(graphene.size.Size)(cast(void*)&(cast(graphene_rect_t*)cPtr).size);

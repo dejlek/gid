@@ -56,9 +56,46 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScaleButton self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /** */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
+  }
+
+  /** */
+  @property gtk.types.IconSize size()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.IconSize)("size");
+  }
+
+  /** */
+  @property void size(gtk.types.IconSize propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.IconSize)("size", propval);
+  }
+
+  /** */
+  @property double value()
+  {
+    return getValue();
+  }
+
+  /** */
+  @property void value(double propval)
+  {
+    return setValue(propval);
   }
 
   mixin OrientableT!();
@@ -99,7 +136,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +148,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +160,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +172,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

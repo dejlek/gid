@@ -45,6 +45,7 @@ class Device : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Device self()
   {
     return this;

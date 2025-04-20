@@ -44,16 +44,26 @@ class GlyphString : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GlyphString self()
   {
     return this;
   }
 
+  /**
+      Get `numGlyphs` field.
+      Returns: number of glyphs in this glyph string
+  */
   @property int numGlyphs()
   {
     return (cast(PangoGlyphString*)cPtr).numGlyphs;
   }
 
+  /**
+      Set `numGlyphs` field.
+      Params:
+        propval = number of glyphs in this glyph string
+  */
   @property void numGlyphs(int propval)
   {
     (cast(PangoGlyphString*)cPtr).numGlyphs = propval;

@@ -14,6 +14,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
 import gtk.c.types;
+import gtk.menu;
 import gtk.tool_button;
 import gtk.types;
 import gtk.widget;
@@ -64,9 +65,22 @@ class MenuToolButton : gtk.tool_button.ToolButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuToolButton self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.menu.Menu menu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("menu");
+  }
+
+  /** */
+  @property void menu(gtk.menu.Menu propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("menu", propval);
   }
 
   /**
@@ -102,7 +116,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_menu_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +129,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

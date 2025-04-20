@@ -43,10 +43,15 @@ import gst.types;
 class Query : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `query.Query` boxed type.
+      Params:
+        type = the #GstQueryType
+  */
+  this(gst.types.QueryType type = gst.types.QueryType.init)
   {
     super(gMalloc(GstQuery.sizeof), Yes.Take);
+    this.type = type;
   }
 
   /** */
@@ -74,21 +79,35 @@ class Query : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Query self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: The parent #GstMiniObject type
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstQuery*)cPtr).miniObject);
   }
 
+  /**
+      Get `type` field.
+      Returns: the #GstQueryType
+  */
   @property gst.types.QueryType type()
   {
     return cast(gst.types.QueryType)(cast(GstQuery*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the #GstQueryType
+  */
   @property void type(gst.types.QueryType propval)
   {
     (cast(GstQuery*)cPtr).type = cast(GstQueryType)propval;
@@ -870,7 +889,7 @@ class Query : gobject.boxed.Boxed
   /**
       Get the pool parameters in query.
       
-      Unref pool with [gst.object.ObjectGst.unref] when it's not needed any more.
+      Unref pool with [gst.object.ObjectWrap.unref] when it's not needed any more.
   
       Params:
         index = index to parse

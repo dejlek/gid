@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class MonthDayNano : gobject.object.ObjectG
+class MonthDayNano : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,67 @@ class MonthDayNano : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MonthDayNano self()
   {
     return this;
+  }
+
+  /**
+      Get `day` property.
+      Returns: The day part value.
+  */
+  @property int day()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("day");
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The day part value.
+  */
+  @property void day(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("day", propval);
+  }
+
+  /**
+      Get `month` property.
+      Returns: The month part value.
+  */
+  @property int month()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("month");
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The month part value.
+  */
+  @property void month(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("month", propval);
+  }
+
+  /**
+      Get `nanosecond` property.
+      Returns: The nanosecond part value.
+  */
+  @property long nanosecond()
+  {
+    return gobject.object.ObjectWrap.getProperty!(long)("nanosecond");
+  }
+
+  /**
+      Set `nanosecond` property.
+      Params:
+        propval = The nanosecond part value.
+  */
+  @property void nanosecond(long propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(long)("nanosecond", propval);
   }
 
   /** */

@@ -22,7 +22,7 @@ import gstgl.types;
     Note: OpenGL framebuffers are not shareable resources so cannot be used
     between multiple OpenGL contexts.
 */
-class GLFramebuffer : gst.object.ObjectGst
+class GLFramebuffer : gst.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class GLFramebuffer : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLFramebuffer self()
   {
     return this;
@@ -78,7 +79,7 @@ class GLFramebuffer : gst.object.ObjectGst
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, width, height);
-    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.Take);
     return _retval;
   }
 

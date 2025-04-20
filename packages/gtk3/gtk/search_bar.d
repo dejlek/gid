@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.event;
 import gid.gid;
+import gobject.object;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -60,9 +61,34 @@ class SearchBar : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SearchBar self()
   {
     return this;
+  }
+
+  /** */
+  @property bool searchModeEnabled()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("search-mode-enabled");
+  }
+
+  /** */
+  @property void searchModeEnabled(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("search-mode-enabled", propval);
+  }
+
+  /** */
+  @property bool showCloseButton()
+  {
+    return getShowCloseButton();
+  }
+
+  /** */
+  @property void showCloseButton(bool propval)
+  {
+    return setShowCloseButton(propval);
   }
 
   /**

@@ -99,9 +99,34 @@ class AccelLabel : gtk.label.Label
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AccelLabel self()
   {
     return this;
+  }
+
+  /** */
+  @property gobject.closure.Closure accelClosure()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.closure.Closure)("accel-closure");
+  }
+
+  /** */
+  @property void accelClosure(gobject.closure.Closure propval)
+  {
+    return setAccelClosure(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget accelWidget()
+  {
+    return getAccelWidget();
+  }
+
+  /** */
+  @property void accelWidget(gtk.widget.Widget propval)
+  {
+    return setAccelWidget(propval);
   }
 
   /**
@@ -141,7 +166,7 @@ class AccelLabel : gtk.label.Label
   {
     GtkWidget* _cretval;
     _cretval = gtk_accel_label_get_accel_widget(cast(GtkAccelLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

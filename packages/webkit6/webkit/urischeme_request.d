@@ -24,7 +24,7 @@ import webkit.web_view;
     request, and also finish the request with
     [webkit.urischeme_request.URISchemeRequest.finish].
 */
-class URISchemeRequest : gobject.object.ObjectG
+class URISchemeRequest : gobject.object.ObjectWrap
 {
 
   /** */
@@ -72,7 +72,7 @@ class URISchemeRequest : gobject.object.ObjectG
       Params:
         error = a #GError that will be passed to the #WebKitWebView
   */
-  void finishError(glib.error.ErrorG error)
+  void finishError(glib.error.ErrorWrap error)
   {
     webkit_uri_scheme_request_finish_error(cast(WebKitURISchemeRequest*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -96,7 +96,7 @@ class URISchemeRequest : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = webkit_uri_scheme_request_get_http_body(cast(WebKitURISchemeRequest*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class URISchemeRequest : gobject.object.ObjectG
   {
     WebKitWebView* _cretval;
     _cretval = webkit_uri_scheme_request_get_web_view(cast(WebKitURISchemeRequest*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
   }
 }

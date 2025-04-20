@@ -32,6 +32,7 @@ class UInt64Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UInt64Array self()
   {
     return this;
@@ -75,7 +76,7 @@ class UInt64Array : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_uint64_array_sum(cast(GArrowUInt64Array*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

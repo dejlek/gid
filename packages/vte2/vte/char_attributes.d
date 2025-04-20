@@ -15,7 +15,7 @@ class CharAttributes
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Vte.CharAttributes");
+      throw new GidConstructException("Null instance pointer for vte.char_attributes.CharAttributes");
 
     cInstance = *cast(VteCharAttributes*)ptr;
 

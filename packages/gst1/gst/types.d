@@ -629,7 +629,7 @@ alias IteratorResyncFunction = void delegate(gst.iterator.Iterator it);
       object = a #GObject
       message = the message
 */
-alias LogFunction = void delegate(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message);
+alias LogFunction = void delegate(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, gst.debug_message.DebugMessage message);
 
 /**
     Copy size bytes from mem starting at offset and return them wrapped in a
@@ -828,7 +828,7 @@ alias MiniObjectNotify = void delegate(gst.mini_object.MiniObject obj);
       parent = the parent of pad
     Returns: true if the pad could be activated.
 */
-alias PadActivateFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
+alias PadActivateFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent);
 
 /**
     The prototype of the push and pull activate functions.
@@ -840,7 +840,7 @@ alias PadActivateFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst 
       active = activate or deactivate the pad.
     Returns: true if the pad could be activated or deactivated.
 */
-alias PadActivateModeFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active);
+alias PadActivateModeFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active);
 
 /**
     A function that will be called on sinkpads when chaining buffers.
@@ -861,7 +861,7 @@ alias PadActivateModeFunction = bool delegate(gst.pad.Pad pad, gst.object.Object
       buffer = the #GstBuffer that is chained, not null.
     Returns: #GST_FLOW_OK for success
 */
-alias PadChainFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer.Buffer buffer);
+alias PadChainFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer);
 
 /**
     A function that will be called on sinkpads when chaining buffer lists.
@@ -882,7 +882,7 @@ alias PadChainFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.obje
       list = the #GstBufferList that is chained, not null.
     Returns: #GST_FLOW_OK for success
 */
-alias PadChainListFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer_list.BufferList list);
+alias PadChainListFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer_list.BufferList list);
 
 /**
     Function signature to handle an event for the pad.
@@ -900,7 +900,7 @@ alias PadChainListFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.
     Returns: [gst.types.FlowReturn.Ok] if the event was handled properly, or any other
       #GstFlowReturn dependent on downstream state.
 */
-alias PadEventFullFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.event.Event event);
+alias PadEventFullFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.event.Event event);
 
 /**
     Function signature to handle an event for the pad.
@@ -913,7 +913,7 @@ alias PadEventFullFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.
       event = the #GstEvent to handle.
     Returns: true if the pad could handle the event.
 */
-alias PadEventFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.event.Event event);
+alias PadEventFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.event.Event event);
 
 /**
     A forward function is called for all internally linked pads, see
@@ -971,7 +971,7 @@ alias PadForwardFunction = bool delegate(gst.pad.Pad pad);
     Returns: #GST_FLOW_OK for success and a valid buffer in buffer. Any other
       return value leaves buffer undefined.
 */
-alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, ulong offset, uint length, gst.buffer.Buffer buffer);
+alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint length, gst.buffer.Buffer buffer);
 
 /**
     The signature of the internal pad link iterator function.
@@ -986,7 +986,7 @@ alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.o
       
       the caller must call [gst.iterator.Iterator.free] after usage.
 */
-alias PadIterIntLinkFunction = gst.iterator.Iterator delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
+alias PadIterIntLinkFunction = gst.iterator.Iterator delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent);
 
 /**
     Function signature to handle a new link on the pad.
@@ -999,7 +999,7 @@ alias PadIterIntLinkFunction = gst.iterator.Iterator delegate(gst.pad.Pad pad, g
       peer = the peer #GstPad of the link
     Returns: the result of the link with the specified peer.
 */
-alias PadLinkFunction = gst.types.PadLinkReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.pad.Pad peer);
+alias PadLinkFunction = gst.types.PadLinkReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.pad.Pad peer);
 
 /**
     Callback used by [gst.pad.Pad.addProbe]. Gets called to notify about the current
@@ -1025,7 +1025,7 @@ alias PadProbeCallback = gst.types.PadProbeReturn delegate(gst.pad.Pad pad, gst.
       query = the #GstQuery object to execute
     Returns: true if the query could be performed.
 */
-alias PadQueryFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.query.Query query);
+alias PadQueryFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.query.Query query);
 
 /**
     Callback used by [gst.pad.Pad.stickyEventsForeach].
@@ -1057,7 +1057,7 @@ alias PadStickyEventsForeachFunction = bool delegate(gst.pad.Pad pad, gst.event.
                  flag is set, parent is guaranteed to be not-null and remain valid
                  during the execution of this function.
 */
-alias PadUnlinkFunction = void delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
+alias PadUnlinkFunction = void delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent);
 
 /**
     A function that can be used with e.g. [gst.registry.Registry.featureFilter]

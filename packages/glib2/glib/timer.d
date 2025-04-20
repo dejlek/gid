@@ -22,7 +22,7 @@ class Timer
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Timer");
+      throw new GidConstructException("Null instance pointer for glib.timer.Timer");
 
     cInstancePtr = cast(GTimer*)ptr;
 

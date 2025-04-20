@@ -12,8 +12,8 @@ import gtk.types;
     widgets.
     
     [gtk.bin_layout.BinLayout] will stack each child of a widget on top of each other,
-    using the [gtk.widget.Widget.gboolean], [gtk.widget.Widget.gboolean],
-    [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
+    using the [gtk.widget.Widget.hexpand], [gtk.widget.Widget.vexpand],
+    [gtk.widget.Widget.halign], and [gtk.widget.Widget.valign] properties
     of each child to determine where they should be positioned.
 */
 class BinLayout : gtk.layout_manager.LayoutManager
@@ -38,6 +38,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BinLayout self()
   {
     return this;

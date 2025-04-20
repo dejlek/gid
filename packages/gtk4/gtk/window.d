@@ -109,9 +109,507 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Window self()
   {
     return this;
+  }
+
+  /**
+      Get `application` property.
+      Returns: The [gtk.application.Application] associated with the window.
+      
+      The application will be kept alive for at least as long as it
+      has any windows associated with it (see [gio.application.Application.hold]
+      for a way to keep it alive without windows).
+      
+      Normally, the connection between the application and the window
+      will remain until the window is destroyed, but you can explicitly
+      remove it by setting the :application property to null.
+  */
+  @property gtk.application.Application application()
+  {
+    return getApplication();
+  }
+
+  /**
+      Set `application` property.
+      Params:
+        propval = The [gtk.application.Application] associated with the window.
+        
+        The application will be kept alive for at least as long as it
+        has any windows associated with it (see [gio.application.Application.hold]
+        for a way to keep it alive without windows).
+        
+        Normally, the connection between the application and the window
+        will remain until the window is destroyed, but you can explicitly
+        remove it by setting the :application property to null.
+  */
+  @property void application(gtk.application.Application propval)
+  {
+    return setApplication(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `decorated` property.
+      Returns: Whether the window should have a frame (also known as *decorations*).
+  */
+  @property bool decorated()
+  {
+    return getDecorated();
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window should have a frame (also known as *decorations*).
+  */
+  @property void decorated(bool propval)
+  {
+    return setDecorated(propval);
+  }
+
+  /**
+      Get `defaultHeight` property.
+      Returns: The default height of the window.
+  */
+  @property int defaultHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("default-height");
+  }
+
+  /**
+      Set `defaultHeight` property.
+      Params:
+        propval = The default height of the window.
+  */
+  @property void defaultHeight(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("default-height", propval);
+  }
+
+  /**
+      Get `defaultWidget` property.
+      Returns: The default widget.
+  */
+  @property gtk.widget.Widget defaultWidget()
+  {
+    return getDefaultWidget();
+  }
+
+  /**
+      Set `defaultWidget` property.
+      Params:
+        propval = The default widget.
+  */
+  @property void defaultWidget(gtk.widget.Widget propval)
+  {
+    return setDefaultWidget(propval);
+  }
+
+  /**
+      Get `defaultWidth` property.
+      Returns: The default width of the window.
+  */
+  @property int defaultWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("default-width");
+  }
+
+  /**
+      Set `defaultWidth` property.
+      Params:
+        propval = The default width of the window.
+  */
+  @property void defaultWidth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("default-width", propval);
+  }
+
+  /**
+      Get `deletable` property.
+      Returns: Whether the window frame should have a close button.
+  */
+  @property bool deletable()
+  {
+    return getDeletable();
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window frame should have a close button.
+  */
+  @property void deletable(bool propval)
+  {
+    return setDeletable(propval);
+  }
+
+  /**
+      Get `destroyWithParent` property.
+      Returns: If this window should be destroyed when the parent is destroyed.
+  */
+  @property bool destroyWithParent()
+  {
+    return getDestroyWithParent();
+  }
+
+  /**
+      Set `destroyWithParent` property.
+      Params:
+        propval = If this window should be destroyed when the parent is destroyed.
+  */
+  @property void destroyWithParent(bool propval)
+  {
+    return setDestroyWithParent(propval);
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display that will display this window.
+  */
+  @property gdk.display.Display display()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that will display this window.
+  */
+  @property void display(gdk.display.Display propval)
+  {
+    return setDisplay(propval);
+  }
+
+  /**
+      Get `focusVisible` property.
+      Returns: Whether 'focus rectangles' are currently visible in this window.
+      
+      This property is maintained by GTK based on user input
+      and should not be set by applications.
+  */
+  @property bool focusVisible()
+  {
+    return getFocusVisible();
+  }
+
+  /**
+      Set `focusVisible` property.
+      Params:
+        propval = Whether 'focus rectangles' are currently visible in this window.
+        
+        This property is maintained by GTK based on user input
+        and should not be set by applications.
+  */
+  @property void focusVisible(bool propval)
+  {
+    return setFocusVisible(propval);
+  }
+
+  /**
+      Get `focusWidget` property.
+      Returns: The focus widget.
+  */
+  @property gtk.widget.Widget focusWidget()
+  {
+    return getFocus();
+  }
+
+  /**
+      Set `focusWidget` property.
+      Params:
+        propval = The focus widget.
+  */
+  @property void focusWidget(gtk.widget.Widget propval)
+  {
+    return setFocus(propval);
+  }
+
+  /**
+      Get `fullscreened` property.
+      Returns: Whether the window is fullscreen.
+      
+      Setting this property is the equivalent of calling
+      [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
+      either operation is asynchronous, which means you will need to
+      connect to the ::notify signal in order to know whether the
+      operation was successful.
+  */
+  @property bool fullscreened()
+  {
+    return isFullscreen();
+  }
+
+  /**
+      Set `fullscreened` property.
+      Params:
+        propval = Whether the window is fullscreen.
+        
+        Setting this property is the equivalent of calling
+        [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
+        either operation is asynchronous, which means you will need to
+        connect to the ::notify signal in order to know whether the
+        operation was successful.
+  */
+  @property void fullscreened(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("fullscreened", propval);
+  }
+
+  /**
+      Get `handleMenubarAccel` property.
+      Returns: Whether the window frame should handle F10 for activating
+      menubars.
+  */
+  @property bool handleMenubarAccel()
+  {
+    return getHandleMenubarAccel();
+  }
+
+  /**
+      Set `handleMenubarAccel` property.
+      Params:
+        propval = Whether the window frame should handle F10 for activating
+        menubars.
+  */
+  @property void handleMenubarAccel(bool propval)
+  {
+    return setHandleMenubarAccel(propval);
+  }
+
+  /**
+      Get `hideOnClose` property.
+      Returns: If this window should be hidden when the users clicks the close button.
+  */
+  @property bool hideOnClose()
+  {
+    return getHideOnClose();
+  }
+
+  /**
+      Set `hideOnClose` property.
+      Params:
+        propval = If this window should be hidden when the users clicks the close button.
+  */
+  @property void hideOnClose(bool propval)
+  {
+    return setHideOnClose(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: Specifies the name of the themed icon to use as the window icon.
+      
+      See [gtk.icon_theme.IconTheme] for more details.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = Specifies the name of the themed icon to use as the window icon.
+        
+        See [gtk.icon_theme.IconTheme] for more details.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `maximized` property.
+      Returns: Whether the window is maximized.
+      
+      Setting this property is the equivalent of calling
+      [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
+      either operation is asynchronous, which means you will need to
+      connect to the ::notify signal in order to know whether the
+      operation was successful.
+  */
+  @property bool maximized()
+  {
+    return isMaximized();
+  }
+
+  /**
+      Set `maximized` property.
+      Params:
+        propval = Whether the window is maximized.
+        
+        Setting this property is the equivalent of calling
+        [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
+        either operation is asynchronous, which means you will need to
+        connect to the ::notify signal in order to know whether the
+        operation was successful.
+  */
+  @property void maximized(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("maximized", propval);
+  }
+
+  /**
+      Get `mnemonicsVisible` property.
+      Returns: Whether mnemonics are currently visible in this window.
+      
+      This property is maintained by GTK based on user input,
+      and should not be set by applications.
+  */
+  @property bool mnemonicsVisible()
+  {
+    return getMnemonicsVisible();
+  }
+
+  /**
+      Set `mnemonicsVisible` property.
+      Params:
+        propval = Whether mnemonics are currently visible in this window.
+        
+        This property is maintained by GTK based on user input,
+        and should not be set by applications.
+  */
+  @property void mnemonicsVisible(bool propval)
+  {
+    return setMnemonicsVisible(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: If true, the window is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = If true, the window is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `resizable` property.
+      Returns: If true, users can resize the window.
+  */
+  @property bool resizable()
+  {
+    return getResizable();
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = If true, users can resize the window.
+  */
+  @property void resizable(bool propval)
+  {
+    return setResizable(propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = A write-only property for setting window's startup notification identifier.
+  */
+  @property void startupId(string propval)
+  {
+    return setStartupId(propval);
+  }
+
+  /**
+      Get `suspended` property.
+      Returns: Whether the window is suspended.
+      
+      See [gtk.window.Window.isSuspended] for details about what suspended means.
+  */
+  @property bool suspended()
+  {
+    return isSuspended();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the window.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the window.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `titlebar` property.
+      Returns: The titlebar widget.
+  */
+  @property gtk.widget.Widget titlebar()
+  {
+    return getTitlebar();
+  }
+
+  /**
+      Set `titlebar` property.
+      Params:
+        propval = The titlebar widget.
+  */
+  @property void titlebar(gtk.widget.Widget propval)
+  {
+    return setTitlebar(propval);
+  }
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the window.
+  */
+  @property gtk.window.Window transientFor()
+  {
+    return getTransientFor();
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the window.
+  */
+  @property void transientFor(gtk.window.Window propval)
+  {
+    return setTransientFor(propval);
   }
 
   mixin NativeT!();
@@ -169,7 +667,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -275,8 +773,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       to fullscreen windows.
       
       You can track the result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
-      notifications of the [gtk.window.Window.gboolean] property.
+      [gdk.toplevel.Toplevel.state] property, or by listening to
+      notifications of the [gtk.window.Window.fullscreened] property.
   */
   void fullscreen()
   {
@@ -291,13 +789,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       any given monitor.
       
       You can track the result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
-      notifications of the [gtk.window.Window.gboolean] property.
+      [gdk.toplevel.Toplevel.state] property, or by listening to
+      notifications of the [gtk.window.Window.fullscreened] property.
   
       Params:
         monitor = which monitor to go fullscreen on
   */
-  void fullscreenOnMonitor(gdk.monitor.MonitorG monitor)
+  void fullscreenOnMonitor(gdk.monitor.MonitorWrap monitor)
   {
     gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
@@ -310,7 +808,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -322,7 +820,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_child(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -364,7 +862,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -403,7 +901,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -430,7 +928,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -525,7 +1023,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -537,7 +1035,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -636,8 +1134,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       initially.
       
       You can track the result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
-      notifications on the [gtk.window.Window.gboolean]
+      [gdk.toplevel.Toplevel.state] property, or by listening to
+      notifications on the [gtk.window.Window.maximized]
       property.
   */
   void maximize()
@@ -659,7 +1157,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       onscreen.
       
       You can track result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property.
+      [gdk.toplevel.Toplevel.state] property.
   */
   void minimize()
   {
@@ -1082,8 +1580,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       write code that crashes if not.
       
       You can track the result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
-      notifications of the [gtk.window.Window.gboolean] property.
+      [gdk.toplevel.Toplevel.state] property, or by listening to
+      notifications of the [gtk.window.Window.fullscreened] property.
   */
   void unfullscreen()
   {
@@ -1099,8 +1597,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       unmaximize.
       
       You can track the result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
-      notifications on the [gtk.window.Window.gboolean] property.
+      [gdk.toplevel.Toplevel.state] property, or by listening to
+      notifications on the [gtk.window.Window.maximized] property.
   */
   void unmaximize()
   {
@@ -1117,7 +1615,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       which case minimization isn’t possible, etc.
       
       You can track result of this operation via the
-      [gdk.toplevel.Toplevel.ToplevelState] property.
+      [gdk.toplevel.Toplevel.state] property.
   */
   void unminimize()
   {

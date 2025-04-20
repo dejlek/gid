@@ -13,10 +13,17 @@ import gstrtsp.types;
 class RTSPAuthCredential : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rtspauth_credential.RTSPAuthCredential` boxed type.
+      Params:
+        scheme = a #GstRTSPAuthMethod
+        authorization = The authorization for the basic schem
+  */
+  this(gstrtsp.types.RTSPAuthMethod scheme = gstrtsp.types.RTSPAuthMethod.init, string authorization = string.init)
   {
     super(gMalloc(GstRTSPAuthCredential.sizeof), Yes.Take);
+    this.scheme = scheme;
+    this.authorization = authorization;
   }
 
   /** */
@@ -44,26 +51,45 @@ class RTSPAuthCredential : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTSPAuthCredential self()
   {
     return this;
   }
 
+  /**
+      Get `scheme` field.
+      Returns: a #GstRTSPAuthMethod
+  */
   @property gstrtsp.types.RTSPAuthMethod scheme()
   {
     return cast(gstrtsp.types.RTSPAuthMethod)(cast(GstRTSPAuthCredential*)cPtr).scheme;
   }
 
+  /**
+      Set `scheme` field.
+      Params:
+        propval = a #GstRTSPAuthMethod
+  */
   @property void scheme(gstrtsp.types.RTSPAuthMethod propval)
   {
     (cast(GstRTSPAuthCredential*)cPtr).scheme = cast(GstRTSPAuthMethod)propval;
   }
 
+  /**
+      Get `authorization` field.
+      Returns: The authorization for the basic schem
+  */
   @property string authorization()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthCredential*)cPtr).authorization);
   }
 
+  /**
+      Set `authorization` field.
+      Params:
+        propval = The authorization for the basic schem
+  */
   @property void authorization(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPAuthCredential*)cPtr).authorization);

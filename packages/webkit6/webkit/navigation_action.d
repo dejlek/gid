@@ -126,7 +126,7 @@ class NavigationAction : gobject.boxed.Boxed
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_navigation_action_get_request(cast(WebKitNavigationAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 

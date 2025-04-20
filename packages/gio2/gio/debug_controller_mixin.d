@@ -18,7 +18,7 @@ public import gio.types;
     Whether debug output is enabled is exposed as
     `property@Gio.DebugController:debug-enabled`. This controls
     `func@GLib.log_set_debug_enabled` by default. Application code may
-    connect to the [gobject.object.ObjectG.notify] signal for it
+    connect to the [gobject.object.ObjectWrap.notify] signal for it
     to control other parts of its debug infrastructure as necessary.
     
     If your application or service is using the default GLib log writer function,
@@ -27,6 +27,27 @@ public import gio.types;
 */
 template DebugControllerT()
 {
+
+  /**
+      Get `debugEnabled` property.
+      Returns: true if debug output should be exposed (for example by forwarding it to
+      the journal), false otherwise.
+  */
+  @property bool debugEnabled()
+  {
+    return getDebugEnabled();
+  }
+
+  /**
+      Set `debugEnabled` property.
+      Params:
+        propval = true if debug output should be exposed (for example by forwarding it to
+        the journal), false otherwise.
+  */
+  @property void debugEnabled(bool propval)
+  {
+    return setDebugEnabled(propval);
+  }
 
   /**
       Get the value of #GDebugController:debug-enabled.

@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class FileWriteOptions : gobject.object.ObjectG
+class FileWriteOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class FileWriteOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileWriteOptions self()
   {
     return this;

@@ -30,6 +30,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CommandDescriptor self()
   {
     return this;

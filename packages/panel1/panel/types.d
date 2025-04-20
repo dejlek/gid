@@ -22,7 +22,7 @@ alias Action = PanelAction*;
 // Callbacks
 
 /** */
-alias ActionActivateFunc = void delegate(void* instance, string actionName, glib.variant.VariantG param);
+alias ActionActivateFunc = void delegate(void* instance, string actionName, glib.variant.Variant param);
 
 /**
     Callback passed to "foreach frame" functions.

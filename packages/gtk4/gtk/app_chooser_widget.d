@@ -68,9 +68,156 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppChooserWidget self()
   {
     return this;
+  }
+
+  /**
+      Get `defaultText` property.
+      Returns: The text that appears in the widget when there are no applications
+      for the given content type.
+  */
+  @property string defaultText()
+  {
+    return getDefaultText();
+  }
+
+  /**
+      Set `defaultText` property.
+      Params:
+        propval = The text that appears in the widget when there are no applications
+        for the given content type.
+  */
+  @property void defaultText(string propval)
+  {
+    return setDefaultText(propval);
+  }
+
+  /**
+      Get `showAll` property.
+      Returns: If true, the app chooser presents all applications
+      in a single list, without subsections for default,
+      recommended or related applications.
+  */
+  @property bool showAll()
+  {
+    return getShowAll();
+  }
+
+  /**
+      Set `showAll` property.
+      Params:
+        propval = If true, the app chooser presents all applications
+        in a single list, without subsections for default,
+        recommended or related applications.
+  */
+  @property void showAll(bool propval)
+  {
+    return setShowAll(propval);
+  }
+
+  /**
+      Get `showDefault` property.
+      Returns: Determines whether the app chooser should show the default
+      handler for the content type in a separate section.
+      
+      If false, the default handler is listed among the recommended
+      applications.
+  */
+  @property bool showDefault()
+  {
+    return getShowDefault();
+  }
+
+  /**
+      Set `showDefault` property.
+      Params:
+        propval = Determines whether the app chooser should show the default
+        handler for the content type in a separate section.
+        
+        If false, the default handler is listed among the recommended
+        applications.
+  */
+  @property void showDefault(bool propval)
+  {
+    return setShowDefault(propval);
+  }
+
+  /**
+      Get `showFallback` property.
+      Returns: Determines whether the app chooser should show a section
+      for fallback applications.
+      
+      If false, the fallback applications are listed among the
+      other applications.
+  */
+  @property bool showFallback()
+  {
+    return getShowFallback();
+  }
+
+  /**
+      Set `showFallback` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+        for fallback applications.
+        
+        If false, the fallback applications are listed among the
+        other applications.
+  */
+  @property void showFallback(bool propval)
+  {
+    return setShowFallback(propval);
+  }
+
+  /**
+      Get `showOther` property.
+      Returns: Determines whether the app chooser should show a section
+      for other applications.
+  */
+  @property bool showOther()
+  {
+    return getShowOther();
+  }
+
+  /**
+      Set `showOther` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+        for other applications.
+  */
+  @property void showOther(bool propval)
+  {
+    return setShowOther(propval);
+  }
+
+  /**
+      Get `showRecommended` property.
+      Returns: Determines whether the app chooser should show a section
+      for recommended applications.
+      
+      If false, the recommended applications are listed
+      among the other applications.
+  */
+  @property bool showRecommended()
+  {
+    return getShowRecommended();
+  }
+
+  /**
+      Set `showRecommended` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+        for recommended applications.
+        
+        If false, the recommended applications are listed
+        among the other applications.
+  */
+  @property void showRecommended(bool propval)
+  {
+    return setShowRecommended(propval);
   }
 
   mixin AppChooserT!();

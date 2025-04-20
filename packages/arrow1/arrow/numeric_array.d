@@ -31,6 +31,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NumericArray self()
   {
     return this;
@@ -43,7 +44,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _retval = garrow_numeric_array_mean(cast(GArrowNumericArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

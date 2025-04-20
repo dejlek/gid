@@ -31,7 +31,7 @@ import gobject.object;
     writing, splicing, flushing and closing streams, but *may* implement
     asynchronous versions.
 */
-class OutputStream : gobject.object.ObjectG
+class OutputStream : gobject.object.ObjectWrap
 {
 
   /** */
@@ -53,6 +53,7 @@ class OutputStream : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OutputStream self()
   {
     return this;
@@ -100,7 +101,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         cancellable = optional cancellable object
       Returns: true on success, false on failure
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -108,7 +109,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_close(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -137,7 +138,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -151,15 +152,15 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true if stream was successfully closed, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -177,7 +178,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         cancellable = optional cancellable object
       Returns: true on success, false on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool flush(gio.cancellable.Cancellable cancellable = null)
   {
@@ -185,7 +186,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_flush(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -211,7 +212,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -225,15 +226,15 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a GAsyncResult.
       Returns: true if flush operation succeeded, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool flushFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -278,7 +279,7 @@ class OutputStream : gobject.object.ObjectG
       already set or stream is closed, it will return false and set
       error.
       Returns: true if pending was previously unset and is now set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setPending()
   {
@@ -286,7 +287,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_set_pending(cast(GOutputStream*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -302,7 +303,7 @@ class OutputStream : gobject.object.ObjectG
             spliced is greater than `G_MAXSSIZE`, then that will be
             returned, and there is no way to determine the actual number
             of bytes spliced.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t splice(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -310,7 +311,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_splice(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -338,7 +339,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -355,15 +356,15 @@ class OutputStream : gobject.object.ObjectG
             number of bytes spliced is greater than `G_MAXSSIZE`, then that
             will be returned, and there is no way to determine the actual
             number of bytes spliced.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t spliceFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -393,7 +394,7 @@ class OutputStream : gobject.object.ObjectG
         buffer = the buffer containing the data to write.
         cancellable = optional cancellable object
       Returns: Number of bytes written, or -1 on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t write(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -406,7 +407,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_write(cast(GOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -437,7 +438,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeAll(ubyte[] buffer, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -450,7 +451,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_write_all(cast(GOutputStream*)cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -485,7 +486,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -514,15 +515,15 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult
         bytesWritten = location to store the number of bytes that was written to the stream
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writeAllFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -577,7 +578,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -607,7 +608,7 @@ class OutputStream : gobject.object.ObjectG
         bytes = the #GBytes to write
         cancellable = optional cancellable object
       Returns: Number of bytes written, or -1 on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t writeBytes(glib.bytes.Bytes bytes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -615,7 +616,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_write_bytes(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -648,7 +649,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -662,15 +663,15 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #gssize containing the number of bytes written to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t writeBytesFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -680,15 +681,15 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #gssize containing the number of bytes written to the stream.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t writeFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -723,7 +724,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional cancellable object
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writev(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -736,7 +737,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_writev(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -770,7 +771,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writevAll(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -783,7 +784,7 @@ class OutputStream : gobject.object.ObjectG
     GError *_err;
     _retval = g_output_stream_writev_all(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -819,7 +820,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -848,15 +849,15 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult
         bytesWritten = location to store the number of bytes that were written to the stream
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writevAllFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -906,7 +907,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -926,15 +927,15 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult.
         bytesWritten = location to store the number of bytes that were written to the stream
       Returns: true on success, false if there was an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool writevFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

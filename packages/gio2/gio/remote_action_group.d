@@ -18,7 +18,7 @@ import glib.variant;
     methods on [gio.action_group.ActionGroup] used to activate actions:
     [gio.action_group.ActionGroup.activateAction] and
     [gio.action_group.ActionGroup.changeActionState]. These variants allow a
-    ‘platform data’ [glib.variant.VariantG] to be specified: a dictionary providing
+    ‘platform data’ [glib.variant.Variant] to be specified: a dictionary providing
     context for the action invocation (for example: timestamps, startup
     notification IDs, etc).
     
@@ -57,7 +57,7 @@ interface RemoteActionGroup
         parameter = the optional parameter to the activation
         platformData = the platform data to send
   */
-  void activateActionFull(string actionName, glib.variant.VariantG parameter, glib.variant.VariantG platformData);
+  void activateActionFull(string actionName, glib.variant.Variant parameter, glib.variant.Variant platformData);
 
   /**
       Changes the state of a remote action.
@@ -75,5 +75,5 @@ interface RemoteActionGroup
         value = the new requested value for the state
         platformData = the platform data to send
   */
-  void changeActionStateFull(string actionName, glib.variant.VariantG value, glib.variant.VariantG platformData);
+  void changeActionStateFull(string actionName, glib.variant.Variant value, glib.variant.Variant platformData);
 }

@@ -31,6 +31,7 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufNonAnim self()
   {
     return this;

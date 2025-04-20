@@ -75,9 +75,296 @@ class AboutDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AboutDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `comments` property.
+      Returns: Comments about the program. This string is displayed in a label
+      in the main dialog, thus it should be a short explanation of
+      the main purpose of the program, not a detailed list of features.
+  */
+  @property string comments()
+  {
+    return getComments();
+  }
+
+  /**
+      Set `comments` property.
+      Params:
+        propval = Comments about the program. This string is displayed in a label
+        in the main dialog, thus it should be a short explanation of
+        the main purpose of the program, not a detailed list of features.
+  */
+  @property void comments(string propval)
+  {
+    return setComments(propval);
+  }
+
+  /**
+      Get `copyright` property.
+      Returns: Copyright information for the program.
+  */
+  @property string copyright()
+  {
+    return getCopyright();
+  }
+
+  /**
+      Set `copyright` property.
+      Params:
+        propval = Copyright information for the program.
+  */
+  @property void copyright(string propval)
+  {
+    return setCopyright(propval);
+  }
+
+  /**
+      Get `license` property.
+      Returns: The license of the program. This string is displayed in a
+      text view in a secondary dialog, therefore it is fine to use
+      a long multi-paragraph text. Note that the text is only wrapped
+      in the text view if the "wrap-license" property is set to true;
+      otherwise the text itself must contain the intended linebreaks.
+      When setting this property to a non-null value, the
+      #GtkAboutDialog:license-type property is set to [gtk.types.License.Custom]
+      as a side effect.
+  */
+  @property string license()
+  {
+    return getLicense();
+  }
+
+  /**
+      Set `license` property.
+      Params:
+        propval = The license of the program. This string is displayed in a
+        text view in a secondary dialog, therefore it is fine to use
+        a long multi-paragraph text. Note that the text is only wrapped
+        in the text view if the "wrap-license" property is set to true;
+        otherwise the text itself must contain the intended linebreaks.
+        When setting this property to a non-null value, the
+        #GtkAboutDialog:license-type property is set to [gtk.types.License.Custom]
+        as a side effect.
+  */
+  @property void license(string propval)
+  {
+    return setLicense(propval);
+  }
+
+  /**
+      Get `licenseType` property.
+      Returns: The license of the program, as a value of the [gtk.types.License] enumeration.
+      
+      The #GtkAboutDialog will automatically fill out a standard disclaimer
+      and link the user to the appropriate online resource for the license
+      text.
+      
+      If [gtk.types.License.Unknown] is used, the link used will be the same
+      specified in the #GtkAboutDialog:website property.
+      
+      If [gtk.types.License.Custom] is used, the current contents of the
+      #GtkAboutDialog:license property are used.
+      
+      For any other #GtkLicense value, the contents of the
+      #GtkAboutDialog:license property are also set by this property as
+      a side effect.
+  */
+  @property gtk.types.License licenseType()
+  {
+    return getLicenseType();
+  }
+
+  /**
+      Set `licenseType` property.
+      Params:
+        propval = The license of the program, as a value of the [gtk.types.License] enumeration.
+        
+        The #GtkAboutDialog will automatically fill out a standard disclaimer
+        and link the user to the appropriate online resource for the license
+        text.
+        
+        If [gtk.types.License.Unknown] is used, the link used will be the same
+        specified in the #GtkAboutDialog:website property.
+        
+        If [gtk.types.License.Custom] is used, the current contents of the
+        #GtkAboutDialog:license property are used.
+        
+        For any other #GtkLicense value, the contents of the
+        #GtkAboutDialog:license property are also set by this property as
+        a side effect.
+  */
+  @property void licenseType(gtk.types.License propval)
+  {
+    return setLicenseType(propval);
+  }
+
+  /**
+      Get `logo` property.
+      Returns: A logo for the about box. If it is null, the default window icon
+      set with [gtk.window.Window.setDefaultIcon] will be used.
+  */
+  @property gdkpixbuf.pixbuf.Pixbuf logo()
+  {
+    return getLogo();
+  }
+
+  /**
+      Set `logo` property.
+      Params:
+        propval = A logo for the about box. If it is null, the default window icon
+        set with [gtk.window.Window.setDefaultIcon] will be used.
+  */
+  @property void logo(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setLogo(propval);
+  }
+
+  /**
+      Get `logoIconName` property.
+      Returns: A named icon to use as the logo for the about box. This property
+      overrides the #GtkAboutDialog:logo property.
+  */
+  @property string logoIconName()
+  {
+    return getLogoIconName();
+  }
+
+  /**
+      Set `logoIconName` property.
+      Params:
+        propval = A named icon to use as the logo for the about box. This property
+        overrides the #GtkAboutDialog:logo property.
+  */
+  @property void logoIconName(string propval)
+  {
+    return setLogoIconName(propval);
+  }
+
+  /**
+      Get `programName` property.
+      Returns: The name of the program.
+      If this is not set, it defaults to [glib.global.getApplicationName].
+  */
+  @property string programName()
+  {
+    return getProgramName();
+  }
+
+  /**
+      Set `programName` property.
+      Params:
+        propval = The name of the program.
+        If this is not set, it defaults to [glib.global.getApplicationName].
+  */
+  @property void programName(string propval)
+  {
+    return setProgramName(propval);
+  }
+
+  /**
+      Get `translatorCredits` property.
+      Returns: Credits to the translators. This string should be marked as translatable.
+      The string may contain email addresses and URLs, which will be displayed
+      as links, see the introduction for more details.
+  */
+  @property string translatorCredits()
+  {
+    return getTranslatorCredits();
+  }
+
+  /**
+      Set `translatorCredits` property.
+      Params:
+        propval = Credits to the translators. This string should be marked as translatable.
+        The string may contain email addresses and URLs, which will be displayed
+        as links, see the introduction for more details.
+  */
+  @property void translatorCredits(string propval)
+  {
+    return setTranslatorCredits(propval);
+  }
+
+  /**
+      Get `version_` property.
+      Returns: The version of the program.
+  */
+  @property string version_()
+  {
+    return getVersion();
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The version of the program.
+  */
+  @property void version_(string propval)
+  {
+    return setVersion(propval);
+  }
+
+  /**
+      Get `website` property.
+      Returns: The URL for the link to the website of the program.
+      This should be a string starting with "http://.
+  */
+  @property string website()
+  {
+    return getWebsite();
+  }
+
+  /**
+      Set `website` property.
+      Params:
+        propval = The URL for the link to the website of the program.
+        This should be a string starting with "http://.
+  */
+  @property void website(string propval)
+  {
+    return setWebsite(propval);
+  }
+
+  /**
+      Get `websiteLabel` property.
+      Returns: The label for the link to the website of the program.
+  */
+  @property string websiteLabel()
+  {
+    return getWebsiteLabel();
+  }
+
+  /**
+      Set `websiteLabel` property.
+      Params:
+        propval = The label for the link to the website of the program.
+  */
+  @property void websiteLabel(string propval)
+  {
+    return setWebsiteLabel(propval);
+  }
+
+  /**
+      Get `wrapLicense` property.
+      Returns: Whether to wrap the text in the license dialog.
+  */
+  @property bool wrapLicense()
+  {
+    return getWrapLicense();
+  }
+
+  /**
+      Set `wrapLicense` property.
+      Params:
+        propval = Whether to wrap the text in the license dialog.
+  */
+  @property void wrapLicense(bool propval)
+  {
+    return setWrapLicense(propval);
   }
 
   /**
@@ -239,13 +526,13 @@ class AboutDialog : gtk.dialog.Dialog
       Returns the pixbuf displayed as logo in the about dialog.
       Returns: the pixbuf displayed as logo. The
           pixbuf is owned by the about dialog. If you want to keep a
-          reference to it, you have to call [gobject.object.ObjectG.ref_] on it.
+          reference to it, you have to call [gobject.object.ObjectWrap.ref_] on it.
   */
   gdkpixbuf.pixbuf.Pixbuf getLogo()
   {
     PixbufC* _cretval;
     _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

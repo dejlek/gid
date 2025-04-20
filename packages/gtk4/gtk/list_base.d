@@ -2,6 +2,7 @@
 module gtk.list_base;
 
 import gid.gid;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -42,9 +43,31 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListBase self()
   {
     return this;
+  }
+
+  /**
+      Get `orientation` property.
+      Returns: The orientation of the list. See GtkOrientable:orientation
+      for details.
+  */
+  @property gtk.types.Orientation orientation()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.Orientation)("orientation");
+  }
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the list. See GtkOrientable:orientation
+        for details.
+  */
+  @property void orientation(gtk.types.Orientation propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.Orientation)("orientation", propval);
   }
 
   mixin OrientableT!();

@@ -36,6 +36,7 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GIOInputStream self()
   {
     return this;
@@ -54,7 +55,7 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
   {
     GInputStream* _cretval;
     _cretval = garrow_gio_input_stream_get_raw(cast(GArrowGIOInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 }

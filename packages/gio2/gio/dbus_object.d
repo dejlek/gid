@@ -33,7 +33,7 @@ interface DBusObject
       Params:
         interfaceName = A D-Bus interface name.
       Returns: null if not found, otherwise a
-          #GDBusInterface that must be freed with [gobject.object.ObjectG.unref].
+          #GDBusInterface that must be freed with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_interface.DBusInterface getInterface(string interfaceName);
 
@@ -41,7 +41,7 @@ interface DBusObject
       Gets the D-Bus interfaces associated with object.
       Returns: A list of #GDBusInterface instances.
           The returned list must be freed by [glib.list.List.free] after each element has been freed
-          with [gobject.object.ObjectG.unref].
+          with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_interface.DBusInterface[] getInterfaces();
 

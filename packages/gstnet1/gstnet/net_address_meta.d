@@ -22,7 +22,7 @@ class NetAddressMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstNet.NetAddressMeta");
+      throw new GidConstructException("Null instance pointer for gstnet.net_address_meta.NetAddressMeta");
 
     cInstance = *cast(GstNetAddressMeta*)ptr;
 
@@ -36,16 +36,29 @@ class NetAddressMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: the parent type
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)cPtr).meta);
   }
 
+  /**
+      Get `addr` field.
+      Returns: a #GSocketAddress stored as metadata
+  */
   @property gio.socket_address.SocketAddress addr()
   {
     return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);
   }
 
+  /**
+      Set `addr` field.
+      Params:
+        propval = a #GSocketAddress stored as metadata
+  */
   @property void addr(gio.socket_address.SocketAddress propval)
   {
     cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);

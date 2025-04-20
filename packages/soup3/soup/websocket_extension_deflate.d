@@ -36,6 +36,7 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WebsocketExtensionDeflate self()
   {
     return this;

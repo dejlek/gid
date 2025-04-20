@@ -49,9 +49,52 @@ class Revealer : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Revealer self()
   {
     return this;
+  }
+
+  /** */
+  @property bool childRevealed()
+  {
+    return getChildRevealed();
+  }
+
+  /** */
+  @property bool revealChild()
+  {
+    return getRevealChild();
+  }
+
+  /** */
+  @property void revealChild(bool propval)
+  {
+    return setRevealChild(propval);
+  }
+
+  /** */
+  @property uint transitionDuration()
+  {
+    return getTransitionDuration();
+  }
+
+  /** */
+  @property void transitionDuration(uint propval)
+  {
+    return setTransitionDuration(propval);
+  }
+
+  /** */
+  @property gtk.types.RevealerTransitionType transitionType()
+  {
+    return getTransitionType();
+  }
+
+  /** */
+  @property void transitionType(gtk.types.RevealerTransitionType propval)
+  {
+    return setTransitionType(propval);
   }
 
   /**

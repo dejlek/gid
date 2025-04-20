@@ -15,7 +15,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class ChunkedArray : gobject.object.ObjectG
+class ChunkedArray : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class ChunkedArray : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ChunkedArray self()
   {
     return this;
@@ -51,7 +52,7 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_new(_chunks, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -62,8 +63,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_new_empty(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -74,8 +75,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_combine(cast(GArrowChunkedArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -94,8 +95,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_filter(cast(GArrowChunkedArray*)cPtr, filter ? cast(GArrowBooleanArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,8 +107,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_filter_chunked_array(cast(GArrowChunkedArray*)cPtr, filter ? cast(GArrowChunkedArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +117,7 @@ class ChunkedArray : gobject.object.ObjectG
   {
     GArrowArray* _cretval;
     _cretval = garrow_chunked_array_get_chunk(cast(GArrowChunkedArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +167,7 @@ class ChunkedArray : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_chunked_array_get_value_data_type(cast(GArrowChunkedArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -184,7 +185,7 @@ class ChunkedArray : gobject.object.ObjectG
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_chunked_array_slice(cast(GArrowChunkedArray*)cPtr, offset, length);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -195,8 +196,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_sort_indices(cast(GArrowChunkedArray*)cPtr, order, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -207,8 +208,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_take(cast(GArrowChunkedArray*)cPtr, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -219,8 +220,8 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_take_chunked_array(cast(GArrowChunkedArray*)cPtr, indices ? cast(GArrowChunkedArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -231,7 +232,7 @@ class ChunkedArray : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_chunked_array_to_string(cast(GArrowChunkedArray*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

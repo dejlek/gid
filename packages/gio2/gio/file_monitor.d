@@ -24,7 +24,7 @@ import gobject.object;
     may cause notifications to be blocked even if the thread-default
     context is still running).
 */
-class FileMonitor : gobject.object.ObjectG
+class FileMonitor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,9 +46,38 @@ class FileMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileMonitor self()
   {
     return this;
+  }
+
+  /**
+      Get `cancelled` property.
+      Returns: Whether the monitor has been cancelled.
+  */
+  @property bool cancelled()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("cancelled");
+  }
+
+  /**
+      Get `rateLimit` property.
+      Returns: The limit of the monitor to watch for changes, in milliseconds.
+  */
+  @property int rateLimit()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("rate-limit");
+  }
+
+  /**
+      Set `rateLimit` property.
+      Params:
+        propval = The limit of the monitor to watch for changes, in milliseconds.
+  */
+  @property void rateLimit(int propval)
+  {
+    return setRateLimit(propval);
   }
 
   /**
@@ -78,7 +107,7 @@ class FileMonitor : gobject.object.ObjectG
   */
   void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType)
   {
-    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(No.Dup) : null, eventType);
+    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(gobject.object.ObjectWrap)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)otherFile).cPtr(No.Dup) : null, eventType);
   }
 
   /**

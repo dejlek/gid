@@ -34,6 +34,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LevelBarAccessible self()
   {
     return this;

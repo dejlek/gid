@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class StrptimeOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,67 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StrptimeOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `errorIsNull` property.
+      Returns: Return null on parsing errors if true or raise if false.
+  */
+  @property bool errorIsNull()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("error-is-null");
+  }
+
+  /**
+      Set `errorIsNull` property.
+      Params:
+        propval = Return null on parsing errors if true or raise if false.
+  */
+  @property void errorIsNull(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("error-is-null", propval);
+  }
+
+  /**
+      Get `format` property.
+      Returns: The desired format string.
+  */
+  @property string format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("format");
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The desired format string.
+  */
+  @property void format(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("format", propval);
+  }
+
+  /**
+      Get `unit` property.
+      Returns: The desired time resolution.
+  */
+  @property arrow.types.TimeUnit unit()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.TimeUnit)("unit");
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The desired time resolution.
+  */
+  @property void unit(arrow.types.TimeUnit propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.TimeUnit)("unit", propval);
   }
 
   /** */

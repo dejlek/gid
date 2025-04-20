@@ -78,9 +78,348 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconView self()
   {
     return this;
+  }
+
+  /**
+      Get `activateOnSingleClick` property.
+      Returns: The activate-on-single-click property specifies whether the "item-activated" signal
+      will be emitted after a single click.
+  */
+  @property bool activateOnSingleClick()
+  {
+    return getActivateOnSingleClick();
+  }
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = The activate-on-single-click property specifies whether the "item-activated" signal
+        will be emitted after a single click.
+  */
+  @property void activateOnSingleClick(bool propval)
+  {
+    return setActivateOnSingleClick(propval);
+  }
+
+  /**
+      Get `columnSpacing` property.
+      Returns: The column-spacing property specifies the space which is inserted between
+      the columns of the icon view.
+  */
+  @property int columnSpacing()
+  {
+    return getColumnSpacing();
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The column-spacing property specifies the space which is inserted between
+        the columns of the icon view.
+  */
+  @property void columnSpacing(int propval)
+  {
+    return setColumnSpacing(propval);
+  }
+
+  /**
+      Get `columns` property.
+      Returns: The columns property contains the number of the columns in which the
+      items should be displayed. If it is -1, the number of columns will
+      be chosen automatically to fill the available area.
+  */
+  @property int columns()
+  {
+    return getColumns();
+  }
+
+  /**
+      Set `columns` property.
+      Params:
+        propval = The columns property contains the number of the columns in which the
+        items should be displayed. If it is -1, the number of columns will
+        be chosen automatically to fill the available area.
+  */
+  @property void columns(int propval)
+  {
+    return setColumns(propval);
+  }
+
+  /**
+      Get `itemOrientation` property.
+      Returns: The item-orientation property specifies how the cells (i.e. the icon and
+      the text) of the item are positioned relative to each other.
+  */
+  @property gtk.types.Orientation itemOrientation()
+  {
+    return getItemOrientation();
+  }
+
+  /**
+      Set `itemOrientation` property.
+      Params:
+        propval = The item-orientation property specifies how the cells (i.e. the icon and
+        the text) of the item are positioned relative to each other.
+  */
+  @property void itemOrientation(gtk.types.Orientation propval)
+  {
+    return setItemOrientation(propval);
+  }
+
+  /**
+      Get `itemPadding` property.
+      Returns: The item-padding property specifies the padding around each
+      of the icon view's item.
+  */
+  @property int itemPadding()
+  {
+    return getItemPadding();
+  }
+
+  /**
+      Set `itemPadding` property.
+      Params:
+        propval = The item-padding property specifies the padding around each
+        of the icon view's item.
+  */
+  @property void itemPadding(int propval)
+  {
+    return setItemPadding(propval);
+  }
+
+  /**
+      Get `itemWidth` property.
+      Returns: The item-width property specifies the width to use for each item.
+      If it is set to -1, the icon view will automatically determine a
+      suitable item size.
+  */
+  @property int itemWidth()
+  {
+    return getItemWidth();
+  }
+
+  /**
+      Set `itemWidth` property.
+      Params:
+        propval = The item-width property specifies the width to use for each item.
+        If it is set to -1, the icon view will automatically determine a
+        suitable item size.
+  */
+  @property void itemWidth(int propval)
+  {
+    return setItemWidth(propval);
+  }
+
+  /**
+      Get `margin` property.
+      Returns: The margin property specifies the space which is inserted
+      at the edges of the icon view.
+  */
+  @property int margin()
+  {
+    return getMargin();
+  }
+
+  /**
+      Set `margin` property.
+      Params:
+        propval = The margin property specifies the space which is inserted
+        at the edges of the icon view.
+  */
+  @property void margin(int propval)
+  {
+    return setMargin(propval);
+  }
+
+  /**
+      Get `markupColumn` property.
+      Returns: The ::markup-column property contains the number of the model column
+      containing markup information to be displayed. The markup column must be
+      of type `G_TYPE_STRING`. If this property and the :text-column property
+      are both set to column numbers, it overrides the text column.
+      If both are set to -1, no texts are displayed.
+  */
+  @property int markupColumn()
+  {
+    return getMarkupColumn();
+  }
+
+  /**
+      Set `markupColumn` property.
+      Params:
+        propval = The ::markup-column property contains the number of the model column
+        containing markup information to be displayed. The markup column must be
+        of type `G_TYPE_STRING`. If this property and the :text-column property
+        are both set to column numbers, it overrides the text column.
+        If both are set to -1, no texts are displayed.
+  */
+  @property void markupColumn(int propval)
+  {
+    return setMarkupColumn(propval);
+  }
+
+  /** */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
+  }
+
+  /** */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `pixbufColumn` property.
+      Returns: The ::pixbuf-column property contains the number of the model column
+      containing the pixbufs which are displayed. The pixbuf column must be
+      of type `GDK_TYPE_PIXBUF`. Setting this property to -1 turns off the
+      display of pixbufs.
+  */
+  @property int pixbufColumn()
+  {
+    return getPixbufColumn();
+  }
+
+  /**
+      Set `pixbufColumn` property.
+      Params:
+        propval = The ::pixbuf-column property contains the number of the model column
+        containing the pixbufs which are displayed. The pixbuf column must be
+        of type `GDK_TYPE_PIXBUF`. Setting this property to -1 turns off the
+        display of pixbufs.
+  */
+  @property void pixbufColumn(int propval)
+  {
+    return setPixbufColumn(propval);
+  }
+
+  /**
+      Get `reorderable` property.
+      Returns: The reorderable property specifies if the items can be reordered
+      by DND.
+  */
+  @property bool reorderable()
+  {
+    return getReorderable();
+  }
+
+  /**
+      Set `reorderable` property.
+      Params:
+        propval = The reorderable property specifies if the items can be reordered
+        by DND.
+  */
+  @property void reorderable(bool propval)
+  {
+    return setReorderable(propval);
+  }
+
+  /**
+      Get `rowSpacing` property.
+      Returns: The row-spacing property specifies the space which is inserted between
+      the rows of the icon view.
+  */
+  @property int rowSpacing()
+  {
+    return getRowSpacing();
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The row-spacing property specifies the space which is inserted between
+        the rows of the icon view.
+  */
+  @property void rowSpacing(int propval)
+  {
+    return setRowSpacing(propval);
+  }
+
+  /**
+      Get `selectionMode` property.
+      Returns: The ::selection-mode property specifies the selection mode of
+      icon view. If the mode is [gtk.types.SelectionMode.Multiple], rubberband selection
+      is enabled, for the other modes, only keyboard selection is possible.
+  */
+  @property gtk.types.SelectionMode selectionMode()
+  {
+    return getSelectionMode();
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The ::selection-mode property specifies the selection mode of
+        icon view. If the mode is [gtk.types.SelectionMode.Multiple], rubberband selection
+        is enabled, for the other modes, only keyboard selection is possible.
+  */
+  @property void selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setSelectionMode(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: The spacing property specifies the space which is inserted between
+      the cells (i.e. the icon and the text) of an item.
+  */
+  @property int spacing()
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The spacing property specifies the space which is inserted between
+        the cells (i.e. the icon and the text) of an item.
+  */
+  @property void spacing(int propval)
+  {
+    return setSpacing(propval);
+  }
+
+  /**
+      Get `textColumn` property.
+      Returns: The ::text-column property contains the number of the model column
+      containing the texts which are displayed. The text column must be
+      of type `G_TYPE_STRING`. If this property and the :markup-column
+      property are both set to -1, no texts are displayed.
+  */
+  @property int textColumn()
+  {
+    return getTextColumn();
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The ::text-column property contains the number of the model column
+        containing the texts which are displayed. The text column must be
+        of type `G_TYPE_STRING`. If this property and the :markup-column
+        property are both set to -1, no texts are displayed.
+  */
+  @property void textColumn(int propval)
+  {
+    return setTextColumn(propval);
+  }
+
+  /** */
+  @property int tooltipColumn()
+  {
+    return getTooltipColumn();
+  }
+
+  /** */
+  @property void tooltipColumn(int propval)
+  {
+    return setTooltipColumn(propval);
   }
 
   mixin CellLayoutT!();
@@ -113,7 +452,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,8 +468,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +487,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GdkPaintable* _cretval;
     _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -450,7 +789,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_icon_view_get_model(cast(GtkIconView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -627,7 +966,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
@@ -755,7 +1094,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     {
       auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -933,7 +1272,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**

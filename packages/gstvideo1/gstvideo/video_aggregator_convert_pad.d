@@ -2,6 +2,8 @@
 module gstvideo.video_aggregator_convert_pad;
 
 import gid.gid;
+import gobject.object;
+import gst.structure;
 import gstvideo.c.functions;
 import gstvideo.c.types;
 import gstvideo.types;
@@ -34,9 +36,22 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoAggregatorConvertPad self()
   {
     return this;
+  }
+
+  /** */
+  @property gst.structure.Structure converterConfig()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("converter-config");
+  }
+
+  /** */
+  @property void converterConfig(gst.structure.Structure propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.structure.Structure)("converter-config", propval);
   }
 
   /**

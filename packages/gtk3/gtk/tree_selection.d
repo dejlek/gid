@@ -37,7 +37,7 @@ import gtk.types;
     when nothing has happened (mostly as a result of programmers calling
     select_row on an already selected row).
 */
-class TreeSelection : gobject.object.ObjectG
+class TreeSelection : gobject.object.ObjectWrap
 {
 
   /** */
@@ -59,9 +59,31 @@ class TreeSelection : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeSelection self()
   {
     return this;
+  }
+
+  /**
+      Get `mode` property.
+      Returns: Selection mode.
+      See [gtk.tree_selection.TreeSelection.setMode] for more information on this property.
+  */
+  @property gtk.types.SelectionMode mode()
+  {
+    return getMode();
+  }
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = Selection mode.
+        See [gtk.tree_selection.TreeSelection.setMode] for more information on this property.
+  */
+  @property void mode(gtk.types.SelectionMode propval)
+  {
+    return setMode(propval);
   }
 
   /**
@@ -111,7 +133,7 @@ class TreeSelection : gobject.object.ObjectG
     GtkTreeModel* _model;
     GtkTreeIter _iter;
     _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)cPtr, &_model, &_iter);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -141,7 +163,7 @@ class TreeSelection : gobject.object.ObjectG
     GtkTreeModel* _model;
     _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)cPtr, &_model);
     auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     return _retval;
   }
 
@@ -153,7 +175,7 @@ class TreeSelection : gobject.object.ObjectG
   {
     GtkTreeView* _cretval;
     _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +266,7 @@ class TreeSelection : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -282,7 +304,7 @@ class TreeSelection : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

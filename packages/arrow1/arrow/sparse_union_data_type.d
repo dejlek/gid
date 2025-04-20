@@ -31,6 +31,7 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SparseUnionDataType self()
   {
     return this;

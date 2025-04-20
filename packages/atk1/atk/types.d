@@ -78,7 +78,7 @@ alias TextRectangle = AtkTextRectangle;
       obj = An #AtkObject instance for whom the callback will be called when
         the specified event (e.g. 'focus:') takes place.
 */
-alias EventListener = void delegate(atk.object.ObjectAtk obj);
+alias EventListener = void delegate(atk.object.ObjectWrap obj);
 
 /**
     An #AtkEventListenerInit function is a special function that is
@@ -102,7 +102,7 @@ alias EventListenerInit = void delegate();
       and [atk.component.Component.removeFocusHandler]. See those
       methods for more information.
 */
-alias FocusHandler = void delegate(atk.object.ObjectAtk object, bool focusIn);
+alias FocusHandler = void delegate(atk.object.ObjectWrap object, bool focusIn);
 
 /**
     An AtkFunction is a function definition used for padding which has
@@ -131,7 +131,7 @@ alias KeySnoopFunc = int delegate(atk.key_event_struct.KeyEventStruct event);
 /**
     An AtkPropertyChangeHandler is a function which is executed when an
     AtkObject's property changes value. It is specified in a call to
-    [atk.object.ObjectAtk.connectPropertyChangeHandler].
+    [atk.object.ObjectWrap.connectPropertyChangeHandler].
 
     Params:
       obj = atkobject which property changes
@@ -139,7 +139,7 @@ alias KeySnoopFunc = int delegate(atk.key_event_struct.KeyEventStruct event);
 
     Deprecated: Since 2.12.
 */
-alias PropertyChangeHandler = void delegate(atk.object.ObjectAtk obj, atk.property_values.PropertyValues vals);
+alias PropertyChangeHandler = void delegate(atk.object.ObjectWrap obj, atk.property_values.PropertyValues vals);
 
 /**
     Like [atk.global.getBinaryAge], but from the headers used at

@@ -12,25 +12,25 @@ import std.traits : isSomeString;
 import std.typecons : isTuple;
 
 /**
-    A type in the [glib.variant.VariantG] type system.
+    A type in the [glib.variant.Variant] type system.
     
-    This section introduces the [glib.variant.VariantG] type system. It is based, in
+    This section introduces the [glib.variant.Variant] type system. It is based, in
     large part, on the D-Bus type system, with two major changes and
     some minor lifting of restrictions. The
     [D-Bus specification](http://dbus.freedesktop.org/doc/dbus-specification.html),
     therefore, provides a significant amount of
-    information that is useful when working with [glib.variant.VariantG].
+    information that is useful when working with [glib.variant.Variant].
     
     The first major change with respect to the D-Bus type system is the
-    introduction of maybe (or ‘nullable’) types.  Any type in [glib.variant.VariantG]
+    introduction of maybe (or ‘nullable’) types.  Any type in [glib.variant.Variant]
     can be converted to a maybe type, in which case, `nothing` (or `null`)
     becomes a valid value.  Maybe types have been added by introducing the
     character `m` to type strings.
     
-    The second major change is that the [glib.variant.VariantG] type system supports
+    The second major change is that the [glib.variant.Variant] type system supports
     the concept of ‘indefinite types’ — types that are less specific than
     the normal types found in D-Bus.  For example, it is possible to speak
-    of ‘an array of any type’ in [glib.variant.VariantG], where the D-Bus type system
+    of ‘an array of any type’ in [glib.variant.Variant], where the D-Bus type system
     would require you to speak of ‘an array of integers’ or ‘an array of
     strings’.  Indefinite types have been added by introducing the
     characters `*`, `?` and `r` to type strings.
@@ -39,24 +39,24 @@ import std.typecons : isTuple;
     types are lifted along with the restriction that dictionary entries
     may only appear nested inside of arrays.
     
-    Just as in D-Bus, [glib.variant.VariantG] types are described with strings (‘type
+    Just as in D-Bus, [glib.variant.Variant] types are described with strings (‘type
     strings’).  Subject to the differences mentioned above, these strings
     are of the same form as those found in D-Bus.  Note, however: D-Bus
     always works in terms of messages and therefore individual type
     strings appear nowhere in its interface.  Instead, ‘signatures’
     are a concatenation of the strings of the type of each argument in a
-    message.  [glib.variant.VariantG] deals with single values directly so
-    [glib.variant.VariantG] type strings always describe the type of exactly one
+    message.  [glib.variant.Variant] deals with single values directly so
+    [glib.variant.Variant] type strings always describe the type of exactly one
     value.  This means that a D-Bus signature string is generally not a valid
-    [glib.variant.VariantG] type string — except in the case that it is the signature
+    [glib.variant.Variant] type string — except in the case that it is the signature
     of a message containing exactly one argument.
     
     An indefinite type is similar in spirit to what may be called an
     abstract type in other type systems.  No value can exist that has an
     indefinite type as its type, but values can exist that have types
     that are subtypes of indefinite types.  That is to say,
-    [glib.variant.VariantG.getType] will never return an indefinite type, but
-    calling [glib.variant.VariantG.isOfType] with an indefinite type may return
+    [glib.variant.Variant.getType] will never return an indefinite type, but
+    calling [glib.variant.Variant.isOfType] with an indefinite type may return
     true.  For example, you cannot have a value that represents ‘an
     array of no particular type’, but you can have an ‘array of integers’
     which certainly matches the type of ‘an array of no particular type’,
@@ -77,7 +77,7 @@ import std.typecons : isTuple;
     
     ## GVariant Type Strings
     
-    A [glib.variant.VariantG] type string can be any of the following:
+    A [glib.variant.Variant] type string can be any of the following:
     
     $(LIST
       * any basic type string (listed below)
@@ -97,7 +97,7 @@ import std.typecons : isTuple;
     The above definition is recursive to arbitrary depth. `aaaaai` and
     `(ui(nq((y)))s)` are both valid type strings, as is
     `a(aa(ui)(qna{ya(yd)}))`. In order to not hit memory limits,
-    [glib.variant.VariantG] imposes a limit on recursion depth of 65 nested
+    [glib.variant.Variant] imposes a limit on recursion depth of 65 nested
     containers. This is the limit in the D-Bus specification (64) plus one to
     allow a [[gio.dbus_message.DBusMessage]](../gio/class.DBusMessage.html) to be nested in
     a top-level tuple.
@@ -196,6 +196,7 @@ class VariantType : Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VariantType self()
   {
     return this;
@@ -248,7 +249,7 @@ class VariantType : Boxed
         typeStr ~= "a" ~ getStr!E;
       else static if (is(Arg : V[K], V, K))
         typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
-      else static if (Arg == VariantG)
+      else static if (Arg == glib.variant.Variant)
         typeStr ~= "v";
       else static if (isTuple!Arg)
         typeStr ~= "r";
@@ -567,7 +568,7 @@ class VariantType : Boxed
       type characters ('*', '?', or 'r').
       
       A #GVariant instance may not have an indefinite type, so calling
-      this function on the result of [glib.variant.VariantG.getType] will always
+      this function on the result of [glib.variant.Variant.getType] will always
       result in true being returned.  Calling this function on an
       indefinite type like `G_VARIANT_TYPE_ARRAY`, however, will result in
       false being returned.

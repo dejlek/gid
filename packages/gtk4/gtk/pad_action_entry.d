@@ -17,7 +17,7 @@ class PadActionEntry
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.PadActionEntry");
+      throw new GidConstructException("Null instance pointer for gtk.pad_action_entry.PadActionEntry");
 
     cInstance = *cast(GtkPadActionEntry*)ptr;
 
@@ -31,52 +31,101 @@ class PadActionEntry
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of pad feature that will trigger this action entry.
+  */
   @property gtk.types.PadActionType type()
   {
     return cast(gtk.types.PadActionType)(cast(GtkPadActionEntry*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of pad feature that will trigger this action entry.
+  */
   @property void type(gtk.types.PadActionType propval)
   {
     (cast(GtkPadActionEntry*)cPtr).type = cast(GtkPadActionType)propval;
   }
 
+  /**
+      Get `index` field.
+      Returns: the 0-indexed button/ring/strip number that will trigger this action
+        entry.
+  */
   @property int index()
   {
     return (cast(GtkPadActionEntry*)cPtr).index;
   }
 
+  /**
+      Set `index` field.
+      Params:
+        propval = the 0-indexed button/ring/strip number that will trigger this action
+          entry.
+  */
   @property void index(int propval)
   {
     (cast(GtkPadActionEntry*)cPtr).index = propval;
   }
 
+  /**
+      Get `mode` field.
+      Returns: the mode that will trigger this action entry, or -1 for all modes.
+  */
   @property int mode()
   {
     return (cast(GtkPadActionEntry*)cPtr).mode;
   }
 
+  /**
+      Set `mode` field.
+      Params:
+        propval = the mode that will trigger this action entry, or -1 for all modes.
+  */
   @property void mode(int propval)
   {
     (cast(GtkPadActionEntry*)cPtr).mode = propval;
   }
 
+  /**
+      Get `label` field.
+      Returns: Human readable description of this action entry, this string should
+        be deemed user-visible.
+  */
   @property string label()
   {
     return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
   }
 
+  /**
+      Set `label` field.
+      Params:
+        propval = Human readable description of this action entry, this string should
+          be deemed user-visible.
+  */
   @property void label(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)cPtr).label);
   }
 
+  /**
+      Get `actionName` field.
+      Returns: action name that will be activated in the [gio.action_group.ActionGroup].
+  */
   @property string actionName()
   {
     return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
   }
 
+  /**
+      Set `actionName` field.
+      Params:
+        propval = action name that will be activated in the [gio.action_group.ActionGroup].
+  */
   @property void actionName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);

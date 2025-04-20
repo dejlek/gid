@@ -43,26 +43,45 @@ class NetTimePacket : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NetTimePacket self()
   {
     return this;
   }
 
+  /**
+      Get `localTime` field.
+      Returns: the local time when this packet was sent
+  */
   @property gst.types.ClockTime localTime()
   {
     return (cast(GstNetTimePacket*)cPtr).localTime;
   }
 
+  /**
+      Set `localTime` field.
+      Params:
+        propval = the local time when this packet was sent
+  */
   @property void localTime(gst.types.ClockTime propval)
   {
     (cast(GstNetTimePacket*)cPtr).localTime = propval;
   }
 
+  /**
+      Get `remoteTime` field.
+      Returns: the remote time observation
+  */
   @property gst.types.ClockTime remoteTime()
   {
     return (cast(GstNetTimePacket*)cPtr).remoteTime;
   }
 
+  /**
+      Set `remoteTime` field.
+      Params:
+        propval = the remote time observation
+  */
   @property void remoteTime(gst.types.ClockTime propval)
   {
     (cast(GstNetTimePacket*)cPtr).remoteTime = propval;
@@ -112,7 +131,7 @@ class NetTimePacket : gobject.boxed.Boxed
         socket = socket to send the time packet on
         destAddress = address to send the time packet to
       Returns: TRUE if successful, FALSE in case an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool send(gio.socket.Socket socket, gio.socket_address.SocketAddress destAddress)
   {
@@ -120,7 +139,7 @@ class NetTimePacket : gobject.boxed.Boxed
     GError *_err;
     _retval = gst_net_time_packet_send(cast(const(GstNetTimePacket)*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -155,7 +174,7 @@ class NetTimePacket : gobject.boxed.Boxed
         srcAddress = address of variable to return sender address
       Returns: a new #GstNetTimePacket, or NULL on error. Free
            with [gstnet.net_time_packet.NetTimePacket.free] when done.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gstnet.net_time_packet.NetTimePacket receive(gio.socket.Socket socket, out gio.socket_address.SocketAddress srcAddress)
   {
@@ -164,7 +183,7 @@ class NetTimePacket : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_net_time_packet_receive(socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, &_srcAddress, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.Take) : null;
     srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.Take);
     return _retval;

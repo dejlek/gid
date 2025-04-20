@@ -16,7 +16,7 @@ class VideoChromaResample
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoChromaResample");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_chroma_resample.VideoChromaResample");
 
     cInstancePtr = cast(GstVideoChromaResample*)ptr;
 

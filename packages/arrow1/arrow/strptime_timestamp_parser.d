@@ -30,6 +30,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StrptimeTimestampParser self()
   {
     return this;

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class FilterOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,29 @@ class FilterOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilterOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `nullSelectionBehavior` property.
+      Returns: How to handle filtered values.
+  */
+  @property arrow.types.FilterNullSelectionBehavior nullSelectionBehavior()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.FilterNullSelectionBehavior)("null-selection-behavior");
+  }
+
+  /**
+      Set `nullSelectionBehavior` property.
+      Params:
+        propval = How to handle filtered values.
+  */
+  @property void nullSelectionBehavior(arrow.types.FilterNullSelectionBehavior propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.FilterNullSelectionBehavior)("null-selection-behavior", propval);
   }
 
   /** */

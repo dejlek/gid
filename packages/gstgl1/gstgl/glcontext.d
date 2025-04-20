@@ -36,7 +36,7 @@ import gstgl.types;
                          functionality.
     )
 */
-class GLContext : gst.object.ObjectGst
+class GLContext : gst.object.ObjectWrap
 {
 
   /** */
@@ -58,6 +58,7 @@ class GLContext : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLContext self()
   {
     return this;
@@ -99,7 +100,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null, handle, contextType, availableApis);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,7 +130,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -295,7 +296,7 @@ class GLContext : gst.object.ObjectGst
       Params:
         otherContext = a #GstGLContext to share OpenGL objects with
       Returns: whether the context could successfully be created
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool create(gstgl.glcontext.GLContext otherContext = null)
   {
@@ -303,7 +304,7 @@ class GLContext : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_context_create(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -323,7 +324,7 @@ class GLContext : gst.object.ObjectGst
       context in the current thread.  Typically used with wrapped contexts to
       allow wrapped contexts to be used as regular #GstGLContext's.
       Returns: 
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool fillInfo()
   {
@@ -331,7 +332,7 @@ class GLContext : gst.object.ObjectGst
     GError *_err;
     _retval = gst_gl_context_fill_info(cast(GstGLContext*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -356,7 +357,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_context_get_display(cast(GstGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -471,7 +472,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_context_get_window(cast(GstGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -583,7 +584,7 @@ class GLContext : gst.object.ObjectGst
     {
       auto _dlg = cast(gstgl.types.GLContextThreadFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 

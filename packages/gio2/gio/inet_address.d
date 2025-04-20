@@ -19,7 +19,7 @@ import gobject.object;
     [gio.inet_socket_address.InetSocketAddress] (which includes a [gio.inet_address.InetAddress] as well as a
     port number).
 */
-class InetAddress : gobject.object.ObjectG
+class InetAddress : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,9 +41,110 @@ class InetAddress : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InetAddress self()
   {
     return this;
+  }
+
+  /**
+      Get `isAny` property.
+      Returns: Whether this is the "any" address for its family.
+      See [gio.inet_address.InetAddress.getIsAny].
+  */
+  @property bool isAny()
+  {
+    return getIsAny();
+  }
+
+  /**
+      Get `isLinkLocal` property.
+      Returns: Whether this is a link-local address.
+      See [gio.inet_address.InetAddress.getIsLinkLocal].
+  */
+  @property bool isLinkLocal()
+  {
+    return getIsLinkLocal();
+  }
+
+  /**
+      Get `isLoopback` property.
+      Returns: Whether this is the loopback address for its family.
+      See [gio.inet_address.InetAddress.getIsLoopback].
+  */
+  @property bool isLoopback()
+  {
+    return getIsLoopback();
+  }
+
+  /**
+      Get `isMcGlobal` property.
+      Returns: Whether this is a global multicast address.
+      See [gio.inet_address.InetAddress.getIsMcGlobal].
+  */
+  @property bool isMcGlobal()
+  {
+    return getIsMcGlobal();
+  }
+
+  /**
+      Get `isMcLinkLocal` property.
+      Returns: Whether this is a link-local multicast address.
+      See [gio.inet_address.InetAddress.getIsMcLinkLocal].
+  */
+  @property bool isMcLinkLocal()
+  {
+    return getIsMcLinkLocal();
+  }
+
+  /**
+      Get `isMcNodeLocal` property.
+      Returns: Whether this is a node-local multicast address.
+      See [gio.inet_address.InetAddress.getIsMcNodeLocal].
+  */
+  @property bool isMcNodeLocal()
+  {
+    return getIsMcNodeLocal();
+  }
+
+  /**
+      Get `isMcOrgLocal` property.
+      Returns: Whether this is an organization-local multicast address.
+      See [gio.inet_address.InetAddress.getIsMcOrgLocal].
+  */
+  @property bool isMcOrgLocal()
+  {
+    return getIsMcOrgLocal();
+  }
+
+  /**
+      Get `isMcSiteLocal` property.
+      Returns: Whether this is a site-local multicast address.
+      See [gio.inet_address.InetAddress.getIsMcSiteLocal].
+  */
+  @property bool isMcSiteLocal()
+  {
+    return getIsMcSiteLocal();
+  }
+
+  /**
+      Get `isMulticast` property.
+      Returns: Whether this is a multicast address.
+      See [gio.inet_address.InetAddress.getIsMulticast].
+  */
+  @property bool isMulticast()
+  {
+    return getIsMulticast();
+  }
+
+  /**
+      Get `isSiteLocal` property.
+      Returns: Whether this is a site-local address.
+      See [gio.inet_address.InetAddress.getIsLoopback].
+  */
+  @property bool isSiteLocal()
+  {
+    return getIsSiteLocal();
   }
 
   /**
@@ -54,13 +155,13 @@ class InetAddress : gobject.object.ObjectG
         family = the address family
       Returns: a new #GInetAddress corresponding to the "any" address
         for family.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.inet_address.InetAddress newAny(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_any(family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,14 +174,14 @@ class InetAddress : gobject.object.ObjectG
         bytes = raw address data
         family = the address family of bytes
       Returns: a new #GInetAddress corresponding to family and bytes.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
     _cretval = g_inet_address_new_from_bytes(_bytes, family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,14 +192,14 @@ class InetAddress : gobject.object.ObjectG
         string_ = a string representation of an IP address
       Returns: a new #GInetAddress corresponding
         to string, or null if string could not be parsed.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.inet_address.InetAddress newFromString(string string_)
   {
     GInetAddress* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_inet_address_new_from_string(_string_);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,13 +210,13 @@ class InetAddress : gobject.object.ObjectG
         family = the address family
       Returns: a new #GInetAddress corresponding to the loopback address
         for family.
-            Free the returned object with [gobject.object.ObjectG.unref].
+            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   static gio.inet_address.InetAddress newLoopback(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_loopback(family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -15,7 +15,7 @@ import gobject.object;
     #GMenuItem is an opaque structure type.  You must access it using the
     functions below.
 */
-class MenuItem : gobject.object.ObjectG
+class MenuItem : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class MenuItem : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuItem self()
   {
     return this;
@@ -82,7 +83,7 @@ class MenuItem : gobject.object.ObjectG
   {
     GMenuItem* _cretval;
     _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,7 +159,7 @@ class MenuItem : gobject.object.ObjectG
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -178,7 +179,7 @@ class MenuItem : gobject.object.ObjectG
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,12 +195,12 @@ class MenuItem : gobject.object.ObjectG
         expectedType = the expected type of the attribute
       Returns: the attribute value, or null
   */
-  glib.variant.VariantG getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -215,7 +216,7 @@ class MenuItem : gobject.object.ObjectG
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_item_get_link(cast(GMenuItem*)cPtr, _link);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -261,10 +262,10 @@ class MenuItem : gobject.object.ObjectG
         action = the name of the action for this item
         targetValue = a #GVariant to use as the action target
   */
-  void setActionAndTargetValue(string action = null, glib.variant.VariantG targetValue = null)
+  void setActionAndTargetValue(string action = null, glib.variant.Variant targetValue = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
-    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
+    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(GVariant*)targetValue.cPtr(No.Dup) : null);
   }
 
   /**
@@ -292,10 +293,10 @@ class MenuItem : gobject.object.ObjectG
         attribute = the attribute to set
         value = a #GVariant to use as the value, or null
   */
-  void setAttributeValue(string attribute, glib.variant.VariantG value = null)
+  void setAttributeValue(string attribute, glib.variant.Variant value = null)
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -339,7 +340,7 @@ class MenuItem : gobject.object.ObjectG
   */
   void setIcon(gio.icon.Icon icon)
   {
-    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

@@ -35,6 +35,7 @@ class BufferOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferOutputStream self()
   {
     return this;

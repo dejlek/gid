@@ -30,7 +30,7 @@ template LoadableIconT()
         cancellable = optional #GCancellable object, null to
           ignore.
       Returns: a #GInputStream to read the icon from.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable = null)
   {
@@ -39,8 +39,8 @@ template LoadableIconT()
     GError *_err;
     _cretval = g_loadable_icon_load(cast(GLoadableIcon*)cPtr, size, &_type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString(Yes.Free);
     return _retval;
   }
@@ -63,7 +63,7 @@ template LoadableIconT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -79,17 +79,17 @@ template LoadableIconT()
         type = a location to store the type of the loaded
                  icon, null to ignore.
       Returns: a #GInputStream to read the icon from.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type)
   {
     GInputStream* _cretval;
     char* _type;
     GError *_err;
-    _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_type, &_err);
+    _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_type, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString(Yes.Free);
     return _retval;
   }

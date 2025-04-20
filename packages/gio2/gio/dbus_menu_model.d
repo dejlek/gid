@@ -36,6 +36,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusMenuModel self()
   {
     return this;
@@ -57,7 +58,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
               or null if connection is not a message bus connection
         objectPath = the object path at which the menu model is exported
       Returns: a #GDBusMenuModel object. Free with
-            [gobject.object.ObjectG.unref].
+            [gobject.object.ObjectWrap.unref].
   */
   static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
@@ -65,7 +66,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 }

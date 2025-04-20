@@ -124,9 +124,86 @@ class Scale : gtk.range.Range
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scale self()
   {
     return this;
+  }
+
+  /**
+      Get `digits` property.
+      Returns: The number of decimal places that are displayed in the value.
+  */
+  @property int digits()
+  {
+    return getDigits();
+  }
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places that are displayed in the value.
+  */
+  @property void digits(int propval)
+  {
+    return setDigits(propval);
+  }
+
+  /**
+      Get `drawValue` property.
+      Returns: Whether the current value is displayed as a string next to the slider.
+  */
+  @property bool drawValue()
+  {
+    return getDrawValue();
+  }
+
+  /**
+      Set `drawValue` property.
+      Params:
+        propval = Whether the current value is displayed as a string next to the slider.
+  */
+  @property void drawValue(bool propval)
+  {
+    return setDrawValue(propval);
+  }
+
+  /**
+      Get `hasOrigin` property.
+      Returns: Whether the scale has an origin.
+  */
+  @property bool hasOrigin()
+  {
+    return getHasOrigin();
+  }
+
+  /**
+      Set `hasOrigin` property.
+      Params:
+        propval = Whether the scale has an origin.
+  */
+  @property void hasOrigin(bool propval)
+  {
+    return setHasOrigin(propval);
+  }
+
+  /**
+      Get `valuePos` property.
+      Returns: The position in which the current value is displayed.
+  */
+  @property gtk.types.PositionType valuePos()
+  {
+    return getValuePos();
+  }
+
+  /**
+      Set `valuePos` property.
+      Params:
+        propval = The position in which the current value is displayed.
+  */
+  @property void valuePos(gtk.types.PositionType propval)
+  {
+    return setValuePos(propval);
   }
 
   /**
@@ -169,7 +246,7 @@ class Scale : gtk.range.Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,7 +331,7 @@ class Scale : gtk.range.Range
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -332,7 +409,7 @@ class Scale : gtk.range.Range
       
       If #NULL is passed as func, the value will be displayed on
       its own, rounded according to the value of the
-      [gtk.scale.Scale.gint] property.
+      [gtk.scale.Scale.digits] property.
   
       Params:
         func = function that formats the value
@@ -344,7 +421,7 @@ class Scale : gtk.range.Range
       string _dretval;
       auto _dlg = cast(gtk.types.ScaleFormatValueFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.scale.Scale)(cast(void*)scale, No.Take), value);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.scale.Scale)(cast(void*)scale, No.Take), value);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;

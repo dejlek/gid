@@ -44,6 +44,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureSwipe self()
   {
     return this;

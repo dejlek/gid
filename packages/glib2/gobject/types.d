@@ -323,7 +323,7 @@ alias InstanceInitFunc = void delegate(gobject.type_instance.TypeInstance instan
     Params:
       object = the #GObject being finalized
 */
-alias ObjectFinalizeFunc = void delegate(gobject.object.ObjectG object);
+alias ObjectFinalizeFunc = void delegate(gobject.object.ObjectWrap object);
 
 /**
     The type of the get_property function of #GObjectClass.
@@ -335,7 +335,7 @@ alias ObjectFinalizeFunc = void delegate(gobject.object.ObjectG object);
       value = a #GValue to return the property value in
       pspec = the #GParamSpec describing the property
 */
-alias ObjectGetPropertyFunc = void delegate(gobject.object.ObjectG object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
+alias ObjectGetPropertyFunc = void delegate(gobject.object.ObjectWrap object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
 
 /**
     The type of the set_property function of #GObjectClass.
@@ -347,7 +347,7 @@ alias ObjectGetPropertyFunc = void delegate(gobject.object.ObjectG object, uint 
       value = the new value for the property
       pspec = the #GParamSpec describing the property
 */
-alias ObjectSetPropertyFunc = void delegate(gobject.object.ObjectG object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
+alias ObjectSetPropertyFunc = void delegate(gobject.object.ObjectWrap object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
 
 /**
     The signal accumulator is a special callback function that can be used
@@ -394,16 +394,16 @@ alias SignalEmissionHook = bool delegate(gobject.types.SignalInvocationHint ihin
     A callback function used for notification when the state
     of a toggle reference changes.
     
-    See also: [gobject.object.ObjectG.addToggleRef]
+    See also: [gobject.object.ObjectWrap.addToggleRef]
 
     Params:
-      object = The object on which [gobject.object.ObjectG.addToggleRef] was called.
+      object = The object on which [gobject.object.ObjectWrap.addToggleRef] was called.
       isLastRef = true if the toggle reference is now the
          last reference to the object. false if the toggle
          reference was the last reference and there are now other
          references.
 */
-alias ToggleNotify = void delegate(gobject.object.ObjectG object, bool isLastRef);
+alias ToggleNotify = void delegate(gobject.object.ObjectWrap object, bool isLastRef);
 
 /**
     A callback function which is called when the reference count of a class
@@ -471,7 +471,7 @@ alias TypeClassCacheFunc = bool delegate(gobject.type_class.TypeClass gClass);
     incremented for reference counted contents stored in the `value->data`
     array. To deviate from our string example for a moment, and taking
     a look at an exemplary implementation for `GTypeValueTable.collect_value()`
-    of [gobject.object.ObjectG]:
+    of [gobject.object.ObjectWrap]:
     
     ```c
     GObject *object = G_OBJECT (collect_values[0].v_pointer);
@@ -653,15 +653,15 @@ alias ValueTransform = void delegate(gobject.value.Value srcValue, gobject.value
     there's not much you could do with the object, apart from e.g. using its
     address as hash-index or the like.
     
-    In particular, this means it’s invalid to call [gobject.object.ObjectG.ref_],
-    [gobject.weak_ref.WeakRef.init_], [gobject.weak_ref.WeakRef.set], [gobject.object.ObjectG.addToggleRef],
-    [gobject.object.ObjectG.weakRef], [gobject.object.ObjectG.addWeakPointer] or any function which calls
+    In particular, this means it’s invalid to call [gobject.object.ObjectWrap.ref_],
+    [gobject.weak_ref.WeakRef.init_], [gobject.weak_ref.WeakRef.set], [gobject.object.ObjectWrap.addToggleRef],
+    [gobject.object.ObjectWrap.weakRef], [gobject.object.ObjectWrap.addWeakPointer] or any function which calls
     them on the object from this callback.
 
     Params:
       whereTheObjectWas = the object being disposed
 */
-alias WeakNotify = void delegate(gobject.object.ObjectG whereTheObjectWas);
+alias WeakNotify = void delegate(gobject.object.ObjectWrap whereTheObjectWas);
 
 /**
     Mask containing the bits of #GParamSpec.flags which are reserved for GLib.

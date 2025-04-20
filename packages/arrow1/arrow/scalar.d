@@ -12,7 +12,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Scalar : gobject.object.ObjectG
+class Scalar : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class Scalar : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scalar self()
   {
     return this;
@@ -51,8 +52,8 @@ class Scalar : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, _data, _size, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,8 +64,8 @@ class Scalar : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_scalar_cast(cast(GArrowScalar*)cPtr, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -89,7 +90,7 @@ class Scalar : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_scalar_get_data_type(cast(GArrowScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
     return _retval;
   }
 

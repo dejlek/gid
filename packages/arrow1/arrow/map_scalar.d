@@ -31,6 +31,7 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MapScalar self()
   {
     return this;

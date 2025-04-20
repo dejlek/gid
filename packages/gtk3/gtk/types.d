@@ -459,7 +459,7 @@ alias _MountOperationHandler = _GtkMountOperationHandler*;
 // Callbacks
 
 /** */
-alias AccelGroupActivate = bool delegate(gtk.accel_group.AccelGroup accelGroup, gobject.object.ObjectG acceleratable, uint keyval, gdk.types.ModifierType modifier);
+alias AccelGroupActivate = bool delegate(gtk.accel_group.AccelGroup accelGroup, gobject.object.ObjectWrap acceleratable, uint keyval, gdk.types.ModifierType modifier);
 
 /** */
 alias AccelGroupFindFunc = bool delegate(gtk.types.AccelKey key, gobject.closure.Closure closure);
@@ -495,7 +495,7 @@ alias AssistantPageFunc = int delegate(int currentPage);
       connectObject = a #GObject, if non-null, use [gobject.global.signalConnectObject]
       flags = #GConnectFlags to use
 */
-alias BuilderConnectFunc = void delegate(gtk.builder.Builder builder, gobject.object.ObjectG object, string signalName, string handlerName, gobject.object.ObjectG connectObject, gobject.types.ConnectFlags flags);
+alias BuilderConnectFunc = void delegate(gtk.builder.Builder builder, gobject.object.ObjectWrap object, string signalName, string handlerName, gobject.object.ObjectWrap connectObject, gobject.types.ConnectFlags flags);
 
 /**
     This kind of functions provide Pango markup with detail information for the
@@ -687,7 +687,7 @@ alias FileFilterFunc = bool delegate(gtk.file_filter_info.FileFilterInfo filterI
       item = the item from the model for which to create a widget for
     Returns: a #GtkWidget that represents item
 */
-alias FlowBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias FlowBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectWrap item);
 
 /**
     A function that will be called whenrever a child changes
@@ -767,7 +767,7 @@ alias KeySnoopFunc = int delegate(gtk.widget.Widget grabWidget, gdk.event_key.Ev
       item = the item from the model for which to create a widget for
     Returns: a #GtkWidget that represents item
 */
-alias ListBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias ListBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectWrap item);
 
 /**
     Will be called whenever the row changes or is added and lets you control
@@ -905,7 +905,7 @@ alias StylePropertyParser = bool delegate(string string_, gobject.value.Value va
       data = data to deserialize
       createTags = true if deserializing may create tags
     Returns: true on success, false otherwise
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 alias TextBufferDeserializeFunc = bool delegate(gtk.text_buffer.TextBuffer registerBuffer, gtk.text_buffer.TextBuffer contentBuffer, gtk.text_iter.TextIter iter, ubyte[] data, bool createTags, GError **_err);
 

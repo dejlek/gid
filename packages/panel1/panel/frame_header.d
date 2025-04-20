@@ -25,6 +25,19 @@ interface FrameHeader
   }
 
   /**
+      Get `frame` property.
+      Returns: The frame the header is attached to, or null.
+  */
+  @property panel.frame.Frame frame();
+
+  /**
+      Set `frame` property.
+      Params:
+        propval = The frame the header is attached to, or null.
+  */
+  @property void frame(panel.frame.Frame propval);
+
+  /**
       Add a widget into a the prefix area with a priority. The highest
       the priority the closest to the start.
   

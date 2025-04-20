@@ -15,7 +15,7 @@ import javascriptcore.types;
     To create a group of JSCContext<!-- -->s pass the same JSCVirtualMachine
     instance to every JSCContext constructor.
 */
-class VirtualMachine : gobject.object.ObjectG
+class VirtualMachine : gobject.object.ObjectWrap
 {
 
   /** */

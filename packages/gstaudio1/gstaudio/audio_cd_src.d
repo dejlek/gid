@@ -2,6 +2,7 @@
 module gstaudio.audio_cd_src;
 
 import gid.gid;
+import gobject.object;
 import gst.urihandler;
 import gst.urihandler_mixin;
 import gstaudio.audio_cd_src_track;
@@ -77,9 +78,46 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioCdSrc self()
   {
     return this;
+  }
+
+  /** */
+  @property string device()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("device");
+  }
+
+  /** */
+  @property void device(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("device", propval);
+  }
+
+  /** */
+  @property gstaudio.types.AudioCdSrcMode mode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gstaudio.types.AudioCdSrcMode)("mode");
+  }
+
+  /** */
+  @property void mode(gstaudio.types.AudioCdSrcMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gstaudio.types.AudioCdSrcMode)("mode", propval);
+  }
+
+  /** */
+  @property uint track()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("track");
+  }
+
+  /** */
+  @property void track(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("track", propval);
   }
 
   mixin URIHandlerT!();

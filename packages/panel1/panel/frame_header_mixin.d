@@ -18,6 +18,25 @@ template FrameHeaderT()
 {
 
   /**
+      Get `frame` property.
+      Returns: The frame the header is attached to, or null.
+  */
+  @property panel.frame.Frame frame()
+  {
+    return getFrame();
+  }
+
+  /**
+      Set `frame` property.
+      Params:
+        propval = The frame the header is attached to, or null.
+  */
+  @property void frame(panel.frame.Frame propval)
+  {
+    return setFrame(propval);
+  }
+
+  /**
       Add a widget into a the prefix area with a priority. The highest
       the priority the closest to the start.
   
@@ -65,7 +84,7 @@ template FrameHeaderT()
   {
     PanelFrame* _cretval;
     _cretval = panel_frame_header_get_frame(cast(PanelFrameHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 

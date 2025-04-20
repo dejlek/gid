@@ -144,9 +144,288 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeView self()
   {
     return this;
+  }
+
+  /**
+      Get `activateOnSingleClick` property.
+      Returns: The activate-on-single-click property specifies whether the "row-activated" signal
+      will be emitted after a single click.
+  */
+  @property bool activateOnSingleClick()
+  {
+    return getActivateOnSingleClick();
+  }
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = The activate-on-single-click property specifies whether the "row-activated" signal
+        will be emitted after a single click.
+  */
+  @property void activateOnSingleClick(bool propval)
+  {
+    return setActivateOnSingleClick(propval);
+  }
+
+  /** */
+  @property gtk.types.TreeViewGridLines enableGridLines()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.TreeViewGridLines)("enable-grid-lines");
+  }
+
+  /** */
+  @property void enableGridLines(gtk.types.TreeViewGridLines propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.TreeViewGridLines)("enable-grid-lines", propval);
+  }
+
+  /** */
+  @property bool enableSearch()
+  {
+    return getEnableSearch();
+  }
+
+  /** */
+  @property void enableSearch(bool propval)
+  {
+    return setEnableSearch(propval);
+  }
+
+  /** */
+  @property bool enableTreeLines()
+  {
+    return getEnableTreeLines();
+  }
+
+  /** */
+  @property void enableTreeLines(bool propval)
+  {
+    return setEnableTreeLines(propval);
+  }
+
+  /** */
+  @property gtk.tree_view_column.TreeViewColumn expanderColumn()
+  {
+    return getExpanderColumn();
+  }
+
+  /** */
+  @property void expanderColumn(gtk.tree_view_column.TreeViewColumn propval)
+  {
+    return setExpanderColumn(propval);
+  }
+
+  /**
+      Get `fixedHeightMode` property.
+      Returns: Setting the ::fixed-height-mode property to true speeds up
+      [gtk.tree_view.TreeView] by assuming that all rows have the same height.
+      Only enable this option if all rows are the same height.
+      Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
+      information on this option.
+  */
+  @property bool fixedHeightMode()
+  {
+    return getFixedHeightMode();
+  }
+
+  /**
+      Set `fixedHeightMode` property.
+      Params:
+        propval = Setting the ::fixed-height-mode property to true speeds up
+        [gtk.tree_view.TreeView] by assuming that all rows have the same height.
+        Only enable this option if all rows are the same height.
+        Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
+        information on this option.
+  */
+  @property void fixedHeightMode(bool propval)
+  {
+    return setFixedHeightMode(propval);
+  }
+
+  /** */
+  @property bool headersClickable()
+  {
+    return getHeadersClickable();
+  }
+
+  /** */
+  @property void headersClickable(bool propval)
+  {
+    return setHeadersClickable(propval);
+  }
+
+  /** */
+  @property bool headersVisible()
+  {
+    return getHeadersVisible();
+  }
+
+  /** */
+  @property void headersVisible(bool propval)
+  {
+    return setHeadersVisible(propval);
+  }
+
+  /**
+      Get `hoverExpand` property.
+      Returns: Enables or disables the hover expansion mode of @tree_view.
+      Hover expansion makes rows expand or collapse if the pointer moves
+      over them.
+      
+      This mode is primarily intended for treeviews in popups, e.g.
+      in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+  */
+  @property bool hoverExpand()
+  {
+    return getHoverExpand();
+  }
+
+  /**
+      Set `hoverExpand` property.
+      Params:
+        propval = Enables or disables the hover expansion mode of @tree_view.
+        Hover expansion makes rows expand or collapse if the pointer moves
+        over them.
+        
+        This mode is primarily intended for treeviews in popups, e.g.
+        in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+  */
+  @property void hoverExpand(bool propval)
+  {
+    return setHoverExpand(propval);
+  }
+
+  /**
+      Get `hoverSelection` property.
+      Returns: Enables or disables the hover selection mode of @tree_view.
+      Hover selection makes the selected row follow the pointer.
+      Currently, this works only for the selection modes
+      [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
+      
+      This mode is primarily intended for treeviews in popups, e.g.
+      in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+  */
+  @property bool hoverSelection()
+  {
+    return getHoverSelection();
+  }
+
+  /**
+      Set `hoverSelection` property.
+      Params:
+        propval = Enables or disables the hover selection mode of @tree_view.
+        Hover selection makes the selected row follow the pointer.
+        Currently, this works only for the selection modes
+        [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
+        
+        This mode is primarily intended for treeviews in popups, e.g.
+        in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+  */
+  @property void hoverSelection(bool propval)
+  {
+    return setHoverSelection(propval);
+  }
+
+  /**
+      Get `levelIndentation` property.
+      Returns: Extra indentation for each level.
+  */
+  @property int levelIndentation()
+  {
+    return getLevelIndentation();
+  }
+
+  /**
+      Set `levelIndentation` property.
+      Params:
+        propval = Extra indentation for each level.
+  */
+  @property void levelIndentation(int propval)
+  {
+    return setLevelIndentation(propval);
+  }
+
+  /** */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
+  }
+
+  /** */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /** */
+  @property bool reorderable()
+  {
+    return getReorderable();
+  }
+
+  /** */
+  @property void reorderable(bool propval)
+  {
+    return setReorderable(propval);
+  }
+
+  /** */
+  @property bool rubberBanding()
+  {
+    return getRubberBanding();
+  }
+
+  /** */
+  @property void rubberBanding(bool propval)
+  {
+    return setRubberBanding(propval);
+  }
+
+  /** */
+  @property int searchColumn()
+  {
+    return getSearchColumn();
+  }
+
+  /** */
+  @property void searchColumn(int propval)
+  {
+    return setSearchColumn(propval);
+  }
+
+  /**
+      Get `showExpanders` property.
+      Returns: true if the view has expanders.
+  */
+  @property bool showExpanders()
+  {
+    return getShowExpanders();
+  }
+
+  /**
+      Set `showExpanders` property.
+      Params:
+        propval = true if the view has expanders.
+  */
+  @property void showExpanders(bool propval)
+  {
+    return setShowExpanders(propval);
+  }
+
+  /** */
+  @property int tooltipColumn()
+  {
+    return getTooltipColumn();
+  }
+
+  /** */
+  @property void tooltipColumn(int propval)
+  {
+    return setTooltipColumn(propval);
   }
 
   mixin ScrollableT!();
@@ -176,8 +455,8 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   static gtk.tree_view.TreeView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view.TreeView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -350,7 +629,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GdkPaintable* _cretval;
     _cretval = gtk_tree_view_create_row_drag_icon(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -505,7 +784,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_column(cast(GtkTreeView*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -634,7 +913,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_expander_column(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -744,7 +1023,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_view_get_model(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -859,7 +1138,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkEditable* _cretval;
     _cretval = gtk_tree_view_get_search_entry(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -873,7 +1152,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkTreeSelection* _cretval;
     _cretval = gtk_tree_view_get_selection(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(GtkTreeSelection*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_selection.TreeSelection)(cast(GtkTreeSelection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -938,7 +1217,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
@@ -1030,7 +1309,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -1117,7 +1396,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeViewMappingFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -1274,7 +1553,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeViewColumnDropFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -1521,7 +1800,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1566,7 +1845,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -1626,7 +1905,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setSearchEntry(gtk.editable.Editable entry = null)
   {
-    gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
+    gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(gobject.object.ObjectWrap)entry).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1646,7 +1925,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _searchEqualFuncCB = searchEqualFunc ? &_searchEqualFuncCallback : null;

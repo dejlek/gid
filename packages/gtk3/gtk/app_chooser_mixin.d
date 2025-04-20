@@ -34,13 +34,13 @@ template AppChooserT()
   /**
       Returns the currently selected application.
       Returns: a #GAppInfo for the currently selected
-            application, or null if none is selected. Free with [gobject.object.ObjectG.unref]
+            application, or null if none is selected. Free with [gobject.object.ObjectWrap.unref]
   */
   override gio.app_info.AppInfo getAppInfo()
   {
     GAppInfo* _cretval;
     _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 

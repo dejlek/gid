@@ -136,7 +136,7 @@ enum GstCollectPadsStateFlags : uint
     this object is for you.
     
     An adapter is created with [gstbase.adapter.Adapter.new_]. It can be freed again with
-    [gobject.object.ObjectG.unref].
+    [gobject.object.ObjectWrap.unref].
     
     The theory of operation is like this: All buffers received are put
     into the adapter using [gstbase.adapter.Adapter.push] and the data is then read back

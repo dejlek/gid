@@ -48,9 +48,22 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StyleSchemePreview self()
   {
     return this;
+  }
+
+  /** */
+  @property bool selected()
+  {
+    return getSelected();
+  }
+
+  /** */
+  @property void selected(bool propval)
+  {
+    return setSelected(propval);
   }
 
   mixin ActionableT!();
@@ -78,7 +91,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 

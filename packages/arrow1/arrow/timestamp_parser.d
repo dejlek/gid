@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class TimestampParser : gobject.object.ObjectG
+class TimestampParser : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class TimestampParser : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TimestampParser self()
   {
     return this;

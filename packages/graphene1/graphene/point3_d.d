@@ -15,10 +15,19 @@ import graphene.vec3;
 class Point3D : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `point3_d.Point3D` boxed type.
+      Params:
+        x = the X coordinate
+        y = the Y coordinate
+        z = the Z coordinate
+  */
+  this(float x = 0.0, float y = 0.0, float z = 0.0)
   {
     super(gMalloc(graphene_point3d_t.sizeof), Yes.Take);
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   /** */
@@ -46,36 +55,64 @@ class Point3D : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Point3D self()
   {
     return this;
   }
 
+  /**
+      Get `x` field.
+      Returns: the X coordinate
+  */
   @property float x()
   {
     return (cast(graphene_point3d_t*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = the X coordinate
+  */
   @property void x(float propval)
   {
     (cast(graphene_point3d_t*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: the Y coordinate
+  */
   @property float y()
   {
     return (cast(graphene_point3d_t*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = the Y coordinate
+  */
   @property void y(float propval)
   {
     (cast(graphene_point3d_t*)cPtr).y = propval;
   }
 
+  /**
+      Get `z` field.
+      Returns: the Z coordinate
+  */
   @property float z()
   {
     return (cast(graphene_point3d_t*)cPtr).z;
   }
 
+  /**
+      Set `z` field.
+      Params:
+        propval = the Z coordinate
+  */
   @property void z(float propval)
   {
     (cast(graphene_point3d_t*)cPtr).z = propval;

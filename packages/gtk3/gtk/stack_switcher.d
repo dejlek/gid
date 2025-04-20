@@ -61,9 +61,43 @@ class StackSwitcher : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StackSwitcher self()
   {
     return this;
+  }
+
+  /**
+      Get `iconSize` property.
+      Returns: Use the "icon-size" property to change the size of the image displayed
+      when a #GtkStackSwitcher is displaying icons.
+  */
+  @property int iconSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("icon-size");
+  }
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = Use the "icon-size" property to change the size of the image displayed
+        when a #GtkStackSwitcher is displaying icons.
+  */
+  @property void iconSize(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("icon-size", propval);
+  }
+
+  /** */
+  @property gtk.stack.Stack stack()
+  {
+    return getStack();
+  }
+
+  /** */
+  @property void stack(gtk.stack.Stack propval)
+  {
+    return setStack(propval);
   }
 
   /**
@@ -87,7 +121,7 @@ class StackSwitcher : gtk.box.Box
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 

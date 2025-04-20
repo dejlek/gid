@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class ArrayBuilder : gobject.object.ObjectG
+class ArrayBuilder : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ArrayBuilder self()
   {
     return this;
@@ -45,7 +46,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_append_empty_value(cast(GArrowArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -56,7 +57,7 @@ class ArrayBuilder : gobject.object.ObjectG
       Params:
         n = The number of null values to be appended.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendEmptyValues(long n)
   {
@@ -64,7 +65,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_append_empty_values(cast(GArrowArrayBuilder*)cPtr, n, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -75,7 +76,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_append_null(cast(GArrowArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -86,7 +87,7 @@ class ArrayBuilder : gobject.object.ObjectG
       Params:
         n = The number of null values to be appended.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendNulls(long n)
   {
@@ -94,7 +95,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_append_nulls(cast(GArrowArrayBuilder*)cPtr, n, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -105,8 +106,8 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_array_builder_finish(cast(GArrowArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,7 +124,7 @@ class ArrayBuilder : gobject.object.ObjectG
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_array_builder_get_child(cast(GArrowArrayBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +158,7 @@ class ArrayBuilder : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_array_builder_get_value_data_type(cast(GArrowArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -177,7 +178,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_reserve(cast(GArrowArrayBuilder*)cPtr, additionalCapacity, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -194,7 +195,7 @@ class ArrayBuilder : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_array_builder_resize(cast(GArrowArrayBuilder*)cPtr, capacity, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

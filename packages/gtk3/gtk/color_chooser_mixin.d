@@ -5,6 +5,7 @@ public import gtk.color_chooser_iface_proxy;
 public import gdk.rgba;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -19,6 +20,60 @@ public import gtk.types;
 */
 template ColorChooserT()
 {
+
+  /**
+      Get `rgba` property.
+      Returns: The ::rgba property contains the currently selected color,
+      as a #GdkRGBA struct. The property can be set to change
+      the current selection programmatically.
+  */
+  @property gdk.rgba.RGBA rgba()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The ::rgba property contains the currently selected color,
+        as a #GdkRGBA struct. The property can be set to change
+        the current selection programmatically.
+  */
+  @property void rgba(gdk.rgba.RGBA propval)
+  {
+    return setRgba(propval);
+  }
+
+  /**
+      Get `useAlpha` property.
+      Returns: When ::use-alpha is true, colors may have alpha (translucency)
+      information. When it is false, the #GdkRGBA struct obtained
+      via the #GtkColorChooser:rgba property will be forced to have
+      alpha == 1.
+      
+      Implementations are expected to show alpha by rendering the color
+      over a non-uniform background (like a checkerboard pattern).
+  */
+  @property bool useAlpha()
+  {
+    return getUseAlpha();
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = When ::use-alpha is true, colors may have alpha (translucency)
+        information. When it is false, the #GdkRGBA struct obtained
+        via the #GtkColorChooser:rgba property will be forced to have
+        alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
+  */
+  @property void useAlpha(bool propval)
+  {
+    return setUseAlpha(propval);
+  }
 
   /**
       Adds a palette to the color chooser. If orientation is horizontal,

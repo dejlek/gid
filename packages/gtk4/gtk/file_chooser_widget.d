@@ -3,6 +3,7 @@ module gtk.file_chooser_widget;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -51,9 +52,37 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserWidget self()
   {
     return this;
+  }
+
+  /** */
+  @property bool searchMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("search-mode");
+  }
+
+  /** */
+  @property void searchMode(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("search-mode", propval);
+  }
+
+  /**
+      Get `showTime` property.
+      Returns: Whether to show the time.
+  */
+  @property bool showTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-time");
+  }
+
+  /** */
+  @property string subtitle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("subtitle");
   }
 
   mixin FileChooserT!();

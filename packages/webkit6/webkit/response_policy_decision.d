@@ -48,6 +48,26 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /**
+      Get `request` property.
+      Returns: This property contains the #WebKitURIRequest associated with this
+      policy decision.
+  */
+  @property webkit.urirequest.URIRequest request()
+  {
+    return getRequest();
+  }
+
+  /**
+      Get `response` property.
+      Returns: This property contains the #WebKitURIResponse associated with this
+      policy decision.
+  */
+  @property webkit.uriresponse.URIResponse response()
+  {
+    return getResponse();
+  }
+
+  /**
       Return the #WebKitURIRequest associated with the response decision.
       
       Modifications to the returned object are <emphasis>not</emphasis> taken
@@ -61,7 +81,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_response_policy_decision_get_request(cast(WebKitResponsePolicyDecision*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,7 +93,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_response_policy_decision_get_response(cast(WebKitResponsePolicyDecision*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 

@@ -5,7 +5,7 @@ import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
 
-/// Proxy object for [Gtk.Actionable] interface when a GObject has no applicable D binding
+/// Proxy object for [gtk.actionable.Actionable] interface when a GObject has no applicable D binding
 class ActionableIfaceProxy : IfaceProxy, gtk.actionable.Actionable
 {
   this(void* ptr, Flag!"Take" take = No.Take)

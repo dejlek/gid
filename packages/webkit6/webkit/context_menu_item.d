@@ -60,12 +60,12 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
         target = a #GVariant to use as the action target
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkit.context_menu_item.ContextMenuItem newFromGaction(gio.action.Action action, string label, glib.variant.VariantG target = null)
+  static webkit.context_menu_item.ContextMenuItem newFromGaction(gio.action.Action action, string label, glib.variant.Variant target = null)
   {
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
-    _cretval = webkit_context_menu_item_new_from_gaction(action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null, _label, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    _cretval = webkit_context_menu_item_new_from_gaction(action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action).cPtr(No.Dup) : null, _label, target ? cast(GVariant*)target.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       activated the action associated will be handled by WebKit and the current
       load operation will be stopped. You can get the #GAction of a
       #WebKitContextMenuItem created with a #WebKitContextMenuAction with
-      [webkit.context_menu_item.ContextMenuItem.getGaction] and connect to the #GSimpleAction::activate signal
+      [webkitwebprocessextension.context_menu_item.ContextMenuItem.getGaction] and connect to the #GSimpleAction::activate signal
       to be notified when the item is activated, but you can't prevent the associated
       action from being performed.
   
@@ -89,7 +89,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_item_new_from_stock_action(action);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = webkit_context_menu_item_new_from_stock_action_with_label(action, _label);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_item_new_separator();
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = webkit_context_menu_item_new_with_submenu(_label, submenu ? cast(WebKitContextMenu*)submenu.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   {
     GAction* _cretval;
     _cretval = webkit_context_menu_item_get_gaction(cast(WebKitContextMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   {
     WebKitContextMenu* _cretval;
     _cretval = webkit_context_menu_item_get_submenu(cast(WebKitContextMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, No.Take);
     return _retval;
   }
 

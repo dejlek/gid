@@ -45,13 +45,13 @@ interface CellAccessibleParent
   int getChildIndex(gtk.cell_accessible.CellAccessible cell);
 
   /** */
-  atk.object.ObjectAtk[] getColumnHeaderCells(gtk.cell_accessible.CellAccessible cell);
+  atk.object.ObjectWrap[] getColumnHeaderCells(gtk.cell_accessible.CellAccessible cell);
 
   /** */
   gtk.types.CellRendererState getRendererState(gtk.cell_accessible.CellAccessible cell);
 
   /** */
-  atk.object.ObjectAtk[] getRowHeaderCells(gtk.cell_accessible.CellAccessible cell);
+  atk.object.ObjectWrap[] getRowHeaderCells(gtk.cell_accessible.CellAccessible cell);
 
   /** */
   bool grabFocus(gtk.cell_accessible.CellAccessible cell);

@@ -112,7 +112,7 @@ template PollableInputStreamT()
         cancellable = a #GCancellable, or null
       Returns: the number of bytes read, or -1 on error (including
           [gio.types.IOErrorEnum.WouldBlock]).
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -121,7 +121,7 @@ template PollableInputStreamT()
     GError *_err;
     _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

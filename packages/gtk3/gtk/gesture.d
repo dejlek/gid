@@ -133,9 +133,31 @@ class Gesture : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Gesture self()
   {
     return this;
+  }
+
+  /**
+      Get `window` property.
+      Returns: If non-null, the gesture will only listen for events that happen on
+      this #GdkWindow, or a child of it.
+  */
+  @property gdk.window.Window window()
+  {
+    return getWindow();
+  }
+
+  /**
+      Set `window` property.
+      Params:
+        propval = If non-null, the gesture will only listen for events that happen on
+        this #GdkWindow, or a child of it.
+  */
+  @property void window(gdk.window.Window propval)
+  {
+    return setWindow(propval);
   }
 
   /**
@@ -190,7 +212,7 @@ class Gesture : gtk.event_controller.EventController
   {
     GdkDevice* _cretval;
     _cretval = gtk_gesture_get_device(cast(GtkGesture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -298,7 +320,7 @@ class Gesture : gtk.event_controller.EventController
   {
     GdkWindow* _cretval;
     _cretval = gtk_gesture_get_window(cast(GtkGesture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

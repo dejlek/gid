@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -48,9 +49,28 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserWidget self()
   {
     return this;
+  }
+
+  /** */
+  @property bool searchMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("search-mode");
+  }
+
+  /** */
+  @property void searchMode(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("search-mode", propval);
+  }
+
+  /** */
+  @property string subtitle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("subtitle");
   }
 
   mixin FileChooserT!();

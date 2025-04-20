@@ -119,9 +119,101 @@ class Notebook : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Notebook self()
   {
     return this;
+  }
+
+  /** */
+  @property bool enablePopup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enable-popup");
+  }
+
+  /** */
+  @property void enablePopup(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("enable-popup", propval);
+  }
+
+  /**
+      Get `groupName` property.
+      Returns: Group name for tab drag and drop.
+  */
+  @property string groupName()
+  {
+    return getGroupName();
+  }
+
+  /**
+      Set `groupName` property.
+      Params:
+        propval = Group name for tab drag and drop.
+  */
+  @property void groupName(string propval)
+  {
+    return setGroupName(propval);
+  }
+
+  /** */
+  @property int page()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("page");
+  }
+
+  /** */
+  @property void page(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("page", propval);
+  }
+
+  /** */
+  @property bool scrollable()
+  {
+    return getScrollable();
+  }
+
+  /** */
+  @property void scrollable(bool propval)
+  {
+    return setScrollable(propval);
+  }
+
+  /** */
+  @property bool showBorder()
+  {
+    return getShowBorder();
+  }
+
+  /** */
+  @property void showBorder(bool propval)
+  {
+    return setShowBorder(propval);
+  }
+
+  /** */
+  @property bool showTabs()
+  {
+    return getShowTabs();
+  }
+
+  /** */
+  @property void showTabs(bool propval)
+  {
+    return setShowTabs(propval);
+  }
+
+  /** */
+  @property gtk.types.PositionType tabPos()
+  {
+    return getTabPos();
+  }
+
+  /** */
+  @property void tabPos(gtk.types.PositionType propval)
+  {
+    return setTabPos(propval);
   }
 
   /**
@@ -204,7 +296,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)cPtr, packType);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +338,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,7 +385,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -373,7 +465,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

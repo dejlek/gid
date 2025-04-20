@@ -76,9 +76,29 @@ class ActionBar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ActionBar self()
   {
     return this;
+  }
+
+  /**
+      Get `revealed` property.
+      Returns: Controls whether the action bar shows its contents.
+  */
+  @property bool revealed()
+  {
+    return getRevealed();
+  }
+
+  /**
+      Set `revealed` property.
+      Params:
+        propval = Controls whether the action bar shows its contents.
+  */
+  @property void revealed(bool propval)
+  {
+    return setRevealed(propval);
   }
 
   /**
@@ -100,13 +120,13 @@ class ActionBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
   /**
       Gets whether the contents of the action bar are revealed.
-      Returns: the current value of the [gtk.action_bar.ActionBar.gboolean]
+      Returns: the current value of the [gtk.action_bar.ActionBar.revealed]
           property
   */
   bool getRevealed()
@@ -166,7 +186,7 @@ class ActionBar : gtk.widget.Widget
       Reveals or conceals the content of the action bar.
       
       Note: this does not show or hide action_bar in the
-      [gtk.widget.Widget.gboolean] sense, so revealing has
+      [gtk.widget.Widget.visible] sense, so revealing has
       no effect if the action bar is hidden.
   
       Params:

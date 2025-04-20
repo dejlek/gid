@@ -21,10 +21,22 @@ import gobject.boxed;
 class RGBA : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rgba.RGBA` boxed type.
+      Params:
+        red = The intensity of the red channel from 0.0 to 1.0 inclusive
+        green = The intensity of the green channel from 0.0 to 1.0 inclusive
+        blue = The intensity of the blue channel from 0.0 to 1.0 inclusive
+        alpha = The opacity of the color from 0.0 for completely translucent to
+            1.0 for opaque
+  */
+  this(float red = 0.0, float green = 0.0, float blue = 0.0, float alpha = 0.0)
   {
     super(gMalloc(GdkRGBA.sizeof), Yes.Take);
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
+    this.alpha = alpha;
   }
 
   /** */
@@ -52,46 +64,85 @@ class RGBA : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RGBA self()
   {
     return this;
   }
 
+  /**
+      Get `red` field.
+      Returns: The intensity of the red channel from 0.0 to 1.0 inclusive
+  */
   @property float red()
   {
     return (cast(GdkRGBA*)cPtr).red;
   }
 
+  /**
+      Set `red` field.
+      Params:
+        propval = The intensity of the red channel from 0.0 to 1.0 inclusive
+  */
   @property void red(float propval)
   {
     (cast(GdkRGBA*)cPtr).red = propval;
   }
 
+  /**
+      Get `green` field.
+      Returns: The intensity of the green channel from 0.0 to 1.0 inclusive
+  */
   @property float green()
   {
     return (cast(GdkRGBA*)cPtr).green;
   }
 
+  /**
+      Set `green` field.
+      Params:
+        propval = The intensity of the green channel from 0.0 to 1.0 inclusive
+  */
   @property void green(float propval)
   {
     (cast(GdkRGBA*)cPtr).green = propval;
   }
 
+  /**
+      Get `blue` field.
+      Returns: The intensity of the blue channel from 0.0 to 1.0 inclusive
+  */
   @property float blue()
   {
     return (cast(GdkRGBA*)cPtr).blue;
   }
 
+  /**
+      Set `blue` field.
+      Params:
+        propval = The intensity of the blue channel from 0.0 to 1.0 inclusive
+  */
   @property void blue(float propval)
   {
     (cast(GdkRGBA*)cPtr).blue = propval;
   }
 
+  /**
+      Get `alpha` field.
+      Returns: The opacity of the color from 0.0 for completely translucent to
+        1.0 for opaque
+  */
   @property float alpha()
   {
     return (cast(GdkRGBA*)cPtr).alpha;
   }
 
+  /**
+      Set `alpha` field.
+      Params:
+        propval = The opacity of the color from 0.0 for completely translucent to
+          1.0 for opaque
+  */
   @property void alpha(float propval)
   {
     (cast(GdkRGBA*)cPtr).alpha = propval;

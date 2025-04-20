@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ServerAuthHandler : gobject.object.ObjectG
+class ServerAuthHandler : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class ServerAuthHandler : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerAuthHandler self()
   {
     return this;

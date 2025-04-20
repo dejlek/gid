@@ -29,7 +29,7 @@ import gobject.object;
     class is registered with the [gobject.types.size_t] type system before calling
     [gio.socket.Socket.receiveMessage] to read such a message.
 */
-class SocketControlMessage : gobject.object.ObjectG
+class SocketControlMessage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -51,6 +51,7 @@ class SocketControlMessage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketControlMessage self()
   {
     return this;
@@ -80,7 +81,7 @@ class SocketControlMessage : gobject.object.ObjectG
 
     auto _data = cast(void*)data.ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
-    auto _retval = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -55,6 +55,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppLaunchContext self()
   {
     return this;
@@ -119,7 +120,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

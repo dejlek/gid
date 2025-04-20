@@ -4,12 +4,13 @@ module arrowflight.server_options;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.location;
+import arrowflight.server_auth_handler;
 import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
 /** */
-class ServerOptions : gobject.object.ObjectG
+class ServerOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,9 +32,29 @@ class ServerOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `authHandler` property.
+      Returns: The authentication handler.
+  */
+  @property arrowflight.server_auth_handler.ServerAuthHandler authHandler()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.server_auth_handler.ServerAuthHandler)("auth-handler");
+  }
+
+  /**
+      Set `authHandler` property.
+      Params:
+        propval = The authentication handler.
+  */
+  @property void authHandler(arrowflight.server_auth_handler.ServerAuthHandler propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrowflight.server_auth_handler.ServerAuthHandler)("auth-handler", propval);
   }
 
   /** */

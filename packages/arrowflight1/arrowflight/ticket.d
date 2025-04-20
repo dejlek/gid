@@ -9,7 +9,7 @@ import glib.bytes;
 import gobject.object;
 
 /** */
-class Ticket : gobject.object.ObjectG
+class Ticket : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,9 +31,31 @@ class Ticket : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Ticket self()
   {
     return this;
+  }
+
+  /**
+      Get `data` property.
+      Returns: Opaque identifier or credential to use when requesting a data
+      stream with the DoGet RPC.
+  */
+  @property glib.bytes.Bytes data()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("data");
+  }
+
+  /**
+      Set `data` property.
+      Params:
+        propval = Opaque identifier or credential to use when requesting a data
+        stream with the DoGet RPC.
+  */
+  @property void data(glib.bytes.Bytes propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(glib.bytes.Bytes)("data", propval);
   }
 
   /** */

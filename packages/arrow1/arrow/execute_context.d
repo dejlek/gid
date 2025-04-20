@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ExecuteContext : gobject.object.ObjectG
+class ExecuteContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class ExecuteContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExecuteContext self()
   {
     return this;

@@ -35,13 +35,14 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileChooserWidgetAccessible self()
   {
     return this;
   }
 
   mixin ActionT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

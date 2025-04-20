@@ -34,7 +34,7 @@ import gobject.object;
     intended to be used with [gio.dbus_object_manager_server.DBusObjectManagerServer] or any D-Bus
     object implementing the `org.freedesktop.DBus.ObjectManager` interface.
 */
-class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.DBusObjectManager
+class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manager.DBusObjectManager
 {
 
   /** */
@@ -56,9 +56,29 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusObjectManagerServer self()
   {
     return this;
+  }
+
+  /**
+      Get `connection` property.
+      Returns: The #GDBusConnection to export objects on.
+  */
+  @property gio.dbus_connection.DBusConnection connection()
+  {
+    return getConnection();
+  }
+
+  /**
+      Set `connection` property.
+      Params:
+        propval = The #GDBusConnection to export objects on.
+  */
+  @property void connection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setConnection(propval);
   }
 
   mixin DBusObjectManagerT!();
@@ -74,7 +94,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   
       Params:
         objectPath = The object path to export the manager object at.
-      Returns: A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectG.unref].
+      Returns: A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectWrap.unref].
   */
   this(string objectPath)
   {
@@ -122,13 +142,13 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
       Gets the #GDBusConnection used by manager.
       Returns: A #GDBusConnection object or null if
           manager isn't exported on a connection. The returned object should
-          be freed with [gobject.object.ObjectG.unref].
+          be freed with [gobject.object.ObjectWrap.unref].
   */
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_server_get_connection(cast(GDBusObjectManagerServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -33,9 +33,29 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FixedLayoutChild self()
   {
     return this;
+  }
+
+  /**
+      Get `transform` property.
+      Returns: The transform of the child.
+  */
+  @property gsk.transform.Transform transform()
+  {
+    return getTransform();
+  }
+
+  /**
+      Set `transform` property.
+      Params:
+        propval = The transform of the child.
+  */
+  @property void transform(gsk.transform.Transform propval)
+  {
+    return setTransform(propval);
   }
 
   /**

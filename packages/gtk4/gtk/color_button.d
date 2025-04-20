@@ -62,9 +62,75 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorButton self()
   {
     return this;
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the color chooser dialog should be modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog should be modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `showEditor` property.
+      Returns: Whether the color chooser should open in editor mode.
+      
+      This property should be used in cases where the palette
+      in the editor would be redundant, such as when the color
+      button is already part of a palette.
+  */
+  @property bool showEditor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
+  }
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Whether the color chooser should open in editor mode.
+        
+        This property should be used in cases where the palette
+        in the editor would be redundant, such as when the color
+        button is already part of a palette.
+  */
+  @property void showEditor(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the color chooser dialog
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the color chooser dialog
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   mixin ColorChooserT!();
@@ -99,7 +165,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

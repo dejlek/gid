@@ -5,7 +5,7 @@ import gobject.object;
 import atk.value;
 import atk.value_mixin;
 
-/// Proxy object for [Atk.Value] interface when a GObject has no applicable D binding
+/// Proxy object for [atk.value.Value] interface when a GObject has no applicable D binding
 class ValueIfaceProxy : IfaceProxy, atk.value.Value
 {
   this(void* ptr, Flag!"Take" take = No.Take)

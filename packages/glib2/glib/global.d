@@ -278,7 +278,7 @@ string asciiStrdown(string str, ptrdiff_t len)
       max = an upper bound (inclusive)
       outNum = a return location for a number
     Returns: true if str was a number, false otherwise
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool asciiStringToSigned(string str, uint base, long min, long max, out long outNum)
 {
@@ -287,7 +287,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
   GError *_err;
   _retval = g_ascii_string_to_signed(_str, base, min, max, cast(long*)&outNum, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -322,7 +322,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
       max = an upper bound (inclusive)
       outNum = a return location for a number
     Returns: true if str was a number, false otherwise
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulong outNum)
 {
@@ -331,7 +331,7 @@ bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulon
   GError *_err;
   _retval = g_ascii_string_to_unsigned(_str, base, min, max, cast(ulong*)&outNum, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -639,7 +639,7 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
 }
 
 /** */
-void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorG error, glib.types.Quark errorDomain, int errorCode)
+void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorWrap error, glib.types.Quark errorDomain, int errorCode)
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -1806,15 +1806,15 @@ int chmod(string filename, int mode)
 
 /**
     If err or *err is null, does nothing. Otherwise,
-    calls [glib.error.ErrorG.free] on *err and sets *err to null.
-    Throws: [ErrorG]
+    calls [glib.error.ErrorWrap.free] on *err and sets *err to null.
+    Throws: [ErrorWrap]
 */
 void clearError()
 {
   GError *_err;
   g_clear_error(&_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
 }
 
 /**
@@ -1839,7 +1839,7 @@ void clearError()
     Params:
       fd = A file descriptor
     Returns: true on success, false if there was an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool close(int fd)
 {
@@ -1847,7 +1847,7 @@ bool close(int fd)
   GError *_err;
   _retval = g_close(fd, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -2065,7 +2065,7 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
     Returns: If the conversion was successful, a newly allocated buffer
                containing the converted string, which must be freed with [glib.global.gfree].
                Otherwise null and error will be set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t bytesRead)
 {
@@ -2081,7 +2081,7 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
   GError *_err;
   _cretval = g_convert(_str, _len, _toCodeset, _fromCodeset, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   ubyte[] _retval;
 
   if (_cretval)
@@ -2135,7 +2135,7 @@ glib.types.Quark convertErrorQuark()
     Returns: If the conversion was successful, a newly allocated buffer
                containing the converted string, which must be freed with [glib.global.gfree].
                Otherwise null and error will be set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, string fallback, out size_t bytesRead)
 {
@@ -2152,7 +2152,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
   GError *_err;
   _cretval = g_convert_with_fallback(_str, _len, _toCodeset, _fromCodeset, _fallback, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   ubyte[] _retval;
 
   if (_cretval)
@@ -2599,7 +2599,7 @@ glib.types.Quark fileErrorQuark()
       contents = location to store an allocated string, use [glib.global.gfree] to free
             the returned string
     Returns: true on success, false if an error occurred
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool fileGetContents(string filename, out ubyte[] contents)
 {
@@ -2610,7 +2610,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
   GError *_err;
   _retval = g_file_get_contents(_filename, &_contents, &_length, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   contents.length = _length;
   contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
   gFree(cast(void*)_contents);
@@ -2644,7 +2644,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
         reading and writing. The file is opened in binary mode on platforms
         where there is a difference. The file handle should be closed with
         close(). In case of errors, -1 is returned and error will be set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 int fileOpenTmp(string tmpl, out string nameUsed)
 {
@@ -2654,7 +2654,7 @@ int fileOpenTmp(string tmpl, out string nameUsed)
   GError *_err;
   _retval = g_file_open_tmp(_tmpl, &_nameUsed, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   nameUsed = _nameUsed.fromCString(Yes.Free);
   return _retval;
 }
@@ -2688,7 +2688,7 @@ int fileOpenTmp(string tmpl, out string nameUsed)
       filename = the symbolic link
     Returns: A newly-allocated string with
         the contents of the symbolic link, or null if an error occurred.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string fileReadLink(string filename)
 {
@@ -2697,7 +2697,7 @@ string fileReadLink(string filename)
   GError *_err;
   _cretval = g_file_read_link(_filename, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -2713,7 +2713,7 @@ string fileReadLink(string filename)
           encoding
       contents = string to write to the file
     Returns: true on success, false if an error occurred
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool fileSetContents(string filename, ubyte[] contents)
 {
@@ -2727,7 +2727,7 @@ bool fileSetContents(string filename, ubyte[] contents)
   GError *_err;
   _retval = g_file_set_contents(_filename, _contents, _length, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -2796,7 +2796,7 @@ bool fileSetContents(string filename, ubyte[] contents)
       flags = flags controlling the safety vs speed of the operation
       mode = file mode, as passed to `open()`; typically this will be `0666`
     Returns: true on success, false if an error occurred
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetContentsFlags flags, int mode)
 {
@@ -2810,7 +2810,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
   GError *_err;
   _retval = g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -2970,7 +2970,7 @@ string filenameDisplayName(string filename)
                    stored in this location.
     Returns: a newly-allocated string holding
                     the resulting filename, or null on an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string filenameFromUri(string uri, out string hostname)
 {
@@ -2980,7 +2980,7 @@ string filenameFromUri(string uri, out string hostname)
   GError *_err;
   _cretval = g_filename_from_uri(_uri, &_hostname, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   hostname = _hostname.fromCString(Yes.Free);
   return _retval;
@@ -3013,7 +3013,7 @@ string filenameFromUri(string uri, out string hostname)
       bytesWritten = the number of bytes stored in
                         the output buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -3022,7 +3022,7 @@ string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, 
   GError *_err;
   _cretval = g_filename_from_utf8(_utf8string, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -3038,7 +3038,7 @@ string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, 
       hostname = A UTF-8 encoded hostname, or null for none.
     Returns: a newly-allocated string holding the resulting
                     URI, or null on an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string filenameToUri(string filename, string hostname = null)
 {
@@ -3048,7 +3048,7 @@ string filenameToUri(string filename, string hostname = null)
   GError *_err;
   _cretval = g_filename_to_uri(_filename, _hostname, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -3084,7 +3084,7 @@ string filenameToUri(string filename, string hostname = null)
       bytesWritten = the number of bytes stored in the output
                         buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string filenameToUtf8(string opsysstring, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -3093,7 +3093,7 @@ string filenameToUtf8(string opsysstring, ptrdiff_t len, out size_t bytesRead, o
   GError *_err;
   _cretval = g_filename_to_utf8(_opsysstring, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -4575,7 +4575,7 @@ string[] listenv()
                         input sequence.
     Returns: A newly-allocated buffer containing the converted string,
                or null on an error, and error will be set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
 {
@@ -4585,7 +4585,7 @@ ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
   GError *_err;
   _cretval = g_locale_from_utf8(_utf8string, len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   ubyte[] _retval;
 
   if (_cretval)
@@ -4623,7 +4623,7 @@ ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
       bytesWritten = the number of bytes stored in the output
                         buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -4636,7 +4636,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesW
   GError *_err;
   _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -4839,7 +4839,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
 }
 
 /**
-    Log a message with structured data, accepting the data within a [glib.variant.VariantG].
+    Log a message with structured data, accepting the data within a [glib.variant.Variant].
     
     This version is especially useful for use in other languages, via introspection.
     
@@ -4851,7 +4851,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
     supported. In this case the message is handled as binary and will be forwarded
     to the log writer as such. The size of the array should not be higher than
     `G_MAXSSIZE`. Otherwise it will be truncated to this size. For other types
-    [glib.variant.VariantG.print] will be used to convert the value into a string.
+    [glib.variant.Variant.print] will be used to convert the value into a string.
     
     For more details on its usage and about the parameters, see `funcGLib.log_structured`.
 
@@ -4859,13 +4859,13 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
       logDomain = log domain, usually `G_LOG_DOMAIN`
       logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
            level
-      fields = a dictionary ([glib.variant.VariantG] of the type `G_VARIANT_TYPE_VARDICT`)
+      fields = a dictionary ([glib.variant.Variant] of the type `G_VARIANT_TYPE_VARDICT`)
         containing the key-value pairs of message data.
 */
-void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.VariantG fields)
+void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.Variant fields)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  g_log_variant(_logDomain, logLevel, fields ? cast(VariantC*)fields.cPtr(No.Dup) : null);
+  g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5821,11 +5821,11 @@ int poll(glib.types.PollFD fds, uint nfds, int timeout)
       dest = error return location
       src = error to move into the return location
 */
-void propagateError(out glib.error.ErrorG dest, glib.error.ErrorG src)
+void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src)
 {
   GError* _dest;
   g_propagate_error(&_dest, src ? cast(GError*)src.cPtr : null);
-  dest = new glib.error.ErrorG(cast(void*)_dest);
+  dest = new glib.error.ErrorWrap(cast(void*)_dest);
 }
 
 /**
@@ -6461,12 +6461,12 @@ void setApplicationName(string applicationName)
       code = error code
       message = error message
 */
-void setErrorLiteral(out glib.error.ErrorG err, glib.types.Quark domain, int code, string message)
+void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int code, string message)
 {
   GError* _err;
   const(char)* _message = message.toCString(No.Alloc);
   g_set_error_literal(&_err, domain, code, _message);
-  err = new glib.error.ErrorG(cast(void*)_err);
+  err = new glib.error.ErrorWrap(cast(void*)_err);
 }
 
 /**
@@ -6561,7 +6561,7 @@ glib.types.Quark shellErrorQuark()
       commandLine = command line to parse
       argvp = return location for array of args
     Returns: true on success, false if error set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool shellParseArgv(string commandLine, out string[] argvp)
 {
@@ -6572,7 +6572,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
   GError *_err;
   _retval = g_shell_parse_argv(_commandLine, &_argcp, &_argvp, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   argvp.length = _argcp;
   foreach (i; 0 .. _argcp)
     argvp[i] = _argvp[i].fromCString(Yes.Free);
@@ -6637,7 +6637,7 @@ string shellQuote(string unquotedString)
     Params:
       quotedString = shell-quoted string
     Returns: an unquoted string
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string shellUnquote(string quotedString)
 {
@@ -6646,7 +6646,7 @@ string shellUnquote(string quotedString)
   GError *_err;
   _cretval = g_shell_unquote(_quotedString, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -6835,7 +6835,7 @@ uint spacedPrimesClosest(uint num)
             in the child just before `exec()`
       childPid = return location for child process reference, or null
     Returns: true on success, false if error is set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid)
 {
@@ -6866,7 +6866,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
   GError *_err;
   _retval = g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -6889,7 +6889,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
       stdoutFd = file descriptor to use for child's stdout, or `-1`
       stderrFd = file descriptor to use for child's stderr, or `-1`
     Returns: true on success, false if an error was set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, int stdinFd, int stdoutFd, int stderrFd)
 {
@@ -6920,7 +6920,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
   GError *_err;
   _retval = g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -6943,7 +6943,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
       standardOutput = return location for file descriptor to read child's stdout, or null
       standardError = return location for file descriptor to read child's stderr, or null
     Returns: true on success, false if an error was set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, out int standardInput, out int standardOutput, out int standardError)
 {
@@ -6974,7 +6974,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
   GError *_err;
   _retval = g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -7196,7 +7196,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
       stdoutPipeOut = return location for file descriptor to read child's stdout, or null
       stderrPipeOut = return location for file descriptor to read child's stderr, or null
     Returns: true on success, false if an error was set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, int stdinFd, int stdoutFd, int stderrFd, int[] sourceFds, int[] targetFds, out glib.types.Pid childPidOut, out int stdinPipeOut, out int stdoutPipeOut, out int stderrPipeOut)
 {
@@ -7236,7 +7236,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   GError *_err;
   _retval = g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -7254,7 +7254,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
       waitStatus = A status as returned from [glib.global.spawnSync]
     Returns: true if child exited successfully, false otherwise (and
           error will be set)
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use [glib.global.spawnCheckWaitStatus] instead, and check whether your code is conflating wait and exit statuses.
 */
@@ -7264,7 +7264,7 @@ bool spawnCheckExitStatus(int waitStatus)
   GError *_err;
   _retval = g_spawn_check_exit_status(waitStatus, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -7313,7 +7313,7 @@ bool spawnCheckExitStatus(int waitStatus)
       waitStatus = A platform-specific wait status as returned from [glib.global.spawnSync]
     Returns: true if child exited successfully, false otherwise (and
         error will be set)
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnCheckWaitStatus(int waitStatus)
 {
@@ -7321,7 +7321,7 @@ bool spawnCheckWaitStatus(int waitStatus)
   GError *_err;
   _retval = g_spawn_check_wait_status(waitStatus, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -7354,7 +7354,7 @@ void spawnClosePid(glib.types.Pid pid)
     Params:
       commandLine = a command line
     Returns: true on success, false if error is set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnCommandLineAsync(string commandLine)
 {
@@ -7363,7 +7363,7 @@ bool spawnCommandLineAsync(string commandLine)
   GError *_err;
   _retval = g_spawn_command_line_async(_commandLine, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -7404,7 +7404,7 @@ bool spawnCommandLineAsync(string commandLine)
       standardError = return location for child errors
       waitStatus = return location for child wait status, as returned by waitpid()
     Returns: true on success, false if an error was set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnCommandLineSync(string commandLine, out string standardOutput, out string standardError, out int waitStatus)
 {
@@ -7415,7 +7415,7 @@ bool spawnCommandLineSync(string commandLine, out string standardOutput, out str
   GError *_err;
   _retval = g_spawn_command_line_sync(_commandLine, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   standardOutput = _standardOutput.fromCString(Yes.Free);
   standardError = _standardError.fromCString(Yes.Free);
   return _retval;
@@ -7474,7 +7474,7 @@ glib.types.Quark spawnExitErrorQuark()
       standardError = return location for child error messages, or null
       waitStatus = return location for child wait status, as returned by waitpid(), or null
     Returns: true on success, false if an error was set
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out string standardOutput, out string standardError, out int waitStatus)
 {
@@ -7506,7 +7506,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   GError *_err;
   _retval = g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   standardOutput = _standardOutput.fromCString(Yes.Free);
   standardError = _standardError.fromCString(Yes.Free);
   return _retval;
@@ -9639,7 +9639,7 @@ void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
     Returns: a pointer to a newly allocated UTF-16 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -9652,7 +9652,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_ucs4_to_utf16(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   ushort[] _retval;
 
   if (_cretval)
@@ -9680,7 +9680,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set. In that case, items_read
           will be set to the position of the first invalid input character.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -9693,7 +9693,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -10410,7 +10410,7 @@ glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition)
       userName = the username to get the passwd file entry for
     Returns: passwd entry, or null on error; free the returned
          value with [glib.global.gfree]
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 void* unixGetPasswdEntry(string userName)
 {
@@ -10418,7 +10418,7 @@ void* unixGetPasswdEntry(string userName)
   GError *_err;
   auto _retval = g_unix_get_passwd_entry(_userName, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -10447,7 +10447,7 @@ void* unixGetPasswdEntry(string userName)
       fds = Array of two integers
       flags = Bitfield of file descriptor flags, as for fcntl()
     Returns: true on success, false if not (and errno will be set).
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool unixOpenPipe(int[] fds, int flags)
 {
@@ -10457,7 +10457,7 @@ bool unixOpenPipe(int[] fds, int flags)
   GError *_err;
   _retval = g_unix_open_pipe(_fds, flags, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -10470,7 +10470,7 @@ bool unixOpenPipe(int[] fds, int flags)
       fd = A file descriptor
       nonblock = If true, set the descriptor to be non-blocking
     Returns: true if successful
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 bool unixSetFdNonblocking(int fd, bool nonblock)
 {
@@ -10478,7 +10478,7 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
   GError *_err;
   _retval = g_unix_set_fd_nonblocking(fd, nonblock, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   return _retval;
 }
 
@@ -10631,7 +10631,7 @@ void usleep(gulong microseconds)
     Returns: a pointer to a newly allocated UCS-4 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
 {
@@ -10645,7 +10645,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
   GError *_err;
   _cretval = g_utf16_to_ucs4(_str, _len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   dchar[] _retval;
 
   if (_cretval)
@@ -10683,7 +10683,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
     Returns: a pointer to a newly allocated UTF-8 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -10696,7 +10696,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -11257,7 +11257,7 @@ string utf8Substring(string str, glong startPos, glong endPos)
     Returns: a pointer to a newly allocated UCS-4 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 {
@@ -11267,7 +11267,7 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
   GError *_err;
   _cretval = g_utf8_to_ucs4(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   dchar[] _retval;
 
   if (_cretval)
@@ -11323,7 +11323,7 @@ dchar[] utf8ToUcs4Fast(string str)
     Returns: a pointer to a newly allocated UTF-16 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 {
@@ -11333,7 +11333,7 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
   GError *_err;
   _cretval = g_utf8_to_utf16(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   ushort[] _retval;
 
   if (_cretval)

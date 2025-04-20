@@ -34,9 +34,48 @@ class BoolFilter : gtk.filter.Filter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BoolFilter self()
   {
     return this;
+  }
+
+  /**
+      Get `expression` property.
+      Returns: The boolean expression to evaluate on item.
+  */
+  @property gtk.expression.Expression expression()
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The boolean expression to evaluate on item.
+  */
+  @property void expression(gtk.expression.Expression propval)
+  {
+    return setExpression(propval);
+  }
+
+  /**
+      Get `invert` property.
+      Returns: If the expression result should be inverted.
+  */
+  @property bool invert()
+  {
+    return getInvert();
+  }
+
+  /**
+      Set `invert` property.
+      Params:
+        propval = If the expression result should be inverted.
+  */
+  @property void invert(bool propval)
+  {
+    return setInvert(propval);
   }
 
   /**

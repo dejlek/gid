@@ -52,9 +52,20 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RadioToolButton self()
   {
     return this;
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio tool button.
+  */
+  @property void group(gtk.radio_tool_button.RadioToolButton propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.radio_tool_button.RadioToolButton)("group", propval);
   }
 
   /**
@@ -94,7 +105,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_radio_tool_button_new_from_stock(_group, _stockId);
-    auto _retval = ObjectG.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +120,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   {
     GtkToolItem* _cretval;
     _cretval = gtk_radio_tool_button_new_from_widget(group ? cast(GtkRadioToolButton*)group.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +141,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_radio_tool_button_new_with_stock_from_widget(group ? cast(GtkRadioToolButton*)group.cPtr(No.Dup) : null, _stockId);
-    auto _retval = ObjectG.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 

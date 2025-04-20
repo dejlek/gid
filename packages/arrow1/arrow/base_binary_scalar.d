@@ -32,6 +32,7 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseBinaryScalar self()
   {
     return this;
@@ -42,7 +43,7 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
     return _retval;
   }
 }

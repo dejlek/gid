@@ -46,6 +46,7 @@ class HScale : gtk.scale.Scale
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HScale self()
   {
     return this;
@@ -90,7 +91,7 @@ class HScale : gtk.scale.Scale
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscale_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.hscale.HScale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.hscale.HScale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

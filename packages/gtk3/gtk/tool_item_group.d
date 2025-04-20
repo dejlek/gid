@@ -10,7 +10,6 @@ import gtk.buildable_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container;
-import gtk.style;
 import gtk.tool_item;
 import gtk.tool_shell;
 import gtk.tool_shell_mixin;
@@ -49,9 +48,70 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToolItemGroup self()
   {
     return this;
+  }
+
+  /** */
+  @property bool collapsed()
+  {
+    return getCollapsed();
+  }
+
+  /** */
+  @property void collapsed(bool propval)
+  {
+    return setCollapsed(propval);
+  }
+
+  /** */
+  @property pango.types.EllipsizeMode ellipsize()
+  {
+    return getEllipsize();
+  }
+
+  /** */
+  @property void ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setEllipsize(propval);
+  }
+
+  /** */
+  @property gtk.types.ReliefStyle headerRelief()
+  {
+    return getHeaderRelief();
+  }
+
+  /** */
+  @property void headerRelief(gtk.types.ReliefStyle propval)
+  {
+    return setHeaderRelief(propval);
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /** */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
   }
 
   mixin ToolShellT!();
@@ -95,7 +155,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_drop_item(cast(GtkToolItemGroup*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +220,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_group_get_label_widget(cast(GtkToolItemGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +246,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_nth_item(cast(GtkToolItemGroup*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 

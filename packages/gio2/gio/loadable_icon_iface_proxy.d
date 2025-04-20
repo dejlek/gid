@@ -5,7 +5,7 @@ import gobject.object;
 import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 
-/// Proxy object for [Gio.LoadableIcon] interface when a GObject has no applicable D binding
+/// Proxy object for [gio.loadable_icon.LoadableIcon] interface when a GObject has no applicable D binding
 class LoadableIconIfaceProxy : IfaceProxy, gio.loadable_icon.LoadableIcon
 {
   this(void* ptr, Flag!"Take" take = No.Take)

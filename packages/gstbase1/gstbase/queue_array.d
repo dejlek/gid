@@ -20,7 +20,7 @@ class QueueArray
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstBase.QueueArray");
+      throw new GidConstructException("Null instance pointer for gstbase.queue_array.QueueArray");
 
     cInstancePtr = cast(GstQueueArray*)ptr;
 

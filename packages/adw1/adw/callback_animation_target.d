@@ -33,6 +33,7 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CallbackAnimationTarget self()
   {
     return this;

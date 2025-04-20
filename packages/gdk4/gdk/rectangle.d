@@ -27,10 +27,21 @@ import gobject.boxed;
 class Rectangle : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rectangle.Rectangle` boxed type.
+      Params:
+        x = the x coordinate of the top left corner
+        y = the y coordinate of the top left corner
+        width = the width of the rectangle
+        height = the height of the rectangle
+  */
+  this(int x = int.init, int y = int.init, int width = int.init, int height = int.init)
   {
     super(gMalloc(GdkRectangle.sizeof), Yes.Take);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   /** */
@@ -58,46 +69,83 @@ class Rectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Rectangle self()
   {
     return this;
   }
 
+  /**
+      Get `x` field.
+      Returns: the x coordinate of the top left corner
+  */
   @property int x()
   {
     return (cast(GdkRectangle*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = the x coordinate of the top left corner
+  */
   @property void x(int propval)
   {
     (cast(GdkRectangle*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: the y coordinate of the top left corner
+  */
   @property int y()
   {
     return (cast(GdkRectangle*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = the y coordinate of the top left corner
+  */
   @property void y(int propval)
   {
     (cast(GdkRectangle*)cPtr).y = propval;
   }
 
+  /**
+      Get `width` field.
+      Returns: the width of the rectangle
+  */
   @property int width()
   {
     return (cast(GdkRectangle*)cPtr).width;
   }
 
+  /**
+      Set `width` field.
+      Params:
+        propval = the width of the rectangle
+  */
   @property void width(int propval)
   {
     (cast(GdkRectangle*)cPtr).width = propval;
   }
 
+  /**
+      Get `height` field.
+      Returns: the height of the rectangle
+  */
   @property int height()
   {
     return (cast(GdkRectangle*)cPtr).height;
   }
 
+  /**
+      Set `height` field.
+      Params:
+        propval = the height of the rectangle
+  */
   @property void height(int propval)
   {
     (cast(GdkRectangle*)cPtr).height = propval;

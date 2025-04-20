@@ -4,6 +4,7 @@ module gtk.arrow;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -55,9 +56,34 @@ class Arrow : gtk.misc.Misc
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Arrow self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.types.ArrowType arrowType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ArrowType)("arrow-type");
+  }
+
+  /** */
+  @property void arrowType(gtk.types.ArrowType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ArrowType)("arrow-type", propval);
+  }
+
+  /** */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ShadowType)("shadow-type");
+  }
+
+  /** */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ShadowType)("shadow-type", propval);
   }
 
   /**

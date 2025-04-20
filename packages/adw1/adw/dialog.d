@@ -93,9 +93,252 @@ class Dialog : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Dialog self()
   {
     return this;
+  }
+
+  /**
+      Get `canClose` property.
+      Returns: Whether the dialog can be closed.
+      
+      If set to `FALSE`, the close button, shortcuts and
+      [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+      emitted instead, and bottom sheet close swipe will be disabled.
+      [adw.dialog.Dialog.forceClose] still works.
+  */
+  @property bool canClose()
+  {
+    return getCanClose();
+  }
+
+  /**
+      Set `canClose` property.
+      Params:
+        propval = Whether the dialog can be closed.
+        
+        If set to `FALSE`, the close button, shortcuts and
+        [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+        emitted instead, and bottom sheet close swipe will be disabled.
+        [adw.dialog.Dialog.forceClose] still works.
+  */
+  @property void canClose(bool propval)
+  {
+    return setCanClose(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget of the [adw.dialog.Dialog].
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget of the [adw.dialog.Dialog].
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `contentHeight` property.
+      Returns: The height of the dialog's contents.
+      
+      Set it to -1 to reset it to the content's natural height.
+      
+      See also: `property@Gtk.Window:default-height`
+  */
+  @property int contentHeight()
+  {
+    return getContentHeight();
+  }
+
+  /**
+      Set `contentHeight` property.
+      Params:
+        propval = The height of the dialog's contents.
+        
+        Set it to -1 to reset it to the content's natural height.
+        
+        See also: `property@Gtk.Window:default-height`
+  */
+  @property void contentHeight(int propval)
+  {
+    return setContentHeight(propval);
+  }
+
+  /**
+      Get `contentWidth` property.
+      Returns: The width of the dialog's contents.
+      
+      Set it to -1 to reset it to the content's natural width.
+      
+      See also: `property@Gtk.Window:default-width`
+  */
+  @property int contentWidth()
+  {
+    return getContentWidth();
+  }
+
+  /**
+      Set `contentWidth` property.
+      Params:
+        propval = The width of the dialog's contents.
+        
+        Set it to -1 to reset it to the content's natural width.
+        
+        See also: `property@Gtk.Window:default-width`
+  */
+  @property void contentWidth(int propval)
+  {
+    return setContentWidth(propval);
+  }
+
+  /**
+      Get `currentBreakpoint` property.
+      Returns: The current breakpoint.
+  */
+  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  {
+    return getCurrentBreakpoint();
+  }
+
+  /**
+      Get `defaultWidget` property.
+      Returns: The default widget.
+      
+      It's activated when the user presses Enter.
+  */
+  @property gtk.widget.Widget defaultWidget()
+  {
+    return getDefaultWidget();
+  }
+
+  /**
+      Set `defaultWidget` property.
+      Params:
+        propval = The default widget.
+        
+        It's activated when the user presses Enter.
+  */
+  @property void defaultWidget(gtk.widget.Widget propval)
+  {
+    return setDefaultWidget(propval);
+  }
+
+  /**
+      Get `focusWidget` property.
+      Returns: The focus widget.
+  */
+  @property gtk.widget.Widget focusWidget()
+  {
+    return getFocus();
+  }
+
+  /**
+      Set `focusWidget` property.
+      Params:
+        propval = The focus widget.
+  */
+  @property void focusWidget(gtk.widget.Widget propval)
+  {
+    return setFocus(propval);
+  }
+
+  /**
+      Get `followsContentSize` property.
+      Returns: Whether to size content automatically.
+      
+      If set to `TRUE`, always use the content's natural size instead of
+      `property@Dialog:content-width` and `property@Dialog:content-height`. If
+      the content resizes, the dialog will immediately resize as well.
+      
+      See also: [gtk.window.Window.resizable]
+  */
+  @property bool followsContentSize()
+  {
+    return getFollowsContentSize();
+  }
+
+  /**
+      Set `followsContentSize` property.
+      Params:
+        propval = Whether to size content automatically.
+        
+        If set to `TRUE`, always use the content's natural size instead of
+        `property@Dialog:content-width` and `property@Dialog:content-height`. If
+        the content resizes, the dialog will immediately resize as well.
+        
+        See also: [gtk.window.Window.resizable]
+  */
+  @property void followsContentSize(bool propval)
+  {
+    return setFollowsContentSize(propval);
+  }
+
+  /**
+      Get `presentationMode` property.
+      Returns: The dialog's presentation mode.
+      
+      When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
+      the following condition is met: `max-width: 450px or max-height: 360px`,
+      and as a floating window otherwise.
+      
+      Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
+      present it a floating window or a bottom sheet respectively, regardless of
+      available size.
+      
+      Presentation mode does nothing for dialogs presented as a window.
+  */
+  @property adw.types.DialogPresentationMode presentationMode()
+  {
+    return getPresentationMode();
+  }
+
+  /**
+      Set `presentationMode` property.
+      Params:
+        propval = The dialog's presentation mode.
+        
+        When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
+        the following condition is met: `max-width: 450px or max-height: 360px`,
+        and as a floating window otherwise.
+        
+        Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
+        present it a floating window or a bottom sheet respectively, regardless of
+        available size.
+        
+        Presentation mode does nothing for dialogs presented as a window.
+  */
+  @property void presentationMode(adw.types.DialogPresentationMode propval)
+  {
+    return setPresentationMode(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the dialog.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the dialog.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -166,7 +409,7 @@ class Dialog : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_child(cast(AdwDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +443,7 @@ class Dialog : gtk.widget.Widget
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_dialog_get_current_breakpoint(cast(AdwDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +455,7 @@ class Dialog : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_default_widget(cast(AdwDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +467,7 @@ class Dialog : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_focus(cast(AdwDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -374,7 +617,7 @@ class Dialog : gtk.widget.Widget
       `propertyDialog:content-width` and `propertyDialog:content-height`. If
       the content resizes, the dialog will immediately resize as well.
       
-      See also: [gtk.window.Window.gboolean]
+      See also: [gtk.window.Window.resizable]
   
       Params:
         followsContentSize = whether to size content automatically

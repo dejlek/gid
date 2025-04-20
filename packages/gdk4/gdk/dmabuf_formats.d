@@ -57,6 +57,7 @@ class DmabufFormats : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DmabufFormats self()
   {
     return this;

@@ -31,6 +31,7 @@ class UnionScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnionScalar self()
   {
     return this;
@@ -49,7 +50,7 @@ class UnionScalar : arrow.scalar.Scalar
   {
     GArrowScalar* _cretval;
     _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
     return _retval;
   }
 }

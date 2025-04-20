@@ -36,6 +36,7 @@ class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CheckMenuItemAccessible self()
   {
     return this;

@@ -29,7 +29,7 @@ import gobject.value;
     
     Also see [gdk.content_deserializer.ContentDeserializer].
 */
-class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
+class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 {
 
   /** */
@@ -51,6 +51,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ContentSerializer self()
   {
     return this;
@@ -68,7 +69,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GCancellable* _cretval;
     _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +106,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GOutputStream* _cretval;
     _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,9 +163,9 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
       This function consumes error.
   
       Params:
-        error = a [glib.error.ErrorG]
+        error = a [glib.error.ErrorWrap]
   */
-  void returnError(glib.error.ErrorG error)
+  void returnError(glib.error.ErrorWrap error)
   {
     gdk_content_serializer_return_error(cast(GdkContentSerializer*)cPtr, error ? cast(GError*)error.cPtr : null);
   }

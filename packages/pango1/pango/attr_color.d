@@ -20,7 +20,7 @@ class AttrColor
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrColor");
+      throw new GidConstructException("Null instance pointer for pango.attr_color.AttrColor");
 
     cInstance = *cast(PangoAttrColor*)ptr;
 
@@ -34,11 +34,19 @@ class AttrColor
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrColor*)cPtr).attr);
   }
 
+  /**
+      Get `color` field.
+      Returns: the [pango.color.Color] which is the value of the attribute
+  */
   @property pango.color.Color color()
   {
     return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)cPtr).color);

@@ -138,9 +138,154 @@ class GLArea : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLArea self()
   {
     return this;
+  }
+
+  /**
+      Get `autoRender` property.
+      Returns: If set to true the #GtkGLArea::render signal will be emitted every time
+      the widget draws. This is the default and is useful if drawing the widget
+      is faster.
+      
+      If set to false the data from previous rendering is kept around and will
+      be used for drawing the widget the next time, unless the window is resized.
+      In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+      This mode is useful when the scene changes seldomly, but takes a long time
+      to redraw.
+  */
+  @property bool autoRender()
+  {
+    return getAutoRender();
+  }
+
+  /**
+      Set `autoRender` property.
+      Params:
+        propval = If set to true the #GtkGLArea::render signal will be emitted every time
+        the widget draws. This is the default and is useful if drawing the widget
+        is faster.
+        
+        If set to false the data from previous rendering is kept around and will
+        be used for drawing the widget the next time, unless the window is resized.
+        In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+        This mode is useful when the scene changes seldomly, but takes a long time
+        to redraw.
+  */
+  @property void autoRender(bool propval)
+  {
+    return setAutoRender(propval);
+  }
+
+  /**
+      Get `context` property.
+      Returns: The #GdkGLContext used by the #GtkGLArea widget.
+      
+      The #GtkGLArea widget is responsible for creating the #GdkGLContext
+      instance. If you need to render with other kinds of buffers (stencil,
+      depth, etc), use render buffers.
+  */
+  @property gdk.glcontext.GLContext context()
+  {
+    return getContext();
+  }
+
+  /**
+      Get `hasAlpha` property.
+      Returns: If set to true the buffer allocated by the widget will have an alpha channel
+      component, and when rendering to the window the result will be composited over
+      whatever is below the widget.
+      
+      If set to false there will be no alpha channel, and the buffer will fully
+      replace anything below the widget.
+  */
+  @property bool hasAlpha()
+  {
+    return getHasAlpha();
+  }
+
+  /**
+      Set `hasAlpha` property.
+      Params:
+        propval = If set to true the buffer allocated by the widget will have an alpha channel
+        component, and when rendering to the window the result will be composited over
+        whatever is below the widget.
+        
+        If set to false there will be no alpha channel, and the buffer will fully
+        replace anything below the widget.
+  */
+  @property void hasAlpha(bool propval)
+  {
+    return setHasAlpha(propval);
+  }
+
+  /**
+      Get `hasDepthBuffer` property.
+      Returns: If set to true the widget will allocate and enable a depth buffer for the
+      target framebuffer.
+  */
+  @property bool hasDepthBuffer()
+  {
+    return getHasDepthBuffer();
+  }
+
+  /**
+      Set `hasDepthBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a depth buffer for the
+        target framebuffer.
+  */
+  @property void hasDepthBuffer(bool propval)
+  {
+    return setHasDepthBuffer(propval);
+  }
+
+  /**
+      Get `hasStencilBuffer` property.
+      Returns: If set to true the widget will allocate and enable a stencil buffer for the
+      target framebuffer.
+  */
+  @property bool hasStencilBuffer()
+  {
+    return getHasStencilBuffer();
+  }
+
+  /**
+      Set `hasStencilBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a stencil buffer for the
+        target framebuffer.
+  */
+  @property void hasStencilBuffer(bool propval)
+  {
+    return setHasStencilBuffer(propval);
+  }
+
+  /**
+      Get `useEs` property.
+      Returns: If set to true the widget will try to create a #GdkGLContext using
+      OpenGL ES instead of OpenGL.
+      
+      See also: [gdk.glcontext.GLContext.setUseEs]
+  */
+  @property bool useEs()
+  {
+    return getUseEs();
+  }
+
+  /**
+      Set `useEs` property.
+      Params:
+        propval = If set to true the widget will try to create a #GdkGLContext using
+        OpenGL ES instead of OpenGL.
+        
+        See also: [gdk.glcontext.GLContext.setUseEs]
+  */
+  @property void useEs(bool propval)
+  {
+    return setUseEs(propval);
   }
 
   /**
@@ -187,7 +332,7 @@ class GLArea : gtk.widget.Widget
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,11 +340,11 @@ class GLArea : gtk.widget.Widget
       Gets the current error set on the area.
       Returns: the #GError or null
   */
-  glib.error.ErrorG getError()
+  glib.error.ErrorWrap getError()
   {
     GError* _cretval;
     _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -315,7 +460,7 @@ class GLArea : gtk.widget.Widget
       Params:
         error = a new #GError, or null to unset the error
   */
-  void setError(glib.error.ErrorG error = null)
+  void setError(glib.error.ErrorWrap error = null)
   {
     gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }

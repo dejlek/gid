@@ -15,7 +15,7 @@ import webkitwebprocessextension.types;
     Each [webkitwebprocessextension.web_page.WebPage] has at least one main frame, and can have any number
     of subframes.
 */
-class Frame : gobject.object.ObjectG
+class Frame : gobject.object.ObjectWrap
 {
 
   /** */
@@ -65,7 +65,7 @@ class Frame : gobject.object.ObjectG
   {
     JSCContext* _cretval;
     _cretval = webkit_frame_get_js_context(cast(WebKitFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Frame : gobject.object.ObjectG
   {
     JSCContext* _cretval;
     _cretval = webkit_frame_get_js_context_for_script_world(cast(WebKitFrame*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -31,6 +31,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LargeStringArray self()
   {
     return this;

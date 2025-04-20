@@ -17,6 +17,7 @@ import gtk.menu;
 import gtk.orientable;
 import gtk.orientable_mixin;
 import gtk.types;
+import gtk.widget;
 
 /**
     #GtkAppChooserWidget is a widget for selecting applications.
@@ -63,9 +64,158 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppChooserWidget self()
   {
     return this;
+  }
+
+  /**
+      Get `defaultText` property.
+      Returns: The #GtkAppChooserWidget:default-text property determines the text
+      that appears in the widget when there are no applications for the
+      given content type.
+      See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
+  */
+  @property string defaultText()
+  {
+    return getDefaultText();
+  }
+
+  /**
+      Set `defaultText` property.
+      Params:
+        propval = The #GtkAppChooserWidget:default-text property determines the text
+        that appears in the widget when there are no applications for the
+        given content type.
+        See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
+  */
+  @property void defaultText(string propval)
+  {
+    return setDefaultText(propval);
+  }
+
+  alias showAll = gtk.widget.Widget.showAll;
+
+  /**
+      Get `showAll` property.
+      Returns: If the #GtkAppChooserWidget:show-all property is true, the app
+      chooser presents all applications in a single list, without
+      subsections for default, recommended or related applications.
+  */
+  @property bool showAll()
+  {
+    return getShowAll();
+  }
+
+  alias showAll = gtk.widget.Widget.showAll;
+
+  /**
+      Set `showAll` property.
+      Params:
+        propval = If the #GtkAppChooserWidget:show-all property is true, the app
+        chooser presents all applications in a single list, without
+        subsections for default, recommended or related applications.
+  */
+  @property void showAll(bool propval)
+  {
+    return setShowAll(propval);
+  }
+
+  /**
+      Get `showDefault` property.
+      Returns: The ::show-default property determines whether the app chooser
+      should show the default handler for the content type in a
+      separate section. If false, the default handler is listed
+      among the recommended applications.
+  */
+  @property bool showDefault()
+  {
+    return getShowDefault();
+  }
+
+  /**
+      Set `showDefault` property.
+      Params:
+        propval = The ::show-default property determines whether the app chooser
+        should show the default handler for the content type in a
+        separate section. If false, the default handler is listed
+        among the recommended applications.
+  */
+  @property void showDefault(bool propval)
+  {
+    return setShowDefault(propval);
+  }
+
+  /**
+      Get `showFallback` property.
+      Returns: The #GtkAppChooserWidget:show-fallback property determines whether
+      the app chooser should show a section for fallback applications.
+      If false, the fallback applications are listed among the other
+      applications.
+  */
+  @property bool showFallback()
+  {
+    return getShowFallback();
+  }
+
+  /**
+      Set `showFallback` property.
+      Params:
+        propval = The #GtkAppChooserWidget:show-fallback property determines whether
+        the app chooser should show a section for fallback applications.
+        If false, the fallback applications are listed among the other
+        applications.
+  */
+  @property void showFallback(bool propval)
+  {
+    return setShowFallback(propval);
+  }
+
+  /**
+      Get `showOther` property.
+      Returns: The #GtkAppChooserWidget:show-other property determines whether
+      the app chooser should show a section for other applications.
+  */
+  @property bool showOther()
+  {
+    return getShowOther();
+  }
+
+  /**
+      Set `showOther` property.
+      Params:
+        propval = The #GtkAppChooserWidget:show-other property determines whether
+        the app chooser should show a section for other applications.
+  */
+  @property void showOther(bool propval)
+  {
+    return setShowOther(propval);
+  }
+
+  /**
+      Get `showRecommended` property.
+      Returns: The #GtkAppChooserWidget:show-recommended property determines
+      whether the app chooser should show a section for recommended
+      applications. If false, the recommended applications are listed
+      among the other applications.
+  */
+  @property bool showRecommended()
+  {
+    return getShowRecommended();
+  }
+
+  /**
+      Set `showRecommended` property.
+      Params:
+        propval = The #GtkAppChooserWidget:show-recommended property determines
+        whether the app chooser should show a section for recommended
+        applications. If false, the recommended applications are listed
+        among the other applications.
+  */
+  @property void showRecommended(bool propval)
+  {
+    return setShowRecommended(propval);
   }
 
   mixin AppChooserT!();

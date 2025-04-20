@@ -17,7 +17,7 @@ class MaskNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.MaskNode");
+      throw new GidConstructException("Null instance pointer for gsk.mask_node.MaskNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

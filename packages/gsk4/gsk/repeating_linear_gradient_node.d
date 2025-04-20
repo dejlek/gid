@@ -17,7 +17,7 @@ class RepeatingLinearGradientNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.RepeatingLinearGradientNode");
+      throw new GidConstructException("Null instance pointer for gsk.repeating_linear_gradient_node.RepeatingLinearGradientNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

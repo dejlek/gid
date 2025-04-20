@@ -55,6 +55,7 @@ class Array : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Array self()
   {
     return this;
@@ -171,7 +172,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the object to add
   */
-  void addObjectElement(json.object.ObjectJson value = null)
+  void addObjectElement(json.object.ObjectWrap value = null)
   {
     json_array_add_object_element(cast(JsonArray*)cPtr, value ? cast(JsonObject*)value.cPtr(Yes.Dup) : null);
   }
@@ -384,11 +385,11 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the object
   */
-  json.object.ObjectJson getObjectElement(uint index)
+  json.object.ObjectWrap getObjectElement(uint index)
   {
     JsonObject* _cretval;
     _cretval = json_array_get_object_element(cast(JsonArray*)cPtr, index);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectWrap(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

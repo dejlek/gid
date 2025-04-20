@@ -46,9 +46,70 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NumerableIcon self()
   {
     return this;
+  }
+
+  /** */
+  @property gio.icon.Icon backgroundIcon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("background-icon");
+  }
+
+  /** */
+  @property void backgroundIcon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("background-icon", propval);
+  }
+
+  /** */
+  @property string backgroundIconName()
+  {
+    return getBackgroundIconName();
+  }
+
+  /** */
+  @property void backgroundIconName(string propval)
+  {
+    return setBackgroundIconName(propval);
+  }
+
+  /** */
+  @property int count()
+  {
+    return getCount();
+  }
+
+  /** */
+  @property void count(int propval)
+  {
+    return setCount(propval);
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /** */
+  @property gtk.style_context.StyleContext styleContext()
+  {
+    return getStyleContext();
+  }
+
+  /** */
+  @property void styleContext(gtk.style_context.StyleContext propval)
+  {
+    return setStyleContext(propval);
   }
 
   /**
@@ -61,8 +122,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   static gio.icon.Icon new_(gio.icon.Icon baseIcon)
   {
     GIcon* _cretval;
-    _cretval = gtk_numerable_icon_new(baseIcon ? cast(GIcon*)(cast(ObjectG)baseIcon).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = gtk_numerable_icon_new(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,8 +140,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   static gio.icon.Icon newWithStyleContext(gio.icon.Icon baseIcon, gtk.style_context.StyleContext context)
   {
     GIcon* _cretval;
-    _cretval = gtk_numerable_icon_new_with_style_context(baseIcon ? cast(GIcon*)(cast(ObjectG)baseIcon).cPtr(No.Dup) : null, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = gtk_numerable_icon_new_with_style_context(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon).cPtr(No.Dup) : null, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -94,7 +155,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   {
     GIcon* _cretval;
     _cretval = gtk_numerable_icon_get_background_gicon(cast(GtkNumerableIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,13 +200,13 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       or null if there’s none.
       Returns: a #GtkStyleContext, or null.
             This object is internal to GTK+ and should not be unreffed.
-            Use [gobject.object.ObjectG.ref_] if you want to keep it around
+            Use [gobject.object.ObjectWrap.ref_] if you want to keep it around
   */
   gtk.style_context.StyleContext getStyleContext()
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_numerable_icon_get_style_context(cast(GtkNumerableIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +225,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setBackgroundGicon(gio.icon.Icon icon = null)
   {
-    gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

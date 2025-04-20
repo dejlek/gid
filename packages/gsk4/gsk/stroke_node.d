@@ -20,7 +20,7 @@ class StrokeNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.StrokeNode");
+      throw new GidConstructException("Null instance pointer for gsk.stroke_node.StrokeNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

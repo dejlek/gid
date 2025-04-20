@@ -44,7 +44,7 @@ import gobject.object;
     and the value inside the #GdkFrameClock::update signal of the clock,
     they will stay exactly synchronized.
 */
-class FrameClock : gobject.object.ObjectG
+class FrameClock : gobject.object.ObjectWrap
 {
 
   /** */
@@ -66,6 +66,7 @@ class FrameClock : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FrameClock self()
   {
     return this;

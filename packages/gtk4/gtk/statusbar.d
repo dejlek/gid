@@ -76,6 +76,7 @@ class Statusbar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Statusbar self()
   {
     return this;

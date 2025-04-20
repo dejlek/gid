@@ -17,7 +17,7 @@ class PollFD
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.PollFD");
+      throw new GidConstructException("Null instance pointer for gst.poll_fd.PollFD");
 
     cInstance = *cast(GstPollFD*)ptr;
 
@@ -31,11 +31,20 @@ class PollFD
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `fd` field.
+      Returns: a file descriptor
+  */
   @property int fd()
   {
     return (cast(GstPollFD*)cPtr).fd;
   }
 
+  /**
+      Set `fd` field.
+      Params:
+        propval = a file descriptor
+  */
   @property void fd(int propval)
   {
     (cast(GstPollFD*)cPtr).fd = propval;

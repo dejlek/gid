@@ -92,7 +92,7 @@ template AppInfoT()
       Params:
         contentType = a string.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool addSupportsType(string contentType)
   {
@@ -101,7 +101,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_add_supports_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ template AppInfoT()
   {
     GAppInfo* _cretval;
     _cretval = g_app_info_dup(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ template AppInfoT()
   override bool equal(gio.app_info.AppInfo appinfo2)
   {
     bool _retval;
-    _retval = g_app_info_equal(cast(GAppInfo*)cPtr, appinfo2 ? cast(GAppInfo*)(cast(ObjectG)appinfo2).cPtr(No.Dup) : null);
+    _retval = g_app_info_equal(cast(GAppInfo*)cPtr, appinfo2 ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)appinfo2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ template AppInfoT()
   {
     GIcon* _cretval;
     _cretval = g_app_info_get_icon(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ template AppInfoT()
         files = a #GList of #GFile objects
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -345,7 +345,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_launch(cast(GAppInfo*)cPtr, _files, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ template AppInfoT()
         uris = a #GList containing URIs to launch.
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -377,7 +377,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_launch_uris(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ template AppInfoT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -418,15 +418,15 @@ template AppInfoT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful launch, false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool launchUrisFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_uris_finish(cast(GAppInfo*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_app_info_launch_uris_finish(cast(GAppInfo*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ template AppInfoT()
       Params:
         contentType = a string.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool removeSupportsType(string contentType)
   {
@@ -445,7 +445,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_remove_supports_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -456,7 +456,7 @@ template AppInfoT()
         extension = a string containing the file extension
               (without the dot).
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAsDefaultForExtension(string extension)
   {
@@ -465,7 +465,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_set_as_default_for_extension(cast(GAppInfo*)cPtr, _extension, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -475,7 +475,7 @@ template AppInfoT()
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAsDefaultForType(string contentType)
   {
@@ -484,7 +484,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_set_as_default_for_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ template AppInfoT()
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool setAsLastUsedForType(string contentType)
   {
@@ -506,7 +506,7 @@ template AppInfoT()
     GError *_err;
     _retval = g_app_info_set_as_last_used_for_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

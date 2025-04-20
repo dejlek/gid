@@ -31,6 +31,7 @@ class StructScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StructScalar self()
   {
     return this;

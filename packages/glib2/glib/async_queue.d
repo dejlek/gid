@@ -21,7 +21,7 @@ class AsyncQueue
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.AsyncQueue");
+      throw new GidConstructException("Null instance pointer for glib.async_queue.AsyncQueue");
 
     cInstancePtr = cast(GAsyncQueue*)ptr;
 

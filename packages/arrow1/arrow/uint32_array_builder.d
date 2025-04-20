@@ -31,6 +31,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UInt32ArrayBuilder self()
   {
     return this;
@@ -51,7 +52,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_uint32_array_builder_append(cast(GArrowUInt32ArrayBuilder*)cPtr, value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_uint32_array_builder_append_value(cast(GArrowUInt32ArrayBuilder*)cPtr, value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -77,7 +78,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValues(uint[] values, bool[] isValids = null)
   {
@@ -95,7 +96,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_uint32_array_builder_append_values(cast(GArrowUInt32ArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

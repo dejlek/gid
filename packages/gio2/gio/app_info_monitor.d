@@ -51,7 +51,7 @@ import gobject.object;
     often come in groups (like during system updates) and rescanning the list
     on every change is pointless and expensive.
 */
-class AppInfoMonitor : gobject.object.ObjectG
+class AppInfoMonitor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -73,6 +73,7 @@ class AppInfoMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AppInfoMonitor self()
   {
     return this;
@@ -90,7 +91,7 @@ class AppInfoMonitor : gobject.object.ObjectG
       [gio.app_info.AppInfo.getAll] (or another `g_app_info_*()` function) is called. Doing
       so will re-arm the signal ready to notify about the next change.
       
-      You must only call [gobject.object.ObjectG.unref] on the return value from under
+      You must only call [gobject.object.ObjectWrap.unref] on the return value from under
       the same main context as you created it.
       Returns: a reference to a #GAppInfoMonitor
   */
@@ -98,7 +99,7 @@ class AppInfoMonitor : gobject.object.ObjectG
   {
     GAppInfoMonitor* _cretval;
     _cretval = g_app_info_monitor_get();
-    auto _retval = ObjectG.getDObject!(gio.app_info_monitor.AppInfoMonitor)(cast(GAppInfoMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info_monitor.AppInfoMonitor)(cast(GAppInfoMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

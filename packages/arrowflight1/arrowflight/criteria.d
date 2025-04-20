@@ -9,7 +9,7 @@ import glib.bytes;
 import gobject.object;
 
 /** */
-class Criteria : gobject.object.ObjectG
+class Criteria : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,9 +31,29 @@ class Criteria : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Criteria self()
   {
     return this;
+  }
+
+  /**
+      Get `expression` property.
+      Returns: Opaque criteria expression, dependent on server implementation.
+  */
+  @property glib.bytes.Bytes expression()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("expression");
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = Opaque criteria expression, dependent on server implementation.
+  */
+  @property void expression(glib.bytes.Bytes propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(glib.bytes.Bytes)("expression", propval);
   }
 
   /** */

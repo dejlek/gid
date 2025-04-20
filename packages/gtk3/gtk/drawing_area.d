@@ -120,6 +120,7 @@ class DrawingArea : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DrawingArea self()
   {
     return this;

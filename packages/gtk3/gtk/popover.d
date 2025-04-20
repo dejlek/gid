@@ -101,9 +101,134 @@ class Popover : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Popover self()
   {
     return this;
+  }
+
+  /**
+      Get `constrainTo` property.
+      Returns: Sets a constraint for the popover position.
+  */
+  @property gtk.types.PopoverConstraint constrainTo()
+  {
+    return getConstrainTo();
+  }
+
+  /**
+      Set `constrainTo` property.
+      Params:
+        propval = Sets a constraint for the popover position.
+  */
+  @property void constrainTo(gtk.types.PopoverConstraint propval)
+  {
+    return setConstrainTo(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Sets whether the popover is modal (so other elements in the window do not
+      receive input while the popover is visible).
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Sets whether the popover is modal (so other elements in the window do not
+        receive input while the popover is visible).
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `pointingTo` property.
+      Returns: Marks a specific rectangle to be pointed.
+  */
+  @property gdk.rectangle.Rectangle pointingTo()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("pointing-to");
+  }
+
+  /**
+      Set `pointingTo` property.
+      Params:
+        propval = Marks a specific rectangle to be pointed.
+  */
+  @property void pointingTo(gdk.rectangle.Rectangle propval)
+  {
+    return setPointingTo(propval);
+  }
+
+  /**
+      Get `position` property.
+      Returns: Sets the preferred position of the popover.
+  */
+  @property gtk.types.PositionType position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = Sets the preferred position of the popover.
+  */
+  @property void position(gtk.types.PositionType propval)
+  {
+    return setPosition(propval);
+  }
+
+  /**
+      Get `relativeTo` property.
+      Returns: Sets the attached widget.
+  */
+  @property gtk.widget.Widget relativeTo()
+  {
+    return getRelativeTo();
+  }
+
+  /**
+      Set `relativeTo` property.
+      Params:
+        propval = Sets the attached widget.
+  */
+  @property void relativeTo(gtk.widget.Widget propval)
+  {
+    return setRelativeTo(propval);
+  }
+
+  /**
+      Get `transitionsEnabled` property.
+      Returns: Whether show/hide transitions are enabled for this popover.
+  
+      Deprecated: You can show or hide the popover without transitions
+        using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
+        and [gtk.popover.Popover.popdown] will use transitions.
+  */
+  @property bool transitionsEnabled()
+  {
+    return getTransitionsEnabled();
+  }
+
+  /**
+      Set `transitionsEnabled` property.
+      Params:
+        propval = Whether show/hide transitions are enabled for this popover.
+  
+      Deprecated: You can show or hide the popover without transitions
+        using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
+        and [gtk.popover.Popover.popdown] will use transitions.
+  */
+  @property void transitionsEnabled(bool propval)
+  {
+    return setTransitionsEnabled(propval);
   }
 
   /**
@@ -141,7 +266,7 @@ class Popover : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,7 +330,7 @@ class Popover : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_default_widget(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,7 +385,7 @@ class Popover : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_relative_to(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

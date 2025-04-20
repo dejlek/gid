@@ -15,7 +15,7 @@ import panel.c.types;
 import panel.types;
 
 /** */
-class LayeredSettings : gobject.object.ObjectG
+class LayeredSettings : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,7 @@ class LayeredSettings : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LayeredSettings self()
   {
     return this;
@@ -81,22 +82,22 @@ class LayeredSettings : gobject.object.ObjectG
   */
   void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping, gio.types.SettingsBindSetMapping setMapping)
   {
-    extern(C) bool _getMappingCallback(GValue* value, VariantC* variant, void* userData)
+    extern(C) bool _getMappingCallback(GValue* value, GVariant* variant, void* userData)
     {
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.VariantG(cast(void*)variant, No.Take) : null);
+      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
 
-    extern(C) VariantC* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
+    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
     {
-      glib.variant.VariantG _dretval;
+      glib.variant.Variant _dretval;
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
       _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      VariantC* _retval = cast(VariantC*)_dretval.cPtr(Yes.Dup);
+      GVariant* _retval = cast(GVariant*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -119,12 +120,12 @@ class LayeredSettings : gobject.object.ObjectG
   }
 
   /** */
-  glib.variant.VariantG getDefaultValue(string key)
+  glib.variant.Variant getDefaultValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_layered_settings_get_default_value(cast(PanelLayeredSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -184,12 +185,12 @@ class LayeredSettings : gobject.object.ObjectG
   }
 
   /** */
-  glib.variant.VariantG getUserValue(string key)
+  glib.variant.Variant getUserValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_layered_settings_get_user_value(cast(PanelLayeredSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -200,12 +201,12 @@ class LayeredSettings : gobject.object.ObjectG
         key = 
       Returns: a #GVariant
   */
-  glib.variant.VariantG getValue(string key)
+  glib.variant.Variant getValue(string key)
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = panel_layered_settings_get_value(cast(PanelLayeredSettings*)cPtr, _key);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -268,10 +269,10 @@ class LayeredSettings : gobject.object.ObjectG
   }
 
   /** */
-  void setValue(string key, glib.variant.VariantG value)
+  void setValue(string key, glib.variant.Variant value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_value(cast(PanelLayeredSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    panel_layered_settings_set_value(cast(PanelLayeredSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /** */

@@ -54,9 +54,29 @@ class StackSidebar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StackSidebar self()
   {
     return this;
+  }
+
+  /**
+      Get `stack` property.
+      Returns: The stack.
+  */
+  @property gtk.stack.Stack stack()
+  {
+    return getStack();
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack.
+  */
+  @property void stack(gtk.stack.Stack propval)
+  {
+    return setStack(propval);
   }
 
   /**
@@ -79,7 +99,7 @@ class StackSidebar : gtk.widget.Widget
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 

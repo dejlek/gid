@@ -44,6 +44,7 @@ class HSV : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HSV self()
   {
     return this;

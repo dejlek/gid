@@ -35,7 +35,7 @@ import webkit.types;
     during initialization is needed when the name of the executable on disk
     does not match the name of a valid `.desktop` file.
 */
-class GeolocationPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

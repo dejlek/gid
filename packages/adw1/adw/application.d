@@ -68,9 +68,22 @@ class Application : gtk.application.Application
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Application self()
   {
     return this;
+  }
+
+  /**
+      Get `styleManager` property.
+      Returns: The style manager for this application.
+      
+      This is a convenience property allowing to access [adw.style_manager.StyleManager] through
+      property bindings or expressions.
+  */
+  @property adw.style_manager.StyleManager styleManager()
+  {
+    return getStyleManager();
   }
 
   /**
@@ -106,7 +119,7 @@ class Application : gtk.application.Application
   {
     AdwStyleManager* _cretval;
     _cretval = adw_application_get_style_manager(cast(AdwApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 }

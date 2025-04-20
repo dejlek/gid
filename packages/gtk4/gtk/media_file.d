@@ -44,9 +44,52 @@ class MediaFile : gtk.media_stream.MediaStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MediaFile self()
   {
     return this;
+  }
+
+  /**
+      Get `file` property.
+      Returns: The file being played back or null if not playing a file.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file being played back or null if not playing a file.
+  */
+  @property void file(gio.file.File propval)
+  {
+    return setFile(propval);
+  }
+
+  /**
+      Get `inputStream` property.
+      Returns: The stream being played back or null if not playing a stream.
+      
+      This is null when playing a file.
+  */
+  @property gio.input_stream.InputStream inputStream()
+  {
+    return getInputStream();
+  }
+
+  /**
+      Set `inputStream` property.
+      Params:
+        propval = The stream being played back or null if not playing a stream.
+        
+        This is null when playing a file.
+  */
+  @property void inputStream(gio.input_stream.InputStream propval)
+  {
+    return setInputStream(propval);
   }
 
   /**
@@ -70,8 +113,8 @@ class MediaFile : gtk.media_stream.MediaStream
   static gtk.media_file.MediaFile newForFile(gio.file.File file)
   {
     GtkMediaStream* _cretval;
-    _cretval = gtk_media_file_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
+    _cretval = gtk_media_file_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,7 +133,7 @@ class MediaFile : gtk.media_stream.MediaStream
     GtkMediaStream* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_media_file_new_for_filename(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +151,7 @@ class MediaFile : gtk.media_stream.MediaStream
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_file_new_for_input_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,7 +170,7 @@ class MediaFile : gtk.media_stream.MediaStream
     GtkMediaStream* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_media_file_new_for_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -150,7 +193,7 @@ class MediaFile : gtk.media_stream.MediaStream
   {
     GFile* _cretval;
     _cretval = gtk_media_file_get_file(cast(GtkMediaFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +208,7 @@ class MediaFile : gtk.media_stream.MediaStream
   {
     GInputStream* _cretval;
     _cretval = gtk_media_file_get_input_stream(cast(GtkMediaFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +222,7 @@ class MediaFile : gtk.media_stream.MediaStream
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_media_file_set_file(cast(GtkMediaFile*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_media_file_set_file(cast(GtkMediaFile*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**

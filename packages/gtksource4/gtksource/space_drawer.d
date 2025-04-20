@@ -11,7 +11,7 @@ import gtksource.c.types;
 import gtksource.types;
 
 /** */
-class SpaceDrawer : gobject.object.ObjectG
+class SpaceDrawer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,9 +33,72 @@ class SpaceDrawer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SpaceDrawer self()
   {
     return this;
+  }
+
+  /**
+      Get `enableMatrix` property.
+      Returns: Whether the #GtkSourceSpaceDrawer:matrix property is enabled.
+  */
+  @property bool enableMatrix()
+  {
+    return getEnableMatrix();
+  }
+
+  /**
+      Set `enableMatrix` property.
+      Params:
+        propval = Whether the #GtkSourceSpaceDrawer:matrix property is enabled.
+  */
+  @property void enableMatrix(bool propval)
+  {
+    return setEnableMatrix(propval);
+  }
+
+  /**
+      Get `matrix` property.
+      Returns: The :matrix property is a #GVariant property to specify where and
+      what kind of white spaces to draw.
+      
+      The #GVariant is of type `"au"`, an array of unsigned integers. Each
+      integer is a combination of #GtkSourceSpaceTypeFlags. There is one
+      integer for each #GtkSourceSpaceLocationFlags, in the same order as
+      they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
+      [gtksource.types.SpaceLocationFlags.All] are not taken into account).
+      
+      If the array is shorter than the number of locations, then the value
+      for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
+      
+      By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.
+  */
+  @property glib.variant.Variant matrix()
+  {
+    return getMatrix();
+  }
+
+  /**
+      Set `matrix` property.
+      Params:
+        propval = The :matrix property is a #GVariant property to specify where and
+        what kind of white spaces to draw.
+        
+        The #GVariant is of type `"au"`, an array of unsigned integers. Each
+        integer is a combination of #GtkSourceSpaceTypeFlags. There is one
+        integer for each #GtkSourceSpaceLocationFlags, in the same order as
+        they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
+        [gtksource.types.SpaceLocationFlags.All] are not taken into account).
+        
+        If the array is shorter than the number of locations, then the value
+        for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
+        
+        By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.
+  */
+  @property void matrix(glib.variant.Variant propval)
+  {
+    return setMatrix(propval);
   }
 
   /**
@@ -89,11 +152,11 @@ class SpaceDrawer : gobject.object.ObjectG
       Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
           instance.
   */
-  glib.variant.VariantG getMatrix()
+  glib.variant.Variant getMatrix()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -142,9 +205,9 @@ class SpaceDrawer : gobject.object.ObjectG
       Params:
         matrix = the new matrix value, or null.
   */
-  void setMatrix(glib.variant.VariantG matrix = null)
+  void setMatrix(glib.variant.Variant matrix = null)
   {
-    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.Dup) : null);
+    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(GVariant*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

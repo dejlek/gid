@@ -143,72 +143,151 @@ class Buffer : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Buffer self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: the parent structure
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstBuffer*)cPtr).miniObject);
   }
 
+  /**
+      Get `pool` field.
+      Returns: pointer to the pool owner of the buffer
+  */
   @property gst.buffer_pool.BufferPool pool()
   {
     return cToD!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)cPtr).pool);
   }
 
+  /**
+      Set `pool` field.
+      Params:
+        propval = pointer to the pool owner of the buffer
+  */
   @property void pool(gst.buffer_pool.BufferPool propval)
   {
     cValueFree!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)cPtr).pool);
     dToC(propval, cast(void*)&(cast(GstBuffer*)cPtr).pool);
   }
 
+  /**
+      Get `pts` field.
+      Returns: presentation timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
+          pts is not known or relevant. The pts contains the timestamp when the
+          media should be presented to the user.
+  */
   @property gst.types.ClockTime pts()
   {
     return (cast(GstBuffer*)cPtr).pts;
   }
 
+  /**
+      Set `pts` field.
+      Params:
+        propval = presentation timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
+            pts is not known or relevant. The pts contains the timestamp when the
+            media should be presented to the user.
+  */
   @property void pts(gst.types.ClockTime propval)
   {
     (cast(GstBuffer*)cPtr).pts = propval;
   }
 
+  /**
+      Get `dts` field.
+      Returns: decoding timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
+          dts is not known or relevant. The dts contains the timestamp when the
+          media should be processed.
+  */
   @property gst.types.ClockTime dts()
   {
     return (cast(GstBuffer*)cPtr).dts;
   }
 
+  /**
+      Set `dts` field.
+      Params:
+        propval = decoding timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
+            dts is not known or relevant. The dts contains the timestamp when the
+            media should be processed.
+  */
   @property void dts(gst.types.ClockTime propval)
   {
     (cast(GstBuffer*)cPtr).dts = propval;
   }
 
+  /**
+      Get `duration` field.
+      Returns: duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
+          when the duration is not known or relevant.
+  */
   @property gst.types.ClockTime duration()
   {
     return (cast(GstBuffer*)cPtr).duration;
   }
 
+  /**
+      Set `duration` field.
+      Params:
+        propval = duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
+            when the duration is not known or relevant.
+  */
   @property void duration(gst.types.ClockTime propval)
   {
     (cast(GstBuffer*)cPtr).duration = propval;
   }
 
+  /**
+      Get `offset` field.
+      Returns: a media specific offset for the buffer data.
+          For video frames, this is the frame number of this buffer.
+          For audio samples, this is the offset of the first sample in this buffer.
+          For file data or compressed data this is the byte offset of the first
+            byte in this buffer.
+  */
   @property ulong offset()
   {
     return (cast(GstBuffer*)cPtr).offset;
   }
 
+  /**
+      Set `offset` field.
+      Params:
+        propval = a media specific offset for the buffer data.
+            For video frames, this is the frame number of this buffer.
+            For audio samples, this is the offset of the first sample in this buffer.
+            For file data or compressed data this is the byte offset of the first
+              byte in this buffer.
+  */
   @property void offset(ulong propval)
   {
     (cast(GstBuffer*)cPtr).offset = propval;
   }
 
+  /**
+      Get `offsetEnd` field.
+      Returns: the last offset contained in this buffer. It has the same
+          format as @offset.
+  */
   @property ulong offsetEnd()
   {
     return (cast(GstBuffer*)cPtr).offsetEnd;
   }
 
+  /**
+      Set `offsetEnd` field.
+      Params:
+        propval = the last offset contained in this buffer. It has the same
+            format as @offset.
+  */
   @property void offsetEnd(ulong propval)
   {
     (cast(GstBuffer*)cPtr).offsetEnd = propval;

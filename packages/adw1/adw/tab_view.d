@@ -84,9 +84,180 @@ class TabView : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabView self()
   {
     return this;
+  }
+
+  /**
+      Get `defaultIcon` property.
+      Returns: Default page icon.
+      
+      If a page doesn't provide its own icon via `property@TabPage:icon`, a
+      default icon may be used instead for contexts where having an icon is
+      necessary.
+      
+      `class@TabBar` will use default icon for pinned tabs in case the page is
+      not loading, doesn't have an icon and an indicator. Default icon is never
+      used for tabs that aren't pinned.
+      
+      `class@TabOverview` will use default icon for pages with missing
+      thumbnails.
+      
+      By default, the `adw-tab-icon-missing-symbolic` icon is used.
+  */
+  @property gio.icon.Icon defaultIcon()
+  {
+    return getDefaultIcon();
+  }
+
+  /**
+      Set `defaultIcon` property.
+      Params:
+        propval = Default page icon.
+        
+        If a page doesn't provide its own icon via `property@TabPage:icon`, a
+        default icon may be used instead for contexts where having an icon is
+        necessary.
+        
+        `class@TabBar` will use default icon for pinned tabs in case the page is
+        not loading, doesn't have an icon and an indicator. Default icon is never
+        used for tabs that aren't pinned.
+        
+        `class@TabOverview` will use default icon for pages with missing
+        thumbnails.
+        
+        By default, the `adw-tab-icon-missing-symbolic` icon is used.
+  */
+  @property void defaultIcon(gio.icon.Icon propval)
+  {
+    return setDefaultIcon(propval);
+  }
+
+  /**
+      Get `isTransferringPage` property.
+      Returns: Whether a page is being transferred.
+      
+      This property will be set to `TRUE` when a drag-n-drop tab transfer starts
+      on any [adw.tab_view.TabView], and to `FALSE` after it ends.
+      
+      During the transfer, children cannot receive pointer input and a tab can
+      be safely dropped on the tab view.
+  */
+  @property bool isTransferringPage()
+  {
+    return getIsTransferringPage();
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: Tab context menu model.
+      
+      When a context menu is shown for a tab, it will be constructed from the
+      provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+      the menu actions for the particular tab.
+  */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = Tab context menu model.
+        
+        When a context menu is shown for a tab, it will be constructed from the
+        provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+        the menu actions for the particular tab.
+  */
+  @property void menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setMenuModel(propval);
+  }
+
+  /**
+      Get `nPages` property.
+      Returns: The number of pages in the tab view.
+  */
+  @property int nPages()
+  {
+    return getNPages();
+  }
+
+  /**
+      Get `nPinnedPages` property.
+      Returns: The number of pinned pages in the tab view.
+      
+      See [adw.tab_view.TabView.setPagePinned].
+  */
+  @property int nPinnedPages()
+  {
+    return getNPinnedPages();
+  }
+
+  /**
+      Get `pages` property.
+      Returns: A selection model with the tab view's pages.
+      
+      This can be used to keep an up-to-date view. The model also implements
+      [gtk.selection_model.SelectionModel] and can be used to track and change the selected
+      page.
+  */
+  @property gtk.selection_model.SelectionModel pages()
+  {
+    return getPages();
+  }
+
+  /**
+      Get `selectedPage` property.
+      Returns: The currently selected page.
+  */
+  @property adw.tab_page.TabPage selectedPage()
+  {
+    return getSelectedPage();
+  }
+
+  /**
+      Set `selectedPage` property.
+      Params:
+        propval = The currently selected page.
+  */
+  @property void selectedPage(adw.tab_page.TabPage propval)
+  {
+    return setSelectedPage(propval);
+  }
+
+  /**
+      Get `shortcuts` property.
+      Returns: The enabled shortcuts.
+      
+      See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+      of the shortcuts are enabled by default.
+      
+      [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
+      provide a convenient way to manage individual shortcuts.
+  */
+  @property adw.types.TabViewShortcuts shortcuts()
+  {
+    return getShortcuts();
+  }
+
+  /**
+      Set `shortcuts` property.
+      Params:
+        propval = The enabled shortcuts.
+        
+        See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+        of the shortcuts are enabled by default.
+        
+        [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
+        provide a convenient way to manage individual shortcuts.
+  */
+  @property void shortcuts(adw.types.TabViewShortcuts propval)
+  {
+    return setShortcuts(propval);
   }
 
   /**
@@ -118,7 +289,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_add_page(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, parent ? cast(AdwTabPage*)parent.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +317,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_append(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,7 +332,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_append_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,7 +428,7 @@ class TabView : gtk.widget.Widget
   {
     GIcon* _cretval;
     _cretval = adw_tab_view_get_default_icon(cast(AdwTabView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,7 +457,7 @@ class TabView : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = adw_tab_view_get_menu_model(cast(AdwTabView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -325,7 +496,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_nth_page(cast(AdwTabView*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -340,7 +511,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_page(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -370,7 +541,7 @@ class TabView : gtk.widget.Widget
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_tab_view_get_pages(cast(AdwTabView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -382,7 +553,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_selected_page(cast(AdwTabView*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,7 +584,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_insert(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -432,7 +603,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_insert_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -458,7 +629,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_prepend(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -473,7 +644,7 @@ class TabView : gtk.widget.Widget
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_prepend_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -609,7 +780,7 @@ class TabView : gtk.widget.Widget
   */
   void setDefaultIcon(gio.icon.Icon defaultIcon)
   {
-    adw_tab_view_set_default_icon(cast(AdwTabView*)cPtr, defaultIcon ? cast(GIcon*)(cast(ObjectG)defaultIcon).cPtr(No.Dup) : null);
+    adw_tab_view_set_default_icon(cast(AdwTabView*)cPtr, defaultIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)defaultIcon).cPtr(No.Dup) : null);
   }
 
   /**

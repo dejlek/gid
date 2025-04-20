@@ -42,7 +42,7 @@ class Poll
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.Poll");
+      throw new GidConstructException("Null instance pointer for gst.poll.Poll");
 
     cInstancePtr = cast(GstPoll*)ptr;
 

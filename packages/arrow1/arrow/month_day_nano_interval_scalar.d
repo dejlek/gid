@@ -32,6 +32,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MonthDayNanoIntervalScalar self()
   {
     return this;
@@ -50,7 +51,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
     return _retval;
   }
 }

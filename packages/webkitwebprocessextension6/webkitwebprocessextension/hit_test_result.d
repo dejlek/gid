@@ -29,7 +29,7 @@ import webkitwebprocessextension.types;
     for the mouse coordinates and #WebKitWebView::mouse-target-changed
     signal is emitted with a #WebKitHitTestResult.
 */
-class HitTestResult : gobject.object.ObjectG
+class HitTestResult : gobject.object.ObjectWrap
 {
 
   /** */

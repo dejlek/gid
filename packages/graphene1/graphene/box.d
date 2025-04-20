@@ -17,7 +17,9 @@ import graphene.vec3;
 class Box : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `box.Box` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_box_t.sizeof), Yes.Take);
@@ -48,6 +50,7 @@ class Box : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Box self()
   {
     return this;

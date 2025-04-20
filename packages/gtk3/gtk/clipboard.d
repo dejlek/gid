@@ -74,7 +74,7 @@ import gtk.types;
     and converting the results into the UTF-8 encoding. (The standard
     form for representing strings in GTK+.)
 */
-class Clipboard : gobject.object.ObjectG
+class Clipboard : gobject.object.ObjectWrap
 {
 
   /** */
@@ -96,6 +96,7 @@ class Clipboard : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Clipboard self()
   {
     return this;
@@ -116,7 +117,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get(selection ? cast(GdkAtom)selection.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +133,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get_default(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,7 +177,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +201,7 @@ class Clipboard : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gtk_clipboard_get_display(cast(GtkClipboard*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,11 +213,11 @@ class Clipboard : gobject.object.ObjectG
       Returns: the owner of the clipboard, if any;
             otherwise null.
   */
-  gobject.object.ObjectG getOwner()
+  gobject.object.ObjectWrap getOwner()
   {
     ObjectC* _cretval;
     _cretval = gtk_clipboard_get_owner(cast(GtkClipboard*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +252,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardReceivedFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -281,7 +282,7 @@ class Clipboard : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardImageReceivedFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -314,7 +315,7 @@ class Clipboard : gobject.object.ObjectG
       _text.length = length;
       _text[0 .. length] = text[0 .. length];
 
-      (*_dlg)(ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gdk.atom.Atom(cast(void*)format, No.Take) : null, _text);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gdk.atom.Atom(cast(void*)format, No.Take) : null, _text);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -344,7 +345,7 @@ class Clipboard : gobject.object.ObjectG
       auto _dlg = cast(gtk.types.ClipboardTextReceivedFunc*)data;
       string _text = text.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -380,7 +381,7 @@ class Clipboard : gobject.object.ObjectG
       foreach (i; 0 .. _lenuris)
         _uris[i] = uris[i].fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -481,7 +482,7 @@ class Clipboard : gobject.object.ObjectG
       the data to be received using the main loop, so events,
       timeouts, etc, may be dispatched during the wait.
       Returns: a newly-allocated #GdkPixbuf
-            object which must be disposed with [gobject.object.ObjectG.unref], or
+            object which must be disposed with [gobject.object.ObjectWrap.unref], or
             null if retrieving the selection data failed. (This could
             happen for various reasons, in particular if the clipboard
             was empty or if the contents of the clipboard could not be
@@ -491,7 +492,7 @@ class Clipboard : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gtk_clipboard_wait_for_image(cast(GtkClipboard*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

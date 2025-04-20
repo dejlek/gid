@@ -42,6 +42,7 @@ class VSeparator : gtk.separator.Separator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VSeparator self()
   {
     return this;

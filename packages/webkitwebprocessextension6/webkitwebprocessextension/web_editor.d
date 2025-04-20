@@ -16,7 +16,7 @@ import webkitwebprocessextension.web_page;
     a #WebKitWebPage such as a possibility to react to the current selection in
     #WebKitWebPage.
 */
-class WebEditor : gobject.object.ObjectG
+class WebEditor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -52,7 +52,7 @@ class WebEditor : gobject.object.ObjectG
   {
     WebKitWebPage* _cretval;
     _cretval = webkit_web_editor_get_page(cast(WebKitWebEditor*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
     return _retval;
   }
 

@@ -14,7 +14,7 @@ import gtk.types;
     It is not used to set the widgets displayed in the individual cells. For that
     see `method@GtkColumnViewColumn.set_factory` and `class@GtkColumnViewCell`.
 */
-class ColumnViewRow : gobject.object.ObjectG
+class ColumnViewRow : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,132 @@ class ColumnViewRow : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColumnViewRow self()
   {
     return this;
+  }
+
+  /**
+      Get `accessibleDescription` property.
+      Returns: The accessible description to set on the row.
+  */
+  @property string accessibleDescription()
+  {
+    return getAccessibleDescription();
+  }
+
+  /**
+      Set `accessibleDescription` property.
+      Params:
+        propval = The accessible description to set on the row.
+  */
+  @property void accessibleDescription(string propval)
+  {
+    return setAccessibleDescription(propval);
+  }
+
+  /**
+      Get `accessibleLabel` property.
+      Returns: The accessible label to set on the row.
+  */
+  @property string accessibleLabel()
+  {
+    return getAccessibleLabel();
+  }
+
+  /**
+      Set `accessibleLabel` property.
+      Params:
+        propval = The accessible label to set on the row.
+  */
+  @property void accessibleLabel(string propval)
+  {
+    return setAccessibleLabel(propval);
+  }
+
+  /**
+      Get `activatable` property.
+      Returns: If the row can be activated by the user.
+  */
+  @property bool activatable()
+  {
+    return getActivatable();
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = If the row can be activated by the user.
+  */
+  @property void activatable(bool propval)
+  {
+    return setActivatable(propval);
+  }
+
+  /**
+      Get `focusable` property.
+      Returns: If the row can be focused with the keyboard.
+  */
+  @property bool focusable()
+  {
+    return getFocusable();
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the row can be focused with the keyboard.
+  */
+  @property void focusable(bool propval)
+  {
+    return setFocusable(propval);
+  }
+
+  /**
+      Get `item` property.
+      Returns: The item for this row.
+  */
+  @property gobject.object.ObjectWrap item()
+  {
+    return getItem();
+  }
+
+  /**
+      Get `position` property.
+      Returns: Position of the row.
+  */
+  @property uint position()
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `selectable` property.
+      Returns: If the row can be selected by the user.
+  */
+  @property bool selectable()
+  {
+    return getSelectable();
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = If the row can be selected by the user.
+  */
+  @property void selectable(bool propval)
+  {
+    return setSelectable(propval);
+  }
+
+  /**
+      Get `selected` property.
+      Returns: If the item in the row is currently selected.
+  */
+  @property bool selected()
+  {
+    return getSelected();
   }
 
   /**
@@ -95,11 +218,11 @@ class ColumnViewRow : gobject.object.ObjectG
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  gobject.object.ObjectG getItem()
+  gobject.object.ObjectWrap getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

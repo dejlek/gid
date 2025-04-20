@@ -22,7 +22,7 @@ import webkit.web_view;
     #WebKitFindController::failed-to-find-text or
     #WebKitFindController::counted-matches<!-- -->.
 */
-class FindController : gobject.object.ObjectG
+class FindController : gobject.object.ObjectWrap
 {
 
   /** */
@@ -48,6 +48,33 @@ class FindController : gobject.object.ObjectG
   override FindController self()
   {
     return this;
+  }
+
+  /**
+      Get `maxMatchCount` property.
+      Returns: The maximum number of matches to report for a given search.
+  */
+  @property uint maxMatchCount()
+  {
+    return getMaxMatchCount();
+  }
+
+  /**
+      Get `options` property.
+      Returns: The options to be used in the search operation.
+  */
+  @property webkit.types.FindOptions options()
+  {
+    return gobject.object.ObjectWrap.getProperty!(webkit.types.FindOptions)("options");
+  }
+
+  /**
+      Get `text` property.
+      Returns: The current search text for this #WebKitFindController.
+  */
+  @property string text()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
 
   /**
@@ -129,7 +156,7 @@ class FindController : gobject.object.ObjectG
   {
     WebKitWebView* _cretval;
     _cretval = webkit_find_controller_get_web_view(cast(WebKitFindController*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
   }
 

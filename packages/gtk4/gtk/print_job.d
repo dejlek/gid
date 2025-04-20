@@ -25,7 +25,7 @@ import gtk.types;
     [gtk.print_job.PrintJob] also supports printing of manually generated PostScript,
     via [gtk.print_job.PrintJob.setSourceFile].
 */
-class PrintJob : gobject.object.ObjectG
+class PrintJob : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,9 +47,31 @@ class PrintJob : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintJob self()
   {
     return this;
+  }
+
+  /**
+      Get `trackPrintStatus` property.
+      Returns: true if the print job will continue to emit status-changed
+      signals after the print data has been setn to the printer.
+  */
+  @property bool trackPrintStatus()
+  {
+    return getTrackPrintStatus();
+  }
+
+  /**
+      Set `trackPrintStatus` property.
+      Params:
+        propval = true if the print job will continue to emit status-changed
+        signals after the print data has been setn to the printer.
+  */
+  @property void trackPrintStatus(bool propval)
+  {
+    return setTrackPrintStatus(propval);
   }
 
   /**
@@ -168,7 +190,7 @@ class PrintJob : gobject.object.ObjectG
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +235,7 @@ class PrintJob : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +255,7 @@ class PrintJob : gobject.object.ObjectG
       Gets a cairo surface onto which the pages of
       the print job should be rendered.
       Returns: the cairo surface of job
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   cairo.surface.Surface getSurface()
   {
@@ -241,7 +263,7 @@ class PrintJob : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -283,7 +305,7 @@ class PrintJob : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -409,7 +431,7 @@ class PrintJob : gobject.object.ObjectG
       Params:
         fd = a file descriptor
       Returns: false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setSourceFd(int fd)
   {
@@ -417,7 +439,7 @@ class PrintJob : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_print_job_set_source_fd(cast(GtkPrintJob*)cPtr, fd, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -433,7 +455,7 @@ class PrintJob : gobject.object.ObjectG
       Params:
         filename = the file to be printed
       Returns: false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setSourceFile(string filename)
   {
@@ -442,7 +464,7 @@ class PrintJob : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

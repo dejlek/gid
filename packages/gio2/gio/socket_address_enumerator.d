@@ -28,7 +28,7 @@ import gobject.object;
     enumeration with that [gio.socket_address_enumerator.SocketAddressEnumerator] is not possible, and it can
     be unreffed.
 */
-class SocketAddressEnumerator : gobject.object.ObjectG
+class SocketAddressEnumerator : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,6 +50,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketAddressEnumerator self()
   {
     return this;
@@ -75,7 +76,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
       Returns: a #GSocketAddress (owned by the caller), or null on
             error (in which case *error will be set) or if there are no
             more addresses.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_address.SocketAddress next(gio.cancellable.Cancellable cancellable = null)
   {
@@ -83,8 +84,8 @@ class SocketAddressEnumerator : gobject.object.ObjectG
     GError *_err;
     _cretval = g_socket_address_enumerator_next(cast(GSocketAddressEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +108,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -126,16 +127,16 @@ class SocketAddressEnumerator : gobject.object.ObjectG
       Returns: a #GSocketAddress (owned by the caller), or null on
             error (in which case *error will be set) or if there are no
             more addresses.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.socket_address.SocketAddress nextFinish(gio.async_result.AsyncResult result)
   {
     GSocketAddress* _cretval;
     GError *_err;
-    _cretval = g_socket_address_enumerator_next_finish(cast(GSocketAddressEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_address_enumerator_next_finish(cast(GSocketAddressEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 }

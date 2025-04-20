@@ -149,16 +149,26 @@ class Structure : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Structure self()
   {
     return this;
   }
 
+  /**
+      Get `type` field.
+      Returns: the GType of a structure
+  */
   @property gobject.types.GType type()
   {
     return (cast(GstStructure*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the GType of a structure
+  */
   @property void type(gobject.types.GType propval)
   {
     (cast(GstStructure*)cPtr).type = propval;

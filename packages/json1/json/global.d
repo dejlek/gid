@@ -100,19 +100,19 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
       length = length of the data stream (unused)
     Returns: a new object instance of the given
         type
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 
     Deprecated: Use `funcJson.gobject_from_data` instead
 */
-gobject.object.ObjectG constructGobject(gobject.types.GType gtype, string data, size_t length)
+gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string data, size_t length)
 {
   ObjectC* _cretval;
   const(char)* _data = data.toCString(No.Alloc);
   GError *_err;
   _cretval = json_construct_gobject(gtype, _data, length, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -127,7 +127,7 @@ gobject.object.ObjectG constructGobject(gobject.types.GType gtype, string data, 
     Params:
       str = a valid UTF-8 string containing JSON data
     Returns: the root node of the JSON tree
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 json.node.Node fromString(string str)
 {
@@ -136,13 +136,13 @@ json.node.Node fromString(string str)
   GError *_err;
   _cretval = json_from_string(_str, &_err);
   if (_err)
-    throw new ErrorG(_err);
+    throw new ErrorWrap(_err);
   auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
 /**
-    Creates a new [gobject.object.ObjectG] instance of the given type, and constructs it
+    Creates a new [gobject.object.ObjectWrap] instance of the given type, and constructs it
     using the members of the object in the given node.
 
     Params:
@@ -151,11 +151,11 @@ json.node.Node fromString(string str)
           object instance for the given type
     Returns: The newly created instance
 */
-gobject.object.ObjectG gobjectDeserialize(gobject.types.GType gtype, json.node.Node node)
+gobject.object.ObjectWrap gobjectDeserialize(gobject.types.GType gtype, json.node.Node node)
 {
   ObjectC* _cretval;
   _cretval = json_gobject_deserialize(gtype, node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -175,17 +175,17 @@ gobject.object.ObjectG gobjectDeserialize(gobject.types.GType gtype, json.node.N
       data = a JSON data stream
       length = length of the data stream, or -1 if it is `NUL`-terminated
     Returns: a new object instance of the given type
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
-gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, ptrdiff_t length)
+gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data, ptrdiff_t length)
 {
   ObjectC* _cretval;
   const(char)* _data = data.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gobject_from_data(gtype, _data, length, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    throw new ErrorWrap(_err);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -202,7 +202,7 @@ gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, p
       gobject = the object to serialize
     Returns: the newly created JSON tree
 */
-json.node.Node gobjectSerialize(gobject.object.ObjectG gobject)
+json.node.Node gobjectSerialize(gobject.object.ObjectWrap gobject)
 {
   JsonNode* _cretval;
   _cretval = json_gobject_serialize(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null);
@@ -211,7 +211,7 @@ json.node.Node gobjectSerialize(gobject.object.ObjectG gobject)
 }
 
 /**
-    Serializes a [gobject.object.ObjectG] instance into a JSON data stream, iterating
+    Serializes a [gobject.object.ObjectWrap] instance into a JSON data stream, iterating
     recursively over each property.
     
     If the given object implements the [json.serializable.Serializable] interface,
@@ -224,7 +224,7 @@ json.node.Node gobjectSerialize(gobject.object.ObjectG gobject)
       length = return value for the length of the buffer
     Returns: a JSON data stream representing the given object
 */
-string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
+string gobjectToData(gobject.object.ObjectWrap gobject, out size_t length)
 {
   char* _cretval;
   _cretval = json_gobject_to_data(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null, cast(size_t*)&length);
@@ -233,15 +233,15 @@ string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
 }
 
 /**
-    Converts a JSON data structure to a [glib.variant.VariantG].
+    Converts a JSON data structure to a [glib.variant.Variant].
     
     If `signature` is not `NULL`, it will be used to resolve ambiguous
     data types.
     
-    If no error occurs, the resulting [glib.variant.VariantG] is guaranteed to conform
+    If no error occurs, the resulting [glib.variant.Variant] is guaranteed to conform
     to `signature`.
     
-    If `signature` is not `NULL` but does not represent a valid [glib.variant.VariantG] type
+    If `signature` is not `NULL` but does not represent a valid [glib.variant.Variant] type
     string, `NULL` is returned and the `error` is set to
     [gio.types.IOErrorEnum.InvalidArgument].
     
@@ -256,24 +256,24 @@ string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
 
     Params:
       jsonNode = the node to convert
-      signature = a valid [glib.variant.VariantG] type string
-    Returns: A newly created [glib.variant.VariantG]
-    Throws: [ErrorG]
+      signature = a valid [glib.variant.Variant] type string
+    Returns: A newly created [glib.variant.Variant]
+    Throws: [ErrorWrap]
 */
-glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signature = null)
+glib.variant.Variant gvariantDeserialize(json.node.Node jsonNode, string signature = null)
 {
-  VariantC* _cretval;
+  GVariant* _cretval;
   const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gvariant_deserialize(jsonNode ? cast(JsonNode*)jsonNode.cPtr(No.Dup) : null, _signature, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    throw new ErrorWrap(_err);
+  auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
   return _retval;
 }
 
 /**
-    Converts a JSON string to a [glib.variant.VariantG] value.
+    Converts a JSON string to a [glib.variant.Variant] value.
     
     This function works exactly like `funcJson.gvariant_deserialize`, but
     takes a JSON encoded string instead.
@@ -288,20 +288,20 @@ glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signat
     Params:
       json = A JSON data string
       length = The length of json, or -1 if `NUL`-terminated
-      signature = A valid [glib.variant.VariantG] type string
-    Returns: A newly created [glib.variant.VariantG]D compliant
-    Throws: [ErrorG]
+      signature = A valid [glib.variant.Variant] type string
+    Returns: A newly created [glib.variant.Variant]D compliant
+    Throws: [ErrorWrap]
 */
-glib.variant.VariantG gvariantDeserializeData(string json, ptrdiff_t length, string signature = null)
+glib.variant.Variant gvariantDeserializeData(string json, ptrdiff_t length, string signature = null)
 {
-  VariantC* _cretval;
+  GVariant* _cretval;
   const(char)* _json = json.toCString(No.Alloc);
   const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gvariant_deserialize_data(_json, length, _signature, &_err);
   if (_err)
-    throw new ErrorG(_err);
-  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    throw new ErrorWrap(_err);
+  auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -309,14 +309,14 @@ glib.variant.VariantG gvariantDeserializeData(string json, ptrdiff_t length, str
     Converts `variant` to a JSON tree.
 
     Params:
-      variant = A [glib.variant.VariantG] to convert
+      variant = A [glib.variant.Variant] to convert
     Returns: the root of the JSON data structure
         obtained from `variant`
 */
-json.node.Node gvariantSerialize(glib.variant.VariantG variant)
+json.node.Node gvariantSerialize(glib.variant.Variant variant)
 {
   JsonNode* _cretval;
-  _cretval = json_gvariant_serialize(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+  _cretval = json_gvariant_serialize(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
   auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -333,16 +333,16 @@ json.node.Node gvariantSerialize(glib.variant.VariantG variant)
     Returns: The JSON encoded string corresponding to
         the given variant
 */
-string gvariantSerializeData(glib.variant.VariantG variant, out size_t length)
+string gvariantSerializeData(glib.variant.Variant variant, out size_t length)
 {
   char* _cretval;
-  _cretval = json_gvariant_serialize_data(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null, cast(size_t*)&length);
+  _cretval = json_gvariant_serialize_data(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null, cast(size_t*)&length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
 /**
-    Serializes a [gobject.object.ObjectG] instance into a JSON data stream.
+    Serializes a [gobject.object.ObjectWrap] instance into a JSON data stream.
     
     If the object implements the [json.serializable.Serializable] interface, it will be
     asked to serizalize all its properties; otherwise, the default
@@ -356,7 +356,7 @@ string gvariantSerializeData(glib.variant.VariantG variant, out size_t length)
 
     Deprecated: Use `funcJson.gobject_to_data` instead
 */
-string serializeGobject(gobject.object.ObjectG gobject, out size_t length)
+string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length)
 {
   char* _cretval;
   _cretval = json_serialize_gobject(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null, cast(size_t*)&length);

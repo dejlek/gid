@@ -172,6 +172,7 @@ class KeyFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override KeyFile self()
   {
     return this;
@@ -1321,7 +1322,7 @@ class KeyFile : gobject.boxed.Boxed
   }
 }
 
-class KeyFileException : ErrorG
+class KeyFileException : ErrorWrap
 {
   this(GError* err)
   {

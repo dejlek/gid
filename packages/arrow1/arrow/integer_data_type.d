@@ -30,6 +30,7 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IntegerDataType self()
   {
     return this;

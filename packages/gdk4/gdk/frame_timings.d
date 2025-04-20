@@ -45,6 +45,7 @@ class FrameTimings : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FrameTimings self()
   {
     return this;

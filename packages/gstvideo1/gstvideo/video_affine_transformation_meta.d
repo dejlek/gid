@@ -28,7 +28,7 @@ class VideoAffineTransformationMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoAffineTransformationMeta");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta");
 
     cInstance = *cast(GstVideoAffineTransformationMeta*)ptr;
 
@@ -42,6 +42,10 @@ class VideoAffineTransformationMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)cPtr).meta);

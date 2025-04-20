@@ -155,9 +155,22 @@ class BaseTransform : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseTransform self()
   {
     return this;
+  }
+
+  /** */
+  @property bool qos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("qos");
+  }
+
+  /** */
+  @property void qos(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
 
   /**
@@ -185,7 +198,7 @@ class BaseTransform : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_transform_get_buffer_pool(cast(GstBaseTransform*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 

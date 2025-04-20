@@ -1,7 +1,6 @@
 /// Module for [DragIcon] class
 module gtk.drag_icon;
 
-import gdk.display;
 import gdk.drag;
 import gdk.paintable;
 import gid.gid;
@@ -57,9 +56,29 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DragIcon self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The widget to display as drag icon.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The widget to display as drag icon.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
   }
 
   mixin NativeT!();
@@ -86,7 +105,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   {
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +123,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   {
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +142,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   */
   static void setFromPaintable(gdk.drag.Drag drag, gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
+    gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**
@@ -134,7 +153,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   {
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_get_child(cast(GtkDragIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -31,6 +31,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MonthIntervalArray self()
   {
     return this;

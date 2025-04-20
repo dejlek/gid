@@ -85,7 +85,7 @@ interface Paintable
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_new_empty(intrinsicWidth, intrinsicHeight);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 

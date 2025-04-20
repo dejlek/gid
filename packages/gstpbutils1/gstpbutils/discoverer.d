@@ -30,7 +30,7 @@ import gstpbutils.types;
     
     All the information is returned in a #GstDiscovererInfo structure.
 */
-class Discoverer : gobject.object.ObjectG
+class Discoverer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -52,9 +52,49 @@ class Discoverer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Discoverer self()
   {
     return this;
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: The duration (in nanoseconds) after which the discovery of an individual
+      URI will timeout.
+      
+      If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
+      set on the result flags.
+  */
+  @property ulong timeout()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("timeout");
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The duration (in nanoseconds) after which the discovery of an individual
+        URI will timeout.
+        
+        If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
+        set on the result flags.
+  */
+  @property void timeout(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("timeout", propval);
+  }
+
+  /** */
+  @property bool useCache()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-cache");
+  }
+
+  /** */
+  @property void useCache(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-cache", propval);
   }
 
   /**
@@ -66,8 +106,8 @@ class Discoverer : gobject.object.ObjectG
       Returns: The new #GstDiscoverer.
         If an error occurred when creating the discoverer, err will be set
         accordingly and null will be returned. If err is set, the caller must
-        free it when no longer needed using [glib.error.ErrorG.free].
-      Throws: [ErrorG]
+        free it when no longer needed using [glib.error.ErrorWrap.free].
+      Throws: [ErrorWrap]
   */
   this(gst.types.ClockTime timeout)
   {
@@ -75,7 +115,7 @@ class Discoverer : gobject.object.ObjectG
     GError *_err;
     _cretval = gst_discoverer_new(timeout, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -89,7 +129,7 @@ class Discoverer : gobject.object.ObjectG
         uri = The URI to run on.
       Returns: the result of the scanning. Can be null if an
         error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gstpbutils.discoverer_info.DiscovererInfo discoverUri(string uri)
   {
@@ -98,8 +138,8 @@ class Discoverer : gobject.object.ObjectG
     GError *_err;
     _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,7 +195,7 @@ class Discoverer : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstpbutils.discoverer_info.DiscovererInfo info, glib.error.ErrorG error, gstpbutils.discoverer.Discoverer discoverer))
+          $(D void callback(gstpbutils.discoverer_info.DiscovererInfo info, glib.error.ErrorWrap error, gstpbutils.discoverer.Discoverer discoverer))
   
           `info` the results #GstDiscovererInfo (optional)
   
@@ -174,7 +214,7 @@ class Discoverer : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer_info.DiscovererInfo)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 4)
   {

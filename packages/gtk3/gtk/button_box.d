@@ -4,6 +4,7 @@ module gtk.button_box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -37,9 +38,22 @@ class ButtonBox : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ButtonBox self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.types.ButtonBoxStyle layoutStyle()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ButtonBoxStyle)("layout-style");
+  }
+
+  /** */
+  @property void layoutStyle(gtk.types.ButtonBoxStyle propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ButtonBoxStyle)("layout-style", propval);
   }
 
   /**

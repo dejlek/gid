@@ -36,7 +36,7 @@ import gobject.object;
     the [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag to the
     server.
 */
-class DBusServer : gobject.object.ObjectG, gio.initable.Initable
+class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
@@ -58,9 +58,28 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusServer self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the server is currently active.
+  */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /**
+      Get `clientAddress` property.
+      Returns: The D-Bus address that clients can use.
+  */
+  @property string clientAddress()
+  {
+    return getClientAddress();
   }
 
   mixin InitableT!();
@@ -94,8 +113,8 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
         observer = A #GDBusAuthObserver or null.
         cancellable = A #GCancellable or null.
       Returns: A #GDBusServer or null if error is set. Free with
-        [gobject.object.ObjectG.unref].
-      Throws: [ErrorG]
+        [gobject.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
   */
   static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -105,8 +124,8 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -2,6 +2,7 @@
 module gstaudio.audio_aggregator;
 
 import gid.gid;
+import gobject.object;
 import gst.caps;
 import gstaudio.audio_aggregator_pad;
 import gstaudio.c.functions;
@@ -81,9 +82,79 @@ class AudioAggregator : gstbase.aggregator.Aggregator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AudioAggregator self()
   {
     return this;
+  }
+
+  /** */
+  @property ulong alignmentThreshold()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("alignment-threshold");
+  }
+
+  /** */
+  @property void alignmentThreshold(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("alignment-threshold", propval);
+  }
+
+  /** */
+  @property ulong discontWait()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("discont-wait");
+  }
+
+  /** */
+  @property void discontWait(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("discont-wait", propval);
+  }
+
+  /**
+      Get `ignoreInactivePads` property.
+      Returns: Don't wait for inactive pads when live. An inactive pad
+      is a pad that hasn't yet received a buffer, but that has
+      been waited on at least once.
+      
+      The purpose of this property is to avoid aggregating on
+      timeout when new pads are requested in advance of receiving
+      data flow, for example the user may decide to connect it later,
+      but wants to configure it already.
+  */
+  @property bool ignoreInactivePads()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("ignore-inactive-pads");
+  }
+
+  /**
+      Set `ignoreInactivePads` property.
+      Params:
+        propval = Don't wait for inactive pads when live. An inactive pad
+        is a pad that hasn't yet received a buffer, but that has
+        been waited on at least once.
+        
+        The purpose of this property is to avoid aggregating on
+        timeout when new pads are requested in advance of receiving
+        data flow, for example the user may decide to connect it later,
+        but wants to configure it already.
+  */
+  @property void ignoreInactivePads(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("ignore-inactive-pads", propval);
+  }
+
+  /** */
+  @property ulong outputBufferDuration()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("output-buffer-duration");
+  }
+
+  /** */
+  @property void outputBufferDuration(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("output-buffer-duration", propval);
   }
 
   /** */

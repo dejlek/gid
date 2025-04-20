@@ -5,7 +5,7 @@ import gobject.object;
 import adw.swipeable;
 import adw.swipeable_mixin;
 
-/// Proxy object for [Adw.Swipeable] interface when a GObject has no applicable D binding
+/// Proxy object for [adw.swipeable.Swipeable] interface when a GObject has no applicable D binding
 class SwipeableIfaceProxy : IfaceProxy, adw.swipeable.Swipeable
 {
   this(void* ptr, Flag!"Take" take = No.Take)

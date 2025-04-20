@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ReadOptions : gobject.object.ObjectG
+class ReadOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,48 @@ class ReadOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ReadOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `maxRecursionDepth` property.
+      Returns: The maximum permitted schema nesting depth.
+  */
+  @property int maxRecursionDepth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-recursion-depth");
+  }
+
+  /**
+      Set `maxRecursionDepth` property.
+      Params:
+        propval = The maximum permitted schema nesting depth.
+  */
+  @property void maxRecursionDepth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("max-recursion-depth", propval);
+  }
+
+  /**
+      Get `useThreads` property.
+      Returns: Whether to use the global CPU thread pool.
+  */
+  @property bool useThreads()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-threads");
+  }
+
+  /**
+      Set `useThreads` property.
+      Params:
+        propval = Whether to use the global CPU thread pool.
+  */
+  @property void useThreads(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("use-threads", propval);
   }
 
   /** */

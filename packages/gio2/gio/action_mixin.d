@@ -15,7 +15,7 @@ public import glib.variant_type;
     
     The main interface to an action is that it can be activated with
     [gio.action.Action.activate]. This results in the 'activate' signal being
-    emitted. An activation has a [glib.variant.VariantG] parameter (which may be
+    emitted. An activation has a [glib.variant.Variant] parameter (which may be
     `NULL`). The correct type for the parameter is determined by a static
     parameter type (which is given at construction time).
     
@@ -44,6 +44,58 @@ public import glib.variant_type;
 template ActionT()
 {
 
+  /**
+      Get `enabled` property.
+      Returns: If @action is currently enabled.
+      
+      If the action is disabled then calls to [gio.action.Action.activate] and
+      [gio.action.Action.changeState] have no effect.
+  */
+  @property bool enabled()
+  {
+    return getEnabled();
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the action.  This is mostly meaningful for identifying
+      the action once it has been added to a #GActionGroup. It is immutable.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `parameterType` property.
+      Returns: The type of the parameter that must be given when activating the
+      action. This is immutable, and may be null if no parameter is needed when
+      activating the action.
+  */
+  @property glib.variant_type.VariantType parameterType()
+  {
+    return getParameterType();
+  }
+
+  /**
+      Get `state` property.
+      Returns: The state of the action, or null if the action is stateless.
+  */
+  @property glib.variant.Variant state()
+  {
+    return getState();
+  }
+
+  /**
+      Get `stateType` property.
+      Returns: The #GVariantType of the state that the action has, or null if the
+      action is stateless. This is immutable.
+  */
+  @property glib.variant_type.VariantType stateType()
+  {
+    return getStateType();
+  }
+
 
 
 
@@ -59,9 +111,9 @@ template ActionT()
       Params:
         parameter = the parameter to the activation
   */
-  override void activate(glib.variant.VariantG parameter = null)
+  override void activate(glib.variant.Variant parameter = null)
   {
-    g_action_activate(cast(GAction*)cPtr, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
+    g_action_activate(cast(GAction*)cPtr, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -79,9 +131,9 @@ template ActionT()
       Params:
         value = the new state
   */
-  override void changeState(glib.variant.VariantG value)
+  override void changeState(glib.variant.Variant value)
   {
-    g_action_change_state(cast(GAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_action_change_state(cast(GAction*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -137,14 +189,14 @@ template ActionT()
       given by [gio.action.Action.getStateType].
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
       Returns: the current state of the action
   */
-  override glib.variant.VariantG getState()
+  override glib.variant.Variant getState()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_action_get_state(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -166,14 +218,14 @@ template ActionT()
       within the range may fail.
       
       The return value (if non-null) should be freed with
-      [glib.variant.VariantG.unref] when it is no longer required.
+      [glib.variant.Variant.unref] when it is no longer required.
       Returns: the state range hint
   */
-  override glib.variant.VariantG getStateHint()
+  override glib.variant.Variant getStateHint()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_action_get_state_hint(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

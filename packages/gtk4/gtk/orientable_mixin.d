@@ -18,10 +18,29 @@ public import gtk.types;
     
     [gtk.widget.Widget] types implementing the [gtk.orientable.Orientable] interface will
     automatically acquire the `horizontal` or `vertical` CSS class depending on
-    the value of the [gtk.orientable.Orientable.Orientation] property.
+    the value of the [gtk.orientable.Orientable.orientation] property.
 */
 template OrientableT()
 {
+
+  /**
+      Get `orientation` property.
+      Returns: The orientation of the orientable.
+  */
+  @property gtk.types.Orientation orientation()
+  {
+    return getOrientation();
+  }
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the orientable.
+  */
+  @property void orientation(gtk.types.Orientation propval)
+  {
+    return setOrientation(propval);
+  }
 
   /**
       Retrieves the orientation of the orientable.

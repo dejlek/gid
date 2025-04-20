@@ -5,7 +5,7 @@ import gobject.object;
 import pangocairo.font;
 import pangocairo.font_mixin;
 
-/// Proxy object for [PangoCairo.Font] interface when a GObject has no applicable D binding
+/// Proxy object for [pangocairo.font.Font] interface when a GObject has no applicable D binding
 class FontIfaceProxy : IfaceProxy, pangocairo.font.Font
 {
   this(void* ptr, Flag!"Take" take = No.Take)

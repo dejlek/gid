@@ -111,9 +111,64 @@ class InfoBar : gtk.box.Box
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override InfoBar self()
   {
     return this;
+  }
+
+  /**
+      Get `messageType` property.
+      Returns: The type of the message.
+      
+      The type may be used to determine the appearance of the info bar.
+  */
+  @property gtk.types.MessageType messageType()
+  {
+    return getMessageType();
+  }
+
+  /**
+      Set `messageType` property.
+      Params:
+        propval = The type of the message.
+        
+        The type may be used to determine the appearance of the info bar.
+  */
+  @property void messageType(gtk.types.MessageType propval)
+  {
+    return setMessageType(propval);
+  }
+
+  /** */
+  @property bool revealed()
+  {
+    return getRevealed();
+  }
+
+  /** */
+  @property void revealed(bool propval)
+  {
+    return setRevealed(propval);
+  }
+
+  /**
+      Get `showCloseButton` property.
+      Returns: Whether to include a standard close button.
+  */
+  @property bool showCloseButton()
+  {
+    return getShowCloseButton();
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to include a standard close button.
+  */
+  @property void showCloseButton(bool propval)
+  {
+    return setShowCloseButton(propval);
   }
 
   /**
@@ -160,7 +215,7 @@ class InfoBar : gtk.box.Box
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +227,7 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_action_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +239,7 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_content_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

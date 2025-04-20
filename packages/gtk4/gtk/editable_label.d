@@ -2,6 +2,7 @@
 module gtk.editable_label;
 
 import gid.gid;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -67,9 +68,29 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EditableLabel self()
   {
     return this;
+  }
+
+  /**
+      Get `editing` property.
+      Returns: This property is true while the widget is in edit mode.
+  */
+  @property bool editing()
+  {
+    return getEditing();
+  }
+
+  /**
+      Set `editing` property.
+      Params:
+        propval = This property is true while the widget is in edit mode.
+  */
+  @property void editing(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("editing", propval);
   }
 
   mixin EditableT!();
@@ -112,9 +133,9 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Switches the label out of “editing mode”.
       
       If commit is true, the resulting text is kept as the
-      [gtk.editable.Editable.utf8] property value, otherwise the
+      [gtk.editable.Editable.text] property value, otherwise the
       resulting text is discarded and the label will keep its
-      previous [gtk.editable.Editable.utf8] property value.
+      previous [gtk.editable.Editable.text] property value.
   
       Params:
         commit = whether to set the edited text on the label

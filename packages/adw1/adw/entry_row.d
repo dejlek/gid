@@ -79,9 +79,171 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EntryRow self()
   {
     return this;
+  }
+
+  /**
+      Get `activatesDefault` property.
+      Returns: Whether activating the embedded entry can activate the default widget.
+  */
+  @property bool activatesDefault()
+  {
+    return getActivatesDefault();
+  }
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether activating the embedded entry can activate the default widget.
+  */
+  @property void activatesDefault(bool propval)
+  {
+    return setActivatesDefault(propval);
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: A list of Pango attributes to apply to the text of the embedded entry.
+      
+      The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
+      the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property pango.attr_list.AttrList attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the embedded entry.
+        
+        The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
+        the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property void attributes(pango.attr_list.AttrList propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /**
+      Get `enableEmojiCompletion` property.
+      Returns: Whether to suggest emoji replacements on the entry row.
+      
+      Emoji replacement is done with :-delimited names, like `:heart:`.
+  */
+  @property bool enableEmojiCompletion()
+  {
+    return getEnableEmojiCompletion();
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest emoji replacements on the entry row.
+        
+        Emoji replacement is done with :-delimited names, like `:heart:`.
+  */
+  @property void enableEmojiCompletion(bool propval)
+  {
+    return setEnableEmojiCompletion(propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional input hints for the entry row.
+      
+      Input hints allow input methods to fine-tune their behavior.
+      
+      See also: `property@Adw.EntryRow:input-purpose`
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional input hints for the entry row.
+        
+        Input hints allow input methods to fine-tune their behavior.
+        
+        See also: `property@Adw.EntryRow:input-purpose`
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The input purpose of the entry row.
+      
+      The input purpose can be used by input methods to adjust their behavior.
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The input purpose of the entry row.
+        
+        The input purpose can be used by input methods to adjust their behavior.
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
+  }
+
+  /**
+      Get `showApplyButton` property.
+      Returns: Whether to show the apply button.
+      
+      When set to `TRUE`, typing text in the entry will reveal an apply button.
+      Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
+      emit the `signal@EntryRow::apply` signal.
+      
+      This is useful if changing the entry contents can trigger an expensive
+      operation, e.g. network activity, to avoid triggering it after typing every
+      character.
+  */
+  @property bool showApplyButton()
+  {
+    return getShowApplyButton();
+  }
+
+  /**
+      Set `showApplyButton` property.
+      Params:
+        propval = Whether to show the apply button.
+        
+        When set to `TRUE`, typing text in the entry will reveal an apply button.
+        Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
+        emit the `signal@EntryRow::apply` signal.
+        
+        This is useful if changing the entry contents can trigger an expensive
+        operation, e.g. network activity, to avoid triggering it after typing every
+        character.
+  */
+  @property void showApplyButton(bool propval)
+  {
+    return setShowApplyButton(propval);
+  }
+
+  /**
+      Get `textLength` property.
+      Returns: The length of the text in the entry row.
+  */
+  @property uint textLength()
+  {
+    return getTextLength();
   }
 
   mixin EditableT!();

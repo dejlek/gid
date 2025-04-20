@@ -36,6 +36,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferInputStream self()
   {
     return this;
@@ -54,7 +55,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

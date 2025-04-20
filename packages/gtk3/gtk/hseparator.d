@@ -47,6 +47,7 @@ class HSeparator : gtk.separator.Separator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HSeparator self()
   {
     return this;

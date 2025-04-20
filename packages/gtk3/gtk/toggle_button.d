@@ -101,9 +101,46 @@ class ToggleButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToggleButton self()
   {
     return this;
+  }
+
+  /** */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /** */
+  @property bool drawIndicator()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("draw-indicator");
+  }
+
+  /** */
+  @property void drawIndicator(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("draw-indicator", propval);
+  }
+
+  /** */
+  @property bool inconsistent()
+  {
+    return getInconsistent();
+  }
+
+  /** */
+  @property void inconsistent(bool propval)
+  {
+    return setInconsistent(propval);
   }
 
   /**
@@ -129,7 +166,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +185,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

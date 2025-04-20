@@ -35,7 +35,9 @@ import gobject.types;
 class Value : Boxed
 {
 
-  /** */
+  /**
+      Create a `value.Value` boxed type.
+  */
   this()
   {
     super(gMalloc(GValue.sizeof), Yes.Take);
@@ -66,6 +68,7 @@ class Value : Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Value self()
   {
     return this;
@@ -135,11 +138,11 @@ class Value : Boxed
       Returns: object content of value,
                  should be unreferenced when no longer needed.
   */
-  gobject.object.ObjectG dupObject()
+  gobject.object.ObjectWrap dupObject()
   {
     ObjectC* _cretval;
     _cretval = g_value_dup_object(cast(const(GValue)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -159,13 +162,13 @@ class Value : Boxed
       Get the contents of a variant #GValue, increasing its refcount. The returned
       #GVariant is never floating.
       Returns: variant contents of value (may be null);
-           should be unreffed using [glib.variant.VariantG.unref] when no longer needed
+           should be unreffed using [glib.variant.Variant.unref] when no longer needed
   */
-  glib.variant.VariantG dupVariant()
+  glib.variant.Variant dupVariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_value_dup_variant(cast(const(GValue)*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -310,11 +313,11 @@ class Value : Boxed
       Get the contents of a `G_TYPE_OBJECT` derived #GValue.
       Returns: object contents of value
   */
-  gobject.object.ObjectG getObject()
+  gobject.object.ObjectWrap getObject()
   {
     ObjectC* _cretval;
     _cretval = g_value_get_object(cast(const(GValue)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -411,11 +414,11 @@ class Value : Boxed
       Get the contents of a variant #GValue.
       Returns: variant contents of value (may be null)
   */
-  glib.variant.VariantG getVariant()
+  glib.variant.Variant getVariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_value_get_variant(cast(const(GValue)*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -654,7 +657,7 @@ class Value : Boxed
       Params:
         vObject = object value to be set
   */
-  void setObject(gobject.object.ObjectG vObject = null)
+  void setObject(gobject.object.ObjectWrap vObject = null)
   {
     g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(No.Dup) : null);
   }
@@ -800,9 +803,9 @@ class Value : Boxed
       Params:
         variant = a #GVariant, or null
   */
-  void setVariant(glib.variant.VariantG variant = null)
+  void setVariant(glib.variant.Variant variant = null)
   {
-    g_value_set_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+    g_value_set_variant(cast(GValue*)cPtr, variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
   }
 
   /**
@@ -868,9 +871,9 @@ class Value : Boxed
       Params:
         variant = a #GVariant, or null
   */
-  void takeVariant(glib.variant.VariantG variant = null)
+  void takeVariant(glib.variant.Variant variant = null)
   {
-    g_value_take_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(Yes.Dup) : null);
+    g_value_take_variant(cast(GValue*)cPtr, variant ? cast(GVariant*)variant.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -970,14 +973,14 @@ void initVal(T)(GValue* gval)
     g_value_init(gval, GTypeEnum.Enum);
   else static if (is(T == string))
     g_value_init(gval, GTypeEnum.String);
-  else static if (is(T == VariantG))
+  else static if (is(T == glib.variant.Variant))
     g_value_init(gval, GTypeEnum.Variant);
   else static if (is(T : ParamSpec))
     g_value_init(gval, GTypeEnum.Param);
   else static if (is(T : Boxed))
   { // Cannot initialize a plain boxed type, it is done in setVal()
   }
-  else static if (is(T : ObjectG) || is(T == interface))
+  else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     g_value_init(gval, GTypeEnum.Object);
   else static if (is(T : Object) || isPointer!T)
     g_value_init(gval, GTypeEnum.Pointer);
@@ -1016,10 +1019,10 @@ T getVal(T)(const(GValue)* gval)
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
     return g_value_get_string(gval).fromCString(No.Free);
-  else static if (is(T == VariantG))
+  else static if (is(T == glib.variant.Variant))
   {
     auto v = g_value_get_variant(gval);
-    return v ? new VariantG(v, No.Take) : null;
+    return v ? new glib.variant.Variant(v, No.Take) : null;
   }
   else static if (is(T : ParamSpec))
   {
@@ -1031,10 +1034,10 @@ T getVal(T)(const(GValue)* gval)
     auto v = g_value_get_boxed(gval);
     return v ? new T(v, No.Take) : null;
   }
-  else static if (is(T : ObjectG) || is(T == interface))
+  else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return ObjectG.getDObject!T(v, No.Take);
+    return gobject.object.ObjectWrap.getDObject!T(v, No.Take);
   }
   else static if (is(T : Object) || isPointer!T)
     return cast(T)g_value_get_pointer(gval);
@@ -1078,8 +1081,8 @@ void setVal(T)(GValue* gval, T v)
   }
   else static if (is(T == string))
     g_value_take_string(gval, v.toCString(Yes.Alloc));
-  else static if (is(T == VariantG))
-    g_value_set_variant(gval, cast(VariantC*)v.cPtr);
+  else static if (is(T == glib.variant.Variant))
+    g_value_set_variant(gval, cast(GVariant*)v.cPtr);
   else static if (is(T : ParamSpec))
     g_value_set_param(gval, cast(GParamSpec*)v.cPtr);
   else static if (is(T : Boxed))
@@ -1087,14 +1090,14 @@ void setVal(T)(GValue* gval, T v)
     g_value_init(gval, v.gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, v.cInstancePtr);
   }
-  else static if (is(T : ObjectG))
+  else static if (is(T : gobject.object.ObjectWrap))
     g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.Dup));
   else static if (is(T == interface))
   {
-    if (auto objG = cast(ObjectG)v)
+    if (auto objG = cast(gobject.object.ObjectWrap)v)
       g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.Dup));
     else
-      assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectG in Value.setVal");
+      assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }
   else static if (is(T : Object) || isPointer!T)
     g_value_set_pointer(gval, cast(void*)v);

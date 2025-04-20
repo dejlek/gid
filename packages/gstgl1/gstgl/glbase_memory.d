@@ -26,10 +26,21 @@ import gstgl.types;
 class GLBaseMemory : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glbase_memory.GLBaseMemory` boxed type.
+      Params:
+        context = the #GstGLContext to use for GL operations
+        mapFlags = 
+        mapCount = 
+        glMapCount = 
+  */
+  this(gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, gst.types.MapFlags mapFlags = gst.types.MapFlags.init, int mapCount = int.init, int glMapCount = int.init)
   {
     super(gMalloc(GstGLBaseMemory.sizeof), Yes.Take);
+    this.context = context;
+    this.mapFlags = mapFlags;
+    this.mapCount = mapCount;
+    this.glMapCount = glMapCount;
   }
 
   /** */
@@ -57,62 +68,84 @@ class GLBaseMemory : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLBaseMemory self()
   {
     return this;
   }
 
+  /**
+      Get `mem` field.
+      Returns: the parent object
+  */
   @property gst.memory.Memory mem()
   {
     return cToD!(gst.memory.Memory)(cast(void*)&(cast(GstGLBaseMemory*)cPtr).mem);
   }
 
+  /**
+      Get `context` field.
+      Returns: the #GstGLContext to use for GL operations
+  */
   @property gstgl.glcontext.GLContext context()
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)cPtr).context);
   }
 
+  /**
+      Set `context` field.
+      Params:
+        propval = the #GstGLContext to use for GL operations
+  */
   @property void context(gstgl.glcontext.GLContext propval)
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLBaseMemory*)cPtr).context);
   }
 
+  /** */
   @property glib.mutex.Mutex lock()
   {
     return new glib.mutex.Mutex(cast(GMutex*)&(cast(GstGLBaseMemory*)cPtr).lock);
   }
 
+  /** */
   @property gst.types.MapFlags mapFlags()
   {
     return cast(gst.types.MapFlags)(cast(GstGLBaseMemory*)cPtr).mapFlags;
   }
 
+  /** */
   @property void mapFlags(gst.types.MapFlags propval)
   {
     (cast(GstGLBaseMemory*)cPtr).mapFlags = cast(GstMapFlags)propval;
   }
 
+  /** */
   @property int mapCount()
   {
     return (cast(GstGLBaseMemory*)cPtr).mapCount;
   }
 
+  /** */
   @property void mapCount(int propval)
   {
     (cast(GstGLBaseMemory*)cPtr).mapCount = propval;
   }
 
+  /** */
   @property int glMapCount()
   {
     return (cast(GstGLBaseMemory*)cPtr).glMapCount;
   }
 
+  /** */
   @property void glMapCount(int propval)
   {
     (cast(GstGLBaseMemory*)cPtr).glMapCount = propval;
   }
 
+  /** */
   @property gstgl.glquery.GLQuery query()
   {
     return new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)cPtr).query);

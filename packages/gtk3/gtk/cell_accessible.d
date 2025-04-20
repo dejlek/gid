@@ -8,7 +8,6 @@ import atk.component_mixin;
 import atk.object;
 import atk.table_cell;
 import atk.table_cell_mixin;
-import atk.types;
 import gid.gid;
 import gtk.accessible;
 import gtk.c.functions;
@@ -38,6 +37,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellAccessible self()
   {
     return this;
@@ -46,7 +46,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
   mixin ActionT!();
   mixin ComponentT!();
   mixin TableCellT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

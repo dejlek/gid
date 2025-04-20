@@ -56,7 +56,7 @@ import gobject.object;
     
     A notification can be sent with [gio.application.Application.sendNotification].
 */
-class Notification : gobject.object.ObjectG
+class Notification : gobject.object.ObjectWrap
 {
 
   /** */
@@ -78,6 +78,7 @@ class Notification : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Notification self()
   {
     return this;
@@ -136,11 +137,11 @@ class Notification : gobject.object.ObjectG
         action = an action name
         target = a #GVariant to use as action's parameter, or null
   */
-  void addButtonWithTarget(string label, string action, glib.variant.VariantG target = null)
+  void addButtonWithTarget(string label, string action, glib.variant.Variant target = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
-    g_notification_add_button_with_target_value(cast(GNotification*)cPtr, _label, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
+    g_notification_add_button_with_target_value(cast(GNotification*)cPtr, _label, _action, target ? cast(GVariant*)target.cPtr(No.Dup) : null);
   }
 
   /**
@@ -209,10 +210,10 @@ class Notification : gobject.object.ObjectG
         action = an action name
         target = a #GVariant to use as action's parameter, or null
   */
-  void setDefaultActionAndTarget(string action, glib.variant.VariantG target = null)
+  void setDefaultActionAndTarget(string action, glib.variant.Variant target = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
-    g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
+    g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(GVariant*)target.cPtr(No.Dup) : null);
   }
 
   /**
@@ -223,7 +224,7 @@ class Notification : gobject.object.ObjectG
   */
   void setIcon(gio.icon.Icon icon)
   {
-    g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

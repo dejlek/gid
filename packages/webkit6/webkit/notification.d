@@ -11,7 +11,7 @@ import webkit.types;
 /**
     Holds information about a notification that should be shown to the user.
 */
-class Notification : gobject.object.ObjectG
+class Notification : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,6 +37,42 @@ class Notification : gobject.object.ObjectG
   override Notification self()
   {
     return this;
+  }
+
+  /**
+      Get `body_` property.
+      Returns: The body for the notification.
+  */
+  @property string body_()
+  {
+    return getBody();
+  }
+
+  /**
+      Get `id` property.
+      Returns: The unique id for the notification.
+  */
+  @property ulong id()
+  {
+    return getId();
+  }
+
+  /**
+      Get `tag` property.
+      Returns: The tag identifier for the notification.
+  */
+  @property string tag()
+  {
+    return getTag();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title for the notification.
+  */
+  @property string title()
+  {
+    return getTitle();
   }
 
   /**

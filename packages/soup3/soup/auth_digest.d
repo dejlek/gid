@@ -36,6 +36,7 @@ class AuthDigest : soup.auth.Auth
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthDigest self()
   {
     return this;

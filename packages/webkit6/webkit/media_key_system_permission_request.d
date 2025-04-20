@@ -22,7 +22,7 @@ import webkit.types;
     When handling this permission request the application may perform additional installation of the
     requested CDM, unless it is already present on the host system.
 */
-class MediaKeySystemPermissionRequest : gobject.object.ObjectG, webkit.permission_request.PermissionRequest
+class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request.PermissionRequest
 {
 
   /** */

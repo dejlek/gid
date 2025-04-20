@@ -279,17 +279,17 @@ struct JSCContextClass
   GObjectClass parentClass;
 }
 
-/**
-    JSCException represents a JavaScript exception.
-*/
-struct JSCException;
-
 /** */
 struct JSCExceptionClass
 {
   /** */
   GObjectClass parentClass;
 }
+
+/**
+    JSCException represents a JavaScript exception.
+*/
+struct JSCException;
 
 /**
     JSCValue represents a reference to a value in a #JSCContext. The JSCValue

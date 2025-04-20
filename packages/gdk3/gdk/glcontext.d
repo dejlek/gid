@@ -63,7 +63,7 @@ import gobject.object;
     [gdk.glcontext.GLContext.getCurrent]; you can also unset any #GdkGLContext
     that is currently set by calling [gdk.glcontext.GLContext.clearCurrent].
 */
-class GLContext : gobject.object.ObjectG
+class GLContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -85,6 +85,7 @@ class GLContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLContext self()
   {
     return this;
@@ -109,7 +110,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +133,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +169,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,7 +206,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_gl_context_get_window(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -248,7 +249,7 @@ class GLContext : gobject.object.ObjectG
       
       It is safe to call this function on a realized #GdkGLContext.
       Returns: true if the context is realized
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool realize()
   {
@@ -256,7 +257,7 @@ class GLContext : gobject.object.ObjectG
     GError *_err;
     _retval = gdk_gl_context_realize(cast(GdkGLContext*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

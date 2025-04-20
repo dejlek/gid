@@ -51,7 +51,9 @@ import gst.types;
 class Caps : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `caps.Caps` boxed type.
+  */
   this()
   {
     super(gMalloc(GstCaps.sizeof), Yes.Take);
@@ -82,11 +84,16 @@ class Caps : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Caps self()
   {
     return this;
   }
 
+  /**
+      Get `miniObject` field.
+      Returns: the parent type
+  */
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstCaps*)cPtr).miniObject);

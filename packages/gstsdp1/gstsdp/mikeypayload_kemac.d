@@ -18,7 +18,7 @@ class MIKEYPayloadKEMAC
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.MIKEYPayloadKEMAC");
+      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_kemac.MIKEYPayloadKEMAC");
 
     cInstance = *cast(GstMIKEYPayloadKEMAC*)ptr;
 
@@ -32,26 +32,48 @@ class MIKEYPayloadKEMAC
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `pt` field.
+      Returns: the common #GstMIKEYPayload
+  */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKEMAC*)cPtr).pt);
   }
 
+  /**
+      Get `encAlg` field.
+      Returns: the #GstMIKEYEncAlg
+  */
   @property gstsdp.types.MIKEYEncAlg encAlg()
   {
     return cast(gstsdp.types.MIKEYEncAlg)(cast(GstMIKEYPayloadKEMAC*)cPtr).encAlg;
   }
 
+  /**
+      Set `encAlg` field.
+      Params:
+        propval = the #GstMIKEYEncAlg
+  */
   @property void encAlg(gstsdp.types.MIKEYEncAlg propval)
   {
     (cast(GstMIKEYPayloadKEMAC*)cPtr).encAlg = cast(GstMIKEYEncAlg)propval;
   }
 
+  /**
+      Get `macAlg` field.
+      Returns: the #GstMIKEYMacAlg
+  */
   @property gstsdp.types.MIKEYMacAlg macAlg()
   {
     return cast(gstsdp.types.MIKEYMacAlg)(cast(GstMIKEYPayloadKEMAC*)cPtr).macAlg;
   }
 
+  /**
+      Set `macAlg` field.
+      Params:
+        propval = the #GstMIKEYMacAlg
+  */
   @property void macAlg(gstsdp.types.MIKEYMacAlg propval)
   {
     (cast(GstMIKEYPayloadKEMAC*)cPtr).macAlg = cast(GstMIKEYMacAlg)propval;

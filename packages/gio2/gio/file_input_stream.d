@@ -47,6 +47,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileInputStream self()
   {
     return this;
@@ -65,7 +66,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
         attributes = a file attribute query string.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GFileInfo, or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -74,8 +75,8 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
     GError *_err;
     _cretval = g_file_input_stream_query_info(cast(GFileInputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,7 +107,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -121,16 +122,16 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
       Params:
         result = a #GAsyncResult.
       Returns: #GFileInfo.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_input_stream_query_info_finish(cast(GFileInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_input_stream_query_info_finish(cast(GFileInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

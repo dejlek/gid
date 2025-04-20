@@ -13,7 +13,7 @@ import gtk.widget;
     be “anchored” (inserted inline, as if they were characters). The anchor
     can have multiple widgets anchored, to allow for multiple views.
 */
-class TextChildAnchor : gobject.object.ObjectG
+class TextChildAnchor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class TextChildAnchor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextChildAnchor self()
   {
     return this;
@@ -58,7 +59,7 @@ class TextChildAnchor : gobject.object.ObjectG
       Determines whether a child anchor has been deleted from
       the buffer. Keep in mind that the child anchor will be
       unreferenced when removed from the buffer, so you need to
-      hold your own reference (with [gobject.object.ObjectG.ref_]) if you plan
+      hold your own reference (with [gobject.object.ObjectWrap.ref_]) if you plan
       to use this function — otherwise all deleted child anchors
       will also be finalized.
       Returns: true if the child anchor has been deleted from its buffer

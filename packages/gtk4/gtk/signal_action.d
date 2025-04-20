@@ -35,6 +35,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SignalAction self()
   {
     return this;

@@ -30,6 +30,7 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SubTreeFileSystem self()
   {
     return this;

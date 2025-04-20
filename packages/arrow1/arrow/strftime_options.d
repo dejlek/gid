@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class StrftimeOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,48 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StrftimeOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `format` property.
+      Returns: The desired format string.
+  */
+  @property string format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("format");
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The desired format string.
+  */
+  @property void format(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("format", propval);
+  }
+
+  /**
+      Get `locale` property.
+      Returns: The desired output locale string.
+  */
+  @property string locale()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("locale");
+  }
+
+  /**
+      Set `locale` property.
+      Params:
+        propval = The desired output locale string.
+  */
+  @property void locale(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("locale", propval);
   }
 
   /** */

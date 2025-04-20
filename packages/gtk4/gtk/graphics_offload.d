@@ -76,9 +76,48 @@ class GraphicsOffload : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GraphicsOffload self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: Whether graphics offload is enabled.
+  */
+  @property gtk.types.GraphicsOffloadEnabled enabled()
+  {
+    return getEnabled();
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether graphics offload is enabled.
+  */
+  @property void enabled(gtk.types.GraphicsOffloadEnabled propval)
+  {
+    return setEnabled(propval);
   }
 
   /**
@@ -103,7 +142,7 @@ class GraphicsOffload : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

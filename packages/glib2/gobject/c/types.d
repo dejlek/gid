@@ -29,8 +29,8 @@ alias GSignalCVaMarshaller = GVaClosureMarshal;
 alias GType = size_t;
 
 /**
-    Flags to be passed to [gobject.object.ObjectG.bindProperty] or
-    [gobject.object.ObjectG.bindPropertyFull].
+    Flags to be passed to [gobject.object.ObjectWrap.bindProperty] or
+    [gobject.object.ObjectWrap.bindPropertyFull].
     
     This enumeration can be extended at later date.
 */
@@ -61,7 +61,7 @@ enum GBindingFlags : uint
         booleans, setting one to true will result in the other being
         set to false and vice versa. This flag will only work for
         boolean properties, and cannot be used when passing custom
-        transformation functions to [gobject.object.ObjectG.bindPropertyFull].
+        transformation functions to [gobject.object.ObjectWrap.bindPropertyFull].
   */
   InvertBoolean = 4,
 }
@@ -160,9 +160,9 @@ enum GParamFlags : uint
   StaticBlurb = 128,
 
   /**
-      calls to [gobject.object.ObjectG.setProperty] for this
+      calls to [gobject.object.ObjectWrap.setProperty] for this
         property will not automatically result in a "notify" signal being
-        emitted: the implementation must call [gobject.object.ObjectG.notify] themselves
+        emitted: the implementation must call [gobject.object.ObjectWrap.notify] themselves
         in case the property actually changes.  Since: 2.42.
   */
   ExplicitNotify = 1073741824,
@@ -385,7 +385,7 @@ enum GTypeFundamentalFlags : uint
 }
 
 /**
-    [gobject.object.ObjectG] instance (or source) and another property on another [gobject.object.ObjectG]
+    [gobject.object.ObjectWrap] instance (or source) and another property on another [gobject.object.ObjectWrap]
     instance (or target).
     
     Whenever the source property changes, the same value is applied to the
@@ -402,7 +402,7 @@ enum GTypeFundamentalFlags : uint
     the property "property-a" of @object1.
     
     It is possible to create a bidirectional binding between two properties
-    of two [gobject.object.ObjectG] instances, so that if either property changes, the
+    of two [gobject.object.ObjectWrap] instances, so that if either property changes, the
     other is updated as well, for instance:
     
     ```c
@@ -453,7 +453,7 @@ enum GTypeFundamentalFlags : uint
     or `func@GObject.signal_handler_block`.
     
     A binding will be severed, and the resources it allocates freed, whenever
-    either one of the [gobject.object.ObjectG] instances it refers to are finalized, or when
+    either one of the [gobject.object.ObjectWrap] instances it refers to are finalized, or when
     the #GBinding instance loses its last reference.
     
     Bindings for languages with garbage collection can use
@@ -785,7 +785,7 @@ struct GInitiallyUnownedClass
   extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
 
   /**
-      the @constructed function is called by [gobject.object.ObjectG.new_] as the
+      the @constructed function is called by [gobject.object.ObjectWrap.new_] as the
        final step of the object creation process.  At the point of the call, all
        construction properties have been set on the object.  The purpose of this
        call is to allow for object initialisation steps that can only be performed
@@ -924,7 +924,7 @@ struct GObjectClass
   extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
 
   /**
-      the @constructed function is called by [gobject.object.ObjectG.new_] as the
+      the @constructed function is called by [gobject.object.ObjectWrap.new_] as the
        final step of the object creation process.  At the point of the call, all
        construction properties have been set on the object.  The purpose of this
        call is to allow for object initialisation steps that can only be performed
@@ -970,24 +970,24 @@ struct GObjectConstructParam
 /**
     The base object type.
     
-    [gobject.object.ObjectG] is the fundamental type providing the common attributes and
+    [gobject.object.ObjectWrap] is the fundamental type providing the common attributes and
     methods for all object types in GTK, Pango and other libraries
-    based on GObject. The [gobject.object.ObjectG] class provides methods for object
+    based on GObject. The [gobject.object.ObjectWrap] class provides methods for object
     construction and destruction, property access methods, and signal
     support. Signals are described in detail [here][gobject-Signals].
     
-    For a tutorial on implementing a new [gobject.object.ObjectG] class, see [How to define and
+    For a tutorial on implementing a new [gobject.object.ObjectWrap] class, see [How to define and
     implement a new GObject](tutorial.html#how-to-define-and-implement-a-new-gobject).
     For a list of naming conventions for GObjects and their methods, see the
     [GType conventions](concepts.html#conventions). For the high-level concepts
     behind GObject, read
     [Instantiatable classed types: Objects](concepts.html#instantiatable-classed-types-objects).
     
-    Since GLib 2.72, all [gobject.object.ObjectG]s are guaranteed to be aligned to at least the
+    Since GLib 2.72, all [gobject.object.ObjectWrap]s are guaranteed to be aligned to at least the
     alignment of the largest basic GLib type (typically this is [vte.types.TEST_FLAGS_NONE] or
-    [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectG], you
-    should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectG] to be
-    appropriately padded. This guarantee applies to the [gobject.object.ObjectG] (or derived)
+    [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectWrap], you
+    should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectWrap] to be
+    appropriately padded. This guarantee applies to the [gobject.object.ObjectWrap] (or derived)
     struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated
     by `G_ADD_PRIVATE()`.
 */
@@ -1004,7 +1004,7 @@ struct ObjectC
 }
 
 /**
-    [gobject.param_spec.ParamSpec] encapsulates the metadata required to specify parameters, such as [gobject.object.ObjectG] properties.
+    [gobject.param_spec.ParamSpec] encapsulates the metadata required to specify parameters, such as [gobject.object.ObjectWrap] properties.
     
     ## Parameter names
     
@@ -1679,8 +1679,8 @@ struct GParamSpecValueArray
     A #GParamSpec derived structure that contains the meta data for #GVariant properties.
     
     When comparing values with [gobject.global.paramValuesCmp], scalar values with the same
-    type will be compared with [glib.variant.VariantG.compare]. Other non-null variants will
-    be checked for equality with [glib.variant.VariantG.equal], and their sort order is
+    type will be compared with [glib.variant.Variant.compare]. Other non-null variants will
+    be checked for equality with [glib.variant.Variant.equal], and their sort order is
     otherwise undefined. null is ordered before non-null variants. Two null
     values compare equal.
 */
@@ -1699,7 +1699,7 @@ struct GParamSpecVariant
   /**
       a #GVariant, or null
   */
-  VariantC* defaultValue;
+  GVariant* defaultValue;
 
   /** */
   void*[4] padding;
@@ -1707,7 +1707,7 @@ struct GParamSpecVariant
 
 /**
     The GParameter struct is an auxiliary structure used
-    to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
+    to hand parameter name/value pairs to [gobject.object.ObjectWrap.newv].
 
     Deprecated: This type is not introspectable.
 */
@@ -1725,9 +1725,9 @@ struct GParameter
 }
 
 /**
-    [gobject.signal_group.SignalGroup] manages a collection of signals on a [gobject.object.ObjectG].
+    [gobject.signal_group.SignalGroup] manages a collection of signals on a [gobject.object.ObjectWrap].
     
-    [gobject.signal_group.SignalGroup] simplifies the process of connecting  many signals to a [gobject.object.ObjectG]
+    [gobject.signal_group.SignalGroup] simplifies the process of connecting  many signals to a [gobject.object.ObjectWrap]
     as a group. As such there is no API to disconnect a signal from the group.
     
     In particular, this allows you to:
@@ -1985,7 +1985,7 @@ struct GTypeInterface
     are gone, the module may be unloaded. If the types and interfaces
     become used again, the module will be reloaded. Note that the last
     reference cannot be released from within the module code, since that
-    would lead to the caller's code being unloaded before `[gobject.object.ObjectG.unref]`
+    would lead to the caller's code being unloaded before `[gobject.object.ObjectWrap.unref]`
     returns to it.
     
     Keeping track of whether the module should be loaded or not is done by
@@ -2078,7 +2078,7 @@ struct GTypeModuleClass
     
     2. The type's implementation is referenced, e.g. through
        [gobject.type_class.TypeClass.ref_] or through `func@GObject.type_create_instance`
-       (this is being called by [gobject.object.ObjectG.new_]) or through one of the above
+       (this is being called by [gobject.object.ObjectWrap.new_]) or through one of the above
        done on a type derived from `new_type_id`.
     
     3. This causes the type system to load the type's implementation by calling
@@ -2344,7 +2344,7 @@ union _Value__data__union
     Like #GValue, #GWeakRef can be statically allocated, stack- or
     heap-allocated, or embedded in larger structures.
     
-    Unlike [gobject.object.ObjectG.weakRef] and [gobject.object.ObjectG.addWeakPointer], this weak
+    Unlike [gobject.object.ObjectWrap.weakRef] and [gobject.object.ObjectWrap.addWeakPointer], this weak
     reference is thread-safe: converting a weak pointer to a reference is
     atomic with respect to invalidation of weak pointers to destroyed
     objects.

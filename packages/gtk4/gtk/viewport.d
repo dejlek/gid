@@ -60,9 +60,56 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Viewport self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `scrollToFocus` property.
+      Returns: Whether to scroll when the focus changes.
+      
+      Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
+      code needs to work with older versions, consider setting it explicitly to
+      TRUE.
+  */
+  @property bool scrollToFocus()
+  {
+    return getScrollToFocus();
+  }
+
+  /**
+      Set `scrollToFocus` property.
+      Params:
+        propval = Whether to scroll when the focus changes.
+        
+        Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
+        code needs to work with older versions, consider setting it explicitly to
+        TRUE.
+  */
+  @property void scrollToFocus(bool propval)
+  {
+    return setScrollToFocus(propval);
   }
 
   mixin ScrollableT!();
@@ -93,7 +140,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_get_child(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

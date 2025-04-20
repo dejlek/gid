@@ -11,7 +11,7 @@ import panel.session_item;
 import panel.types;
 
 /** */
-class Session : gobject.object.ObjectG
+class Session : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class Session : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Session self()
   {
     return this;
@@ -55,16 +56,16 @@ class Session : gobject.object.ObjectG
       Params:
         variant = a #GVariant from [panel.session.Session.toVariant]
       Returns: a #PanelSession
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
-  static panel.session.Session newFromVariant(glib.variant.VariantG variant)
+  static panel.session.Session newFromVariant(glib.variant.Variant variant)
   {
     PanelSession* _cretval;
     GError *_err;
-    _cretval = panel_session_new_from_variant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null, &_err);
+    _cretval = panel_session_new_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(panel.session.Session)(cast(PanelSession*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session.Session)(cast(PanelSession*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,7 +87,7 @@ class Session : gobject.object.ObjectG
   {
     PanelSessionItem* _cretval;
     _cretval = panel_session_get_item(cast(PanelSession*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +117,7 @@ class Session : gobject.object.ObjectG
     PanelSessionItem* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = panel_session_lookup_by_id(cast(PanelSession*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,11 +148,11 @@ class Session : gobject.object.ObjectG
       The resulting variant will not be floating.
       Returns: a #GVariant
   */
-  glib.variant.VariantG toVariant()
+  glib.variant.Variant toVariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = panel_session_to_variant(cast(PanelSession*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

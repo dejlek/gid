@@ -55,7 +55,7 @@ import gtk.types;
     }
     ```
 */
-class PageSetup : gobject.object.ObjectG
+class PageSetup : gobject.object.ObjectWrap
 {
 
   /** */
@@ -77,6 +77,7 @@ class PageSetup : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PageSetup self()
   {
     return this;
@@ -103,7 +104,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the filename to read the page setup from
       Returns: the restored [gtk.page_setup.PageSetup]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtk.page_setup.PageSetup newFromFile(string fileName)
   {
@@ -112,8 +113,8 @@ class PageSetup : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_page_setup_new_from_file(_fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -124,14 +125,14 @@ class PageSetup : gobject.object.ObjectG
       [gtk.page_setup.PageSetup.toGvariant].
   
       Params:
-        variant = an a{sv} [glib.variant.VariantG]
+        variant = an a{sv} [glib.variant.Variant]
       Returns: a new [gtk.page_setup.PageSetup] object
   */
-  static gtk.page_setup.PageSetup newFromGvariant(glib.variant.VariantG variant)
+  static gtk.page_setup.PageSetup newFromGvariant(glib.variant.Variant variant)
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,7 +148,7 @@ class PageSetup : gobject.object.ObjectG
         groupName = the name of the group in the key_file to read
              to use the default name “Page Setup”
       Returns: the restored [gtk.page_setup.PageSetup]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -156,8 +157,8 @@ class PageSetup : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +170,7 @@ class PageSetup : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -333,7 +334,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the filename to read the page setup from
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadFile(string fileName)
   {
@@ -342,7 +343,7 @@ class PageSetup : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_page_setup_load_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -355,7 +356,7 @@ class PageSetup : gobject.object.ObjectG
         groupName = the name of the group in the key_file to read
             to use the default name “Page Setup”
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -364,7 +365,7 @@ class PageSetup : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_page_setup_load_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -459,7 +460,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the file to save to
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool toFile(string fileName)
   {
@@ -468,19 +469,19 @@ class PageSetup : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_page_setup_to_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
   /**
       Serialize page setup to an a{sv} variant.
-      Returns: a new, floating, [glib.variant.VariantG]
+      Returns: a new, floating, [glib.variant.Variant]
   */
-  glib.variant.VariantG toGvariant()
+  glib.variant.Variant toGvariant()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 

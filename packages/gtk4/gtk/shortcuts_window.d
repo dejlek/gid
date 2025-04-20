@@ -3,6 +3,7 @@ module gtk.shortcuts_window;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -96,9 +97,66 @@ class ShortcutsWindow : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ShortcutsWindow self()
   {
     return this;
+  }
+
+  /**
+      Get `sectionName` property.
+      Returns: The name of the section to show.
+      
+      This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
+      objects that are in this shortcuts window.
+  */
+  @property string sectionName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("section-name");
+  }
+
+  /**
+      Set `sectionName` property.
+      Params:
+        propval = The name of the section to show.
+        
+        This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
+        objects that are in this shortcuts window.
+  */
+  @property void sectionName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("section-name", propval);
+  }
+
+  /**
+      Get `viewName` property.
+      Returns: The view name by which to filter the contents.
+      
+      This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
+      property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
+      are inside this shortcuts window.
+      
+      Set this to null to show all groups.
+  */
+  @property string viewName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("view-name");
+  }
+
+  /**
+      Set `viewName` property.
+      Params:
+        propval = The view name by which to filter the contents.
+        
+        This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
+        property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
+        are inside this shortcuts window.
+        
+        Set this to null to show all groups.
+  */
+  @property void viewName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
 
   /**

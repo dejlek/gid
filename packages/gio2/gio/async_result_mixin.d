@@ -104,11 +104,11 @@ template AsyncResultT()
       Returns: a new reference to the source
            object for the res, or null if there is none.
   */
-  override gobject.object.ObjectG getSourceObject()
+  override gobject.object.ObjectWrap getSourceObject()
   {
     ObjectC* _cretval;
     _cretval = g_async_result_get_source_object(cast(GAsyncResult*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ template AsyncResultT()
       to enable subclasses to chain up correctly.
       Returns: true if error is has been filled in with an error from
           res, false if not.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool legacyPropagateError()
   {
@@ -159,7 +159,7 @@ template AsyncResultT()
     GError *_err;
     _retval = g_async_result_legacy_propagate_error(cast(GAsyncResult*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

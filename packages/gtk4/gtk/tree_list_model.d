@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.tree_list_row;
@@ -13,7 +14,7 @@ import gtk.types;
 /**
     [gtk.tree_list_model.TreeListModel] is a list model that can create child models on demand.
 */
-class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
+class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -35,9 +36,56 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeListModel self()
   {
     return this;
+  }
+
+  /**
+      Get `autoexpand` property.
+      Returns: If all rows should be expanded by default.
+  */
+  @property bool autoexpand()
+  {
+    return getAutoexpand();
+  }
+
+  /**
+      Set `autoexpand` property.
+      Params:
+        propval = If all rows should be expanded by default.
+  */
+  @property void autoexpand(bool propval)
+  {
+    return setAutoexpand(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The root model displayed.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -61,8 +109,8 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
       gio.list_model.ListModel _dretval;
       auto _dlg = cast(gtk.types.TreeListModelCreateModelFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
-      GListModel* _retval = cast(GListModel*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      GListModel* _retval = cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval).cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -71,7 +119,7 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
     GtkTreeListModel* _cretval;
     auto _createFunc = createFunc ? freezeDelegate(cast(void*)&createFunc) : null;
     GDestroyNotify _createFuncDestroyCB = createFunc ? &thawDelegate : null;
-    _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(ObjectG)root).cPtr(Yes.Dup) : null, passthrough, autoexpand, _createFuncCB, _createFunc, _createFuncDestroyCB);
+    _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(gobject.object.ObjectWrap)root).cPtr(Yes.Dup) : null, passthrough, autoexpand, _createFuncCB, _createFunc, _createFuncDestroyCB);
     this(_cretval, Yes.Take);
   }
 
@@ -107,7 +155,7 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_child_row(cast(GtkTreeListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +167,7 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_model_get_model(cast(GtkTreeListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +218,7 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_row(cast(GtkTreeListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 

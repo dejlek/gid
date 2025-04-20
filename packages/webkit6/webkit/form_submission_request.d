@@ -17,7 +17,7 @@ import webkit.types;
     [webkit.form_submission_request.FormSubmissionRequest.listTextFields]. You can submit the
     form with [webkit.form_submission_request.FormSubmissionRequest.submit].
 */
-class FormSubmissionRequest : gobject.object.ObjectG
+class FormSubmissionRequest : gobject.object.ObjectWrap
 {
 
   /** */

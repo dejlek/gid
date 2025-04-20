@@ -21,6 +21,25 @@ template OrientableT()
 {
 
   /**
+      Get `orientation` property.
+      Returns: The orientation of the orientable.
+  */
+  @property gtk.types.Orientation orientation()
+  {
+    return getOrientation();
+  }
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the orientable.
+  */
+  @property void orientation(gtk.types.Orientation propval)
+  {
+    return setOrientation(propval);
+  }
+
+  /**
       Retrieves the orientation of the orientable.
       Returns: the orientation of the orientable.
   */

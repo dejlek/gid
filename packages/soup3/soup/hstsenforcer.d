@@ -35,7 +35,7 @@ import soup.types;
     HSTS policy persistence. See `class@HSTSEnforcerDB` for a persistent
     enforcer.
 */
-class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
+class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
@@ -57,6 +57,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HSTSEnforcer self()
   {
     return this;

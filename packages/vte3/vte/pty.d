@@ -15,7 +15,7 @@ import vte.c.types;
 import vte.types;
 
 /** */
-class Pty : gobject.object.ObjectG, gio.initable.Initable
+class Pty : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
@@ -37,6 +37,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Pty self()
   {
     return this;
@@ -56,7 +57,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         fd = a file descriptor to the PTY
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty for fd, or null on error with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable = null)
   {
@@ -64,8 +65,8 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +103,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         flags = flags from #VtePtyFlags
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty, or null on error with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -110,8 +111,8 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,7 +147,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         rows = a location to store the number of rows, or null
         columns = a location to store the number of columns, or null
       Returns: true on success, false on failure with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool getSize(out int rows, out int columns)
   {
@@ -154,7 +155,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _retval = vte_pty_get_size(cast(VtePty*)cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -168,7 +169,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         rows = the desired number of rows
         columns = the desired number of columns
       Returns: true on success, false on failure with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setSize(int rows, int columns)
   {
@@ -176,7 +177,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _retval = vte_pty_set_size(cast(VtePty*)cPtr, rows, columns, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -188,7 +189,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       Params:
         utf8 = whether or not the pty is in UTF-8 mode
       Returns: true on success, false on failure with error filled in
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setUtf8(bool utf8)
   {
@@ -196,7 +197,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     GError *_err;
     _retval = vte_pty_set_utf8(cast(VtePty*)cPtr, utf8, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -232,7 +233,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -260,9 +261,9 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_spawn_finish(cast(VtePty*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
+    _retval = vte_pty_spawn_finish(cast(VtePty*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -328,7 +329,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

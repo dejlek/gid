@@ -60,9 +60,29 @@ class SocketService : gio.socket_listener.SocketListener
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketService self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the service is currently accepting connections.
+  */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the service is currently accepting connections.
+  */
+  @property void active(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
 
   /**
@@ -146,7 +166,7 @@ class SocketService : gio.socket_listener.SocketListener
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.socket_service.SocketService socketService))
+          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.socket_service.SocketService socketService))
   
           `connection` a new #GSocketConnection object (optional)
   
@@ -163,7 +183,7 @@ class SocketService : gio.socket_listener.SocketListener
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.socket_connection.SocketConnection)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectG)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.socket_service.SocketService)))
   && Parameters!T.length < 4)
   {

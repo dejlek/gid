@@ -38,6 +38,7 @@ class IconSource : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconSource self()
   {
     return this;
@@ -175,7 +176,7 @@ class IconSource : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     _cretval = gtk_icon_source_get_pixbuf(cast(const(GtkIconSource)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

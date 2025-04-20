@@ -77,9 +77,126 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProgressBar self()
   {
     return this;
+  }
+
+  /**
+      Get `ellipsize` property.
+      Returns: The preferred place to ellipsize the string, if the progress bar does
+      not have enough room to display the entire string, specified as a
+      #PangoEllipsizeMode.
+      
+      Note that setting this property to a value other than
+      [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+      only enough space to display the ellipsis ("..."). Another means to set a
+      progress bar's width is [gtk.widget.Widget.setSizeRequest].
+  */
+  @property pango.types.EllipsizeMode ellipsize()
+  {
+    return getEllipsize();
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the progress bar does
+        not have enough room to display the entire string, specified as a
+        #PangoEllipsizeMode.
+        
+        Note that setting this property to a value other than
+        [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+        only enough space to display the ellipsis ("..."). Another means to set a
+        progress bar's width is [gtk.widget.Widget.setSizeRequest].
+  */
+  @property void ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setEllipsize(propval);
+  }
+
+  /** */
+  @property double fraction()
+  {
+    return getFraction();
+  }
+
+  /** */
+  @property void fraction(double propval)
+  {
+    return setFraction(propval);
+  }
+
+  /** */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /** */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /** */
+  @property double pulseStep()
+  {
+    return getPulseStep();
+  }
+
+  /** */
+  @property void pulseStep(double propval)
+  {
+    return setPulseStep(propval);
+  }
+
+  /**
+      Get `showText` property.
+      Returns: Sets whether the progress bar will show a text in addition
+      to the bar itself. The shown text is either the value of
+      the #GtkProgressBar:text property or, if that is null,
+      the #GtkProgressBar:fraction value, as a percentage.
+      
+      To make a progress bar that is styled and sized suitably for
+      showing text (even if the actual text is blank), set
+      #GtkProgressBar:show-text to true and #GtkProgressBar:text
+      to the empty string (not null).
+  */
+  @property bool showText()
+  {
+    return getShowText();
+  }
+
+  /**
+      Set `showText` property.
+      Params:
+        propval = Sets whether the progress bar will show a text in addition
+        to the bar itself. The shown text is either the value of
+        the #GtkProgressBar:text property or, if that is null,
+        the #GtkProgressBar:fraction value, as a percentage.
+        
+        To make a progress bar that is styled and sized suitably for
+        showing text (even if the actual text is blank), set
+        #GtkProgressBar:show-text to true and #GtkProgressBar:text
+        to the empty string (not null).
+  */
+  @property void showText(bool propval)
+  {
+    return setShowText(propval);
+  }
+
+  /** */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /** */
+  @property void text(string propval)
+  {
+    return setText(propval);
   }
 
   mixin OrientableT!();

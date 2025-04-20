@@ -34,6 +34,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLDisplayEGLDevice self()
   {
     return this;
@@ -65,7 +66,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new_with_egl_device(device);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
     return _retval;
   }
 }

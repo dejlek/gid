@@ -19,7 +19,7 @@ class EventMotion
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.EventMotion");
+      throw new GidConstructException("Null instance pointer for gdk.event_motion.EventMotion");
 
     cInstance = *cast(GdkEventMotion*)ptr;
 
@@ -33,113 +33,224 @@ class EventMotion
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the event.
+  */
   @property gdk.types.EventType type()
   {
     return cast(gdk.types.EventType)(cast(GdkEventMotion*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event.
+  */
   @property void type(gdk.types.EventType propval)
   {
     (cast(GdkEventMotion*)cPtr).type = cast(GdkEventType)propval;
   }
 
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
   @property gdk.window.Window window()
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)cPtr).window);
   }
 
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
   @property void window(gdk.window.Window propval)
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventMotion*)cPtr).window);
   }
 
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
   @property byte sendEvent()
   {
     return (cast(GdkEventMotion*)cPtr).sendEvent;
   }
 
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
   @property void sendEvent(byte propval)
   {
     (cast(GdkEventMotion*)cPtr).sendEvent = propval;
   }
 
+  /**
+      Get `time` field.
+      Returns: the time of the event in milliseconds.
+  */
   @property uint time()
   {
     return (cast(GdkEventMotion*)cPtr).time;
   }
 
+  /**
+      Set `time` field.
+      Params:
+        propval = the time of the event in milliseconds.
+  */
   @property void time(uint propval)
   {
     (cast(GdkEventMotion*)cPtr).time = propval;
   }
 
+  /**
+      Get `x` field.
+      Returns: the x coordinate of the pointer relative to the window.
+  */
   @property double x()
   {
     return (cast(GdkEventMotion*)cPtr).x;
   }
 
+  /**
+      Set `x` field.
+      Params:
+        propval = the x coordinate of the pointer relative to the window.
+  */
   @property void x(double propval)
   {
     (cast(GdkEventMotion*)cPtr).x = propval;
   }
 
+  /**
+      Get `y` field.
+      Returns: the y coordinate of the pointer relative to the window.
+  */
   @property double y()
   {
     return (cast(GdkEventMotion*)cPtr).y;
   }
 
+  /**
+      Set `y` field.
+      Params:
+        propval = the y coordinate of the pointer relative to the window.
+  */
   @property void y(double propval)
   {
     (cast(GdkEventMotion*)cPtr).y = propval;
   }
 
+  /**
+      Get `state` field.
+      Returns: a bit-mask representing the state of
+        the modifier keys (e.g. Control, Shift and Alt) and the pointer
+        buttons. See #GdkModifierType.
+  */
   @property gdk.types.ModifierType state()
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventMotion*)cPtr).state;
   }
 
+  /**
+      Set `state` field.
+      Params:
+        propval = a bit-mask representing the state of
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
+  */
   @property void state(gdk.types.ModifierType propval)
   {
     (cast(GdkEventMotion*)cPtr).state = cast(GdkModifierType)propval;
   }
 
+  /**
+      Get `isHint` field.
+      Returns: set to 1 if this event is just a hint, see the
+        [gdk.types.EventMask.PointerMotionHintMask] value of #GdkEventMask.
+  */
   @property short isHint()
   {
     return (cast(GdkEventMotion*)cPtr).isHint;
   }
 
+  /**
+      Set `isHint` field.
+      Params:
+        propval = set to 1 if this event is just a hint, see the
+          [gdk.types.EventMask.PointerMotionHintMask] value of #GdkEventMask.
+  */
   @property void isHint(short propval)
   {
     (cast(GdkEventMotion*)cPtr).isHint = propval;
   }
 
+  /**
+      Get `device` field.
+      Returns: the master device that the event originated from. Use
+      [gdk.event.Event.getSourceDevice] to get the slave device.
+  */
   @property gdk.device.Device device()
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)cPtr).device);
   }
 
+  /**
+      Set `device` field.
+      Params:
+        propval = the master device that the event originated from. Use
+        [gdk.event.Event.getSourceDevice] to get the slave device.
+  */
   @property void device(gdk.device.Device propval)
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventMotion*)cPtr).device);
   }
 
+  /**
+      Get `xRoot` field.
+      Returns: the x coordinate of the pointer relative to the root of the
+        screen.
+  */
   @property double xRoot()
   {
     return (cast(GdkEventMotion*)cPtr).xRoot;
   }
 
+  /**
+      Set `xRoot` field.
+      Params:
+        propval = the x coordinate of the pointer relative to the root of the
+          screen.
+  */
   @property void xRoot(double propval)
   {
     (cast(GdkEventMotion*)cPtr).xRoot = propval;
   }
 
+  /**
+      Get `yRoot` field.
+      Returns: the y coordinate of the pointer relative to the root of the
+        screen.
+  */
   @property double yRoot()
   {
     return (cast(GdkEventMotion*)cPtr).yRoot;
   }
 
+  /**
+      Set `yRoot` field.
+      Params:
+        propval = the y coordinate of the pointer relative to the root of the
+          screen.
+  */
   @property void yRoot(double propval)
   {
     (cast(GdkEventMotion*)cPtr).yRoot = propval;

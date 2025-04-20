@@ -36,6 +36,7 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NoOpObjectFactory self()
   {
     return this;

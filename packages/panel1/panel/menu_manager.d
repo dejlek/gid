@@ -30,7 +30,7 @@ import panel.types;
     that menu may contain no children until something has extended it later
     on during the application process.
 */
-class MenuManager : gobject.object.ObjectG
+class MenuManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -52,6 +52,7 @@ class MenuManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuManager self()
   {
     return this;
@@ -73,7 +74,7 @@ class MenuManager : gobject.object.ObjectG
     GError *_err;
     _retval = panel_menu_manager_add_filename(cast(PanelMenuManager*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -85,7 +86,7 @@ class MenuManager : gobject.object.ObjectG
     GError *_err;
     _retval = panel_menu_manager_add_resource(cast(PanelMenuManager*)cPtr, _resource, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -106,7 +107,7 @@ class MenuManager : gobject.object.ObjectG
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = panel_menu_manager_find_item_by_id(cast(PanelMenuManager*)cPtr, _id, cast(uint*)&position);
-    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +117,7 @@ class MenuManager : gobject.object.ObjectG
     GMenu* _cretval;
     const(char)* _menuId = menuId.toCString(No.Alloc);
     _cretval = panel_menu_manager_get_menu_by_id(cast(PanelMenuManager*)cPtr, _menuId);
-    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 

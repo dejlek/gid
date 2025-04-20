@@ -33,6 +33,7 @@ class BinaryArray : arrow.array.Array
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BinaryArray self()
   {
     return this;
@@ -51,7 +52,7 @@ class BinaryArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_binary_array_get_buffer(cast(GArrowBinaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -60,7 +61,7 @@ class BinaryArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_binary_array_get_data_buffer(cast(GArrowBinaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +70,7 @@ class BinaryArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_binary_array_get_offsets_buffer(cast(GArrowBinaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 

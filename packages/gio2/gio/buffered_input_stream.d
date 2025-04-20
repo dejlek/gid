@@ -51,9 +51,29 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferedInputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `bufferSize` property.
+      Returns: The size of the backend buffer, in bytes.
+  */
+  @property uint bufferSize()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("buffer-size");
+  }
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+  */
+  @property void bufferSize(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("buffer-size", propval);
   }
 
   mixin SeekableT!();
@@ -86,7 +106,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,7 +141,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
         cancellable = optional #GCancellable object, null to ignore
       Returns: the number of bytes read into stream's buffer, up to count,
             or -1 on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t fill(ptrdiff_t count, gio.cancellable.Cancellable cancellable = null)
   {
@@ -129,7 +149,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     GError *_err;
     _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -154,7 +174,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -168,15 +188,15 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Params:
         result = a #GAsyncResult
       Returns: a #gssize of the read stream, or `-1` on an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t fillFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -262,7 +282,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Params:
         cancellable = optional #GCancellable object, null to ignore
       Returns: the byte read from the stream, or -1 on end of stream or error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int readByte(gio.cancellable.Cancellable cancellable = null)
   {
@@ -270,7 +290,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     GError *_err;
     _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

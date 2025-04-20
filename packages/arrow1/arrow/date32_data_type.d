@@ -30,6 +30,7 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Date32DataType self()
   {
     return this;

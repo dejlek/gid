@@ -87,7 +87,7 @@ import gtk.types;
       }
     ```
 */
-class IconTheme : gobject.object.ObjectG
+class IconTheme : gobject.object.ObjectWrap
 {
 
   /** */
@@ -109,6 +109,7 @@ class IconTheme : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconTheme self()
   {
     return this;
@@ -171,7 +172,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +197,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_get_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -264,7 +265,7 @@ class IconTheme : gobject.object.ObjectG
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
     _cretval = gtk_icon_theme_choose_icon(cast(GtkIconTheme*)cPtr, _iconNames, size, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -298,7 +299,7 @@ class IconTheme : gobject.object.ObjectG
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
     _cretval = gtk_icon_theme_choose_icon_for_scale(cast(GtkIconTheme*)cPtr, _iconNames, size, scale, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -448,9 +449,9 @@ class IconTheme : gobject.object.ObjectG
         flags = flags modifying the behavior of the icon lookup
       Returns: the rendered icon; this may be
             a newly created icon or a new reference to an internal icon, so
-            you must not modify the icon. Use [gobject.object.ObjectG.unref] to release
+            you must not modify the icon. Use [gobject.object.ObjectWrap.unref] to release
             your reference to the icon. null if the icon isn’t found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIcon(string iconName, int size, gtk.types.IconLookupFlags flags)
   {
@@ -459,8 +460,8 @@ class IconTheme : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_theme_load_icon(cast(GtkIconTheme*)cPtr, _iconName, size, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -487,9 +488,9 @@ class IconTheme : gobject.object.ObjectG
         flags = flags modifying the behavior of the icon lookup
       Returns: the rendered icon; this may be
             a newly created icon or a new reference to an internal icon, so
-            you must not modify the icon. Use [gobject.object.ObjectG.unref] to release
+            you must not modify the icon. Use [gobject.object.ObjectWrap.unref] to release
             your reference to the icon. null if the icon isn’t found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIconForScale(string iconName, int size, int scale, gtk.types.IconLookupFlags flags)
   {
@@ -498,8 +499,8 @@ class IconTheme : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_theme_load_icon_for_scale(cast(GtkIconTheme*)cPtr, _iconName, size, scale, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -526,7 +527,7 @@ class IconTheme : gobject.object.ObjectG
             you must not modify the icon. Use [cairo.surface.Surface.destroy] to
             release your reference to the icon. null if the icon isn’t
             found.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   cairo.surface.Surface loadSurface(string iconName, int size, int scale, gdk.window.Window forWindow, gtk.types.IconLookupFlags flags)
   {
@@ -535,7 +536,7 @@ class IconTheme : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_icon_theme_load_surface(cast(GtkIconTheme*)cPtr, _iconName, size, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -557,13 +558,13 @@ class IconTheme : gobject.object.ObjectG
         flags = flags modifying the behavior of the icon lookup
       Returns: a #GtkIconInfo containing
             information about the icon, or null if the icon wasn’t
-            found. Unref with [gobject.object.ObjectG.unref]
+            found. Unref with [gobject.object.ObjectWrap.unref]
   */
   gtk.icon_info.IconInfo lookupByGicon(gio.icon.Icon icon, int size, gtk.types.IconLookupFlags flags)
   {
     GtkIconInfo* _cretval;
-    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size, flags);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -579,13 +580,13 @@ class IconTheme : gobject.object.ObjectG
         flags = flags modifying the behavior of the icon lookup
       Returns: a #GtkIconInfo containing
             information about the icon, or null if the icon wasn’t
-            found. Unref with [gobject.object.ObjectG.unref]
+            found. Unref with [gobject.object.ObjectWrap.unref]
   */
   gtk.icon_info.IconInfo lookupByGiconForScale(gio.icon.Icon icon, int size, int scale, gtk.types.IconLookupFlags flags)
   {
     GtkIconInfo* _cretval;
-    _cretval = gtk_icon_theme_lookup_by_gicon_for_scale(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size, scale, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    _cretval = gtk_icon_theme_lookup_by_gicon_for_scale(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size, scale, flags);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -615,7 +616,7 @@ class IconTheme : gobject.object.ObjectG
     GtkIconInfo* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)cPtr, _iconName, size, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -640,7 +641,7 @@ class IconTheme : gobject.object.ObjectG
     GtkIconInfo* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_icon_theme_lookup_icon_for_scale(cast(GtkIconTheme*)cPtr, _iconName, size, scale, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 

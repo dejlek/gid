@@ -14,7 +14,7 @@ import gtk.widget;
 /**
     An auxiliary class used by `class@TabView`.
 */
-class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
+class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
@@ -36,9 +36,438 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabPage self()
   {
     return this;
+  }
+
+  /**
+      Get `icon` property.
+      Returns: The icon of the page.
+      
+      `class@TabBar` and `class@TabOverview` display the icon next to the title,
+      unless `property@TabPage:loading` is set to `TRUE`.
+      
+      [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
+      [propertyTabPage:indicator-icon] is set.
+  */
+  @property gio.icon.Icon icon()
+  {
+    return getIcon();
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The icon of the page.
+        
+        `class@TabBar` and `class@TabOverview` display the icon next to the title,
+        unless `property@TabPage:loading` is set to `TRUE`.
+        
+        [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
+        [propertyTabPage:indicator-icon] is set.
+  */
+  @property void icon(gio.icon.Icon propval)
+  {
+    return setIcon(propval);
+  }
+
+  /**
+      Get `indicatorActivatable` property.
+      Returns: Whether the indicator icon is activatable.
+      
+      If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+      when the indicator icon is clicked.
+      
+      If `property@TabPage:indicator-icon` is not set, does nothing.
+  */
+  @property bool indicatorActivatable()
+  {
+    return getIndicatorActivatable();
+  }
+
+  /**
+      Set `indicatorActivatable` property.
+      Params:
+        propval = Whether the indicator icon is activatable.
+        
+        If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+        when the indicator icon is clicked.
+        
+        If `property@TabPage:indicator-icon` is not set, does nothing.
+  */
+  @property void indicatorActivatable(bool propval)
+  {
+    return setIndicatorActivatable(propval);
+  }
+
+  /**
+      Get `indicatorIcon` property.
+      Returns: An indicator icon for the page.
+      
+      A common use case is an audio or camera indicator in a web browser.
+      
+      `class@TabBar` will show it at the beginning of the tab, alongside icon
+      representing `property@TabPage:icon` or loading spinner.
+      
+      If the page is pinned, the indicator will be shown instead of icon or
+      spinner.
+      
+      `class@TabOverview` will show it at the at the top part of the thumbnail.
+      
+      `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+      indicator icon.
+      
+      If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+      indicator icon can act as a button.
+  */
+  @property gio.icon.Icon indicatorIcon()
+  {
+    return getIndicatorIcon();
+  }
+
+  /**
+      Set `indicatorIcon` property.
+      Params:
+        propval = An indicator icon for the page.
+        
+        A common use case is an audio or camera indicator in a web browser.
+        
+        `class@TabBar` will show it at the beginning of the tab, alongside icon
+        representing `property@TabPage:icon` or loading spinner.
+        
+        If the page is pinned, the indicator will be shown instead of icon or
+        spinner.
+        
+        `class@TabOverview` will show it at the at the top part of the thumbnail.
+        
+        `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+        indicator icon.
+        
+        If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+        indicator icon can act as a button.
+  */
+  @property void indicatorIcon(gio.icon.Icon propval)
+  {
+    return setIndicatorIcon(propval);
+  }
+
+  /**
+      Get `indicatorTooltip` property.
+      Returns: The tooltip of the indicator icon.
+      
+      The tooltip can be marked up with the Pango text markup language.
+      
+      See `property@TabPage:indicator-icon`.
+  */
+  @property string indicatorTooltip()
+  {
+    return getIndicatorTooltip();
+  }
+
+  /**
+      Set `indicatorTooltip` property.
+      Params:
+        propval = The tooltip of the indicator icon.
+        
+        The tooltip can be marked up with the Pango text markup language.
+        
+        See `property@TabPage:indicator-icon`.
+  */
+  @property void indicatorTooltip(string propval)
+  {
+    return setIndicatorTooltip(propval);
+  }
+
+  /**
+      Get `keyword` property.
+      Returns: The search keyboard of the page.
+      
+      `class@TabOverview` can search pages by their keywords in addition to their
+      titles and tooltips.
+      
+      Keywords allow to include e.g. page URLs into tab search in a web browser.
+  */
+  @property string keyword()
+  {
+    return getKeyword();
+  }
+
+  /**
+      Set `keyword` property.
+      Params:
+        propval = The search keyboard of the page.
+        
+        `class@TabOverview` can search pages by their keywords in addition to their
+        titles and tooltips.
+        
+        Keywords allow to include e.g. page URLs into tab search in a web browser.
+  */
+  @property void keyword(string propval)
+  {
+    return setKeyword(propval);
+  }
+
+  /**
+      Get `liveThumbnail` property.
+      Returns: Whether to enable live thumbnail for this page.
+      
+      When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+      immediately when the page is redrawn or resized.
+      
+      If it's set to `FALSE`, the thumbnail will only be live when the page is
+      selected, and otherwise it will be static and will only update when
+      [adw.tab_page.TabPage.invalidateThumbnail] or
+      [adw.tab_view.TabView.invalidateThumbnails] is called.
+  */
+  @property bool liveThumbnail()
+  {
+    return getLiveThumbnail();
+  }
+
+  /**
+      Set `liveThumbnail` property.
+      Params:
+        propval = Whether to enable live thumbnail for this page.
+        
+        When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+        immediately when the page is redrawn or resized.
+        
+        If it's set to `FALSE`, the thumbnail will only be live when the page is
+        selected, and otherwise it will be static and will only update when
+        [adw.tab_page.TabPage.invalidateThumbnail] or
+        [adw.tab_view.TabView.invalidateThumbnails] is called.
+  */
+  @property void liveThumbnail(bool propval)
+  {
+    return setLiveThumbnail(propval);
+  }
+
+  /**
+      Get `loading` property.
+      Returns: Whether the page is loading.
+      
+      If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+      spinner in place of icon.
+      
+      If the page is pinned and `property@TabPage:indicator-icon` is set,
+      loading status will not be visible with [adw.tab_bar.TabBar].
+  */
+  @property bool loading()
+  {
+    return getLoading();
+  }
+
+  /**
+      Set `loading` property.
+      Params:
+        propval = Whether the page is loading.
+        
+        If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+        spinner in place of icon.
+        
+        If the page is pinned and `property@TabPage:indicator-icon` is set,
+        loading status will not be visible with [adw.tab_bar.TabBar].
+  */
+  @property void loading(bool propval)
+  {
+    return setLoading(propval);
+  }
+
+  /**
+      Get `needsAttention` property.
+      Returns: Whether the page needs attention.
+      
+      `class@TabBar` will display a line under the tab representing the page if
+      set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
+      bar will be highlighted.
+      
+      `class@TabOverview` will display a dot in the corner of the thumbnail if set
+      to `TRUE`.
+      
+      `class@TabButton` will display a dot if any of the pages that aren't
+      selected have this property set to `TRUE`.
+  */
+  @property bool needsAttention()
+  {
+    return getNeedsAttention();
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page needs attention.
+        
+        `class@TabBar` will display a line under the tab representing the page if
+        set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
+        bar will be highlighted.
+        
+        `class@TabOverview` will display a dot in the corner of the thumbnail if set
+        to `TRUE`.
+        
+        `class@TabButton` will display a dot if any of the pages that aren't
+        selected have this property set to `TRUE`.
+  */
+  @property void needsAttention(bool propval)
+  {
+    return setNeedsAttention(propval);
+  }
+
+  /**
+      Get `pinned` property.
+      Returns: Whether the page is pinned.
+      
+      See [adw.tab_view.TabView.setPagePinned].
+  */
+  @property bool pinned()
+  {
+    return getPinned();
+  }
+
+  /**
+      Get `selected` property.
+      Returns: Whether the page is selected.
+  */
+  @property bool selected()
+  {
+    return getSelected();
+  }
+
+  /**
+      Get `thumbnailXalign` property.
+      Returns: The horizontal alignment of the page thumbnail.
+      
+      If the page is so wide that `class@TabOverview` can't display it completely
+      and has to crop it, horizontal alignment will determine which part of the
+      page will be visible.
+      
+      For example, 0.5 means the center of the page will be visible, 0 means the
+      start edge will be visible and 1 means the end edge will be visible.
+      
+      The default horizontal alignment is 0.
+  */
+  @property float thumbnailXalign()
+  {
+    return getThumbnailXalign();
+  }
+
+  /**
+      Set `thumbnailXalign` property.
+      Params:
+        propval = The horizontal alignment of the page thumbnail.
+        
+        If the page is so wide that `class@TabOverview` can't display it completely
+        and has to crop it, horizontal alignment will determine which part of the
+        page will be visible.
+        
+        For example, 0.5 means the center of the page will be visible, 0 means the
+        start edge will be visible and 1 means the end edge will be visible.
+        
+        The default horizontal alignment is 0.
+  */
+  @property void thumbnailXalign(float propval)
+  {
+    return setThumbnailXalign(propval);
+  }
+
+  /**
+      Get `thumbnailYalign` property.
+      Returns: The vertical alignment of the page thumbnail.
+      
+      If the page is so tall that `class@TabOverview` can't display it completely
+      and has to crop it, vertical alignment will determine which part of the
+      page will be visible.
+      
+      For example, 0.5 means the center of the page will be visible, 0 means the
+      top edge will be visible and 1 means the bottom edge will be visible.
+      
+      The default vertical alignment is 0.
+  */
+  @property float thumbnailYalign()
+  {
+    return getThumbnailYalign();
+  }
+
+  /**
+      Set `thumbnailYalign` property.
+      Params:
+        propval = The vertical alignment of the page thumbnail.
+        
+        If the page is so tall that `class@TabOverview` can't display it completely
+        and has to crop it, vertical alignment will determine which part of the
+        page will be visible.
+        
+        For example, 0.5 means the center of the page will be visible, 0 means the
+        top edge will be visible and 1 means the bottom edge will be visible.
+        
+        The default vertical alignment is 0.
+  */
+  @property void thumbnailYalign(float propval)
+  {
+    return setThumbnailYalign(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the page.
+      
+      `class@TabBar` will display it in the center of the tab unless it's pinned,
+      and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+      
+      `class@TabOverview` will display it below the thumbnail unless it's pinned,
+      or inside the card otherwise, and will use it as a tooltip unless
+      `property@TabPage:tooltip` is set.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the page.
+        
+        `class@TabBar` will display it in the center of the tab unless it's pinned,
+        and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+        
+        `class@TabOverview` will display it below the thumbnail unless it's pinned,
+        or inside the card otherwise, and will use it as a tooltip unless
+        `property@TabPage:tooltip` is set.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `tooltip` property.
+      Returns: The tooltip of the page.
+      
+      The tooltip can be marked up with the Pango text markup language.
+      
+      If not set, `class@TabBar` and `class@TabOverview` will use
+      `property@TabPage:title` as a tooltip instead.
+  */
+  @property string tooltip()
+  {
+    return getTooltip();
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = The tooltip of the page.
+        
+        The tooltip can be marked up with the Pango text markup language.
+        
+        If not set, `class@TabBar` and `class@TabOverview` will use
+        `property@TabPage:title` as a tooltip instead.
+  */
+  @property void tooltip(string propval)
+  {
+    return setTooltip(propval);
   }
 
   mixin AccessibleT!();
@@ -51,7 +480,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_page_get_child(cast(AdwTabPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -63,7 +492,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     GIcon* _cretval;
     _cretval = adw_tab_page_get_icon(cast(AdwTabPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +515,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     GIcon* _cretval;
     _cretval = adw_tab_page_get_indicator_icon(cast(AdwTabPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +586,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_page_get_parent(cast(AdwTabPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,7 +689,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    adw_tab_page_set_icon(cast(AdwTabPage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    adw_tab_page_set_icon(cast(AdwTabPage*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,7 +732,7 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
   */
   void setIndicatorIcon(gio.icon.Icon indicatorIcon = null)
   {
-    adw_tab_page_set_indicator_icon(cast(AdwTabPage*)cPtr, indicatorIcon ? cast(GIcon*)(cast(ObjectG)indicatorIcon).cPtr(No.Dup) : null);
+    adw_tab_page_set_indicator_icon(cast(AdwTabPage*)cPtr, indicatorIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)indicatorIcon).cPtr(No.Dup) : null);
   }
 
   /**

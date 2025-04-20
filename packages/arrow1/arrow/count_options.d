@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class CountOptions : arrow.function_options.FunctionOptions
@@ -30,9 +31,22 @@ class CountOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CountOptions self()
   {
     return this;
+  }
+
+  /** */
+  @property arrow.types.CountMode mode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.CountMode)("mode");
+  }
+
+  /** */
+  @property void mode(arrow.types.CountMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.types.CountMode)("mode", propval);
   }
 
   /** */

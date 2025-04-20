@@ -9,7 +9,7 @@ import gobject.value;
 
 /**
     The GParameter struct is an auxiliary structure used
-    to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
+    to hand parameter name/value pairs to [gobject.object.ObjectWrap.newv].
 
     Deprecated: This type is not introspectable.
 */
@@ -21,7 +21,7 @@ class Parameter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GObject.Parameter");
+      throw new GidConstructException("Null instance pointer for gobject.parameter.Parameter");
 
     cInstance = *cast(GParameter*)ptr;
 
@@ -35,17 +35,30 @@ class Parameter
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `name` field.
+      Returns: the parameter name
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GParameter*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = the parameter name
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GParameter*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GParameter*)cPtr).name);
   }
 
+  /**
+      Get `value` field.
+      Returns: the parameter value
+  */
   @property gobject.value.Value value()
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(GParameter*)cPtr).value);

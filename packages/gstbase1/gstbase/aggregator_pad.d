@@ -3,6 +3,7 @@ module gstbase.aggregator_pad;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gst.buffer;
 import gst.pad;
 import gstbase.c.functions;
@@ -36,9 +37,29 @@ class AggregatorPad : gst.pad.Pad
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AggregatorPad self()
   {
     return this;
+  }
+
+  /**
+      Get `emitSignals` property.
+      Returns: Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
+  */
+  @property bool emitSignals()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("emit-signals");
+  }
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
+  */
+  @property void emitSignals(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("emit-signals", propval);
   }
 
   /**

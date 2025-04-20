@@ -32,6 +32,7 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListBoxRowAccessible self()
   {
     return this;

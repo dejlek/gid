@@ -60,10 +60,19 @@ import gobject.value;
 class Closure : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `closure.Closure` boxed type.
+      Params:
+        inMarshal = Indicates whether the closure is currently being invoked with
+            [gobject.closure.Closure.invoke]
+        isInvalid = Indicates whether the closure has been invalidated by
+            [gobject.closure.Closure.invalidate]
+  */
+  this(uint inMarshal = uint.init, uint isInvalid = uint.init)
   {
     super(gMalloc(GClosure.sizeof), Yes.Take);
+    this.inMarshal = inMarshal;
+    this.isInvalid = isInvalid;
   }
 
   /** */
@@ -91,33 +100,58 @@ class Closure : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Closure self()
   {
     return this;
   }
 
+  /**
+      Get `inMarshal` field.
+      Returns: Indicates whether the closure is currently being invoked with
+        [gobject.closure.Closure.invoke]
+  */
   @property uint inMarshal()
   {
     return (cast(GClosure*)cPtr).inMarshal;
   }
 
+  /**
+      Set `inMarshal` field.
+      Params:
+        propval = Indicates whether the closure is currently being invoked with
+          [gobject.closure.Closure.invoke]
+  */
   @property void inMarshal(uint propval)
   {
     (cast(GClosure*)cPtr).inMarshal = propval;
   }
 
+  /**
+      Get `isInvalid` field.
+      Returns: Indicates whether the closure has been invalidated by
+        [gobject.closure.Closure.invalidate]
+  */
   @property uint isInvalid()
   {
     return (cast(GClosure*)cPtr).isInvalid;
   }
 
+  /**
+      Set `isInvalid` field.
+      Params:
+        propval = Indicates whether the closure has been invalidated by
+          [gobject.closure.Closure.invalidate]
+  */
   @property void isInvalid(uint propval)
   {
     (cast(GClosure*)cPtr).isInvalid = propval;
   }
 
+  /** Function alias for field `marshal` */
   alias MarshalFuncType = extern(C) void function(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData);
 
+  /** */
   @property MarshalFuncType marshal()
   {
     return (cast(GClosure*)cPtr).marshal;
@@ -125,7 +159,7 @@ class Closure : gobject.boxed.Boxed
 
   /**
       A variant of [gobject.closure.Closure.newSimple] which stores object in the
-      data field of the closure and calls [gobject.object.ObjectG.watchClosure] on
+      data field of the closure and calls [gobject.object.ObjectWrap.watchClosure] on
       object and the created closure. This function is mainly useful
       when implementing new types of closures.
   
@@ -136,7 +170,7 @@ class Closure : gobject.boxed.Boxed
            allocated #GClosure
       Returns: a newly allocated #GClosure
   */
-  static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectG object)
+  static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectWrap object)
   {
     GClosure* _cretval;
     _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);

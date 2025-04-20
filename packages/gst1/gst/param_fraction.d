@@ -18,7 +18,7 @@ class ParamFraction : gobject.param_spec.ParamSpec
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.ParamFraction");
+      throw new GidConstructException("Null instance pointer for gst.param_fraction.ParamFraction");
 
     super(cast(GParamSpec*)ptr, take);
   }

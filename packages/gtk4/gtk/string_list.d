@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -40,7 +41,7 @@ import gtk.types;
     </object>
     ```
 */
-class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildable.Buildable
+class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
   /** */
@@ -62,9 +63,28 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringList self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();

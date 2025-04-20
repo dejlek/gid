@@ -77,6 +77,7 @@ class PadController : gtk.event_controller.EventController
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PadController self()
   {
     return this;
@@ -102,7 +103,7 @@ class PadController : gtk.event_controller.EventController
   this(gtk.window.Window window, gio.action_group.ActionGroup group, gdk.device.Device pad = null)
   {
     GtkPadController* _cretval;
-    _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
+    _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 

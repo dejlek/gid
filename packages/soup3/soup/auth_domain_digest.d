@@ -37,9 +37,48 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override AuthDomainDigest self()
   {
     return this;
+  }
+
+  /**
+      Get `authCallback` property.
+      Returns: The `callback@AuthDomainDigestAuthCallback`.
+  */
+  @property soup.types.AuthDomainDigestAuthCallback authCallback()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback");
+  }
+
+  /**
+      Set `authCallback` property.
+      Params:
+        propval = The `callback@AuthDomainDigestAuthCallback`.
+  */
+  @property void authCallback(soup.types.AuthDomainDigestAuthCallback propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback", propval);
+  }
+
+  /**
+      Get `authData` property.
+      Returns: The data to pass to the `callback@AuthDomainDigestAuthCallback`.
+  */
+  @property void* authData()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("auth-data");
+  }
+
+  /**
+      Set `authData` property.
+      Params:
+        propval = The data to pass to the `callback@AuthDomainDigestAuthCallback`.
+  */
+  @property void authData(void* propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(void*)("auth-data", propval);
   }
 
   /**
@@ -100,7 +139,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;

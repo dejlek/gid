@@ -13,7 +13,7 @@ import pango.types;
     A [pango.font_face.FontFace] is used to represent a group of fonts with
     the same family, slant, weight, and width, but varying sizes.
 */
-class FontFace : gobject.object.ObjectG
+class FontFace : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class FontFace : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontFace self()
   {
     return this;
@@ -83,7 +84,7 @@ class FontFace : gobject.object.ObjectG
   {
     PangoFontFamily* _cretval;
     _cretval = pango_font_face_get_family(cast(PangoFontFace*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 

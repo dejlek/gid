@@ -13,7 +13,7 @@ import gobject.object;
     looking in the file system for clues. Can return a list of possible
     completion strings for widget implementations.
 */
-class FilenameCompleter : gobject.object.ObjectG
+class FilenameCompleter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,6 +35,7 @@ class FilenameCompleter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilenameCompleter self()
   {
     return this;

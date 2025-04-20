@@ -31,6 +31,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override StringArrayBuilder self()
   {
     return this;
@@ -54,7 +55,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     GError *_err;
     _retval = garrow_string_array_builder_append(cast(GArrowStringArrayBuilder*)cPtr, _value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -66,7 +67,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     GError *_err;
     _retval = garrow_string_array_builder_append_string(cast(GArrowStringArrayBuilder*)cPtr, _value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -78,7 +79,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     GError *_err;
     _retval = garrow_string_array_builder_append_string_len(cast(GArrowStringArrayBuilder*)cPtr, _value, length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -93,7 +94,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendStrings(string[] values, bool[] isValids = null)
   {
@@ -115,7 +116,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     GError *_err;
     _retval = garrow_string_array_builder_append_strings(cast(GArrowStringArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

@@ -30,6 +30,7 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FloatingPointDataType self()
   {
     return this;

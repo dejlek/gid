@@ -3,6 +3,7 @@ module gtk.cell_renderer_toggle;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -41,15 +42,64 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRendererToggle self()
   {
     return this;
   }
 
+  /** */
+  @property bool activatable()
+  {
+    return getActivatable();
+  }
+
+  /** */
+  @property void activatable(bool propval)
+  {
+    return setActivatable(propval);
+  }
+
+  /** */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /** */
+  @property bool inconsistent()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("inconsistent");
+  }
+
+  /** */
+  @property void inconsistent(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("inconsistent", propval);
+  }
+
+  /** */
+  @property bool radio()
+  {
+    return getRadio();
+  }
+
+  /** */
+  @property void radio(bool propval)
+  {
+    return setRadio(propval);
+  }
+
   /**
       Creates a new [gtk.cell_renderer_toggle.CellRendererToggle]. Adjust rendering
       parameters using object properties. Object properties can be set
-      globally (with [gobject.object.ObjectG.set]). Also, with [gtk.tree_view_column.TreeViewColumn], you
+      globally (with [gobject.object.ObjectWrap.set]). Also, with [gtk.tree_view_column.TreeViewColumn], you
       can bind a property to a value in a [gtk.tree_model.TreeModel]. For example, you
       can bind the “active” property on the cell renderer to a boolean value
       in the model, thus causing the check button to reflect the state of

@@ -21,7 +21,7 @@ import gtk.types;
     etc. Most importantly, a [gtk.printer.Printer] object can be used to create
     a [gtk.print_job.PrintJob] object, which lets you print to the printer.
 */
-class Printer : gobject.object.ObjectG
+class Printer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,9 +43,67 @@ class Printer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Printer self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptingJobs` property.
+      Returns: true if the printer is accepting jobs.
+  */
+  @property bool acceptingJobs()
+  {
+    return isAcceptingJobs();
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: Icon name to use for the printer.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Get `jobCount` property.
+      Returns: Number of jobs queued in the printer.
+  */
+  @property int jobCount()
+  {
+    return getJobCount();
+  }
+
+  /**
+      Get `location` property.
+      Returns: Information about the location of the printer.
+  */
+  @property string location()
+  {
+    return getLocation();
+  }
+
+  /**
+      Get `paused` property.
+      Returns: true if this printer is paused.
+      
+      A paused printer still accepts jobs, but it does
+      not print them.
+  */
+  @property bool paused()
+  {
+    return isPaused();
+  }
+
+  /**
+      Get `stateMessage` property.
+      Returns: String giving the current status of the printer.
+  */
+  @property string stateMessage()
+  {
+    return getStateMessage();
   }
 
   /**
@@ -143,7 +201,7 @@ class Printer : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_printer_get_default_page_size(cast(GtkPrinter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 

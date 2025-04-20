@@ -147,7 +147,7 @@ gdk.drawing_context.DrawingContext cairoGetDrawingContext(cairo.context.Context 
 {
   GdkDrawingContext* _cretval;
   _cretval = gdk_cairo_get_drawing_context(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
   return _retval;
 }
 
@@ -628,7 +628,7 @@ gdk.window.Window getDefaultRootWindow()
 {
   GdkWindow* _cretval;
   _cretval = gdk_get_default_root_window();
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
   return _retval;
 }
 
@@ -934,7 +934,7 @@ gdk.window.Window offscreenWindowGetEmbedder(gdk.window.Window window)
 {
   GdkWindow* _cretval;
   _cretval = gdk_offscreen_window_get_embedder(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
   return _retval;
 }
 
@@ -993,7 +993,7 @@ pango.context.Context pangoContextGet()
 {
   PangoContext* _cretval;
   _cretval = gdk_pango_context_get();
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1020,7 +1020,7 @@ pango.context.Context pangoContextGetForDisplay(gdk.display.Display display)
 {
   PangoContext* _cretval;
   _cretval = gdk_pango_context_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1047,7 +1047,7 @@ pango.context.Context pangoContextGetForScreen(gdk.screen.Screen screen)
 {
   PangoContext* _cretval;
   _cretval = gdk_pango_context_get_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1073,7 +1073,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1123,7 +1123,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromWindow(gdk.window.Window window, int srcX, 
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_window(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1377,7 +1377,7 @@ gdk.window.Window selectionOwnerGet(gdk.atom.Atom selection)
 {
   GdkWindow* _cretval;
   _cretval = gdk_selection_owner_get(selection ? cast(GdkAtom)selection.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1400,7 +1400,7 @@ gdk.window.Window selectionOwnerGetForDisplay(gdk.display.Display display, gdk.a
 {
   GdkWindow* _cretval;
   _cretval = gdk_selection_owner_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
   return _retval;
 }
 

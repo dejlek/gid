@@ -39,9 +39,137 @@ class Buffer : gtk.text_buffer.TextBuffer
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Buffer self()
   {
     return this;
+  }
+
+  /**
+      Get `highlightMatchingBrackets` property.
+      Returns: Whether to highlight matching brackets in the buffer.
+  */
+  @property bool highlightMatchingBrackets()
+  {
+    return getHighlightMatchingBrackets();
+  }
+
+  /**
+      Set `highlightMatchingBrackets` property.
+      Params:
+        propval = Whether to highlight matching brackets in the buffer.
+  */
+  @property void highlightMatchingBrackets(bool propval)
+  {
+    return setHighlightMatchingBrackets(propval);
+  }
+
+  /**
+      Get `highlightSyntax` property.
+      Returns: Whether to highlight syntax in the buffer.
+  */
+  @property bool highlightSyntax()
+  {
+    return getHighlightSyntax();
+  }
+
+  /**
+      Set `highlightSyntax` property.
+      Params:
+        propval = Whether to highlight syntax in the buffer.
+  */
+  @property void highlightSyntax(bool propval)
+  {
+    return setHighlightSyntax(propval);
+  }
+
+  /**
+      Get `implicitTrailingNewline` property.
+      Returns: Whether the buffer has an implicit trailing newline. See
+      [gtksource.buffer.Buffer.setImplicitTrailingNewline].
+  */
+  @property bool implicitTrailingNewline()
+  {
+    return getImplicitTrailingNewline();
+  }
+
+  /**
+      Set `implicitTrailingNewline` property.
+      Params:
+        propval = Whether the buffer has an implicit trailing newline. See
+        [gtksource.buffer.Buffer.setImplicitTrailingNewline].
+  */
+  @property void implicitTrailingNewline(bool propval)
+  {
+    return setImplicitTrailingNewline(propval);
+  }
+
+  /** */
+  @property gtksource.language.Language language()
+  {
+    return getLanguage();
+  }
+
+  /** */
+  @property void language(gtksource.language.Language propval)
+  {
+    return setLanguage(propval);
+  }
+
+  /**
+      Get `maxUndoLevels` property.
+      Returns: Number of undo levels for the buffer. -1 means no limit. This property
+      will only affect the default undo manager.
+  */
+  @property int maxUndoLevels()
+  {
+    return getMaxUndoLevels();
+  }
+
+  /**
+      Set `maxUndoLevels` property.
+      Params:
+        propval = Number of undo levels for the buffer. -1 means no limit. This property
+        will only affect the default undo manager.
+  */
+  @property void maxUndoLevels(int propval)
+  {
+    return setMaxUndoLevels(propval);
+  }
+
+  /**
+      Get `styleScheme` property.
+      Returns: Style scheme. It contains styles for syntax highlighting, optionally
+      foreground, background, cursor color, current line color, and matching
+      brackets style.
+  */
+  @property gtksource.style_scheme.StyleScheme styleScheme()
+  {
+    return getStyleScheme();
+  }
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = Style scheme. It contains styles for syntax highlighting, optionally
+        foreground, background, cursor color, current line color, and matching
+        brackets style.
+  */
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
+  {
+    return setStyleScheme(propval);
+  }
+
+  /** */
+  @property gtksource.undo_manager.UndoManager undoManager()
+  {
+    return getUndoManager();
+  }
+
+  /** */
+  @property void undoManager(gtksource.undo_manager.UndoManager propval)
+  {
+    return setUndoManager(propval);
   }
 
   /**
@@ -72,7 +200,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_buffer_new_with_language(language ? cast(GtkSourceLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -171,7 +299,7 @@ class Buffer : gtk.text_buffer.TextBuffer
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)cPtr, _name, _category, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,7 +425,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GtkSourceLanguage* _cretval;
     _cretval = gtk_source_buffer_get_language(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -359,7 +487,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_buffer_get_style_scheme(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -374,7 +502,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GtkSourceUndoManager* _cretval;
     _cretval = gtk_source_buffer_get_undo_manager(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.undo_manager.UndoManager)(cast(GtkSourceUndoManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.undo_manager.UndoManager)(cast(GtkSourceUndoManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -604,7 +732,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setUndoManager(gtksource.undo_manager.UndoManager manager = null)
   {
-    gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)cPtr, manager ? cast(GtkSourceUndoManager*)(cast(ObjectG)manager).cPtr(No.Dup) : null);
+    gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)cPtr, manager ? cast(GtkSourceUndoManager*)(cast(gobject.object.ObjectWrap)manager).cPtr(No.Dup) : null);
   }
 
   /**

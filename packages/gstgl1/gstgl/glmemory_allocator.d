@@ -34,6 +34,7 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemoryAllocator self()
   {
     return this;
@@ -44,7 +45,7 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   {
     GstGLMemoryAllocator* _cretval;
     _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 }

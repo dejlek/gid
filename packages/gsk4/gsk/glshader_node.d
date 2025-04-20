@@ -21,7 +21,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.GLShaderNode");
+      throw new GidConstructException("Null instance pointer for gsk.glshader_node.GLShaderNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }
@@ -114,7 +114,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
     return _retval;
   }
 }

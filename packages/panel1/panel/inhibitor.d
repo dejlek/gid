@@ -8,7 +8,7 @@ import panel.c.types;
 import panel.types;
 
 /** */
-class Inhibitor : gobject.object.ObjectG
+class Inhibitor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class Inhibitor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Inhibitor self()
   {
     return this;

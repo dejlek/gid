@@ -6,14 +6,13 @@ import atk.action_mixin;
 import atk.component;
 import atk.component_mixin;
 import atk.object;
-import atk.types;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
 /** */
-class EntryIconAccessible : atk.object.ObjectAtk, atk.action.Action, atk.component.Component
+class EntryIconAccessible : atk.object.ObjectWrap, atk.action.Action, atk.component.Component
 {
 
   /** */
@@ -35,6 +34,7 @@ class EntryIconAccessible : atk.object.ObjectAtk, atk.action.Action, atk.compone
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EntryIconAccessible self()
   {
     return this;
@@ -42,7 +42,7 @@ class EntryIconAccessible : atk.object.ObjectAtk, atk.action.Action, atk.compone
 
   mixin ActionT!();
   mixin ComponentT!();
-  alias getDescription = atk.object.ObjectAtk.getDescription;
-  alias getName = atk.object.ObjectAtk.getName;
-  alias setDescription = atk.object.ObjectAtk.setDescription;
+  alias getDescription = atk.object.ObjectWrap.getDescription;
+  alias getName = atk.object.ObjectWrap.getName;
+  alias setDescription = atk.object.ObjectWrap.setDescription;
 }

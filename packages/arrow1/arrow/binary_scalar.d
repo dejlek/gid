@@ -31,6 +31,7 @@ class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BinaryScalar self()
   {
     return this;

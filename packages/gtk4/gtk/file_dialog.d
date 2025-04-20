@@ -27,7 +27,7 @@ import gtk.window;
     the corresponding finish function, for example
     [gtk.file_dialog.FileDialog.openFinish].
 */
-class FileDialog : gobject.object.ObjectG
+class FileDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,194 @@ class FileDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptLabel` property.
+      Returns: Label for the file chooser's accept button.
+  */
+  @property string acceptLabel()
+  {
+    return getAcceptLabel();
+  }
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = Label for the file chooser's accept button.
+  */
+  @property void acceptLabel(string propval)
+  {
+    return setAcceptLabel(propval);
+  }
+
+  /**
+      Get `defaultFilter` property.
+      Returns: The default filter, that is, the filter that is initially
+      active in the file chooser dialog.
+      
+      If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+      is used as the default filter. If that property contains no filter, the dialog will
+      be unfiltered.
+      
+      If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
+      of the list. If it is not, the dialog may choose to not make it available.
+  */
+  @property gtk.file_filter.FileFilter defaultFilter()
+  {
+    return getDefaultFilter();
+  }
+
+  /**
+      Set `defaultFilter` property.
+      Params:
+        propval = The default filter, that is, the filter that is initially
+        active in the file chooser dialog.
+        
+        If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+        is used as the default filter. If that property contains no filter, the dialog will
+        be unfiltered.
+        
+        If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
+        of the list. If it is not, the dialog may choose to not make it available.
+  */
+  @property void defaultFilter(gtk.file_filter.FileFilter propval)
+  {
+    return setDefaultFilter(propval);
+  }
+
+  /**
+      Get `filters` property.
+      Returns: The list of filters.
+      
+      See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+  */
+  @property gio.list_model.ListModel filters()
+  {
+    return getFilters();
+  }
+
+  /**
+      Set `filters` property.
+      Params:
+        propval = The list of filters.
+        
+        See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+  */
+  @property void filters(gio.list_model.ListModel propval)
+  {
+    return setFilters(propval);
+  }
+
+  /**
+      Get `initialFile` property.
+      Returns: The initial file, that is, the file that is initially selected
+      in the file chooser dialog
+      
+      This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
+      `property@Gtk.FileDialog:initial-name`.
+  */
+  @property gio.file.File initialFile()
+  {
+    return getInitialFile();
+  }
+
+  /**
+      Set `initialFile` property.
+      Params:
+        propval = The initial file, that is, the file that is initially selected
+        in the file chooser dialog
+        
+        This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
+        `property@Gtk.FileDialog:initial-name`.
+  */
+  @property void initialFile(gio.file.File propval)
+  {
+    return setInitialFile(propval);
+  }
+
+  /**
+      Get `initialFolder` property.
+      Returns: The initial folder, that is, the directory that is initially
+      opened in the file chooser dialog
+  */
+  @property gio.file.File initialFolder()
+  {
+    return getInitialFolder();
+  }
+
+  /**
+      Set `initialFolder` property.
+      Params:
+        propval = The initial folder, that is, the directory that is initially
+        opened in the file chooser dialog
+  */
+  @property void initialFolder(gio.file.File propval)
+  {
+    return setInitialFolder(propval);
+  }
+
+  /**
+      Get `initialName` property.
+      Returns: The initial name, that is, the filename that is initially
+      selected in the file chooser dialog.
+  */
+  @property string initialName()
+  {
+    return getInitialName();
+  }
+
+  /**
+      Set `initialName` property.
+      Params:
+        propval = The initial name, that is, the filename that is initially
+        selected in the file chooser dialog.
+  */
+  @property void initialName(string propval)
+  {
+    return setInitialName(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the file chooser dialog is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the file chooser dialog is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: A title that may be shown on the file chooser dialog.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the file chooser dialog.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -83,7 +268,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_dialog_get_default_filter(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +282,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GListModel* _cretval;
     _cretval = gtk_file_dialog_get_filters(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,7 +295,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_file(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +308,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_folder(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +370,7 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -201,16 +386,16 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file.File openFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_open_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_open_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -237,7 +422,7 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -254,16 +439,16 @@ class FileDialog : gobject.object.ObjectG
       Returns: the file that was selected,
           as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
           and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.list_model.ListModel openMultipleFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_open_multiple_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_open_multiple_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -287,7 +472,7 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -303,16 +488,16 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file.File saveFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_save_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_save_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -340,7 +525,7 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -356,16 +541,16 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.file.File selectFolderFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_select_folder_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_select_folder_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -392,7 +577,7 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -409,16 +594,16 @@ class FileDialog : gobject.object.ObjectG
       Returns: the file that was selected,
           as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
           and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.list_model.ListModel selectMultipleFoldersFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_select_multiple_folders_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_select_multiple_folders_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -441,7 +626,7 @@ class FileDialog : gobject.object.ObjectG
       Sets the filter that will be selected by default
       in the file chooser dialog.
       
-      If set to null, the first item in [gtk.file_dialog.FileDialog.Gio.ListModel]
+      If set to null, the first item in [gtk.file_dialog.FileDialog.filters]
       will be used as the default filter. If that list is empty, the dialog
       will be unfiltered.
   
@@ -462,7 +647,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setFilters(gio.list_model.ListModel filters = null)
   {
-    gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(gobject.object.ObjectWrap)filters).cPtr(No.Dup) : null);
   }
 
   /**
@@ -479,7 +664,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setInitialFile(gio.file.File file = null)
   {
-    gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
   }
 
   /**
@@ -491,7 +676,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setInitialFolder(gio.file.File folder = null)
   {
-    gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder).cPtr(No.Dup) : null);
   }
 
   /**

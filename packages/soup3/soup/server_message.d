@@ -31,7 +31,7 @@ import soup.types;
     Response. In libsoup, a #SoupServerMessage combines both the request and the
     response.
 */
-class ServerMessage : gobject.object.ObjectG
+class ServerMessage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -53,9 +53,28 @@ class ServerMessage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ServerMessage self()
   {
     return this;
+  }
+
+  /**
+      Get `tlsPeerCertificate` property.
+      Returns: The peer's #GTlsCertificate associated with the message
+  */
+  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate()
+  {
+    return getTlsPeerCertificate();
+  }
+
+  /**
+      Get `tlsPeerCertificateErrors` property.
+      Returns: The verification errors on #SoupServerMessage:tls-peer-certificate
+  */
+  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors()
+  {
+    return getTlsPeerCertificateErrors();
   }
 
   /**
@@ -81,7 +100,7 @@ class ServerMessage : gobject.object.ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = soup_server_message_get_local_address(cast(SoupServerMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +139,7 @@ class ServerMessage : gobject.object.ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = soup_server_message_get_remote_address(cast(SoupServerMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +222,7 @@ class ServerMessage : gobject.object.ObjectG
   {
     GSocket* _cretval;
     _cretval = soup_server_message_get_socket(cast(SoupServerMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,7 +248,7 @@ class ServerMessage : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_message_get_tls_peer_certificate(cast(SoupServerMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -369,7 +388,7 @@ class ServerMessage : gobject.object.ObjectG
   {
     GIOStream* _cretval;
     _cretval = soup_server_message_steal_connection(cast(SoupServerMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 

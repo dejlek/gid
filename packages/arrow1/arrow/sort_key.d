@@ -9,7 +9,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class SortKey : gobject.object.ObjectG
+class SortKey : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,9 +31,23 @@ class SortKey : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SortKey self()
   {
     return this;
+  }
+
+  /**
+      Get `target` property.
+      Returns: A name or dot path for the sort target.
+      
+          dot_path = '.' name
+                   | '[' digit+ ']'
+                   | dot_path+
+  */
+  @property string target()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("target");
   }
 
   /** */
@@ -44,7 +58,7 @@ class SortKey : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_sort_key_new(_target, order, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

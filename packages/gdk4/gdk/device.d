@@ -20,7 +20,7 @@ import pango.types;
     See the [gdk.seat.Seat] documentation for more information
     about the various kinds of devices, and their relationships.
 */
-class Device : gobject.object.ObjectG
+class Device : gobject.object.ObjectWrap
 {
 
   /** */
@@ -42,9 +42,102 @@ class Device : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Device self()
   {
     return this;
+  }
+
+  /**
+      Get `capsLockState` property.
+      Returns: Whether Caps Lock is on.
+      
+      This is only relevant for keyboard devices.
+  */
+  @property bool capsLockState()
+  {
+    return getCapsLockState();
+  }
+
+  /**
+      Get `direction` property.
+      Returns: The direction of the current layout.
+      
+      This is only relevant for keyboard devices.
+  */
+  @property pango.types.Direction direction()
+  {
+    return getDirection();
+  }
+
+  /**
+      Get `modifierState` property.
+      Returns: The current modifier state of the device.
+      
+      This is only relevant for keyboard devices.
+  */
+  @property gdk.types.ModifierType modifierState()
+  {
+    return getModifierState();
+  }
+
+  /**
+      Get `nAxes` property.
+      Returns: Number of axes in the device.
+  */
+  @property uint nAxes()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-axes");
+  }
+
+  /**
+      Get `numLockState` property.
+      Returns: Whether Num Lock is on.
+      
+      This is only relevant for keyboard devices.
+  */
+  @property bool numLockState()
+  {
+    return getNumLockState();
+  }
+
+  /**
+      Get `scrollLockState` property.
+      Returns: Whether Scroll Lock is on.
+      
+      This is only relevant for keyboard devices.
+  */
+  @property bool scrollLockState()
+  {
+    return getScrollLockState();
+  }
+
+  /**
+      Get `seat` property.
+      Returns: [gdk.seat.Seat] of this device.
+  */
+  @property gdk.seat.Seat seat()
+  {
+    return getSeat();
+  }
+
+  /**
+      Set `seat` property.
+      Params:
+        propval = [gdk.seat.Seat] of this device.
+  */
+  @property void seat(gdk.seat.Seat propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.seat.Seat)("seat", propval);
+  }
+
+  /**
+      Get `tool` property.
+      Returns: The [gdk.device_tool.DeviceTool] that is currently used with this device.
+  */
+  @property gdk.device_tool.DeviceTool tool()
+  {
+    return getDeviceTool();
   }
 
   /**
@@ -68,7 +161,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_device_get_device_tool(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +192,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +296,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +331,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

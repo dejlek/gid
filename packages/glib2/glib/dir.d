@@ -39,6 +39,7 @@ class Dir : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Dir self()
   {
     return this;
@@ -56,7 +57,7 @@ class Dir : gobject.boxed.Boxed
       Returns: a newly allocated #GDir on success, null on failure.
           If non-null, you must free the result with [glib.dir.Dir.close]
           when you are finished with it.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static glib.dir.Dir open(string path, uint flags)
   {
@@ -65,7 +66,7 @@ class Dir : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dir_open(_path, flags, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.dir.Dir(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -125,7 +126,7 @@ class Dir : gobject.boxed.Boxed
           should be freed with [glib.global.gfree] when not needed any longer and is
           is in the GLib file name encoding. In case of errors, null is
           returned and error will be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static string makeTmp(string tmpl = null)
   {
@@ -134,7 +135,7 @@ class Dir : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dir_make_tmp(_tmpl, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -22,7 +22,7 @@ class AudioMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstAudio.AudioMeta");
+      throw new GidConstructException("Null instance pointer for gstaudio.audio_meta.AudioMeta");
 
     cInstance = *cast(GstAudioMeta*)ptr;
 
@@ -36,21 +36,38 @@ class AudioMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioMeta*)cPtr).meta);
   }
 
+  /**
+      Get `info` field.
+      Returns: the audio properties of the buffer
+  */
   @property gstaudio.audio_info.AudioInfo info()
   {
     return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioMeta*)cPtr).info);
   }
 
+  /**
+      Get `samples` field.
+      Returns: the number of valid samples in the buffer
+  */
   @property size_t samples()
   {
     return (cast(GstAudioMeta*)cPtr).samples;
   }
 
+  /**
+      Set `samples` field.
+      Params:
+        propval = the number of valid samples in the buffer
+  */
   @property void samples(size_t propval)
   {
     (cast(GstAudioMeta*)cPtr).samples = propval;

@@ -38,6 +38,7 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeViewAccessible self()
   {
     return this;

@@ -22,7 +22,7 @@ import pango.types;
     @draw_glyphs and @draw_rectangle, renderers for particular font
     backends and destinations can be created.
 */
-class Renderer : gobject.object.ObjectG
+class Renderer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -44,6 +44,7 @@ class Renderer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Renderer self()
   {
     return this;
@@ -285,7 +286,7 @@ class Renderer : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = pango_renderer_get_layout(cast(PangoRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 

@@ -27,7 +27,7 @@ import gtk.window;
     See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
     that uses [gtk.color_dialog.ColorDialog] and presents the results.
 */
-class ColorDialog : gobject.object.ObjectG
+class ColorDialog : gobject.object.ObjectWrap
 {
 
   /** */
@@ -49,9 +49,75 @@ class ColorDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ColorDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the color chooser dialog is modal.
+  */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog is modal.
+  */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: A title that may be shown on the color chooser
+      dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the color chooser
+        dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `withAlpha` property.
+      Returns: Whether colors may have alpha (translucency).
+      
+      When with-alpha is false, the color that is selected
+      will be forced to have alpha == 1.
+  */
+  @property bool withAlpha()
+  {
+    return getWithAlpha();
+  }
+
+  /**
+      Set `withAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+        
+        When with-alpha is false, the color that is selected
+        will be forced to have alpha == 1.
+  */
+  @property void withAlpha(bool propval)
+  {
+    return setWithAlpha(propval);
   }
 
   /**
@@ -86,7 +152,7 @@ class ColorDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -102,15 +168,15 @@ class ColorDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the selected color, or
           `NULL` and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
   {
     GdkRGBA* _cretval;
     GError *_err;
-    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

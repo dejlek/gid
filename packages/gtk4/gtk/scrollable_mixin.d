@@ -14,8 +14,8 @@ public import gtk.types;
     [gtk.scrollable.Scrollable] is an interface for widgets with native scrolling ability.
     
     To implement this interface you should override the
-    [gtk.scrollable.Scrollable.Adjustment] and
-    [gtk.scrollable.Scrollable.Adjustment] properties.
+    [gtk.scrollable.Scrollable.hadjustment] and
+    [gtk.scrollable.Scrollable.vadjustment] properties.
     
     ## Creating a scrollable widget
     
@@ -46,6 +46,90 @@ template ScrollableT()
 {
 
   /**
+      Get `hadjustment` property.
+      Returns: Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
+      
+      This adjustment is shared between the scrollable widget and its parent.
+  */
+  @property gtk.adjustment.Adjustment hadjustment()
+  {
+    return getHadjustment();
+  }
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
+        
+        This adjustment is shared between the scrollable widget and its parent.
+  */
+  @property void hadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setHadjustment(propval);
+  }
+
+  /**
+      Get `hscrollPolicy` property.
+      Returns: Determines when horizontal scrolling should start.
+  */
+  @property gtk.types.ScrollablePolicy hscrollPolicy()
+  {
+    return getHscrollPolicy();
+  }
+
+  /**
+      Set `hscrollPolicy` property.
+      Params:
+        propval = Determines when horizontal scrolling should start.
+  */
+  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval)
+  {
+    return setHscrollPolicy(propval);
+  }
+
+  /**
+      Get `vadjustment` property.
+      Returns: Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
+      
+      This adjustment is shared between the scrollable widget and its parent.
+  */
+  @property gtk.adjustment.Adjustment vadjustment()
+  {
+    return getVadjustment();
+  }
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
+        
+        This adjustment is shared between the scrollable widget and its parent.
+  */
+  @property void vadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setVadjustment(propval);
+  }
+
+  /**
+      Get `vscrollPolicy` property.
+      Returns: Determines when vertical scrolling should start.
+  */
+  @property gtk.types.ScrollablePolicy vscrollPolicy()
+  {
+    return getVscrollPolicy();
+  }
+
+  /**
+      Set `vscrollPolicy` property.
+      Params:
+        propval = Determines when vertical scrolling should start.
+  */
+  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval)
+  {
+    return setVscrollPolicy(propval);
+  }
+
+  /**
       Returns the size of a non-scrolling border around the
       outside of the scrollable.
       
@@ -74,7 +158,7 @@ template ScrollableT()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +182,7 @@ template ScrollableT()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

@@ -50,9 +50,29 @@ class Bin : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Bin self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget of the [adw.bin.Bin].
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget of the [adw.bin.Bin].
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
   }
 
   /**
@@ -74,7 +94,7 @@ class Bin : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = adw_bin_get_child(cast(AdwBin*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

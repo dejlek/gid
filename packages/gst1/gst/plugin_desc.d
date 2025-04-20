@@ -21,7 +21,7 @@ class PluginDesc
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.PluginDesc");
+      throw new GidConstructException("Null instance pointer for gst.plugin_desc.PluginDesc");
 
     cInstance = *cast(GstPluginDesc*)ptr;
 
@@ -35,118 +35,228 @@ class PluginDesc
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `majorVersion` field.
+      Returns: the major version number of core that plugin was compiled for
+  */
   @property int majorVersion()
   {
     return (cast(GstPluginDesc*)cPtr).majorVersion;
   }
 
+  /**
+      Set `majorVersion` field.
+      Params:
+        propval = the major version number of core that plugin was compiled for
+  */
   @property void majorVersion(int propval)
   {
     (cast(GstPluginDesc*)cPtr).majorVersion = propval;
   }
 
+  /**
+      Get `minorVersion` field.
+      Returns: the minor version number of core that plugin was compiled for
+  */
   @property int minorVersion()
   {
     return (cast(GstPluginDesc*)cPtr).minorVersion;
   }
 
+  /**
+      Set `minorVersion` field.
+      Params:
+        propval = the minor version number of core that plugin was compiled for
+  */
   @property void minorVersion(int propval)
   {
     (cast(GstPluginDesc*)cPtr).minorVersion = propval;
   }
 
+  /**
+      Get `name` field.
+      Returns: a unique name of the plugin
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = a unique name of the plugin
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).name);
   }
 
+  /**
+      Get `description` field.
+      Returns: description of plugin
+  */
   @property string description()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
   }
 
+  /**
+      Set `description` field.
+      Params:
+        propval = description of plugin
+  */
   @property void description(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).description);
   }
 
+  /**
+      Get `pluginInit` field.
+      Returns: pointer to the init function of this plugin.
+  */
   @property GstPluginInitFunc pluginInit()
   {
     return (cast(GstPluginDesc*)cPtr).pluginInit;
   }
+
+  /**
+      Set `pluginInit` field.
+      Params:
+        propval = pointer to the init function of this plugin.
+  */
 
   @property void pluginInit(GstPluginInitFunc propval)
   {
     (cast(GstPluginDesc*)cPtr).pluginInit = propval;
   }
 
+  /**
+      Get `version_` field.
+      Returns: version of the plugin
+  */
   @property string version_()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
   }
 
+  /**
+      Set `version_` field.
+      Params:
+        propval = version of the plugin
+  */
   @property void version_(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).version_);
   }
 
+  /**
+      Get `license` field.
+      Returns: effective license of plugin
+  */
   @property string license()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
   }
 
+  /**
+      Set `license` field.
+      Params:
+        propval = effective license of plugin
+  */
   @property void license(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).license);
   }
 
+  /**
+      Get `source` field.
+      Returns: source module plugin belongs to
+  */
   @property string source()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
   }
 
+  /**
+      Set `source` field.
+      Params:
+        propval = source module plugin belongs to
+  */
   @property void source(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).source);
   }
 
+  /**
+      Get `package_` field.
+      Returns: shipped package plugin belongs to
+  */
   @property string package_()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
   }
 
+  /**
+      Set `package_` field.
+      Params:
+        propval = shipped package plugin belongs to
+  */
   @property void package_(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).package_);
   }
 
+  /**
+      Get `origin` field.
+      Returns: URL to provider of plugin
+  */
   @property string origin()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
   }
 
+  /**
+      Set `origin` field.
+      Params:
+        propval = URL to provider of plugin
+  */
   @property void origin(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).origin);
   }
 
+  /**
+      Get `releaseDatetime` field.
+      Returns: date time string in ISO 8601
+          format (or rather, a subset thereof), or null. Allowed are the
+          following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+          'T' a separator and 'Z' indicating UTC/Zulu time). This field
+          should be set via the GST_PACKAGE_RELEASE_DATETIME
+          preprocessor macro.
+  */
   @property string releaseDatetime()
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
   }
 
+  /**
+      Set `releaseDatetime` field.
+      Params:
+        propval = date time string in ISO 8601
+            format (or rather, a subset thereof), or null. Allowed are the
+            following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+            'T' a separator and 'Z' indicating UTC/Zulu time). This field
+            should be set via the GST_PACKAGE_RELEASE_DATETIME
+            preprocessor macro.
+  */
   @property void releaseDatetime(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);

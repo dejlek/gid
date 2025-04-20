@@ -36,6 +36,7 @@ class GestureRotate : gtk.gesture.Gesture
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GestureRotate self()
   {
     return this;

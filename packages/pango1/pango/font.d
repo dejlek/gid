@@ -21,7 +21,7 @@ import pango.types;
     A [pango.font.Font] is used to represent a font in a
     rendering-system-independent manner.
 */
-class Font : gobject.object.ObjectG
+class Font : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class Font : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Font self()
   {
     return this;
@@ -61,7 +62,7 @@ class Font : gobject.object.ObjectG
         context = a [pango.context.Context]
         bytes = the bytes containing the data
       Returns: a new [pango.font.Font]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static pango.font.Font deserialize(pango.context.Context context, glib.bytes.Bytes bytes)
   {
@@ -69,8 +70,8 @@ class Font : gobject.object.ObjectG
     GError *_err;
     _cretval = pango_font_deserialize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +117,7 @@ class Font : gobject.object.ObjectG
   {
     PangoCoverage* _cretval;
     _cretval = pango_font_get_coverage(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +129,7 @@ class Font : gobject.object.ObjectG
   {
     PangoFontFace* _cretval;
     _cretval = pango_font_get_face(cast(PangoFont*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +176,7 @@ class Font : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = pango_font_get_font_map(cast(PangoFont*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 

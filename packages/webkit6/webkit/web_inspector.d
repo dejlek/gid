@@ -34,7 +34,7 @@ import webkit.web_view_base;
     webkit_web_inspector_show (WEBKIT_WEB_INSPECTOR(inspector));
     ```
 */
-class WebInspector : gobject.object.ObjectG
+class WebInspector : gobject.object.ObjectWrap
 {
 
   /** */
@@ -60,6 +60,34 @@ class WebInspector : gobject.object.ObjectG
   override WebInspector self()
   {
     return this;
+  }
+
+  /**
+      Get `attachedHeight` property.
+      Returns: The height that the inspector view should have when it is attached.
+  */
+  @property uint attachedHeight()
+  {
+    return getAttachedHeight();
+  }
+
+  /**
+      Get `canAttach` property.
+      Returns: Whether the @inspector can be attached to the same window that contains
+      the inspected view.
+  */
+  @property bool canAttach()
+  {
+    return getCanAttach();
+  }
+
+  /**
+      Get `inspectedUri` property.
+      Returns: The URI that is currently being inspected.
+  */
+  @property string inspectedUri()
+  {
+    return getInspectedUri();
   }
 
   /**
@@ -148,7 +176,7 @@ class WebInspector : gobject.object.ObjectG
   {
     WebKitWebViewBase* _cretval;
     _cretval = webkit_web_inspector_get_web_view(cast(WebKitWebInspector*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.web_view_base.WebViewBase)(cast(WebKitWebViewBase*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view_base.WebViewBase)(cast(WebKitWebViewBase*)_cretval, No.Take);
     return _retval;
   }
 

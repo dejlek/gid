@@ -20,7 +20,7 @@ class AttrLanguage
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrLanguage");
+      throw new GidConstructException("Null instance pointer for pango.attr_language.AttrLanguage");
 
     cInstance = *cast(PangoAttrLanguage*)ptr;
 
@@ -34,16 +34,29 @@ class AttrLanguage
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)cPtr).attr);
   }
 
+  /**
+      Get `value` field.
+      Returns: the [pango.language.Language] which is the value of the attribute
+  */
   @property pango.language.Language value()
   {
     return cToD!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = the [pango.language.Language] which is the value of the attribute
+  */
   @property void value(pango.language.Language propval)
   {
     cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);

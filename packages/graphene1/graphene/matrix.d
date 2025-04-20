@@ -27,7 +27,9 @@ import graphene.vec4;
 class Matrix : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `matrix.Matrix` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_matrix_t.sizeof), Yes.Take);
@@ -58,6 +60,7 @@ class Matrix : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Matrix self()
   {
     return this;

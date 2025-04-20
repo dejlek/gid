@@ -16,7 +16,7 @@ import gobject.object;
     API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
     internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
 */
-class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
+class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketConnectable
 {
 
   /** */
@@ -38,9 +38,19 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketAddress self()
   {
     return this;
+  }
+
+  /**
+      Get `family` property.
+      Returns: The family of the socket address.
+  */
+  @property gio.types.SocketFamily family()
+  {
+    return getFamily();
   }
 
   mixin SocketConnectableT!();
@@ -59,7 +69,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,7 +113,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
         destlen = the size of dest. Must be at least as large as
               [gio.socket_address.SocketAddress.getNativeSize]
       Returns: true if dest was filled in, false on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool toNative(void* dest, size_t destlen)
   {
@@ -111,7 +121,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
     GError *_err;
     _retval = g_socket_address_to_native(cast(GSocketAddress*)cPtr, dest, destlen, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

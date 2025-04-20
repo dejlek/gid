@@ -33,6 +33,7 @@ class MapArray : arrow.list_array.ListArray
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MapArray self()
   {
     return this;
@@ -45,7 +46,7 @@ class MapArray : arrow.list_array.ListArray
     GError *_err;
     _cretval = garrow_map_array_new(offsets ? cast(GArrowArray*)offsets.cPtr(No.Dup) : null, keys ? cast(GArrowArray*)keys.cPtr(No.Dup) : null, items ? cast(GArrowArray*)items.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -54,7 +55,7 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,7 +64,7 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

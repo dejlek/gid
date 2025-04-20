@@ -14,7 +14,7 @@ import gtk.widget;
     controllers. Those react to a series of #GdkEvents, and possibly trigger
     actions as a consequence of those.
 */
-class EventController : gobject.object.ObjectG
+class EventController : gobject.object.ObjectWrap
 {
 
   /** */
@@ -36,9 +36,29 @@ class EventController : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override EventController self()
   {
     return this;
+  }
+
+  /**
+      Get `propagationPhase` property.
+      Returns: The propagation phase at which this controller will handle events.
+  */
+  @property gtk.types.PropagationPhase propagationPhase()
+  {
+    return getPropagationPhase();
+  }
+
+  /**
+      Set `propagationPhase` property.
+      Params:
+        propval = The propagation phase at which this controller will handle events.
+  */
+  @property void propagationPhase(gtk.types.PropagationPhase propval)
+  {
+    return setPropagationPhase(propval);
   }
 
   /**
@@ -61,7 +81,7 @@ class EventController : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

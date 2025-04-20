@@ -19,7 +19,7 @@ class VariantIter
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.VariantIter");
+      throw new GidConstructException("Null instance pointer for glib.variant_iter.VariantIter");
 
     cInstance = *cast(GVariantIter*)ptr;
 
@@ -57,7 +57,7 @@ class VariantIter
       Gets the next item in the container.  If no more items remain then
       null is returned.
       
-      Use [glib.variant.VariantG.unref] to drop your reference on the return value when
+      Use [glib.variant.Variant.unref] to drop your reference on the return value when
       you no longer need it.
       
       Here is an example for iterating with [glib.variant_iter.VariantIter.nextValue]:
@@ -83,11 +83,11 @@ class VariantIter
       ```
       Returns: a #GVariant, or null
   */
-  glib.variant.VariantG nextValue()
+  glib.variant.Variant nextValue()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_variant_iter_next_value(cast(GVariantIter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

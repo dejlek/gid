@@ -23,7 +23,7 @@ class SDPMedia
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPMedia");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpmedia.SDPMedia");
 
     cInstance = *cast(GstSDPMedia*)ptr;
 
@@ -37,59 +37,108 @@ class SDPMedia
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `media` field.
+      Returns: the media type
+  */
   @property string media()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).media);
   }
 
+  /**
+      Set `media` field.
+      Params:
+        propval = the media type
+  */
   @property void media(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).media);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).media);
   }
 
+  /**
+      Get `port` field.
+      Returns: the transport port to which the media stream will be sent
+  */
   @property uint port()
   {
     return (cast(GstSDPMedia*)cPtr).port;
   }
 
+  /**
+      Set `port` field.
+      Params:
+        propval = the transport port to which the media stream will be sent
+  */
   @property void port(uint propval)
   {
     (cast(GstSDPMedia*)cPtr).port = propval;
   }
 
+  /**
+      Get `numPorts` field.
+      Returns: the number of ports or -1 if only one port was specified
+  */
   @property uint numPorts()
   {
     return (cast(GstSDPMedia*)cPtr).numPorts;
   }
 
+  /**
+      Set `numPorts` field.
+      Params:
+        propval = the number of ports or -1 if only one port was specified
+  */
   @property void numPorts(uint propval)
   {
     (cast(GstSDPMedia*)cPtr).numPorts = propval;
   }
 
+  /**
+      Get `proto` field.
+      Returns: the transport protocol
+  */
   @property string proto()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).proto);
   }
 
+  /**
+      Set `proto` field.
+      Params:
+        propval = the transport protocol
+  */
   @property void proto(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).proto);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).proto);
   }
 
+  /**
+      Get `information` field.
+      Returns: the media title
+  */
   @property string information()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).information);
   }
 
+  /**
+      Set `information` field.
+      Params:
+        propval = the media title
+  */
   @property void information(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).information);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).information);
   }
 
+  /**
+      Get `key` field.
+      Returns: the encryption key
+  */
   @property gstsdp.sdpkey.SDPKey key()
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)cPtr).key);

@@ -104,11 +104,11 @@ template SelectionT()
         selected accessible, or null if selection does not implement this
         interface.
   */
-  override atk.object.ObjectAtk refSelection(int i)
+  override atk.object.ObjectWrap refSelection(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_selection_ref_selection(cast(AtkSelection*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 

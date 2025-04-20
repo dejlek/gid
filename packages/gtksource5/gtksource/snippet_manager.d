@@ -21,7 +21,7 @@ import gtksource.types;
     Use [gtksource.snippet_manager.SnippetManager.getSnippet] to retrieve snippets for
     a given snippets.
 */
-class SnippetManager : gobject.object.ObjectG
+class SnippetManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -43,6 +43,7 @@ class SnippetManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SnippetManager self()
   {
     return this;
@@ -57,7 +58,7 @@ class SnippetManager : gobject.object.ObjectG
   {
     GtkSourceSnippetManager* _cretval;
     _cretval = gtk_source_snippet_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +106,7 @@ class SnippetManager : gobject.object.ObjectG
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _trigger = trigger.toCString(No.Alloc);
     _cretval = gtk_source_snippet_manager_get_snippet(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _trigger);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,7 +121,7 @@ class SnippetManager : gobject.object.ObjectG
   {
     GListModel* _cretval;
     _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +158,7 @@ class SnippetManager : gobject.object.ObjectG
       
       The [gio.list_model.ListModel] only contains information about the available snippets until
       [gio.list_model.ListModel.getItem] is called for a specific snippet. This helps reduce
-      the number of [gobject.object.ObjectG]'s that are created at runtime to those needed by
+      the number of [gobject.object.ObjectWrap]'s that are created at runtime to those needed by
       the calling application.
   
       Params:
@@ -173,7 +174,7 @@ class SnippetManager : gobject.object.ObjectG
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _triggerPrefix = triggerPrefix.toCString(No.Alloc);
     _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _triggerPrefix);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 

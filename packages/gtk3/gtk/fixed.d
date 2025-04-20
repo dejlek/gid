@@ -78,6 +78,7 @@ class Fixed : gtk.container.Container
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Fixed self()
   {
     return this;

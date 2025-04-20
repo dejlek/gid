@@ -14,7 +14,7 @@ import gst.types;
     combines them and maps the resulting value to the type and value range of the
     bound property.
 */
-class ControlBinding : gst.object.ObjectGst
+class ControlBinding : gst.object.ObjectWrap
 {
 
   /** */
@@ -36,12 +36,13 @@ class ControlBinding : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ControlBinding self()
   {
     return this;
   }
 
-  alias getGValueArray = gst.object.ObjectGst.getGValueArray;
+  alias getGValueArray = gst.object.ObjectWrap.getGValueArray;
 
   /**
       Gets a number of #GValues for the given controlled property starting at the
@@ -72,7 +73,7 @@ class ControlBinding : gst.object.ObjectGst
     return _retval;
   }
 
-  alias getValue = gst.object.ObjectGst.getValue;
+  alias getValue = gst.object.ObjectWrap.getValue;
 
   /**
       Gets the value for the given controlled property at the requested time.
@@ -103,7 +104,7 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       This function is used to disable a control binding for some time, i.e.
-      [gst.object.ObjectGst.syncValues] will do nothing.
+      [gst.object.ObjectWrap.syncValues] will do nothing.
   
       Params:
         disabled = boolean that specifies whether to disable the controller
@@ -114,7 +115,7 @@ class ControlBinding : gst.object.ObjectGst
     gst_control_binding_set_disabled(cast(GstControlBinding*)cPtr, disabled);
   }
 
-  alias syncValues = gst.object.ObjectGst.syncValues;
+  alias syncValues = gst.object.ObjectWrap.syncValues;
 
   /**
       Sets the property of the object, according to the #GstControlSources that
@@ -130,7 +131,7 @@ class ControlBinding : gst.object.ObjectGst
       Returns: true if the controller value could be applied to the object
         property, false otherwise
   */
-  bool syncValues(gst.object.ObjectGst object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
+  bool syncValues(gst.object.ObjectWrap object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
   {
     bool _retval;
     _retval = gst_control_binding_sync_values(cast(GstControlBinding*)cPtr, object ? cast(GstObject*)object.cPtr(No.Dup) : null, timestamp, lastSync);

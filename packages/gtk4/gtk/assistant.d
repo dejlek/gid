@@ -86,9 +86,19 @@ class Assistant : gtk.window.Window
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Assistant self()
   {
     return this;
+  }
+
+  /**
+      Get `pages` property.
+      Returns: [gio.list_model.ListModel] containing the pages.
+  */
+  @property gio.list_model.ListModel pages()
+  {
+    return getPages();
   }
 
   /**
@@ -195,7 +205,7 @@ class Assistant : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +222,7 @@ class Assistant : gtk.window.Window
   {
     GtkAssistantPage* _cretval;
     _cretval = gtk_assistant_get_page(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.assistant_page.AssistantPage)(cast(GtkAssistantPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.assistant_page.AssistantPage)(cast(GtkAssistantPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -276,7 +286,7 @@ class Assistant : gtk.window.Window
   {
     GListModel* _cretval;
     _cretval = gtk_assistant_get_pages(cast(GtkAssistant*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 

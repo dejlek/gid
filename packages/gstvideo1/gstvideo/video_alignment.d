@@ -19,7 +19,7 @@ class VideoAlignment
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoAlignment");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_alignment.VideoAlignment");
 
     cInstance = *cast(GstVideoAlignment*)ptr;
 
@@ -33,41 +33,77 @@ class VideoAlignment
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `paddingTop` field.
+      Returns: extra pixels on the top
+  */
   @property uint paddingTop()
   {
     return (cast(GstVideoAlignment*)cPtr).paddingTop;
   }
 
+  /**
+      Set `paddingTop` field.
+      Params:
+        propval = extra pixels on the top
+  */
   @property void paddingTop(uint propval)
   {
     (cast(GstVideoAlignment*)cPtr).paddingTop = propval;
   }
 
+  /**
+      Get `paddingBottom` field.
+      Returns: extra pixels on the bottom
+  */
   @property uint paddingBottom()
   {
     return (cast(GstVideoAlignment*)cPtr).paddingBottom;
   }
 
+  /**
+      Set `paddingBottom` field.
+      Params:
+        propval = extra pixels on the bottom
+  */
   @property void paddingBottom(uint propval)
   {
     (cast(GstVideoAlignment*)cPtr).paddingBottom = propval;
   }
 
+  /**
+      Get `paddingLeft` field.
+      Returns: extra pixels on the left side
+  */
   @property uint paddingLeft()
   {
     return (cast(GstVideoAlignment*)cPtr).paddingLeft;
   }
 
+  /**
+      Set `paddingLeft` field.
+      Params:
+        propval = extra pixels on the left side
+  */
   @property void paddingLeft(uint propval)
   {
     (cast(GstVideoAlignment*)cPtr).paddingLeft = propval;
   }
 
+  /**
+      Get `paddingRight` field.
+      Returns: extra pixels on the right side
+  */
   @property uint paddingRight()
   {
     return (cast(GstVideoAlignment*)cPtr).paddingRight;
   }
 
+  /**
+      Set `paddingRight` field.
+      Params:
+        propval = extra pixels on the right side
+  */
   @property void paddingRight(uint propval)
   {
     (cast(GstVideoAlignment*)cPtr).paddingRight = propval;

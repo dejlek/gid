@@ -22,7 +22,7 @@ import gtk.widget;
     acccessible implementation, override the get_accessible vfunc
     in #GtkWidgetClass.
 */
-class Accessible : atk.object.ObjectAtk
+class Accessible : atk.object.ObjectWrap
 {
 
   /** */
@@ -44,9 +44,22 @@ class Accessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Accessible self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
+  }
+
+  /** */
+  @property void widget(gtk.widget.Widget propval)
+  {
+    return setWidget(propval);
   }
 
   /**
@@ -71,7 +84,7 @@ class Accessible : atk.object.ObjectAtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_accessible_get_widget(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

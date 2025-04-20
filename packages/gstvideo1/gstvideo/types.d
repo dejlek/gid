@@ -184,7 +184,7 @@ alias VideoTileInfo = GstVideoTileInfo;
 // Callbacks
 
 /** */
-alias VideoConvertSampleCallback = void delegate(gst.sample.Sample sample, glib.error.ErrorG error);
+alias VideoConvertSampleCallback = void delegate(gst.sample.Sample sample, glib.error.ErrorWrap error);
 
 /** */
 alias VideoGLTextureUpload = bool delegate(gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta meta, uint[] textureId);

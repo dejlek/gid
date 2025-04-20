@@ -50,7 +50,7 @@ import gobject.object;
       g_error ("Unsupported GDK backend");
     ```
 */
-class DisplayManager : gobject.object.ObjectG
+class DisplayManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -72,9 +72,22 @@ class DisplayManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DisplayManager self()
   {
     return this;
+  }
+
+  /** */
+  @property gdk.display.Display defaultDisplay()
+  {
+    return getDefaultDisplay();
+  }
+
+  /** */
+  @property void defaultDisplay(gdk.display.Display propval)
+  {
+    return setDefaultDisplay(propval);
   }
 
   /**
@@ -93,7 +106,7 @@ class DisplayManager : gobject.object.ObjectG
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
-    auto _retval = ObjectG.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +119,7 @@ class DisplayManager : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +150,7 @@ class DisplayManager : gobject.object.ObjectG
     GdkDisplay* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 

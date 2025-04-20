@@ -35,6 +35,7 @@ class Application : adw.application.Application
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Application self()
   {
     return this;

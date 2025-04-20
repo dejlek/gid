@@ -48,7 +48,7 @@ import gst.types;
     All further [gst.buffer_pool.BufferPool.acquireBuffer] calls will return an error. When
     all buffers are returned to the pool they will be freed.
 */
-class BufferPool : gst.object.ObjectGst
+class BufferPool : gst.object.ObjectWrap
 {
 
   /** */
@@ -70,6 +70,7 @@ class BufferPool : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BufferPool self()
   {
     return this;

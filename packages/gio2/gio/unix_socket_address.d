@@ -53,6 +53,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixSocketAddress self()
   {
     return this;
@@ -95,7 +96,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
-    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,7 +147,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
-    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 

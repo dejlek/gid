@@ -16,10 +16,24 @@ import gobject.boxed;
 class Color : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `color.Color` boxed type.
+      Params:
+        pixel = For allocated colors, the pixel value used to
+              draw this color on the screen. Not used anymore.
+        red = The red component of the color. This is
+              a value between 0 and 65535, with 65535 indicating
+              full intensity
+        green = The green component of the color
+        blue = The blue component of the color
+  */
+  this(uint pixel = uint.init, ushort red = ushort.init, ushort green = ushort.init, ushort blue = ushort.init)
   {
     super(gMalloc(GdkColor.sizeof), Yes.Take);
+    this.pixel = pixel;
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
   }
 
   /** */
@@ -47,46 +61,89 @@ class Color : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Color self()
   {
     return this;
   }
 
+  /**
+      Get `pixel` field.
+      Returns: For allocated colors, the pixel value used to
+          draw this color on the screen. Not used anymore.
+  */
   @property uint pixel()
   {
     return (cast(GdkColor*)cPtr).pixel;
   }
 
+  /**
+      Set `pixel` field.
+      Params:
+        propval = For allocated colors, the pixel value used to
+            draw this color on the screen. Not used anymore.
+  */
   @property void pixel(uint propval)
   {
     (cast(GdkColor*)cPtr).pixel = propval;
   }
 
+  /**
+      Get `red` field.
+      Returns: The red component of the color. This is
+          a value between 0 and 65535, with 65535 indicating
+          full intensity
+  */
   @property ushort red()
   {
     return (cast(GdkColor*)cPtr).red;
   }
 
+  /**
+      Set `red` field.
+      Params:
+        propval = The red component of the color. This is
+            a value between 0 and 65535, with 65535 indicating
+            full intensity
+  */
   @property void red(ushort propval)
   {
     (cast(GdkColor*)cPtr).red = propval;
   }
 
+  /**
+      Get `green` field.
+      Returns: The green component of the color
+  */
   @property ushort green()
   {
     return (cast(GdkColor*)cPtr).green;
   }
 
+  /**
+      Set `green` field.
+      Params:
+        propval = The green component of the color
+  */
   @property void green(ushort propval)
   {
     (cast(GdkColor*)cPtr).green = propval;
   }
 
+  /**
+      Get `blue` field.
+      Returns: The blue component of the color
+  */
   @property ushort blue()
   {
     return (cast(GdkColor*)cPtr).blue;
   }
 
+  /**
+      Set `blue` field.
+      Params:
+        propval = The blue component of the color
+  */
   @property void blue(ushort propval)
   {
     (cast(GdkColor*)cPtr).blue = propval;

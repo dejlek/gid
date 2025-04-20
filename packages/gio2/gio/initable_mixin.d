@@ -17,8 +17,8 @@ public import glib.error;
     (the latter is only available if it also implements [gio.async_initable.AsyncInitable]).
     
     If the object is not initialized, or initialization returns with an
-    error, then all operations on the object except `[gobject.object.ObjectG.ref_]` and
-    `[gobject.object.ObjectG.unref]` are considered to be invalid, and have undefined
+    error, then all operations on the object except `[gobject.object.ObjectWrap.ref_]` and
+    `[gobject.object.ObjectWrap.unref]` are considered to be invalid, and have undefined
     behaviour. They will often fail with `func@GLib.critical` or
     `func@GLib.warning`, but this must not be relied on.
     
@@ -27,7 +27,7 @@ public import glib.error;
     in various ways. For C applications you generally just call
     [gio.initable.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
     This will call [gio.initable.Initable.init_] under the cover, returning `NULL`
-    and setting a [glib.error.ErrorG] on failure (at which point the instance is
+    and setting a [glib.error.ErrorWrap] on failure (at which point the instance is
     unreferenced).
     
     For bindings in languages where the native constructor supports
@@ -55,8 +55,8 @@ template InitableT()
       [gio.types.IOErrorEnum.NotSupported] will be returned.
       
       If the object is not initialized, or initialization returns with an
-      error, then all operations on the object except [gobject.object.ObjectG.ref_] and
-      [gobject.object.ObjectG.unref] are considered to be invalid, and have undefined
+      error, then all operations on the object except [gobject.object.ObjectWrap.ref_] and
+      [gobject.object.ObjectWrap.unref] are considered to be invalid, and have undefined
       behaviour. See the [introduction][ginitable] for more details.
       
       Callers should not assume that a class which implements #GInitable can be
@@ -75,14 +75,14 @@ template InitableT()
       it is designed to be used via the singleton pattern, with a
       #GObjectClass.constructor that sometimes returns an existing instance.
       In this pattern, a caller would expect to be able to call [gio.initable.Initable.init_]
-      on the result of [gobject.object.ObjectG.new_], regardless of whether it is in fact a new
+      on the result of [gobject.object.ObjectWrap.new_], regardless of whether it is in fact a new
       instance.
   
       Params:
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if successful. If an error has occurred, this function will
             return false and set error appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool init_(gio.cancellable.Cancellable cancellable = null)
   {
@@ -90,7 +90,7 @@ template InitableT()
     GError *_err;
     _retval = g_initable_init(cast(GInitable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

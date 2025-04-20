@@ -44,7 +44,7 @@ interface Buildable
         child = child to add
         type = kind of child or null
   */
-  void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type = null);
+  void addChild(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string type = null);
 
   /**
       Constructs a child of buildable with the name name.
@@ -57,7 +57,7 @@ interface Buildable
         name = name of child to construct
       Returns: the constructed child
   */
-  gobject.object.ObjectG constructChild(gtk.builder.Builder builder, string name);
+  gobject.object.ObjectWrap constructChild(gtk.builder.Builder builder, string name);
 
   /**
       This is similar to [gtk.buildable.Buildable.parserFinished] but is
@@ -69,7 +69,7 @@ interface Buildable
         tagname = the name of the tag
         data = user data created in custom_tag_start
   */
-  void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data = null);
+  void customFinished(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, void* data = null);
 
   /**
       This is called for each unknown element under `<child>`.
@@ -84,7 +84,7 @@ interface Buildable
       Returns: true if a object has a custom implementation, false
                  if it doesn't.
   */
-  bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, out glib.types.MarkupParser parser, out void* data);
+  bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, out glib.types.MarkupParser parser, out void* data);
 
   /**
       Get the internal child called childname of the buildable object.
@@ -94,7 +94,7 @@ interface Buildable
         childname = name of child
       Returns: the internal child of the buildable object
   */
-  gobject.object.ObjectG getInternalChild(gtk.builder.Builder builder, string childname);
+  gobject.object.ObjectWrap getInternalChild(gtk.builder.Builder builder, string childname);
 
   /**
       Gets the name of the buildable object.

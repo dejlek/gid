@@ -4,6 +4,7 @@ module gstnet.net_time_provider;
 import gid.gid;
 import gio.initable;
 import gio.initable_mixin;
+import gobject.object;
 import gst.clock;
 import gst.object;
 import gstnet.c.functions;
@@ -21,7 +22,7 @@ import gstnet.types;
     
     The #GstNetTimeProvider typically wraps the clock used by a #GstPipeline.
 */
-class NetTimeProvider : gst.object.ObjectGst, gio.initable.Initable
+class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
@@ -43,9 +44,34 @@ class NetTimeProvider : gst.object.ObjectGst, gio.initable.Initable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NetTimeProvider self()
   {
     return this;
+  }
+
+  /** */
+  @property bool active()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+  }
+
+  /** */
+  @property void active(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
+  }
+
+  /** */
+  @property int qosDscp()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("qos-dscp");
+  }
+
+  /** */
+  @property void qosDscp(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("qos-dscp", propval);
   }
 
   mixin InitableT!();

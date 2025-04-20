@@ -36,9 +36,48 @@ class NumericSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NumericSorter self()
   {
     return this;
+  }
+
+  /**
+      Get `expression` property.
+      Returns: The expression to evaluate on items to get a number to compare with.
+  */
+  @property gtk.expression.Expression expression()
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on items to get a number to compare with.
+  */
+  @property void expression(gtk.expression.Expression propval)
+  {
+    return setExpression(propval);
+  }
+
+  /**
+      Get `sortOrder` property.
+      Returns: Whether the sorter will sort smaller numbers first.
+  */
+  @property gtk.types.SortType sortOrder()
+  {
+    return getSortOrder();
+  }
+
+  /**
+      Set `sortOrder` property.
+      Params:
+        propval = Whether the sorter will sort smaller numbers first.
+  */
+  @property void sortOrder(gtk.types.SortType propval)
+  {
+    return setSortOrder(propval);
   }
 
   /**

@@ -2,6 +2,7 @@
 module gstvideo.video_aggregator_pad;
 
 import gid.gid;
+import gobject.object;
 import gst.buffer;
 import gstbase.aggregator_pad;
 import gstvideo.c.functions;
@@ -32,9 +33,46 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override VideoAggregatorPad self()
   {
     return this;
+  }
+
+  /** */
+  @property ulong maxLastBufferRepeat()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("max-last-buffer-repeat");
+  }
+
+  /** */
+  @property void maxLastBufferRepeat(ulong propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(ulong)("max-last-buffer-repeat", propval);
+  }
+
+  /** */
+  @property bool repeatAfterEos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("repeat-after-eos");
+  }
+
+  /** */
+  @property void repeatAfterEos(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("repeat-after-eos", propval);
+  }
+
+  /** */
+  @property uint zorder()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("zorder");
+  }
+
+  /** */
+  @property void zorder(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("zorder", propval);
   }
 
   /**

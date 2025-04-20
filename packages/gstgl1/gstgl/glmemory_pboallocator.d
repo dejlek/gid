@@ -32,6 +32,7 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLMemoryPBOAllocator self()
   {
     return this;

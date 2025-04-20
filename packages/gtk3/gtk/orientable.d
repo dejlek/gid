@@ -28,6 +28,19 @@ interface Orientable
   }
 
   /**
+      Get `orientation` property.
+      Returns: The orientation of the orientable.
+  */
+  @property gtk.types.Orientation orientation();
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the orientable.
+  */
+  @property void orientation(gtk.types.Orientation propval);
+
+  /**
       Retrieves the orientation of the orientable.
       Returns: the orientation of the orientable.
   */

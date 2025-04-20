@@ -9,7 +9,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ExecuteNode : gobject.object.ObjectG
+class ExecuteNode : gobject.object.ObjectWrap
 {
 
   /** */
@@ -31,6 +31,7 @@ class ExecuteNode : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExecuteNode self()
   {
     return this;
@@ -50,7 +51,7 @@ class ExecuteNode : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 }

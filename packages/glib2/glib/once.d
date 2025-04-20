@@ -19,7 +19,7 @@ class Once
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Once");
+      throw new GidConstructException("Null instance pointer for glib.once.Once");
 
     cInstance = *cast(GOnce*)ptr;
 
@@ -33,11 +33,20 @@ class Once
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `status` field.
+      Returns: the status of the #GOnce
+  */
   @property glib.types.OnceStatus status()
   {
     return cast(glib.types.OnceStatus)(cast(GOnce*)cPtr).status;
   }
 
+  /**
+      Set `status` field.
+      Params:
+        propval = the status of the #GOnce
+  */
   @property void status(glib.types.OnceStatus propval)
   {
     (cast(GOnce*)cPtr).status = cast(GOnceStatus)propval;

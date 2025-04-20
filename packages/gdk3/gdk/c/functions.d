@@ -295,7 +295,7 @@ __gshared extern(C)
   bool function(GdkKeymap* keymap, GdkModifierType* state) c_gdk_keymap_map_virtual_modifiers; ///
   bool function(GdkKeymap* keymap, uint hardwareKeycode, GdkModifierType state, int group, uint* keyval, int* effectiveGroup, int* level, GdkModifierType* consumedModifiers) c_gdk_keymap_translate_keyboard_state; ///
 
-  // MonitorG
+  // MonitorWrap
   GType function() c_gdk_monitor_get_type; ///
   GdkDisplay* function(GdkMonitor* monitor) c_gdk_monitor_get_display; ///
   void function(GdkMonitor* monitor, GdkRectangle* geometry) c_gdk_monitor_get_geometry; ///
@@ -1424,7 +1424,7 @@ alias gdk_keymap_map_virtual_modifiers = c_gdk_keymap_map_virtual_modifiers;
 /** */
 alias gdk_keymap_translate_keyboard_state = c_gdk_keymap_translate_keyboard_state;
 
-// MonitorG
+// MonitorWrap
 
 /** */
 alias gdk_monitor_get_type = c_gdk_monitor_get_type;
@@ -2778,7 +2778,7 @@ shared static this()
   gidLink(cast(void**)&gdk_keymap_map_virtual_modifiers, "gdk_keymap_map_virtual_modifiers", LIBS);
   gidLink(cast(void**)&gdk_keymap_translate_keyboard_state, "gdk_keymap_translate_keyboard_state", LIBS);
 
-  // MonitorG
+  // MonitorWrap
   gidLink(cast(void**)&gdk_monitor_get_type, "gdk_monitor_get_type", LIBS);
   gidLink(cast(void**)&gdk_monitor_get_display, "gdk_monitor_get_display", LIBS);
   gidLink(cast(void**)&gdk_monitor_get_geometry, "gdk_monitor_get_geometry", LIBS);

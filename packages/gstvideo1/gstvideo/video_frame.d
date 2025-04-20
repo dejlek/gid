@@ -20,7 +20,7 @@ class VideoFrame
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoFrame");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_frame.VideoFrame");
 
     cInstance = *cast(GstVideoFrame*)ptr;
 
@@ -34,37 +34,70 @@ class VideoFrame
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `info` field.
+      Returns: the #GstVideoInfo
+  */
   @property gstvideo.video_info.VideoInfo info()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoFrame*)cPtr).info);
   }
 
+  /**
+      Get `flags` field.
+      Returns: #GstVideoFrameFlags for the frame
+  */
   @property gstvideo.types.VideoFrameFlags flags()
   {
     return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoFrame*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = #GstVideoFrameFlags for the frame
+  */
   @property void flags(gstvideo.types.VideoFrameFlags propval)
   {
     (cast(GstVideoFrame*)cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
 
+  /**
+      Get `buffer` field.
+      Returns: the mapped buffer
+  */
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
   }
 
+  /**
+      Set `buffer` field.
+      Params:
+        propval = the mapped buffer
+  */
   @property void buffer(gst.buffer.Buffer propval)
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstVideoFrame*)cPtr).buffer);
   }
 
+  /**
+      Get `id` field.
+      Returns: id of the mapped frame. the id can for example be used to
+        identify the frame in case of multiview video.
+  */
   @property int id()
   {
     return (cast(GstVideoFrame*)cPtr).id;
   }
 
+  /**
+      Set `id` field.
+      Params:
+        propval = id of the mapped frame. the id can for example be used to
+          identify the frame in case of multiview video.
+  */
   @property void id(int propval)
   {
     (cast(GstVideoFrame*)cPtr).id = propval;

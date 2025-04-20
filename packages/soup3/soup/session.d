@@ -60,7 +60,7 @@ import soup.websocket_connection;
     Note that all async methods will invoke their callbacks on the thread-default
     context at the time of the function call.
 */
-class Session : gobject.object.ObjectG
+class Session : gobject.object.ObjectWrap
 {
 
   /** */
@@ -82,9 +82,290 @@ class Session : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Session self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptLanguage` property.
+      Returns: If non-null, the value to use for the "Accept-Language" header
+      on `class@Message`s sent from this session.
+      
+      Setting this will disable `property@Session:accept-language-auto`.
+  */
+  @property string acceptLanguage()
+  {
+    return getAcceptLanguage();
+  }
+
+  /**
+      Set `acceptLanguage` property.
+      Params:
+        propval = If non-null, the value to use for the "Accept-Language" header
+        on `class@Message`s sent from this session.
+        
+        Setting this will disable `property@Session:accept-language-auto`.
+  */
+  @property void acceptLanguage(string propval)
+  {
+    return setAcceptLanguage(propval);
+  }
+
+  /**
+      Get `acceptLanguageAuto` property.
+      Returns: If true, #SoupSession will automatically set the string
+      for the "Accept-Language" header on every `class@Message`
+      sent, based on the return value of `func@GLib.get_language_names`.
+      
+      Setting this will override any previous value of
+      `property@Session:accept-language`.
+  */
+  @property bool acceptLanguageAuto()
+  {
+    return getAcceptLanguageAuto();
+  }
+
+  /**
+      Set `acceptLanguageAuto` property.
+      Params:
+        propval = If true, #SoupSession will automatically set the string
+        for the "Accept-Language" header on every `class@Message`
+        sent, based on the return value of `func@GLib.get_language_names`.
+        
+        Setting this will override any previous value of
+        `property@Session:accept-language`.
+  */
+  @property void acceptLanguageAuto(bool propval)
+  {
+    return setAcceptLanguageAuto(propval);
+  }
+
+  /**
+      Get `idleTimeout` property.
+      Returns: Connection lifetime (in seconds) when idle. Any connection
+      left idle longer than this will be closed.
+      
+      Although you can change this property at any time, it will
+      only affect newly-created connections, not currently-open
+      ones. You can call [soup.session.Session.abort] after setting this
+      if you want to ensure that all future connections will have
+      this timeout value.
+  */
+  @property uint idleTimeout()
+  {
+    return getIdleTimeout();
+  }
+
+  /**
+      Set `idleTimeout` property.
+      Params:
+        propval = Connection lifetime (in seconds) when idle. Any connection
+        left idle longer than this will be closed.
+        
+        Although you can change this property at any time, it will
+        only affect newly-created connections, not currently-open
+        ones. You can call [soup.session.Session.abort] after setting this
+        if you want to ensure that all future connections will have
+        this timeout value.
+  */
+  @property void idleTimeout(uint propval)
+  {
+    return setIdleTimeout(propval);
+  }
+
+  /**
+      Get `proxyResolver` property.
+      Returns: A [gio.proxy_resolver.ProxyResolver] to use with this session.
+      
+      If no proxy resolver is set, then the default proxy resolver
+      will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
+      You can set it to null if you don't want to use proxies, or
+      set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
+      what proxies get used.
+  */
+  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  {
+    return getProxyResolver();
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = A [gio.proxy_resolver.ProxyResolver] to use with this session.
+        
+        If no proxy resolver is set, then the default proxy resolver
+        will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
+        You can set it to null if you don't want to use proxies, or
+        set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
+        what proxies get used.
+  */
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  {
+    return setProxyResolver(propval);
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: The timeout (in seconds) for socket I/O operations
+      (including connecting to a server, and waiting for a reply
+      to an HTTP request).
+      
+      Although you can change this property at any time, it will
+      only affect newly-created connections, not currently-open
+      ones. You can call [soup.session.Session.abort] after setting this
+      if you want to ensure that all future connections will have
+      this timeout value.
+      
+      Not to be confused with `property@Session:idle-timeout` (which is
+      the length of time that idle persistent connections will be
+      kept open).
+  */
+  @property uint timeout()
+  {
+    return getTimeout();
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout (in seconds) for socket I/O operations
+        (including connecting to a server, and waiting for a reply
+        to an HTTP request).
+        
+        Although you can change this property at any time, it will
+        only affect newly-created connections, not currently-open
+        ones. You can call [soup.session.Session.abort] after setting this
+        if you want to ensure that all future connections will have
+        this timeout value.
+        
+        Not to be confused with `property@Session:idle-timeout` (which is
+        the length of time that idle persistent connections will be
+        kept open).
+  */
+  @property void timeout(uint propval)
+  {
+    return setTimeout(propval);
+  }
+
+  /**
+      Get `tlsDatabase` property.
+      Returns: Sets the [gio.tls_database.TlsDatabase] to use for validating SSL/TLS
+      certificates.
+      
+      If no certificate database is set, then the default database will be
+      used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+  */
+  @property gio.tls_database.TlsDatabase tlsDatabase()
+  {
+    return getTlsDatabase();
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = Sets the [gio.tls_database.TlsDatabase] to use for validating SSL/TLS
+        certificates.
+        
+        If no certificate database is set, then the default database will be
+        used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+  */
+  @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
+  {
+    return setTlsDatabase(propval);
+  }
+
+  /**
+      Get `tlsInteraction` property.
+      Returns: A [gio.tls_interaction.TlsInteraction] object that will be passed on to any
+      [gio.tls_connection.TlsConnection]s created by the session.
+      
+      This can be used to provide client-side certificates, for example.
+  */
+  @property gio.tls_interaction.TlsInteraction tlsInteraction()
+  {
+    return getTlsInteraction();
+  }
+
+  /**
+      Set `tlsInteraction` property.
+      Params:
+        propval = A [gio.tls_interaction.TlsInteraction] object that will be passed on to any
+        [gio.tls_connection.TlsConnection]s created by the session.
+        
+        This can be used to provide client-side certificates, for example.
+  */
+  @property void tlsInteraction(gio.tls_interaction.TlsInteraction propval)
+  {
+    return setTlsInteraction(propval);
+  }
+
+  /**
+      Get `userAgent` property.
+      Returns: User-Agent string.
+      
+      If non-null, the value to use for the "User-Agent" header
+      on `class@Message`s sent from this session.
+      
+      RFC 2616 says: "The User-Agent request-header field
+      contains information about the user agent originating the
+      request. This is for statistical purposes, the tracing of
+      protocol violations, and automated recognition of user
+      agents for the sake of tailoring responses to avoid
+      particular user agent limitations. User agents SHOULD
+      include this field with requests."
+      
+      The User-Agent header contains a list of one or more
+      product tokens, separated by whitespace, with the most
+      significant product token coming first. The tokens must be
+      brief, ASCII, and mostly alphanumeric (although "-", "_",
+      and "." are also allowed), and may optionally include a "/"
+      followed by a version string. You may also put comments,
+      enclosed in parentheses, between or after the tokens.
+      
+      If you set a `property@Session:user-agent` property that has trailing
+      whitespace, #SoupSession will append its own product token
+      (eg, `libsoup/2.3.2`) to the end of the
+      header for you.
+  */
+  @property string userAgent()
+  {
+    return getUserAgent();
+  }
+
+  /**
+      Set `userAgent` property.
+      Params:
+        propval = User-Agent string.
+        
+        If non-null, the value to use for the "User-Agent" header
+        on `class@Message`s sent from this session.
+        
+        RFC 2616 says: "The User-Agent request-header field
+        contains information about the user agent originating the
+        request. This is for statistical purposes, the tracing of
+        protocol violations, and automated recognition of user
+        agents for the sake of tailoring responses to avoid
+        particular user agent limitations. User agents SHOULD
+        include this field with requests."
+        
+        The User-Agent header contains a list of one or more
+        product tokens, separated by whitespace, with the most
+        significant product token coming first. The tokens must be
+        brief, ASCII, and mostly alphanumeric (although "-", "_",
+        and "." are also allowed), and may optionally include a "/"
+        followed by a version string. You may also put comments,
+        enclosed in parentheses, between or after the tokens.
+        
+        If you set a `property@Session:user-agent` property that has trailing
+        whitespace, #SoupSession will append its own product token
+        (eg, `libsoup/2.3.2`) to the end of the
+        header for you.
+  */
+  @property void userAgent(string propval)
+  {
+    return setUserAgent(propval);
   }
 
   /**
@@ -119,7 +400,7 @@ class Session : gobject.object.ObjectG
   */
   void addFeature(soup.session_feature.SessionFeature feature)
   {
-    soup_session_add_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
+    soup_session_add_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(gobject.object.ObjectWrap)feature).cPtr(No.Dup) : null);
   }
 
   /**
@@ -183,8 +464,8 @@ class Session : gobject.object.ObjectG
   soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result)
   {
     SoupMessage* _cretval;
-    _cretval = soup_session_get_async_result_message(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, No.Take);
+    _cretval = soup_session_get_async_result_message(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +481,7 @@ class Session : gobject.object.ObjectG
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature(cast(SoupSession*)cPtr, featureType);
-    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +499,7 @@ class Session : gobject.object.ObjectG
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature_for_message(cast(SoupSession*)cPtr, featureType, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +524,7 @@ class Session : gobject.object.ObjectG
   {
     GInetSocketAddress* _cretval;
     _cretval = soup_session_get_local_address(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GInetSocketAddress*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GInetSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +560,7 @@ class Session : gobject.object.ObjectG
   {
     GProxyResolver* _cretval;
     _cretval = soup_session_get_proxy_resolver(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -291,7 +572,7 @@ class Session : gobject.object.ObjectG
   {
     GSocketConnectable* _cretval;
     _cretval = soup_session_get_remote_connectable(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -315,7 +596,7 @@ class Session : gobject.object.ObjectG
   {
     GTlsDatabase* _cretval;
     _cretval = soup_session_get_tls_database(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -327,7 +608,7 @@ class Session : gobject.object.ObjectG
   {
     GTlsInteraction* _cretval;
     _cretval = soup_session_get_tls_interaction(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -385,7 +666,7 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -399,15 +680,15 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: true if the preconnect succeeded, or false in case of error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool preconnectFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = soup_session_preconnect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = soup_session_preconnect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -419,7 +700,7 @@ class Session : gobject.object.ObjectG
   */
   void removeFeature(soup.session_feature.SessionFeature feature)
   {
-    soup_session_remove_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
+    soup_session_remove_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(gobject.object.ObjectWrap)feature).cPtr(No.Dup) : null);
   }
 
   /**
@@ -459,7 +740,7 @@ class Session : gobject.object.ObjectG
         cancellable = a #GCancellable
       Returns: a #GInputStream for reading the
           response body, or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -467,8 +748,8 @@ class Session : gobject.object.ObjectG
     GError *_err;
     _cretval = soup_session_send(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -485,7 +766,7 @@ class Session : gobject.object.ObjectG
         msg = a #SoupMessage
         cancellable = a #GCancellable
       Returns: a #GBytes, or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -493,7 +774,7 @@ class Session : gobject.object.ObjectG
     GError *_err;
     _cretval = soup_session_send_and_read(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -522,7 +803,7 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -538,15 +819,15 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: a #GBytes, or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   glib.bytes.Bytes sendAndReadFinish(gio.async_result.AsyncResult result)
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = soup_session_send_and_read_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send_and_read_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -562,7 +843,7 @@ class Session : gobject.object.ObjectG
         flags = a set of #GOutputStreamSpliceFlags
         cancellable = a #GCancellable
       Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -570,7 +851,7 @@ class Session : gobject.object.ObjectG
     GError *_err;
     _retval = soup_session_send_and_splice(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, outStream ? cast(GOutputStream*)outStream.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -596,7 +877,7 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -610,15 +891,15 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t sendAndSpliceFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = soup_session_send_and_splice_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = soup_session_send_and_splice_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -645,7 +926,7 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -663,16 +944,16 @@ class Session : gobject.object.ObjectG
         result = the #GAsyncResult passed to your callback
       Returns: a #GInputStream for reading the
           response body, or null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream sendFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_session_send_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -732,7 +1013,7 @@ class Session : gobject.object.ObjectG
   */
   void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
-    soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
+    soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(gobject.object.ObjectWrap)proxyResolver).cPtr(No.Dup) : null);
   }
 
   /**
@@ -832,7 +1113,7 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -858,16 +1139,16 @@ class Session : gobject.object.ObjectG
         result = the #GAsyncResult passed to your callback
       Returns: a new #SoupWebsocketConnection, or
           null on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   soup.websocket_connection.WebsocketConnection websocketConnectFinish(gio.async_result.AsyncResult result)
   {
     SoupWebsocketConnection* _cretval;
     GError *_err;
-    _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 

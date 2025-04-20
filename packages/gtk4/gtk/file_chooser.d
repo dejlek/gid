@@ -69,6 +69,100 @@ interface FileChooser
   }
 
   /**
+      Get `action` property.
+      Returns: The type of operation that the file chooser is performing.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gtk.types.FileChooserAction action();
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The type of operation that the file chooser is performing.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void action(gtk.types.FileChooserAction propval);
+
+  /**
+      Get `createFolders` property.
+      Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+      will offer the user to create new folders.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property bool createFolders();
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+        will offer the user to create new folders.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void createFolders(bool propval);
+
+  /**
+      Get `filter` property.
+      Returns: The current filter for selecting files that are displayed.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gtk.file_filter.FileFilter filter();
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The current filter for selecting files that are displayed.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void filter(gtk.file_filter.FileFilter propval);
+
+  /**
+      Get `filters` property.
+      Returns: A [gio.list_model.ListModel] containing the filters that have been
+      added with [gtk.file_chooser.FileChooser.addFilter].
+      
+      The returned object should not be modified. It may
+      or may not be updated for later changes.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gio.list_model.ListModel filters();
+
+  /**
+      Get `selectMultiple` property.
+      Returns: Whether to allow multiple files to be selected.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property bool selectMultiple();
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Whether to allow multiple files to be selected.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property void selectMultiple(bool propval);
+
+  /**
+      Get `shortcutFolders` property.
+      Returns: A [gio.list_model.ListModel] containing the shortcut folders that have been
+      added with [gtk.file_chooser.FileChooser.addShortcutFolder].
+      
+      The returned object should not be modified. It may
+      or may not be updated for later changes.
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  @property gio.list_model.ListModel shortcutFolders();
+
+  /**
       Adds a 'choice' to the file chooser.
       
       This is typically implemented as a combobox or, for boolean choices,
@@ -112,7 +206,7 @@ interface FileChooser
         folder = a [gio.file.File] for the folder to add
       Returns: true if the folder could be added successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -178,7 +272,7 @@ interface FileChooser
       If the file chooser is in folder mode, this function returns
       the selected folder.
       Returns: a selected [gio.file.File]. You own the
-          returned file; use [gobject.object.ObjectG.unref] to release it.
+          returned file; use [gobject.object.ObjectWrap.unref] to release it.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -189,7 +283,7 @@ interface FileChooser
       of chooser as [gio.file.File].
       Returns: a list model containing a [gio.file.File] for each
           selected file and subfolder in the current folder. Free the returned
-          list with [gobject.object.ObjectG.unref].
+          list with [gobject.object.ObjectWrap.unref].
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -265,7 +359,7 @@ interface FileChooser
         folder = a [gio.file.File] for the folder to remove
       Returns: true if the folder could be removed successfully,
           false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -321,7 +415,7 @@ interface FileChooser
         file = the [gio.file.File] for the new folder
       Returns: true if the folder could be changed successfully, false
           otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -396,7 +490,7 @@ interface FileChooser
       Params:
         file = the [gio.file.File] to set as current
       Returns: Not useful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */

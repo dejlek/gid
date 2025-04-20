@@ -16,7 +16,7 @@ import gobject.object;
     a [gio.dbus_object_proxy.DBusObjectProxy] yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
     is used to obtain it.
 */
-class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
+class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 {
 
   /** */
@@ -38,6 +38,7 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusObjectProxy self()
   {
     return this;
@@ -71,7 +72,7 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 }

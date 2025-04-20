@@ -3,10 +3,12 @@ module gtk.cell_renderer_combo;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer_text;
 import gtk.tree_iter;
+import gtk.tree_model;
 import gtk.types;
 
 /**
@@ -45,15 +47,93 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRendererCombo self()
   {
     return this;
   }
 
   /**
+      Get `hasEntry` property.
+      Returns: If true, the cell renderer will include an entry and allow to enter
+      values other than the ones in the popup list.
+  */
+  @property bool hasEntry()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("has-entry");
+  }
+
+  /**
+      Set `hasEntry` property.
+      Params:
+        propval = If true, the cell renderer will include an entry and allow to enter
+        values other than the ones in the popup list.
+  */
+  @property void hasEntry(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("has-entry", propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: Holds a tree model containing the possible values for the combo box.
+      Use the text_column property to specify the column holding the values.
+  */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.tree_model.TreeModel)("model");
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Holds a tree model containing the possible values for the combo box.
+        Use the text_column property to specify the column holding the values.
+  */
+  @property void model(gtk.tree_model.TreeModel propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.tree_model.TreeModel)("model", propval);
+  }
+
+  /**
+      Get `textColumn` property.
+      Returns: Specifies the model column which holds the possible values for the
+      combo box.
+      
+      Note that this refers to the model specified in the model property,
+      not the model backing the tree view to which
+      this cell renderer is attached.
+      
+      #GtkCellRendererCombo automatically adds a text cell renderer for
+      this column to its combo box.
+  */
+  @property int textColumn()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("text-column");
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = Specifies the model column which holds the possible values for the
+        combo box.
+        
+        Note that this refers to the model specified in the model property,
+        not the model backing the tree view to which
+        this cell renderer is attached.
+        
+        #GtkCellRendererCombo automatically adds a text cell renderer for
+        this column to its combo box.
+  */
+  @property void textColumn(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("text-column", propval);
+  }
+
+  /**
       Creates a new #GtkCellRendererCombo.
       Adjust how text is drawn using object properties.
-      Object properties can be set globally (with [gobject.object.ObjectG.set]).
+      Object properties can be set globally (with [gobject.object.ObjectWrap.set]).
       Also, with #GtkTreeViewColumn, you can bind a property to a value
       in a #GtkTreeModel. For example, you can bind the “text” property
       on the cell renderer to a string value in the model, thus rendering

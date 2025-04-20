@@ -363,9 +363,53 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellArea self()
   {
     return this;
+  }
+
+  /**
+      Get `editWidget` property.
+      Returns: The widget currently editing the edited cell
+      
+      This property is read-only and only changes as
+      a result of a call [gtk.cell_area.CellArea.activateCell].
+  */
+  @property gtk.cell_editable.CellEditable editWidget()
+  {
+    return getEditWidget();
+  }
+
+  /**
+      Get `editedCell` property.
+      Returns: The cell in the area that is currently edited
+      
+      This property is read-only and only changes as
+      a result of a call [gtk.cell_area.CellArea.activateCell].
+  */
+  @property gtk.cell_renderer.CellRenderer editedCell()
+  {
+    return getEditedCell();
+  }
+
+  /**
+      Get `focusCell` property.
+      Returns: The cell in the area that currently has focus
+  */
+  @property gtk.cell_renderer.CellRenderer focusCell()
+  {
+    return getFocusCell();
+  }
+
+  /**
+      Set `focusCell` property.
+      Params:
+        propval = The cell in the area that currently has focus
+  */
+  @property void focusCell(gtk.cell_renderer.CellRenderer propval)
+  {
+    return setFocusCell(propval);
   }
 
   mixin BuildableT!();
@@ -455,7 +499,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void applyAttributes(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_cell_area_apply_attributes(cast(GtkCellArea*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, isExpander, isExpanded);
+    gtk_cell_area_apply_attributes(cast(GtkCellArea*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel).cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, isExpander, isExpanded);
   }
 
   /**
@@ -554,7 +598,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellAreaContext* _cretval;
     _cretval = gtk_cell_area_copy_context(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.cell_area_context.CellAreaContext)(cast(GtkCellAreaContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_area_context.CellAreaContext)(cast(GtkCellAreaContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -571,7 +615,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellAreaContext* _cretval;
     _cretval = gtk_cell_area_create_context(cast(GtkCellArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_area_context.CellAreaContext)(cast(GtkCellAreaContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_area_context.CellAreaContext)(cast(GtkCellAreaContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -625,7 +669,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     {
       auto _dlg = cast(gtk.types.CellCallback*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -651,7 +695,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     {
       auto _dlg = cast(gtk.types.CellAllocCallback*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take), cellArea ? new gdk.rectangle.Rectangle(cast(void*)cellArea, No.Take) : null, cellBackground ? new gdk.rectangle.Rectangle(cast(void*)cellBackground, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take), cellArea ? new gdk.rectangle.Rectangle(cast(void*)cellArea, No.Take) : null, cellBackground ? new gdk.rectangle.Rectangle(cast(void*)cellBackground, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -699,7 +743,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     GtkCellRenderer* _cretval;
     GdkRectangle _allocArea;
     _cretval = gtk_cell_area_get_cell_at_position(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, x, y, &_allocArea);
-    auto _retval = ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
     allocArea = new gdk.rectangle.Rectangle(cast(void*)&_allocArea, No.Take);
     return _retval;
   }
@@ -731,7 +775,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellEditable* _cretval;
     _cretval = gtk_cell_area_get_edit_widget(cast(GtkCellArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -744,7 +788,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_area_get_edited_cell(cast(GtkCellArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -756,7 +800,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_area_get_focus_cell(cast(GtkCellArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -778,7 +822,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_area_get_focus_from_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 

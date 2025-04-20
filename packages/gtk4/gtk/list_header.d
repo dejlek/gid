@@ -16,7 +16,7 @@ import gtk.widget;
     objects via their factory, but provide a different set of properties suitable
     for managing the header instead of individual items.
 */
-class ListHeader : gobject.object.ObjectG
+class ListHeader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -38,9 +38,65 @@ class ListHeader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ListHeader self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: Widget used for display.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
+  }
+
+  /**
+      Get `end` property.
+      Returns: The first position no longer part of this section.
+  */
+  @property uint end()
+  {
+    return getEnd();
+  }
+
+  /**
+      Get `item` property.
+      Returns: The item at the start of the section.
+  */
+  @property gobject.object.ObjectWrap item()
+  {
+    return getItem();
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: Number of items in this section.
+  */
+  @property uint nItems()
+  {
+    return getNItems();
+  }
+
+  /**
+      Get `start` property.
+      Returns: First position of items in this section.
+  */
+  @property uint start()
+  {
+    return getStart();
   }
 
   /**
@@ -52,7 +108,7 @@ class ListHeader : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_header_get_child(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,16 +129,16 @@ class ListHeader : gobject.object.ObjectG
   /**
       Gets the model item at the start of the section.
       This is the item that occupies the list model at position
-      [gtk.list_header.ListHeader.guint].
+      [gtk.list_header.ListHeader.start].
       
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  gobject.object.ObjectG getItem()
+  gobject.object.ObjectWrap getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_list_header_get_item(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

@@ -22,7 +22,7 @@ import webkit.website_data_manager;
 /**
     Manages network configuration.
 */
-class NetworkSession : gobject.object.ObjectG
+class NetworkSession : gobject.object.ObjectWrap
 {
 
   /** */
@@ -83,7 +83,7 @@ class NetworkSession : gobject.object.ObjectG
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_new_ephemeral();
-    auto _retval = ObjectG.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class NetworkSession : gobject.object.ObjectG
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_get_default();
-    auto _retval = ObjectG.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class NetworkSession : gobject.object.ObjectG
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = webkit_network_session_download_uri(cast(WebKitNetworkSession*)cPtr, _uri);
-    auto _retval = ObjectG.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class NetworkSession : gobject.object.ObjectG
   {
     WebKitCookieManager* _cretval;
     _cretval = webkit_network_session_get_cookie_manager(cast(WebKitNetworkSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.cookie_manager.CookieManager)(cast(WebKitCookieManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.cookie_manager.CookieManager)(cast(WebKitCookieManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class NetworkSession : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -219,15 +219,15 @@ class NetworkSession : gobject.object.ObjectG
       Returns: a #GList of #WebKitITPThirdParty.
            You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty<!-- -->s with
            [webkit.itpthird_party.ITPThirdParty.unref] when you're done with them.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   webkit.itpthird_party.ITPThirdParty[] getItpSummaryFinish(gio.async_result.AsyncResult result)
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -265,7 +265,7 @@ class NetworkSession : gobject.object.ObjectG
   {
     WebKitWebsiteDataManager* _cretval;
     _cretval = webkit_network_session_get_website_data_manager(cast(WebKitNetworkSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(webkit.website_data_manager.WebsiteDataManager)(cast(WebKitWebsiteDataManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.website_data_manager.WebsiteDataManager)(cast(WebKitWebsiteDataManager*)_cretval, No.Take);
     return _retval;
   }
 

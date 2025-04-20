@@ -15,7 +15,7 @@ import panel.c.types;
 import panel.types;
 
 /** */
-class SaveDelegate : gobject.object.ObjectG
+class SaveDelegate : gobject.object.ObjectWrap
 {
 
   /** */
@@ -37,9 +37,156 @@ class SaveDelegate : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SaveDelegate self()
   {
     return this;
+  }
+
+  /**
+      Get `icon` property.
+      Returns: The "icon" property contains a #GIcon that describes the save
+      operation. Generally, this should be the symbolic icon of the
+      document class you are saving.
+      
+      Alternatively, you can use #PanelSaveDelegate:icon-name for a
+      named icon.
+  */
+  @property gio.icon.Icon icon()
+  {
+    return getIcon();
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The "icon" property contains a #GIcon that describes the save
+        operation. Generally, this should be the symbolic icon of the
+        document class you are saving.
+        
+        Alternatively, you can use #PanelSaveDelegate:icon-name for a
+        named icon.
+  */
+  @property void icon(gio.icon.Icon propval)
+  {
+    return setIcon(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The "icon-name" property contains the name of an icon to use when
+      showing information about the save operation in UI such as a save
+      dialog.
+      
+      You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
+      an icon name.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The "icon-name" property contains the name of an icon to use when
+        showing information about the save operation in UI such as a save
+        dialog.
+        
+        You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
+        an icon name.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `isDraft` property.
+      Returns: The "is-draft" property indicates that the document represented by the
+      delegate is a draft and might be lost of not saved.
+  */
+  @property bool isDraft()
+  {
+    return getIsDraft();
+  }
+
+  /**
+      Set `isDraft` property.
+      Params:
+        propval = The "is-draft" property indicates that the document represented by the
+        delegate is a draft and might be lost of not saved.
+  */
+  @property void isDraft(bool propval)
+  {
+    return setIsDraft(propval);
+  }
+
+  /**
+      Get `progress` property.
+      Returns: The "progress" property contains progress between 0.0 and 1.0 and
+      should be updated by the delegate implementation as saving progresses.
+  */
+  @property double progress()
+  {
+    return getProgress();
+  }
+
+  /**
+      Set `progress` property.
+      Params:
+        propval = The "progress" property contains progress between 0.0 and 1.0 and
+        should be updated by the delegate implementation as saving progresses.
+  */
+  @property void progress(double propval)
+  {
+    return setProgress(propval);
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The "subtitle" property contains additional information that may
+      not make sense to put in the title. This might include the directory
+      that the file will be saved within.
+  */
+  @property string subtitle()
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The "subtitle" property contains additional information that may
+        not make sense to put in the title. This might include the directory
+        that the file will be saved within.
+  */
+  @property void subtitle(string propval)
+  {
+    return setSubtitle(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The "title" property contains the title of the document being saved.
+      Generally, this should be the base name of the document such as
+      `file.txt`.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The "title" property contains the title of the document being saved.
+        Generally, this should be the base name of the document such as
+        `file.txt`.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
   }
 
   /**
@@ -73,7 +220,7 @@ class SaveDelegate : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = panel_save_delegate_get_icon(cast(PanelSaveDelegate*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +284,7 @@ class SaveDelegate : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -150,9 +297,9 @@ class SaveDelegate : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = panel_save_delegate_save_finish(cast(PanelSaveDelegate*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = panel_save_delegate_save_finish(cast(PanelSaveDelegate*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -164,7 +311,7 @@ class SaveDelegate : gobject.object.ObjectG
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    panel_save_delegate_set_icon(cast(PanelSaveDelegate*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    panel_save_delegate_set_icon(cast(PanelSaveDelegate*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

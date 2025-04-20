@@ -17,7 +17,7 @@ class ScrollEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.ScrollEvent");
+      throw new GidConstructException("Null instance pointer for gdk.scroll_event.ScrollEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

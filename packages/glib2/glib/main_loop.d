@@ -40,6 +40,7 @@ class MainLoop : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MainLoop self()
   {
     return this;

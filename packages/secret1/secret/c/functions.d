@@ -96,9 +96,9 @@ __gshared extern(C)
   // Prompt
   GType function() c_secret_prompt_get_type; ///
   void function(SecretPrompt* self, const(char)* windowId, const(GVariantType)* returnType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_prompt_perform; ///
-  VariantC* function(SecretPrompt* self, GAsyncResult* result, GError** _err) c_secret_prompt_perform_finish; ///
-  VariantC* function(SecretPrompt* self, const(char)* windowId, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_prompt_perform_sync; ///
-  VariantC* function(SecretPrompt* self, const(char)* windowId, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_prompt_run; ///
+  GVariant* function(SecretPrompt* self, GAsyncResult* result, GError** _err) c_secret_prompt_perform_finish; ///
+  GVariant* function(SecretPrompt* self, const(char)* windowId, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_prompt_perform_sync; ///
+  GVariant* function(SecretPrompt* self, const(char)* windowId, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_prompt_run; ///
 
   // Retrievable
   GType function() c_secret_retrievable_get_type; ///
@@ -138,11 +138,11 @@ __gshared extern(C)
   void function(SecretService* self, const(char)* collectionPath, GHashTable* properties, SecretValue* value, SecretItemCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_create_item_dbus_path; ///
   char* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_create_item_dbus_path_finish; ///
   char* function(SecretService* self, const(char)* collectionPath, GHashTable* properties, SecretValue* value, SecretItemCreateFlags flags, GCancellable* cancellable, GError** _err) c_secret_service_create_item_dbus_path_sync; ///
-  SecretValue* function(SecretService* service, VariantC* value) c_secret_service_decode_dbus_secret; ///
+  SecretValue* function(SecretService* service, GVariant* value) c_secret_service_decode_dbus_secret; ///
   void function(SecretService* self, const(char)* itemPath, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_delete_item_dbus_path; ///
   bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_delete_item_dbus_path_finish; ///
   bool function(SecretService* self, const(char)* itemPath, GCancellable* cancellable, GError** _err) c_secret_service_delete_item_dbus_path_sync; ///
-  VariantC* function(SecretService* service, SecretValue* value) c_secret_service_encode_dbus_secret; ///
+  GVariant* function(SecretService* service, SecretValue* value) c_secret_service_encode_dbus_secret; ///
   void function(SecretService* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_ensure_session; ///
   bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_ensure_session_finish; ///
   bool function(SecretService* self, GCancellable* cancellable, GError** _err) c_secret_service_ensure_session_sync; ///
@@ -172,10 +172,10 @@ __gshared extern(C)
   SecretValue* function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_service_lookup_sync; ///
   void function(SecretService* self, SecretPrompt* prompt, const(GVariantType)* returnType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_prompt; ///
   void function(SecretService* self, const(char)* promptPath, const(GVariantType)* returnType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_prompt_at_dbus_path; ///
-  VariantC* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_prompt_at_dbus_path_finish; ///
-  VariantC* function(SecretService* self, const(char)* promptPath, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_service_prompt_at_dbus_path_sync; ///
-  VariantC* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_prompt_finish; ///
-  VariantC* function(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_service_prompt_sync; ///
+  GVariant* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_prompt_at_dbus_path_finish; ///
+  GVariant* function(SecretService* self, const(char)* promptPath, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_service_prompt_at_dbus_path_sync; ///
+  GVariant* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_prompt_finish; ///
+  GVariant* function(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) c_secret_service_prompt_sync; ///
   void function(SecretService* self, const(char)* alias_, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_read_alias_dbus_path; ///
   char* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_read_alias_dbus_path_finish; ///
   char* function(SecretService* self, const(char)* alias_, GCancellable* cancellable, GError** _err) c_secret_service_read_alias_dbus_path_sync; ///

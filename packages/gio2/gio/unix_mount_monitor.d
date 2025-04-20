@@ -11,7 +11,7 @@ import gobject.object;
 /**
     Watches #GUnixMounts for changes.
 */
-class UnixMountMonitor : gobject.object.ObjectG
+class UnixMountMonitor : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class UnixMountMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixMountMonitor self()
   {
     return this;
@@ -62,7 +63,7 @@ class UnixMountMonitor : gobject.object.ObjectG
       mounted filesystems as well as the list of mount points (ie: fstab
       entries).
       
-      You must only call [gobject.object.ObjectG.unref] on the return value from under
+      You must only call [gobject.object.ObjectWrap.unref] on the return value from under
       the same main context as you called this function.
       Returns: the #GUnixMountMonitor.
   */
@@ -70,7 +71,7 @@ class UnixMountMonitor : gobject.object.ObjectG
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
-    auto _retval = ObjectG.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

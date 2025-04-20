@@ -113,9 +113,58 @@ class Scale : gtk.range.Range
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scale self()
   {
     return this;
+  }
+
+  /** */
+  @property int digits()
+  {
+    return getDigits();
+  }
+
+  /** */
+  @property void digits(int propval)
+  {
+    return setDigits(propval);
+  }
+
+  /** */
+  @property bool drawValue()
+  {
+    return getDrawValue();
+  }
+
+  /** */
+  @property void drawValue(bool propval)
+  {
+    return setDrawValue(propval);
+  }
+
+  /** */
+  @property bool hasOrigin()
+  {
+    return getHasOrigin();
+  }
+
+  /** */
+  @property void hasOrigin(bool propval)
+  {
+    return setHasOrigin(propval);
+  }
+
+  /** */
+  @property gtk.types.PositionType valuePos()
+  {
+    return getValuePos();
+  }
+
+  /** */
+  @property void valuePos(gtk.types.PositionType propval)
+  {
+    return setValuePos(propval);
   }
 
   /**
@@ -156,7 +205,7 @@ class Scale : gtk.range.Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -239,7 +288,7 @@ class Scale : gtk.range.Range
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 

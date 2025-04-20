@@ -19,7 +19,7 @@ class AttrFontFeatures
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrFontFeatures");
+      throw new GidConstructException("Null instance pointer for pango.attr_font_features.AttrFontFeatures");
 
     cInstance = *cast(PangoAttrFontFeatures*)ptr;
 
@@ -33,16 +33,29 @@ class AttrFontFeatures
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
   }
 
+  /**
+      Get `features` field.
+      Returns: the features, as a string in CSS syntax
+  */
   @property string features()
   {
     return cToD!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
   }
 
+  /**
+      Set `features` field.
+      Params:
+        propval = the features, as a string in CSS syntax
+  */
   @property void features(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);

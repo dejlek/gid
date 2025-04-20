@@ -32,6 +32,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SocketAccessible self()
   {
     return this;

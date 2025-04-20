@@ -17,7 +17,7 @@ import json.types;
     from a tree of [json.node.Node] instances, and put it into a buffer
     or a file.
 */
-class Generator : gobject.object.ObjectG
+class Generator : gobject.object.ObjectWrap
 {
 
   /** */
@@ -39,9 +39,96 @@ class Generator : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Generator self()
   {
     return this;
+  }
+
+  /**
+      Get `indent` property.
+      Returns: Number of spaces to be used to indent when pretty printing.
+  */
+  @property uint indent()
+  {
+    return getIndent();
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Number of spaces to be used to indent when pretty printing.
+  */
+  @property void indent(uint propval)
+  {
+    return setIndent(propval);
+  }
+
+  /**
+      Get `indentChar` property.
+      Returns: The character that should be used when indenting in pretty print.
+  */
+  @property uint indentChar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("indent-char");
+  }
+
+  /**
+      Set `indentChar` property.
+      Params:
+        propval = The character that should be used when indenting in pretty print.
+  */
+  @property void indentChar(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("indent-char", propval);
+  }
+
+  /**
+      Get `pretty` property.
+      Returns: Whether the output should be "pretty-printed", with indentation and
+      newlines.
+      
+      The indentation level can be controlled by using the
+      [json.generator.Generator.indent] property.
+  */
+  @property bool pretty()
+  {
+    return getPretty();
+  }
+
+  /**
+      Set `pretty` property.
+      Params:
+        propval = Whether the output should be "pretty-printed", with indentation and
+        newlines.
+        
+        The indentation level can be controlled by using the
+        [json.generator.Generator.indent] property.
+  */
+  @property void pretty(bool propval)
+  {
+    return setPretty(propval);
+  }
+
+  /**
+      Get `root` property.
+      Returns: The root node to be used when constructing a JSON data
+      stream.
+  */
+  @property json.node.Node root()
+  {
+    return getRoot();
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root node to be used when constructing a JSON data
+        stream.
+  */
+  @property void root(json.node.Node propval)
+  {
+    return setRoot(propval);
   }
 
   /**
@@ -132,8 +219,8 @@ class Generator : gobject.object.ObjectG
       Sets whether the generated JSON should be pretty printed.
       
       Pretty printing will use indentation character specified in the
-      [json.generator.Generator.guint] property and the spacing
-      specified in the [json.generator.Generator.guint] property.
+      [json.generator.Generator.indent] property and the spacing
+      specified in the [json.generator.Generator.indent] property.
   
       Params:
         isPretty = whether the generated string should be pretty printed
@@ -185,7 +272,7 @@ class Generator : gobject.object.ObjectG
       Params:
         filename = the path to the target file
       Returns: true if saving was successful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool toFile(string filename)
   {
@@ -194,7 +281,7 @@ class Generator : gobject.object.ObjectG
     GError *_err;
     _retval = json_generator_to_file(cast(JsonGenerator*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -221,7 +308,7 @@ class Generator : gobject.object.ObjectG
         stream = the output stream used to write the JSON data
         cancellable = a [gio.cancellable.Cancellable]
       Returns: whether the write operation was successful
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool toStream(gio.output_stream.OutputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -229,7 +316,7 @@ class Generator : gobject.object.ObjectG
     GError *_err;
     _retval = json_generator_to_stream(cast(JsonGenerator*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

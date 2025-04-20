@@ -24,7 +24,7 @@ template WritableFileT()
     GError *_err;
     _retval = garrow_writable_file_write_at(cast(GArrowWritableFile*)cPtr, position, _data, _nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

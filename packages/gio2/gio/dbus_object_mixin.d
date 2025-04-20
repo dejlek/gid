@@ -26,14 +26,14 @@ template DBusObjectT()
       Params:
         interfaceName = A D-Bus interface name.
       Returns: null if not found, otherwise a
-          #GDBusInterface that must be freed with [gobject.object.ObjectG.unref].
+          #GDBusInterface that must be freed with [gobject.object.ObjectWrap.unref].
   */
   override gio.dbus_interface.DBusInterface getInterface(string interfaceName)
   {
     GDBusInterface* _cretval;
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_get_interface(cast(GDBusObject*)cPtr, _interfaceName);
-    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -41,7 +41,7 @@ template DBusObjectT()
       Gets the D-Bus interfaces associated with object.
       Returns: A list of #GDBusInterface instances.
           The returned list must be freed by [glib.list.List.free] after each element has been freed
-          with [gobject.object.ObjectG.unref].
+          with [gobject.object.ObjectWrap.unref].
   */
   override gio.dbus_interface.DBusInterface[] getInterfaces()
   {

@@ -4,6 +4,7 @@ module gtk.popover_menu;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -107,9 +108,22 @@ class PopoverMenu : gtk.popover.Popover
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PopoverMenu self()
   {
     return this;
+  }
+
+  /** */
+  @property string visibleSubmenu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("visible-submenu");
+  }
+
+  /** */
+  @property void visibleSubmenu(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("visible-submenu", propval);
   }
 
   /**

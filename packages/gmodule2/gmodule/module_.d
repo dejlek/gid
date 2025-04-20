@@ -22,7 +22,7 @@ class Module
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GModule.Module");
+      throw new GidConstructException("Null instance pointer for gmodule.module_.Module");
 
     cInstancePtr = cast(ModuleC*)ptr;
 
@@ -154,7 +154,7 @@ class Module
   }
 }
 
-class ModuleException : ErrorG
+class ModuleException : ErrorWrap
 {
   this(GError* err)
   {

@@ -47,6 +47,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixFDMessage self()
   {
     return this;
@@ -75,7 +76,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +93,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       Params:
         fd = a valid open file descriptor
       Returns: true in case of success, else false (and error is set)
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendFd(int fd)
   {
@@ -100,7 +101,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
     GError *_err;
     _retval = g_unix_fd_message_append_fd(cast(GUnixFDMessage*)cPtr, fd, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -114,7 +115,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 

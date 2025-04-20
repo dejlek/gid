@@ -25,6 +25,25 @@ interface TlsFileDatabase
   }
 
   /**
+      Get `anchors` property.
+      Returns: The path to a file containing PEM encoded certificate authority
+      root anchors. The certificates in this file will be treated as
+      root authorities for the purpose of verifying other certificates
+      via the [gio.tls_database.TlsDatabase.verifyChain] operation.
+  */
+  @property string anchors();
+
+  /**
+      Set `anchors` property.
+      Params:
+        propval = The path to a file containing PEM encoded certificate authority
+        root anchors. The certificates in this file will be treated as
+        root authorities for the purpose of verifying other certificates
+        via the [gio.tls_database.TlsDatabase.verifyChain] operation.
+  */
+  @property void anchors(string propval);
+
+  /**
       Creates a new #GTlsFileDatabase which uses anchor certificate authorities
       in anchors to verify certificate chains.
       
@@ -34,7 +53,7 @@ interface TlsFileDatabase
         anchors = filename of anchor certificate authorities.
       Returns: the new
         #GTlsFileDatabase, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.tls_file_database.TlsFileDatabase new_(string anchors)
   {
@@ -43,8 +62,8 @@ interface TlsFileDatabase
     GError *_err;
     _cretval = g_tls_file_database_new(_anchors, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 }

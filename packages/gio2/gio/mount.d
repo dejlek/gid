@@ -83,7 +83,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
   */
@@ -110,7 +110,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -120,7 +120,7 @@ interface Mount
       the home directory, or the root of the volume).
       Returns: a #GFile.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.file.File getDefaultLocation();
 
@@ -132,7 +132,7 @@ interface Mount
       Returns: a #GDrive or null if mount is not
              associated with a volume or a drive.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.drive.Drive getDrive();
 
@@ -140,7 +140,7 @@ interface Mount
       Gets the icon for mount.
       Returns: a #GIcon.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.icon.Icon getIcon();
 
@@ -156,7 +156,7 @@ interface Mount
       Gets the root directory on mount.
       Returns: a #GFile.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.file.File getRoot();
 
@@ -170,7 +170,7 @@ interface Mount
       Gets the symbolic icon for mount.
       Returns: a #GIcon.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.icon.Icon getSymbolicIcon();
 
@@ -191,7 +191,7 @@ interface Mount
       Returns: a #GVolume or null if mount is not
              associated with a volume.
              The returned object should be unreffed with
-             [gobject.object.ObjectG.unref] when no longer needed.
+             [gobject.object.ObjectWrap.unref] when no longer needed.
   */
   gio.volume.Volume getVolume();
 
@@ -227,7 +227,7 @@ interface Mount
         result = a #GAsyncResult
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string[] guessContentTypeFinish(gio.async_result.AsyncResult result);
 
@@ -248,7 +248,7 @@ interface Mount
         cancellable = optional #GCancellable object, null to ignore
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable = null);
 
@@ -307,7 +307,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully remounted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool remountFinish(gio.async_result.AsyncResult result);
 
@@ -340,7 +340,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
   */
@@ -367,7 +367,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool unmountWithOperationFinish(gio.async_result.AsyncResult result);
 

@@ -19,7 +19,7 @@ class AttrShape
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Pango.AttrShape");
+      throw new GidConstructException("Null instance pointer for pango.attr_shape.AttrShape");
 
     cInstance = *cast(PangoAttrShape*)ptr;
 
@@ -33,45 +33,87 @@ class AttrShape
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
   @property pango.attribute.Attribute attr()
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrShape*)cPtr).attr);
   }
 
+  /**
+      Get `inkRect` field.
+      Returns: the ink rectangle to restrict to
+  */
   @property pango.types.Rectangle inkRect()
   {
     return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).inkRect);
   }
 
+  /**
+      Set `inkRect` field.
+      Params:
+        propval = the ink rectangle to restrict to
+  */
   @property void inkRect(pango.types.Rectangle propval)
   {
     (cast(PangoAttrShape*)cPtr).inkRect = propval;
   }
 
+  /**
+      Get `logicalRect` field.
+      Returns: the logical rectangle to restrict to
+  */
   @property pango.types.Rectangle logicalRect()
   {
     return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).logicalRect);
   }
 
+  /**
+      Set `logicalRect` field.
+      Params:
+        propval = the logical rectangle to restrict to
+  */
   @property void logicalRect(pango.types.Rectangle propval)
   {
     (cast(PangoAttrShape*)cPtr).logicalRect = propval;
   }
 
+  /**
+      Get `copyFunc` field.
+      Returns: copy function for the user data
+  */
   @property PangoAttrDataCopyFunc copyFunc()
   {
     return (cast(PangoAttrShape*)cPtr).copyFunc;
   }
+
+  /**
+      Set `copyFunc` field.
+      Params:
+        propval = copy function for the user data
+  */
 
   @property void copyFunc(PangoAttrDataCopyFunc propval)
   {
     (cast(PangoAttrShape*)cPtr).copyFunc = propval;
   }
 
+  /**
+      Get `destroyFunc` field.
+      Returns: destroy function for the user data
+  */
   @property GDestroyNotify destroyFunc()
   {
     return (cast(PangoAttrShape*)cPtr).destroyFunc;
   }
+
+  /**
+      Set `destroyFunc` field.
+      Params:
+        propval = destroy function for the user data
+  */
 
   @property void destroyFunc(GDestroyNotify propval)
   {

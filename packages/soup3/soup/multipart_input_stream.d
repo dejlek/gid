@@ -52,6 +52,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MultipartInputStream self()
   {
     return this;
@@ -118,7 +119,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
         cancellable = a #GCancellable
       Returns: a new #GInputStream, or
           null if there are no more parts
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable = null)
   {
@@ -126,8 +127,8 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     GError *_err;
     _cretval = soup_multipart_input_stream_next_part(cast(SoupMultipartInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +149,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -164,16 +165,16 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Returns: a newly created
           [gio.input_stream.InputStream] for reading the next part or null if there are no
           more parts.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream nextPartFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

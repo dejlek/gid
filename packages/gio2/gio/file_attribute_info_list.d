@@ -40,21 +40,35 @@ class FileAttributeInfoList : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileAttributeInfoList self()
   {
     return this;
   }
 
+  /**
+      Get `infos` field.
+      Returns: an array of #GFileAttributeInfos.
+  */
   @property gio.file_attribute_info.FileAttributeInfo infos()
   {
     return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)cPtr).infos);
   }
 
+  /**
+      Get `nInfos` field.
+      Returns: the number of values in the array.
+  */
   @property int nInfos()
   {
     return (cast(GFileAttributeInfoList*)cPtr).nInfos;
   }
 
+  /**
+      Set `nInfos` field.
+      Params:
+        propval = the number of values in the array.
+  */
   @property void nInfos(int propval)
   {
     (cast(GFileAttributeInfoList*)cPtr).nInfos = propval;

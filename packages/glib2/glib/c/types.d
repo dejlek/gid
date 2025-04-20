@@ -5048,7 +5048,7 @@ struct GDebugKey
 struct GDir;
 
 /**
-    The [glib.error.ErrorG] structure contains information about
+    The [glib.error.ErrorWrap] structure contains information about
     an error that has occurred.
 */
 struct GError
@@ -5794,7 +5794,7 @@ struct GOptionEntry
           the location depends on the @arg type:
            - `G_OPTION_ARG_NONE`: [glib.types.SOURCE_REMOVE]
            - `G_OPTION_ARG_STRING`: [glib.types.LOG_DOMAIN]*
-           - `G_OPTION_ARG_INT`: [vte.types.SPAWN_REQUIRE_SYSTEMD_SCOPE]
+           - `G_OPTION_ARG_INT`: [webkit.types.MINOR_VERSION]
            - `G_OPTION_ARG_FILENAME`: [glib.types.LOG_DOMAIN]*
            - `G_OPTION_ARG_STRING_ARRAY`: [glib.types.LOG_DOMAIN]**
            - `G_OPTION_ARG_FILENAME_ARRAY`: [glib.types.LOG_DOMAIN]**
@@ -7599,6 +7599,254 @@ struct GUriParamsIter
 }
 
 /**
+    [glib.variant.Variant] is a variant datatype; it can contain one or more values
+    along with information about the type of the values.
+    
+    A [glib.variant.Variant] may contain simple types, like an integer, or a boolean value;
+    or complex types, like an array of two strings, or a dictionary of key
+    value pairs. A [glib.variant.Variant] is also immutable: once it’s been created neither
+    its type nor its content can be modified further.
+    
+    [glib.variant.Variant] is useful whenever data needs to be serialized, for example when
+    sending method parameters in D-Bus, or when saving settings using
+    [[gio.settings.Settings]](../gio/class.Settings.html).
+    
+    When creating a new [glib.variant.Variant], you pass the data you want to store in it
+    along with a string representing the type of data you wish to pass to it.
+    
+    For instance, if you want to create a [glib.variant.Variant] holding an integer value you
+    can use:
+    
+    ```c
+    GVariant *v = g_variant_new ("u", 40);
+    ```
+    
+    The string `u` in the first argument tells [glib.variant.Variant] that the data passed to
+    the constructor (`40`) is going to be an unsigned integer.
+    
+    More advanced examples of [glib.variant.Variant] in use can be found in documentation for
+    [[glib.variant.Variant] format strings](gvariant-format-strings.html#pointers).
+    
+    The range of possible values is determined by the type.
+    
+    The type system used by [glib.variant.Variant] is [glib.variant_type.VariantType].
+    
+    [glib.variant.Variant] instances always have a type and a value (which are given
+    at construction time).  The type and value of a [glib.variant.Variant] instance
+    can never change other than by the [glib.variant.Variant] itself being
+    destroyed.  A [glib.variant.Variant] cannot contain a pointer.
+    
+    [glib.variant.Variant] is reference counted using [glib.variant.Variant.ref_] and
+    [glib.variant.Variant.unref].  [glib.variant.Variant] also has floating reference counts —
+    see [glib.variant.Variant.refSink].
+    
+    [glib.variant.Variant] is completely threadsafe.  A [glib.variant.Variant] instance can be
+    concurrently accessed in any way from any number of threads without
+    problems.
+    
+    [glib.variant.Variant] is heavily optimised for dealing with data in serialized
+    form.  It works particularly well with data located in memory-mapped
+    files.  It can perform nearly all deserialization operations in a
+    small constant time, usually touching only a single memory page.
+    Serialized [glib.variant.Variant] data can also be sent over the network.
+    
+    [glib.variant.Variant] is largely compatible with D-Bus.  Almost all types of
+    [glib.variant.Variant] instances can be sent over D-Bus.  See [glib.variant_type.VariantType] for
+    exceptions.  (However, [glib.variant.Variant]’s serialization format is not the same
+    as the serialization format of a D-Bus message body: use
+    [GDBusMessage](../gio/class.DBusMessage.html), in the GIO library, for those.)
+    
+    For space-efficiency, the [glib.variant.Variant] serialization format does not
+    automatically include the variant’s length, type or endianness,
+    which must either be implied from context (such as knowledge that a
+    particular file format always contains a little-endian
+    `G_VARIANT_TYPE_VARIANT` which occupies the whole length of the file)
+    or supplied out-of-band (for instance, a length, type and/or endianness
+    indicator could be placed at the beginning of a file, network message
+    or network stream).
+    
+    A [glib.variant.Variant]’s size is limited mainly by any lower level operating
+    system constraints, such as the number of bits in [gobject.types.size_t].  For
+    example, it is reasonable to have a 2GB file mapped into memory
+    with [glib.mapped_file.MappedFile], and call [glib.variant.Variant.newFromData] on
+    it.
+    
+    For convenience to C programmers, [glib.variant.Variant] features powerful
+    varargs-based value construction and destruction.  This feature is
+    designed to be embedded in other libraries.
+    
+    There is a Python-inspired text language for describing [glib.variant.Variant]
+    values.  [glib.variant.Variant] includes a printer for this language and a parser
+    with type inferencing.
+    
+    ## Memory Use
+    
+    [glib.variant.Variant] tries to be quite efficient with respect to memory use.
+    This section gives a rough idea of how much memory is used by the
+    current implementation.  The information here is subject to change
+    in the future.
+    
+    The memory allocated by [glib.variant.Variant] can be grouped into 4 broad
+    purposes: memory for serialized data, memory for the type
+    information cache, buffer management memory and memory for the
+    [glib.variant.Variant] structure itself.
+    
+    ## Serialized Data Memory
+    
+    This is the memory that is used for storing [glib.variant.Variant] data in
+    serialized form.  This is what would be sent over the network or
+    what would end up on disk, not counting any indicator of the
+    endianness, or of the length or type of the top-level variant.
+    
+    The amount of memory required to store a boolean is 1 byte. 16,
+    32 and 64 bit integers and double precision floating point numbers
+    use their ‘natural’ size.  Strings (including object path and
+    signature strings) are stored with a nul terminator, and as such
+    use the length of the string plus 1 byte.
+    
+    ‘Maybe’ types use no space at all to represent the null value and
+    use the same amount of space (sometimes plus one byte) as the
+    equivalent non-maybe-typed value to represent the non-null case.
+    
+    Arrays use the amount of space required to store each of their
+    members, concatenated.  Additionally, if the items stored in an
+    array are not of a fixed-size (ie: strings, other arrays, etc)
+    then an additional framing offset is stored for each item.  The
+    size of this offset is either 1, 2 or 4 bytes depending on the
+    overall size of the container.  Additionally, extra padding bytes
+    are added as required for alignment of child values.
+    
+    Tuples (including dictionary entries) use the amount of space
+    required to store each of their members, concatenated, plus one
+    framing offset (as per arrays) for each non-fixed-sized item in
+    the tuple, except for the last one.  Additionally, extra padding
+    bytes are added as required for alignment of child values.
+    
+    Variants use the same amount of space as the item inside of the
+    variant, plus 1 byte, plus the length of the type string for the
+    item inside the variant.
+    
+    As an example, consider a dictionary mapping strings to variants.
+    In the case that the dictionary is empty, 0 bytes are required for
+    the serialization.
+    
+    If we add an item ‘width’ that maps to the int32 value of 500 then
+    we will use 4 bytes to store the int32 (so 6 for the variant
+    containing it) and 6 bytes for the string.  The variant must be
+    aligned to 8 after the 6 bytes of the string, so that’s 2 extra
+    bytes.  6 (string) + 2 (padding) + 6 (variant) is 14 bytes used
+    for the dictionary entry.  An additional 1 byte is added to the
+    array as a framing offset making a total of 15 bytes.
+    
+    If we add another entry, ‘title’ that maps to a nullable string
+    that happens to have a value of null, then we use 0 bytes for the
+    null value (and 3 bytes for the variant to contain it along with
+    its type string) plus 6 bytes for the string.  Again, we need 2
+    padding bytes.  That makes a total of 6 + 2 + 3 = 11 bytes.
+    
+    We now require extra padding between the two items in the array.
+    After the 14 bytes of the first item, that’s 2 bytes required.
+    We now require 2 framing offsets for an extra two
+    bytes. 14 + 2 + 11 + 2 = 29 bytes to encode the entire two-item
+    dictionary.
+    
+    ## Type Information Cache
+    
+    For each [glib.variant.Variant] type that currently exists in the program a type
+    information structure is kept in the type information cache.  The
+    type information structure is required for rapid deserialization.
+    
+    Continuing with the above example, if a [glib.variant.Variant] exists with the
+    type `a{sv}` then a type information struct will exist for
+    `a{sv}`, `{sv}`, `s`, and `v`.  Multiple uses of the same type
+    will share the same type information.  Additionally, all
+    single-digit types are stored in read-only static memory and do
+    not contribute to the writable memory footprint of a program using
+    [glib.variant.Variant].
+    
+    Aside from the type information structures stored in read-only
+    memory, there are two forms of type information.  One is used for
+    container types where there is a single element type: arrays and
+    maybe types.  The other is used for container types where there
+    are multiple element types: tuples and dictionary entries.
+    
+    Array type info structures are `6 * sizeof (void *)`, plus the
+    memory required to store the type string itself.  This means that
+    on 32-bit systems, the cache entry for `a{sv}` would require 30
+    bytes of memory (plus allocation overhead).
+    
+    Tuple type info structures are `6 * sizeof (void *)`, plus `4 *
+    sizeof (void *)` for each item in the tuple, plus the memory
+    required to store the type string itself.  A 2-item tuple, for
+    example, would have a type information structure that consumed
+    writable memory in the size of `14 * sizeof (void *)` (plus type
+    string)  This means that on 32-bit systems, the cache entry for
+    `{sv}` would require 61 bytes of memory (plus allocation overhead).
+    
+    This means that in total, for our `a{sv}` example, 91 bytes of
+    type information would be allocated.
+    
+    The type information cache, additionally, uses a [glib.hash_table.HashTable] to
+    store and look up the cached items and stores a pointer to this
+    hash table in static storage.  The hash table is freed when there
+    are zero items in the type cache.
+    
+    Although these sizes may seem large it is important to remember
+    that a program will probably only have a very small number of
+    different types of values in it and that only one type information
+    structure is required for many different values of the same type.
+    
+    ## Buffer Management Memory
+    
+    [glib.variant.Variant] uses an internal buffer management structure to deal
+    with the various different possible sources of serialized data
+    that it uses.  The buffer is responsible for ensuring that the
+    correct call is made when the data is no longer in use by
+    [glib.variant.Variant].  This may involve a `func@GLib.free` or
+    even [glib.mapped_file.MappedFile.unref].
+    
+    One buffer management structure is used for each chunk of
+    serialized data.  The size of the buffer management structure
+    is `4 * (void *)`.  On 32-bit systems, that’s 16 bytes.
+    
+    ## GVariant structure
+    
+    The size of a [glib.variant.Variant] structure is `6 * (void *)`.  On 32-bit
+    systems, that’s 24 bytes.
+    
+    [glib.variant.Variant] structures only exist if they are explicitly created
+    with API calls.  For example, if a [glib.variant.Variant] is constructed out of
+    serialized data for the example given above (with the dictionary)
+    then although there are 9 individual values that comprise the
+    entire dictionary (two keys, two values, two variants containing
+    the values, two dictionary entries, plus the dictionary itself),
+    only 1 [glib.variant.Variant] instance exists — the one referring to the
+    dictionary.
+    
+    If calls are made to start accessing the other values then
+    [glib.variant.Variant] instances will exist for those values only for as long
+    as they are in use (ie: until you call [glib.variant.Variant.unref]).  The
+    type information is shared.  The serialized data and the buffer
+    management structure for that serialized data is shared by the
+    child.
+    
+    ## Summary
+    
+    To put the entire example together, for our dictionary mapping
+    strings to variants (with two entries, as given above), we are
+    using 91 bytes of memory for type information, 29 bytes of memory
+    for the serialized data, 16 bytes for buffer management and 24
+    bytes for the [glib.variant.Variant] instance, or a total of 160 bytes, plus
+    allocation overhead.  If we were to use [glib.variant.Variant.getChildValue]
+    to access the two dictionary entries, we would use an additional 48
+    bytes.  If we were to have other dictionaries of the same type, we
+    would use more memory for the serialized data and buffer
+    management for those dictionaries, but the type information would
+    be shared.
+*/
+struct GVariant;
+
+/**
     A utility type for constructing container-type #GVariant instances.
     
     This is an opaque structure and may only be accessed using the
@@ -7730,254 +7978,6 @@ struct GVariantBuilder
 struct GVariantDict;
 
 /**
-    [glib.variant.VariantG] is a variant datatype; it can contain one or more values
-    along with information about the type of the values.
-    
-    A [glib.variant.VariantG] may contain simple types, like an integer, or a boolean value;
-    or complex types, like an array of two strings, or a dictionary of key
-    value pairs. A [glib.variant.VariantG] is also immutable: once it’s been created neither
-    its type nor its content can be modified further.
-    
-    [glib.variant.VariantG] is useful whenever data needs to be serialized, for example when
-    sending method parameters in D-Bus, or when saving settings using
-    [[gio.settings.Settings]](../gio/class.Settings.html).
-    
-    When creating a new [glib.variant.VariantG], you pass the data you want to store in it
-    along with a string representing the type of data you wish to pass to it.
-    
-    For instance, if you want to create a [glib.variant.VariantG] holding an integer value you
-    can use:
-    
-    ```c
-    GVariant *v = g_variant_new ("u", 40);
-    ```
-    
-    The string `u` in the first argument tells [glib.variant.VariantG] that the data passed to
-    the constructor (`40`) is going to be an unsigned integer.
-    
-    More advanced examples of [glib.variant.VariantG] in use can be found in documentation for
-    [[glib.variant.VariantG] format strings](gvariant-format-strings.html#pointers).
-    
-    The range of possible values is determined by the type.
-    
-    The type system used by [glib.variant.VariantG] is [glib.variant_type.VariantType].
-    
-    [glib.variant.VariantG] instances always have a type and a value (which are given
-    at construction time).  The type and value of a [glib.variant.VariantG] instance
-    can never change other than by the [glib.variant.VariantG] itself being
-    destroyed.  A [glib.variant.VariantG] cannot contain a pointer.
-    
-    [glib.variant.VariantG] is reference counted using [glib.variant.VariantG.ref_] and
-    [glib.variant.VariantG.unref].  [glib.variant.VariantG] also has floating reference counts —
-    see [glib.variant.VariantG.refSink].
-    
-    [glib.variant.VariantG] is completely threadsafe.  A [glib.variant.VariantG] instance can be
-    concurrently accessed in any way from any number of threads without
-    problems.
-    
-    [glib.variant.VariantG] is heavily optimised for dealing with data in serialized
-    form.  It works particularly well with data located in memory-mapped
-    files.  It can perform nearly all deserialization operations in a
-    small constant time, usually touching only a single memory page.
-    Serialized [glib.variant.VariantG] data can also be sent over the network.
-    
-    [glib.variant.VariantG] is largely compatible with D-Bus.  Almost all types of
-    [glib.variant.VariantG] instances can be sent over D-Bus.  See [glib.variant_type.VariantType] for
-    exceptions.  (However, [glib.variant.VariantG]’s serialization format is not the same
-    as the serialization format of a D-Bus message body: use
-    [GDBusMessage](../gio/class.DBusMessage.html), in the GIO library, for those.)
-    
-    For space-efficiency, the [glib.variant.VariantG] serialization format does not
-    automatically include the variant’s length, type or endianness,
-    which must either be implied from context (such as knowledge that a
-    particular file format always contains a little-endian
-    `G_VARIANT_TYPE_VARIANT` which occupies the whole length of the file)
-    or supplied out-of-band (for instance, a length, type and/or endianness
-    indicator could be placed at the beginning of a file, network message
-    or network stream).
-    
-    A [glib.variant.VariantG]’s size is limited mainly by any lower level operating
-    system constraints, such as the number of bits in [gobject.types.size_t].  For
-    example, it is reasonable to have a 2GB file mapped into memory
-    with [glib.mapped_file.MappedFile], and call [glib.variant.VariantG.newFromData] on
-    it.
-    
-    For convenience to C programmers, [glib.variant.VariantG] features powerful
-    varargs-based value construction and destruction.  This feature is
-    designed to be embedded in other libraries.
-    
-    There is a Python-inspired text language for describing [glib.variant.VariantG]
-    values.  [glib.variant.VariantG] includes a printer for this language and a parser
-    with type inferencing.
-    
-    ## Memory Use
-    
-    [glib.variant.VariantG] tries to be quite efficient with respect to memory use.
-    This section gives a rough idea of how much memory is used by the
-    current implementation.  The information here is subject to change
-    in the future.
-    
-    The memory allocated by [glib.variant.VariantG] can be grouped into 4 broad
-    purposes: memory for serialized data, memory for the type
-    information cache, buffer management memory and memory for the
-    [glib.variant.VariantG] structure itself.
-    
-    ## Serialized Data Memory
-    
-    This is the memory that is used for storing [glib.variant.VariantG] data in
-    serialized form.  This is what would be sent over the network or
-    what would end up on disk, not counting any indicator of the
-    endianness, or of the length or type of the top-level variant.
-    
-    The amount of memory required to store a boolean is 1 byte. 16,
-    32 and 64 bit integers and double precision floating point numbers
-    use their ‘natural’ size.  Strings (including object path and
-    signature strings) are stored with a nul terminator, and as such
-    use the length of the string plus 1 byte.
-    
-    ‘Maybe’ types use no space at all to represent the null value and
-    use the same amount of space (sometimes plus one byte) as the
-    equivalent non-maybe-typed value to represent the non-null case.
-    
-    Arrays use the amount of space required to store each of their
-    members, concatenated.  Additionally, if the items stored in an
-    array are not of a fixed-size (ie: strings, other arrays, etc)
-    then an additional framing offset is stored for each item.  The
-    size of this offset is either 1, 2 or 4 bytes depending on the
-    overall size of the container.  Additionally, extra padding bytes
-    are added as required for alignment of child values.
-    
-    Tuples (including dictionary entries) use the amount of space
-    required to store each of their members, concatenated, plus one
-    framing offset (as per arrays) for each non-fixed-sized item in
-    the tuple, except for the last one.  Additionally, extra padding
-    bytes are added as required for alignment of child values.
-    
-    Variants use the same amount of space as the item inside of the
-    variant, plus 1 byte, plus the length of the type string for the
-    item inside the variant.
-    
-    As an example, consider a dictionary mapping strings to variants.
-    In the case that the dictionary is empty, 0 bytes are required for
-    the serialization.
-    
-    If we add an item ‘width’ that maps to the int32 value of 500 then
-    we will use 4 bytes to store the int32 (so 6 for the variant
-    containing it) and 6 bytes for the string.  The variant must be
-    aligned to 8 after the 6 bytes of the string, so that’s 2 extra
-    bytes.  6 (string) + 2 (padding) + 6 (variant) is 14 bytes used
-    for the dictionary entry.  An additional 1 byte is added to the
-    array as a framing offset making a total of 15 bytes.
-    
-    If we add another entry, ‘title’ that maps to a nullable string
-    that happens to have a value of null, then we use 0 bytes for the
-    null value (and 3 bytes for the variant to contain it along with
-    its type string) plus 6 bytes for the string.  Again, we need 2
-    padding bytes.  That makes a total of 6 + 2 + 3 = 11 bytes.
-    
-    We now require extra padding between the two items in the array.
-    After the 14 bytes of the first item, that’s 2 bytes required.
-    We now require 2 framing offsets for an extra two
-    bytes. 14 + 2 + 11 + 2 = 29 bytes to encode the entire two-item
-    dictionary.
-    
-    ## Type Information Cache
-    
-    For each [glib.variant.VariantG] type that currently exists in the program a type
-    information structure is kept in the type information cache.  The
-    type information structure is required for rapid deserialization.
-    
-    Continuing with the above example, if a [glib.variant.VariantG] exists with the
-    type `a{sv}` then a type information struct will exist for
-    `a{sv}`, `{sv}`, `s`, and `v`.  Multiple uses of the same type
-    will share the same type information.  Additionally, all
-    single-digit types are stored in read-only static memory and do
-    not contribute to the writable memory footprint of a program using
-    [glib.variant.VariantG].
-    
-    Aside from the type information structures stored in read-only
-    memory, there are two forms of type information.  One is used for
-    container types where there is a single element type: arrays and
-    maybe types.  The other is used for container types where there
-    are multiple element types: tuples and dictionary entries.
-    
-    Array type info structures are `6 * sizeof (void *)`, plus the
-    memory required to store the type string itself.  This means that
-    on 32-bit systems, the cache entry for `a{sv}` would require 30
-    bytes of memory (plus allocation overhead).
-    
-    Tuple type info structures are `6 * sizeof (void *)`, plus `4 *
-    sizeof (void *)` for each item in the tuple, plus the memory
-    required to store the type string itself.  A 2-item tuple, for
-    example, would have a type information structure that consumed
-    writable memory in the size of `14 * sizeof (void *)` (plus type
-    string)  This means that on 32-bit systems, the cache entry for
-    `{sv}` would require 61 bytes of memory (plus allocation overhead).
-    
-    This means that in total, for our `a{sv}` example, 91 bytes of
-    type information would be allocated.
-    
-    The type information cache, additionally, uses a [glib.hash_table.HashTable] to
-    store and look up the cached items and stores a pointer to this
-    hash table in static storage.  The hash table is freed when there
-    are zero items in the type cache.
-    
-    Although these sizes may seem large it is important to remember
-    that a program will probably only have a very small number of
-    different types of values in it and that only one type information
-    structure is required for many different values of the same type.
-    
-    ## Buffer Management Memory
-    
-    [glib.variant.VariantG] uses an internal buffer management structure to deal
-    with the various different possible sources of serialized data
-    that it uses.  The buffer is responsible for ensuring that the
-    correct call is made when the data is no longer in use by
-    [glib.variant.VariantG].  This may involve a `func@GLib.free` or
-    even [glib.mapped_file.MappedFile.unref].
-    
-    One buffer management structure is used for each chunk of
-    serialized data.  The size of the buffer management structure
-    is `4 * (void *)`.  On 32-bit systems, that’s 16 bytes.
-    
-    ## GVariant structure
-    
-    The size of a [glib.variant.VariantG] structure is `6 * (void *)`.  On 32-bit
-    systems, that’s 24 bytes.
-    
-    [glib.variant.VariantG] structures only exist if they are explicitly created
-    with API calls.  For example, if a [glib.variant.VariantG] is constructed out of
-    serialized data for the example given above (with the dictionary)
-    then although there are 9 individual values that comprise the
-    entire dictionary (two keys, two values, two variants containing
-    the values, two dictionary entries, plus the dictionary itself),
-    only 1 [glib.variant.VariantG] instance exists — the one referring to the
-    dictionary.
-    
-    If calls are made to start accessing the other values then
-    [glib.variant.VariantG] instances will exist for those values only for as long
-    as they are in use (ie: until you call [glib.variant.VariantG.unref]).  The
-    type information is shared.  The serialized data and the buffer
-    management structure for that serialized data is shared by the
-    child.
-    
-    ## Summary
-    
-    To put the entire example together, for our dictionary mapping
-    strings to variants (with two entries, as given above), we are
-    using 91 bytes of memory for type information, 29 bytes of memory
-    for the serialized data, 16 bytes for buffer management and 24
-    bytes for the [glib.variant.VariantG] instance, or a total of 160 bytes, plus
-    allocation overhead.  If we were to use [glib.variant.VariantG.getChildValue]
-    to access the two dictionary entries, we would use an additional 48
-    bytes.  If we were to have other dictionaries of the same type, we
-    would use more memory for the serialized data and buffer
-    management for those dictionaries, but the type information would
-    be shared.
-*/
-struct VariantC;
-
-/**
     #GVariantIter is an opaque data structure and can only be accessed
     using the following functions.
 */
@@ -7988,25 +7988,25 @@ struct GVariantIter
 }
 
 /**
-    A type in the [glib.variant.VariantG] type system.
+    A type in the [glib.variant.Variant] type system.
     
-    This section introduces the [glib.variant.VariantG] type system. It is based, in
+    This section introduces the [glib.variant.Variant] type system. It is based, in
     large part, on the D-Bus type system, with two major changes and
     some minor lifting of restrictions. The
     [D-Bus specification](http://dbus.freedesktop.org/doc/dbus-specification.html),
     therefore, provides a significant amount of
-    information that is useful when working with [glib.variant.VariantG].
+    information that is useful when working with [glib.variant.Variant].
     
     The first major change with respect to the D-Bus type system is the
-    introduction of maybe (or ‘nullable’) types.  Any type in [glib.variant.VariantG]
+    introduction of maybe (or ‘nullable’) types.  Any type in [glib.variant.Variant]
     can be converted to a maybe type, in which case, `nothing` (or `null`)
     becomes a valid value.  Maybe types have been added by introducing the
     character `m` to type strings.
     
-    The second major change is that the [glib.variant.VariantG] type system supports
+    The second major change is that the [glib.variant.Variant] type system supports
     the concept of ‘indefinite types’ — types that are less specific than
     the normal types found in D-Bus.  For example, it is possible to speak
-    of ‘an array of any type’ in [glib.variant.VariantG], where the D-Bus type system
+    of ‘an array of any type’ in [glib.variant.Variant], where the D-Bus type system
     would require you to speak of ‘an array of integers’ or ‘an array of
     strings’.  Indefinite types have been added by introducing the
     characters `*`, `?` and `r` to type strings.
@@ -8015,24 +8015,24 @@ struct GVariantIter
     types are lifted along with the restriction that dictionary entries
     may only appear nested inside of arrays.
     
-    Just as in D-Bus, [glib.variant.VariantG] types are described with strings (‘type
+    Just as in D-Bus, [glib.variant.Variant] types are described with strings (‘type
     strings’).  Subject to the differences mentioned above, these strings
     are of the same form as those found in D-Bus.  Note, however: D-Bus
     always works in terms of messages and therefore individual type
     strings appear nowhere in its interface.  Instead, ‘signatures’
     are a concatenation of the strings of the type of each argument in a
-    message.  [glib.variant.VariantG] deals with single values directly so
-    [glib.variant.VariantG] type strings always describe the type of exactly one
+    message.  [glib.variant.Variant] deals with single values directly so
+    [glib.variant.Variant] type strings always describe the type of exactly one
     value.  This means that a D-Bus signature string is generally not a valid
-    [glib.variant.VariantG] type string — except in the case that it is the signature
+    [glib.variant.Variant] type string — except in the case that it is the signature
     of a message containing exactly one argument.
     
     An indefinite type is similar in spirit to what may be called an
     abstract type in other type systems.  No value can exist that has an
     indefinite type as its type, but values can exist that have types
     that are subtypes of indefinite types.  That is to say,
-    [glib.variant.VariantG.getType] will never return an indefinite type, but
-    calling [glib.variant.VariantG.isOfType] with an indefinite type may return
+    [glib.variant.Variant.getType] will never return an indefinite type, but
+    calling [glib.variant.Variant.isOfType] with an indefinite type may return
     true.  For example, you cannot have a value that represents ‘an
     array of no particular type’, but you can have an ‘array of integers’
     which certainly matches the type of ‘an array of no particular type’,
@@ -8053,7 +8053,7 @@ struct GVariantIter
     
     ## GVariant Type Strings
     
-    A [glib.variant.VariantG] type string can be any of the following:
+    A [glib.variant.Variant] type string can be any of the following:
     
     $(LIST
       * any basic type string (listed below)
@@ -8073,7 +8073,7 @@ struct GVariantIter
     The above definition is recursive to arbitrary depth. `aaaaai` and
     `(ui(nq((y)))s)` are both valid type strings, as is
     `a(aa(ui)(qna{ya(yd)}))`. In order to not hit memory limits,
-    [glib.variant.VariantG] imposes a limit on recursion depth of 65 nested
+    [glib.variant.Variant] imposes a limit on recursion depth of 65 nested
     containers. This is the limit in the D-Bus specification (64) plus one to
     allow a [[gio.dbus_message.DBusMessage]](../gio/class.DBusMessage.html) to be nested in
     a top-level tuple.

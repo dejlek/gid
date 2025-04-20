@@ -13,10 +13,17 @@ import gobject.boxed;
 class DBusSignalInfo : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `dbus_signal_info.DBusSignalInfo` boxed type.
+      Params:
+        refCount = The reference count or -1 if statically allocated.
+        name = The name of the D-Bus signal, e.g. "NameOwnerChanged".
+  */
+  this(int refCount = int.init, string name = string.init)
   {
     super(gMalloc(GDBusSignalInfo.sizeof), Yes.Take);
+    this.refCount = refCount;
+    this.name = name;
   }
 
   /** */
@@ -44,26 +51,45 @@ class DBusSignalInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusSignalInfo self()
   {
     return this;
   }
 
+  /**
+      Get `refCount` field.
+      Returns: The reference count or -1 if statically allocated.
+  */
   @property int refCount()
   {
     return (cast(GDBusSignalInfo*)cPtr).refCount;
   }
 
+  /**
+      Set `refCount` field.
+      Params:
+        propval = The reference count or -1 if statically allocated.
+  */
   @property void refCount(int propval)
   {
     (cast(GDBusSignalInfo*)cPtr).refCount = propval;
   }
 
+  /**
+      Get `name` field.
+      Returns: The name of the D-Bus signal, e.g. "NameOwnerChanged".
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = The name of the D-Bus signal, e.g. "NameOwnerChanged".
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);

@@ -52,7 +52,7 @@ import gtk.widget;
         false to not show it.
     )
 */
-class Tooltip : gobject.object.ObjectG
+class Tooltip : gobject.object.ObjectWrap
 {
 
   /** */
@@ -74,6 +74,7 @@ class Tooltip : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Tooltip self()
   {
     return this;
@@ -132,7 +133,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setIconFromGicon(gio.icon.Icon gicon, gtk.types.IconSize size)
   {
-    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null, size);
+    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null, size);
   }
 
   /**

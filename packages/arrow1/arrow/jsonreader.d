@@ -12,7 +12,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class JSONReader : gobject.object.ObjectG
+class JSONReader : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class JSONReader : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override JSONReader self()
   {
     return this;
@@ -46,7 +47,7 @@ class JSONReader : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_json_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.Dup) : null, options ? cast(GArrowJSONReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -57,8 +58,8 @@ class JSONReader : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_json_reader_read(cast(GArrowJSONReader*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

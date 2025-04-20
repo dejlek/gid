@@ -36,9 +36,29 @@ class FilterInputStream : gio.input_stream.InputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FilterInputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `closeBaseStream` property.
+      Returns: Whether the base stream should be closed when the filter stream is closed.
+  */
+  @property bool closeBaseStream()
+  {
+    return getCloseBaseStream();
+  }
+
+  /**
+      Set `closeBaseStream` property.
+      Params:
+        propval = Whether the base stream should be closed when the filter stream is closed.
+  */
+  @property void closeBaseStream(bool propval)
+  {
+    return setCloseBaseStream(propval);
   }
 
   /**
@@ -49,7 +69,7 @@ class FilterInputStream : gio.input_stream.InputStream
   {
     GInputStream* _cretval;
     _cretval = g_filter_input_stream_get_base_stream(cast(GFilterInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 

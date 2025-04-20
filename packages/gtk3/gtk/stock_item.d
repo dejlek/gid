@@ -16,7 +16,7 @@ class StockItem
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.StockItem");
+      throw new GidConstructException("Null instance pointer for gtk.stock_item.StockItem");
 
     cInstance = *cast(GtkStockItem*)ptr;
 
@@ -30,53 +30,98 @@ class StockItem
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `stockId` field.
+      Returns: Identifier.
+  */
   @property string stockId()
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
   }
 
+  /**
+      Set `stockId` field.
+      Params:
+        propval = Identifier.
+  */
   @property void stockId(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
     dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).stockId);
   }
 
+  /**
+      Get `label` field.
+      Returns: User visible label.
+  */
   @property string label()
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
   }
 
+  /**
+      Set `label` field.
+      Params:
+        propval = User visible label.
+  */
   @property void label(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).label);
   }
 
+  /**
+      Get `modifier` field.
+      Returns: Modifier type for keyboard accelerator
+  */
   @property gdk.types.ModifierType modifier()
   {
     return cast(gdk.types.ModifierType)(cast(GtkStockItem*)cPtr).modifier;
   }
 
+  /**
+      Set `modifier` field.
+      Params:
+        propval = Modifier type for keyboard accelerator
+  */
   @property void modifier(gdk.types.ModifierType propval)
   {
     (cast(GtkStockItem*)cPtr).modifier = cast(GdkModifierType)propval;
   }
 
+  /**
+      Get `keyval` field.
+      Returns: Keyboard accelerator
+  */
   @property uint keyval()
   {
     return (cast(GtkStockItem*)cPtr).keyval;
   }
 
+  /**
+      Set `keyval` field.
+      Params:
+        propval = Keyboard accelerator
+  */
   @property void keyval(uint propval)
   {
     (cast(GtkStockItem*)cPtr).keyval = propval;
   }
 
+  /**
+      Get `translationDomain` field.
+      Returns: Translation domain of the menu or toolbar item
+  */
   @property string translationDomain()
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
   }
 
+  /**
+      Set `translationDomain` field.
+      Params:
+        propval = Translation domain of the menu or toolbar item
+  */
   @property void translationDomain(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);

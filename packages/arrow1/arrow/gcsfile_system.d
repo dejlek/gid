@@ -30,6 +30,7 @@ class GCSFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GCSFileSystem self()
   {
     return this;

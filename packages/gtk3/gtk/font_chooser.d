@@ -31,6 +31,95 @@ interface FontChooser
   }
 
   /**
+      Get `font` property.
+      Returns: The font description as a string, e.g. "Sans Italic 12".
+  */
+  @property string font();
+
+  /**
+      Set `font` property.
+      Params:
+        propval = The font description as a string, e.g. "Sans Italic 12".
+  */
+  @property void font(string propval);
+
+  /**
+      Get `fontDesc` property.
+      Returns: The font description as a #PangoFontDescription.
+  */
+  @property pango.font_description.FontDescription fontDesc();
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = The font description as a #PangoFontDescription.
+  */
+  @property void fontDesc(pango.font_description.FontDescription propval);
+
+  /**
+      Get `fontFeatures` property.
+      Returns: The selected font features, in a format that is compatible with
+      CSS and with Pango attributes.
+  */
+  @property string fontFeatures();
+
+  /**
+      Get `language` property.
+      Returns: The language for which the #GtkFontChooser:font-features were
+      selected, in a format that is compatible with CSS and with Pango
+      attributes.
+  */
+  @property string language();
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the #GtkFontChooser:font-features were
+        selected, in a format that is compatible with CSS and with Pango
+        attributes.
+  */
+  @property void language(string propval);
+
+  /**
+      Get `level` property.
+      Returns: The level of granularity to offer for selecting fonts.
+  */
+  @property gtk.types.FontChooserLevel level();
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of granularity to offer for selecting fonts.
+  */
+  @property void level(gtk.types.FontChooserLevel propval);
+
+  /**
+      Get `previewText` property.
+      Returns: The string with which to preview the font.
+  */
+  @property string previewText();
+
+  /**
+      Set `previewText` property.
+      Params:
+        propval = The string with which to preview the font.
+  */
+  @property void previewText(string propval);
+
+  /**
+      Get `showPreviewEntry` property.
+      Returns: Whether to show an entry to change the preview text.
+  */
+  @property bool showPreviewEntry();
+
+  /**
+      Set `showPreviewEntry` property.
+      Params:
+        propval = Whether to show an entry to change the preview text.
+  */
+  @property void showPreviewEntry(bool propval);
+
+  /**
       Gets the currently-selected font name.
       
       Note that this can be a different string than what you set with

@@ -3,7 +3,6 @@ module gtk.widget_accessible;
 
 import atk.component;
 import atk.component_mixin;
-import atk.types;
 import gid.gid;
 import gtk.accessible;
 import gtk.c.functions;
@@ -33,6 +32,7 @@ class WidgetAccessible : gtk.accessible.Accessible, atk.component.Component
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override WidgetAccessible self()
   {
     return this;

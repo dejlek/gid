@@ -18,7 +18,7 @@ class MIKEYPayloadRAND
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.MIKEYPayloadRAND");
+      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_rand.MIKEYPayloadRAND");
 
     cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
 
@@ -32,16 +32,29 @@ class MIKEYPayloadRAND
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `pt` field.
+      Returns: the payload header
+  */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadRAND*)cPtr).pt);
   }
 
+  /**
+      Get `len` field.
+      Returns: the length of @rand
+  */
   @property ubyte len()
   {
     return (cast(GstMIKEYPayloadRAND*)cPtr).len;
   }
 
+  /**
+      Set `len` field.
+      Params:
+        propval = the length of @rand
+  */
   @property void len(ubyte propval)
   {
     (cast(GstMIKEYPayloadRAND*)cPtr).len = propval;

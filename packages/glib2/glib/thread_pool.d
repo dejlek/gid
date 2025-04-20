@@ -43,7 +43,7 @@ class ThreadPool
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.ThreadPool");
+      throw new GidConstructException("Null instance pointer for glib.thread_pool.ThreadPool");
 
     cInstance = *cast(GThreadPool*)ptr;
 
@@ -62,21 +62,40 @@ class ThreadPool
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `func` field.
+      Returns: the function to execute in the threads of this pool
+  */
   @property GFunc func()
   {
     return (cast(GThreadPool*)cPtr).func;
   }
+
+  /**
+      Set `func` field.
+      Params:
+        propval = the function to execute in the threads of this pool
+  */
 
   @property void func(GFunc propval)
   {
     (cast(GThreadPool*)cPtr).func = propval;
   }
 
+  /**
+      Get `exclusive` field.
+      Returns: are all threads exclusive to this pool
+  */
   @property bool exclusive()
   {
     return (cast(GThreadPool*)cPtr).exclusive;
   }
 
+  /**
+      Set `exclusive` field.
+      Params:
+        propval = are all threads exclusive to this pool
+  */
   @property void exclusive(bool propval)
   {
     (cast(GThreadPool*)cPtr).exclusive = propval;
@@ -145,7 +164,7 @@ class ThreadPool
       Params:
         data = a new task for pool
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool push(void* data = null)
   {
@@ -153,7 +172,7 @@ class ThreadPool
     GError *_err;
     _retval = g_thread_pool_push(cast(GThreadPool*)cPtr, data, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -183,7 +202,7 @@ class ThreadPool
         maxThreads = a new maximal number of threads for pool,
               or -1 for unlimited
       Returns: true on success, false if an error occurred
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setMaxThreads(int maxThreads)
   {
@@ -191,7 +210,7 @@ class ThreadPool
     GError *_err;
     _retval = g_thread_pool_set_max_threads(cast(GThreadPool*)cPtr, maxThreads, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

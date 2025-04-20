@@ -11,7 +11,7 @@ import gtksource.types;
 import gtksource.view;
 
 /** */
-class Gutter : gobject.object.ObjectG
+class Gutter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class Gutter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Gutter self()
   {
     return this;
@@ -50,7 +51,7 @@ class Gutter : gobject.object.ObjectG
   {
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_get_renderer_at_pos(cast(GtkSourceGutter*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -59,7 +60,7 @@ class Gutter : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 

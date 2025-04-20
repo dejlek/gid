@@ -116,9 +116,291 @@ class ScrolledWindow : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScrolledWindow self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.adjustment.Adjustment hadjustment()
+  {
+    return getHadjustment();
+  }
+
+  /** */
+  @property void hadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setHadjustment(propval);
+  }
+
+  /** */
+  @property gtk.types.PolicyType hscrollbarPolicy()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.PolicyType)("hscrollbar-policy");
+  }
+
+  /** */
+  @property void hscrollbarPolicy(gtk.types.PolicyType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.PolicyType)("hscrollbar-policy", propval);
+  }
+
+  /**
+      Get `kineticScrolling` property.
+      Returns: Whether kinetic scrolling is enabled or not. Kinetic scrolling
+      only applies to devices with source [gdk.types.InputSource.Touchscreen].
+  */
+  @property bool kineticScrolling()
+  {
+    return getKineticScrolling();
+  }
+
+  /**
+      Set `kineticScrolling` property.
+      Params:
+        propval = Whether kinetic scrolling is enabled or not. Kinetic scrolling
+        only applies to devices with source [gdk.types.InputSource.Touchscreen].
+  */
+  @property void kineticScrolling(bool propval)
+  {
+    return setKineticScrolling(propval);
+  }
+
+  /**
+      Get `maxContentHeight` property.
+      Returns: The maximum content height of @scrolled_window, or -1 if not set.
+  */
+  @property int maxContentHeight()
+  {
+    return getMaxContentHeight();
+  }
+
+  /**
+      Set `maxContentHeight` property.
+      Params:
+        propval = The maximum content height of @scrolled_window, or -1 if not set.
+  */
+  @property void maxContentHeight(int propval)
+  {
+    return setMaxContentHeight(propval);
+  }
+
+  /**
+      Get `maxContentWidth` property.
+      Returns: The maximum content width of @scrolled_window, or -1 if not set.
+  */
+  @property int maxContentWidth()
+  {
+    return getMaxContentWidth();
+  }
+
+  /**
+      Set `maxContentWidth` property.
+      Params:
+        propval = The maximum content width of @scrolled_window, or -1 if not set.
+  */
+  @property void maxContentWidth(int propval)
+  {
+    return setMaxContentWidth(propval);
+  }
+
+  /**
+      Get `minContentHeight` property.
+      Returns: The minimum content height of @scrolled_window, or -1 if not set.
+  */
+  @property int minContentHeight()
+  {
+    return getMinContentHeight();
+  }
+
+  /**
+      Set `minContentHeight` property.
+      Params:
+        propval = The minimum content height of @scrolled_window, or -1 if not set.
+  */
+  @property void minContentHeight(int propval)
+  {
+    return setMinContentHeight(propval);
+  }
+
+  /**
+      Get `minContentWidth` property.
+      Returns: The minimum content width of @scrolled_window, or -1 if not set.
+  */
+  @property int minContentWidth()
+  {
+    return getMinContentWidth();
+  }
+
+  /**
+      Set `minContentWidth` property.
+      Params:
+        propval = The minimum content width of @scrolled_window, or -1 if not set.
+  */
+  @property void minContentWidth(int propval)
+  {
+    return setMinContentWidth(propval);
+  }
+
+  /**
+      Get `overlayScrolling` property.
+      Returns: Whether overlay scrolling is enabled or not. If it is, the
+      scrollbars are only added as traditional widgets when a mouse
+      is present. Otherwise, they are overlayed on top of the content,
+      as narrow indicators.
+      
+      Note that overlay scrolling can also be globally disabled, with
+      the #GtkSettings::gtk-overlay-scrolling setting.
+  */
+  @property bool overlayScrolling()
+  {
+    return getOverlayScrolling();
+  }
+
+  /**
+      Set `overlayScrolling` property.
+      Params:
+        propval = Whether overlay scrolling is enabled or not. If it is, the
+        scrollbars are only added as traditional widgets when a mouse
+        is present. Otherwise, they are overlayed on top of the content,
+        as narrow indicators.
+        
+        Note that overlay scrolling can also be globally disabled, with
+        the #GtkSettings::gtk-overlay-scrolling setting.
+  */
+  @property void overlayScrolling(bool propval)
+  {
+    return setOverlayScrolling(propval);
+  }
+
+  /**
+      Get `propagateNaturalHeight` property.
+      Returns: Whether the natural height of the child should be calculated and propagated
+      through the scrolled window’s requested natural height.
+      
+      This is useful in cases where an attempt should be made to allocate exactly
+      enough space for the natural size of the child.
+  */
+  @property bool propagateNaturalHeight()
+  {
+    return getPropagateNaturalHeight();
+  }
+
+  /**
+      Set `propagateNaturalHeight` property.
+      Params:
+        propval = Whether the natural height of the child should be calculated and propagated
+        through the scrolled window’s requested natural height.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
+  */
+  @property void propagateNaturalHeight(bool propval)
+  {
+    return setPropagateNaturalHeight(propval);
+  }
+
+  /**
+      Get `propagateNaturalWidth` property.
+      Returns: Whether the natural width of the child should be calculated and propagated
+      through the scrolled window’s requested natural width.
+      
+      This is useful in cases where an attempt should be made to allocate exactly
+      enough space for the natural size of the child.
+  */
+  @property bool propagateNaturalWidth()
+  {
+    return getPropagateNaturalWidth();
+  }
+
+  /**
+      Set `propagateNaturalWidth` property.
+      Params:
+        propval = Whether the natural width of the child should be calculated and propagated
+        through the scrolled window’s requested natural width.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
+  */
+  @property void propagateNaturalWidth(bool propval)
+  {
+    return setPropagateNaturalWidth(propval);
+  }
+
+  /** */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return getShadowType();
+  }
+
+  /** */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    return setShadowType(propval);
+  }
+
+  /** */
+  @property gtk.adjustment.Adjustment vadjustment()
+  {
+    return getVadjustment();
+  }
+
+  /** */
+  @property void vadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setVadjustment(propval);
+  }
+
+  /** */
+  @property gtk.types.PolicyType vscrollbarPolicy()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.PolicyType)("vscrollbar-policy");
+  }
+
+  /** */
+  @property void vscrollbarPolicy(gtk.types.PolicyType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.PolicyType)("vscrollbar-policy", propval);
+  }
+
+  /** */
+  @property gtk.types.CornerType windowPlacement()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.CornerType)("window-placement");
+  }
+
+  /** */
+  @property void windowPlacement(gtk.types.CornerType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.CornerType)("window-placement", propval);
+  }
+
+  /**
+      Get `windowPlacementSet` property.
+      Returns: Whether "window-placement" should be used to determine the location
+      of the contents with respect to the scrollbars.
+  
+      Deprecated: This value is ignored and
+      #GtkScrolledWindow:window-placement value is always honored.
+  */
+  @property bool windowPlacementSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("window-placement-set");
+  }
+
+  /**
+      Set `windowPlacementSet` property.
+      Params:
+        propval = Whether "window-placement" should be used to determine the location
+        of the contents with respect to the scrollbars.
+  
+      Deprecated: This value is ignored and
+      #GtkScrolledWindow:window-placement value is always honored.
+  */
+  @property void windowPlacementSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("window-placement-set", propval);
   }
 
   /**
@@ -192,7 +474,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +486,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -351,7 +633,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -363,7 +645,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

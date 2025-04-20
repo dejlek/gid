@@ -26,9 +26,9 @@ import gtk.widget;
     
     [gtk.switch_.Switch] can also handle situations where the underlying state
     changes with a delay. In this case, the slider position indicates
-    the user's recent change (as indicated by the [gtk.switch_.Switch.gboolean]
+    the user's recent change (as indicated by the [gtk.switch_.Switch.active]
     property), and the color indicates whether the underlying state (represented
-    by the [gtk.switch_.Switch.gboolean] property) has been updated yet.
+    by the [gtk.switch_.Switch.state] property) has been updated yet.
     
     ![GtkSwitch with delayed state change](switch-state.png)
     
@@ -73,9 +73,52 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Switch self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the [gtk.switch_.Switch] widget is in its on or off state.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the [gtk.switch_.Switch] widget is in its on or off state.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The backend state that is controlled by the switch.
+      
+      See `signal@Gtk.Switch::state-set` for details.
+  */
+  @property bool state()
+  {
+    return getState();
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The backend state that is controlled by the switch.
+        
+        See `signal@Gtk.Switch::state-set` for details.
+  */
+  @property void state(bool propval)
+  {
+    return setState(propval);
   }
 
   mixin ActionableT!();
@@ -146,7 +189,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Emitted to animate the switch.
       
       Applications should never connect to this signal,
-      but use the [gtk.switch_.Switch.gboolean] property.
+      but use the [gtk.switch_.Switch.active] property.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -187,7 +230,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       
       The ::state-set signal is emitted when the user changes the switch
       position. The default handler keeps the state in sync with the
-      [gtk.switch_.Switch.gboolean] property.
+      [gtk.switch_.Switch.active] property.
       
       To implement delayed state change, applications can connect to this
       signal, initiate the change of the underlying state, and call
@@ -196,7 +239,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       default handler from running.
       
       Visually, the underlying state is represented by the trough color of
-      the switch, while the [gtk.switch_.Switch.gboolean] property is
+      the switch, while the [gtk.switch_.Switch.active] property is
       represented by the position of the switch.
   
       Params:

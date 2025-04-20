@@ -13,7 +13,7 @@ import gtk.widget;
 /**
     An auxiliary class used by `class@ViewStack`.
 */
-class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
+class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
@@ -35,9 +35,163 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ViewStackPage self()
   {
     return this;
+  }
+
+  /**
+      Get `badgeNumber` property.
+      Returns: The badge number for this page.
+      
+      `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+      commonly used to display a number of unread items within the page.
+      
+      It can be used together with `property@ViewStack{age}:needs-attention`.
+  */
+  @property uint badgeNumber()
+  {
+    return getBadgeNumber();
+  }
+
+  /**
+      Set `badgeNumber` property.
+      Params:
+        propval = The badge number for this page.
+        
+        `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+        commonly used to display a number of unread items within the page.
+        
+        It can be used together with `property@ViewStack{age}:needs-attention`.
+  */
+  @property void badgeNumber(uint propval)
+  {
+    return setBadgeNumber(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name of the child page.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name of the child page.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the child page.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `needsAttention` property.
+      Returns: Whether the page requires the user attention.
+      
+      `class@ViewSwitcher` will display it as a dot next to the page icon.
+  */
+  @property bool needsAttention()
+  {
+    return getNeedsAttention();
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page requires the user attention.
+        
+        `class@ViewSwitcher` will display it as a dot next to the page icon.
+  */
+  @property void needsAttention(bool propval)
+  {
+    return setNeedsAttention(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the child page.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the child page.
+  */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property bool useUnderline()
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+  */
+  @property void useUnderline(bool propval)
+  {
+    return setUseUnderline(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether this page is visible.
+      
+      This is independent from the [gtk.widget.Widget.visible] property of
+      `property@ViewStackPage:child`.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this page is visible.
+        
+        This is independent from the [gtk.widget.Widget.visible] property of
+        `property@ViewStackPage:child`.
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
   }
 
   mixin AccessibleT!();
@@ -61,7 +215,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   {
     GtkWidget* _cretval;
     _cretval = adw_view_stack_page_get_child(cast(AdwViewStackPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +280,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   /**
       Gets whether self is visible in its [adw.view_stack.ViewStack].
       
-      This is independent from the [gtk.widget.Widget.gboolean]
+      This is independent from the [gtk.widget.Widget.visible]
       property of its widget.
       Returns: whether self is visible
   */
@@ -216,7 +370,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   /**
       Sets whether page is visible in its [adw.view_stack.ViewStack].
       
-      This is independent from the [gtk.widget.Widget.gboolean] property of
+      This is independent from the [gtk.widget.Widget.visible] property of
       `propertyViewStackPage:child`.
   
       Params:

@@ -16,15 +16,15 @@ import gobject.object;
     GL textures.
     
     The operation is quite simple: Create a texture builder, set all the necessary
-    properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.GLContext],
-    [gdk.gltexture_builder.GLTextureBuilder.guint], [gdk.gltexture_builder.GLTextureBuilder.gint], and
-    [gdk.gltexture_builder.GLTextureBuilder.gint] are mandatory - and then call
+    properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.context],
+    [gdk.gltexture_builder.GLTextureBuilder.id], [gdk.gltexture_builder.GLTextureBuilder.width], and
+    [gdk.gltexture_builder.GLTextureBuilder.height] are mandatory - and then call
     [gdk.gltexture_builder.GLTextureBuilder.build] to create the new texture.
     
     [gdk.gltexture_builder.GLTextureBuilder] can be used for quick one-shot construction of
     textures as well as kept around and reused to construct multiple textures.
 */
-class GLTextureBuilder : gobject.object.ObjectG
+class GLTextureBuilder : gobject.object.ObjectWrap
 {
 
   /** */
@@ -46,9 +46,185 @@ class GLTextureBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLTextureBuilder self()
   {
     return this;
+  }
+
+  /**
+      Get `context` property.
+      Returns: The context owning the texture.
+  */
+  @property gdk.glcontext.GLContext context()
+  {
+    return getContext();
+  }
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The context owning the texture.
+  */
+  @property void context(gdk.glcontext.GLContext propval)
+  {
+    return setContext(propval);
+  }
+
+  /**
+      Get `format` property.
+      Returns: The format when downloading the texture.
+  */
+  @property gdk.types.MemoryFormat format()
+  {
+    return getFormat();
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format when downloading the texture.
+  */
+  @property void format(gdk.types.MemoryFormat propval)
+  {
+    return setFormat(propval);
+  }
+
+  /**
+      Get `hasMipmap` property.
+      Returns: If the texture has a mipmap.
+  */
+  @property bool hasMipmap()
+  {
+    return getHasMipmap();
+  }
+
+  /**
+      Set `hasMipmap` property.
+      Params:
+        propval = If the texture has a mipmap.
+  */
+  @property void hasMipmap(bool propval)
+  {
+    return setHasMipmap(propval);
+  }
+
+  /**
+      Get `height` property.
+      Returns: The height of the texture.
+  */
+  @property int height()
+  {
+    return getHeight();
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+  */
+  @property void height(int propval)
+  {
+    return setHeight(propval);
+  }
+
+  /**
+      Get `id` property.
+      Returns: The texture ID to use.
+  */
+  @property uint id()
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The texture ID to use.
+  */
+  @property void id(uint propval)
+  {
+    return setId(propval);
+  }
+
+  /**
+      Get `sync` property.
+      Returns: An optional `GLSync` object.
+      
+      If this is set, GTK will wait on it before using the texture.
+  */
+  @property void* sync()
+  {
+    return getSync();
+  }
+
+  /**
+      Set `sync` property.
+      Params:
+        propval = An optional `GLSync` object.
+        
+        If this is set, GTK will wait on it before using the texture.
+  */
+  @property void sync(void* propval)
+  {
+    return setSync(propval);
+  }
+
+  /**
+      Get `updateRegion` property.
+      Returns: The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+  */
+  @property cairo.region.Region updateRegion()
+  {
+    return getUpdateRegion();
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+  */
+  @property void updateRegion(cairo.region.Region propval)
+  {
+    return setUpdateRegion(propval);
+  }
+
+  /**
+      Get `updateTexture` property.
+      Returns: The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+  */
+  @property gdk.texture.Texture updateTexture()
+  {
+    return getUpdateTexture();
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+  */
+  @property void updateTexture(gdk.texture.Texture propval)
+  {
+    return setUpdateTexture(propval);
+  }
+
+  /**
+      Get `width` property.
+      Returns: The width of the texture.
+  */
+  @property int width()
+  {
+    return getWidth();
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+  */
+  @property void width(int propval)
+  {
+    return setWidth(propval);
   }
 
   /**
@@ -68,8 +244,8 @@ class GLTextureBuilder : gobject.object.ObjectG
       The `destroy` function gets called when the returned texture gets released;
       either when the texture is finalized or by an explicit call to
       [gdk.gltexture.GLTexture.release]. It should release all GL resources associated
-      with the texture, such as the [gdk.gltexture_builder.GLTextureBuilder.guint] and the
-      [gdk.gltexture_builder.GLTextureBuilder.gpointer].
+      with the texture, such as the [gdk.gltexture_builder.GLTextureBuilder.id] and the
+      [gdk.gltexture_builder.GLTextureBuilder.sync].
       
       Note that it is a programming error to call this function if any mandatory
       property has not been set.
@@ -96,7 +272,7 @@ class GLTextureBuilder : gobject.object.ObjectG
 
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)cPtr, _destroyCB, data);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +285,7 @@ class GLTextureBuilder : gobject.object.ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +368,7 @@ class GLTextureBuilder : gobject.object.ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +402,7 @@ class GLTextureBuilder : gobject.object.ObjectG
       Sets the format of the texture. The default is [gdk.types.MemoryFormat.R8g8b8a8Premultiplied].
       
       The format is the preferred format the texture data should be downloaded to. The
-      format must be supported by the GL version of [gdk.gltexture_builder.GLTextureBuilder.GLContext].
+      format must be supported by the GL version of [gdk.gltexture_builder.GLTextureBuilder.context].
       
       GDK's texture download code assumes that the format corresponds to the storage
       parameters of the GL texture in an obvious way. For example, a format of

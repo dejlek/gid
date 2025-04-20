@@ -56,9 +56,50 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Switch self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: Whether the #GtkSwitch widget is in its on or off state.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the #GtkSwitch widget is in its on or off state.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The backend state that is controlled by the switch.
+      See #GtkSwitch::state-set for details.
+  */
+  @property bool state()
+  {
+    return getState();
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The backend state that is controlled by the switch.
+        See #GtkSwitch::state-set for details.
+  */
+  @property void state(bool propval)
+  {
+    return setState(propval);
   }
 
   mixin ActionableT!();

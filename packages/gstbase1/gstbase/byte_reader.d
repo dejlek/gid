@@ -22,7 +22,7 @@ class ByteReader
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstBase.ByteReader");
+      throw new GidConstructException("Null instance pointer for gstbase.byte_reader.ByteReader");
 
     cInstance = *cast(GstByteReader*)ptr;
 
@@ -36,21 +36,39 @@ class ByteReader
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `size` field.
+      Returns: Size of @data in bytes
+  */
   @property uint size()
   {
     return (cast(GstByteReader*)cPtr).size;
   }
 
+  /**
+      Set `size` field.
+      Params:
+        propval = Size of @data in bytes
+  */
   @property void size(uint propval)
   {
     (cast(GstByteReader*)cPtr).size = propval;
   }
 
+  /**
+      Get `byte_` field.
+      Returns: Current byte position
+  */
   @property uint byte_()
   {
     return (cast(GstByteReader*)cPtr).byte_;
   }
 
+  /**
+      Set `byte_` field.
+      Params:
+        propval = Current byte position
+  */
   @property void byte_(uint propval)
   {
     (cast(GstByteReader*)cPtr).byte_ = propval;

@@ -151,6 +151,92 @@ interface FileChooser
     return cast(void function())gtk_file_chooser_get_type != &gidSymbolNotFound ? gtk_file_chooser_get_type() : cast(GType)0;
   }
 
+  /** */
+  @property gtk.types.FileChooserAction action();
+
+  /** */
+  @property void action(gtk.types.FileChooserAction propval);
+
+  /**
+      Get `createFolders` property.
+      Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+      will offer the user to create new folders.
+  */
+  @property bool createFolders();
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+        will offer the user to create new folders.
+  */
+  @property void createFolders(bool propval);
+
+  /**
+      Get `doOverwriteConfirmation` property.
+      Returns: Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+      will present an overwrite confirmation dialog if the user
+      selects a file name that already exists.
+  */
+  @property bool doOverwriteConfirmation();
+
+  /**
+      Set `doOverwriteConfirmation` property.
+      Params:
+        propval = Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+        will present an overwrite confirmation dialog if the user
+        selects a file name that already exists.
+  */
+  @property void doOverwriteConfirmation(bool propval);
+
+  /** */
+  @property gtk.widget.Widget extraWidget();
+
+  /** */
+  @property void extraWidget(gtk.widget.Widget propval);
+
+  /** */
+  @property gtk.file_filter.FileFilter filter();
+
+  /** */
+  @property void filter(gtk.file_filter.FileFilter propval);
+
+  /** */
+  @property bool localOnly();
+
+  /** */
+  @property void localOnly(bool propval);
+
+  /** */
+  @property gtk.widget.Widget previewWidget();
+
+  /** */
+  @property void previewWidget(gtk.widget.Widget propval);
+
+  /** */
+  @property bool previewWidgetActive();
+
+  /** */
+  @property void previewWidgetActive(bool propval);
+
+  /** */
+  @property bool selectMultiple();
+
+  /** */
+  @property void selectMultiple(bool propval);
+
+  /** */
+  @property bool showHidden();
+
+  /** */
+  @property void showHidden(bool propval);
+
+  /** */
+  @property bool usePreviewLabel();
+
+  /** */
+  @property void usePreviewLabel(bool propval);
+
   /**
       Adds a 'choice' to the file chooser. This is typically implemented
       as a combobox or, for boolean choices, as a checkbutton. You can select
@@ -191,7 +277,7 @@ interface FileChooser
         folder = filename of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addShortcutFolder(string folder);
 
@@ -205,7 +291,7 @@ interface FileChooser
         uri = URI of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool addShortcutFolderUri(string uri);
 
@@ -317,7 +403,7 @@ interface FileChooser
       If the file chooser is in folder mode, this function returns the selected
       folder.
       Returns: a selected #GFile. You own the returned file;
-            use [gobject.object.ObjectG.unref] to release it.
+            use [gobject.object.ObjectWrap.unref] to release it.
   */
   gio.file.File getFile();
 
@@ -353,7 +439,7 @@ interface FileChooser
       Returns: a #GSList
           containing a #GFile for each selected file and subfolder in the
           current folder.  Free the returned list with [glib.slist.SList.free], and
-          the files with [gobject.object.ObjectG.unref].
+          the files with [gobject.object.ObjectWrap.unref].
   */
   gio.file.File[] getFiles();
 
@@ -374,7 +460,7 @@ interface FileChooser
       Gets the #GFile that should be previewed in a custom preview
       Internal function, see [gtk.file_chooser.FileChooser.getPreviewUri].
       Returns: the #GFile for the file to preview,
-            or null if no file is selected. Free with [gobject.object.ObjectG.unref].
+            or null if no file is selected. Free with [gobject.object.ObjectWrap.unref].
   */
   gio.file.File getPreviewFile();
 
@@ -509,7 +595,7 @@ interface FileChooser
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolder]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeShortcutFolder(string folder);
 
@@ -522,7 +608,7 @@ interface FileChooser
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolderUri]
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeShortcutFolderUri(string uri);
 
@@ -538,7 +624,7 @@ interface FileChooser
       Params:
         file = the file to select
       Returns: Not useful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool selectFile(gio.file.File file);
 
@@ -622,7 +708,7 @@ interface FileChooser
         file = the #GFile for the new folder
       Returns: true if the folder could be changed successfully, false
         otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setCurrentFolderFile(gio.file.File file);
 
@@ -723,7 +809,7 @@ interface FileChooser
       Params:
         file = the #GFile to set as current
       Returns: Not useful.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setFile(gio.file.File file);
 

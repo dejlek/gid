@@ -25,7 +25,7 @@ import gobject.object;
     [gio.types.DBusInterfaceVTable] that was passed to
     [gio.dbus_connection.DBusConnection.registerObject].
 */
-class DBusMethodInvocation : gobject.object.ObjectG
+class DBusMethodInvocation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DBusMethodInvocation self()
   {
     return this;
@@ -60,7 +61,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_method_invocation_get_connection(cast(GDBusMethodInvocation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +97,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_method_invocation_get_message(cast(GDBusMethodInvocation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,11 +147,11 @@ class DBusMethodInvocation : gobject.object.ObjectG
       parameters then this will return a GVariant with 0 children rather than NULL.
       Returns: A #GVariant tuple. Do not unref this because it is owned by invocation.
   */
-  glib.variant.VariantG getParameters()
+  glib.variant.Variant getParameters()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_dbus_method_invocation_get_parameters(cast(GDBusMethodInvocation*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -235,7 +236,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
       Params:
         error = A #GError.
   */
-  void returnGerror(glib.error.ErrorG error)
+  void returnGerror(glib.error.ErrorWrap error)
   {
     g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }
@@ -277,9 +278,9 @@ class DBusMethodInvocation : gobject.object.ObjectG
       Params:
         parameters = A #GVariant tuple with out parameters for the method or null if not passing any parameters.
   */
-  void returnValue(glib.variant.VariantG parameters = null)
+  void returnValue(glib.variant.Variant parameters = null)
   {
-    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null);
   }
 
   /**
@@ -295,8 +296,8 @@ class DBusMethodInvocation : gobject.object.ObjectG
         parameters = A #GVariant tuple with out parameters for the method or null if not passing any parameters.
         fdList = A #GUnixFDList or null.
   */
-  void returnValueWithUnixFdList(glib.variant.VariantG parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
+  void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
   {
-    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
   }
 }

@@ -502,7 +502,7 @@ alias EqualFuncFull = bool delegate(const(void)* a, const(void)* b);
     Params:
       error = extended error to clear
 */
-alias ErrorClearFunc = void delegate(glib.error.ErrorG error);
+alias ErrorClearFunc = void delegate(glib.error.ErrorWrap error);
 
 /**
     Specifies the type of function which is called when an extended
@@ -518,7 +518,7 @@ alias ErrorClearFunc = void delegate(glib.error.ErrorG error);
       srcError = source extended error
       destError = destination extended error
 */
-alias ErrorCopyFunc = void delegate(glib.error.ErrorG srcError, glib.error.ErrorG destError);
+alias ErrorCopyFunc = void delegate(glib.error.ErrorWrap srcError, glib.error.ErrorWrap destError);
 
 /**
     Specifies the type of function which is called just after an
@@ -532,7 +532,7 @@ alias ErrorCopyFunc = void delegate(glib.error.ErrorG srcError, glib.error.Error
     Params:
       error = extended error
 */
-alias ErrorInitFunc = void delegate(glib.error.ErrorG error);
+alias ErrorInitFunc = void delegate(glib.error.ErrorWrap error);
 
 /**
     Declares a type of function which takes an arbitrary
@@ -740,7 +740,7 @@ alias NodeTraverseFunc = bool delegate(glib.node.Node node);
       value = The value to be parsed.
     Returns: true if the option was successfully parsed, false if an error
        occurred, in which case error should be set with [glib.global.setError]
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 alias OptionArgFunc = bool delegate(string optionName, string value, GError **_err);
 
@@ -750,7 +750,7 @@ alias OptionArgFunc = bool delegate(string optionName, string value, GError **_e
     Params:
       context = The active #GOptionContext
       group = The group to which the function belongs
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 alias OptionErrorFunc = void delegate(glib.option_context.OptionContext context, glib.option_group.OptionGroup group, GError **_err);
 
@@ -762,7 +762,7 @@ alias OptionErrorFunc = void delegate(glib.option_context.OptionContext context,
       group = The group to which the function belongs
     Returns: true if the function completed successfully, false if an error
        occurred, in which case error should be set with [glib.global.setError]
-    Throws: [ErrorG]
+    Throws: [ErrorWrap]
 */
 alias OptionParseFunc = bool delegate(glib.option_context.OptionContext context, glib.option_group.OptionGroup group, GError **_err);
 

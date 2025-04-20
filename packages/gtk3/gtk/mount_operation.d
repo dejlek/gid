@@ -35,9 +35,34 @@ class MountOperation : gio.mount_operation.MountOperation
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MountOperation self()
   {
     return this;
+  }
+
+  /** */
+  @property gtk.window.Window parent()
+  {
+    return getParent();
+  }
+
+  /** */
+  @property void parent(gtk.window.Window propval)
+  {
+    return setParent(propval);
+  }
+
+  /** */
+  @property gdk.screen.Screen screen()
+  {
+    return getScreen();
+  }
+
+  /** */
+  @property void screen(gdk.screen.Screen propval)
+  {
+    return setScreen(propval);
   }
 
   /**
@@ -62,7 +87,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,7 +100,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GdkScreen* _cretval;
     _cretval = gtk_mount_operation_get_screen(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 

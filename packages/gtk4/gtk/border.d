@@ -40,46 +40,83 @@ class Border : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Border self()
   {
     return this;
   }
 
+  /**
+      Get `left` field.
+      Returns: The width of the left border
+  */
   @property short left()
   {
     return (cast(GtkBorder*)cPtr).left;
   }
 
+  /**
+      Set `left` field.
+      Params:
+        propval = The width of the left border
+  */
   @property void left(short propval)
   {
     (cast(GtkBorder*)cPtr).left = propval;
   }
 
+  /**
+      Get `right` field.
+      Returns: The width of the right border
+  */
   @property short right()
   {
     return (cast(GtkBorder*)cPtr).right;
   }
 
+  /**
+      Set `right` field.
+      Params:
+        propval = The width of the right border
+  */
   @property void right(short propval)
   {
     (cast(GtkBorder*)cPtr).right = propval;
   }
 
+  /**
+      Get `top` field.
+      Returns: The width of the top border
+  */
   @property short top()
   {
     return (cast(GtkBorder*)cPtr).top;
   }
 
+  /**
+      Set `top` field.
+      Params:
+        propval = The width of the top border
+  */
   @property void top(short propval)
   {
     (cast(GtkBorder*)cPtr).top = propval;
   }
 
+  /**
+      Get `bottom` field.
+      Returns: The width of the bottom border
+  */
   @property short bottom()
   {
     return (cast(GtkBorder*)cPtr).bottom;
   }
 
+  /**
+      Set `bottom` field.
+      Params:
+        propval = The width of the bottom border
+  */
   @property void bottom(short propval)
   {
     (cast(GtkBorder*)cPtr).bottom = propval;

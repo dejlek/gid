@@ -19,7 +19,6 @@ import gtk.print_settings;
 import gtk.printer;
 import gtk.root;
 import gtk.root_mixin;
-import gtk.settings;
 import gtk.shortcut_manager;
 import gtk.shortcut_manager_mixin;
 import gtk.types;
@@ -108,9 +107,152 @@ class PrintUnixDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PrintUnixDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `currentPage` property.
+      Returns: The current page in the document.
+  */
+  @property int currentPage()
+  {
+    return getCurrentPage();
+  }
+
+  /**
+      Set `currentPage` property.
+      Params:
+        propval = The current page in the document.
+  */
+  @property void currentPage(int propval)
+  {
+    return setCurrentPage(propval);
+  }
+
+  /**
+      Get `embedPageSetup` property.
+      Returns: true if the page setup controls are embedded.
+  */
+  @property bool embedPageSetup()
+  {
+    return getEmbedPageSetup();
+  }
+
+  /**
+      Set `embedPageSetup` property.
+      Params:
+        propval = true if the page setup controls are embedded.
+  */
+  @property void embedPageSetup(bool propval)
+  {
+    return setEmbedPageSetup(propval);
+  }
+
+  /**
+      Get `hasSelection` property.
+      Returns: Whether the application has a selection.
+  */
+  @property bool hasSelection()
+  {
+    return getHasSelection();
+  }
+
+  /**
+      Set `hasSelection` property.
+      Params:
+        propval = Whether the application has a selection.
+  */
+  @property void hasSelection(bool propval)
+  {
+    return setHasSelection(propval);
+  }
+
+  /**
+      Get `manualCapabilities` property.
+      Returns: Capabilities the application can handle.
+  */
+  @property gtk.types.PrintCapabilities manualCapabilities()
+  {
+    return getManualCapabilities();
+  }
+
+  /**
+      Set `manualCapabilities` property.
+      Params:
+        propval = Capabilities the application can handle.
+  */
+  @property void manualCapabilities(gtk.types.PrintCapabilities propval)
+  {
+    return setManualCapabilities(propval);
+  }
+
+  /**
+      Get `pageSetup` property.
+      Returns: The [gtk.page_setup.PageSetup] object to use.
+  */
+  @property gtk.page_setup.PageSetup pageSetup()
+  {
+    return getPageSetup();
+  }
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The [gtk.page_setup.PageSetup] object to use.
+  */
+  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setPageSetup(propval);
+  }
+
+  /**
+      Get `printSettings` property.
+      Returns: The [gtk.print_settings.PrintSettings] object used for this dialog.
+  */
+  @property gtk.print_settings.PrintSettings printSettings()
+  {
+    return getSettings();
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The [gtk.print_settings.PrintSettings] object used for this dialog.
+  */
+  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setSettings(propval);
+  }
+
+  /**
+      Get `selectedPrinter` property.
+      Returns: The [gtk.printer.Printer] which is selected.
+  */
+  @property gtk.printer.Printer selectedPrinter()
+  {
+    return getSelectedPrinter();
+  }
+
+  /**
+      Get `supportSelection` property.
+      Returns: Whether the dialog supports selection.
+  */
+  @property bool supportSelection()
+  {
+    return getSupportSelection();
+  }
+
+  /**
+      Set `supportSelection` property.
+      Params:
+        propval = Whether the dialog supports selection.
+  */
+  @property void supportSelection(bool propval)
+  {
+    return setSupportSelection(propval);
   }
 
   /**
@@ -194,7 +336,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_unix_dialog_get_page_setup(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -217,7 +359,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_unix_dialog_get_selected_printer(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +377,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_unix_dialog_get_settings(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 

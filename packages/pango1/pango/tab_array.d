@@ -42,6 +42,7 @@ class TabArray : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TabArray self()
   {
     return this;

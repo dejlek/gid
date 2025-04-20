@@ -26,7 +26,7 @@ import gtk.window;
     
     To launch a file, use [gtk.file_launcher.FileLauncher].
 */
-class UriLauncher : gobject.object.ObjectG
+class UriLauncher : gobject.object.ObjectWrap
 {
 
   /** */
@@ -48,9 +48,29 @@ class UriLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UriLauncher self()
   {
     return this;
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The uri to launch.
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The uri to launch.
+  */
+  @property void uri(string propval)
+  {
+    return setUri(propval);
   }
 
   /**
@@ -101,7 +121,7 @@ class UriLauncher : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -117,15 +137,15 @@ class UriLauncher : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if an application was launched,
             or `FALSE` and error is set
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

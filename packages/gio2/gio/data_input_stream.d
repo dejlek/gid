@@ -40,9 +40,54 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DataInputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `byteOrder` property.
+      Returns: The :byte-order property determines the byte ordering that
+      is used when reading multi-byte entities (such as integers)
+      from the stream.
+  */
+  @property gio.types.DataStreamByteOrder byteOrder()
+  {
+    return getByteOrder();
+  }
+
+  /**
+      Set `byteOrder` property.
+      Params:
+        propval = The :byte-order property determines the byte ordering that
+        is used when reading multi-byte entities (such as integers)
+        from the stream.
+  */
+  @property void byteOrder(gio.types.DataStreamByteOrder propval)
+  {
+    return setByteOrder(propval);
+  }
+
+  /**
+      Get `newlineType` property.
+      Returns: The :newline-type property determines what is considered
+      as a line ending when reading complete lines from the stream.
+  */
+  @property gio.types.DataStreamNewlineType newlineType()
+  {
+    return getNewlineType();
+  }
+
+  /**
+      Set `newlineType` property.
+      Params:
+        propval = The :newline-type property determines what is considered
+        as a line ending when reading complete lines from the stream.
+  */
+  @property void newlineType(gio.types.DataStreamNewlineType propval)
+  {
+    return setNewlineType(propval);
   }
 
   /**
@@ -90,7 +135,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 8-bit/1-byte value read from the stream or `0`
         if an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ubyte readByteData(gio.cancellable.Cancellable cancellable = null)
   {
@@ -98,7 +143,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -112,7 +157,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 16-bit/2-byte value read from stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   short readInt16(gio.cancellable.Cancellable cancellable = null)
   {
@@ -120,7 +165,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -138,7 +183,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 32-bit/4-byte value read from the stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int readInt32(gio.cancellable.Cancellable cancellable = null)
   {
@@ -146,7 +191,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -164,7 +209,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 64-bit/8-byte value read from stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   long readInt64(gio.cancellable.Cancellable cancellable = null)
   {
@@ -172,7 +217,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -196,7 +241,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -217,15 +262,15 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
          null and error will be set. For UTF-8 conversion errors, the set
          error domain is `G_CONVERT_ERROR`.  If there's no content to read,
          it will still return null, but error won't be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string readLineFinishUtf8(gio.async_result.AsyncResult result, out size_t length)
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -247,7 +292,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
          conversion errors, the set error domain is `G_CONVERT_ERROR`.  If
          there's no content to read, it will still return null, but error
          won't be set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string readLineUtf8(out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
@@ -255,7 +300,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -270,7 +315,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 16-bit/2-byte value read from the stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ushort readUint16(gio.cancellable.Cancellable cancellable = null)
   {
@@ -278,7 +323,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -296,7 +341,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 32-bit/4-byte value read from the stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   uint readUint32(gio.cancellable.Cancellable cancellable = null)
   {
@@ -304,7 +349,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -322,7 +367,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 64-bit/8-byte read from stream or `0` if
         an error occurred.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ulong readUint64(gio.cancellable.Cancellable cancellable = null)
   {
@@ -330,7 +375,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -355,7 +400,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.data_input_stream.DataInputStream.readUpto] instead, which has more
             consistent behaviour regarding the stop character.
@@ -367,7 +412,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -405,7 +450,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -425,7 +470,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoFinish] instead, which
             has more consistent behaviour regarding the stop character.
@@ -434,9 +479,9 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -465,7 +510,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
@@ -474,7 +519,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -510,7 +555,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -536,15 +581,15 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   string readUptoFinish(gio.async_result.AsyncResult result, out size_t length)
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

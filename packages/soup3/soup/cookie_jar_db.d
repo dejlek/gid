@@ -41,6 +41,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CookieJarDB self()
   {
     return this;

@@ -51,6 +51,7 @@ class Thread : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Thread self()
   {
     return this;
@@ -233,7 +234,7 @@ class Thread : gobject.boxed.Boxed
   }
 }
 
-class ThreadException : ErrorG
+class ThreadException : ErrorWrap
 {
   this(GError* err)
   {

@@ -46,7 +46,7 @@ __gshared extern(C)
 
   // DiscovererInfo
   GType function() c_gst_discoverer_info_get_type; ///
-  GstDiscovererInfo* function(VariantC* variant) c_gst_discoverer_info_from_variant; ///
+  GstDiscovererInfo* function(GVariant* variant) c_gst_discoverer_info_from_variant; ///
   GstDiscovererInfo* function(GstDiscovererInfo* ptr) c_gst_discoverer_info_copy; ///
   GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_audio_streams; ///
   GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_container_streams; ///
@@ -64,7 +64,7 @@ __gshared extern(C)
   const(GstToc)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_toc; ///
   const(char)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_uri; ///
   GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_video_streams; ///
-  VariantC* function(GstDiscovererInfo* info, GstDiscovererSerializeFlags flags) c_gst_discoverer_info_to_variant; ///
+  GVariant* function(GstDiscovererInfo* info, GstDiscovererSerializeFlags flags) c_gst_discoverer_info_to_variant; ///
 
   // DiscovererStreamInfo
   GType function() c_gst_discoverer_stream_info_get_type; ///

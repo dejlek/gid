@@ -107,7 +107,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been ejected successfully,
             false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   
       Deprecated: Use [gio.drive.Drive.ejectWithOperationFinish] instead.
   */
@@ -134,7 +134,7 @@ interface Drive
       Params:
         result = a #GAsyncResult.
       Returns: true if the drive was successfully ejected. false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -151,7 +151,7 @@ interface Drive
   /**
       Gets the icon for drive.
       Returns: #GIcon for the drive.
-           Free the returned object with [gobject.object.ObjectG.unref].
+           Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.icon.Icon getIcon();
 
@@ -190,7 +190,7 @@ interface Drive
   /**
       Gets the icon for drive.
       Returns: symbolic #GIcon for the drive.
-           Free the returned object with [gobject.object.ObjectG.unref].
+           Free the returned object with [gobject.object.ObjectWrap.unref].
   */
   gio.icon.Icon getSymbolicIcon();
 
@@ -198,7 +198,7 @@ interface Drive
       Get a list of mountable volumes for drive.
       
       The returned list should be freed with [glib.list.List.free], after
-      its elements have been unreffed with [gobject.object.ObjectG.unref].
+      its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: #GList containing any #GVolume objects on the given drive.
   */
   gio.volume.Volume[] getVolumes();
@@ -257,7 +257,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been poll_for_mediaed successfully,
             false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool pollForMediaFinish(gio.async_result.AsyncResult result);
 
@@ -284,7 +284,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been started successfully,
             false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool startFinish(gio.async_result.AsyncResult result);
 
@@ -311,7 +311,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been stopped successfully,
             false otherwise.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool stopFinish(gio.async_result.AsyncResult result);
 

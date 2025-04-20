@@ -200,6 +200,7 @@ class Uri : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Uri self()
   {
     return this;
@@ -1124,7 +1125,7 @@ class Uri : gobject.boxed.Boxed
   }
 }
 
-class UriException : ErrorG
+class UriException : ErrorWrap
 {
   this(GError* err)
   {

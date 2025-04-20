@@ -19,7 +19,7 @@ import gtksource.types;
     The `class@Snippet` will build the context and then expand each of the
     chunks during the insertion/edit phase.
 */
-class SnippetContext : gobject.object.ObjectG
+class SnippetContext : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,7 @@ class SnippetContext : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SnippetContext self()
   {
     return this;

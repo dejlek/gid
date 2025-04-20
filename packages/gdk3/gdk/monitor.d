@@ -1,4 +1,4 @@
-/// Module for [MonitorG] class
+/// Module for [MonitorWrap] class
 module gdk.monitor;
 
 import gdk.c.functions;
@@ -20,7 +20,7 @@ import gobject.object;
     GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
     APIs in GdkScreen to obtain monitor-related information.
 */
-class MonitorG : gobject.object.ObjectG
+class MonitorWrap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -42,9 +42,64 @@ class MonitorG : gobject.object.ObjectG
     return getGType();
   }
 
-  override MonitorG self()
+  /** Returns `this`, for use in `with` statements. */
+  override MonitorWrap self()
   {
     return this;
+  }
+
+  /** */
+  @property gdk.rectangle.Rectangle geometry()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
+  }
+
+  /** */
+  @property int heightMm()
+  {
+    return getHeightMm();
+  }
+
+  /** */
+  @property string manufacturer()
+  {
+    return getManufacturer();
+  }
+
+  /** */
+  @property string model()
+  {
+    return getModel();
+  }
+
+  /** */
+  @property int refreshRate()
+  {
+    return getRefreshRate();
+  }
+
+  /** */
+  @property int scaleFactor()
+  {
+    return getScaleFactor();
+  }
+
+  /** */
+  @property gdk.types.SubpixelLayout subpixelLayout()
+  {
+    return getSubpixelLayout();
+  }
+
+  /** */
+  @property int widthMm()
+  {
+    return getWidthMm();
+  }
+
+  /** */
+  @property gdk.rectangle.Rectangle workarea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("workarea");
   }
 
   /**
@@ -55,14 +110,14 @@ class MonitorG : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
   /**
       Retrieves the size and position of an individual monitor within the
       display coordinate space. The returned geometry is in  ”application pixels”,
-      not in ”device pixels” (see [gdk.monitor.MonitorG.getScaleFactor]).
+      not in ”device pixels” (see [gdk.monitor.MonitorWrap.getScaleFactor]).
   
       Params:
         geometry = a #GdkRectangle to be filled with the monitor geometry
@@ -173,7 +228,7 @@ class MonitorG : gobject.object.ObjectG
       Retrieves the size and position of the “work area” on a monitor
       within the display coordinate space. The returned geometry is in
       ”application pixels”, not in ”device pixels” (see
-      [gdk.monitor.MonitorG.getScaleFactor]).
+      [gdk.monitor.MonitorWrap.getScaleFactor]).
       
       The work area should be considered when positioning menus and
       similar popups, to avoid placing them below panels, docks or other
@@ -214,9 +269,9 @@ class MonitorG : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitorG))
+          $(D void callback(gdk.monitor.MonitorWrap monitorWrap))
   
-          `monitorG` the instance the signal is connected to (optional)
+          `monitorWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -224,7 +279,7 @@ class MonitorG : gobject.object.ObjectG
   ulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -167,7 +167,7 @@ alias DataQueueFullCallback = void delegate(gstbase.data_queue.DataQueue queue);
       buffer = a memory location to hold the result buffer
     Returns: GST_FLOW_OK for success
 */
-alias TypeFindHelperGetRangeFunction = gst.types.FlowReturn delegate(gst.object.ObjectGst obj, gst.object.ObjectGst parent, ulong offset, uint length, out gst.buffer.Buffer buffer);
+alias TypeFindHelperGetRangeFunction = gst.types.FlowReturn delegate(gst.object.ObjectWrap obj, gst.object.ObjectWrap parent, ulong offset, uint length, out gst.buffer.Buffer buffer);
 
 /** */
 enum BASE_PARSE_FLAG_DRAINING = 2;

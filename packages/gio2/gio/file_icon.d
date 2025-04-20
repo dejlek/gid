@@ -18,7 +18,7 @@ import gobject.object;
     
     It implements [gio.loadable_icon.LoadableIcon].
 */
-class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
+class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   /** */
@@ -40,6 +40,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileIcon self()
   {
     return this;
@@ -59,7 +60,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   this(gio.file.File file)
   {
     GIcon* _cretval;
-    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,7 +72,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   {
     GFile* _cretval;
     _cretval = g_file_icon_get_file(cast(GFileIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -160,7 +160,7 @@ struct JsonArray;
 /**
     [json.builder.Builder] provides an object for generating a JSON tree.
     
-    The root of the JSON tree can be either a [json.object.ObjectJson] or a [json.array.Array].
+    The root of the JSON tree can be either a [json.object.ObjectWrap] or a [json.array.Array].
     Thus the first call must necessarily be either
     [json.builder.Builder.beginObject] or [json.builder.Builder.beginArray].
     
@@ -268,7 +268,7 @@ struct JsonGeneratorPrivate;
     type you can retrieve a copy of the [gobject.value.Value] holding it with the
     [json.node.Node.getValue] function, and then use the [gobject.value.Value] API to extract
     the data; if the node contains a complex type you can retrieve the
-    [json.object.ObjectJson] or the [json.array.Array] using [json.node.Node.getObject]
+    [json.object.ObjectWrap] or the [json.array.Array] using [json.node.Node.getObject]
     or [json.node.Node.getArray] respectively, and then retrieve the nodes
     they contain.
     
@@ -318,24 +318,24 @@ struct JsonObjectIter
 }
 
 /**
-    [json.object.ObjectJson] is the representation of the object type inside JSON.
+    [json.object.ObjectWrap] is the representation of the object type inside JSON.
     
-    A [json.object.ObjectJson] contains [json.node.Node] "members", which may contain
+    A [json.object.ObjectWrap] contains [json.node.Node] "members", which may contain
     fundamental types, arrays or other objects; each member of an object is
     accessed using a unique string, or "name".
     
     Since objects can be arbitrarily big, copying them can be expensive; for
     this reason they are reference counted. You can control the lifetime of
-    a [json.object.ObjectJson] using [json.object.ObjectJson.ref_] and [json.object.ObjectJson.unref].
+    a [json.object.ObjectWrap] using [json.object.ObjectWrap.ref_] and [json.object.ObjectWrap.unref].
     
-    To add or overwrite a member with a given name, use [json.object.ObjectJson.setMember].
+    To add or overwrite a member with a given name, use [json.object.ObjectWrap.setMember].
     
-    To extract a member with a given name, use [json.object.ObjectJson.getMember].
+    To extract a member with a given name, use [json.object.ObjectWrap.getMember].
     
-    To retrieve the list of members, use [json.object.ObjectJson.getMembers].
+    To retrieve the list of members, use [json.object.ObjectWrap.getMembers].
     
     To retrieve the size of the object (that is, the number of members it has),
-    use [json.object.ObjectJson.getSize].
+    use [json.object.ObjectWrap.getSize].
 */
 struct JsonObject;
 
@@ -682,7 +682,7 @@ struct JsonReaderPrivate;
 
 /**
     [json.serializable.Serializable] is an interface for controlling the serialization
-    and deserialization of [gobject.object.ObjectG] classes.
+    and deserialization of [gobject.object.ObjectWrap] classes.
     
     Implementing this interface allows controlling how the class is going
     to be serialized or deserialized by `func@Json.construct_gobject` and

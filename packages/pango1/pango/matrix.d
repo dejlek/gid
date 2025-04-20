@@ -21,10 +21,25 @@ import pango.types;
 class Matrix : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `matrix.Matrix` boxed type.
+      Params:
+        xx = 1st component of the transformation matrix
+        xy = 2nd component of the transformation matrix
+        yx = 3rd component of the transformation matrix
+        yy = 4th component of the transformation matrix
+        x0 = x translation
+        y0 = y translation
+  */
+  this(double xx = 0.0, double xy = 0.0, double yx = 0.0, double yy = 0.0, double x0 = 0.0, double y0 = 0.0)
   {
     super(gMalloc(PangoMatrix.sizeof), Yes.Take);
+    this.xx = xx;
+    this.xy = xy;
+    this.yx = yx;
+    this.yy = yy;
+    this.x0 = x0;
+    this.y0 = y0;
   }
 
   /** */
@@ -52,66 +67,121 @@ class Matrix : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Matrix self()
   {
     return this;
   }
 
+  /**
+      Get `xx` field.
+      Returns: 1st component of the transformation matrix
+  */
   @property double xx()
   {
     return (cast(PangoMatrix*)cPtr).xx;
   }
 
+  /**
+      Set `xx` field.
+      Params:
+        propval = 1st component of the transformation matrix
+  */
   @property void xx(double propval)
   {
     (cast(PangoMatrix*)cPtr).xx = propval;
   }
 
+  /**
+      Get `xy` field.
+      Returns: 2nd component of the transformation matrix
+  */
   @property double xy()
   {
     return (cast(PangoMatrix*)cPtr).xy;
   }
 
+  /**
+      Set `xy` field.
+      Params:
+        propval = 2nd component of the transformation matrix
+  */
   @property void xy(double propval)
   {
     (cast(PangoMatrix*)cPtr).xy = propval;
   }
 
+  /**
+      Get `yx` field.
+      Returns: 3rd component of the transformation matrix
+  */
   @property double yx()
   {
     return (cast(PangoMatrix*)cPtr).yx;
   }
 
+  /**
+      Set `yx` field.
+      Params:
+        propval = 3rd component of the transformation matrix
+  */
   @property void yx(double propval)
   {
     (cast(PangoMatrix*)cPtr).yx = propval;
   }
 
+  /**
+      Get `yy` field.
+      Returns: 4th component of the transformation matrix
+  */
   @property double yy()
   {
     return (cast(PangoMatrix*)cPtr).yy;
   }
 
+  /**
+      Set `yy` field.
+      Params:
+        propval = 4th component of the transformation matrix
+  */
   @property void yy(double propval)
   {
     (cast(PangoMatrix*)cPtr).yy = propval;
   }
 
+  /**
+      Get `x0` field.
+      Returns: x translation
+  */
   @property double x0()
   {
     return (cast(PangoMatrix*)cPtr).x0;
   }
 
+  /**
+      Set `x0` field.
+      Params:
+        propval = x translation
+  */
   @property void x0(double propval)
   {
     (cast(PangoMatrix*)cPtr).x0 = propval;
   }
 
+  /**
+      Get `y0` field.
+      Returns: y translation
+  */
   @property double y0()
   {
     return (cast(PangoMatrix*)cPtr).y0;
   }
 
+  /**
+      Set `y0` field.
+      Params:
+        propval = y translation
+  */
   @property void y0(double propval)
   {
     (cast(PangoMatrix*)cPtr).y0 = propval;

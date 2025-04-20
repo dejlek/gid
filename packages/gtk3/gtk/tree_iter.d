@@ -17,10 +17,15 @@ import gtk.types;
 class TreeIter : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `tree_iter.TreeIter` boxed type.
+      Params:
+        stamp = a unique stamp to catch invalid iterators
+  */
+  this(int stamp = int.init)
   {
     super(gMalloc(GtkTreeIter.sizeof), Yes.Take);
+    this.stamp = stamp;
   }
 
   /** */
@@ -48,16 +53,26 @@ class TreeIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TreeIter self()
   {
     return this;
   }
 
+  /**
+      Get `stamp` field.
+      Returns: a unique stamp to catch invalid iterators
+  */
   @property int stamp()
   {
     return (cast(GtkTreeIter*)cPtr).stamp;
   }
 
+  /**
+      Set `stamp` field.
+      Params:
+        propval = a unique stamp to catch invalid iterators
+  */
   @property void stamp(int propval)
   {
     (cast(GtkTreeIter*)cPtr).stamp = propval;

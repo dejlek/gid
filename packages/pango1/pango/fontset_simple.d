@@ -38,6 +38,7 @@ class FontsetSimple : pango.fontset.Fontset
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FontsetSimple self()
   {
     return this;

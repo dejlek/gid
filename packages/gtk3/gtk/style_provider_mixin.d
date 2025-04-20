@@ -34,7 +34,7 @@ template StyleProviderT()
   {
     GtkIconFactory* _cretval;
     _cretval = gtk_style_provider_get_icon_factory(cast(GtkStyleProvider*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_factory.IconFactory)(cast(GtkIconFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_factory.IconFactory)(cast(GtkIconFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ template StyleProviderT()
   {
     GtkStyleProperties* _cretval;
     _cretval = gtk_style_provider_get_style(cast(GtkStyleProvider*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.style_properties.StyleProperties)(cast(GtkStyleProperties*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_properties.StyleProperties)(cast(GtkStyleProperties*)_cretval, Yes.Take);
     return _retval;
   }
 

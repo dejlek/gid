@@ -45,7 +45,7 @@ import gtk.types;
     g_object_unref (icon);
     ```
 */
-class IconTheme : gobject.object.ObjectG
+class IconTheme : gobject.object.ObjectWrap
 {
 
   /** */
@@ -67,9 +67,56 @@ class IconTheme : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override IconTheme self()
   {
     return this;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display that this icon theme object is attached to.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that this icon theme object is attached to.
+  */
+  @property void display(gdk.display.Display propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.display.Display)("display", propval);
+  }
+
+  /**
+      Get `themeName` property.
+      Returns: The name of the icon theme that is being used.
+      
+      Unless set to a different value, this will be the value of
+      the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
+      object associated to the display of the icontheme object.
+  */
+  @property string themeName()
+  {
+    return getThemeName();
+  }
+
+  /**
+      Set `themeName` property.
+      Params:
+        propval = The name of the icon theme that is being used.
+        
+        Unless set to a different value, this will be the value of
+        the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
+        object associated to the display of the icontheme object.
+  */
+  @property void themeName(string propval)
+  {
+    return setThemeName(propval);
   }
 
   /**
@@ -108,7 +155,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +200,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gtk_icon_theme_get_display(cast(GtkIconTheme*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +332,7 @@ class IconTheme : gobject.object.ObjectG
   bool hasGicon(gio.icon.Icon gicon)
   {
     bool _retval;
-    _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -319,13 +366,13 @@ class IconTheme : gobject.object.ObjectG
         direction = text direction the icon will be displayed in
         flags = flags modifying the behavior of the icon lookup
       Returns: a [gtk.icon_paintable.IconPaintable] containing
-          information about the icon. Unref with [gobject.object.ObjectG.unref]
+          information about the icon. Unref with [gobject.object.ObjectWrap.unref]
   */
   gtk.icon_paintable.IconPaintable lookupByGicon(gio.icon.Icon icon, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size, scale, direction, flags);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -367,7 +414,7 @@ class IconTheme : gobject.object.ObjectG
     _tmpfallbacks ~= null;
     const(char*)* _fallbacks = _tmpfallbacks.ptr;
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)cPtr, _iconName, _fallbacks, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 

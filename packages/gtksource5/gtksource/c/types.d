@@ -1788,8 +1788,8 @@ struct GtkSourceTagClass
     ```
     
     If you need to adjust the font or size of font within a portion of the
-    document only, you should use a [gtk.text_tag.TextTag] with the [gtk.text_tag.TextTag.utf8] or
-    [gtk.text_tag.TextTag.gdouble] set so that the font size may be scaled relative to
+    document only, you should use a [gtk.text_tag.TextTag] with the [gtk.text_tag.TextTag.family] or
+    [gtk.text_tag.TextTag.scale] set so that the font size may be scaled relative to
     the default font set in CSS.
 */
 struct GtkSourceView

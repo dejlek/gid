@@ -18,7 +18,9 @@ import graphene.types;
 class Quad : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `quad.Quad` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_quad_t.sizeof), Yes.Take);
@@ -49,6 +51,7 @@ class Quad : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Quad self()
   {
     return this;

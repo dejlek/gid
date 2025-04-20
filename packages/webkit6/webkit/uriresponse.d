@@ -15,7 +15,7 @@ import webkit.types;
     status code, the content length, the mime type, the HTTP status or
     the suggested filename.
 */
-class URIResponse : gobject.object.ObjectG
+class URIResponse : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,6 +41,60 @@ class URIResponse : gobject.object.ObjectG
   override URIResponse self()
   {
     return this;
+  }
+
+  /**
+      Get `contentLength` property.
+      Returns: The expected content length of the response.
+  */
+  @property ulong contentLength()
+  {
+    return getContentLength();
+  }
+
+  /**
+      Get `httpHeaders` property.
+      Returns: The HTTP headers of the response, or null if the response is not an HTTP response.
+  */
+  @property soup.message_headers.MessageHeaders httpHeaders()
+  {
+    return getHttpHeaders();
+  }
+
+  /**
+      Get `mimeType` property.
+      Returns: The MIME type of the response.
+  */
+  @property string mimeType()
+  {
+    return getMimeType();
+  }
+
+  /**
+      Get `statusCode` property.
+      Returns: The status code of the response as returned by the server.
+  */
+  @property uint statusCode()
+  {
+    return getStatusCode();
+  }
+
+  /**
+      Get `suggestedFilename` property.
+      Returns: The suggested filename for the URI response.
+  */
+  @property string suggestedFilename()
+  {
+    return getSuggestedFilename();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The URI for which the response was made.
+  */
+  @property string uri()
+  {
+    return getUri();
   }
 
   /**

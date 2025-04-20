@@ -34,6 +34,7 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ScaleAccessible self()
   {
     return this;

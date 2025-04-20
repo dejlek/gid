@@ -18,10 +18,26 @@ import gobject.boxed;
 class PixbufFormat : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `pixbuf_format.PixbufFormat` boxed type.
+      Params:
+        name = the name of the image format
+        domain = the message domain for the `description`
+        description = a description of the image format
+        flags = a combination of [gdkpixbuf.types.PixbufFormatFlags]
+        disabled = a boolean determining whether the loader is disabled`
+        license = a string containing license information, typically set to
+            shorthands like "GPL", "LGPL", etc.
+  */
+  this(string name = string.init, string domain = string.init, string description = string.init, uint flags = uint.init, bool disabled = bool.init, string license = string.init)
   {
     super(gMalloc(GdkPixbufFormat.sizeof), Yes.Take);
+    this.name = name;
+    this.domain = domain;
+    this.description = description;
+    this.flags = flags;
+    this.disabled = disabled;
+    this.license = license;
   }
 
   /** */
@@ -49,74 +65,135 @@ class PixbufFormat : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PixbufFormat self()
   {
     return this;
   }
 
+  /**
+      Get `name` field.
+      Returns: the name of the image format
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = the name of the image format
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).name);
   }
 
+  /**
+      Get `signature` field.
+      Returns: the signature of the module
+  */
   @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
   {
     return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)cPtr).signature);
   }
 
+  /**
+      Get `domain` field.
+      Returns: the message domain for the `description`
+  */
   @property string domain()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
   }
 
+  /**
+      Set `domain` field.
+      Params:
+        propval = the message domain for the `description`
+  */
   @property void domain(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).domain);
   }
 
+  /**
+      Get `description` field.
+      Returns: a description of the image format
+  */
   @property string description()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
   }
 
+  /**
+      Set `description` field.
+      Params:
+        propval = a description of the image format
+  */
   @property void description(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).description);
   }
 
+  /**
+      Get `flags` field.
+      Returns: a combination of [gdkpixbuf.types.PixbufFormatFlags]
+  */
   @property uint flags()
   {
     return (cast(GdkPixbufFormat*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = a combination of [gdkpixbuf.types.PixbufFormatFlags]
+  */
   @property void flags(uint propval)
   {
     (cast(GdkPixbufFormat*)cPtr).flags = propval;
   }
 
+  /**
+      Get `disabled` field.
+      Returns: a boolean determining whether the loader is disabled`
+  */
   @property bool disabled()
   {
     return (cast(GdkPixbufFormat*)cPtr).disabled;
   }
 
+  /**
+      Set `disabled` field.
+      Params:
+        propval = a boolean determining whether the loader is disabled`
+  */
   @property void disabled(bool propval)
   {
     (cast(GdkPixbufFormat*)cPtr).disabled = propval;
   }
 
+  /**
+      Get `license` field.
+      Returns: a string containing license information, typically set to
+        shorthands like "GPL", "LGPL", etc.
+  */
   @property string license()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);
   }
 
+  /**
+      Set `license` field.
+      Params:
+        propval = a string containing license information, typically set to
+          shorthands like "GPL", "LGPL", etc.
+  */
   @property void license(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);

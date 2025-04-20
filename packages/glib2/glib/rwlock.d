@@ -79,7 +79,7 @@ class RWLock
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.RWLock");
+      throw new GidConstructException("Null instance pointer for glib.rwlock.RWLock");
 
     cInstance = *cast(GRWLock*)ptr;
 

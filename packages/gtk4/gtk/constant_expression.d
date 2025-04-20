@@ -18,7 +18,7 @@ class ConstantExpression : gtk.expression.Expression
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gtk.ConstantExpression");
+      throw new GidConstructException("Null instance pointer for gtk.constant_expression.ConstantExpression");
 
     super(cast(GtkExpression*)ptr, take);
   }

@@ -157,9 +157,77 @@ class BaseSrc : gst.element.Element
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BaseSrc self()
   {
     return this;
+  }
+
+  /**
+      Get `automaticEos` property.
+      Returns: See [gstbase.base_src.BaseSrc.setAutomaticEos]
+  */
+  @property bool automaticEos()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("automatic-eos");
+  }
+
+  /**
+      Set `automaticEos` property.
+      Params:
+        propval = See [gstbase.base_src.BaseSrc.setAutomaticEos]
+  */
+  @property void automaticEos(bool propval)
+  {
+    return setAutomaticEos(propval);
+  }
+
+  /** */
+  @property uint blocksize()
+  {
+    return getBlocksize();
+  }
+
+  /** */
+  @property void blocksize(uint propval)
+  {
+    return setBlocksize(propval);
+  }
+
+  /** */
+  @property bool doTimestamp()
+  {
+    return getDoTimestamp();
+  }
+
+  /** */
+  @property void doTimestamp(bool propval)
+  {
+    return setDoTimestamp(propval);
+  }
+
+  /** */
+  @property int numBuffers()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("num-buffers");
+  }
+
+  /** */
+  @property void numBuffers(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("num-buffers", propval);
+  }
+
+  /** */
+  @property bool typefind()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("typefind");
+  }
+
+  /** */
+  @property void typefind(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("typefind", propval);
   }
 
   /**
@@ -198,7 +266,7 @@ class BaseSrc : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_src_get_buffer_pool(cast(GstBaseSrc*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 

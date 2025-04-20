@@ -23,7 +23,7 @@ import gtk.types;
     
     Unlike a [gtk.widget.Widget], a [gtk.constraint_guide.ConstraintGuide] will not be drawn.
 */
-class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.ConstraintTarget
+class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.ConstraintTarget
 {
 
   /** */
@@ -45,9 +45,164 @@ class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.Constraint
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ConstraintGuide self()
   {
     return this;
+  }
+
+  /**
+      Get `maxHeight` property.
+      Returns: The maximum height of the guide.
+  */
+  @property int maxHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-height");
+  }
+
+  /**
+      Set `maxHeight` property.
+      Params:
+        propval = The maximum height of the guide.
+  */
+  @property void maxHeight(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("max-height", propval);
+  }
+
+  /**
+      Get `maxWidth` property.
+      Returns: The maximum width of the guide.
+  */
+  @property int maxWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-width");
+  }
+
+  /**
+      Set `maxWidth` property.
+      Params:
+        propval = The maximum width of the guide.
+  */
+  @property void maxWidth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("max-width", propval);
+  }
+
+  /**
+      Get `minHeight` property.
+      Returns: The minimum height of the guide.
+  */
+  @property int minHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("min-height");
+  }
+
+  /**
+      Set `minHeight` property.
+      Params:
+        propval = The minimum height of the guide.
+  */
+  @property void minHeight(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("min-height", propval);
+  }
+
+  /**
+      Get `minWidth` property.
+      Returns: The minimum width of the guide.
+  */
+  @property int minWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("min-width");
+  }
+
+  /**
+      Set `minWidth` property.
+      Params:
+        propval = The minimum width of the guide.
+  */
+  @property void minWidth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("min-width", propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
+  */
+  @property void name(string propval)
+  {
+    return setName(propval);
+  }
+
+  /**
+      Get `natHeight` property.
+      Returns: The preferred, or natural, height of the guide.
+  */
+  @property int natHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("nat-height");
+  }
+
+  /**
+      Set `natHeight` property.
+      Params:
+        propval = The preferred, or natural, height of the guide.
+  */
+  @property void natHeight(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("nat-height", propval);
+  }
+
+  /**
+      Get `natWidth` property.
+      Returns: The preferred, or natural, width of the guide.
+  */
+  @property int natWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("nat-width");
+  }
+
+  /**
+      Set `natWidth` property.
+      Params:
+        propval = The preferred, or natural, width of the guide.
+  */
+  @property void natWidth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("nat-width", propval);
+  }
+
+  /**
+      Get `strength` property.
+      Returns: The [gtk.types.ConstraintStrength] to be used for the constraint on
+      the natural size of the guide.
+  */
+  @property gtk.types.ConstraintStrength strength()
+  {
+    return getStrength();
+  }
+
+  /**
+      Set `strength` property.
+      Params:
+        propval = The [gtk.types.ConstraintStrength] to be used for the constraint on
+        the natural size of the guide.
+  */
+  @property void strength(gtk.types.ConstraintStrength propval)
+  {
+    return setStrength(propval);
   }
 
   mixin ConstraintTargetT!();

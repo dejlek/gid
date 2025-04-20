@@ -103,9 +103,508 @@ class Window : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Window self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptFocus` property.
+      Returns: Whether the window should receive the input focus.
+  */
+  @property bool acceptFocus()
+  {
+    return getAcceptFocus();
+  }
+
+  /**
+      Set `acceptFocus` property.
+      Params:
+        propval = Whether the window should receive the input focus.
+  */
+  @property void acceptFocus(bool propval)
+  {
+    return setAcceptFocus(propval);
+  }
+
+  /**
+      Get `application` property.
+      Returns: The #GtkApplication associated with the window.
+      
+      The application will be kept alive for at least as long as it
+      has any windows associated with it (see [gio.application.Application.hold]
+      for a way to keep it alive without windows).
+      
+      Normally, the connection between the application and the window
+      will remain until the window is destroyed, but you can explicitly
+      remove it by setting the :application property to null.
+  */
+  @property gtk.application.Application application()
+  {
+    return getApplication();
+  }
+
+  /**
+      Set `application` property.
+      Params:
+        propval = The #GtkApplication associated with the window.
+        
+        The application will be kept alive for at least as long as it
+        has any windows associated with it (see [gio.application.Application.hold]
+        for a way to keep it alive without windows).
+        
+        Normally, the connection between the application and the window
+        will remain until the window is destroyed, but you can explicitly
+        remove it by setting the :application property to null.
+  */
+  @property void application(gtk.application.Application propval)
+  {
+    return setApplication(propval);
+  }
+
+  /**
+      Get `attachedTo` property.
+      Returns: The widget to which this window is attached.
+      See [gtk.window.Window.setAttachedTo].
+      
+      Examples of places where specifying this relation is useful are
+      for instance a #GtkMenu created by a #GtkComboBox, a completion
+      popup window created by #GtkEntry or a typeahead search entry
+      created by #GtkTreeView.
+  */
+  @property gtk.widget.Widget attachedTo()
+  {
+    return getAttachedTo();
+  }
+
+  /**
+      Set `attachedTo` property.
+      Params:
+        propval = The widget to which this window is attached.
+        See [gtk.window.Window.setAttachedTo].
+        
+        Examples of places where specifying this relation is useful are
+        for instance a #GtkMenu created by a #GtkComboBox, a completion
+        popup window created by #GtkEntry or a typeahead search entry
+        created by #GtkTreeView.
+  */
+  @property void attachedTo(gtk.widget.Widget propval)
+  {
+    return setAttachedTo(propval);
+  }
+
+  /**
+      Get `decorated` property.
+      Returns: Whether the window should be decorated by the window manager.
+  */
+  @property bool decorated()
+  {
+    return getDecorated();
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window should be decorated by the window manager.
+  */
+  @property void decorated(bool propval)
+  {
+    return setDecorated(propval);
+  }
+
+  /** */
+  @property int defaultHeight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("default-height");
+  }
+
+  /** */
+  @property void defaultHeight(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("default-height", propval);
+  }
+
+  /** */
+  @property int defaultWidth()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("default-width");
+  }
+
+  /** */
+  @property void defaultWidth(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("default-width", propval);
+  }
+
+  /**
+      Get `deletable` property.
+      Returns: Whether the window frame should have a close button.
+  */
+  @property bool deletable()
+  {
+    return getDeletable();
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window frame should have a close button.
+  */
+  @property void deletable(bool propval)
+  {
+    return setDeletable(propval);
+  }
+
+  /** */
+  @property bool destroyWithParent()
+  {
+    return getDestroyWithParent();
+  }
+
+  /** */
+  @property void destroyWithParent(bool propval)
+  {
+    return setDestroyWithParent(propval);
+  }
+
+  /**
+      Get `focusOnMap` property.
+      Returns: Whether the window should receive the input focus when mapped.
+  */
+  @property bool focusOnMap()
+  {
+    return getFocusOnMap();
+  }
+
+  /**
+      Set `focusOnMap` property.
+      Params:
+        propval = Whether the window should receive the input focus when mapped.
+  */
+  @property void focusOnMap(bool propval)
+  {
+    return setFocusOnMap(propval);
+  }
+
+  /**
+      Get `focusVisible` property.
+      Returns: Whether 'focus rectangles' are currently visible in this window.
+      
+      This property is maintained by GTK+ based on user input
+      and should not be set by applications.
+  */
+  @property bool focusVisible()
+  {
+    return getFocusVisible();
+  }
+
+  /**
+      Set `focusVisible` property.
+      Params:
+        propval = Whether 'focus rectangles' are currently visible in this window.
+        
+        This property is maintained by GTK+ based on user input
+        and should not be set by applications.
+  */
+  @property void focusVisible(bool propval)
+  {
+    return setFocusVisible(propval);
+  }
+
+  /**
+      Get `gravity` property.
+      Returns: The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
+      more details about window gravity.
+  */
+  @property gdk.types.Gravity gravity()
+  {
+    return getGravity();
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
+        more details about window gravity.
+  */
+  @property void gravity(gdk.types.Gravity propval)
+  {
+    return setGravity(propval);
+  }
+
+  /**
+      Get `hasResizeGrip` property.
+      Returns: Whether the window has a corner resize grip.
+      
+      Note that the resize grip is only shown if the window is
+      actually resizable and not maximized. Use
+      #GtkWindow:resize-grip-visible to find out if the resize
+      grip is currently shown.
+  
+      Deprecated: Resize grips have been removed.
+  */
+  @property bool hasResizeGrip()
+  {
+    return getHasResizeGrip();
+  }
+
+  /**
+      Set `hasResizeGrip` property.
+      Params:
+        propval = Whether the window has a corner resize grip.
+        
+        Note that the resize grip is only shown if the window is
+        actually resizable and not maximized. Use
+        #GtkWindow:resize-grip-visible to find out if the resize
+        grip is currently shown.
+  
+      Deprecated: Resize grips have been removed.
+  */
+  @property void hasResizeGrip(bool propval)
+  {
+    return setHasResizeGrip(propval);
+  }
+
+  /**
+      Get `hideTitlebarWhenMaximized` property.
+      Returns: Whether the titlebar should be hidden during maximization.
+  */
+  @property bool hideTitlebarWhenMaximized()
+  {
+    return getHideTitlebarWhenMaximized();
+  }
+
+  /**
+      Set `hideTitlebarWhenMaximized` property.
+      Params:
+        propval = Whether the titlebar should be hidden during maximization.
+  */
+  @property void hideTitlebarWhenMaximized(bool propval)
+  {
+    return setHideTitlebarWhenMaximized(propval);
+  }
+
+  /** */
+  @property gdkpixbuf.pixbuf.Pixbuf icon()
+  {
+    return getIcon();
+  }
+
+  /** */
+  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setIcon(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The :icon-name property specifies the name of the themed icon to
+      use as the window icon. See #GtkIconTheme for more details.
+  */
+  @property string iconName()
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The :icon-name property specifies the name of the themed icon to
+        use as the window icon. See #GtkIconTheme for more details.
+  */
+  @property void iconName(string propval)
+  {
+    return setIconName(propval);
+  }
+
+  /**
+      Get `mnemonicsVisible` property.
+      Returns: Whether mnemonics are currently visible in this window.
+      
+      This property is maintained by GTK+ based on user input,
+      and should not be set by applications.
+  */
+  @property bool mnemonicsVisible()
+  {
+    return getMnemonicsVisible();
+  }
+
+  /**
+      Set `mnemonicsVisible` property.
+      Params:
+        propval = Whether mnemonics are currently visible in this window.
+        
+        This property is maintained by GTK+ based on user input,
+        and should not be set by applications.
+  */
+  @property void mnemonicsVisible(bool propval)
+  {
+    return setMnemonicsVisible(propval);
+  }
+
+  /** */
+  @property bool modal()
+  {
+    return getModal();
+  }
+
+  /** */
+  @property void modal(bool propval)
+  {
+    return setModal(propval);
+  }
+
+  /** */
+  @property bool resizable()
+  {
+    return getResizable();
+  }
+
+  /** */
+  @property void resizable(bool propval)
+  {
+    return setResizable(propval);
+  }
+
+  /**
+      Get `resizeGripVisible` property.
+      Returns: Whether a corner resize grip is currently shown.
+  
+      Deprecated: Resize grips have been removed.
+  */
+  @property bool resizeGripVisible()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("resize-grip-visible");
+  }
+
+  /** */
+  @property string role()
+  {
+    return getRole();
+  }
+
+  /** */
+  @property void role(string propval)
+  {
+    return setRole(propval);
+  }
+
+  /** */
+  @property gdk.screen.Screen screen()
+  {
+    return getScreen();
+  }
+
+  /** */
+  @property void screen(gdk.screen.Screen propval)
+  {
+    return setScreen(propval);
+  }
+
+  /** */
+  @property bool skipPagerHint()
+  {
+    return getSkipPagerHint();
+  }
+
+  /** */
+  @property void skipPagerHint(bool propval)
+  {
+    return setSkipPagerHint(propval);
+  }
+
+  /** */
+  @property bool skipTaskbarHint()
+  {
+    return getSkipTaskbarHint();
+  }
+
+  /** */
+  @property void skipTaskbarHint(bool propval)
+  {
+    return setSkipTaskbarHint(propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The :startup-id is a write-only property for setting window's
+        startup notification identifier. See [gtk.window.Window.setStartupId]
+        for more details.
+  */
+  @property void startupId(string propval)
+  {
+    return setStartupId(propval);
+  }
+
+  /** */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /** */
+  @property void title(string propval)
+  {
+    return setTitle(propval);
+  }
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the window. See [gtk.window.Window.setTransientFor] for
+      more details about transient windows.
+  */
+  @property gtk.window.Window transientFor()
+  {
+    return getTransientFor();
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the window. See [gtk.window.Window.setTransientFor] for
+        more details about transient windows.
+  */
+  @property void transientFor(gtk.window.Window propval)
+  {
+    return setTransientFor(propval);
+  }
+
+  /** */
+  @property gdk.types.WindowTypeHint typeHint()
+  {
+    return getTypeHint();
+  }
+
+  /** */
+  @property void typeHint(gdk.types.WindowTypeHint propval)
+  {
+    return setTypeHint(propval);
+  }
+
+  /** */
+  @property bool urgencyHint()
+  {
+    return getUrgencyHint();
+  }
+
+  /** */
+  @property void urgencyHint(bool propval)
+  {
+    return setUrgencyHint(propval);
+  }
+
+  /** */
+  @property gtk.types.WindowPosition windowPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.WindowPosition)("window-position");
+  }
+
+  /** */
+  @property void windowPosition(gtk.types.WindowPosition propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.WindowPosition)("window-position", propval);
   }
 
   /**
@@ -228,7 +727,7 @@ class Window : gtk.bin.Bin
       Params:
         filename = location of icon file
       Returns: true if setting the icon succeeded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static bool setDefaultIconFromFile(string filename)
   {
@@ -237,7 +736,7 @@ class Window : gtk.bin.Bin
     GError *_err;
     _retval = gtk_window_set_default_icon_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -453,7 +952,7 @@ class Window : gtk.bin.Bin
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -467,7 +966,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_attached_to(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -508,7 +1007,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -549,7 +1048,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -599,7 +1098,7 @@ class Window : gtk.bin.Bin
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -639,7 +1138,7 @@ class Window : gtk.bin.Bin
   {
     PixbufC* _cretval;
     _cretval = gtk_window_get_icon(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -825,7 +1324,7 @@ class Window : gtk.bin.Bin
   {
     GdkScreen* _cretval;
     _cretval = gtk_window_get_screen(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -957,7 +1456,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -971,7 +1470,7 @@ class Window : gtk.bin.Bin
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1785,7 +2284,7 @@ class Window : gtk.bin.Bin
       Params:
         filename = location of icon file
       Returns: true if setting the icon succeeded.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool setIconFromFile(string filename)
   {
@@ -1794,7 +2293,7 @@ class Window : gtk.bin.Bin
     GError *_err;
     _retval = gtk_window_set_icon_from_file(cast(GtkWindow*)cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

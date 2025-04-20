@@ -16,6 +16,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.widget;
 
 /**
     A dialog showing application's preferences.
@@ -55,9 +56,71 @@ class PreferencesDialog : adw.dialog.Dialog
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override PreferencesDialog self()
   {
     return this;
+  }
+
+  /**
+      Get `searchEnabled` property.
+      Returns: Whether search is enabled.
+  */
+  @property bool searchEnabled()
+  {
+    return getSearchEnabled();
+  }
+
+  /**
+      Set `searchEnabled` property.
+      Params:
+        propval = Whether search is enabled.
+  */
+  @property void searchEnabled(bool propval)
+  {
+    return setSearchEnabled(propval);
+  }
+
+  /**
+      Get `visiblePage` property.
+      Returns: The currently visible page.
+  */
+  @property gtk.widget.Widget visiblePage()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("visible-page");
+  }
+
+  /**
+      Set `visiblePage` property.
+      Params:
+        propval = The currently visible page.
+  */
+  @property void visiblePage(gtk.widget.Widget propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("visible-page", propval);
+  }
+
+  /**
+      Get `visiblePageName` property.
+      Returns: The name of the currently visible page.
+      
+      See `property@AdwPreferencesDialog:visible-page`.
+  */
+  @property string visiblePageName()
+  {
+    return getVisiblePageName();
+  }
+
+  /**
+      Set `visiblePageName` property.
+      Params:
+        propval = The name of the currently visible page.
+        
+        See `property@AdwPreferencesDialog:visible-page`.
+  */
+  @property void visiblePageName(string propval)
+  {
+    return setVisiblePageName(propval);
   }
 
   /**
@@ -114,7 +177,7 @@ class PreferencesDialog : adw.dialog.Dialog
   {
     AdwPreferencesPage* _cretval;
     _cretval = adw_preferences_dialog_get_visible_page(cast(AdwPreferencesDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
     return _retval;
   }
 

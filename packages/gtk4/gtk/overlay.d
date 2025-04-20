@@ -21,7 +21,7 @@ import gtk.widget;
     ![An example GtkOverlay](overlay.png)
     
     The position of each overlay widget is determined by its
-    [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
     properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
     will be placed at the top left corner of the [gtk.overlay.Overlay] container,
     whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
@@ -70,9 +70,29 @@ class Overlay : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Overlay self()
   {
     return this;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The main child widget.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The main child widget.
+  */
+  @property void child(gtk.widget.Widget propval)
+  {
+    return setChild(propval);
   }
 
   /**
@@ -93,8 +113,8 @@ class Overlay : gtk.widget.Widget
       added with [gtk.overlay.Overlay.setChild].
       
       The position at which widget is placed is determined
-      from its [gtk.widget.Widget.Align] and
-      [gtk.widget.Widget.Align] properties.
+      from its [gtk.widget.Widget.halign] and
+      [gtk.widget.Widget.valign] properties.
   
       Params:
         widget = a [gtk.widget.Widget] to be added to the container
@@ -112,7 +132,7 @@ class Overlay : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_get_child(cast(GtkOverlay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

@@ -18,7 +18,9 @@ import graphene.vec3;
 class Triangle : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `triangle.Triangle` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_triangle_t.sizeof), Yes.Take);
@@ -49,6 +51,7 @@ class Triangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Triangle self()
   {
     return this;

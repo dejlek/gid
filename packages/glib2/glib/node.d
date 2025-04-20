@@ -17,7 +17,7 @@ class Node
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.Node");
+      throw new GidConstructException("Null instance pointer for glib.node.Node");
 
     cInstance = *cast(GNode*)ptr;
 
@@ -31,21 +31,41 @@ class Node
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `next` field.
+      Returns: points to the node's next sibling (a sibling is another
+             #GNode with the same parent).
+  */
   @property glib.node.Node next()
   {
     return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).next);
   }
 
+  /**
+      Get `prev` field.
+      Returns: points to the node's previous sibling.
+  */
   @property glib.node.Node prev()
   {
     return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).prev);
   }
 
+  /**
+      Get `parent` field.
+      Returns: points to the parent of the #GNode, or is null if the
+               #GNode is the root of the tree.
+  */
   @property glib.node.Node parent()
   {
     return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).parent);
   }
 
+  /**
+      Get `children` field.
+      Returns: points to the first child of the #GNode.  The other
+                 children are accessed by using the @next pointer of each
+                 child.
+  */
   @property glib.node.Node children()
   {
     return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).children);

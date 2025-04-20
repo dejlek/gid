@@ -21,7 +21,7 @@ import webkit.web_view;
     settings with [webkit.print_operation.PrintOperation.setPrintSettings] or
     display the print dialog with [webkit.print_operation.PrintOperation.runDialog].
 */
-class PrintOperation : gobject.object.ObjectG
+class PrintOperation : gobject.object.ObjectWrap
 {
 
   /** */
@@ -50,6 +50,44 @@ class PrintOperation : gobject.object.ObjectG
   }
 
   /**
+      Get `pageSetup` property.
+      Returns: The initial #GtkPageSetup for the print operation.
+  */
+  @property gtk.page_setup.PageSetup pageSetup()
+  {
+    return getPageSetup();
+  }
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The initial #GtkPageSetup for the print operation.
+  */
+  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setPageSetup(propval);
+  }
+
+  /**
+      Get `printSettings` property.
+      Returns: The initial #GtkPrintSettings for the print operation.
+  */
+  @property gtk.print_settings.PrintSettings printSettings()
+  {
+    return getPrintSettings();
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The initial #GtkPrintSettings for the print operation.
+  */
+  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setPrintSettings(propval);
+  }
+
+  /**
       Create a new #WebKitPrintOperation to print web_view contents.
   
       Params:
@@ -75,7 +113,7 @@ class PrintOperation : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = webkit_print_operation_get_page_setup(cast(WebKitPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,7 +129,7 @@ class PrintOperation : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = webkit_print_operation_get_print_settings(cast(WebKitPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +221,7 @@ class PrintOperation : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorG error, webkit.print_operation.PrintOperation printOperation))
+          $(D void callback(glib.error.ErrorWrap error, webkit.print_operation.PrintOperation printOperation))
   
           `error` the #GError that was triggered (optional)
   
@@ -195,7 +233,7 @@ class PrintOperation : gobject.object.ObjectG
   ulong connectFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {

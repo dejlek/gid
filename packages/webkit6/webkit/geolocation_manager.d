@@ -19,7 +19,7 @@ import webkit.types;
     updated by calling [webkit.geolocation_manager.GeolocationManager.updatePosition]. The signal #WebKitGeolocationManager::stop
     will be emitted when location updates are no longer needed.
 */
-class GeolocationManager : gobject.object.ObjectG
+class GeolocationManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -45,6 +45,17 @@ class GeolocationManager : gobject.object.ObjectG
   override GeolocationManager self()
   {
     return this;
+  }
+
+  /**
+      Get `enableHighAccuracy` property.
+      Returns: Whether high accuracy is enabled. This is a read-only property that will be
+      set to true when a #WebKitGeolocationManager needs to get accurate position updates.
+      You can connect to notify::enable-high-accuracy signal to monitor it.
+  */
+  @property bool enableHighAccuracy()
+  {
+    return getEnableHighAccuracy();
   }
 
   /**

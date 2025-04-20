@@ -49,9 +49,29 @@ class ToggleToolButton : gtk.tool_button.ToolButton
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToggleToolButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: If the toggle tool button should be pressed in.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the toggle tool button should be pressed in.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
   }
 
   /**
@@ -83,7 +103,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_toggle_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 

@@ -1,4 +1,4 @@
-/// Module for [MonitorG] class
+/// Module for [MonitorWrap] class
 module gdk.monitor;
 
 import gdk.c.functions;
@@ -11,7 +11,7 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
-    [gdk.monitor.MonitorG] objects represent the individual outputs that are
+    [gdk.monitor.MonitorWrap] objects represent the individual outputs that are
     associated with a [gdk.display.Display].
     
     [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
@@ -19,7 +19,7 @@ import gobject.object;
     [gdk.display.Display.getMonitorAtSurface] to find a particular
     monitor.
 */
-class MonitorG : gobject.object.ObjectG
+class MonitorWrap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -41,9 +41,121 @@ class MonitorG : gobject.object.ObjectG
     return getGType();
   }
 
-  override MonitorG self()
+  /** Returns `this`, for use in `with` statements. */
+  override MonitorWrap self()
   {
     return this;
+  }
+
+  /**
+      Get `connector` property.
+      Returns: The connector name.
+  */
+  @property string connector()
+  {
+    return getConnector();
+  }
+
+  /**
+      Get `description` property.
+      Returns: A short description of the monitor, meant for display to the user.
+  */
+  @property string description()
+  {
+    return getDescription();
+  }
+
+  /**
+      Get `geometry` property.
+      Returns: The geometry of the monitor.
+  */
+  @property gdk.rectangle.Rectangle geometry()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
+  }
+
+  /**
+      Get `heightMm` property.
+      Returns: The height of the monitor, in millimeters.
+  */
+  @property int heightMm()
+  {
+    return getHeightMm();
+  }
+
+  /**
+      Get `manufacturer` property.
+      Returns: The manufacturer name.
+  */
+  @property string manufacturer()
+  {
+    return getManufacturer();
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model name.
+  */
+  @property string model()
+  {
+    return getModel();
+  }
+
+  /**
+      Get `refreshRate` property.
+      Returns: The refresh rate, in milli-Hertz.
+  */
+  @property int refreshRate()
+  {
+    return getRefreshRate();
+  }
+
+  /**
+      Get `scale` property.
+      Returns: The scale of the monitor.
+  */
+  @property double scale()
+  {
+    return getScale();
+  }
+
+  /**
+      Get `scaleFactor` property.
+      Returns: The scale factor.
+      
+      The scale factor is the next larger integer,
+      compared to [gdk.surface.Surface.scale].
+  */
+  @property int scaleFactor()
+  {
+    return getScaleFactor();
+  }
+
+  /**
+      Get `subpixelLayout` property.
+      Returns: The subpixel layout.
+  */
+  @property gdk.types.SubpixelLayout subpixelLayout()
+  {
+    return getSubpixelLayout();
+  }
+
+  /**
+      Get `valid` property.
+      Returns: Whether the object is still valid.
+  */
+  @property bool valid()
+  {
+    return isValid();
+  }
+
+  /**
+      Get `widthMm` property.
+      Returns: The width of the monitor, in millimeters.
+  */
+  @property int widthMm()
+  {
+    return getWidthMm();
   }
 
   /**
@@ -84,7 +196,7 @@ class MonitorG : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,7 +205,7 @@ class MonitorG : gobject.object.ObjectG
       display coordinate space.
       
       The returned geometry is in  ”application pixels”, not in
-      ”device pixels” (see [gdk.monitor.MonitorG.getScale]).
+      ”device pixels” (see [gdk.monitor.MonitorWrap.getScale]).
   
       Params:
         geometry = a [gtk.types.Rectangle] to be filled with the monitor geometry
@@ -242,9 +354,9 @@ class MonitorG : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorG monitorG))
+          $(D void callback(gdk.monitor.MonitorWrap monitorWrap))
   
-          `monitorG` the instance the signal is connected to (optional)
+          `monitorWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -252,7 +364,7 @@ class MonitorG : gobject.object.ObjectG
   ulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

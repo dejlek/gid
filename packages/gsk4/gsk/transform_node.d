@@ -18,7 +18,7 @@ class TransformNode : gsk.render_node.RenderNode
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gsk.TransformNode");
+      throw new GidConstructException("Null instance pointer for gsk.transform_node.TransformNode");
 
     super(cast(GskRenderNode*)ptr, take);
   }

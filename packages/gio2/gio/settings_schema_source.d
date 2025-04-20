@@ -40,6 +40,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SettingsSchemaSource self()
   {
     return this;
@@ -83,7 +84,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
         parent = a #GSettingsSchemaSource, or null
         trusted = true, if the directory is trusted
       Returns: 
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.settings_schema_source.SettingsSchemaSource newFromDirectory(string directory, gio.settings_schema_source.SettingsSchemaSource parent, bool trusted)
   {
@@ -92,7 +93,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent.cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.settings_schema_source.SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

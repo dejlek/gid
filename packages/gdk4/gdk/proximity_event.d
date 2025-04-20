@@ -17,7 +17,7 @@ class ProximityEvent : gdk.event.Event
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gdk.ProximityEvent");
+      throw new GidConstructException("Null instance pointer for gdk.proximity_event.ProximityEvent");
 
     super(cast(GdkEvent*)ptr, take);
   }

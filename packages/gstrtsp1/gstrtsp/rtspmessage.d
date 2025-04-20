@@ -16,10 +16,15 @@ import gstrtsp.types;
 class RTSPMessage : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rtspmessage.RTSPMessage` boxed type.
+      Params:
+        type = the message type
+  */
+  this(gstrtsp.types.RTSPMsgType type = gstrtsp.types.RTSPMsgType.init)
   {
     super(gMalloc(GstRTSPMessage.sizeof), Yes.Take);
+    this.type = type;
   }
 
   /** */
@@ -47,16 +52,26 @@ class RTSPMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTSPMessage self()
   {
     return this;
   }
 
+  /**
+      Get `type` field.
+      Returns: the message type
+  */
   @property gstrtsp.types.RTSPMsgType type()
   {
     return cast(gstrtsp.types.RTSPMsgType)(cast(GstRTSPMessage*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the message type
+  */
   @property void type(gstrtsp.types.RTSPMsgType propval)
   {
     (cast(GstRTSPMessage*)cPtr).type = cast(GstRTSPMsgType)propval;

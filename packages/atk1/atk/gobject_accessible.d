@@ -16,7 +16,7 @@ import gobject.object;
     not derived from GtkWidget. One example of its use is in providing
     an accessible object for GnomeCanvasItem in the GAIL library.
 */
-class GObjectAccessible : atk.object.ObjectAtk
+class GObjectAccessible : atk.object.ObjectWrap
 {
 
   /** */
@@ -38,6 +38,7 @@ class GObjectAccessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GObjectAccessible self()
   {
     return this;
@@ -51,11 +52,11 @@ class GObjectAccessible : atk.object.ObjectAtk
       Returns: a #AtkObject which is the accessible object for
         the obj
   */
-  static atk.object.ObjectAtk forObject(gobject.object.ObjectG obj)
+  static atk.object.ObjectWrap forObject(gobject.object.ObjectWrap obj)
   {
     AtkObject* _cretval;
     _cretval = atk_gobject_accessible_for_object(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -64,11 +65,11 @@ class GObjectAccessible : atk.object.ObjectAtk
       Returns: a #GObject which is the object for which obj is
         the accessible object
   */
-  gobject.object.ObjectG getObject()
+  gobject.object.ObjectWrap getObject()
   {
     ObjectC* _cretval;
     _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 }

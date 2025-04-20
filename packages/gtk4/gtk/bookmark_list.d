@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -19,7 +20,7 @@ import gtk.types;
     namespace added: `recent::private` (boolean) and `recent:applications`
     (stringv).
 */
-class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
+class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -41,9 +42,75 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BookmarkList self()
   {
     return this;
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: The attributes to query.
+  */
+  @property string attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+  */
+  @property void attributes(string propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /**
+      Get `ioPriority` property.
+      Returns: Priority used when loading.
+  */
+  @property int ioPriority()
+  {
+    return getIoPriority();
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+  */
+  @property void ioPriority(int propval)
+  {
+    return setIoPriority(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `loading` property.
+      Returns: true if files are being loaded.
+  */
+  @property bool loading()
+  {
+    return isLoading();
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();

@@ -48,37 +48,73 @@ class String : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override String self()
   {
     return this;
   }
 
+  /**
+      Get `str` field.
+      Returns: points to the character data. It may move as text is added.
+        The @str field is null-terminated and so
+        can be used as an ordinary C string.
+  */
   @property string str()
   {
     return cToD!(string)(cast(void*)(cast(GString*)cPtr).str);
   }
 
+  /**
+      Set `str` field.
+      Params:
+        propval = points to the character data. It may move as text is added.
+          The @str field is null-terminated and so
+          can be used as an ordinary C string.
+  */
   @property void str(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GString*)cPtr).str);
     dToC(propval, cast(void*)&(cast(GString*)cPtr).str);
   }
 
+  /**
+      Get `len` field.
+      Returns: contains the length of the string, not including the
+        terminating nul byte.
+  */
   @property size_t len()
   {
     return (cast(GString*)cPtr).len;
   }
 
+  /**
+      Set `len` field.
+      Params:
+        propval = contains the length of the string, not including the
+          terminating nul byte.
+  */
   @property void len(size_t propval)
   {
     (cast(GString*)cPtr).len = propval;
   }
 
+  /**
+      Get `allocatedLen` field.
+      Returns: the number of bytes that can be stored in the
+        string before it needs to be reallocated. May be larger than @len.
+  */
   @property size_t allocatedLen()
   {
     return (cast(GString*)cPtr).allocatedLen;
   }
 
+  /**
+      Set `allocatedLen` field.
+      Params:
+        propval = the number of bytes that can be stored in the
+          string before it needs to be reallocated. May be larger than @len.
+  */
   @property void allocatedLen(size_t propval)
   {
     (cast(GString*)cPtr).allocatedLen = propval;

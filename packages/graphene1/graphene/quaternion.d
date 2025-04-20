@@ -20,7 +20,9 @@ import graphene.vec4;
 class Quaternion : gobject.boxed.Boxed
 {
 
-  /** */
+  /**
+      Create a `quaternion.Quaternion` boxed type.
+  */
   this()
   {
     super(gMalloc(graphene_quaternion_t.sizeof), Yes.Take);
@@ -51,6 +53,7 @@ class Quaternion : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Quaternion self()
   {
     return this;

@@ -88,9 +88,158 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProgressBar self()
   {
     return this;
+  }
+
+  /**
+      Get `ellipsize` property.
+      Returns: The preferred place to ellipsize the string.
+      
+      The text will be ellipsized if the progress bar does not have enough room
+      to display the entire string, specified as a [pango.types.EllipsizeMode].
+      
+      Note that setting this property to a value other than
+      [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+      only enough space to display the ellipsis ("..."). Another means to set a
+      progress bar's width is [gtk.widget.Widget.setSizeRequest].
+  */
+  @property pango.types.EllipsizeMode ellipsize()
+  {
+    return getEllipsize();
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string.
+        
+        The text will be ellipsized if the progress bar does not have enough room
+        to display the entire string, specified as a [pango.types.EllipsizeMode].
+        
+        Note that setting this property to a value other than
+        [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+        only enough space to display the ellipsis ("..."). Another means to set a
+        progress bar's width is [gtk.widget.Widget.setSizeRequest].
+  */
+  @property void ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setEllipsize(propval);
+  }
+
+  /**
+      Get `fraction` property.
+      Returns: The fraction of total work that has been completed.
+  */
+  @property double fraction()
+  {
+    return getFraction();
+  }
+
+  /**
+      Set `fraction` property.
+      Params:
+        propval = The fraction of total work that has been completed.
+  */
+  @property void fraction(double propval)
+  {
+    return setFraction(propval);
+  }
+
+  /**
+      Get `inverted` property.
+      Returns: Invert the direction in which the progress bar grows.
+  */
+  @property bool inverted()
+  {
+    return getInverted();
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Invert the direction in which the progress bar grows.
+  */
+  @property void inverted(bool propval)
+  {
+    return setInverted(propval);
+  }
+
+  /**
+      Get `pulseStep` property.
+      Returns: The fraction of total progress to move the bounding block when pulsed.
+  */
+  @property double pulseStep()
+  {
+    return getPulseStep();
+  }
+
+  /**
+      Set `pulseStep` property.
+      Params:
+        propval = The fraction of total progress to move the bounding block when pulsed.
+  */
+  @property void pulseStep(double propval)
+  {
+    return setPulseStep(propval);
+  }
+
+  /**
+      Get `showText` property.
+      Returns: Sets whether the progress bar will show a text in addition
+      to the bar itself.
+      
+      The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+      property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
+      value, as a percentage.
+      
+      To make a progress bar that is styled and sized suitably for showing text
+      (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+      to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
+  */
+  @property bool showText()
+  {
+    return getShowText();
+  }
+
+  /**
+      Set `showText` property.
+      Params:
+        propval = Sets whether the progress bar will show a text in addition
+        to the bar itself.
+        
+        The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+        property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
+        value, as a percentage.
+        
+        To make a progress bar that is styled and sized suitably for showing text
+        (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+        to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
+  */
+  @property void showText(bool propval)
+  {
+    return setShowText(propval);
+  }
+
+  /**
+      Get `text` property.
+      Returns: Text to be displayed in the progress bar.
+  */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Text to be displayed in the progress bar.
+  */
+  @property void text(string propval)
+  {
+    return setText(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -257,13 +406,13 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   /**
       Sets whether the progress bar will show text next to the bar.
       
-      The shown text is either the value of the [gtk.progress_bar.ProgressBar.utf8]
-      property or, if that is null, the [gtk.progress_bar.ProgressBar.gdouble] value,
+      The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+      property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction] value,
       as a percentage.
       
       To make a progress bar that is styled and sized suitably for containing
       text (even if the actual text is blank), set `propertyGtk.ProgressBar:show-text`
-      to true and [gtk.progress_bar.ProgressBar.utf8] to the empty string (not null).
+      to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   
       Params:
         showText = whether to show text
@@ -277,7 +426,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Causes the given text to appear next to the progress bar.
       
       If text is null and `propertyGtk.ProgressBar:show-text` is true,
-      the current value of [gtk.progress_bar.ProgressBar.gdouble] will be displayed
+      the current value of [gtk.progress_bar.ProgressBar.fraction] will be displayed
       as a percentage.
       
       If text is non-null and `propertyGtk.ProgressBar:show-text` is true,

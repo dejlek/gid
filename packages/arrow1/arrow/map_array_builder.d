@@ -33,6 +33,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MapArrayBuilder self()
   {
     return this;
@@ -45,7 +46,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _cretval = garrow_map_array_builder_new(dataType ? cast(GArrowMapDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 
@@ -56,7 +57,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_map_array_builder_append_value(cast(GArrowMapArrayBuilder*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -71,7 +72,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool appendValues(int[] offsets, bool[] isValids = null)
   {
@@ -89,7 +90,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = garrow_map_array_builder_append_values(cast(GArrowMapArrayBuilder*)cPtr, _offsets, _offsetsLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -98,7 +99,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_item_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +108,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_key_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +117,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

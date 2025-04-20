@@ -22,7 +22,7 @@ import gobject.object;
     
     It is a [gio.initable.Initable] object, and will register an object at
     `/org/gtk/Debugging` on the bus given as
-    [gio.debug_controller_dbus.DebugControllerDBus.DBusConnection] once it’s initialized. The
+    [gio.debug_controller_dbus.DebugControllerDBus.connection] once it’s initialized. The
     object will be unregistered when the last reference to the
     [gio.debug_controller_dbus.DebugControllerDBus] is dropped.
     
@@ -128,7 +128,7 @@ import gobject.object;
       }
     ```
 */
-class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugController, gio.initable.Initable
+class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.DebugController, gio.initable.Initable
 {
 
   /** */
@@ -150,6 +150,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DebugControllerDBus self()
   {
     return this;
@@ -172,7 +173,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
         cancellable = a #GCancellable, or null
       Returns: a new #GDebugControllerDBus, or null
           on failure
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   this(gio.dbus_connection.DBusConnection connection, gio.cancellable.Cancellable cancellable = null)
   {
@@ -180,7 +181,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
     GError *_err;
     _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
   }
 

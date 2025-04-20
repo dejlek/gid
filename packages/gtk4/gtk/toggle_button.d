@@ -116,9 +116,39 @@ class ToggleButton : gtk.button.Button
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ToggleButton self()
   {
     return this;
+  }
+
+  /**
+      Get `active` property.
+      Returns: If the toggle button should be pressed in.
+  */
+  @property bool active()
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the toggle button should be pressed in.
+  */
+  @property void active(bool propval)
+  {
+    return setActive(propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The toggle button whose group this widget belongs to.
+  */
+  @property void group(gtk.toggle_button.ToggleButton propval)
+  {
+    return setGroup(propval);
   }
 
   /**
@@ -146,7 +176,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +196,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

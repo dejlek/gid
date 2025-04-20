@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class KeyValuePartitioningOptions : gobject.object.ObjectG
+class KeyValuePartitioningOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,9 +30,31 @@ class KeyValuePartitioningOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override KeyValuePartitioningOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `segmentEncoding` property.
+      Returns: After splitting a path into components, decode the path
+      components before parsing according to this scheme.
+  */
+  @property arrowdataset.types.SegmentEncoding segmentEncoding()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowdataset.types.SegmentEncoding)("segment-encoding");
+  }
+
+  /**
+      Set `segmentEncoding` property.
+      Params:
+        propval = After splitting a path into components, decode the path
+        components before parsing according to this scheme.
+  */
+  @property void segmentEncoding(arrowdataset.types.SegmentEncoding propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(arrowdataset.types.SegmentEncoding)("segment-encoding", propval);
   }
 
   /** */

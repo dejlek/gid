@@ -5,7 +5,7 @@ import gobject.object;
 import atk.window;
 import atk.window_mixin;
 
-/// Proxy object for [Atk.Window] interface when a GObject has no applicable D binding
+/// Proxy object for [atk.window.Window] interface when a GObject has no applicable D binding
 class WindowIfaceProxy : IfaceProxy, atk.window.Window
 {
   this(void* ptr, Flag!"Take" take = No.Take)

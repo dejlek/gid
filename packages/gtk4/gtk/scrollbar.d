@@ -24,15 +24,15 @@ import gtk.widget;
     
     Its position and movement are controlled by the adjustment that is passed to
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
-    details. The [gtk.adjustment.Adjustment.gdouble] field sets the position of the
-    thumb and must be between [gtk.adjustment.Adjustment.gdouble] and
-    [gtk.adjustment.Adjustment.gdouble] - `property@Gtk.Adjustment:page-size`.
+    details. The [gtk.adjustment.Adjustment.value] field sets the position of the
+    thumb and must be between [gtk.adjustment.Adjustment.lower] and
+    [gtk.adjustment.Adjustment.upper] - `property@Gtk.Adjustment:page-size`.
     The `property@Gtk.Adjustment:page-size` represents the size of the visible
     scrollable area.
     
     The fields `property@Gtk.Adjustment:step-increment` and
     `property@Gtk.Adjustment:page-increment` fields are added to or subtracted
-    from the [gtk.adjustment.Adjustment.gdouble] when the user asks to move by a step
+    from the [gtk.adjustment.Adjustment.value] when the user asks to move by a step
     (using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
     keys).
     
@@ -83,9 +83,29 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Scrollbar self()
   {
     return this;
+  }
+
+  /**
+      Get `adjustment` property.
+      Returns: The [gtk.adjustment.Adjustment] controlled by this scrollbar.
+  */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return getAdjustment();
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] controlled by this scrollbar.
+  */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setAdjustment(propval);
   }
 
   mixin OrientableT!();
@@ -114,7 +134,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 

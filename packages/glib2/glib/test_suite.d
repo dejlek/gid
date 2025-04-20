@@ -18,7 +18,7 @@ class TestSuite
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GLib.TestSuite");
+      throw new GidConstructException("Null instance pointer for glib.test_suite.TestSuite");
 
     cInstancePtr = cast(GTestSuite*)ptr;
 

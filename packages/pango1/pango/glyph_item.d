@@ -21,10 +21,26 @@ import pango.types;
 class GlyphItem : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `glyph_item.GlyphItem` boxed type.
+      Params:
+        item = corresponding [pango.item.Item]
+        glyphs = corresponding [pango.glyph_string.GlyphString]
+        yOffset = shift of the baseline, relative to the baseline
+            of the containing line. Positive values shift upwards
+        startXOffset = horizontal displacement to apply before the
+            glyph item. Positive values shift right
+        endXOffset = horizontal displacement to apply after th
+            glyph item. Positive values shift right
+  */
+  this(pango.item.Item item = pango.item.Item.init, pango.glyph_string.GlyphString glyphs = pango.glyph_string.GlyphString.init, int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init)
   {
     super(gMalloc(PangoGlyphItem.sizeof), Yes.Take);
+    this.item = item;
+    this.glyphs = glyphs;
+    this.yOffset = yOffset;
+    this.startXOffset = startXOffset;
+    this.endXOffset = endXOffset;
   }
 
   /** */
@@ -52,58 +68,110 @@ class GlyphItem : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GlyphItem self()
   {
     return this;
   }
 
+  /**
+      Get `item` field.
+      Returns: corresponding [pango.item.Item]
+  */
   @property pango.item.Item item()
   {
     return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
   }
 
+  /**
+      Set `item` field.
+      Params:
+        propval = corresponding [pango.item.Item]
+  */
   @property void item(pango.item.Item propval)
   {
     cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
     dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).item);
   }
 
+  /**
+      Get `glyphs` field.
+      Returns: corresponding [pango.glyph_string.GlyphString]
+  */
   @property pango.glyph_string.GlyphString glyphs()
   {
     return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
   }
 
+  /**
+      Set `glyphs` field.
+      Params:
+        propval = corresponding [pango.glyph_string.GlyphString]
+  */
   @property void glyphs(pango.glyph_string.GlyphString propval)
   {
     cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
     dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).glyphs);
   }
 
+  /**
+      Get `yOffset` field.
+      Returns: shift of the baseline, relative to the baseline
+        of the containing line. Positive values shift upwards
+  */
   @property int yOffset()
   {
     return (cast(PangoGlyphItem*)cPtr).yOffset;
   }
 
+  /**
+      Set `yOffset` field.
+      Params:
+        propval = shift of the baseline, relative to the baseline
+          of the containing line. Positive values shift upwards
+  */
   @property void yOffset(int propval)
   {
     (cast(PangoGlyphItem*)cPtr).yOffset = propval;
   }
 
+  /**
+      Get `startXOffset` field.
+      Returns: horizontal displacement to apply before the
+        glyph item. Positive values shift right
+  */
   @property int startXOffset()
   {
     return (cast(PangoGlyphItem*)cPtr).startXOffset;
   }
 
+  /**
+      Set `startXOffset` field.
+      Params:
+        propval = horizontal displacement to apply before the
+          glyph item. Positive values shift right
+  */
   @property void startXOffset(int propval)
   {
     (cast(PangoGlyphItem*)cPtr).startXOffset = propval;
   }
 
+  /**
+      Get `endXOffset` field.
+      Returns: horizontal displacement to apply after th
+        glyph item. Positive values shift right
+  */
   @property int endXOffset()
   {
     return (cast(PangoGlyphItem*)cPtr).endXOffset;
   }
 
+  /**
+      Set `endXOffset` field.
+      Params:
+        propval = horizontal displacement to apply after th
+          glyph item. Positive values shift right
+  */
   @property void endXOffset(int propval)
   {
     (cast(PangoGlyphItem*)cPtr).endXOffset = propval;

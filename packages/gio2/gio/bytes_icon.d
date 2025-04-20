@@ -16,7 +16,7 @@ import gobject.object;
     [gio.bytes_icon.BytesIcon] specifies an image held in memory in a common format (usually
     PNG) to be used as icon.
 */
-class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
+class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   /** */
@@ -38,6 +38,7 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override BytesIcon self()
   {
     return this;

@@ -1582,11 +1582,11 @@ struct WebKitColorChooserRequestClass
     When a #WebKitWebView is about to display the context menu, it
     emits the #WebKitWebView::context-menu signal, which has the
     #WebKitContextMenu as an argument. You can modify it, adding new
-    submenus that you can create with [webkit.context_menu.ContextMenu.new_], adding
+    submenus that you can create with [webkitwebprocessextension.context_menu.ContextMenu.new_], adding
     new #WebKitContextMenuItem<!-- -->s with
-    [webkit.context_menu.ContextMenu.prepend], [webkit.context_menu.ContextMenu.append] or
-    [webkit.context_menu.ContextMenu.insert], maybe after having removed the
-    existing ones with [webkit.context_menu.ContextMenu.removeAll].
+    [webkitwebprocessextension.context_menu.ContextMenu.prepend], [webkitwebprocessextension.context_menu.ContextMenu.append] or
+    [webkitwebprocessextension.context_menu.ContextMenu.insert], maybe after having removed the
+    existing ones with [webkitwebprocessextension.context_menu.ContextMenu.removeAll].
 */
 struct WebKitContextMenu;
 
@@ -1915,10 +1915,10 @@ struct WebKitGeolocationPosition;
     an image or a media.
     
     You can get the context of the HitTestResult with
-    [webkit.hit_test_result.HitTestResult.getContext] that returns a bitmask of
+    [webkitwebprocessextension.hit_test_result.HitTestResult.getContext] that returns a bitmask of
     #WebKitHitTestResultContext flags. You can also use
-    [webkit.hit_test_result.HitTestResult.contextIsLink], [webkit.hit_test_result.HitTestResult.contextIsImage] and
-    [webkit.hit_test_result.HitTestResult.contextIsMedia] to determine whether there's
+    [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsLink], [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsImage] and
+    [webkitwebprocessextension.hit_test_result.HitTestResult.contextIsMedia] to determine whether there's
     a link, image or a media element at the coordinates of the Hit Test.
     Note that it's possible that several #WebKitHitTestResultContext flags
     are active at the same time, for example if there's a link containing an image.
@@ -2470,8 +2470,8 @@ struct WebKitSettingsClass
     Represents a URI request.
     
     A #WebKitURIRequest can be created with a URI using the
-    [webkit.urirequest.URIRequest.new_] method, and you can get the URI of an
-    existing request with the [webkit.urirequest.URIRequest.getUri] one.
+    [webkitwebprocessextension.urirequest.URIRequest.new_] method, and you can get the URI of an
+    existing request with the [webkitwebprocessextension.urirequest.URIRequest.getUri] one.
 */
 struct WebKitURIRequest;
 
@@ -2623,7 +2623,7 @@ struct WebKitUserMediaPermissionRequestClass
     UNIX file descriptors. Messages can be sent from a #WebKitWebContext to all web process extensions,
     from a web process extension to its corresponding #WebKitWebContext, and from a #WebKitWebView to its
     corresponding #WebKitWebPage (and vice versa). One to one messages can be replied to directly with
-    [webkit.user_message.UserMessage.sendReply].
+    [webkitwebprocessextension.user_message.UserMessage.sendReply].
 */
 struct WebKitUserMessage;
 

@@ -86,9 +86,440 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override TextView self()
   {
     return this;
+  }
+
+  /**
+      Get `acceptsTab` property.
+      Returns: Whether Tab will result in a tab character being entered.
+  */
+  @property bool acceptsTab()
+  {
+    return getAcceptsTab();
+  }
+
+  /**
+      Set `acceptsTab` property.
+      Params:
+        propval = Whether Tab will result in a tab character being entered.
+  */
+  @property void acceptsTab(bool propval)
+  {
+    return setAcceptsTab(propval);
+  }
+
+  /**
+      Get `bottomMargin` property.
+      Returns: The bottom margin for text in the text view.
+      
+      Note that this property is confusingly named. In CSS terms,
+      the value set here is padding, and it is applied in addition
+      to the padding from the theme.
+      
+      Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+  */
+  @property int bottomMargin()
+  {
+    return getBottomMargin();
+  }
+
+  /**
+      Set `bottomMargin` property.
+      Params:
+        propval = The bottom margin for text in the text view.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+  */
+  @property void bottomMargin(int propval)
+  {
+    return setBottomMargin(propval);
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The buffer which is displayed.
+  */
+  @property gtk.text_buffer.TextBuffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The buffer which is displayed.
+  */
+  @property void buffer(gtk.text_buffer.TextBuffer propval)
+  {
+    return setBuffer(propval);
+  }
+
+  /**
+      Get `cursorVisible` property.
+      Returns: If the insertion cursor is shown.
+  */
+  @property bool cursorVisible()
+  {
+    return getCursorVisible();
+  }
+
+  /**
+      Set `cursorVisible` property.
+      Params:
+        propval = If the insertion cursor is shown.
+  */
+  @property void cursorVisible(bool propval)
+  {
+    return setCursorVisible(propval);
+  }
+
+  /** */
+  @property bool editable()
+  {
+    return getEditable();
+  }
+
+  /** */
+  @property void editable(bool propval)
+  {
+    return setEditable(propval);
+  }
+
+  /**
+      Get `extraMenu` property.
+      Returns: A menu model whose contents will be appended to the context menu.
+  */
+  @property gio.menu_model.MenuModel extraMenu()
+  {
+    return getExtraMenu();
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+  */
+  @property void extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setExtraMenu(propval);
+  }
+
+  /**
+      Get `imModule` property.
+      Returns: Which IM (input method) module should be used for this text_view.
+      
+      See [gtk.immulticontext.IMMulticontext].
+      
+      Setting this to a non-null value overrides the system-wide IM module
+      setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+  */
+  @property string imModule()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("im-module");
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this text_view.
+        
+        See [gtk.immulticontext.IMMulticontext].
+        
+        Setting this to a non-null value overrides the system-wide IM module
+        setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+  */
+  @property void imModule(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
+  }
+
+  /**
+      Get `indent` property.
+      Returns: Amount to indent the paragraph, in pixels.
+      
+      A negative value of indent will produce a hanging indentation.
+      That is, the first line will have the full width, and subsequent
+      lines will be indented by the absolute value of indent.
+  */
+  @property int indent()
+  {
+    return getIndent();
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Amount to indent the paragraph, in pixels.
+        
+        A negative value of indent will produce a hanging indentation.
+        That is, the first line will have the full width, and subsequent
+        lines will be indented by the absolute value of indent.
+  */
+  @property void indent(int propval)
+  {
+    return setIndent(propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+      that allow input methods to fine-tune their behaviour.
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+        that allow input methods to fine-tune their behaviour.
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose of this text field.
+      
+      This property can be used by on-screen keyboards and other input
+      methods to adjust their behaviour.
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
+  }
+
+  /** */
+  @property gtk.types.Justification justification()
+  {
+    return getJustification();
+  }
+
+  /** */
+  @property void justification(gtk.types.Justification propval)
+  {
+    return setJustification(propval);
+  }
+
+  /**
+      Get `leftMargin` property.
+      Returns: The default left margin for text in the text view.
+      
+      Tags in the buffer may override the default.
+      
+      Note that this property is confusingly named. In CSS terms,
+      the value set here is padding, and it is applied in addition
+      to the padding from the theme.
+  */
+  @property int leftMargin()
+  {
+    return getLeftMargin();
+  }
+
+  /**
+      Set `leftMargin` property.
+      Params:
+        propval = The default left margin for text in the text view.
+        
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+  */
+  @property void leftMargin(int propval)
+  {
+    return setLeftMargin(propval);
+  }
+
+  /**
+      Get `monospace` property.
+      Returns: Whether text should be displayed in a monospace font.
+      
+      If true, set the .monospace style class on the
+      text view to indicate that a monospace font is desired.
+  */
+  @property bool monospace()
+  {
+    return getMonospace();
+  }
+
+  /**
+      Set `monospace` property.
+      Params:
+        propval = Whether text should be displayed in a monospace font.
+        
+        If true, set the .monospace style class on the
+        text view to indicate that a monospace font is desired.
+  */
+  @property void monospace(bool propval)
+  {
+    return setMonospace(propval);
+  }
+
+  /**
+      Get `overwrite` property.
+      Returns: Whether entered text overwrites existing contents.
+  */
+  @property bool overwrite()
+  {
+    return getOverwrite();
+  }
+
+  /**
+      Set `overwrite` property.
+      Params:
+        propval = Whether entered text overwrites existing contents.
+  */
+  @property void overwrite(bool propval)
+  {
+    return setOverwrite(propval);
+  }
+
+  /** */
+  @property int pixelsAboveLines()
+  {
+    return getPixelsAboveLines();
+  }
+
+  /** */
+  @property void pixelsAboveLines(int propval)
+  {
+    return setPixelsAboveLines(propval);
+  }
+
+  /** */
+  @property int pixelsBelowLines()
+  {
+    return getPixelsBelowLines();
+  }
+
+  /** */
+  @property void pixelsBelowLines(int propval)
+  {
+    return setPixelsBelowLines(propval);
+  }
+
+  /** */
+  @property int pixelsInsideWrap()
+  {
+    return getPixelsInsideWrap();
+  }
+
+  /** */
+  @property void pixelsInsideWrap(int propval)
+  {
+    return setPixelsInsideWrap(propval);
+  }
+
+  /**
+      Get `rightMargin` property.
+      Returns: The default right margin for text in the text view.
+      
+      Tags in the buffer may override the default.
+      
+      Note that this property is confusingly named. In CSS terms,
+      the value set here is padding, and it is applied in addition
+      to the padding from the theme.
+  */
+  @property int rightMargin()
+  {
+    return getRightMargin();
+  }
+
+  /**
+      Set `rightMargin` property.
+      Params:
+        propval = The default right margin for text in the text view.
+        
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+  */
+  @property void rightMargin(int propval)
+  {
+    return setRightMargin(propval);
+  }
+
+  /** */
+  @property pango.tab_array.TabArray tabs()
+  {
+    return getTabs();
+  }
+
+  /** */
+  @property void tabs(pango.tab_array.TabArray propval)
+  {
+    return setTabs(propval);
+  }
+
+  /**
+      Get `topMargin` property.
+      Returns: The top margin for text in the text view.
+      
+      Note that this property is confusingly named. In CSS terms,
+      the value set here is padding, and it is applied in addition
+      to the padding from the theme.
+      
+      Don't confuse this property with `property@Gtk.Widget:margin-top`.
+  */
+  @property int topMargin()
+  {
+    return getTopMargin();
+  }
+
+  /**
+      Set `topMargin` property.
+      Params:
+        propval = The top margin for text in the text view.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with `property@Gtk.Widget:margin-top`.
+  */
+  @property void topMargin(int propval)
+  {
+    return setTopMargin(propval);
+  }
+
+  /** */
+  @property gtk.types.WrapMode wrapMode()
+  {
+    return getWrapMode();
+  }
+
+  /** */
+  @property void wrapMode(gtk.types.WrapMode propval)
+  {
+    return setWrapMode(propval);
   }
 
   mixin AccessibleTextT!();
@@ -126,7 +557,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,7 +734,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -376,7 +807,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_view_get_extra_menu(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -396,7 +827,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_get_gutter(cast(GtkTextView*)cPtr, win);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -586,7 +1017,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_ltr_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -676,7 +1107,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_rtl_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 

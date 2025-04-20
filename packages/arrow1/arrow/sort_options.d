@@ -31,6 +31,7 @@ class SortOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SortOptions self()
   {
     return this;

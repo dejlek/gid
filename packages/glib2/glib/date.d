@@ -77,66 +77,125 @@ class Date : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Date self()
   {
     return this;
   }
 
+  /**
+      Get `julianDays` field.
+      Returns: the Julian representation of the date
+  */
   @property uint julianDays()
   {
     return (cast(GDate*)cPtr).julianDays;
   }
 
+  /**
+      Set `julianDays` field.
+      Params:
+        propval = the Julian representation of the date
+  */
   @property void julianDays(uint propval)
   {
     (cast(GDate*)cPtr).julianDays = propval;
   }
 
+  /**
+      Get `julian` field.
+      Returns: this bit is set if @julian_days is valid
+  */
   @property uint julian()
   {
     return (cast(GDate*)cPtr).julian;
   }
 
+  /**
+      Set `julian` field.
+      Params:
+        propval = this bit is set if @julian_days is valid
+  */
   @property void julian(uint propval)
   {
     (cast(GDate*)cPtr).julian = propval;
   }
 
+  /**
+      Get `dmy` field.
+      Returns: this is set if @day, @month and @year are valid
+  */
   @property uint dmy()
   {
     return (cast(GDate*)cPtr).dmy;
   }
 
+  /**
+      Set `dmy` field.
+      Params:
+        propval = this is set if @day, @month and @year are valid
+  */
   @property void dmy(uint propval)
   {
     (cast(GDate*)cPtr).dmy = propval;
   }
 
+  /**
+      Get `day` field.
+      Returns: the day of the day-month-year representation of the date,
+        as a number between 1 and 31
+  */
   @property uint day()
   {
     return (cast(GDate*)cPtr).day;
   }
 
+  /**
+      Set `day` field.
+      Params:
+        propval = the day of the day-month-year representation of the date,
+          as a number between 1 and 31
+  */
   @property void day(uint propval)
   {
     (cast(GDate*)cPtr).day = propval;
   }
 
+  /**
+      Get `month` field.
+      Returns: the month of the day-month-year representation of the date,
+        as a number between 1 and 12
+  */
   @property uint month()
   {
     return (cast(GDate*)cPtr).month;
   }
 
+  /**
+      Set `month` field.
+      Params:
+        propval = the month of the day-month-year representation of the date,
+          as a number between 1 and 12
+  */
   @property void month(uint propval)
   {
     (cast(GDate*)cPtr).month = propval;
   }
 
+  /**
+      Get `year` field.
+      Returns: the year of the day-month-year representation of the date
+  */
   @property uint year()
   {
     return (cast(GDate*)cPtr).year;
   }
 
+  /**
+      Set `year` field.
+      Params:
+        propval = the year of the day-month-year representation of the date
+  */
   @property void year(uint propval)
   {
     (cast(GDate*)cPtr).year = propval;

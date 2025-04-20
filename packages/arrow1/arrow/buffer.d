@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class Buffer : gobject.object.ObjectG
+class Buffer : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class Buffer : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Buffer self()
   {
     return this;
@@ -55,7 +56,7 @@ class Buffer : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_new_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,8 +67,8 @@ class Buffer : gobject.object.ObjectG
     GError *_err;
     _cretval = garrow_buffer_copy(cast(GArrowBuffer*)cPtr, start, size, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -95,7 +96,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
-  alias getData = gobject.object.ObjectG.getData;
+  alias getData = gobject.object.ObjectWrap.getData;
 
   /** */
   glib.bytes.Bytes getData()
@@ -120,7 +121,7 @@ class Buffer : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_get_parent(cast(GArrowBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,7 +146,7 @@ class Buffer : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_slice(cast(GArrowBuffer*)cPtr, offset, size);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

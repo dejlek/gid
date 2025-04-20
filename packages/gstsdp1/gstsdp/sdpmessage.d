@@ -24,10 +24,21 @@ import gstsdp.types;
 class SDPMessage : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `sdpmessage.SDPMessage` boxed type.
+      Params:
+        version_ = the protocol version
+        sessionName = session name
+        information = session information
+        uri = URI of description
+  */
+  this(string version_ = string.init, string sessionName = string.init, string information = string.init, string uri = string.init)
   {
     super(gMalloc(GstSDPMessage.sizeof), Yes.Take);
+    this.version_ = version_;
+    this.sessionName = sessionName;
+    this.information = information;
+    this.uri = uri;
   }
 
   /** */
@@ -55,65 +66,114 @@ class SDPMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SDPMessage self()
   {
     return this;
   }
 
+  /**
+      Get `version_` field.
+      Returns: the protocol version
+  */
   @property string version_()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
   }
 
+  /**
+      Set `version_` field.
+      Params:
+        propval = the protocol version
+  */
   @property void version_(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).version_);
   }
 
+  /**
+      Get `origin` field.
+      Returns: owner/creator and session identifier
+  */
   @property gstsdp.sdporigin.SDPOrigin origin()
   {
     return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)cPtr).origin);
   }
 
+  /**
+      Get `sessionName` field.
+      Returns: session name
+  */
   @property string sessionName()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
   }
 
+  /**
+      Set `sessionName` field.
+      Params:
+        propval = session name
+  */
   @property void sessionName(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).sessionName);
   }
 
+  /**
+      Get `information` field.
+      Returns: session information
+  */
   @property string information()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
   }
 
+  /**
+      Set `information` field.
+      Params:
+        propval = session information
+  */
   @property void information(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).information);
   }
 
+  /**
+      Get `uri` field.
+      Returns: URI of description
+  */
   @property string uri()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
   }
 
+  /**
+      Set `uri` field.
+      Params:
+        propval = URI of description
+  */
   @property void uri(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).uri);
   }
 
+  /**
+      Get `connection` field.
+      Returns: connection information for the session
+  */
   @property gstsdp.sdpconnection.SDPConnection connection()
   {
     return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)cPtr).connection);
   }
 
+  /**
+      Get `key` field.
+      Returns: encryption key
+  */
   @property gstsdp.sdpkey.SDPKey key()
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)cPtr).key);

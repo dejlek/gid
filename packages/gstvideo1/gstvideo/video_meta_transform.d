@@ -20,7 +20,7 @@ class VideoMetaTransform
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstVideo.VideoMetaTransform");
+      throw new GidConstructException("Null instance pointer for gstvideo.video_meta_transform.VideoMetaTransform");
 
     cInstance = *cast(GstVideoMetaTransform*)ptr;
 
@@ -34,22 +34,40 @@ class VideoMetaTransform
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `inInfo` field.
+      Returns: the input #GstVideoInfo
+  */
   @property gstvideo.video_info.VideoInfo inInfo()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
   }
 
+  /**
+      Set `inInfo` field.
+      Params:
+        propval = the input #GstVideoInfo
+  */
   @property void inInfo(gstvideo.video_info.VideoInfo propval)
   {
     cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
     dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)cPtr).inInfo);
   }
 
+  /**
+      Get `outInfo` field.
+      Returns: the output #GstVideoInfo
+  */
   @property gstvideo.video_info.VideoInfo outInfo()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
   }
 
+  /**
+      Set `outInfo` field.
+      Params:
+        propval = the output #GstVideoInfo
+  */
   @property void outInfo(gstvideo.video_info.VideoInfo propval)
   {
     cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);

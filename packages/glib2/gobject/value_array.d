@@ -65,26 +65,45 @@ class ValueArray : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ValueArray self()
   {
     return this;
   }
 
+  /**
+      Get `nValues` field.
+      Returns: number of values contained in the array
+  */
   @property uint nValues()
   {
     return (cast(GValueArray*)cPtr).nValues;
   }
 
+  /**
+      Set `nValues` field.
+      Params:
+        propval = number of values contained in the array
+  */
   @property void nValues(uint propval)
   {
     (cast(GValueArray*)cPtr).nValues = propval;
   }
 
+  /**
+      Get `values` field.
+      Returns: array of values
+  */
   @property gobject.value.Value values()
   {
     return cToD!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);
   }
 
+  /**
+      Set `values` field.
+      Params:
+        propval = array of values
+  */
   @property void values(gobject.value.Value propval)
   {
     cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);

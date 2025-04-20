@@ -18,7 +18,7 @@ class SDPKey
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstSdp.SDPKey");
+      throw new GidConstructException("Null instance pointer for gstsdp.sdpkey.SDPKey");
 
     cInstance = *cast(GstSDPKey*)ptr;
 
@@ -32,22 +32,40 @@ class SDPKey
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `type` field.
+      Returns: the encryption type
+  */
   @property string type()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the encryption type
+  */
   @property void type(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
     dToC(propval, cast(void*)&(cast(GstSDPKey*)cPtr).type);
   }
 
+  /**
+      Get `data` field.
+      Returns: the encryption data
+  */
   @property string data()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);
   }
 
+  /**
+      Set `data` field.
+      Params:
+        propval = the encryption data
+  */
   @property void data(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);

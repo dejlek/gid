@@ -31,12 +31,21 @@ public import gobject.object;
     or activity at all), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
     profile GPU usage.
     
-    Don’t forget to disconnect the [gobject.object.ObjectG.notify] signal for
+    Don’t forget to disconnect the [gobject.object.ObjectWrap.notify] signal for
     `property@Gio.PowerProfileMonitor:power-saver-enabled`, and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
 template PowerProfileMonitorT()
 {
+
+  /**
+      Get `powerSaverEnabled` property.
+      Returns: Whether “Power Saver” mode is enabled on the system.
+  */
+  @property bool powerSaverEnabled()
+  {
+    return getPowerSaverEnabled();
+  }
 
 
   /**

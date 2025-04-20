@@ -73,7 +73,7 @@ import gtk.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
-class RecentManager : gobject.object.ObjectG
+class RecentManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -95,9 +95,19 @@ class RecentManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RecentManager self()
   {
     return this;
+  }
+
+  /**
+      Get `size` property.
+      Returns: The size of the recently used resources list.
+  */
+  @property int size()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("size");
   }
 
   /**
@@ -127,7 +137,7 @@ class RecentManager : gobject.object.ObjectG
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +242,7 @@ class RecentManager : gobject.object.ObjectG
           about the resource pointed by uri, or null if the URI was
           not registered in the recently used resources list. Free with
           [gtk.recent_info.RecentInfo.unref].
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   gtk.recent_info.RecentInfo lookupItem(string uri)
   {
@@ -241,7 +251,7 @@ class RecentManager : gobject.object.ObjectG
     GError *_err;
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -257,7 +267,7 @@ class RecentManager : gobject.object.ObjectG
         newUri = the new URI of the recently used resource, or
              null to remove the item pointed by uri in the list
       Returns: true on success
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool moveItem(string uri, string newUri = null)
   {
@@ -267,7 +277,7 @@ class RecentManager : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)cPtr, _uri, _newUri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -275,7 +285,7 @@ class RecentManager : gobject.object.ObjectG
       Purges every item from the recently used resources list.
       Returns: the number of items that have been removed from the
           recently used resources list
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   int purgeItems()
   {
@@ -283,7 +293,7 @@ class RecentManager : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_recent_manager_purge_items(cast(GtkRecentManager*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -295,7 +305,7 @@ class RecentManager : gobject.object.ObjectG
         uri = the URI of the item you wish to remove
       Returns: true if the item pointed by uri has been successfully
           removed by the recently used resources list, and false otherwise
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool removeItem(string uri)
   {
@@ -304,7 +314,7 @@ class RecentManager : gobject.object.ObjectG
     GError *_err;
     _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 

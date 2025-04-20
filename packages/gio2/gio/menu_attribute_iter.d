@@ -12,7 +12,7 @@ import gobject.object;
     #GMenuAttributeIter is an opaque structure type.  You must access it
     using the functions below.
 */
-class MenuAttributeIter : gobject.object.ObjectG
+class MenuAttributeIter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -34,6 +34,7 @@ class MenuAttributeIter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override MenuAttributeIter self()
   {
     return this;
@@ -69,7 +70,7 @@ class MenuAttributeIter : gobject.object.ObjectG
       
       The value returned in name remains valid for as long as the iterator
       remains at the current position.  The value returned in value must
-      be unreffed using [glib.variant.VariantG.unref] when it is no longer in use.
+      be unreffed using [glib.variant.Variant.unref] when it is no longer in use.
   
       Params:
         outName = the type of the attribute
@@ -77,14 +78,14 @@ class MenuAttributeIter : gobject.object.ObjectG
       Returns: true on success, or false if there is no additional
             attribute
   */
-  bool getNext(out string outName, out glib.variant.VariantG value)
+  bool getNext(out string outName, out glib.variant.Variant value)
   {
     bool _retval;
     char* _outName;
-    VariantC* _value;
+    GVariant* _value;
     _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)cPtr, &_outName, &_value);
     outName = _outName.fromCString(No.Free);
-    value = new glib.variant.VariantG(cast(void*)_value, Yes.Take);
+    value = new glib.variant.Variant(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -94,11 +95,11 @@ class MenuAttributeIter : gobject.object.ObjectG
       The iterator is not advanced.
       Returns: the value of the current attribute
   */
-  glib.variant.VariantG getValue()
+  glib.variant.Variant getValue()
   {
-    VariantC* _cretval;
+    GVariant* _cretval;
     _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

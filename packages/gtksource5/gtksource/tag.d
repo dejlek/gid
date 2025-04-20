@@ -2,6 +2,7 @@
 module gtksource.tag;
 
 import gid.gid;
+import gobject.object;
 import gtk.text_tag;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -38,15 +39,68 @@ class Tag : gtk.text_tag.TextTag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Tag self()
   {
     return this;
   }
 
   /**
+      Get `drawSpaces` property.
+      Returns: Whether to draw white spaces.
+      
+      This property takes precedence over the value defined by the `class@SpaceDrawer`'s
+      `property@SpaceDrawer:matrix` property (only where the tag is applied).
+      
+      Setting this property also changes `property@Tag:draw-spaces-set` to
+      true.
+  */
+  @property bool drawSpaces()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("draw-spaces");
+  }
+
+  /**
+      Set `drawSpaces` property.
+      Params:
+        propval = Whether to draw white spaces.
+        
+        This property takes precedence over the value defined by the `class@SpaceDrawer`'s
+        `property@SpaceDrawer:matrix` property (only where the tag is applied).
+        
+        Setting this property also changes `property@Tag:draw-spaces-set` to
+        true.
+  */
+  @property void drawSpaces(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("draw-spaces", propval);
+  }
+
+  /**
+      Get `drawSpacesSet` property.
+      Returns: Whether the `property@Tag:draw-spaces` property is set and must be
+      taken into account.
+  */
+  @property bool drawSpacesSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("draw-spaces-set");
+  }
+
+  /**
+      Set `drawSpacesSet` property.
+      Params:
+        propval = Whether the `property@Tag:draw-spaces` property is set and must be
+        taken into account.
+  */
+  @property void drawSpacesSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("draw-spaces-set", propval);
+  }
+
+  /**
       Creates a [gtksource.tag.Tag].
       
-      Configure the tag using object arguments, i.e. using [gobject.object.ObjectG.set].
+      Configure the tag using object arguments, i.e. using [gobject.object.ObjectWrap.set].
       
       For usual cases, [gtksource.buffer.Buffer.createSourceTag] is more convenient to
       use.

@@ -65,7 +65,7 @@ import gtk.widget;
     </object>
     ```
 */
-class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
+class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
@@ -87,9 +87,67 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ActionGroup self()
   {
     return this;
+  }
+
+  /**
+      Get `accelGroup` property.
+      Returns: The accelerator group the actions of this group should use.
+  */
+  @property gtk.accel_group.AccelGroup accelGroup()
+  {
+    return getAccelGroup();
+  }
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The accelerator group the actions of this group should use.
+  */
+  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setAccelGroup(propval);
+  }
+
+  /**
+      Get `sensitive` property.
+      Returns: Whether the action group is enabled.
+  */
+  @property bool sensitive()
+  {
+    return getSensitive();
+  }
+
+  /**
+      Set `sensitive` property.
+      Params:
+        propval = Whether the action group is enabled.
+  */
+  @property void sensitive(bool propval)
+  {
+    return setSensitive(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether the action group is visible.
+  */
+  @property bool visible()
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the action group is visible.
+  */
+  @property void visible(bool propval)
+  {
+    return setVisible(propval);
   }
 
   mixin BuildableT!();
@@ -156,7 +214,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_action_group_get_accel_group(cast(GtkActionGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +230,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     GtkAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = gtk_action_group_get_action(cast(GtkActionGroup*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 

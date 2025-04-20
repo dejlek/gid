@@ -52,6 +52,7 @@ class Bitset : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Bitset self()
   {
     return this;

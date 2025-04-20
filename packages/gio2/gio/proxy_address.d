@@ -35,6 +35,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProxyAddress self()
   {
     return this;
@@ -45,7 +46,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       tunnel through dest_hostname and dest_port.
       
       (Note that this method doesn't set the #GProxyAddress:uri or
-      #GProxyAddress:destination-protocol fields; use [gobject.object.ObjectG.new_]
+      #GProxyAddress:destination-protocol fields; use [gobject.object.ObjectWrap.new_]
       directly if you want to set those.)
   
       Params:

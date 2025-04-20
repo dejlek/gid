@@ -30,6 +30,7 @@ class NullDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NullDataType self()
   {
     return this;

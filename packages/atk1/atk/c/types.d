@@ -9,7 +9,7 @@ public import gobject.c.types;
     used by [atk.text.Text.getRunAttributes],
     [atk.text.Text.getDefaultAttributes],
     [atk.editable_text.EditableText.setRunAttributes],
-    [atk.document.Document.getAttributes] and [atk.object.ObjectAtk.getAttributes]
+    [atk.document.Document.getAttributes] and [atk.object.ObjectWrap.getAttributes]
 */
 alias AtkAttributeSet = GSList;
 
@@ -1765,7 +1765,7 @@ struct AtkActionIface
 /**
     AtkAttribute is a string name/value pair representing a generic
     attribute. This can be used to expose additional information from
-    an accessible object as a whole (see [atk.object.ObjectAtk.getAttributes])
+    an accessible object as a whole (see [atk.object.ObjectWrap.getAttributes])
     or an document (see [atk.document.Document.getAttributes]). In the case of
     text attributes (see [atk.text.Text.getDefaultAttributes]),
     #AtkTextAttribute enum defines all the possible text attribute
@@ -2312,54 +2312,6 @@ struct AtkNoOpObjectFactoryClass
   AtkObjectFactoryClass parentClass;
 }
 
-/**
-    The base object class for the Accessibility Toolkit API.
-    
-    This class is the primary class for accessibility support via the
-    Accessibility ToolKit (ATK).  Objects which are instances of
-    #AtkObject (or instances of AtkObject-derived types) are queried
-    for properties which relate basic (and generic) properties of a UI
-    component such as name and description.  Instances of #AtkObject
-    may also be queried as to whether they implement other ATK
-    interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
-    to the role which a given UI component plays in a user interface.
-    
-    All UI components in an application which provide useful
-    information or services to the user must provide corresponding
-    #AtkObject instances on request (in GTK+, for instance, usually on
-    a call to #gtk_widget_get_accessible ()), either via ATK support
-    built into the toolkit for the widget class or ancestor class, or
-    in the case of custom widgets, if the inherited #AtkObject
-    implementation is insufficient, via instances of a new #AtkObject
-    subclass.
-    
-    See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
-    #GtkAccessible).
-*/
-struct AtkObject
-{
-  /** */
-  ObjectC parent;
-
-  /** */
-  char* description;
-
-  /** */
-  char* name;
-
-  /** */
-  AtkObject* accessibleParent;
-
-  /** */
-  AtkRole role;
-
-  /** */
-  AtkRelationSet* relationSet;
-
-  /** */
-  AtkLayer layer;
-}
-
 /** */
 struct AtkObjectClass
 {
@@ -2498,6 +2450,54 @@ struct AtkObjectFactoryClass
 
   /** */
   AtkFunction pad2;
+}
+
+/**
+    The base object class for the Accessibility Toolkit API.
+    
+    This class is the primary class for accessibility support via the
+    Accessibility ToolKit (ATK).  Objects which are instances of
+    #AtkObject (or instances of AtkObject-derived types) are queried
+    for properties which relate basic (and generic) properties of a UI
+    component such as name and description.  Instances of #AtkObject
+    may also be queried as to whether they implement other ATK
+    interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
+    to the role which a given UI component plays in a user interface.
+    
+    All UI components in an application which provide useful
+    information or services to the user must provide corresponding
+    #AtkObject instances on request (in GTK+, for instance, usually on
+    a call to #gtk_widget_get_accessible ()), either via ATK support
+    built into the toolkit for the widget class or ancestor class, or
+    in the case of custom widgets, if the inherited #AtkObject
+    implementation is insufficient, via instances of a new #AtkObject
+    subclass.
+    
+    See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
+    #GtkAccessible).
+*/
+struct AtkObject
+{
+  /** */
+  ObjectC parent;
+
+  /** */
+  char* description;
+
+  /** */
+  char* name;
+
+  /** */
+  AtkObject* accessibleParent;
+
+  /** */
+  AtkRole role;
+
+  /** */
+  AtkRelationSet* relationSet;
+
+  /** */
+  AtkLayer layer;
 }
 
 /**
@@ -2745,8 +2745,8 @@ struct AtkSelectionIface
     could call the method [atk.socket.Socket.embed] in order to embed it.
     
     For the same reasons, an implementor doesn't need to implement
-    [atk.object.ObjectAtk.getNAccessibleChildren] and
-    [atk.object.ObjectAtk.refAccessibleChild]. All the logic related to those
+    [atk.object.ObjectWrap.getNAccessibleChildren] and
+    [atk.object.ObjectWrap.refAccessibleChild]. All the logic related to those
     functions will be implemented by the IPC layer.
     
     See `class@AtkPlug`
@@ -2775,7 +2775,7 @@ struct AtkSocketClass
     
     An AtkStateSet is a read-only representation of the full set of #AtkStates
     that apply to an object at a given time. This set is not meant to be
-    modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
+    modified, but rather created when #[atk.object.ObjectWrap.refStateSet] is called.
 */
 struct AtkStateSet
 {

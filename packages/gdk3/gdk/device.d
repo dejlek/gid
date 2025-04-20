@@ -22,7 +22,7 @@ import gobject.object;
     about the various kinds of master and slave devices, and their
     relationships.
 */
-class Device : gobject.object.ObjectG
+class Device : gobject.object.ObjectWrap
 {
 
   /** */
@@ -44,9 +44,75 @@ class Device : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Device self()
   {
     return this;
+  }
+
+  /**
+      Get `associatedDevice` property.
+      Returns: Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
+      always come in keyboard/pointer pairs. Other device types will have a null associated device.
+  */
+  @property gdk.device.Device associatedDevice()
+  {
+    return getAssociatedDevice();
+  }
+
+  /**
+      Get `axes` property.
+      Returns: The axes currently available for this device.
+  */
+  @property gdk.types.AxisFlags axes()
+  {
+    return getAxes();
+  }
+
+  /** */
+  @property gdk.types.InputMode inputMode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.InputMode)("input-mode");
+  }
+
+  /** */
+  @property void inputMode(gdk.types.InputMode propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.types.InputMode)("input-mode", propval);
+  }
+
+  /**
+      Get `nAxes` property.
+      Returns: Number of axes in the device.
+  */
+  @property uint nAxes()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-axes");
+  }
+
+  /**
+      Get `seat` property.
+      Returns: #GdkSeat of this device.
+  */
+  @property gdk.seat.Seat seat()
+  {
+    return getSeat();
+  }
+
+  /**
+      Set `seat` property.
+      Params:
+        propval = #GdkSeat of this device.
+  */
+  @property void seat(gdk.seat.Seat propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdk.seat.Seat)("seat", propval);
+  }
+
+  /** */
+  @property gdk.device_tool.DeviceTool tool()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.device_tool.DeviceTool)("tool");
   }
 
   /**
@@ -92,7 +158,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_get_associated_device(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +210,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -189,7 +255,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_last_event_window(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -300,7 +366,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -373,7 +439,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position(cast(GdkDevice*)cPtr, cast(int*)&winX, cast(int*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -398,7 +464,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position_double(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

@@ -89,66 +89,116 @@ class DsdInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DsdInfo self()
   {
     return this;
   }
 
+  /**
+      Get `format` field.
+      Returns: DSD grouping format
+  */
   @property gstaudio.types.DsdFormat format()
   {
     return cast(gstaudio.types.DsdFormat)(cast(GstDsdInfo*)cPtr).format;
   }
 
+  /**
+      Set `format` field.
+      Params:
+        propval = DSD grouping format
+  */
   @property void format(gstaudio.types.DsdFormat propval)
   {
     (cast(GstDsdInfo*)cPtr).format = cast(GstDsdFormat)propval;
   }
 
+  /**
+      Get `rate` field.
+      Returns: DSD rate
+  */
   @property int rate()
   {
     return (cast(GstDsdInfo*)cPtr).rate;
   }
 
+  /**
+      Set `rate` field.
+      Params:
+        propval = DSD rate
+  */
   @property void rate(int propval)
   {
     (cast(GstDsdInfo*)cPtr).rate = propval;
   }
 
+  /**
+      Get `channels` field.
+      Returns: number of channels (must be at least 1)
+  */
   @property int channels()
   {
     return (cast(GstDsdInfo*)cPtr).channels;
   }
 
+  /**
+      Set `channels` field.
+      Params:
+        propval = number of channels (must be at least 1)
+  */
   @property void channels(int propval)
   {
     (cast(GstDsdInfo*)cPtr).channels = propval;
   }
 
+  /**
+      Get `layout` field.
+      Returns: audio layout
+  */
   @property gstaudio.types.AudioLayout layout()
   {
     return cast(gstaudio.types.AudioLayout)(cast(GstDsdInfo*)cPtr).layout;
   }
 
+  /**
+      Set `layout` field.
+      Params:
+        propval = audio layout
+  */
   @property void layout(gstaudio.types.AudioLayout propval)
   {
     (cast(GstDsdInfo*)cPtr).layout = cast(GstAudioLayout)propval;
   }
 
+  /**
+      Get `reversedBytes` field.
+      Returns: true if the DSD bits in the data bytes are reversed,
+        that is, the least significant bit comes first
+  */
   @property bool reversedBytes()
   {
     return (cast(GstDsdInfo*)cPtr).reversedBytes;
   }
 
+  /**
+      Set `reversedBytes` field.
+      Params:
+        propval = true if the DSD bits in the data bytes are reversed,
+          that is, the least significant bit comes first
+  */
   @property void reversedBytes(bool propval)
   {
     (cast(GstDsdInfo*)cPtr).reversedBytes = propval;
   }
 
+  /** */
   @property gstaudio.types.AudioFlags flags()
   {
     return cast(gstaudio.types.AudioFlags)(cast(GstDsdInfo*)cPtr).flags;
   }
 
+  /** */
   @property void flags(gstaudio.types.AudioFlags propval)
   {
     (cast(GstDsdInfo*)cPtr).flags = cast(GstAudioFlags)propval;

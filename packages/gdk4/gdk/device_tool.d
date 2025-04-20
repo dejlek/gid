@@ -10,7 +10,7 @@ import gobject.object;
 /**
     A physical tool associated to a [gdk.device.Device].
 */
-class DeviceTool : gobject.object.ObjectG
+class DeviceTool : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class DeviceTool : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DeviceTool self()
   {
     return this;

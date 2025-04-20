@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class DatasetFactory : gobject.object.ObjectG
+class DatasetFactory : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class DatasetFactory : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override DatasetFactory self()
   {
     return this;
@@ -45,8 +46,8 @@ class DatasetFactory : gobject.object.ObjectG
     GError *_err;
     _cretval = gadataset_dataset_factory_finish(cast(GADatasetDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.dataset.Dataset)(cast(GADatasetDataset*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.dataset.Dataset)(cast(GADatasetDataset*)_cretval, Yes.Take);
     return _retval;
   }
 }

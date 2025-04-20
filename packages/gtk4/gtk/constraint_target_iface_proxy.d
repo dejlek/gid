@@ -5,7 +5,7 @@ import gobject.object;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 
-/// Proxy object for [Gtk.ConstraintTarget] interface when a GObject has no applicable D binding
+/// Proxy object for [gtk.constraint_target.ConstraintTarget] interface when a GObject has no applicable D binding
 class ConstraintTargetIfaceProxy : IfaceProxy, gtk.constraint_target.ConstraintTarget
 {
   this(void* ptr, Flag!"Take" take = No.Take)

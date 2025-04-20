@@ -19,7 +19,7 @@ class RTPSourceMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GstRtp.RTPSourceMeta");
+      throw new GidConstructException("Null instance pointer for gstrtp.rtpsource_meta.RTPSourceMeta");
 
     cInstance = *cast(GstRTPSourceMeta*)ptr;
 
@@ -33,36 +33,67 @@ class RTPSourceMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstRTPSourceMeta*)cPtr).meta);
   }
 
+  /**
+      Get `ssrc` field.
+      Returns: the SSRC
+  */
   @property uint ssrc()
   {
     return (cast(GstRTPSourceMeta*)cPtr).ssrc;
   }
 
+  /**
+      Set `ssrc` field.
+      Params:
+        propval = the SSRC
+  */
   @property void ssrc(uint propval)
   {
     (cast(GstRTPSourceMeta*)cPtr).ssrc = propval;
   }
 
+  /**
+      Get `ssrcValid` field.
+      Returns: whether @ssrc is set and valid
+  */
   @property bool ssrcValid()
   {
     return (cast(GstRTPSourceMeta*)cPtr).ssrcValid;
   }
 
+  /**
+      Set `ssrcValid` field.
+      Params:
+        propval = whether @ssrc is set and valid
+  */
   @property void ssrcValid(bool propval)
   {
     (cast(GstRTPSourceMeta*)cPtr).ssrcValid = propval;
   }
 
+  /**
+      Get `csrcCount` field.
+      Returns: number of elements in @csrc
+  */
   @property uint csrcCount()
   {
     return (cast(GstRTPSourceMeta*)cPtr).csrcCount;
   }
 
+  /**
+      Set `csrcCount` field.
+      Params:
+        propval = number of elements in @csrc
+  */
   @property void csrcCount(uint propval)
   {
     (cast(GstRTPSourceMeta*)cPtr).csrcCount = propval;

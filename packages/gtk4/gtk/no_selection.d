@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.section_model;
@@ -22,7 +23,7 @@ import gtk.types;
     
     [gtk.no_selection.NoSelection] passes through sections from the underlying model.
 */
-class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
+class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   /** */
@@ -44,9 +45,47 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NoSelection self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being managed.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being managed.
+  */
+  @property void model(gio.list_model.ListModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -63,7 +102,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   this(gio.list_model.ListModel model = null)
   {
     GtkNoSelection* _cretval;
-    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -75,7 +114,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   {
     GListModel* _cretval;
     _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,6 +128,6 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 }

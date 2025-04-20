@@ -13,10 +13,17 @@ import secret.types;
 class SchemaAttribute : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `schema_attribute.SchemaAttribute` boxed type.
+      Params:
+        name = name of the attribute
+        type = the type of the attribute
+  */
+  this(string name = string.init, secret.types.SchemaAttributeType type = secret.types.SchemaAttributeType.init)
   {
     super(gMalloc(SecretSchemaAttribute.sizeof), Yes.Take);
+    this.name = name;
+    this.type = type;
   }
 
   /** */
@@ -44,27 +51,46 @@ class SchemaAttribute : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SchemaAttribute self()
   {
     return this;
   }
 
+  /**
+      Get `name` field.
+      Returns: name of the attribute
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = name of the attribute
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
     dToC(propval, cast(void*)&(cast(SecretSchemaAttribute*)cPtr).name);
   }
 
+  /**
+      Get `type` field.
+      Returns: the type of the attribute
+  */
   @property secret.types.SchemaAttributeType type()
   {
     return cast(secret.types.SchemaAttributeType)(cast(SecretSchemaAttribute*)cPtr).type;
   }
 
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the attribute
+  */
   @property void type(secret.types.SchemaAttributeType propval)
   {
     (cast(SecretSchemaAttribute*)cPtr).type = cast(SecretSchemaAttributeType)propval;

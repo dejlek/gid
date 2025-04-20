@@ -542,7 +542,7 @@ import gobject.value;
         context when the task is finalized
     )
 */
-class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
+class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 {
 
   /** */
@@ -564,9 +564,36 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Task self()
   {
     return this;
+  }
+
+  /**
+      Get `completed` property.
+      Returns: Whether the task has completed, meaning its callback (if set) has been
+      invoked.
+      
+      This can only happen after [gio.task.Task.returnPointer],
+      [gio.task.Task.returnError] or one of the other return functions have been called
+      on the task. However, it is not guaranteed to happen immediately after
+      those functions are called, as the task’s callback may need to be scheduled
+      to run in a different thread.
+      
+      That means it is **not safe** to use this property to track whether a
+      return function has been called on the #GTask. Callers must do that
+      tracking themselves, typically by linking the lifetime of the #GTask to the
+      control flow of their code.
+      
+      This property is guaranteed to change from false to true exactly once.
+      
+      The #GObject::notify signal for this change is emitted in the same main
+      context as the task’s callback, immediately after that callback is invoked.
+  */
+  @property bool completed()
+  {
+    return getCompleted();
   }
 
   mixin AsyncResultT!();
@@ -596,14 +623,14 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
         callback = a #GAsyncReadyCallback.
       Returns: a #GTask.
   */
-  this(gobject.object.ObjectG sourceObject = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  this(gobject.object.ObjectWrap sourceObject = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -625,10 +652,10 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Returns: true if result and source_object are valid, false
         if not
   */
-  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG sourceObject = null)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap sourceObject = null)
   {
     bool _retval;
-    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
+    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -649,14 +676,14 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
         sourceTag = an opaque pointer indicating the source of this task
         error = error to report
   */
-  static void reportError(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag, glib.error.ErrorG error)
+  static void reportError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag, glib.error.ErrorWrap error)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -672,7 +699,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GCancellable* _cretval;
     _cretval = g_task_get_cancellable(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -759,11 +786,11 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       [gio.async_result.AsyncResult.getSourceObject], but does not ref the object.
       Returns: task's source object, or null
   */
-  gobject.object.ObjectG getSourceObject()
+  gobject.object.ObjectWrap getSourceObject()
   {
     ObjectC* _cretval;
     _cretval = g_task_get_source_object(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -807,7 +834,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or false on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool propagateBoolean()
   {
@@ -815,7 +842,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     GError *_err;
     _retval = g_task_propagate_boolean(cast(GTask*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -828,7 +855,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or -1 on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   ptrdiff_t propagateInt()
   {
@@ -836,7 +863,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     GError *_err;
     _retval = g_task_propagate_int(cast(GTask*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -850,14 +877,14 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or null on error
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   void* propagatePointer()
   {
     GError *_err;
     auto _retval = g_task_propagate_pointer(cast(GTask*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -876,7 +903,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Params:
         value = return location for the #GValue
       Returns: true if task succeeded, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool propagateValue(out gobject.value.Value value)
   {
@@ -885,7 +912,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     GError *_err;
     _retval = g_task_propagate_value(cast(GTask*)cPtr, &_value, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
@@ -911,7 +938,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Note that since the task takes ownership of error, and since the
       task may be completed before returning from [gio.task.Task.returnError],
       you cannot assume that error is still valid after calling this.
-      Call [glib.error.ErrorG.copy] on the error if you need to keep a local copy
+      Call [glib.error.ErrorWrap.copy] on the error if you need to keep a local copy
       as well.
       
       See also [gio.task.Task.returnNewError],
@@ -920,7 +947,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Params:
         error = the #GError result of a task function.
   */
-  void returnError(glib.error.ErrorG error)
+  void returnError(glib.error.ErrorWrap error)
   {
     g_task_return_error(cast(GTask*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -953,7 +980,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-      Sets task’s result to a new [glib.error.ErrorG] created from domain, code,
+      Sets task’s result to a new [glib.error.ErrorWrap] created from domain, code,
       message and completes the task.
       
       See [gio.task.Task.returnPointer] for more discussion of exactly what
@@ -1060,7 +1087,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread(cast(GTask*)cPtr, _taskFuncCB);
@@ -1094,7 +1121,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread_sync(cast(GTask*)cPtr, _taskFuncCB);

@@ -20,7 +20,7 @@ class StaticCaps
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.StaticCaps");
+      throw new GidConstructException("Null instance pointer for gst.static_caps.StaticCaps");
 
     cInstance = *cast(GstStaticCaps*)ptr;
 
@@ -34,22 +34,40 @@ class StaticCaps
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `caps` field.
+      Returns: the cached #GstCaps
+  */
   @property gst.caps.Caps caps()
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
   }
 
+  /**
+      Set `caps` field.
+      Params:
+        propval = the cached #GstCaps
+  */
   @property void caps(gst.caps.Caps propval)
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
     dToC(propval, cast(void*)&(cast(GstStaticCaps*)cPtr).caps);
   }
 
+  /**
+      Get `string_` field.
+      Returns: a string describing a caps
+  */
   @property string string_()
   {
     return cToD!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
   }
 
+  /**
+      Set `string_` field.
+      Params:
+        propval = a string describing a caps
+  */
   @property void string_(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);

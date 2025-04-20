@@ -11,7 +11,7 @@ import webkitwebprocessextension.types;
 import webkitwebprocessextension.web_page;
 
 /** */
-class ScriptWorld : gobject.object.ObjectG
+class ScriptWorld : gobject.object.ObjectWrap
 {
 
   /** */
@@ -73,7 +73,7 @@ class ScriptWorld : gobject.object.ObjectG
     WebKitScriptWorld* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = webkit_script_world_new_with_name(_name);
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ScriptWorld : gobject.object.ObjectG
   {
     WebKitScriptWorld* _cretval;
     _cretval = webkit_script_world_get_default();
-    auto _retval = ObjectG.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, No.Take);
     return _retval;
   }
 

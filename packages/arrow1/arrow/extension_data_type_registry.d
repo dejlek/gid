@@ -10,7 +10,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class ExtensionDataTypeRegistry : gobject.object.ObjectG
+class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExtensionDataTypeRegistry self()
   {
     return this;
@@ -42,7 +43,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   {
     GArrowExtensionDataTypeRegistry* _cretval;
     _cretval = garrow_extension_data_type_registry_default();
-    auto _retval = ObjectG.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -52,7 +53,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     GArrowExtensionDataType* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +63,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
       Params:
         dataType = A #GArrowExtensionDataType to be registered.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool register(arrow.extension_data_type.ExtensionDataType dataType)
   {
@@ -70,7 +71,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)cPtr, dataType ? cast(GArrowExtensionDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -81,7 +82,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
       Params:
         name = An extension data type name to be unregistered.
       Returns: true on success, false on error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   bool unregister(string name)
   {
@@ -90,7 +91,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     GError *_err;
     _retval = garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

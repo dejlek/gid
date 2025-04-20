@@ -1,4 +1,4 @@
-/// Module for [ObjectAtk] class
+/// Module for [ObjectWrap] class
 module atk.object;
 
 import atk.c.functions;
@@ -35,7 +35,7 @@ import gobject.object;
     See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
     #GtkAccessible).
 */
-class ObjectAtk : gobject.object.ObjectG
+class ObjectWrap : gobject.object.ObjectWrap
 {
 
   /** */
@@ -57,9 +57,274 @@ class ObjectAtk : gobject.object.ObjectG
     return getGType();
   }
 
-  override ObjectAtk self()
+  /** Returns `this`, for use in `with` statements. */
+  override ObjectWrap self()
   {
     return this;
+  }
+
+  /** */
+  @property int accessibleComponentLayer()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("accessible-component-layer");
+  }
+
+  /** */
+  @property int accessibleComponentMdiZorder()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("accessible-component-mdi-zorder");
+  }
+
+  /** */
+  @property string accessibleDescription()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-description");
+  }
+
+  /** */
+  @property void accessibleDescription(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-description", propval);
+  }
+
+  /** */
+  @property string accessibleHelpText()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-help-text");
+  }
+
+  /** */
+  @property void accessibleHelpText(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-help-text", propval);
+  }
+
+  /** */
+  @property int accessibleHypertextNlinks()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("accessible-hypertext-nlinks");
+  }
+
+  /** */
+  @property string accessibleId()
+  {
+    return getAccessibleId();
+  }
+
+  /** */
+  @property void accessibleId(string propval)
+  {
+    return setAccessibleId(propval);
+  }
+
+  /** */
+  @property string accessibleName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-name");
+  }
+
+  /** */
+  @property void accessibleName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-name", propval);
+  }
+
+  /** */
+  @property atk.object.ObjectWrap accessibleParent()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-parent");
+  }
+
+  /** */
+  @property void accessibleParent(atk.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-parent", propval);
+  }
+
+  /** */
+  @property atk.types.Role accessibleRole()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.types.Role)("accessible-role");
+  }
+
+  /** */
+  @property void accessibleRole(atk.types.Role propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.types.Role)("accessible-role", propval);
+  }
+
+  /**
+      Get `accessibleTableCaption` property.
+      Returns: Table caption.
+  
+      Deprecated: Since 1.3. Use table-caption-object instead.
+  */
+  @property string accessibleTableCaption()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-caption");
+  }
+
+  /**
+      Set `accessibleTableCaption` property.
+      Params:
+        propval = Table caption.
+  
+      Deprecated: Since 1.3. Use table-caption-object instead.
+  */
+  @property void accessibleTableCaption(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-table-caption", propval);
+  }
+
+  /** */
+  @property atk.object.ObjectWrap accessibleTableCaptionObject()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-caption-object");
+  }
+
+  /** */
+  @property void accessibleTableCaptionObject(atk.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-caption-object", propval);
+  }
+
+  /**
+      Get `accessibleTableColumnDescription` property.
+      Returns: Accessible table column description.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
+      and [atk.table.Table.setColumnDescription] instead.
+  */
+  @property string accessibleTableColumnDescription()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-column-description");
+  }
+
+  /**
+      Set `accessibleTableColumnDescription` property.
+      Params:
+        propval = Accessible table column description.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
+      and [atk.table.Table.setColumnDescription] instead.
+  */
+  @property void accessibleTableColumnDescription(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-table-column-description", propval);
+  }
+
+  /**
+      Get `accessibleTableColumnHeader` property.
+      Returns: Accessible table column header.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
+      [atk.table.Table.setColumnHeader] instead.
+  */
+  @property atk.object.ObjectWrap accessibleTableColumnHeader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-column-header");
+  }
+
+  /**
+      Set `accessibleTableColumnHeader` property.
+      Params:
+        propval = Accessible table column header.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
+      [atk.table.Table.setColumnHeader] instead.
+  */
+  @property void accessibleTableColumnHeader(atk.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-column-header", propval);
+  }
+
+  /**
+      Get `accessibleTableRowDescription` property.
+      Returns: Accessible table row description.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
+      [atk.table.Table.setRowDescription] instead.
+  */
+  @property string accessibleTableRowDescription()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-row-description");
+  }
+
+  /**
+      Set `accessibleTableRowDescription` property.
+      Params:
+        propval = Accessible table row description.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
+      [atk.table.Table.setRowDescription] instead.
+  */
+  @property void accessibleTableRowDescription(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("accessible-table-row-description", propval);
+  }
+
+  /**
+      Get `accessibleTableRowHeader` property.
+      Returns: Accessible table row header.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
+      [atk.table.Table.setRowHeader] instead.
+  */
+  @property atk.object.ObjectWrap accessibleTableRowHeader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-row-header");
+  }
+
+  /**
+      Set `accessibleTableRowHeader` property.
+      Params:
+        propval = Accessible table row header.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
+      [atk.table.Table.setRowHeader] instead.
+  */
+  @property void accessibleTableRowHeader(atk.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-row-header", propval);
+  }
+
+  /** */
+  @property atk.object.ObjectWrap accessibleTableSummary()
+  {
+    return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-summary");
+  }
+
+  /** */
+  @property void accessibleTableSummary(atk.object.ObjectWrap propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-summary", propval);
+  }
+
+  /**
+      Get `accessibleValue` property.
+      Returns: Numeric value of this object, in case being and AtkValue.
+  
+      Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText] to get
+      the value, and value-changed signal to be notified on their value
+      changes.
+  */
+  @property double accessibleValue()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("accessible-value");
+  }
+
+  /**
+      Set `accessibleValue` property.
+      Params:
+        propval = Numeric value of this object, in case being and AtkValue.
+  
+      Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText] to get
+      the value, and value-changed signal to be notified on their value
+      changes.
+  */
+  @property void accessibleValue(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("accessible-value", propval);
   }
 
   /**
@@ -70,7 +335,7 @@ class ObjectAtk : gobject.object.ObjectG
         target = The #AtkObject which is to be the target of the relation.
       Returns: TRUE if the relationship is added.
   */
-  bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
+  bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
     _retval = atk_object_add_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -198,21 +463,21 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible parent of the accessible. By default this is
-      the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
+      the one assigned with [atk.object.ObjectWrap.setParent], but it is assumed
       that ATK implementors have ways to get the parent of the object
       without the need of assigning it manually with
-      [atk.object.ObjectAtk.setParent], and will return it with this method.
+      [atk.object.ObjectWrap.setParent], and will return it with this method.
       
       If you are only interested on the parent assigned with
-      [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
+      [atk.object.ObjectWrap.setParent], use [atk.object.ObjectWrap.peekParent].
       Returns: an #AtkObject representing the accessible
         parent of the accessible
   */
-  atk.object.ObjectAtk getParent()
+  atk.object.ObjectWrap getParent()
   {
     AtkObject* _cretval;
     _cretval = atk_object_get_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,16 +528,16 @@ class ObjectAtk : gobject.object.ObjectG
       function returns null.
       
       This method is intended as an utility for ATK implementors, and not
-      to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
+      to be exposed to accessible tools. See [atk.object.ObjectWrap.getParent] for
       further reference.
       Returns: an #AtkObject representing the accessible
         parent of the accessible if assigned
   */
-  atk.object.ObjectAtk peekParent()
+  atk.object.ObjectWrap peekParent()
   {
     AtkObject* _cretval;
     _cretval = atk_object_peek_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,11 +551,11 @@ class ObjectAtk : gobject.object.ObjectG
       Returns: an #AtkObject representing the specified
         accessible child of the accessible.
   */
-  atk.object.ObjectAtk refAccessibleChild(int i)
+  atk.object.ObjectWrap refAccessibleChild(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_object_ref_accessible_child(cast(AtkObject*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -303,7 +568,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkRelationSet* _cretval;
     _cretval = atk_object_ref_relation_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -317,7 +582,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_object_ref_state_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -327,7 +592,7 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         handlerId = a guint which identifies the handler to be removed.
   
-      Deprecated: See [atk.object.ObjectAtk.connectPropertyChangeHandler]
+      Deprecated: See [atk.object.ObjectWrap.connectPropertyChangeHandler]
   */
   void removePropertyChangeHandler(uint handlerId)
   {
@@ -342,7 +607,7 @@ class ObjectAtk : gobject.object.ObjectG
         target = The #AtkObject which is the target of the relation to be removed.
       Returns: TRUE if the relationship is removed.
   */
-  bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
+  bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
     _retval = atk_object_remove_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -415,7 +680,7 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         parent = an #AtkObject to be set as the accessible parent
   */
-  void setParent(atk.object.ObjectAtk parent)
+  void setParent(atk.object.ObjectWrap parent)
   {
     atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.Dup) : null);
   }
@@ -443,11 +708,11 @@ class ObjectAtk : gobject.object.ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk))
+          $(D void callback(atk.object.ObjectWrap arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` the newly focused object. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -455,8 +720,8 @@ class ObjectAtk : gobject.object.ObjectG
   ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectAtk)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -490,11 +755,11 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, atk.object.ObjectAtk objectAtk))
+          $(D void callback(string arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` the text to be announced. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -503,7 +768,7 @@ class ObjectAtk : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -535,14 +800,14 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, string arg2, atk.object.ObjectAtk objectAtk))
+          $(D void callback(string arg1, string arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` the name of the attribute being modified, or null if not
                    available. (optional)
   
           `arg2` the attribute's new value, or null if not available. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -552,7 +817,7 @@ class ObjectAtk : gobject.object.ObjectG
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -590,7 +855,7 @@ class ObjectAtk : gobject.object.ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk))
+          $(D void callback(uint arg1, atk.object.ObjectWrap arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` The index of the added or removed child. The value can be
           -1. This is used if the value is not known by the implementor
@@ -601,7 +866,7 @@ class ObjectAtk : gobject.object.ObjectG
           available for the implementor. In that case this pointer can be
           NULL. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -610,8 +875,8 @@ class ObjectAtk : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -647,12 +912,12 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool arg1, atk.object.ObjectAtk objectAtk))
+          $(D void callback(bool arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` a boolean value which indicates whether the object gained
           or lost focus. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -663,7 +928,7 @@ class ObjectAtk : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -695,14 +960,14 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, int arg2, atk.object.ObjectAtk objectAtk))
+          $(D void callback(string arg1, int arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` the text to be announced. (optional)
   
           `arg2` an #AtkLive specifying the politeness of the notification.
           Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -712,7 +977,7 @@ class ObjectAtk : gobject.object.ObjectG
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -751,7 +1016,7 @@ class ObjectAtk : gobject.object.ObjectG
       reinstate the previous value.
       
       Toolkit implementor note: ATK implementors should use
-      [gobject.object.ObjectG.notify] to emit property-changed
+      [gobject.object.ObjectWrap.notify] to emit property-changed
       notifications. #AtkObject::property-changed is needed by the
       implementation of [atk.global.addGlobalEventListener] because GObject
       notify doesn't support emission hooks.
@@ -760,12 +1025,12 @@ class ObjectAtk : gobject.object.ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk))
+          $(D void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` an #AtkPropertyValues containing the new
           value of the property which changed. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -774,7 +1039,7 @@ class ObjectAtk : gobject.object.ObjectG
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.property_values.PropertyValues)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -808,13 +1073,13 @@ class ObjectAtk : gobject.object.ObjectG
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, bool arg2, atk.object.ObjectAtk objectAtk))
+          $(D void callback(string arg1, bool arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` The name of the state which has changed (optional)
   
           `arg2` A boolean which indicates whether the state has been set or unset. (optional)
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -824,7 +1089,7 @@ class ObjectAtk : gobject.object.ObjectG
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -860,9 +1125,9 @@ class ObjectAtk : gobject.object.ObjectG
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.object.ObjectAtk objectAtk))
+          $(D void callback(atk.object.ObjectWrap objectWrap))
   
-          `objectAtk` the instance the signal is connected to (optional)
+          `objectWrap` the instance the signal is connected to (optional)
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -870,7 +1135,7 @@ class ObjectAtk : gobject.object.ObjectG
   ulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))
   && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

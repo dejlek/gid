@@ -13,7 +13,7 @@ import gtk.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
-class SqueezerPage : gobject.object.ObjectG
+class SqueezerPage : gobject.object.ObjectWrap
 {
 
   /** */
@@ -35,9 +35,51 @@ class SqueezerPage : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SqueezerPage self()
   {
     return this;
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: Whether the child is enabled.
+      
+      If a child is disabled, it will be ignored when looking for the child
+      fitting the available size best.
+      
+      This allows to programmatically and prematurely hide a child even if it
+      fits in the available space.
+      
+      This can be used e.g. to ensure a certain child is hidden below a certain
+      window width, or any other constraint you find suitable.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  @property bool enabled()
+  {
+    return getEnabled();
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the child is enabled.
+        
+        If a child is disabled, it will be ignored when looking for the child
+        fitting the available size best.
+        
+        This allows to programmatically and prematurely hide a child even if it
+        fits in the available space.
+        
+        This can be used e.g. to ensure a certain child is hidden below a certain
+        window width, or any other constraint you find suitable.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  @property void enabled(bool propval)
+  {
+    return setEnabled(propval);
   }
 
   /**
@@ -50,7 +92,7 @@ class SqueezerPage : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = adw_squeezer_page_get_child(cast(AdwSqueezerPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

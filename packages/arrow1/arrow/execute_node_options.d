@@ -8,7 +8,7 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class ExecuteNodeOptions : gobject.object.ObjectG
+class ExecuteNodeOptions : gobject.object.ObjectWrap
 {
 
   /** */
@@ -30,6 +30,7 @@ class ExecuteNodeOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ExecuteNodeOptions self()
   {
     return this;

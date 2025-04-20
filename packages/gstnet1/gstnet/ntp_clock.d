@@ -31,6 +31,7 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override NtpClock self()
   {
     return this;

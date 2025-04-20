@@ -25,7 +25,7 @@ import pango.types;
     
     To obtain a [pango.context.Context], use [pango.font_map.FontMap.createContext].
 */
-class Context : gobject.object.ObjectG
+class Context : gobject.object.ObjectWrap
 {
 
   /** */
@@ -47,6 +47,7 @@ class Context : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Context self()
   {
     return this;
@@ -65,7 +66,7 @@ class Context : gobject.object.ObjectG
       For instance, the GTK toolkit has, among others,
       `[gtk.widget.Widget.getPangoContext]`. Use those instead.
       Returns: the newly allocated [pango.context.Context], which should
-          be freed with [gobject.object.ObjectG.unref].
+          be freed with [gobject.object.ObjectWrap.unref].
   */
   this()
   {
@@ -139,7 +140,7 @@ class Context : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = pango_context_get_font_map(cast(PangoContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +286,7 @@ class Context : gobject.object.ObjectG
     pango_context_list_families(cast(PangoContext*)cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
+      families[i] = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     gFree(cast(void*)_families);
   }
 
@@ -302,7 +303,7 @@ class Context : gobject.object.ObjectG
   {
     PangoFont* _cretval;
     _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -320,7 +321,7 @@ class Context : gobject.object.ObjectG
   {
     PangoFontset* _cretval;
     _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 

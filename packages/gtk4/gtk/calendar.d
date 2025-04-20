@@ -88,9 +88,132 @@ class Calendar : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Calendar self()
   {
     return this;
+  }
+
+  /**
+      Get `day` property.
+      Returns: The selected day (as a number between 1 and 31).
+  */
+  @property int day()
+  {
+    return getDay();
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31).
+  */
+  @property void day(int propval)
+  {
+    return setDay(propval);
+  }
+
+  /**
+      Get `month` property.
+      Returns: The selected month (as a number between 0 and 11).
+      
+      This property gets initially set to the current month.
+  */
+  @property int month()
+  {
+    return getMonth();
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+        
+        This property gets initially set to the current month.
+  */
+  @property void month(int propval)
+  {
+    return setMonth(propval);
+  }
+
+  /**
+      Get `showDayNames` property.
+      Returns: Determines whether day names are displayed.
+  */
+  @property bool showDayNames()
+  {
+    return getShowDayNames();
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+  */
+  @property void showDayNames(bool propval)
+  {
+    return setShowDayNames(propval);
+  }
+
+  /**
+      Get `showHeading` property.
+      Returns: Determines whether a heading is displayed.
+  */
+  @property bool showHeading()
+  {
+    return getShowHeading();
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+  */
+  @property void showHeading(bool propval)
+  {
+    return setShowHeading(propval);
+  }
+
+  /**
+      Get `showWeekNumbers` property.
+      Returns: Determines whether week numbers are displayed.
+  */
+  @property bool showWeekNumbers()
+  {
+    return getShowWeekNumbers();
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+  */
+  @property void showWeekNumbers(bool propval)
+  {
+    return setShowWeekNumbers(propval);
+  }
+
+  /**
+      Get `year` property.
+      Returns: The selected year.
+      
+      This property gets initially set to the current year.
+  */
+  @property int year()
+  {
+    return getYear();
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+        
+        This property gets initially set to the current year.
+  */
+  @property void year(int propval)
+  {
+    return setYear(propval);
   }
 
   /**

@@ -47,9 +47,29 @@ class GesturePan : gtk.gesture_drag.GestureDrag
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GesturePan self()
   {
     return this;
+  }
+
+  /**
+      Get `orientation` property.
+      Returns: The expected orientation of pan gestures.
+  */
+  @property gtk.types.Orientation orientation()
+  {
+    return getOrientation();
+  }
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The expected orientation of pan gestures.
+  */
+  @property void orientation(gtk.types.Orientation propval)
+  {
+    return setOrientation(propval);
   }
 
   /**

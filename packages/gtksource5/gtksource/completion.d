@@ -4,6 +4,7 @@ module gtksource.completion;
 import gid.gid;
 import gobject.dclosure;
 import gobject.object;
+import gtk.text_view;
 import gtksource.buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -43,7 +44,7 @@ import pango.attr_list;
     A same `iface@CompletionProvider` object can be used for several
     [gtksource.completion.Completion]'s.
 */
-class Completion : gobject.object.ObjectG
+class Completion : gobject.object.ObjectWrap
 {
 
   /** */
@@ -65,9 +66,102 @@ class Completion : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Completion self()
   {
     return this;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkTextBuffer for the #GtkSourceCompletion:view.
+      This is a convenience property for providers.
+  */
+  @property gtk.text_view.TextView buffer()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.text_view.TextView)("buffer");
+  }
+
+  /**
+      Get `pageSize` property.
+      Returns: The number of rows to display to the user before scrolling.
+  */
+  @property uint pageSize()
+  {
+    return getPageSize();
+  }
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The number of rows to display to the user before scrolling.
+  */
+  @property void pageSize(uint propval)
+  {
+    return setPageSize(propval);
+  }
+
+  /**
+      Get `rememberInfoVisibility` property.
+      Returns: Determines whether the visibility of the info window should be saved when the
+      completion is hidden, and restored when the completion is shown again.
+  */
+  @property bool rememberInfoVisibility()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("remember-info-visibility");
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be saved when the
+        completion is hidden, and restored when the completion is shown again.
+  */
+  @property void rememberInfoVisibility(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("remember-info-visibility", propval);
+  }
+
+  /**
+      Get `selectOnShow` property.
+      Returns: Determines whether the first proposal should be selected when the completion
+      is first shown.
+  */
+  @property bool selectOnShow()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("select-on-show");
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the completion
+        is first shown.
+  */
+  @property void selectOnShow(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("select-on-show", propval);
+  }
+
+  /**
+      Get `showIcons` property.
+      Returns: The "show-icons" property denotes if icons should be displayed within
+      the list of completions presented to the user.
+  */
+  @property bool showIcons()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-icons");
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = The "show-icons" property denotes if icons should be displayed within
+        the list of completions presented to the user.
+  */
+  @property void showIcons(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
   }
 
   /**
@@ -123,7 +217,7 @@ class Completion : gobject.object.ObjectG
   */
   void addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /** */
@@ -140,7 +234,7 @@ class Completion : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +254,7 @@ class Completion : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +278,7 @@ class Completion : gobject.object.ObjectG
   */
   void removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
   }
 
   /** */

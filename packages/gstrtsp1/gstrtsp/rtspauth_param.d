@@ -13,10 +13,17 @@ import gstrtsp.types;
 class RTSPAuthParam : gobject.boxed.Boxed
 {
 
-  /** */
-  this()
+  /**
+      Create a `rtspauth_param.RTSPAuthParam` boxed type.
+      Params:
+        name = The name of the parameter
+        value = The value of the parameter
+  */
+  this(string name = string.init, string value = string.init)
   {
     super(gMalloc(GstRTSPAuthParam.sizeof), Yes.Take);
+    this.name = name;
+    this.value = value;
   }
 
   /** */
@@ -44,27 +51,46 @@ class RTSPAuthParam : gobject.boxed.Boxed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override RTSPAuthParam self()
   {
     return this;
   }
 
+  /**
+      Get `name` field.
+      Returns: The name of the parameter
+  */
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
   }
 
+  /**
+      Set `name` field.
+      Params:
+        propval = The name of the parameter
+  */
   @property void name(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
     dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)cPtr).name);
   }
 
+  /**
+      Get `value` field.
+      Returns: The value of the parameter
+  */
   @property string value()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
   }
 
+  /**
+      Set `value` field.
+      Params:
+        propval = The value of the parameter
+  */
   @property void value(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);

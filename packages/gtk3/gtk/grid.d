@@ -55,9 +55,70 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Grid self()
   {
     return this;
+  }
+
+  /** */
+  @property int baselineRow()
+  {
+    return getBaselineRow();
+  }
+
+  /** */
+  @property void baselineRow(int propval)
+  {
+    return setBaselineRow(propval);
+  }
+
+  /** */
+  @property bool columnHomogeneous()
+  {
+    return getColumnHomogeneous();
+  }
+
+  /** */
+  @property void columnHomogeneous(bool propval)
+  {
+    return setColumnHomogeneous(propval);
+  }
+
+  /** */
+  @property int columnSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("column-spacing");
+  }
+
+  /** */
+  @property void columnSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("column-spacing", propval);
+  }
+
+  /** */
+  @property bool rowHomogeneous()
+  {
+    return getRowHomogeneous();
+  }
+
+  /** */
+  @property void rowHomogeneous(bool propval)
+  {
+    return setRowHomogeneous(propval);
+  }
+
+  /** */
+  @property int rowSpacing()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("row-spacing");
+  }
+
+  /** */
+  @property void rowSpacing(int propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("row-spacing", propval);
   }
 
   mixin OrientableT!();
@@ -140,7 +201,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, left, top);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

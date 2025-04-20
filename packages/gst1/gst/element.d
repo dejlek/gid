@@ -76,7 +76,7 @@ import gst.types;
     toplevel #GstPipeline so the clock functions are only to be used in very
     specific situations.
 */
-class Element : gst.object.ObjectGst
+class Element : gst.object.ObjectWrap
 {
 
   /** */
@@ -98,6 +98,7 @@ class Element : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Element self()
   {
     return this;
@@ -112,7 +113,7 @@ class Element : gst.object.ObjectGst
         elementname = Name of created element, can be null.
       Returns: a new element or null if none
         could be created
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gst.element.Element makeFromUri(gst.types.URIType type, string uri, string elementname = null)
   {
@@ -122,8 +123,8 @@ class Element : gst.object.ObjectGst
     GError *_err;
     _cretval = gst_element_make_from_uri(type, _uri, _elementname, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,7 +222,7 @@ class Element : gst.object.ObjectGst
 
   /**
       Adds a pad (link point) to element. pad's parent will be set to element;
-      see [gst.object.ObjectGst.setParent] for refcounting information.
+      see [gst.object.ObjectWrap.setParent] for refcounting information.
       
       Pads are automatically activated when added in the PAUSED or PLAYING
       state.
@@ -284,7 +285,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementCallAsyncFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -397,7 +398,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -427,7 +428,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -457,7 +458,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -496,7 +497,7 @@ class Element : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_element_get_bus(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -514,7 +515,7 @@ class Element : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_element_get_clock(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -531,14 +532,14 @@ class Element : gst.object.ObjectGst
         pad = the #GstPad to find a compatible one for.
         caps = the #GstCaps to use as a filter.
       Returns: the #GstPad to which a link
-          can be made, or null if one cannot be found. [gst.object.ObjectGst.unref]
+          can be made, or null if one cannot be found. [gst.object.ObjectWrap.unref]
           after usage.
   */
   gst.pad.Pad getCompatiblePad(gst.pad.Pad pad, gst.caps.Caps caps = null)
   {
     GstPad* _cretval;
     _cretval = gst_element_get_compatible_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -556,7 +557,7 @@ class Element : gst.object.ObjectGst
   {
     GstPadTemplate* _cretval;
     _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)cPtr, compattempl ? cast(GstPadTemplate*)compattempl.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -644,7 +645,7 @@ class Element : gst.object.ObjectGst
   {
     GstElementFactory* _cretval;
     _cretval = gst_element_get_factory(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -678,7 +679,7 @@ class Element : gst.object.ObjectGst
     GstPadTemplate* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_get_pad_template(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -714,7 +715,7 @@ class Element : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_get_request_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -795,7 +796,7 @@ class Element : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_get_static_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1123,7 +1124,7 @@ class Element : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_element_provide_clock(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1218,7 +1219,7 @@ class Element : gst.object.ObjectGst
       
       This does not unref the pad. If the pad was created by using
       [gst.element.Element.requestPad], [gst.element.Element.releaseRequestPad] needs to be
-      followed by [gst.object.ObjectGst.unref] to free the pad.
+      followed by [gst.object.ObjectWrap.unref] to free the pad.
       
       MT safe.
   
@@ -1232,7 +1233,7 @@ class Element : gst.object.ObjectGst
 
   /**
       Removes pad from element. pad will be destroyed if it has not been
-      referenced elsewhere using [gst.object.ObjectGst.unparent].
+      referenced elsewhere using [gst.object.ObjectWrap.unparent].
       
       This function is used by plugin developers and should not be used
       by applications. Pads that were dynamically requested from elements
@@ -1289,7 +1290,7 @@ class Element : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_request_pad(cast(GstElement*)cPtr, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1317,7 +1318,7 @@ class Element : gst.object.ObjectGst
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_request_pad_simple(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 

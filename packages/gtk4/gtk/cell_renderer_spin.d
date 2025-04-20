@@ -2,6 +2,8 @@
 module gtk.cell_renderer_spin;
 
 import gid.gid;
+import gobject.object;
+import gtk.adjustment;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer_text;
@@ -47,9 +49,69 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override CellRendererSpin self()
   {
     return this;
+  }
+
+  /**
+      Get `adjustment` property.
+      Returns: The adjustment that holds the value of the spinbutton.
+      This must be non-null for the cell renderer to be editable.
+  */
+  @property gtk.adjustment.Adjustment adjustment()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.adjustment.Adjustment)("adjustment");
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The adjustment that holds the value of the spinbutton.
+        This must be non-null for the cell renderer to be editable.
+  */
+  @property void adjustment(gtk.adjustment.Adjustment propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.adjustment.Adjustment)("adjustment", propval);
+  }
+
+  /**
+      Get `climbRate` property.
+      Returns: The acceleration rate when you hold down a button.
+  */
+  @property double climbRate()
+  {
+    return gobject.object.ObjectWrap.getProperty!(double)("climb-rate");
+  }
+
+  /**
+      Set `climbRate` property.
+      Params:
+        propval = The acceleration rate when you hold down a button.
+  */
+  @property void climbRate(double propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(double)("climb-rate", propval);
+  }
+
+  /**
+      Get `digits` property.
+      Returns: The number of decimal places to display.
+  */
+  @property uint digits()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("digits");
+  }
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places to display.
+  */
+  @property void digits(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("digits", propval);
   }
 
   /**

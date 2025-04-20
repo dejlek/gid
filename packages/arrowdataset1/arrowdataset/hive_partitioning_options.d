@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions
@@ -30,9 +31,31 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override HivePartitioningOptions self()
   {
     return this;
+  }
+
+  /**
+      Get `nullFallback` property.
+      Returns: The fallback string for null. This is used only by
+      #GADatasetHivePartitioning.
+  */
+  @property string nullFallback()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("null-fallback");
+  }
+
+  /**
+      Set `nullFallback` property.
+      Params:
+        propval = The fallback string for null. This is used only by
+        #GADatasetHivePartitioning.
+  */
+  @property void nullFallback(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("null-fallback", propval);
   }
 
   /** */

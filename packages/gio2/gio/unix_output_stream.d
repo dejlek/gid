@@ -44,9 +44,29 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override UnixOutputStream self()
   {
     return this;
+  }
+
+  /**
+      Get `closeFd` property.
+      Returns: Whether to close the file descriptor when the stream is closed.
+  */
+  @property bool closeFd()
+  {
+    return getCloseFd();
+  }
+
+  /**
+      Set `closeFd` property.
+      Params:
+        propval = Whether to close the file descriptor when the stream is closed.
+  */
+  @property void closeFd(bool propval)
+  {
+    return setCloseFd(propval);
   }
 
   mixin FileDescriptorBasedT!();

@@ -38,6 +38,7 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override OverlayLayout self()
   {
     return this;

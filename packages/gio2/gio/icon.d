@@ -59,11 +59,11 @@ interface Icon
         value = a #GVariant created with [gio.icon.Icon.serialize]
       Returns: a #GIcon, or null when deserialization fails.
   */
-  static gio.icon.Icon deserialize(glib.variant.VariantG value)
+  static gio.icon.Icon deserialize(glib.variant.Variant value)
   {
     GIcon* _cretval;
-    _cretval = g_icon_deserialize(value ? cast(VariantC*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_icon_deserialize(value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ interface Icon
         str = A string obtained via [gio.icon.Icon.toString_].
       Returns: An object implementing the #GIcon
                  interface or null if error is set.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   static gio.icon.Icon newForString(string str)
   {
@@ -88,8 +88,8 @@ interface Icon
     GError *_err;
     _cretval = g_icon_new_for_string(_str, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ interface Icon
       (as opposed to over the network), and within the same file system namespace.
       Returns: a #GVariant, or null when serialization fails. The #GVariant will not be floating.
   */
-  glib.variant.VariantG serialize();
+  glib.variant.Variant serialize();
 
   /**
       Generates a textual representation of icon that can be used for

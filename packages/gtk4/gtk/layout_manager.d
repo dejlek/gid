@@ -25,7 +25,7 @@ import gtk.widget;
     
     A layout manager can expose properties for controlling the layout of
     each child, by creating an object type derived from [gtk.layout_child.LayoutChild]
-    and installing the properties on it as normal [gobject.object.ObjectG] properties.
+    and installing the properties on it as normal [gobject.object.ObjectWrap] properties.
     
     Each [gtk.layout_child.LayoutChild] instance storing the layout properties for a
     specific child is created through the [gtk.layout_manager.LayoutManager.getLayoutChild]
@@ -59,7 +59,7 @@ import gtk.widget;
     [gtk.layout_manager.LayoutManager.layoutChanged] every time a property is
     updated, in order to queue a new size measuring and allocation.
 */
-class LayoutManager : gobject.object.ObjectG
+class LayoutManager : gobject.object.ObjectWrap
 {
 
   /** */
@@ -81,6 +81,7 @@ class LayoutManager : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override LayoutManager self()
   {
     return this;
@@ -120,7 +121,7 @@ class LayoutManager : gobject.object.ObjectG
   {
     GtkLayoutChild* _cretval;
     _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +145,7 @@ class LayoutManager : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

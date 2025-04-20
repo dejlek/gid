@@ -50,7 +50,7 @@ import gtk.types;
     ```
     
     [gtk.grid_view.GridView] uses a single CSS node with name `gridview`. Each child uses
-    a single CSS node with name `child`. If the [gtk.list_item.ListItem.gboolean]
+    a single CSS node with name `child`. If the [gtk.list_item.ListItem.activatable]
     property is set, the corresponding row will have the `.activatable` style
     class. For rubberband selection, a subnode with name `rubberband` is used.
     
@@ -81,9 +81,149 @@ class GridView : gtk.list_base.ListBase
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GridView self()
   {
     return this;
+  }
+
+  /**
+      Get `enableRubberband` property.
+      Returns: Allow rubberband selection.
+  */
+  @property bool enableRubberband()
+  {
+    return getEnableRubberband();
+  }
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+  */
+  @property void enableRubberband(bool propval)
+  {
+    return setEnableRubberband(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+  */
+  @property gtk.list_item_factory.ListItemFactory factory()
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+  */
+  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setFactory(propval);
+  }
+
+  /**
+      Get `maxColumns` property.
+      Returns: Maximum number of columns per row.
+      
+      If this number is smaller than `property@Gtk.GridView:min-columns`,
+      that value is used instead.
+  */
+  @property uint maxColumns()
+  {
+    return getMaxColumns();
+  }
+
+  /**
+      Set `maxColumns` property.
+      Params:
+        propval = Maximum number of columns per row.
+        
+        If this number is smaller than `property@Gtk.GridView:min-columns`,
+        that value is used instead.
+  */
+  @property void maxColumns(uint propval)
+  {
+    return setMaxColumns(propval);
+  }
+
+  /**
+      Get `minColumns` property.
+      Returns: Minimum number of columns per row.
+  */
+  @property uint minColumns()
+  {
+    return getMinColumns();
+  }
+
+  /**
+      Set `minColumns` property.
+      Params:
+        propval = Minimum number of columns per row.
+  */
+  @property void minColumns(uint propval)
+  {
+    return setMinColumns(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: Model for the items displayed.
+  */
+  @property gtk.selection_model.SelectionModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+  */
+  @property void model(gtk.selection_model.SelectionModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `singleClickActivate` property.
+      Returns: Activate rows on single click and select them on hover.
+  */
+  @property bool singleClickActivate()
+  {
+    return getSingleClickActivate();
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+  */
+  @property void singleClickActivate(bool propval)
+  {
+    return setSingleClickActivate(propval);
+  }
+
+  /**
+      Get `tabBehavior` property.
+      Returns: Behavior of the <kbd>Tab</kbd> key
+  */
+  @property gtk.types.ListTabBehavior tabBehavior()
+  {
+    return getTabBehavior();
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+  */
+  @property void tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setTabBehavior(propval);
   }
 
   /**
@@ -105,7 +245,7 @@ class GridView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -128,7 +268,7 @@ class GridView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +302,7 @@ class GridView : gtk.list_base.ListBase
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_grid_view_get_model(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,7 +412,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -305,7 +445,7 @@ class GridView : gtk.list_base.ListBase
       usually via activating the GtkGridView|list.activate-item action.
       
       This allows for a convenient way to handle activation in a gridview.
-      See [gtk.list_item.ListItem.gboolean] for details on how to use
+      See [gtk.list_item.ListItem.activatable] for details on how to use
       this signal.
   
       Params:

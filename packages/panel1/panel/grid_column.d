@@ -38,6 +38,7 @@ class GridColumn : gtk.widget.Widget
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GridColumn self()
   {
     return this;
@@ -63,7 +64,7 @@ class GridColumn : gtk.widget.Widget
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -87,7 +88,7 @@ class GridColumn : gtk.widget.Widget
   {
     PanelFrame* _cretval;
     _cretval = panel_grid_column_get_most_recent_frame(cast(PanelGridColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,7 +111,7 @@ class GridColumn : gtk.widget.Widget
   {
     PanelFrame* _cretval;
     _cretval = panel_grid_column_get_row(cast(PanelGridColumn*)cPtr, row);
-    auto _retval = ObjectG.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 }

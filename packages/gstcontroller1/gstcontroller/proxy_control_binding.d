@@ -33,6 +33,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override ProxyControlBinding self()
   {
     return this;
@@ -52,7 +53,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
       Returns: a new #GstControlBinding that proxies the control interface between
         properties on different #GstObject's
   */
-  this(gst.object.ObjectGst object, string propertyName, gst.object.ObjectGst refObject, string refPropertyName)
+  this(gst.object.ObjectWrap object, string propertyName, gst.object.ObjectWrap refObject, string refPropertyName)
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);

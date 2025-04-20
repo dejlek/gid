@@ -46,7 +46,7 @@ class PixbufModulePattern
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for GdkPixbuf.PixbufModulePattern");
+      throw new GidConstructException("Null instance pointer for gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern");
 
     cInstance = *cast(GdkPixbufModulePattern*)ptr;
 
@@ -60,33 +60,62 @@ class PixbufModulePattern
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `prefix` field.
+      Returns: the prefix for this pattern
+  */
   @property string prefix()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
   }
 
+  /**
+      Set `prefix` field.
+      Params:
+        propval = the prefix for this pattern
+  */
   @property void prefix(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
     dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).prefix);
   }
 
+  /**
+      Get `mask` field.
+      Returns: mask containing bytes which modify how the prefix is matched against
+       test data
+  */
   @property string mask()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
   }
 
+  /**
+      Set `mask` field.
+      Params:
+        propval = mask containing bytes which modify how the prefix is matched against
+         test data
+  */
   @property void mask(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
     dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).mask);
   }
 
+  /**
+      Get `relevance` field.
+      Returns: relevance of this pattern
+  */
   @property int relevance()
   {
     return (cast(GdkPixbufModulePattern*)cPtr).relevance;
   }
 
+  /**
+      Set `relevance` field.
+      Params:
+        propval = relevance of this pattern
+  */
   @property void relevance(int propval)
   {
     (cast(GdkPixbufModulePattern*)cPtr).relevance = propval;

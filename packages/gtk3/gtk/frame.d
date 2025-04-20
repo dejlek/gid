@@ -79,9 +79,70 @@ class Frame : gtk.bin.Bin
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Frame self()
   {
     return this;
+  }
+
+  /** */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /** */
+  @property void label(string propval)
+  {
+    return setLabel(propval);
+  }
+
+  /** */
+  @property gtk.widget.Widget labelWidget()
+  {
+    return getLabelWidget();
+  }
+
+  /** */
+  @property void labelWidget(gtk.widget.Widget propval)
+  {
+    return setLabelWidget(propval);
+  }
+
+  /** */
+  @property float labelXalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("label-xalign");
+  }
+
+  /** */
+  @property void labelXalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("label-xalign", propval);
+  }
+
+  /** */
+  @property float labelYalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("label-yalign");
+  }
+
+  /** */
+  @property void labelYalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("label-yalign", propval);
+  }
+
+  /** */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return getShadowType();
+  }
+
+  /** */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    return setShadowType(propval);
   }
 
   /**
@@ -143,7 +204,7 @@ class Frame : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

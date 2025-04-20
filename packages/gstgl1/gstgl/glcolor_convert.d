@@ -23,7 +23,7 @@ import gstgl.types;
     The glcolorconvertelement provides a GStreamer element that uses
     #GstGLColorConvert to convert between video formats and color spaces.
 */
-class GLColorConvert : gst.object.ObjectGst
+class GLColorConvert : gst.object.ObjectWrap
 {
 
   /** */
@@ -45,6 +45,7 @@ class GLColorConvert : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLColorConvert self()
   {
     return this;

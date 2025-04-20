@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.selection_model;
@@ -14,7 +15,7 @@ import gtk.types;
     [gtk.selection_filter_model.SelectionFilterModel] is a list model that presents the selection from
     a [gtk.selection_model.SelectionModel].
 */
-class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
+class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
@@ -36,9 +37,47 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override SelectionFilterModel self()
   {
     return this;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being filtered.
+  */
+  @property gtk.selection_model.SelectionModel model()
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being filtered.
+  */
+  @property void model(gtk.selection_model.SelectionModel propval)
+  {
+    return setModel(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
 
   mixin ListModelT!();
@@ -54,7 +93,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkSelectionFilterModel* _cretval;
-    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -66,7 +105,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -83,6 +122,6 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
   }
 }

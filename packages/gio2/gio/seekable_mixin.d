@@ -75,7 +75,7 @@ template SeekableT()
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable = null)
   {
@@ -83,7 +83,7 @@ template SeekableT()
     GError *_err;
     _retval = g_seekable_seek(cast(GSeekable*)cPtr, offset, type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ template SeekableT()
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool truncate(long offset, gio.cancellable.Cancellable cancellable = null)
   {
@@ -124,7 +124,7 @@ template SeekableT()
     GError *_err;
     _retval = g_seekable_truncate(cast(GSeekable*)cPtr, offset, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

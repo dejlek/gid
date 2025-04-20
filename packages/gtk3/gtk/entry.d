@@ -127,9 +127,999 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override Entry self()
   {
     return this;
+  }
+
+  /** */
+  @property bool activatesDefault()
+  {
+    return getActivatesDefault();
+  }
+
+  /** */
+  @property void activatesDefault(bool propval)
+  {
+    return setActivatesDefault(propval);
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: A list of Pango attributes to apply to the text of the entry.
+      
+      This is mainly useful to change the size or weight of the text.
+      
+      The #PangoAttribute's @start_index and @end_index must refer to the
+      #GtkEntryBuffer text, i.e. without the preedit string.
+  */
+  @property pango.attr_list.AttrList attributes()
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the entry.
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The #PangoAttribute's @start_index and @end_index must refer to the
+        #GtkEntryBuffer text, i.e. without the preedit string.
+  */
+  @property void attributes(pango.attr_list.AttrList propval)
+  {
+    return setAttributes(propval);
+  }
+
+  /** */
+  @property gtk.entry_buffer.EntryBuffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /** */
+  @property void buffer(gtk.entry_buffer.EntryBuffer propval)
+  {
+    return setBuffer(propval);
+  }
+
+  /**
+      Get `capsLockWarning` property.
+      Returns: Whether password entries will show a warning when Caps Lock is on.
+      
+      Note that the warning is shown using a secondary icon, and thus
+      does not work if you are using the secondary icon position for some
+      other purpose.
+  */
+  @property bool capsLockWarning()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("caps-lock-warning");
+  }
+
+  /**
+      Set `capsLockWarning` property.
+      Params:
+        propval = Whether password entries will show a warning when Caps Lock is on.
+        
+        Note that the warning is shown using a secondary icon, and thus
+        does not work if you are using the secondary icon position for some
+        other purpose.
+  */
+  @property void capsLockWarning(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("caps-lock-warning", propval);
+  }
+
+  /**
+      Get `completion` property.
+      Returns: The auxiliary completion object to use with the entry.
+  */
+  @property gtk.entry_completion.EntryCompletion completion()
+  {
+    return getCompletion();
+  }
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The auxiliary completion object to use with the entry.
+  */
+  @property void completion(gtk.entry_completion.EntryCompletion propval)
+  {
+    return setCompletion(propval);
+  }
+
+  /** */
+  @property int cursorPosition()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
+  }
+
+  /** */
+  @property bool editable()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("editable");
+  }
+
+  /** */
+  @property void editable(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("editable", propval);
+  }
+
+  /** */
+  @property bool enableEmojiCompletion()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("enable-emoji-completion");
+  }
+
+  /** */
+  @property void enableEmojiCompletion(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("enable-emoji-completion", propval);
+  }
+
+  /** */
+  @property bool hasFrame()
+  {
+    return getHasFrame();
+  }
+
+  /** */
+  @property void hasFrame(bool propval)
+  {
+    return setHasFrame(propval);
+  }
+
+  /**
+      Get `imModule` property.
+      Returns: Which IM (input method) module should be used for this entry.
+      See #GtkIMContext.
+      
+      Setting this to a non-null value overrides the
+      system-wide IM module setting. See the GtkSettings
+      #GtkSettings:gtk-im-module property.
+  */
+  @property string imModule()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("im-module");
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this entry.
+        See #GtkIMContext.
+        
+        Setting this to a non-null value overrides the
+        system-wide IM module setting. See the GtkSettings
+        #GtkSettings:gtk-im-module property.
+  */
+  @property void imModule(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
+  }
+
+  /**
+      Get `innerBorder` property.
+      Returns: Sets the text area's border between the text and the frame.
+  
+      Deprecated: Use the standard border and padding CSS properties
+        (through objects like #GtkStyleContext and #GtkCssProvider); the value
+        of this style property is ignored.
+  */
+  @property gtk.border.Border innerBorder()
+  {
+    return getInnerBorder();
+  }
+
+  /**
+      Set `innerBorder` property.
+      Params:
+        propval = Sets the text area's border between the text and the frame.
+  
+      Deprecated: Use the standard border and padding CSS properties
+        (through objects like #GtkStyleContext and #GtkCssProvider); the value
+        of this style property is ignored.
+  */
+  @property void innerBorder(gtk.border.Border propval)
+  {
+    return setInnerBorder(propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional hints (beyond #GtkEntry:input-purpose) that
+      allow input methods to fine-tune their behaviour.
+  */
+  @property gtk.types.InputHints inputHints()
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints (beyond #GtkEntry:input-purpose) that
+        allow input methods to fine-tune their behaviour.
+  */
+  @property void inputHints(gtk.types.InputHints propval)
+  {
+    return setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose of this text field.
+      
+      This property can be used by on-screen keyboards and other input
+      methods to adjust their behaviour.
+      
+      Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+      [gtk.types.InputPurpose.Pin] is independent from setting
+      #GtkEntry:visibility.
+  */
+  @property gtk.types.InputPurpose inputPurpose()
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+        [gtk.types.InputPurpose.Pin] is independent from setting
+        #GtkEntry:visibility.
+  */
+  @property void inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setInputPurpose(propval);
+  }
+
+  /**
+      Get `invisibleChar` property.
+      Returns: The invisible character is used when masking entry contents (in
+      \"password mode\")"). When it is not explicitly set with the
+      #GtkEntry:invisible-char property, GTK+ determines the character
+      to use from a list of possible candidates, depending on availability
+      in the current font.
+      
+      This style property allows the theme to prepend a character
+      to the list of candidates.
+  */
+  @property uint invisibleChar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("invisible-char");
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The invisible character is used when masking entry contents (in
+        \"password mode\")"). When it is not explicitly set with the
+        #GtkEntry:invisible-char property, GTK+ determines the character
+        to use from a list of possible candidates, depending on availability
+        in the current font.
+        
+        This style property allows the theme to prepend a character
+        to the list of candidates.
+  */
+  @property void invisibleChar(uint propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(uint)("invisible-char", propval);
+  }
+
+  /**
+      Get `invisibleCharSet` property.
+      Returns: Whether the invisible char has been set for the #GtkEntry.
+  */
+  @property bool invisibleCharSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("invisible-char-set");
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the #GtkEntry.
+  */
+  @property void invisibleCharSet(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("invisible-char-set", propval);
+  }
+
+  /** */
+  @property int maxLength()
+  {
+    return getMaxLength();
+  }
+
+  /** */
+  @property void maxLength(int propval)
+  {
+    return setMaxLength(propval);
+  }
+
+  /**
+      Get `maxWidthChars` property.
+      Returns: The desired maximum width of the entry, in characters.
+      If this property is set to -1, the width will be calculated
+      automatically.
+  */
+  @property int maxWidthChars()
+  {
+    return getMaxWidthChars();
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the entry, in characters.
+        If this property is set to -1, the width will be calculated
+        automatically.
+  */
+  @property void maxWidthChars(int propval)
+  {
+    return setMaxWidthChars(propval);
+  }
+
+  /**
+      Get `overwriteMode` property.
+      Returns: If text is overwritten when typing in the #GtkEntry.
+  */
+  @property bool overwriteMode()
+  {
+    return getOverwriteMode();
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the #GtkEntry.
+  */
+  @property void overwriteMode(bool propval)
+  {
+    return setOverwriteMode(propval);
+  }
+
+  /**
+      Get `placeholderText` property.
+      Returns: The text that will be displayed in the #GtkEntry when it is empty
+      and unfocused.
+  */
+  @property string placeholderText()
+  {
+    return getPlaceholderText();
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the #GtkEntry when it is empty
+        and unfocused.
+  */
+  @property void placeholderText(string propval)
+  {
+    return setPlaceholderText(propval);
+  }
+
+  /**
+      Get `populateAll` property.
+      Returns: If :populate-all is true, the #GtkEntry::populate-popup
+      signal is also emitted for touch popups.
+  */
+  @property bool populateAll()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("populate-all");
+  }
+
+  /**
+      Set `populateAll` property.
+      Params:
+        propval = If :populate-all is true, the #GtkEntry::populate-popup
+        signal is also emitted for touch popups.
+  */
+  @property void populateAll(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("populate-all", propval);
+  }
+
+  /**
+      Get `primaryIconActivatable` property.
+      Returns: Whether the primary icon is activatable.
+      
+      GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+      signals only on sensitive, activatable icons.
+      
+      Sensitive, but non-activatable icons can be used for purely
+      informational purposes.
+  */
+  @property bool primaryIconActivatable()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("primary-icon-activatable");
+  }
+
+  /**
+      Set `primaryIconActivatable` property.
+      Params:
+        propval = Whether the primary icon is activatable.
+        
+        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+        signals only on sensitive, activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
+  */
+  @property void primaryIconActivatable(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("primary-icon-activatable", propval);
+  }
+
+  /**
+      Get `primaryIconGicon` property.
+      Returns: The #GIcon to use for the primary icon for the entry.
+  */
+  @property gio.icon.Icon primaryIconGicon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("primary-icon-gicon");
+  }
+
+  /**
+      Set `primaryIconGicon` property.
+      Params:
+        propval = The #GIcon to use for the primary icon for the entry.
+  */
+  @property void primaryIconGicon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("primary-icon-gicon", propval);
+  }
+
+  /**
+      Get `primaryIconName` property.
+      Returns: The icon name to use for the primary icon for the entry.
+  */
+  @property string primaryIconName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-name");
+  }
+
+  /**
+      Set `primaryIconName` property.
+      Params:
+        propval = The icon name to use for the primary icon for the entry.
+  */
+  @property void primaryIconName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("primary-icon-name", propval);
+  }
+
+  /**
+      Get `primaryIconPixbuf` property.
+      Returns: A pixbuf to use as the primary icon for the entry.
+  */
+  @property gdkpixbuf.pixbuf.Pixbuf primaryIconPixbuf()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("primary-icon-pixbuf");
+  }
+
+  /**
+      Set `primaryIconPixbuf` property.
+      Params:
+        propval = A pixbuf to use as the primary icon for the entry.
+  */
+  @property void primaryIconPixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("primary-icon-pixbuf", propval);
+  }
+
+  /**
+      Get `primaryIconSensitive` property.
+      Returns: Whether the primary icon is sensitive.
+      
+      An insensitive icon appears grayed out. GTK+ does not emit the
+      #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+      does not allow DND from insensitive icons.
+      
+      An icon should be set insensitive if the action that would trigger
+      when clicked is currently not available.
+  */
+  @property bool primaryIconSensitive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("primary-icon-sensitive");
+  }
+
+  /**
+      Set `primaryIconSensitive` property.
+      Params:
+        propval = Whether the primary icon is sensitive.
+        
+        An insensitive icon appears grayed out. GTK+ does not emit the
+        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+        does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
+  */
+  @property void primaryIconSensitive(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("primary-icon-sensitive", propval);
+  }
+
+  /**
+      Get `primaryIconStock` property.
+      Returns: The stock id to use for the primary icon for the entry.
+  
+      Deprecated: Use #GtkEntry:primary-icon-name instead.
+  */
+  @property string primaryIconStock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-stock");
+  }
+
+  /**
+      Set `primaryIconStock` property.
+      Params:
+        propval = The stock id to use for the primary icon for the entry.
+  
+      Deprecated: Use #GtkEntry:primary-icon-name instead.
+  */
+  @property void primaryIconStock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("primary-icon-stock", propval);
+  }
+
+  /**
+      Get `primaryIconStorageType` property.
+      Returns: The representation which is used for the primary icon of the entry.
+  */
+  @property gtk.types.ImageType primaryIconStorageType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ImageType)("primary-icon-storage-type");
+  }
+
+  /**
+      Get `primaryIconTooltipMarkup` property.
+      Returns: The contents of the tooltip on the primary icon, which is marked up
+      with the [Pango text markup language][PangoMarkupFormat].
+      
+      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+  */
+  @property string primaryIconTooltipMarkup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-markup");
+  }
+
+  /**
+      Set `primaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon, which is marked up
+        with the [Pango text markup language][PangoMarkupFormat].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+  */
+  @property void primaryIconTooltipMarkup(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Get `primaryIconTooltipText` property.
+      Returns: The contents of the tooltip on the primary icon.
+      
+      Also see [gtk.entry.Entry.setIconTooltipText].
+  */
+  @property string primaryIconTooltipText()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-text");
+  }
+
+  /**
+      Set `primaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon.
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
+  */
+  @property void primaryIconTooltipText(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Get `progressFraction` property.
+      Returns: The current fraction of the task that's been completed.
+  */
+  @property double progressFraction()
+  {
+    return getProgressFraction();
+  }
+
+  /**
+      Set `progressFraction` property.
+      Params:
+        propval = The current fraction of the task that's been completed.
+  */
+  @property void progressFraction(double propval)
+  {
+    return setProgressFraction(propval);
+  }
+
+  /**
+      Get `progressPulseStep` property.
+      Returns: The fraction of total entry width to move the progress
+      bouncing block for each call to [gtk.entry.Entry.progressPulse].
+  */
+  @property double progressPulseStep()
+  {
+    return getProgressPulseStep();
+  }
+
+  /**
+      Set `progressPulseStep` property.
+      Params:
+        propval = The fraction of total entry width to move the progress
+        bouncing block for each call to [gtk.entry.Entry.progressPulse].
+  */
+  @property void progressPulseStep(double propval)
+  {
+    return setProgressPulseStep(propval);
+  }
+
+  /** */
+  @property int scrollOffset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("scroll-offset");
+  }
+
+  /**
+      Get `secondaryIconActivatable` property.
+      Returns: Whether the secondary icon is activatable.
+      
+      GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+      signals only on sensitive, activatable icons.
+      
+      Sensitive, but non-activatable icons can be used for purely
+      informational purposes.
+  */
+  @property bool secondaryIconActivatable()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("secondary-icon-activatable");
+  }
+
+  /**
+      Set `secondaryIconActivatable` property.
+      Params:
+        propval = Whether the secondary icon is activatable.
+        
+        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+        signals only on sensitive, activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
+  */
+  @property void secondaryIconActivatable(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("secondary-icon-activatable", propval);
+  }
+
+  /**
+      Get `secondaryIconGicon` property.
+      Returns: The #GIcon to use for the secondary icon for the entry.
+  */
+  @property gio.icon.Icon secondaryIconGicon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("secondary-icon-gicon");
+  }
+
+  /**
+      Set `secondaryIconGicon` property.
+      Params:
+        propval = The #GIcon to use for the secondary icon for the entry.
+  */
+  @property void secondaryIconGicon(gio.icon.Icon propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("secondary-icon-gicon", propval);
+  }
+
+  /**
+      Get `secondaryIconName` property.
+      Returns: The icon name to use for the secondary icon for the entry.
+  */
+  @property string secondaryIconName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-name");
+  }
+
+  /**
+      Set `secondaryIconName` property.
+      Params:
+        propval = The icon name to use for the secondary icon for the entry.
+  */
+  @property void secondaryIconName(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-name", propval);
+  }
+
+  /**
+      Get `secondaryIconPixbuf` property.
+      Returns: An pixbuf to use as the secondary icon for the entry.
+  */
+  @property gdkpixbuf.pixbuf.Pixbuf secondaryIconPixbuf()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("secondary-icon-pixbuf");
+  }
+
+  /**
+      Set `secondaryIconPixbuf` property.
+      Params:
+        propval = An pixbuf to use as the secondary icon for the entry.
+  */
+  @property void secondaryIconPixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("secondary-icon-pixbuf", propval);
+  }
+
+  /**
+      Get `secondaryIconSensitive` property.
+      Returns: Whether the secondary icon is sensitive.
+      
+      An insensitive icon appears grayed out. GTK+ does not emit the
+      #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+      does not allow DND from insensitive icons.
+      
+      An icon should be set insensitive if the action that would trigger
+      when clicked is currently not available.
+  */
+  @property bool secondaryIconSensitive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("secondary-icon-sensitive");
+  }
+
+  /**
+      Set `secondaryIconSensitive` property.
+      Params:
+        propval = Whether the secondary icon is sensitive.
+        
+        An insensitive icon appears grayed out. GTK+ does not emit the
+        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+        does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
+  */
+  @property void secondaryIconSensitive(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("secondary-icon-sensitive", propval);
+  }
+
+  /**
+      Get `secondaryIconStock` property.
+      Returns: The stock id to use for the secondary icon for the entry.
+  
+      Deprecated: Use #GtkEntry:secondary-icon-name instead.
+  */
+  @property string secondaryIconStock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-stock");
+  }
+
+  /**
+      Set `secondaryIconStock` property.
+      Params:
+        propval = The stock id to use for the secondary icon for the entry.
+  
+      Deprecated: Use #GtkEntry:secondary-icon-name instead.
+  */
+  @property void secondaryIconStock(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-stock", propval);
+  }
+
+  /**
+      Get `secondaryIconStorageType` property.
+      Returns: The representation which is used for the secondary icon of the entry.
+  */
+  @property gtk.types.ImageType secondaryIconStorageType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ImageType)("secondary-icon-storage-type");
+  }
+
+  /**
+      Get `secondaryIconTooltipMarkup` property.
+      Returns: The contents of the tooltip on the secondary icon, which is marked up
+      with the [Pango text markup language][PangoMarkupFormat].
+      
+      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+  */
+  @property string secondaryIconTooltipMarkup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-markup");
+  }
+
+  /**
+      Set `secondaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon, which is marked up
+        with the [Pango text markup language][PangoMarkupFormat].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+  */
+  @property void secondaryIconTooltipMarkup(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Get `secondaryIconTooltipText` property.
+      Returns: The contents of the tooltip on the secondary icon.
+      
+      Also see [gtk.entry.Entry.setIconTooltipText].
+  */
+  @property string secondaryIconTooltipText()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-text");
+  }
+
+  /**
+      Set `secondaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon.
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
+  */
+  @property void secondaryIconTooltipText(string propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-text", propval);
+  }
+
+  /** */
+  @property int selectionBound()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("selection-bound");
+  }
+
+  /**
+      Get `shadowType` property.
+      Returns: Which kind of shadow to draw around the entry when
+      #GtkEntry:has-frame is set to true.
+  
+      Deprecated: Use CSS to determine the style of the border;
+          the value of this style property is ignored.
+  */
+  @property gtk.types.ShadowType shadowType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ShadowType)("shadow-type");
+  }
+
+  /**
+      Set `shadowType` property.
+      Params:
+        propval = Which kind of shadow to draw around the entry when
+        #GtkEntry:has-frame is set to true.
+  
+      Deprecated: Use CSS to determine the style of the border;
+          the value of this style property is ignored.
+  */
+  @property void shadowType(gtk.types.ShadowType propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ShadowType)("shadow-type", propval);
+  }
+
+  /** */
+  @property bool showEmojiIcon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("show-emoji-icon");
+  }
+
+  /** */
+  @property void showEmojiIcon(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("show-emoji-icon", propval);
+  }
+
+  /** */
+  @property pango.tab_array.TabArray tabs()
+  {
+    return getTabs();
+  }
+
+  /** */
+  @property void tabs(pango.tab_array.TabArray propval)
+  {
+    return setTabs(propval);
+  }
+
+  /** */
+  @property string text()
+  {
+    return getText();
+  }
+
+  /** */
+  @property void text(string propval)
+  {
+    return setText(propval);
+  }
+
+  /**
+      Get `textLength` property.
+      Returns: The length of the text in the #GtkEntry.
+  */
+  @property uint textLength()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("text-length");
+  }
+
+  /**
+      Get `truncateMultiline` property.
+      Returns: When true, pasted multi-line text is truncated to the first line.
+  */
+  @property bool truncateMultiline()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("truncate-multiline");
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+  */
+  @property void truncateMultiline(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("truncate-multiline", propval);
+  }
+
+  /** */
+  @property bool visibility()
+  {
+    return getVisibility();
+  }
+
+  /** */
+  @property void visibility(bool propval)
+  {
+    return setVisibility(propval);
+  }
+
+  /** */
+  @property int widthChars()
+  {
+    return getWidthChars();
+  }
+
+  /** */
+  @property void widthChars(int propval)
+  {
+    return setWidthChars(propval);
+  }
+
+  /**
+      Get `xalign` property.
+      Returns: The horizontal alignment, from 0 (left) to 1 (right).
+      Reversed for RTL layouts.
+  */
+  @property float xalign()
+  {
+    return gobject.object.ObjectWrap.getProperty!(float)("xalign");
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment, from 0 (left) to 1 (right).
+        Reversed for RTL layouts.
+  */
+  @property void xalign(float propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
 
   mixin CellEditableT!();
@@ -157,7 +1147,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +1196,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_entry_get_buffer(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -219,7 +1209,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_get_completion(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -249,7 +1239,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_entry_get_cursor_hadjustment(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -333,7 +1323,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GIcon* _cretval;
     _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -371,7 +1361,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PixbufC* _cretval;
     _cretval = gtk_entry_get_icon_pixbuf(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -532,7 +1522,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PangoLayout* _cretval;
     _cretval = gtk_entry_get_layout(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -957,7 +1947,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
   {
-    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
   }
 
   /**

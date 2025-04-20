@@ -10,7 +10,7 @@ import parquet.row_group_metadata;
 import parquet.types;
 
 /** */
-class FileMetadata : gobject.object.ObjectG
+class FileMetadata : gobject.object.ObjectWrap
 {
 
   /** */
@@ -32,6 +32,7 @@ class FileMetadata : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileMetadata self()
   {
     return this;
@@ -101,8 +102,8 @@ class FileMetadata : gobject.object.ObjectG
     GError *_err;
     _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)cPtr, index, &_err);
     if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
+      throw new ErrorWrap(_err);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 

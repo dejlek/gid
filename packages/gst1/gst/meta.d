@@ -40,7 +40,7 @@ class Meta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.Meta");
+      throw new GidConstructException("Null instance pointer for gst.meta.Meta");
 
     cInstance = *cast(GstMeta*)ptr;
 
@@ -54,16 +54,29 @@ class Meta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `flags` field.
+      Returns: extra flags for the metadata
+  */
   @property gst.types.MetaFlags flags()
   {
     return cast(gst.types.MetaFlags)(cast(GstMeta*)cPtr).flags;
   }
 
+  /**
+      Set `flags` field.
+      Params:
+        propval = extra flags for the metadata
+  */
   @property void flags(gst.types.MetaFlags propval)
   {
     (cast(GstMeta*)cPtr).flags = cast(GstMetaFlags)propval;
   }
 
+  /**
+      Get `info` field.
+      Returns: pointer to the #GstMetaInfo
+  */
   @property gst.meta_info.MetaInfo info()
   {
     return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)cPtr).info);

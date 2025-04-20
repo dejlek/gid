@@ -28,7 +28,7 @@ import webkit.types;
     WebKit will provide a default handler which will asynchronously run
     a regular #GtkFileChooserDialog for the user to interact with.
 */
-class FileChooserRequest : gobject.object.ObjectG
+class FileChooserRequest : gobject.object.ObjectWrap
 {
 
   /** */
@@ -54,6 +54,29 @@ class FileChooserRequest : gobject.object.ObjectG
   override FileChooserRequest self()
   {
     return this;
+  }
+
+  /**
+      Get `filter` property.
+      Returns: The filter currently associated with the request. See
+      [webkit.file_chooser_request.FileChooserRequest.getMimeTypesFilter] for more
+      details.
+  */
+  @property gtk.file_filter.FileFilter filter()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.file_filter.FileFilter)("filter");
+  }
+
+  /**
+      Get `selectMultiple` property.
+      Returns: Whether the file chooser should allow selecting multiple
+      files. See
+      [webkit.file_chooser_request.FileChooserRequest.getSelectMultiple] for
+      more details.
+  */
+  @property bool selectMultiple()
+  {
+    return getSelectMultiple();
   }
 
   /**
@@ -121,7 +144,7 @@ class FileChooserRequest : gobject.object.ObjectG
   {
     GtkFileFilter* _cretval;
     _cretval = webkit_file_chooser_request_get_mime_types_filter(cast(WebKitFileChooserRequest*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 

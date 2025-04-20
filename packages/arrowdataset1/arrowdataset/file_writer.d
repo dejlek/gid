@@ -11,7 +11,7 @@ import glib.error;
 import gobject.object;
 
 /** */
-class FileWriter : gobject.object.ObjectG
+class FileWriter : gobject.object.ObjectWrap
 {
 
   /** */
@@ -33,6 +33,7 @@ class FileWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override FileWriter self()
   {
     return this;
@@ -45,7 +46,7 @@ class FileWriter : gobject.object.ObjectG
     GError *_err;
     _retval = gadataset_file_writer_finish(cast(GADatasetFileWriter*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -56,7 +57,7 @@ class FileWriter : gobject.object.ObjectG
     GError *_err;
     _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -67,7 +68,7 @@ class FileWriter : gobject.object.ObjectG
     GError *_err;
     _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)cPtr, reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

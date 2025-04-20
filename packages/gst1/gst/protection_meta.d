@@ -21,7 +21,7 @@ class ProtectionMeta
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
-      throw new GidConstructException("Null instance pointer for Gst.ProtectionMeta");
+      throw new GidConstructException("Null instance pointer for gst.protection_meta.ProtectionMeta");
 
     cInstance = *cast(GstProtectionMeta*)ptr;
 
@@ -35,16 +35,29 @@ class ProtectionMeta
     return cast(void*)&cInstance;
   }
 
+  /**
+      Get `meta` field.
+      Returns: the parent #GstMeta.
+  */
   @property gst.meta.Meta meta()
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)cPtr).meta);
   }
 
+  /**
+      Get `info` field.
+      Returns: the cryptographic information needed to decrypt the sample.
+  */
   @property gst.structure.Structure info()
   {
     return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);
   }
 
+  /**
+      Set `info` field.
+      Params:
+        propval = the cryptographic information needed to decrypt the sample.
+  */
   @property void info(gst.structure.Structure propval)
   {
     cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);

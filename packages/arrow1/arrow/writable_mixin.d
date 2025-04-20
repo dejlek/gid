@@ -15,7 +15,7 @@ template WritableT()
   /**
       It ensures writing all data on memory to storage.
       Returns: true on success, false if there was an error.
-      Throws: [ErrorG]
+      Throws: [ErrorWrap]
   */
   override bool flush()
   {
@@ -23,7 +23,7 @@ template WritableT()
     GError *_err;
     _retval = garrow_writable_flush(cast(GArrowWritable*)cPtr, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 
@@ -39,7 +39,7 @@ template WritableT()
     GError *_err;
     _retval = garrow_writable_write(cast(GArrowWritable*)cPtr, _data, _nBytes, &_err);
     if (_err)
-      throw new ErrorG(_err);
+      throw new ErrorWrap(_err);
     return _retval;
   }
 }

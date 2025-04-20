@@ -2,6 +2,7 @@
 module gstgl.gloverlay_compositor;
 
 import gid.gid;
+import gobject.object;
 import gst.buffer;
 import gst.caps;
 import gst.object;
@@ -13,7 +14,7 @@ import gstgl.types;
 /**
     Opaque #GstGLOverlayCompositor object
 */
-class GLOverlayCompositor : gst.object.ObjectGst
+class GLOverlayCompositor : gst.object.ObjectWrap
 {
 
   /** */
@@ -35,9 +36,22 @@ class GLOverlayCompositor : gst.object.ObjectGst
     return getGType();
   }
 
+  /** Returns `this`, for use in `with` statements. */
   override GLOverlayCompositor self()
   {
     return this;
+  }
+
+  /** */
+  @property bool yinvert()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("yinvert");
+  }
+
+  /** */
+  @property void yinvert(bool propval)
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("yinvert", propval);
   }
 
   /** */
