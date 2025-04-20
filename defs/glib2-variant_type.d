@@ -53,7 +53,7 @@ class VariantType : Boxed
         typeStr ~= "a" ~ getStr!E;
       else static if (is(Arg : V[K], V, K))
         typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
-      else static if (Arg == VariantG)
+      else static if (Arg == glib.variant.Variant)
         typeStr ~= "v";
       else static if (isTuple!Arg)
         typeStr ~= "r";

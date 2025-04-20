@@ -416,7 +416,7 @@ T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list)
  */
 V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable* hash)
   if ((is(K == string) || is(K == const(void)*))
-    && (is(V : ObjectG) || is(V == interface) || is(V == string) || is(V == void*)))
+    && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
 {
   GHashTableIter iter;
   void* key;
@@ -611,11 +611,11 @@ GSList* gSListFromD(T)(T[] a)
  */
 GHashTable* gHashTableFromD(K, V)(V[K] map)
   if ((is(K == string) || is(K == const(void)*))
-    && (is(V : ObjectG) || is(V == interface) || is(V == string) || is(V == void*)))
+    && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
 {
   GDestroyNotify valDestroyFunc;
 
-  static if (is(V : ObjectG) || is(T == interface))
+  static if (is(V : gobject.object.ObjectWrap) || is(T == interface))
     valDestroyFunc = cast(GDestroyNotify)g_object_unref;
   else static if (is(V : string))
     valDestroyFunc = g_free;
@@ -648,7 +648,7 @@ GHashTable* gHashTableFromD(K, V)(V[K] map)
  */
 bool containerTypeIsSupported(T)()
 {
-  return is(T : ObjectG) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
+  return is(T : gobject.object.ObjectWrap) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
     || is(T == void*) || is(T == const(void)*);
 }
 
@@ -780,8 +780,8 @@ bool isTypeSimple(T)()
 T cToD(T)(void* data)
   if (containerTypeIsSupported!T)
 {
-  static if (is(T : ObjectG) || is(T == interface))
-    return ObjectG.getDObject!T(data, No.Take);
+  static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
+    return gobject.object.ObjectWrap.getDObject!T(data, No.Take);
   else static if (is(T == string))
     return fromCString(cast(const(char)*)data, No.Free);
   else static if (isTypeCopyableStruct!T)
@@ -804,14 +804,14 @@ T cToD(T)(void* data)
 void dToC(T)(T val, void* data)
   if (containerTypeIsSupported!T)
 {
-  static if (is(T : ObjectG) || isTypeCopyableStruct!T)
+  static if (is(T : gobject.object.ObjectWrap) || isTypeCopyableStruct!T)
     *(cast(void**)data) = val.cPtr(Yes.Dup);
   else static if (is(T == interface))
   {
-    if (auto objG = cast(ObjectG)val)
+    if (auto objG = cast(gobject.object.ObjectWrap)val)
       *(cast(void**)data) = objG.cPtr(Yes.Dup);
     else
-      assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectG");
+      assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
   }
   else static if (is(T == string))
     *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
@@ -832,8 +832,8 @@ void dToC(T)(T val, void* data)
 void cValueFree(T)(void* data)
   if (containerTypeIsSupported!T)
 {
-  static if (is(T : ObjectG) || is(T == interface))
-    ObjectG.unref(data);
+  static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
+    gobject.object.ObjectWrap.unref(data);
   else static if (is(T : Boxed))
     Boxed.boxedFree!T(data);
   else static if (__traits(compiles, T.unref(data))) // Reffed types
@@ -842,7 +842,7 @@ void cValueFree(T)(void* data)
     gFree(data);
 }
 
-/// Exception class used for ObjectG constructor errors
+/// Exception class used for ObjectWrap constructor errors
 class GidConstructException : Exception
 {
   this(string msg)

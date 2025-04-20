@@ -10,10 +10,6 @@
 //!set record[HashTableIter][ignore] 1
 //!set record[Tree][ignore] 1
 
-//# Change Variant to VariantG so as not to conflict with std.variant
-//!subdtype Variant VariantG
-//!subctype GVariant VariantC
-
 //!set function[malloc][name] gmalloc
 //!set function[free][name] gfree
 
@@ -40,7 +36,7 @@
 //!set function[test_queue_destroy][ignore] 1
 
 //# Error conflicts with the base D Error type, rename to ErrorG
-//!subtype Error ErrorG
+//!subtype Error ErrorWrap
 
 //# Override OptionEntry type kind to be a simple struct, not Wrap
 //!kind OptionEntry Simple

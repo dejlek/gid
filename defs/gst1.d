@@ -1,6 +1,6 @@
 //!gir Gst-1.0
 
-//!subdtype Object ObjectGst
+//!subdtype Object ObjectWrap
 
 //# These are all fundamental types with no obvious way to wrap them and minimal usage, ignore them
 //!set class[Bitmask][ignore] 1
@@ -17,7 +17,7 @@
 //!set record[Iterator].*field[][ignore] 1
 //!set record[TypeFind].*field[][ignore] 1
 
-//# Change ChildProxy.getProperty to getChildProxyProperty, conflicts with ObjectG.getProperty and could not get it to work with an alias
+//# Change ChildProxy.getProperty to getChildProxyProperty, conflicts with ObjectWrap.getProperty and could not get it to work with an alias
 //!set interface[ChildProxy].method[get_property][name] getChildProxyProperty
 
 //# Ignore methods which take a parent refcount, used for code implementing parent objects

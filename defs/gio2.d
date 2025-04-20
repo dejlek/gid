@@ -66,20 +66,20 @@
    */
   T getItem(T)(uint position)
   {
-    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return ObjectG.getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this).cPtr, position);
+    return gobject.object.ObjectWrap.getDObject!T(gobj, Yes.Take);
   }
 
 //# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data
 //!set class[ListStore].method[find_with_equal_func_full][ignore] 1
 
-//# Override to use delegates with ObjectG arguments
+//# Override to use delegates with ObjectWrap arguments
 //!set class[ListStore].method[find_with_equal_func][ignore] 1
 //!set class[ListStore].method[insert_sorted][ignore] 1
 //!set class[ListStore].method[sort][ignore] 1
 //!class ListStore
 
-  //# Override findWithEqualFunc to handle ObjectG parameters instead of ObjectC pointers
+  //# Override findWithEqualFunc to handle ObjectWrap parameters instead of ObjectC pointers
   /**
    * Looks up the given item in the list store by looping over the items and
    * comparing them with equal_func until the first occurrence of item which
@@ -94,13 +94,14 @@
    * Returns: Whether store contains item. If it was found, position will be
    *   set to the position where item occurred for the first time.
    */
-  bool findWithEqualFunc(ObjectG item, bool delegate(ObjectG, ObjectG) equalFunc, out uint position)
+  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position)
   {
-    static bool delegate(ObjectG, ObjectG) _static_equalFunc;
+    static bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_equalFunc;
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
+      bool _retval = _static_equalFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
@@ -123,13 +124,14 @@
    *   compareFunc = pairwise comparison function for sorting
    * Returns: the position at which item was inserted
    */
-  uint insertSorted(ObjectG item, int delegate(ObjectG, ObjectG) compareFunc)
+  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
   {
-    static int delegate(ObjectG, ObjectG) _static_compareFunc;
+    static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
@@ -145,13 +147,14 @@
    * Params:
    *   compareFunc = pairwise comparison function for sorting
    */
-  void sort(int delegate(ObjectG, ObjectG) compareFunc)
+  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
   {
-    static int delegate(ObjectG, ObjectG) _static_compareFunc;
+    static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 

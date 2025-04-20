@@ -1,6 +1,6 @@
 //!gir Atk-1.0
 
-//!subdtype Object ObjectAtk
+//!subdtype Object ObjectWrap
 
 //!add alias[AttributeSet].type '<type name="Attribute"></type>'
 

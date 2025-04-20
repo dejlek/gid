@@ -54,7 +54,7 @@
 
 //# Rename Object and TypeInfo which conflict with the base D Object type
 //!subctype GObject ObjectC
-//!subdtype Object ObjectG
+//!subdtype Object ObjectWrap
 //!subdtype Type GType
 
 //# Set ref/unref of ParamSpec
@@ -115,7 +115,7 @@
       instance = The instance to remove the signal handler from.
       handlerId = Handler id of the handler to be disconnected.
 */
-void signalHandlerDisconnect(gobject.object.ObjectG instance, gulong handlerId)
+void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   g_signal_handler_disconnect(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
   instance.signalClosures.remove(handlerId);
@@ -129,7 +129,7 @@ void signalHandlerDisconnect(gobject.object.ObjectG instance, gulong handlerId)
     Params:
       instance = The instance whose signal handlers are destroyed
 */
-void signalHandlersDestroy(gobject.object.ObjectG instance)
+void signalHandlersDestroy(gobject.object.ObjectWrap instance)
 {
   g_signal_handlers_destroy(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
   instance.signalClosures.clear;

@@ -39,8 +39,8 @@
 //!set class[CustomSorter].method[set_sort_func][ignore] 1
   import gobject.object;
 
-  // Define a sort delegate that takes ObjectG objects, instead of the CompareDataFunc which is passed raw ObjectC pointers
-  alias CustomSortDelegate = int delegate(ObjectG aObj, ObjectG bObj);
+  // Define a sort delegate that takes ObjectWrap objects, instead of the CompareDataFunc which is passed raw ObjectC pointers
+  alias CustomSortDelegate = int delegate(gobject.object.ObjectWrap aObj, gobject.object.ObjectWrap bObj);
 
   /**
    * Creates a new `GtkSorter` that works by calling
@@ -58,7 +58,8 @@
       auto aObj = cast(ObjectC*)a;
       auto bObj = cast(ObjectC*)b;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!ObjectG(aObj), ObjectG.getDObject!ObjectG(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(aObj),
+        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(bObj));
       return _retval;
     }
 
@@ -86,7 +87,8 @@
       auto aObj = cast(ObjectC*)a;
       auto bObj = cast(ObjectC*)b;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!ObjectG(aObj), ObjectG.getDObject!ObjectG(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(aObj),
+        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(bObj));
       return _retval;
     }
 

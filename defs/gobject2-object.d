@@ -1,4 +1,4 @@
-//!class ObjectG pre
+//!class ObjectWrap pre
 //!inhibit init
 
 import core.atomic;
@@ -29,7 +29,7 @@ shared static this()
 
 private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 
-// String quark used to assign the D ObjectG to the C GObject keyed-data list
+// String quark used to assign the D ObjectWrap to the C GObject keyed-data list
 immutable Quark gidObjectQuark;
 
 // One time initialized on first use and considered immutable there-after
@@ -38,10 +38,10 @@ __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interf
 __gshared bool classMapsInitialized;
 
 /**
- * A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
- * Returns: A string value to use with mixin() within ObjectG derived classes.
+ * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
+ * Returns: A string value to use with mixin() within ObjectWrap derived classes.
  */
-string objectGMixin()
+string objectMixin()
 {
   return
 `  this(void* cObj, Flag!"Take" take = No.Take)
@@ -51,14 +51,14 @@ string objectGMixin()
 `;
 }
 
-class ObjectG
+class ObjectWrap
 {
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
   DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
-   * Create an ObjectG which is wrapping a C GObject with the given GType.
-   * Useful for creating custom D classes which are derived from ObjectG.
+   * Create an ObjectWrap which is wrapping a C GObject with the given GType.
+   * Useful for creating custom D classes which are derived from ObjectWrap.
    * Params:
    *   type = The GType value to use for creating the wrapped GObject
    */
@@ -91,7 +91,7 @@ class ObjectG
   }
 
   /**
-   * Set the GObject of a D ObjectG wrapper.
+   * Set the GObject of a D ObjectWrap wrapper.
    * Params:
    *   cObj = Pointer to the GObject
    *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
@@ -130,7 +130,7 @@ class ObjectG
   {
     debug
     {
-      (cast(ObjectG)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
+      (cast(ObjectWrap)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
         : "_cObjToggleNotify isLastRef=false");
     }
 
@@ -203,7 +203,7 @@ class ObjectG
    * Convenience method to return `this` cast to a type. For use in D with statements.
    * Returns: The object instance
    */
-  ObjectG self()
+  ObjectWrap self()
   {
     return this;
   }
@@ -221,8 +221,8 @@ class ObjectG
     if (!cptr)
       return null;
 
-    // Cast return value to ObjectG or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
-    if (auto dObj = cast(ObjectG)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
+    // Cast return value to ObjectWrap or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
+    if (auto dObj = cast(ObjectWrap)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
     {
       if (take)
         g_object_unref(cast(ObjectC*)cptr);
@@ -234,7 +234,7 @@ class ObjectG
     {
       synchronized
       {
-        auto gobjClass = typeid(ObjectG);
+        auto gobjClass = typeid(ObjectWrap);
         auto ifProxyClass = typeid(IfaceProxy);
 
         foreach (m; ModuleInfo)
@@ -258,7 +258,7 @@ class ObjectG
             { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
               auto obj = _d_newclass(c);
 
-              if (auto gType = (cast(ObjectG)obj).gType)
+              if (auto gType = (cast(ObjectWrap)obj).gType)
                 gtypeClasses[gType] = c;
             }
           }
@@ -279,7 +279,7 @@ class ObjectG
 
         if (auto obj = _d_newclass(cast()*dClassType))
         {
-          (cast(ObjectG)obj).setGObject(cptr, take);
+          (cast(ObjectWrap)obj).setGObject(cptr, take);
           return cast(T)obj;
         }
 
@@ -293,7 +293,7 @@ class ObjectG
       {
         if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
         {
-          (cast(ObjectG)obj).setGObject(cptr, take); // Assign the C GObject
+          (cast(ObjectWrap)obj).setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
         }
       }
@@ -417,7 +417,7 @@ class ObjectG
 /**
  * Interface proxy class - used to wrap unknown GObjects as a known interface
  */
-abstract class IfaceProxy : ObjectG
+abstract class IfaceProxy : ObjectWrap
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {

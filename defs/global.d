@@ -166,8 +166,6 @@
 //!subtype va_list void*
 
 //# These are defined to different sizes depending on the platform
-//!subtype "glong" glong
-//!subtype "gulong" gulong
 //!subtype "unsigned long" gulong
 
 //# GType is used for D type when it should be Type

@@ -1,4 +1,4 @@
-//!class VariantG pre
+//!class Variant pre
 
 import glib.variant_builder;
 import glib.variant_type;
@@ -6,12 +6,12 @@ import glib.variant_type;
 import std.conv : to;
 import std.traits : isSomeString;
 import std.typecons : isTuple, Tuple;
-import std.variant : Variant;
+import std.variant : StdVariant = Variant;
 
-class VariantG
+class Variant
 {
   /**
-   * Template to create a new VariantG from a single D value.
+   * Template to create a new Variant from a single D value.
    * Params:
    *   T = The D type to create the variant from
    *   val = The value to assign
@@ -20,14 +20,14 @@ class VariantG
     if (!is(T == void*))
   {
     // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
-    static if (is(T : VariantG)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.Take);
+    static if (is(T : Variant)) // A variant (wrap it)
+      this(cast(void*)createVariant(cast(GVariant*)val.cPtr), No.Take);
     else
       this(cast(void*)createVariant(val), No.Take);
   }
 
   /**
-   * Template to create a new VariantG from multiple D values.
+   * Template to create a new Variant from multiple D values.
    * Params:
    *   T = The D types to create the variant from
    *   vals = The values to assign
@@ -42,10 +42,10 @@ class VariantG
 
     foreach (v; vals)
     {
-      static if (is(T : VariantG)) // A variant (wrap it)
-        g_variant_builder_add_value(&builder, createVariant(cast(VariantC*)v.cPtr)); // !! takes over floating reference of new VariantC
+      static if (is(T : Variant)) // A variant (wrap it)
+        g_variant_builder_add_value(&builder, createVariant(cast(GVariant*)v.cPtr)); // !! takes over floating reference of new GVariant
       else
-        g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new VariantC
+        g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new GVariant
     }
 
     this(g_variant_builder_end(&builder), No.Take);
@@ -54,7 +54,7 @@ class VariantG
   /** */
   override bool opEquals(Object other)
   {
-    if (auto otherVariant = cast(VariantG)other)
+    if (auto otherVariant = cast(Variant)other)
       return equal(otherVariant);
     else
       return this.opEquals(other);
@@ -63,7 +63,7 @@ class VariantG
   /** */
   override int opCmp(Object other)
   {
-    if (auto otherVariant = cast(VariantG)other)
+    if (auto otherVariant = cast(Variant)other)
       return compare(otherVariant);
     else
       return this.opCmp(other);
@@ -76,24 +76,24 @@ class VariantG
   }
 
   /**
-   * Template to get a single value from a VariantG
+   * Template to get a single value from a Variant
    * Params:
    *   T = The D type of the value to get
-   * Returns: The single value of the VariantG of type `T`
+   * Returns: The single value of the Variant of type `T`
    */
   T get(T)()
   {
-    static if (is(T : VariantG)) // A variant (unwrap it)
+    static if (is(T : Variant)) // A variant (unwrap it)
       return getVariant;
     else
-      return getVal!T(cast(VariantC*)cPtr);
+      return getVal!T(cast(GVariant*)cPtr);
   }
 
   /**
-   * Template to get multiple values from a VariantG
+   * Template to get multiple values from a Variant
    * Params:
    *   T = The D types of the values to get
-   * Returns: A tuple containing the values from the VariantG of the specified types
+   * Returns: A tuple containing the values from the Variant of the specified types
    */
   auto get(T...)()
     if (T.length > 1)
@@ -108,13 +108,13 @@ class VariantG
 }
 
 /**
- * Template to create a VariantC from a single D value.
+ * Template to create a GVariant from a single D value.
  * Params:
  *   T = The type of the value
- *   val = The value to assign to the new VariantG.
+ *   val = The value to assign to the new Variant.
  * Returns: New variant C instance with floating reference
  */
-VariantC* createVariant(T)(T val)
+GVariant* createVariant(T)(T val)
 {
   static if (is(T == bool))
     return g_variant_new_boolean(val);
@@ -144,7 +144,7 @@ VariantC* createVariant(T)(T val)
     g_variant_type_free(variantType); // -- free
 
     foreach (item; val)
-      g_variant_builder_add_value(&builder, createVariant(item)); // !! takes over floating reference of new VariantC
+      g_variant_builder_add_value(&builder, createVariant(item)); // !! takes over floating reference of new GVariant
 
     return g_variant_builder_end(&builder);
   }
@@ -156,13 +156,13 @@ VariantC* createVariant(T)(T val)
     g_variant_type_free(variantType); // -- free
 
     foreach (k, v; val)
-      g_variant_builder_add_value(&builder, g_variant_new_dict_entry(createVariant(k), createVariant(v))); // !! takes over floating reference of new VariantC
+      g_variant_builder_add_value(&builder, g_variant_new_dict_entry(createVariant(k), createVariant(v))); // !! takes over floating reference of new GVariant
 
     return g_variant_builder_end(&builder);
   }
-  else static if (is(T == VariantC*))
+  else static if (is(T == GVariant*))
     return g_variant_new_variant(val);
-  else static if (is(T == Variant)) // std.variant.Variant (only basic types supported currently)
+  else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
   {
     if (val.type is typeid(bool))
       return createVariant(val.get!bool);
@@ -185,22 +185,22 @@ VariantC* createVariant(T)(T val)
     else if (val.type is typeid(string) || val.type is typeid(wstring) || val.type is typeid(dstring))
       return createVariant(val.coerce!string);
     else
-      assert(false, "VariantG.createVariant does not support D Variant type " ~ val.type.to!string);
+      assert(false, "Variant.createVariant does not support D Variant type " ~ val.type.to!string);
   }
   else static if (isTuple!T)
     return createVariant(val.expand);
   else
-    static assert(false, "Unsupported type for VariantG.createVariant: " ~ T.stringof);
+    static assert(false, "Unsupported type for Variant.createVariant: " ~ T.stringof);
 }
 
 /**
- * Template to create a new VariantC from multiple D values.
+ * Template to create a new GVariant from multiple D values.
  * Params:
  *   T = The D types to create the variant from
  *   vals = The values to assign
  * Returns: New variant C instance with floating reference
  */
-VariantC* createVariant(T...)(T vals)
+GVariant* createVariant(T...)(T vals)
   if (vals.length > 1)
 {
   auto variantType = g_variant_type_new("r"); // ++ new
@@ -209,19 +209,19 @@ VariantC* createVariant(T...)(T vals)
   g_variant_type_free(variantType); // -- free
 
   foreach (v; vals)
-    g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new VariantC
+    g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new GVariant
 
   return g_variant_builder_end(&builder);
 }
 
 /**
- * Template to get a single value from a VariantC
+ * Template to get a single value from a GVariant
  * Params:
  *   T = D type of the value to get
- *   v = VariantC struct pointer
+ *   v = GVariant struct pointer
  * Returns: The single variant value of type `T`
  */
-T getVal(T)(VariantC* v)
+T getVal(T)(GVariant* v)
 {
   static if (is(T == bool))
     return g_variant_get_boolean(v);
@@ -260,14 +260,14 @@ T getVal(T)(VariantC* v)
     foreach (i; 0 .. g_variant_n_children(v))
     {
       auto dv = g_variant_get_child_value(v, i);
-      dict[getVal!K(g_variant_get_child_value(dv, 0))] = getVal!V(g_variant_get_child_value(dv, 1)); // VariantC dict entries hold 2 values (key, value)
+      dict[getVal!K(g_variant_get_child_value(dv, 0))] = getVal!V(g_variant_get_child_value(dv, 1)); // GVariant dict entries hold 2 values (key, value)
     }
 
     return dict;
   }
-  else static if ((is(T == VariantC*)))
+  else static if ((is(T == GVariant*)))
     return g_variant_get_variant(v);
-  else static if (is(T == Variant)) // std.variant.Variant (only basic types supported currently)
+  else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
   {
     if (g_variant_type_is_basic(g_variant_get_type(v)))
     {
@@ -294,24 +294,24 @@ T getVal(T)(VariantC* v)
         case 's':
           return Variant(getVal!string(v));
         default:
-          assert(false, "VariantG.getVal has unexpected type string");
+          assert(false, "Variant.getVal has unexpected type string");
       }
     }
   }
   else static if (isTuple!T)
     return getVal(val.expand);
   else
-    static assert(false, "Unsupported type for VariantG.getVal: " ~ T.stringof);
+    static assert(false, "Unsupported type for Variant.getVal: " ~ T.stringof);
 }
 
 /**
- * Template to get multiple values from a VariantC
+ * Template to get multiple values from a GVariant
  * Params:
  *   T = D types of the values to get
- *   v = VariantC struct pointer
- * Returns: A tuple containing the values from the VariantG of the specified types
+ *   v = GVariant struct pointer
+ * Returns: A tuple containing the values from the Variant of the specified types
  */
-auto getVal(T...)(VariantC* v)
+auto getVal(T...)(GVariant* v)
   if (T.length > 1)
 {
   Tuple!T vals;
