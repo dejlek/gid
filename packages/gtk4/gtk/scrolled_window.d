@@ -1073,7 +1073,7 @@ class ScrolledWindow : gtk.widget.Widget
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -2169,7 +2169,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2250,7 +2250,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2455,7 +2455,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2494,7 +2494,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2540,7 +2540,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2579,7 +2579,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2633,7 +2633,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2687,7 +2687,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2726,7 +2726,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2765,7 +2765,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

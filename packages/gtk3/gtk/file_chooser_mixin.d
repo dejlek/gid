@@ -1515,7 +1515,7 @@ template FileChooserT()
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gtk.types.FileChooserConfirmation(_returnValue, _retval);
+      setVal!(gtk.types.FileChooserConfirmation)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

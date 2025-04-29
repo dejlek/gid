@@ -679,7 +679,7 @@ class Surface : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -824,7 +824,7 @@ class Surface : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

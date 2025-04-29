@@ -377,7 +377,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -491,7 +491,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gdk.content_provider.ContentProvider(_returnValue, _retval);
+      setVal!(gdk.content_provider.ContentProvider)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

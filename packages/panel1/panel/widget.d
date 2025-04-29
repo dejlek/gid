@@ -704,7 +704,7 @@ class Widget : gtk.widget.Widget
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gtk.widget.Widget(_returnValue, _retval);
+      setVal!(gtk.widget.Widget)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

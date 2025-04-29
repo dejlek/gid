@@ -374,7 +374,7 @@ class MarkAttributes : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!string(_returnValue, _retval);
+      setVal!(string)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -422,7 +422,7 @@ class MarkAttributes : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!string(_returnValue, _retval);
+      setVal!(string)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -369,7 +369,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -414,7 +414,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -464,7 +464,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -515,7 +515,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -564,7 +564,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -608,7 +608,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

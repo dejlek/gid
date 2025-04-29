@@ -2980,7 +2980,7 @@ class Window : gobject.object.ObjectWrap
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!cairo.surface.Surface(_returnValue, _retval);
+      setVal!(cairo.surface.Surface)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3112,7 +3112,7 @@ class Window : gobject.object.ObjectWrap
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gdk.window.Window(_returnValue, _retval);
+      setVal!(gdk.window.Window)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

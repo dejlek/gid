@@ -658,7 +658,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -794,7 +794,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         _paramTuple[5] = getVal!(Parameters!T[5])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

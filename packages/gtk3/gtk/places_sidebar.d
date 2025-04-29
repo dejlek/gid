@@ -649,7 +649,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!int(_returnValue, _retval);
+      setVal!(int)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -718,7 +718,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!int(_returnValue, _retval);
+      setVal!(int)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

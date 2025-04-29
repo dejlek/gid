@@ -244,7 +244,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -306,7 +306,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gdk.types.DragAction(_returnValue, _retval);
+      setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -413,7 +413,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gdk.types.DragAction(_returnValue, _retval);
+      setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -486,7 +486,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

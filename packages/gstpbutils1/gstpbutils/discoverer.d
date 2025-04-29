@@ -321,7 +321,7 @@ class Discoverer : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gstpbutils.discoverer_info.DiscovererInfo(_returnValue, _retval);
+      setVal!(gstpbutils.discoverer_info.DiscovererInfo)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

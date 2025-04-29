@@ -664,7 +664,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!adw.navigation_page.NavigationPage(_returnValue, _retval);
+      setVal!(adw.navigation_page.NavigationPage)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

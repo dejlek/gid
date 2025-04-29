@@ -1146,7 +1146,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gobject.object.ObjectWrap(_returnValue, _retval);
+      setVal!(gobject.object.ObjectWrap)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1449,7 +1449,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1524,7 +1524,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

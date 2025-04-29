@@ -4257,7 +4257,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4352,7 +4352,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4483,7 +4483,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

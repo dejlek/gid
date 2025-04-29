@@ -1884,7 +1884,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

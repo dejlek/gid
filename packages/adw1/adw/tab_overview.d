@@ -719,7 +719,7 @@ class TabOverview : gtk.widget.Widget
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!adw.tab_page.TabPage(_returnValue, _retval);
+      setVal!(adw.tab_page.TabPage)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -777,7 +777,7 @@ class TabOverview : gtk.widget.Widget
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -838,7 +838,7 @@ class TabOverview : gtk.widget.Widget
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gdk.types.DragAction(_returnValue, _retval);
+      setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

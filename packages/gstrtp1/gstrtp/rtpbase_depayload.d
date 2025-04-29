@@ -444,7 +444,7 @@ class RTPBaseDepayload : gst.element.Element
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gstrtp.rtpheader_extension.RTPHeaderExtension(_returnValue, _retval);
+      setVal!(gstrtp.rtpheader_extension.RTPHeaderExtension)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -334,7 +334,7 @@ class GLDisplay : gst.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gstgl.glcontext.GLContext(_returnValue, _retval);
+      setVal!(gstgl.glcontext.GLContext)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

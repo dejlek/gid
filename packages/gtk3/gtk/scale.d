@@ -435,7 +435,7 @@ class Scale : gtk.range.Range
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!string(_returnValue, _retval);
+      setVal!(string)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

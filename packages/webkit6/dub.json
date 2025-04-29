@@ -1,6 +1,6 @@
 {
   "name": "webkit6",
-  "description": "WebKit library D binding",
+  "description": "D binding for WebKit, a fast open-source web browser engine",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",

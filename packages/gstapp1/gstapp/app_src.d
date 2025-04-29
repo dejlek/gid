@@ -896,7 +896,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gst.types.FlowReturn(_returnValue, _retval);
+      setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1040,7 +1040,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gst.types.FlowReturn(_returnValue, _retval);
+      setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1094,7 +1094,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gst.types.FlowReturn(_returnValue, _retval);
+      setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1152,7 +1152,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!gst.types.FlowReturn(_returnValue, _retval);
+      setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1200,7 +1200,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
-      setVal!bool(_returnValue, _retval);
+      setVal!(bool)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
