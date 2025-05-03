@@ -48,7 +48,7 @@ The remainder of this document provides an overview of the giD bindings.
 ## Versions and API Stability
 
 Currently the giD API should be considered to be unstable.  This is the reason for the current versions being **0.9.x**.
-The API may break on each 0.9.x release and therefore any applications depending on giD libraries should specify the exact version `==0.9.0` for example.
+The API may break on each 0.9.x release and therefore any applications depending on giD libraries should specify the exact version, `==0.9.6` for example.
 Once v1.0.0 is released, an increment in the micro version will be backwards compatible, and minor version increments may break backwards compatibility.
 
 
@@ -67,6 +67,7 @@ And finally the D binding source code itself can be used as a reference.
 
 See the [doc/C_API_Library_Reference.md](doc/C_API_Library_Reference.md) file for the comprehensive list.
 
+
 ## Dub Packages
 
 Each library has its own binding dub sub-package, within the `gid` package, each with a single source directory (package name).
@@ -79,6 +80,39 @@ This results in the full dub package name `gid:gtk4` with the toplevel package d
 
 **NOTE:** giD supports multiple versions of some packages, such as for Gtk.
 The same top-level module directory is used for both, which while less verbose, means that only one version can be used in an application.
+
+
+### Project Dependencies
+
+**NOTE:** When adding giD package dependencies to a project, the top-level `gid` project should not be used.
+Using it will result in linker issues, since there are multiple versions of packages, gtk3 vs gtk4 for example,
+which will result in duplicate symbol errors.
+
+Projects should instead use the relevant dub sub-packages which are needed.
+The dependencies of a sub-package do not need to be added though, since dub will automatically resolve dependencies recursively.
+For example, if a project uses gtksource and Gtk 4, only `gid:gtksource5` would need to be added to the `dub.json` file.
+Since `gid:gtk4` is a dependency of it, it would automatically be included as well as all of its recursive dependencies.
+
+
+### Example dub.json
+
+Example `dub.json file` for a Gtk4 project:
+
+```json
+{
+  "name": "gid-gtk4-examples",
+  "description": "giD Gtk 4 examples",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "dependencies": {
+    "gid:gtk4": "==0.9.6"
+  }
+}
+```
+
+**NOTE:** If you are publicly distributing your application, we recommend specifying the exact giD version that your application works with.
+This is because backwards compatibility may be broken with newer 0.9.x versions.
+Once version 1.0.0 is released, this will no longer be an issue and backwards compatibility will be maintained with the same major.minor versions.
 
 
 ## Module Names
