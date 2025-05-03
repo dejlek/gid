@@ -42,7 +42,9 @@ For a quickstart guide to developing Gtk4 GUI applications, please consult the [
 
 Dejan Lekic has several example projects for giD libraries in his [gid-examples](https://codeberg.org/dejan/gid-examples/) project.
 
-The remainder of this document provides an overview of the giD bindings.
+**NOTE:** When adding giD package dependencies to a project, the top-level `gid` project should not be used.
+Using it will result in linker issues, since there are multiple versions of packages, gtk3 vs gtk4 for example,
+which will result in duplicate symbol errors. See [Project Dependences](#project-dependencies) for more details.
 
 
 ## Versions and API Stability
@@ -84,11 +86,8 @@ The same top-level module directory is used for both, which while less verbose, 
 
 ### Project Dependencies
 
-**NOTE:** When adding giD package dependencies to a project, the top-level `gid` project should not be used.
-Using it will result in linker issues, since there are multiple versions of packages, gtk3 vs gtk4 for example,
-which will result in duplicate symbol errors.
-
-Projects should instead use the relevant dub sub-packages which are needed.
+Projects should not use the top-level gid project as a dependency, which will result in duplicate symbol errors,
+but instead use the relevant dub sub-packages which are required.
 The dependencies of a sub-package do not need to be added though, since dub will automatically resolve dependencies recursively.
 For example, if a project uses gtksource and Gtk 4, only `gid:gtksource5` would need to be added to the `dub.json` file.
 Since `gid:gtk4` is a dependency of it, it would automatically be included as well as all of its recursive dependencies.
@@ -110,9 +109,9 @@ Example `dub.json file` for a Gtk4 project:
 }
 ```
 
-**NOTE:** If you are publicly distributing your application, we recommend specifying the exact giD version that your application works with.
+**NOTE:** If you are publicly distributing your application, we recommend specifying the exact giD version that your application works with for now.
 This is because backwards compatibility may be broken with newer 0.9.x versions.
-Once version 1.0.0 is released, this will no longer be an issue and backwards compatibility will be maintained with the same major.minor versions.
+Once version 1.0.0 is released, this will no longer be an issue and backwards compatibility will be maintained within the same major.minor versions.
 
 
 ## Module Names
