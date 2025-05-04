@@ -221,7 +221,7 @@ class ObjectWrap
   * Get the GType of an object.
   * Returns: The GType
   */
-  static GType getType()
+  static GType getGType()
   {
     return g_object_get_type();
   }
@@ -232,7 +232,7 @@ class ObjectWrap
   */
   @property GType gType()
   {
-    return getType;
+    return getGType;
   }
 
   /**
