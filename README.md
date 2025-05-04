@@ -1,5 +1,7 @@
 # GObject Instrospection D Package Repository
 
+<img src="https://raw.githubusercontent.com/Kymorphia/gid/refs/heads/main/gid-logo.svg" alt="giD Logo" align="right">
+
 This is the GObject Introspection D Language Package Repository for the **giD** project (pronounced *giddy*).
 The intention of this project is to create high quality [D language](https://dlang.org/) (AKA Dlang) bindings for libraries with
 [GObject Introspection](https://gi.readthedocs.io/en/latest/) APIs.
