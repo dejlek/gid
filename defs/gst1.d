@@ -49,3 +49,77 @@
 //# Disable unnecessary ByteArrayInterface functions (can use GArray versions instead)
 //!set record[Meta].method[serialize][ignore] 1
 //!set callback[MetaSerializeFunction][ignore] 1
+
+//!set function[init][ignore] 1
+//!set function[init_check][ignore] 1
+//!class global pre
+
+/**
+ * Initializes the GStreamer library, setting up internal path lists,
+ * registering built-in elements, and loading standard plugins.
+ *
+ * Unless the plugin registry is disabled at compile time, the registry will be
+ * loaded. By default this will also check if the registry cache needs to be
+ * updated and rescan all plugins if needed. See gst_update_registry() for
+ * details and section
+ * &lt;link linkend="gst-running"&gt;Running GStreamer Applications&lt;/link&gt;
+ * for how to disable automatic registry updates.
+ *
+ * WARNING: This function will terminate your program if it was unable to
+ * initialize GStreamer for some reason. If you want your program to fall back,
+ * use gst_init_check() instead.
+ *
+ * Params:
+ *   argv = Array of program arguments or null to not process them.
+ */
+void init_(ref string[] argv)
+{
+  int _argc = cast(int)argv.length;
+  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
+  scope(exit) gFree(_argv);
+
+  foreach (i, a; argv)
+    _argv[i] = toCString(a, No.Alloc);
+
+  gst_init(&_argc, &_argv);
+
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = fromCString(_argv[i], No.Free);
+}
+
+/**
+ * Initializes the GStreamer library, setting up internal path lists,
+ * registering built-in elements, and loading standard plugins.
+ *
+ * This function will return %FALSE if GStreamer could not be initialized
+ * for some reason.  If you want your program to fail fatally,
+ * use gst_init() instead.
+ *
+ * Params:
+ *   argv = Array of program arguments or null to not process them.
+ * Returns: true if GStreamer could be initialized.
+ * Throws: [ErrorWrap]
+ */
+bool initCheck(ref string[] argv)
+{
+  int _argc = cast(int)argv.length;
+  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
+  scope(exit) gFree(_argv);
+
+  foreach (i, a; argv)
+    _argv[i] = toCString(a, No.Alloc);
+
+  GError *_err;
+  bool _retval = gst_init_check(&_argc, &_argv, &_err);
+
+  if (_err)
+    throw new ErrorWrap(_err);
+
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = fromCString(_argv[i], No.Free);
+
+  return _retval;
+}
+
