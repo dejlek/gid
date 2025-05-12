@@ -36,6 +36,15 @@ class Value : Boxed
   }
 
   /**
+   * Get the GType of the data stored in the value.
+   * Returns: The GType of the value
+   */
+  @property GType valType()
+  {
+    return (cast(GValue*)_cPtr).gType;
+  }
+
+  /**
    * Template to get a Value of a specific type.
    * Params:
    *   T = The D type of the value to get (must match the type of the Value)
