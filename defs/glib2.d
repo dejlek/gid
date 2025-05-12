@@ -291,3 +291,44 @@
     _retval = g_timer_elapsed(cast(GTimer*)_cPtr, null);
     return _retval;
   }
+
+//!set record[Date].function[strftime][disable] 1
+//!class Date
+
+  /**
+      Generates a printed representation of the date, in a
+      [locale][setlocale]-specific way.
+      Works just like the platform's C library strftime() function,
+      but only accepts date-related formats; time-related formats
+      give undefined results. Date must be valid. Unlike strftime()
+      (which uses the locale encoding), works on a UTF-8 format
+      string and stores a UTF-8 result.
+      
+      This function does not provide any conversion specifiers in
+      addition to those implemented by the platform's C library.
+      For example, don't expect that using [glib.date.Date.strftime] would
+      make the \`F` provided by the C99 strftime() work on Windows
+      where the C library only complies to C89.
+  
+      Params:
+        format = format string
+      Returns: The formatted date string, will be empty if result exceeds 1024 bytes
+   */
+  string strftime(string format)
+  {
+    char[] buf;
+    const(char)* _format = format.toCString(No.Alloc);
+
+    for (buf.length = 32; buf.length <= 1024; buf.length *= 2) // Increase buffer until output fits
+    {
+      auto sizeWritten = g_date_strftime(buf.ptr, buf.length, _format, cast(const(GDate)*)_cPtr(No.Dup));
+
+      if (sizeWritten > 0)
+      {
+        buf.length = sizeWritten;
+        return cast(string)buf;
+      }
+    }
+
+    return null;
+  }
