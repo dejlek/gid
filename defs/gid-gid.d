@@ -715,8 +715,8 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        cValueFree!T(n.data);
-        g_list_free_1(n);
+        cValueFree!T(tmp.data);
+        g_list_free_1(tmp);
       }
     }
     else
@@ -730,8 +730,8 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        cValueFree!T(n.data);
-        g_slist_free_1(n);
+        cValueFree!T(tmp.data);
+        g_slist_free_1(tmp);
       }
     }
     else
