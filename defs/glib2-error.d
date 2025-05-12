@@ -21,6 +21,12 @@ class ErrorWrap : Exception
     this(g_error_new_literal(domain, code, message.toCString(No.Alloc)));
   }
 
+  /** */
+  this()
+  {
+    super("");
+  }
+
   ~this()
   {
     g_error_free(errPtr);
