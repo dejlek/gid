@@ -288,6 +288,6 @@
   double elapsed()
   {
     double _retval;
-    _retval = g_timer_elapsed(cast(GTimer*)cPtr, null);
+    _retval = g_timer_elapsed(cast(GTimer*)_cPtr, null);
     return _retval;
   }

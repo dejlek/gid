@@ -29,7 +29,7 @@ class ErrorWrap : Exception
   /**
    * Get wrapped C GError pointer.
    */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)errPtr;
   }

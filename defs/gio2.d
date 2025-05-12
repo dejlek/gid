@@ -66,8 +66,8 @@
    */
   T getItem(T)(uint position)
   {
-    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this).cPtr, position);
-    return gobject.object.ObjectWrap.getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
+    return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
   }
 
 //# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data
@@ -79,7 +79,7 @@
 //!set class[ListStore].method[sort][ignore] 1
 //!class ListStore
 
-  //# Override findWithEqualFunc to handle ObjectWrap parameters instead of ObjectC pointers
+  //# Override findWithEqualFunc to handle ObjectWrap parameters instead of GObject pointers
   /**
    * Looks up the given item in the list store by looping over the items and
    * comparing them with equal_func until the first occurrence of item which
@@ -100,14 +100,14 @@
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      bool _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_equalFunc = equalFunc;
     bool _retval;
-    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_equalFuncCallback, cast(uint*)&position);
+    _retval = g_list_store_find_with_equal_func(cast(GListStore*)_cPtr, item ? cast(GObject*)item._cPtr : null, &_equalFuncCallback, cast(uint*)&position);
     _static_equalFunc = null;
     return _retval;
   }
@@ -130,14 +130,14 @@
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
     uint _retval;
-    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_compareFuncCallback, null);
+    _retval = g_list_store_insert_sorted(cast(GListStore*)_cPtr, item ? cast(GObject*)item._cPtr : null, &_compareFuncCallback, null);
     _static_compareFunc = null;
     return _retval;
   }
@@ -153,12 +153,12 @@
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
-    g_list_store_sort(cast(GListStore*)cPtr, &_compareFuncCallback, null);
+    g_list_store_sort(cast(GListStore*)_cPtr, &_compareFuncCallback, null);
     _static_compareFunc = null;
   }

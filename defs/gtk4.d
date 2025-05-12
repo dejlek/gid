@@ -39,7 +39,7 @@
 //!set class[CustomSorter].method[set_sort_func][ignore] 1
   import gobject.object;
 
-  // Define a sort delegate that takes ObjectWrap objects, instead of the CompareDataFunc which is passed raw ObjectC pointers
+  // Define a sort delegate that takes ObjectWrap objects, instead of the CompareDataFunc which is passed raw GObject pointers
   alias CustomSortDelegate = int delegate(gobject.object.ObjectWrap aObj, gobject.object.ObjectWrap bObj);
 
   /**
@@ -55,11 +55,11 @@
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
-      auto aObj = cast(ObjectC*)a;
-      auto bObj = cast(ObjectC*)b;
+      auto aObj = cast(GObject*)a;
+      auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(aObj),
-        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
       return _retval;
     }
 
@@ -84,14 +84,14 @@
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
-      auto aObj = cast(ObjectC*)a;
-      auto bObj = cast(ObjectC*)b;
+      auto aObj = cast(GObject*)a;
+      auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(aObj),
-        gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
       return _retval;
     }
 
     auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
-    gtk_custom_sorter_set_sort_func(cast(GtkCustomSorter*)cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
+    gtk_custom_sorter_set_sort_func(cast(GtkCustomSorter*)_cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
   }

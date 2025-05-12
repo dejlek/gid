@@ -32,7 +32,7 @@ class Value : Boxed
    */
   void init_(T)()
   {
-    initVal!T(cast(GValue*)cPtr);
+    initVal!T(cast(GValue*)_cPtr);
   }
 
   /**
@@ -43,7 +43,7 @@ class Value : Boxed
    */
   T get(T)()
   {
-    return getVal!T(cast(GValue*)cPtr);
+    return getVal!T(cast(GValue*)_cPtr);
   }
 
   /**
@@ -54,7 +54,7 @@ class Value : Boxed
    */
   void set(T)(T val)
   {
-    setVal!T(cast(GValue*)cPtr, val);
+    setVal!T(cast(GValue*)_cPtr, val);
   }
 }
 
@@ -152,7 +152,7 @@ T getVal(T)(const(GValue)* gval)
   else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return gobject.object.ObjectWrap.getDObject!T(v, No.Take);
+    return gobject.object.ObjectWrap._getDObject!T(v, No.Take);
   }
   else static if (is(T : Object) || isPointer!T)
     return cast(T)g_value_get_pointer(gval);
@@ -197,20 +197,20 @@ void setVal(T)(GValue* gval, T v)
   else static if (is(T == string))
     g_value_take_string(gval, v.toCString(Yes.Alloc));
   else static if (is(T == glib.variant.Variant))
-    g_value_set_variant(gval, cast(GVariant*)v.cPtr);
+    g_value_set_variant(gval, cast(GVariant*)v._cPtr);
   else static if (is(T : ParamSpec))
-    g_value_set_param(gval, cast(GParamSpec*)v.cPtr);
+    g_value_set_param(gval, cast(GParamSpec*)v._cPtr);
   else static if (is(T : Boxed))
   {
-    g_value_init(gval, v.gType); // Have to initialize the specific boxed type here rather than in initVal
+    g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, v.cInstancePtr);
   }
   else static if (is(T : gobject.object.ObjectWrap))
-    g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.Dup));
+    g_value_set_object(gval, cast(GObject*)v._cPtr(No.Dup));
   else static if (is(T == interface))
   {
     if (auto objG = cast(gobject.object.ObjectWrap)v)
-      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.Dup));
+      g_value_set_object(gval, cast(GObject*)objG._cPtr(No.Dup));
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }

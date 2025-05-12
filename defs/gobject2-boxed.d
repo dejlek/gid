@@ -19,10 +19,7 @@ abstract class Boxed
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
 
     if (!owned)
-    {
-      auto type = gType;
-      this.cInstancePtr = g_boxed_copy(type, boxPtr);
-    }
+      this.cInstancePtr = g_boxed_copy(_gType, boxPtr);
     else
       this.cInstancePtr = boxPtr;
   }
@@ -38,14 +35,14 @@ abstract class Boxed
   ~this()
   {
     if (cInstancePtr) // Might be null if an exception occurred during construction
-      g_boxed_free(gType, cInstancePtr);
+      g_boxed_free(_gType, cInstancePtr);
   }
 
   /**
    * Get the GType of this boxed type.
    * Returns: The GObject GType
    */
-  static GType getType()
+  static GType _getGType()
   {
     return cast(GType)0; // Gets overridden by derived boxed types
   }
@@ -54,9 +51,9 @@ abstract class Boxed
    * Boxed GType property.
    * Returns: The GType of the Boxed class.
    */
-  @property GType gType()
+  @property GType _gType()
   {
-    return getType;
+    return _getGType;
   }
 
   /**
@@ -73,7 +70,7 @@ abstract class Boxed
    */
   void* copy_()
   {
-    return cInstancePtr ? cast(void*)g_boxed_copy(gType, cInstancePtr) : null;
+    return cInstancePtr ? cast(void*)g_boxed_copy(_gType, cInstancePtr) : null;
   }
 
   /**
@@ -85,7 +82,7 @@ abstract class Boxed
    */
   static void* boxedCopy(T)(void* cBoxed)
   {
-    return cBoxed ? g_boxed_copy(T.getType, cBoxed) : null;
+    return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
   }
 
   /**
@@ -97,6 +94,6 @@ abstract class Boxed
   static void boxedFree(T)(void* cBoxed)
   {
     if (cBoxed)
-      g_boxed_free(T.getType, cBoxed);
+      g_boxed_free(T._getGType, cBoxed);
   }
 }

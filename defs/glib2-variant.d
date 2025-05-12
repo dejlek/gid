@@ -21,7 +21,7 @@ class Variant
   {
     // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     static if (is(T : Variant)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(GVariant*)val.cPtr), No.Take);
+      this(cast(void*)createVariant(cast(GVariant*)val._cPtr), No.Take);
     else
       this(cast(void*)createVariant(val), No.Take);
   }
@@ -43,7 +43,7 @@ class Variant
     foreach (v; vals)
     {
       static if (is(T : Variant)) // A variant (wrap it)
-        g_variant_builder_add_value(&builder, createVariant(cast(GVariant*)v.cPtr)); // !! takes over floating reference of new GVariant
+        g_variant_builder_add_value(&builder, createVariant(cast(GVariant*)v._cPtr)); // !! takes over floating reference of new GVariant
       else
         g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new GVariant
     }
@@ -86,7 +86,7 @@ class Variant
     static if (is(T : Variant)) // A variant (unwrap it)
       return getVariant;
     else
-      return getVal!T(cast(GVariant*)cPtr);
+      return getVal!T(cast(GVariant*)_cPtr);
   }
 
   /**
